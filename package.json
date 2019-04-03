@@ -1,0 +1,58 @@
+{
+  "name": "__PACKAGE_NAME__",
+  "version": "0.0.1",
+
+  "dependencies": {
+    "jquery":    "^3.3.1",
+    "mousetrap": "^1.6.3"
+  },
+
+  "devDependencies": {
+    "@enteleform/path": "file:D:/Projects/Web/Packages/path",
+
+    "@types/node": "^11.13.0",
+    "ts-node": "^8.0.3",
+    "typescript":  "^3.4.1",
+
+    "@types/webpack": "^4.4.27",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0",
+    "@types/webpack-dev-server": "^3.1.5",
+    "webpack-dev-server": "^3.2.1",
+    "@types/clean-webpack-plugin": "^0.1.3",
+    "clean-webpack-plugin": "^2.0.1",
+    "@types/html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^3.2.0",
+    "pug": "^2.0.3",
+    "pug-loader": "^2.4.0",
+    "ts-loader": "^5.3.3",
+
+    "npm-run-all": "^4.1.5",
+    "cpy-cli":      "^2.0.0",
+    "del-cli":      "^1.1.0",
+    "make-dir-cli": "^2.0.0",
+
+    "@types/jest": "^24.0.11",
+    "jest":        "^24.7.0",
+    "ts-jest":     "^24.0.1",
+
+    "@types/jquery": "^3.3.29",
+    "clipboard-cli": "^1.1.0",
+    "@types/mousetrap": "^1.6.2"
+  },
+
+  "scripts": {
+    "build:development": "webpack --mode development --env.development",
+
+    "build":              "npm-run-all build:production:*",
+    "build:production:1": "webpack --mode production --env.production",
+    "build:production:2": "type .\\__dist__\\main.bundle.js | clipboard",
+
+    "install-dependencies": "pnpm install",
+
+    "start": "webpack-dev-server --open",
+
+    "test":          "cls && jest",
+    "test:coverage": "cls && jest --coverage"
+  }
+}
