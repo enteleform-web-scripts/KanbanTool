@@ -1,7 +1,9 @@
 //###  NPM  ###//
-import $       from "jquery"
+import jquery from "jquery"
+const $:any = jquery
 import hotkeys from "hotkeys-js"
 
+const KanbanTool = (window as any).KT
 
 const cssClass = "custom_extension--mode_legend"
 const cssClass_LegendContainer = "legendContainer"
@@ -42,9 +44,10 @@ let modes = [
 	new Mode({name:"Mode_C", rows:[],                  columns:[]}),
 ]
 
-function get_SetMode_Function(mode:Mode){
+function get_SetMode_Callback(mode:Mode){
 	return (event:Event) => {
 		console.log("PRESSED @ ", mode.name)
+		set_Mode(mode)
 	}
 }
 
@@ -58,7 +61,7 @@ function get_KeyNumber(index:number){
 modes.forEach( (mode, i) => {
 	const cell = $("<td>", {"class":cssClass})
 	cell.text(mode.name)
-	let set_Mode = get_SetMode_Function(mode)
+	let set_Mode = get_SetMode_Callback(mode)
 	let keyNumber = get_KeyNumber(i)
 	console.log("@@@", keyNumber)
 	if(keyNumber !== null)
@@ -104,3 +107,32 @@ $("<style>")
 
 	`)
 	.appendTo("head")
+
+function get_ActiveBoard(){
+	const boards = KanbanTool.boards.filter(board => board.isOpen)
+	if(boards.length == 1)
+		{return boards[0]}
+	else
+		{return null}
+}
+
+
+function set_Mode(mode:Mode){
+	const board = get_ActiveBoard()
+
+	const targetRows =
+		board.swimlanes()
+			.map   ((lane, index) => ({lane, index})                     )
+			.filter(item => mode.rows.includes(item.lane.attributes.name))
+			.map   (item => item.index                                   )
+
+	const rows = $.find("#show > div.kt-side-panel-slide > kt-board > tbody > tr")
+
+	rows.forEach((row, i) => {
+		const $row = $(row)
+		if(targetRows.includes(i))
+			{$row.removeClass("kt-collapsed")}
+		else
+			{$row.addClass("kt-collapsed")}
+	})
+}

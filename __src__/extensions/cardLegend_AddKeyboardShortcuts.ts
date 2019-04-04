@@ -1,3 +1,5 @@
+const KanbanTool = (window as any).KT
+
 
 const legendIndex_Key_Map:any = {
 	// index: key,
@@ -72,7 +74,7 @@ function _add_LegendPrefix(keyNumber:number, cardType:any){
 }
 
 function _board_HasLegend(board:any){
-	return (window as any).KT.extensionsManager.powerupSettings("CardLegend", board).enabled
+	return KanbanTool.extensionsManager.powerupSettings("CardLegend", board).enabled
 }
 
 function _get_CardType_Count(cardTypes:any[]){

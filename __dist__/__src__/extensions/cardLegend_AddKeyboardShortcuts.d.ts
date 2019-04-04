@@ -1,3 +1,4 @@
+declare const KanbanTool: any;
 declare const legendIndex_Key_Map: any;
 declare const numberKey_Count: number;
 declare let card: any;
