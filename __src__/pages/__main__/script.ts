@@ -1,3 +1,8 @@
-import "~/extensions/cardLegend_AddKeyboardShortcuts"
-import "~/extensions/checklistAction_AddShortcuts"
-import "~/extensions/modeLegend"
+
+//###  Extensions  ###
+import "~/Extensions/cardLegend_AddKeyboardShortcuts"
+import "~/Extensions/checklistAction_AddShortcuts"
+import "~/Extensions/modeLegend"
+
+//###  KeyBindings  ###
+import "~/KeyBindings/filter"
