@@ -37,18 +37,16 @@
     "ts-jest":     "^24.0.1",
 
     "@types/jquery": "^3.3.29",
-    "clipboard-cli": "^1.1.0",
     "@types/mousetrap": "^1.6.2"
   },
 
   "scripts": {
-    "build:development": "webpack --mode development --env.development",
 
-    "build":              "npm-run-all build:production:*",
-    "build:production:1": "webpack --mode production --env.production",
-    "build:production:2": "type .\\__dist__\\main.bundle.js | clipboard",
+    "build":   "npm-run-all build:*",
+    "build:1": "webpack --mode development --env.development",
+    "//build:1": "webpack --mode production --env.production",
 
-    "install-dependencies": "pnpm install",
+    "install-dependencies": "yarn install",
 
     "start": "webpack-dev-server --open",
 

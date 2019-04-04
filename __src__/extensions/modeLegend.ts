@@ -1,5 +1,6 @@
 //###  NPM  ###//
-import MouseTrap from "mousetrap";
+import $         from "jquery"
+import MouseTrap from "mousetrap"
 
 
 const cssClass = "custom_extension--mode_legend"
@@ -12,9 +13,9 @@ $("body").append(legendContainer)
 
 const cardType_Legend = $("table.kt-extensions-card_legend").detach()
 
-let table = $("<table>", {"class":cssClass})
+let table     = $("<table>", {"class":cssClass})
 let tableBody = $("<tbody>")
-let tableRow = $("<tr>")
+let tableRow  = $("<tr>"   )
 table.append(tableBody)
 tableBody.append(tableRow)
 legendContainer.append(cardType_Legend)
