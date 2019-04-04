@@ -8,7 +8,7 @@ const $:any = jquery
 
 class FilterKeybindings{
 
-	@Keyboard.bind("Ctrl + F")
+	@Keyboard.bind("ctrl+shift+f")
 	static show_FilterMenu(event){
 		console.log("@@@ Func")
 		event.preventDefault()
