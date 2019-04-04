@@ -8,7 +8,7 @@ const cssClass_LegendContainer = "legendContainer"
 const __ALL_ROWS__    = "__ALL_ROWS__"
 const __ALL_COLUMNS__ = "__ALL_COLUMNS__"
 
-const legendContainer = $("<div>", {"class":`${cssClass} ${cssClass_LegendContainer}`})
+const legendContainer = $("<div>", {"class":cssClass_LegendContainer})
 $("body").append(legendContainer)
 
 const cardType_Legend = $("table.kt-extensions-card_legend").detach()
@@ -82,7 +82,7 @@ $("<style>")
 			bottom:   0;
 		}
 
-		.${cssClass}.td{
+		.${cssClass} td{
 			background-color: #444;
 			color:            #EEE;
 			text-align:       center;
