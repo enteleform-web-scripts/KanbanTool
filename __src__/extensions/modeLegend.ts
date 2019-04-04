@@ -97,5 +97,9 @@ $("<style>")
 			position: static !important;
 		}
 
+		#show > div.kt-side-panel-slide{
+			margin-bottom: 70px;
+		}
+
 	`)
 	.appendTo("head");
