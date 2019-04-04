@@ -2,6 +2,16 @@
 import hotkeys from "hotkeys-js"
 
 
+
+
+function disable_DefaultFilters(event)
+	{return true}
+
+hotkeys.filter = disable_DefaultFilters
+
+
+
+
 export class Keyboard{
 	static bind(keys:string|string[]){
 		console.log("@@@ Bind.1", keys)
