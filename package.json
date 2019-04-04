@@ -3,7 +3,7 @@
   "version": "0.0.1",
 
   "dependencies": {
-    "jquery":    "^3.3.1",
+    "jquery":     "^3.3.1",
     "hotkeys-js": "^3.6.2"
   },
 
@@ -40,18 +40,14 @@
   },
 
   "scripts": {
-
     "build":   "npm-run-all build:*",
     "build:1": "webpack --mode development --env.development",
-    "build:1//": "webpack --mode production --env.production",
     "build:2": "git add --all",
     "build:3": "git commit --all --message \"..\"",
     "build:4": "git push",
     "build:5": "git subtree push --prefix __dist__ origin gh-pages",
 
     "install-dependencies": "yarn install",
-
-    "start": "webpack-dev-server --open",
 
     "test":          "cls && jest",
     "test:coverage": "cls && jest --coverage"

@@ -10,6 +10,7 @@ class FilterKeybindings{
 
 	@Keyboard.bind("Ctrl + F")
 	static show_FilterMenu(event){
+		console.log("@@@ Func")
 		event.preventDefault()
 		const filterButton = $(".kt-board_search-container > .btn[data-toggle=kt-board_search-filters_popover]")
 		filterButton.click()
