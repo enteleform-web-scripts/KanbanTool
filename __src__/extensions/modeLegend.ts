@@ -82,9 +82,9 @@ $("<style>")
 			bottom:   0;
 		}
 
-		.${cssClass} td{
-			background-color: #333;
-			color:            #D4D4D4;
+		.${cssClass}.td{
+			background-color: #444;
+			color:            #EEE;
 			text-align:       center;
 			padding:          2px;
 			cursor:           pointer;
@@ -103,4 +103,4 @@ $("<style>")
 		}
 
 	`)
-	.appendTo("head");
+	.appendTo("head")
