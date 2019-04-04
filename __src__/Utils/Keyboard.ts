@@ -11,7 +11,7 @@ export class Keyboard{
 			: (keys as string)
 
 		return (target, propertyKey, descriptor) => {
-			console.log("@@@ Bind.2")
+			console.log("@@@ Bind.2", descriptor.value)
 			hotkeys(keysString, descriptor.value)
 			return descriptor
 		}
