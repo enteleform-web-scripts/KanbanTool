@@ -77,7 +77,7 @@ $("<style>")
 			z-index:      10;
 		}
 
-		.${cssClass_LegendContainer}.${cssClass}{
+		.${cssClass_LegendContainer}{
 			position: fixed;
 			bottom:   0;
 		}
