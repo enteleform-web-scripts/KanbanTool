@@ -47,6 +47,7 @@
     "build:2": "git add --all",
     "build:3": "git commit --all --message \"..\"",
     "build:4": "git push",
+    "build:5": "git subtree push --prefix __dist__ origin gh-pages",
 
     "install-dependencies": "yarn install",
 

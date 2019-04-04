@@ -83,14 +83,15 @@ $("<style>")
 		}
 
 		.${cssClass} td{
-			color:       rgba(0,0,0,0.87059);
-			text-align:  center;
-			padding:     2px;
-			cursor:      pointer;
-			position:    relative;
-			user-select: none;
-			border:      1px solid #D4D4D4;
-			box-shadow:  0 -1px 1px rgba(0,0,0,0.065);
+			background-color: #333;
+			color:            #D4D4D4;
+			text-align:       center;
+			padding:          2px;
+			cursor:           pointer;
+			position:         relative;
+			user-select:      none;
+			border:           1px solid #D4D4D4;
+			box-shadow:       0 -1px 1px rgba(0,0,0,0.065);
 		}
 
 		.kt-extensions-card_legend{
