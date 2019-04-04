@@ -1,6 +1,6 @@
 //###  NPM  ###//
 import $       from "jquery"
-import hotkeys, {KeyHandler} from "hotkeys-js"
+import hotkeys from "hotkeys-js"
 
 
 const cssClass = "custom_extension--mode_legend"
