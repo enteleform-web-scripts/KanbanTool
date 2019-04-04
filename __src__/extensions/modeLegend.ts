@@ -1,6 +1,6 @@
 //###  NPM  ###//
-import $         from "jquery"
-import MouseTrap from "mousetrap"
+import $       from "jquery"
+import hotkeys, {KeyHandler} from "hotkeys-js"
 
 
 const cssClass = "custom_extension--mode_legend"
@@ -62,7 +62,7 @@ modes.forEach( (mode, i) => {
 	let keyNumber = get_KeyNumber(i)
 	console.log("@@@", keyNumber)
 	if(keyNumber !== null)
-		{MouseTrap.bind(`Alt+${keyNumber}`, set_Mode)}
+		{hotkeys(`Alt+${keyNumber}`, set_Mode)}
 	cell.on("click", set_Mode)
 	tableRow.append(cell)
 })
