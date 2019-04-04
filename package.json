@@ -45,6 +45,9 @@
     "build":   "npm-run-all build:*",
     "build:1": "webpack --mode development --env.development",
     "//build:1": "webpack --mode production --env.production",
+    "build:2": "git add --all",
+    "build:3": "git commit --all --message '..'",
+    "build:4": "git push",
 
     "install-dependencies": "yarn install",
 
