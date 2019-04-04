@@ -56,10 +56,10 @@ function get_KeyNumber(index:number){
 }
 
 modes.forEach( (mode, i) => {
-	const cell = $("<td>", {"class":cssClass})
-	cell.text(`[${i}] &nbsp;${mode.name}`)
-	let set_Mode = get_SetMode_Callback(mode)
 	let keyNumber = get_KeyNumber(i)
+	const cell = $("<td>", {"class":cssClass})
+	cell.text(`[${keyNumber}]  ${mode.name}`)
+	let set_Mode = get_SetMode_Callback(mode)
 	if(keyNumber !== null)
 		{hotkeys(`Alt+${keyNumber}`, set_Mode)}
 	cell.on("click", set_Mode)
