@@ -39,31 +39,27 @@ class Mode{
 }
 
 let modes = [
-	new Mode({name:"Mode_A", rows:["Daily", "Active"], columns:[]}),
-	new Mode({name:"Mode_B", rows:[__ALL_ROWS__],      columns:[]}),
-	new Mode({name:"Mode_C", rows:[],                  columns:[]}),
+	new Mode({name:"Work", rows:["Daily", "Active"], columns:[]}),
+	new Mode({name:"Plan", rows:[__ALL_ROWS__],      columns:[]}),
 ]
 
 function get_SetMode_Callback(mode:Mode){
-	return (event:Event) => {
-		console.log("PRESSED @ ", mode.name)
-		set_Mode(mode)
-	}
+	return (event:Event) => set_Mode(mode)
 }
 
 function get_KeyNumber(index:number){
-	//!!!!!!!!!!!!!!!!!!!!!
-	//!!  ___UPDATE____  !!
-	//!!!!!!!!!!!!!!!!!!!!!
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	//!!  __ UPDATE __                                                  !!
+	//!!  extract logic from cardLegend_AddKeyboardShortcuts to module  !!
+	//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	return (index + 1)
 }
 
 modes.forEach( (mode, i) => {
 	const cell = $("<td>", {"class":cssClass})
-	cell.text(mode.name)
+	cell.text(`[${i}] &nbsp;${mode.name}`)
 	let set_Mode = get_SetMode_Callback(mode)
 	let keyNumber = get_KeyNumber(i)
-	console.log("@@@", keyNumber)
 	if(keyNumber !== null)
 		{hotkeys(`Alt+${keyNumber}`, set_Mode)}
 	cell.on("click", set_Mode)
@@ -116,21 +112,29 @@ function get_ActiveBoard(){
 		{return null}
 }
 
-
 function set_Mode(mode:Mode){
+	const target_AllRows = ((mode.rows.length == 1) && (mode.rows[0] == __ALL_ROWS__))
+	_set_RowStates(mode, target_AllRows)
+}
+
+function _get_TargetRows(mode:Mode){
 	const board = get_ActiveBoard()
 
-	const targetRows =
+	return (
 		board.swimlanes()
 			.map   ((lane, index) => ({lane, index})                     )
 			.filter(item => mode.rows.includes(item.lane.attributes.name))
 			.map   (item => item.index                                   )
+	)
+}
 
+function _set_RowStates(mode:Mode, target_AllRows:boolean){
 	const rows = $.find("#show > div.kt-side-panel-slide > kt-board > tbody > tr")
+	const targetRows = (target_AllRows) ? [] : _get_TargetRows(mode)
 
 	rows.forEach((row, i) => {
 		const $row = $(row)
-		if(targetRows.includes(i))
+		if(target_AllRows || targetRows.includes(i))
 			{$row.removeClass("kt-collapsed")}
 		else
 			{$row.addClass("kt-collapsed")}
