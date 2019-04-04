@@ -4,7 +4,7 @@ import hotkeys from "hotkeys-js"
 
 export class Keyboard{
 	static bind(keys:string|string[]){
-		console.log("@@@ Bind.1")
+		console.log("@@@ Bind.1", keys)
 		const keysString =
 			(keys.constructor === Array)
 			? (keys as Array<string>).join(", ")
