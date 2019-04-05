@@ -7,18 +7,18 @@ const KanbanTool = (window as any).KT
 
 const cssVariables = require("./CSS_Variables.json")
 console.log(">>>", cssVariables)
-console.log(">>>", cssVariables.LegendContainer)
-console.log(">>>", cssVariables.Extension)
+console.log(">>>", cssVariables.legendContainer)
+console.log(">>>", cssVariables.extension)
 
 const __ALL_ROWS__    = "__ALL_ROWS__"
 const __ALL_COLUMNS__ = "__ALL_COLUMNS__"
 
-const legendContainer = $("<div>", {"class":cssVariables.LegendContainer})
+const legendContainer = $("<div>", {"class":cssVariables.legendContainer})
 $("body").append(legendContainer)
 
 const cardType_Legend = $("table.kt-extensions-card_legend").detach()
 
-let table     = $("<table>", {"class":cssVariables.Extension})
+let table     = $("<table>", {"class":cssVariables.extension})
 let tableBody = $("<tbody>")
 let tableRow  = $("<tr>"   )
 table.append(tableBody)
@@ -60,7 +60,7 @@ function get_KeyNumber(index:number){
 
 modes.forEach( (mode, i) => {
 	let keyNumber = get_KeyNumber(i)
-	const cell = $("<td>", {"class":cssVariables.Extension})
+	const cell = $("<td>", {"class":cssVariables.extension})
 	cell.text(`[${keyNumber}]  ${mode.name}`)
 	let set_Mode = get_SetMode_Callback(mode)
 	if(keyNumber !== null)
