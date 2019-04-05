@@ -1,4 +1,4 @@
-import "~/Extensions/cardLegend_AddKeyboardShortcuts";
-import "~/Extensions/checklistAction_AddShortcuts";
-import "~/Extensions/modeLegend";
-import "~/KeyBindings/filter";
+import "~/Extensions/CardLegend.ts/TEMP";
+import "~/Extensions/CheckList/TEMP";
+import "~/Extensions/FunctionBar/TEMP";
+import "~/KeyBindings/Filter";

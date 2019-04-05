@@ -1,8 +1,8 @@
 
 //###  Extensions  ###
-import "~/Extensions/cardLegend_AddKeyboardShortcuts"
-import "~/Extensions/checklistAction_AddShortcuts"
-import "~/Extensions/modeLegend"
+import "~/Extensions/CardLegend.ts/TEMP"
+import "~/Extensions/CheckList/TEMP"
+import "~/Extensions/FunctionBar/TEMP"
 
 //###  KeyBindings  ###
-import "~/KeyBindings/filter"
+import "~/KeyBindings/Filter"

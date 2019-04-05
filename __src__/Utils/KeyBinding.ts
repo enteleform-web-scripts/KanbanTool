@@ -39,9 +39,11 @@ export class KeyBinding{
 
 type _KeyBinding_Callback = (event:KeyboardEvent) => void
 
-interface _BindOptions{
-	preventDefault: boolean
-}
+interface _BindOptions
+	{preventDefault: boolean}
+
+const _bindOptions_Defaults =
+	{preventDefault: false}
 
 function _get_BindArguments(arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_BindOptions){
 	let callback, options
@@ -54,14 +56,16 @@ function _get_BindArguments(arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_Bi
 	else if (arg_2)
 		options = arg_2
 
+	options = {..._bindOptions_Defaults, ...options}
+
 	return {callback, options}
 }
 
 function _add_KeyBinding(hotKeys:string, callback:_KeyBinding_Callback, options:_BindOptions){
 	HotKeys(hotKeys, (event) => {
 		if(options.preventDefault)
-			{event.preventDefault; console.log("PREVENT DEFAULT >>>")}
-		console.log(`[@KeyBoard] ${hotKeys}`)
+			{event.preventDefault}
+		console.log(`[KeyBinding] '${hotKeys}'`)
 		callback(event)
 	})
 }
