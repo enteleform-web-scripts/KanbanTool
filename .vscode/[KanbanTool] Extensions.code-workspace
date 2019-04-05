@@ -2,19 +2,19 @@
 	"folders": [
 		{
 			"path": "D:/Projects/Web/Scripts/KanbanTool/Extensions",
-			"name": "___  CONFIG  _________________"
+			"name": "___  CONFIG  _________________",
 		},
 		{
 			"path": "D:/Projects/Web/Scripts/KanbanTool/Extensions/__src__",
-			"name": "___  SRC  ____________________"
+			"name": "___  SRC  ____________________",
 		},
 		{
 			"path": "D:/Projects/Web/Scripts/KanbanTool/Extensions/__dist__",
-			"name": "___  DIST  __________________"
+			"name": "___  DIST  __________________",
 		},
 		{
 			"path": "D:/Projects/Web/Scripts/KanbanTool/Extensions/.vscode",
-			"name": "___  VS  _____________________"
+			"name": "___  VS  _____________________",
 		},
 	],
 	"settings": {
@@ -34,6 +34,7 @@
 			"**/__Archive__":       true,
 			"**/__build__":         true,
 			"**/__dist__":          true,
+			"**/__src__":           true,
 			"**/node_modules":      true,
 			"**/package-lock.json": true,
 		},
