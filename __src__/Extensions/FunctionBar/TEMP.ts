@@ -66,43 +66,70 @@ modes.forEach( (mode, i) => {
 	tableRow.append(cell)
 })
 
-$("<style>")
-	.prop("type", "text/css")
-	.html(`
+import {get_FileText} from "~/Utils/get_FileText"
+require("./CSS.styl")
+// require("!css-loader!stylus-loader!./CSS.styl")
 
-		.${cssClass}{
-			width:        100%;
-			table-layout: fixed;
-			z-index:      10;
-		}
+// import stylus from "stylus"
 
-		.${cssClass_LegendContainer}{
-			position: fixed;
-			bottom:   0;
-		}
+// const styleSheet = get_FileText(
+// 	// "./css/Extensions.FunctionBar.css"
+// 	// "https://enteleform-extensions.github.io/KanbanTool/css/Extensions.FunctionBar.css"
+// 	apply_CSS,
+// )
 
-		.${cssClass} td{
-			background-color: #444;
-			color:            #EEE;
-			text-align:       center;
-			padding:          2px;
-			cursor:           pointer;
-			position:         relative;
-			user-select:      none;
-			border:           1px solid #D4D4D4;
-			box-shadow:       0 -1px 1px rgba(0,0,0,0.065);
-		}
+// function apply_CSS(fileText){
+// 	stylus(fileText)
+// 		.set('filename', 'nesting.css')
+// 		.render(function(err, css){
+// 			console.log(">>>>>>>>>>>>>>>>>>>>>>>>")
+// 			console.log(css)
+// 			console.log("<<<<<<<<<<<<<<<<<<<<<<<<")
+// 			$("<style>")
+// 				.prop("type", "text/css")
+// 				.html(css)
+// 				.appendTo("head")
+// 		})
+// }
 
-		.kt-extensions-card_legend{
-			position: static !important;
-		}
+// $("<style>")
+// 	.prop("type", "text/css")
+// 	.html(styleSheet)
+// 	.html(`
 
-		#show > div.kt-side-panel-slide{
-			margin-bottom: 70px;
-		}
+// 		.${cssClass}{
+// 			width:        100%;
+// 			table-layout: fixed;
+// 			z-index:      10;
+// 		}
 
-	`)
-	.appendTo("head")
+// 		.${cssClass_LegendContainer}{
+// 			position: fixed;
+// 			bottom:   0;
+// 		}
+
+// 		.${cssClass} td{
+// 			background-color: #444;
+// 			color:            #EEE;
+// 			text-align:       center;
+// 			padding:          2px;
+// 			cursor:           pointer;
+// 			position:         relative;
+// 			user-select:      none;
+// 			border:           1px solid #D4D4D4;
+// 			box-shadow:       0 -1px 1px rgba(0,0,0,0.065);
+// 		}
+
+// 		.kt-extensions-card_legend{
+// 			position: static !important;
+// 		}
+
+// 		#show > div.kt-side-panel-slide{
+// 			margin-bottom: 70px;
+// 		}
+
+// 	`)
+// 	.appendTo("head")
 
 function get_ActiveBoard(){
 	const boards = KanbanTool.boards.filter(board => board.isOpen)

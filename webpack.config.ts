@@ -1,8 +1,9 @@
 import * as path from "path"
 // import {Directory}        from "@enteleform/path"
-import webpack            from "webpack"
-import HtmlWebpackPlugin  from "html-webpack-plugin"
-import CleanWebpackPlugin from "clean-webpack-plugin"
+import webpack              from "webpack"
+import HtmlWebpackPlugin    from "html-webpack-plugin"
+import CleanWebpackPlugin   from "clean-webpack-plugin"
+import MiniCssExtractPlugin from "mini-css-extract-plugin"
 
 
 const root     = path.resolve(__dirname)
@@ -33,6 +34,10 @@ const config: ((env:any) => webpack.Configuration) = function(env:any){
 					test: /\.pug?$/,
 					use: "pug-loader",
 				},
+				{
+					test: /\.styl$/,
+					use: [MiniCssExtractPlugin.loader, "css-loader", "stylus-loader"],
+				},
 			],
 		},
 		resolve: {
@@ -50,9 +55,10 @@ const config: ((env:any) => webpack.Configuration) = function(env:any){
 			new CleanWebpackPlugin(),
 			// new CleanWebpackPlugin([distPath.tail]),
 			new HtmlWebpackPlugin({template:mainLayout}),
+			new MiniCssExtractPlugin({filename:"StyleSheet.css"}),
 		],
 		output: {
-			filename: "[name].bundle.js",
+			filename: "__main__.js",
 			path: distPath,
 		},
 	}
