@@ -85,3 +85,9 @@ function _get_CardType_Count(cardTypes:any[]){
 
 
 main()
+
+
+
+// $(".kt-board_search-filters [data-card-type-id='5921145']").click()
+// $(".kt-board_search-filter[data-filter-name='extensions.board_search.filters.card_type']").click()
+// hasClass("kt-board_search-filter--active")
