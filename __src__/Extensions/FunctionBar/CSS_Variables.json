@@ -1,6 +1,6 @@
 {
 
-	"extension":       "CustomExtension--FunctionBar",
-	"legendContainer": "LegendContainer",
+	"Extension":       "CustomExtension--FunctionBar",
+	"LegendContainer": "LegendContainer",
 
 "_":""}
