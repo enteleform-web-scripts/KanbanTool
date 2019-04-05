@@ -5,17 +5,17 @@ import hotkeys from "hotkeys-js"
 
 const KanbanTool = (window as any).KT
 
-const cssClass = "custom_extension--mode_legend"
-const cssClass_LegendContainer = "legendContainer"
+const cssVariables = require("./CSS_Variables.json")
+
 const __ALL_ROWS__    = "__ALL_ROWS__"
 const __ALL_COLUMNS__ = "__ALL_COLUMNS__"
 
-const legendContainer = $("<div>", {"class":cssClass_LegendContainer})
+const legendContainer = $("<div>", {"class":cssVariables.LegendContainer})
 $("body").append(legendContainer)
 
 const cardType_Legend = $("table.kt-extensions-card_legend").detach()
 
-let table     = $("<table>", {"class":cssClass})
+let table     = $("<table>", {"class":cssVariables.Extension})
 let tableBody = $("<tbody>")
 let tableRow  = $("<tr>"   )
 table.append(tableBody)
@@ -57,7 +57,7 @@ function get_KeyNumber(index:number){
 
 modes.forEach( (mode, i) => {
 	let keyNumber = get_KeyNumber(i)
-	const cell = $("<td>", {"class":cssClass})
+	const cell = $("<td>", {"class":cssVariables.Extension})
 	cell.text(`[${keyNumber}]  ${mode.name}`)
 	let set_Mode = get_SetMode_Callback(mode)
 	if(keyNumber !== null)
@@ -82,44 +82,6 @@ function apply_CSS(css:string){
 		.appendTo("head")
 }
 
-// $("<style>")
-// 	.prop("type", "text/css")
-// 	.html(styleSheet)
-// 	.html(`
-
-// 		.${cssClass}{
-// 			width:        100%;
-// 			table-layout: fixed;
-// 			z-index:      10;
-// 		}
-
-// 		.${cssClass_LegendContainer}{
-// 			position: fixed;
-// 			bottom:   0;
-// 		}
-
-// 		.${cssClass} td{
-// 			background-color: #444;
-// 			color:            #EEE;
-// 			text-align:       center;
-// 			padding:          2px;
-// 			cursor:           pointer;
-// 			position:         relative;
-// 			user-select:      none;
-// 			border:           1px solid #D4D4D4;
-// 			box-shadow:       0 -1px 1px rgba(0,0,0,0.065);
-// 		}
-
-// 		.kt-extensions-card_legend{
-// 			position: static !important;
-// 		}
-
-// 		#show > div.kt-side-panel-slide{
-// 			margin-bottom: 70px;
-// 		}
-
-// 	`)
-// 	.appendTo("head")
 
 function get_ActiveBoard(){
 	const boards = KanbanTool.boards.filter(board => board.isOpen)

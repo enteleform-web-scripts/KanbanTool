@@ -12,7 +12,7 @@ const _baseURL = "https://enteleform-extensions.github.io/KanbanTool"
 //#################//
 
 export async function get_FileText(url:string){
-	const result = {value: null}
+	const result:{value:string|null} = {value:null}
 	await _get_FileText(url, result)
 	return result.value
 }
