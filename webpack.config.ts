@@ -1,8 +1,9 @@
-import * as path from "path"
-// import {Directory}        from "@enteleform/path"
+import * as path            from "path"
+// import {Directory}          from "@enteleform/path"
 import webpack              from "webpack"
 import HtmlWebpackPlugin    from "html-webpack-plugin"
 import CleanWebpackPlugin   from "clean-webpack-plugin"
+import CopyPlugin           from "copy-webpack-plugin"
 import MiniCssExtractPlugin from "mini-css-extract-plugin"
 
 
@@ -12,6 +13,7 @@ const root     = path.resolve(__dirname)
 const srcPath         = path.join(root, "__src__")
 // const srcPath         = new Directory(root, "__src__")
 const distPath        = path.join(root, "__dist__")
+const staticPath      = path.join(srcPath, "Static")
 // const distPath        = new Directory(root, "__dist__")
 const mainPage_Folder = `./${path.basename(srcPath)}/pages/__main__`
 // const mainPage_Folder = `./${srcPath.tail}/pages/__main__`
@@ -56,6 +58,9 @@ const config: ((env:any) => webpack.Configuration) = function(env:any){
 			// new CleanWebpackPlugin([distPath.tail]),
 			new HtmlWebpackPlugin({template:mainLayout}),
 			new MiniCssExtractPlugin({filename:"StyleSheet.css"}),
+			new CopyPlugin([
+				{from:staticPath, to:distPath},
+			]),
 		],
 		output: {
 			filename: "__main__.js",
