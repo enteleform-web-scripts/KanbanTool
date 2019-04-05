@@ -21,6 +21,7 @@ export class Keyboard{
 
 		return (target, propertyKey, descriptor) => {
 			hotkeys(keysString, descriptor.value)
+			console.log(keysString, propertyKey, descriptor.value)
 			return descriptor
 		}
 	}
