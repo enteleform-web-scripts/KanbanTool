@@ -1,5 +1,5 @@
 //###  NPM  ###//
-import hotkeys from "hotkeys-js"
+import HotKeys from "hotkeys-js"
 
 
 
@@ -7,26 +7,41 @@ import hotkeys from "hotkeys-js"
 function disable_DefaultFilters(event)
 	{return true}
 
-hotkeys.filter = disable_DefaultFilters
+HotKeys.filter = disable_DefaultFilters
 
 
 
 
 export class Keyboard{
-	static bind(keys:string|string[]){
-		const keysString =
+	static bind(hotKeys:string|string[]){
+		const hotKeys_String = _convert_HotKeys_ToString(hotKeys)
+		return _get_Decorator(hotKeys_String)
+	}
+}
+
+
+
+
+//###############//
+//###  utils  ###//
+//###############//
+
+function _convert_HotKeys_ToString(keys:string|string[]){
+	return (
 			(keys.constructor === Array)
 			? (keys as Array<string>).join(", ")
 			: (keys as string)
+	)
+}
 
-		return (target, propertyKey, descriptor) => {
-			hotkeys(keysString, descriptor.value)
-			const func = descriptor.value
-			descriptor.value = (...args) => {
-				console.log(`${propertyKey} [${keysString}]`)
-				return func(...args)
-			}
-			return descriptor
+function _get_Decorator(hotKeys:string){
+	return (target, propertyKey, descriptor) => {
+		HotKeys(hotKeys, descriptor.value)
+		const func = descriptor.value
+		descriptor.value = (...args) => {
+			console.log(`${propertyKey} [${hotKeys}]`)
+			return func(...args)
 		}
+		return descriptor
 	}
 }

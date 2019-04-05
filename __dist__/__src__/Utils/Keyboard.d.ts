@@ -1,3 +1,3 @@
 export declare class Keyboard {
-    static bind(keys: string | string[]): (target: any, propertyKey: any, descriptor: any) => any;
+    static bind(hotKeys: string | string[]): (target: any, propertyKey: any, descriptor: any) => any;
 }
