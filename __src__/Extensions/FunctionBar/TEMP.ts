@@ -72,8 +72,7 @@ require("./CSS.styl")
 // import stylus from "stylus"
 
 const styleSheet = get_FileText(
-	"./__Main__.css",
-	// "https://enteleform-extensions.github.io/KanbanTool/__Main__.css"
+	"https://enteleform-extensions.github.io/KanbanTool/__Main__.css",
 	apply_CSS,
 )
 
