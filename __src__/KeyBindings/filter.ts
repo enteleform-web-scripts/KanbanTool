@@ -8,18 +8,16 @@ const $:any = jquery
 
 class FilterKeybindings{
 
-	@Keyboard.bind("Ctrl + F")
+	@Keyboard.bind("Ctrl + F", {preventDefault:true})
 	static focus_SearchField(event){
 		event.preventDefault()
 		const searchField = $("#kt-board_search-q")
 		searchField.focus()
 	}
 
-	@Keyboard.bind("Ctrl + Space")
+	@Keyboard.bind("Ctrl + Space", {preventDefault:false})
 	static show_FilterMenu(event){
 		event.preventDefault()
-		// const filterButton = $(".kt-board_search-container > .btn[data-toggle=kt-board_search-filters_popover]")
-		// filterButton.click()
 		const filterMenu = $(".kt-board_search-filters_popover")
 		const displayValue =
 			(filterMenu.css("display") == "none")
