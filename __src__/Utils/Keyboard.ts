@@ -2,7 +2,9 @@
 import HotKeys from "hotkeys-js"
 
 
-
+//##############//
+//###  Init  ###//
+//##############//
 
 function disable_DefaultFilters(event)
 	{return true}
@@ -10,16 +12,15 @@ function disable_DefaultFilters(event)
 HotKeys.filter = disable_DefaultFilters
 
 
-
-
+//#################//
+//###  Exports  ###//
+//#################//
 export class Keyboard{
 	static bind(hotKeys:string|string[]){
 		const hotKeys_String = _convert_HotKeys_ToString(hotKeys)
 		return _get_Decorator(hotKeys_String)
 	}
 }
-
-
 
 
 //###############//
