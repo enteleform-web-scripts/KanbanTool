@@ -101,10 +101,10 @@
 /*!***********************************************************!*\
   !*** ./__src__/Extensions/FunctionBar/CSS_Variables.json ***!
   \***********************************************************/
-/*! exports provided: extension, legendContainer, _, default */
+/*! exports provided: Extension, LegendContainer, _, default */
 /***/ (function(module) {
 
-module.exports = {"extension":"CustomExtension--FunctionBar","legendContainer":"LegendContainer","_":""};
+module.exports = {"Extension":"CustomExtension--FunctionBar","LegendContainer":"LegendContainer","_":""};
 
 /***/ }),
 
