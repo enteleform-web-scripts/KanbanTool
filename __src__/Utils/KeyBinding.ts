@@ -34,7 +34,7 @@ export class KeyBinding{
 
 
 //###############//
-//###  utils  ###//
+//###  Utils  ###//
 //###############//
 
 type _KeyBinding_Callback = (event:KeyboardEvent) => void
