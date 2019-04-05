@@ -16,12 +16,12 @@ HotKeys.filter = disable_DefaultFilters
 //###  Exports  ###//
 //#################//
 
-export class Keyboard{
-	static bind(hotKeys:string|string[],                                           options?:{preventDefault:boolean}) // Decorator
-	static bind(hotKeys:string|string[], callback:((event:KeyboardEvent) => void), options?:{preventDefault:boolean}) // Function Call
-	static bind(hotKeys:string|string[], b?:KeyBinding_Callback|BindOptions, c?:BindOptions){
+export class KeyBinding{
+	static add(hotKeys:string|string[],                                           options?:{preventDefault:boolean}) // Decorator
+	static add(hotKeys:string|string[], callback:((event:KeyboardEvent) => void), options?:{preventDefault:boolean}) // Function Call
+	static add(hotKeys:string|string[], arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_BindOptions){
 		const hotKeys_String = _convert_HotKeys_ToString(hotKeys)
-		const {callback, options} = _get_BindArguments(b, c)
+		const {callback, options} = _get_BindArguments(arg_2, arg_3)
 
 		if(callback)
 			{_add_KeyBinding(hotKeys_String, callback, options)}
@@ -30,31 +30,32 @@ export class Keyboard{
 	}
 }
 
-function _get_BindArguments(b?:KeyBinding_Callback|BindOptions, c?:BindOptions){
-	let callback, options
-
-	if (b instanceof Function)
-		callback = b
-		if (c)
-			options = c
-
-	else if (b)
-		options = b
-
-	return {callback, options}
-}
 
 //###############//
 //###  utils  ###//
 //###############//
 
-type KeyBinding_Callback = (event:KeyboardEvent) => void
+type _KeyBinding_Callback = (event:KeyboardEvent) => void
 
-interface BindOptions{
+interface _BindOptions{
 	preventDefault: boolean
 }
 
-function _add_KeyBinding(hotKeys:string, callback:KeyBinding_Callback, options:BindOptions){
+function _get_BindArguments(arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_BindOptions){
+	let callback, options
+
+	if (arg_2 instanceof Function)
+		callback = arg_2
+		if (arg_3)
+			options = arg_3
+
+	else if (arg_2)
+		options = arg_2
+
+	return {callback, options}
+}
+
+function _add_KeyBinding(hotKeys:string, callback:_KeyBinding_Callback, options:_BindOptions){
 	HotKeys(hotKeys, (event) => {
 		if(options.preventDefault)
 			{event.preventDefault; console.log("PREVENT DEFAULT >>>")}
@@ -63,7 +64,7 @@ function _add_KeyBinding(hotKeys:string, callback:KeyBinding_Callback, options:B
 	})
 }
 
-function _get_Decorator(hotKeys:string, options:BindOptions){
+function _get_Decorator(hotKeys:string, options:_BindOptions){
 	return (target, propertyKey, descriptor) => {
 		_add_KeyBinding(hotKeys, descriptor.value, options)
 		return descriptor
