@@ -71,25 +71,28 @@ require("./CSS.styl")
 
 // import stylus from "stylus"
 
-// const styleSheet = get_FileText(
-// 	// "./css/Extensions.FunctionBar.css"
-// 	// "https://enteleform-extensions.github.io/KanbanTool/css/Extensions.FunctionBar.css"
-// 	apply_CSS,
-// )
+const styleSheet = get_FileText(
+	"./__Main__.css",
+	// "https://enteleform-extensions.github.io/KanbanTool/__Main__.css"
+	apply_CSS,
+)
 
-// function apply_CSS(fileText){
-// 	stylus(fileText)
-// 		.set('filename', 'nesting.css')
-// 		.render(function(err, css){
-// 			console.log(">>>>>>>>>>>>>>>>>>>>>>>>")
-// 			console.log(css)
-// 			console.log("<<<<<<<<<<<<<<<<<<<<<<<<")
-// 			$("<style>")
-// 				.prop("type", "text/css")
-// 				.html(css)
-// 				.appendTo("head")
-// 		})
-// }
+function apply_CSS(fileText){
+	console.log(">>>>>>>>>>>>>>>>>>>>>>>>")
+	console.log(fileText)
+	console.log("<<<<<<<<<<<<<<<<<<<<<<<<")
+	// stylus(fileText)
+	// 	.set('filename', 'nesting.css')
+	// 	.render(function(err, css){
+	// 		console.log(">>>>>>>>>>>>>>>>>>>>>>>>")
+	// 		console.log(css)
+	// 		console.log("<<<<<<<<<<<<<<<<<<<<<<<<")
+	// 		$("<style>")
+	// 			.prop("type", "text/css")
+	// 			.html(css)
+	// 			.appendTo("head")
+	// 	})
+}
 
 // $("<style>")
 // 	.prop("type", "text/css")
