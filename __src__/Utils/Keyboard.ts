@@ -39,6 +39,8 @@ function _get_Decorator(hotKeys:string){
 	return (target, propertyKey, descriptor) => {
 		HotKeys(hotKeys, descriptor.value)
 		const func = descriptor.value
+    if(descriptor === undefined)
+			{descriptor = Object.getOwnPropertyDescriptor(target, propertyKey)}
 		descriptor.value = (...args) => {
 			console.log(`${propertyKey} [${hotKeys}]`)
 			return func(...args)
