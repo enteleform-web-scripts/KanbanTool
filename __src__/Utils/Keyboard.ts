@@ -21,7 +21,11 @@ export class Keyboard{
 
 		return (target, propertyKey, descriptor) => {
 			hotkeys(keysString, descriptor.value)
-			console.log(keysString, propertyKey, descriptor.value)
+			const func = descriptor.value
+			descriptor.value = (...args) => {
+				console.log(`${propertyKey} [${keysString}]`)
+				return func(...args)
+			}
 			return descriptor
 		}
 	}
