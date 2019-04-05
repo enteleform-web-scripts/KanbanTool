@@ -7,6 +7,8 @@ const KanbanTool = (window as any).KT
 
 const cssVariables = require("./CSS_Variables.json")
 console.log(">>>", cssVariables)
+console.log(">>>", cssVariables.LegendContainer)
+console.log(">>>", cssVariables.Extension)
 
 const __ALL_ROWS__    = "__ALL_ROWS__"
 const __ALL_COLUMNS__ = "__ALL_COLUMNS__"
