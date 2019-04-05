@@ -6,6 +6,7 @@ import hotkeys from "hotkeys-js"
 const KanbanTool = (window as any).KT
 
 const cssVariables = require("./CSS_Variables.json")
+console.log(">>>", cssVariables)
 
 const __ALL_ROWS__    = "__ALL_ROWS__"
 const __ALL_COLUMNS__ = "__ALL_COLUMNS__"
@@ -73,9 +74,6 @@ get_FileText("./__Main__.css")
 	.then(fileText => apply_CSS(fileText))
 
 function apply_CSS(css:string){
-	console.log("---------------------")
-	console.log(css)
-	console.log("---------------------")
 	$("<style>")
 		.prop("type", "text/css")
 		.html(css)
