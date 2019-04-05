@@ -57,7 +57,7 @@ const config: ((env:any) => webpack.Configuration) = function(env:any){
 			new CleanWebpackPlugin(),
 			// new CleanWebpackPlugin([distPath.tail]),
 			new HtmlWebpackPlugin({template:mainLayout}),
-			new MiniCssExtractPlugin({filename:"StyleSheet.css"}),
+			new MiniCssExtractPlugin({filename:"__Main__.css"}),
 			new CopyPlugin([
 				{from:staticPath, to:distPath},
 			]),
