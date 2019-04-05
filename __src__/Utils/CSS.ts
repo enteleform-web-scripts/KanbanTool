@@ -1,5 +1,5 @@
 //###  Module  ###//
-const Settings = require("./CSS_Variables.json")
+const Settings = require("~/Settings.json")
 import {get_FileText} from "~/Utils/_get_FileText"
 
 

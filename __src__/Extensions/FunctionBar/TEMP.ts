@@ -1,6 +1,7 @@
-//###  Module  ###//
+//###  Module: CSS  ###//
+import {CSS} from "~/Utils/CSS"
 require("./CSS.styl")
-
+CSS.apply("__Main__.css")
 
 //###  NPM  ###//
 import jquery from "jquery"
