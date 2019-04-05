@@ -20,8 +20,14 @@ class FilterKeybindings{
 	static show_FilterMenu(event){
 		console.log("@@@ show_FilterMenu")
 		event.preventDefault()
-		const filterButton = $(".kt-board_search-container > .btn[data-toggle=kt-board_search-filters_popover]")
-		filterButton.click()
+		// const filterButton = $(".kt-board_search-container > .btn[data-toggle=kt-board_search-filters_popover]")
+		// filterButton.click()
+		const filterMenu = $(".kt-board_search-filters_popover")
+		const displayValue =
+			(filterMenu.css("display") == "none")
+			? "block"
+			: "none"
+		filterMenu.css("display", displayValue)
 	}
 
 }
