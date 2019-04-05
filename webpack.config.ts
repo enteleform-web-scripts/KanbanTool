@@ -58,7 +58,7 @@ const config: ((env:any) => webpack.Configuration) = function(env:any){
 			new MiniCssExtractPlugin({filename:"StyleSheet.css"}),
 		],
 		output: {
-			filename: "[name].bundle.js",
+			filename: "__main__.js",
 			path: distPath,
 		},
 	}
