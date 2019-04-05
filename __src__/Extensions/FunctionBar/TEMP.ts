@@ -72,9 +72,6 @@ require("./CSS.styl")
 get_FileText("./__Main__.css")
 	.then(fileText => apply_CSS(fileText))
 
-get_FileText("./WOT.css")
-	.then(fileText => apply_CSS(fileText))
-
 function apply_CSS(fileText){
 	console.log("?!?!?!?!>>>>>>>>>>>>>>>>>>>>>>>>")
 	console.log(fileText)
