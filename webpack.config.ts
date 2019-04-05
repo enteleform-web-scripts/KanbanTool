@@ -54,8 +54,9 @@ const config: ((env:any) => webpack.Configuration) = function(env:any){
 			// contentBase: `./${distPath.tail}`,
 		},
 		plugins: [
-			new CleanWebpackPlugin(),
-			// new CleanWebpackPlugin([distPath.tail]),
+			new CleanWebpackPlugin({
+				cleanOnceBeforeBuildPatterns: ["**/*", "!.git", "!.gitignore"],
+			}),
 			new HtmlWebpackPlugin({template:mainLayout}),
 			new MiniCssExtractPlugin({filename:"__Main__.css"}),
 			new CopyPlugin([

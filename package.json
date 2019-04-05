@@ -63,8 +63,9 @@
     "github:push:1": "git add --all",
     "github:push:2": "git commit --all --message \"..\"",
     "github:push:3": "git push",
-    "//github:push:4": "git subtree add --squash --prefix __dist__ origin gh-pages",
-    "//github:push:5": "git subtree push --squash --prefix __dist__ origin gh-pages",
+    "github:push:4": "git -C ./__dist__ add --all",
+    "github:push:5": "git -C ./__dist__ commit --all --message \"..\"",
+    "github:push:6": "git -C ./__dist__ push",
 
     "install-dependencies": "yarn install",
 
