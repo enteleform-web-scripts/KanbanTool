@@ -4,10 +4,10 @@
 const _baseURL = "https://enteleform-extensions.github.io/KanbanTool"
 
 
-export function get_FileText(filePath:string, callback:((text:string) => void)){
-	filePath = filePath.replace(/^\.\//, `${_baseURL}/`)
+export async function get_FileText(url:string){
+	const fileURL = url.replace(/^\.\//, `${_baseURL}/`)
 	var file = new XMLHttpRequest()
-	file.open("GET", filePath, false)
+	file.open("GET", fileURL, false)
 
 	file.onreadystatechange = () => {
 		const fileAcquired = (
@@ -16,7 +16,13 @@ export function get_FileText(filePath:string, callback:((text:string) => void)){
 		)
 
 		if(fileAcquired)
-			{callback(file.responseText)}
+			{return file.responseText}
+		else{
+			throw new Error(`
+				Unable to resolve URL:
+					'${url}'
+ 			`)
+		}
 	}
 
 	file.send(null)

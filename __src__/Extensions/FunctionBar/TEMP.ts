@@ -69,12 +69,16 @@ modes.forEach( (mode, i) => {
 import {get_FileText} from "~/Utils/get_FileText"
 require("./CSS.styl")
 
-get_FileText("./__Main__.css", apply_CSS)
+get_FileText("./__Main__.css")
+	.then(fileText => apply_CSS(fileText))
+
+get_FileText("./WOT.css")
+	.then(fileText => apply_CSS(fileText))
 
 function apply_CSS(fileText){
-	console.log("!!!!>>>>>>>>>>>>>>>>>>>>>>>>")
+	console.log("?!?!?!?!>>>>>>>>>>>>>>>>>>>>>>>>")
 	console.log(fileText)
-	console.log("!!!!<<<<<<<<<<<<<<<<<<<<<<<<")
+	console.log("?!?!?!<<<<<<<<<<<<<<<<<<<<<<<<")
 	// stylus(fileText)
 	// 	.set('filename', 'nesting.css')
 	// 	.render(function(err, css){
