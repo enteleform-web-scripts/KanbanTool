@@ -63,7 +63,7 @@ const config: ((env:any) => webpack.Configuration) = function(env:any){
 			]),
 		],
 		output: {
-			filename: "__main__.js",
+			filename: "__Main__.js",
 			path: distPath,
 		},
 	}
