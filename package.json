@@ -4,7 +4,6 @@
 
   "dependencies": {
     "jquery":     "^3.3.1",
-		"stylus":     "^0.54.5",
     "hotkeys-js": "^3.6.2"
   },
 
@@ -15,6 +14,7 @@
     "ts-node":     "^8.0.3",
     "typescript":  "^3.4.1",
     "pug":         "^2.0.3",
+		"stylus":      "^0.54.5",
 
     "@types/webpack":                 "^4.4.27",
     "webpack":                        "^4.29.6",

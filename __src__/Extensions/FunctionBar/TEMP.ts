@@ -69,17 +69,12 @@ modes.forEach( (mode, i) => {
 import {get_FileText} from "~/Utils/get_FileText"
 require("./CSS.styl")
 
-// import stylus from "stylus"
-
-const styleSheet = get_FileText(
-	"https://enteleform-extensions.github.io/KanbanTool/__Main__.css",
-	apply_CSS,
-)
+get_FileText("./__Main__.css", apply_CSS)
 
 function apply_CSS(fileText){
-	console.log(">>>>>>>>>>>>>>>>>>>>>>>>")
+	console.log("!!!!>>>>>>>>>>>>>>>>>>>>>>>>")
 	console.log(fileText)
-	console.log("<<<<<<<<<<<<<<<<<<<<<<<<")
+	console.log("!!!!<<<<<<<<<<<<<<<<<<<<<<<<")
 	// stylus(fileText)
 	// 	.set('filename', 'nesting.css')
 	// 	.render(function(err, css){
