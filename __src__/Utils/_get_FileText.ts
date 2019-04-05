@@ -1,11 +1,5 @@
 // modified from https://stackoverflow.com/a/14446538/4955183
 
-//###############//
-//###  Setup  ###//
-//###############//
-
-const _baseURL = "https://enteleform-extensions.github.io/KanbanTool"
-
 
 //#################//
 //###  Exports  ###//
@@ -18,15 +12,13 @@ export async function get_FileText(url:string){
 }
 
 
-//#################//
+//###############//
 //###  Utils  ###//
-//#################//
+//###############//
 
 async function _get_FileText(url:string, result:{value}){
-	const fileURL = url.replace(/^\.\//, `${_baseURL}/`)
-
 	var file = new XMLHttpRequest()
-	file.open("GET", fileURL, false)
+	file.open("GET", url, false)
 
 	file.onreadystatechange = () => {
 		const fileAcquired = (

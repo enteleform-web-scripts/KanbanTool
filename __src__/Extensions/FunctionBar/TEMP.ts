@@ -1,3 +1,7 @@
+//###  Module  ###//
+require("./CSS.styl")
+
+
 //###  NPM  ###//
 import jquery from "jquery"
 const $:any = jquery
@@ -6,9 +10,6 @@ import hotkeys from "hotkeys-js"
 const KanbanTool = (window as any).KT
 
 const cssVariables = require("./CSS_Variables.json")
-console.log(">>>", cssVariables)
-console.log(">>>", cssVariables.legendContainer)
-console.log(">>>", cssVariables.extension)
 
 const __ALL_ROWS__    = "__ALL_ROWS__"
 const __ALL_COLUMNS__ = "__ALL_COLUMNS__"
@@ -68,22 +69,6 @@ modes.forEach( (mode, i) => {
 	cell.on("click", set_Mode)
 	tableRow.append(cell)
 })
-
-import {get_FileText} from "~/Utils/get_FileText"
-require("./CSS.styl")
-
-get_FileText("./__Main__.css")
-	.then(fileText => apply_CSS(fileText))
-
-function apply_CSS(css:string){
-	console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
-	console.log(css)
-	console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
-	$("<style>")
-		.prop("type", "text/css")
-		.html(css)
-		.appendTo("head")
-}
 
 
 function get_ActiveBoard(){
