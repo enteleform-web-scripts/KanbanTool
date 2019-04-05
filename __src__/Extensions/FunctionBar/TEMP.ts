@@ -76,6 +76,9 @@ get_FileText("./__Main__.css")
 	.then(fileText => apply_CSS(fileText))
 
 function apply_CSS(css:string){
+	console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
+	console.log(css)
+	console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
 	$("<style>")
 		.prop("type", "text/css")
 		.html(css)
