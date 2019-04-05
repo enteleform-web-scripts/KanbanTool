@@ -30,6 +30,8 @@ export class KeyBinding{
 	}
 }
 
+(window as any).KeyBinding = KeyBinding
+
 
 //###############//
 //###  utils  ###//
