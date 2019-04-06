@@ -47,7 +47,9 @@
     "ts-jest":     "^24.0.1",
 
     "@types/jquery": "^3.3.29",
-		"@types/stylus": "^0.48.31"
+		"@types/stylus": "^0.48.31",
+
+		"escape-string-regexp": "^1.0.5"
   },
 
   "scripts": {
