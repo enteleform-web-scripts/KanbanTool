@@ -62,13 +62,17 @@
     "build:push:1": "npm run build:local",
     "build:push:2": "npm run github:push",
 
-    "github:push":   "npm-run-all github:push:*",
-    "github:push:1": "git add --all",
-    "github:push:2": "git commit --all --message \"..\"",
-    "github:push:3": "git push",
-    "github:push:4": "git -C ./__dist__ add --all",
-    "github:push:5": "git -C ./__dist__ commit --all --message \"..\"",
-    "github:push:6": "git -C ./__dist__ push",
+    "github:push": "npm-run-all github:push:*",
+
+    "github:push:source":   "npm-run-all github:push:source:*",
+    "github:push:source:1": "git add --all",
+    "github:push:source:2": "git commit --all --message \"..\"",
+    "github:push:source:3": "git push",
+
+    "github:push:gh-pages":   "npm-run-all github:push:gh-pages:*",
+    "github:push:gh-pages:1": "git -C ./__dist__ add --all",
+    "github:push:gh-pages:2": "git -C ./__dist__ commit --all --message \"..\"",
+    "github:push:gh-pages:3": "git -C ./__dist__ push",
 
     "install-dependencies": "yarn install",
 
