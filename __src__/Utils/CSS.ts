@@ -10,9 +10,10 @@ import {get_FileText} from "~/Utils/_get_FileText"
 export class CSS{
 
 	static async apply(filePath:string){
-		const url = _add_BaseURL(filePath)
-		get_FileText(url)
-			.then(fileText => _apply_CSS(fileText))
+		console.log(">>> CSS >>>", filePath)
+		// const url = _add_BaseURL(filePath)
+		// get_FileText(url)
+		// 	.then(fileText => _apply_CSS(fileText))
 	}
 
 }

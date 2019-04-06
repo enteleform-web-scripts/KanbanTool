@@ -1,7 +1,7 @@
 //###  Module: CSS  ###//
 import {CSS} from "~/Utils/CSS"
-CSS.apply("__Main__.css")
-// CSS.apply(__dirname)
+// CSS.apply("__Main__.css")
+CSS.apply(__dirname)
 
 //###  NPM  ###//
 import jquery from "jquery"
