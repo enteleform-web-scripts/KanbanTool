@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {Settings} from "../../../Settings"
+import {Settings} from "../../Settings"
 
 //###  Node  ###//
 import path from "path"
@@ -41,7 +41,6 @@ function _get_ChunkName(module){
 			.replace(filePath_Head,               "")
 			.replace(Settings.css_FileBase_RegEx, "")
 			.replace(/\\$/,                       "")
-
 	return fileBase
 }
 

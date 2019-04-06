@@ -1,6 +1,6 @@
 //###  Module  ###//
 import {Settings    } from "../Settings"
-import {CSS_Splitter} from "./Utils/CSS_Splitter/__main__"
+import {CSS_Splitter} from "./Utils/CSS_Splitter"
 
 //###  NPM  ###//
 import webpack from "webpack"

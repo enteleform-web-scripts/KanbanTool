@@ -58,22 +58,9 @@
   "scripts": {
 		"build:local": "webpack --mode development --env.development",
 
-		"build:local-config":   "npm-run-all build:local-config:*",
-    "build:local-config:1": "npm run config:build",
-    "build:local-config:2": "cls",
-    "build:local-config:3": "npm run build:local",
-
 		"build:push":   "npm-run-all build:push:*",
-    "build:push:1": "npm run build:local-config",
+    "build:push:1": "npm run build:local",
     "build:push:2": "npm run github:push",
-
-		"config:build":   "npm-run-all config:build:*",
-		"config:build:1": "npm run config:clean",
-		"config:build:2": "tsc --project ./.config/tsconfig.json",
-
-		"config:clean":   "npm-run-all config:clean:*",
-		"config:clean:1": "del-cli ./.config/__compiled__/**",
-		"config:clean:2": "make-dir ./.config/__compiled__",
 
     "github:push":   "npm-run-all github:push:*",
     "github:push:1": "git add --all",
