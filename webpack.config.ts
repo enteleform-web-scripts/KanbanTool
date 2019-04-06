@@ -1,21 +1,21 @@
-import * as path            from "path"
+//###  Module  ###//
+import {Settings    } from "./.config/__compiled__/Settings"
+import {optimization} from "./.config/__compiled__/webpack/optimization"
+import {CSS_Splitter} from "./.config/__compiled__/webpack/Utils/CSS_Splitter/__main__"
+
+//###  Node  ###//
+import path from "path"
+
+//###  NPM  ###//
 // import {Directory}          from "@enteleform/path"
 import webpack              from "webpack"
 import HtmlWebpackPlugin    from "html-webpack-plugin"
 import CleanWebpackPlugin   from "clean-webpack-plugin"
 import CopyPlugin           from "copy-webpack-plugin"
 import MiniCssExtractPlugin from "mini-css-extract-plugin"
-import escapeStringRegEx    from "escape-string-regexp"
 
-const root     = path.resolve(__dirname)
-// const root = new Directory(__dirname)
+const mainPage_Folder = `./${Settings.sourceFolder}/pages/__main__`
 
-const srcPath         = path.join(root, "__src__")
-// const srcPath         = new Directory(root, "__src__")
-const distPath        = path.join(root, "__dist__")
-const staticPath      = path.join(srcPath, "Static")
-// const distPath        = new Directory(root, "__dist__")
-const mainPage_Folder = `./${path.basename(srcPath)}/pages/__main__`
 // const mainPage_Folder = `./${srcPath.tail}/pages/__main__`
 
 const mainScript = `./${mainPage_Folder}/script.ts`
@@ -25,9 +25,7 @@ const mainLayout = `./${mainPage_Folder}/layout.pug`
 const config: ((env:any) => webpack.Configuration) = function(env:any){
 	return {
 		target: "web",
-		// entry: [mainScript],
-		// entry: [mainScript, `${srcPath}/Extensions/FunctionBar/CSS.styl`],
-		entry: [mainScript, `${srcPath}/Extensions/FunctionBar/CSS.styl`, `${srcPath}/Extensions/FunctionBar/CSS2.styl`],
+		entry: [mainScript, ...CSS_Splitter.filePaths],
 		module: {
 			rules: [
 				{
@@ -46,14 +44,15 @@ const config: ((env:any) => webpack.Configuration) = function(env:any){
 		},
 		resolve: {
 			alias: {
-				"~": srcPath,
+				"~": Settings.sourcePath,
+				// "!": Settings.configPath,
 			},
 			extensions: [".tsx", ".ts", ".js"],
 		},
 		devtool: "inline-source-map",
 		devServer: {
-			contentBase: `./${path.basename(distPath)}`,
-			// contentBase: `./${distPath.tail}`,
+			contentBase: `./${path.basename(Settings.distributionPath)}`,
+			// contentBase: `./${Settings.distributionPath.tail}`,
 		},
 		plugins: [
 			new CleanWebpackPlugin({
@@ -65,86 +64,13 @@ const config: ((env:any) => webpack.Configuration) = function(env:any){
 				chunkFilename: "css/[name].css",
 			}),
 			new CopyPlugin([
-				{from:staticPath, to:distPath},
+				{from:Settings.staticPath, to:Settings.distributionPath},
 			]),
 		],
-		optimization: {
-			splitChunks: {
-				// name(module, chunks, cacheGroupKey){
-				// 	console.log("!!!!!!!!!!!!")
-				// 	console.log(module, chunks, cacheGroupKey)
-				// 	console.log("!!!!!!!!!!!!")
-				// 	return
-				// },
-				// chunks(chunk){
-				// 	console.log("!!!!!!!!!!!!")
-				// 	const identifier = chunk.entryModule._identifier
-				// 	// const nameSegments = identifier.split("__src__")
-				// 	// if(! (nameSegments.length > 0))
-				// 	// 	{return false}
-				// 	// const name =
-				// 	// 	nameSegments[nameSegments.length - 1]
-				// 	// 	.replace(/\.styl$/, "")
-				// 	// console.log(name)
-				// 	console.log(chunk.name)
-				// 	console.log("!!!!!!!!!!!!")
-				// 	// chunk.name = name
-				// 	return true
-				// },
-				cacheGroups: {
-					a: {
-						name(module, chunks, cacheGroup_Key){
-							const filePath = (module.resource || module.issuer.resource)
-							const filePath_Head =  new RegExp("^" + escapeStringRegEx(srcPath))
-							const fileBase =
-								filePath
-									.replace(filePath_Head, "")
-									.replace(/CSS\.styl$/,  "")
-									.replace(/\\$/,         "")
-							return fileBase
-						},
-						test:    /CSS\.styl$/,
-						chunks:  "all",
-						enforce: true,
-					},
-					b: {
-						name: "lololol",
-						// name(module, chunks, cacheGroupKey){
-						// 	console.log("!!!!!!!!!!!!")
-						// 	console.log(module, chunks, cacheGroupKey)
-						// 	console.log("!!!!!!!!!!!!")
-						// 	return "styles--UWOTM8"
-						// },
-						test:    /CSS2\.styl$/,
-						chunks:  "all",
-						enforce: true,
-					},
-				},
-				// cacheGroups: {
-				// 	vendors: false
-				// },
-			}
-			// splitChunks: {
-			// 	cacheGroups: {
-			// 		a: {
-			// 			name:    "styles-lol",
-			// 			test:    /CSS\.styl$/,
-			// 			chunks:  "all",
-			// 			enforce: true,
-			// 		},
-			// 		b: {
-			// 			name:    "styles-wot",
-			// 			test:    /CSS2\.styl$/,
-			// 			chunks:  "all",
-			// 			enforce: true,
-			// 		},
-			// 	},
-			// },
-			// runtimeChunk: true,
-		},
+		optimization,
 		output: {
 			filename: "__Main__.js",
-			path: distPath,
+			path: Settings.distributionPath,
 		},
 	}
 }

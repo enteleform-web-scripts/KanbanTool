@@ -37,19 +37,22 @@
 		"stylus-loader": "^3.0.2",
     "ts-loader":     "^5.3.3",
 
-    "npm-run-all": "^4.1.5",
-    "cpy-cli":      "^2.0.0",
-    "del-cli":      "^1.1.0",
-    "make-dir-cli": "^2.0.0",
+    "npm-run-all":       "^4.1.5",
+    "cpy-cli":           "^2.0.0",
+    "del-cli":           "^1.1.0",
+    "make-dir-cli":      "^2.0.0",
+
+		"@types/klaw-sync" : "^6.0.0",
+		"klaw-sync":         "^6.0.0",
 
     "@types/jest": "^24.0.11",
     "jest":        "^24.7.0",
     "ts-jest":     "^24.0.1",
 
     "@types/jquery": "^3.3.29",
-		"@types/stylus": "^0.48.31",
 
-		"escape-string-regexp": "^1.0.5"
+		"@types/escape-string-regexp": "^1.0.0",
+		"escape-string-regexp":        "^1.0.5"
   },
 
   "scripts": {
@@ -57,9 +60,22 @@
 
 		"build:local": "npm run _build",
 
-		"build:push": "npm-run-all build:push:*",
-    "build::push:1": "npm run _build",
-    "build::push:2": "npm run github:push",
+		"build:local-config":   "npm-run-all build:local-config:*",
+    "build:local-config:1": "npm run config:build",
+    "build:local-config:2": "cls",
+    "build:local-config:3": "npm run build:local",
+
+		"build:push":   "npm-run-all build:push:*",
+    "build:push:1": "npm run _build",
+    "build:push:2": "npm run github:push",
+
+		"config:build":   "npm-run-all config:build:*",
+		"config:build:1": "npm run config:clean",
+		"config:build:2": "tsc --project ./.config/tsconfig.json",
+
+		"config:clean":   "npm-run-all config:clean:*",
+		"config:clean:1": "del-cli ./.config/__compiled__/**",
+		"config:clean:2": "make-dir ./.config/__compiled__",
 
     "github:push":   "npm-run-all github:push:*",
     "github:push:1": "git add --all",
