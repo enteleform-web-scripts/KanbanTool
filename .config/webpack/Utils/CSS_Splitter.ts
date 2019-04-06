@@ -38,9 +38,10 @@ function _get_ChunkName(module){
 
 	const fileBase =
 		filePath
-			.replace(filePath_Head,               "")
-			.replace(Settings.css_FileBase_RegEx, "")
-			.replace(/\\$/,                       "")
+			.replace(filePath_Head,               "" )
+			.replace(Settings.css_FileBase_RegEx, "" )
+			.replace(/\\$/,                       "" )
+			.replace(/\\/g,                       "/")
 	return fileBase
 }
 

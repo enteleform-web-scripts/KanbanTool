@@ -70,7 +70,6 @@
     "github:push:5": "git -C ./__dist__ commit --all --message \"..\"",
     "github:push:6": "git -C ./__dist__ push",
 
-
     "install-dependencies": "yarn install",
 
     "test":          "cls && jest",
