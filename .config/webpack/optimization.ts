@@ -1,35 +1,26 @@
 //###  Module  ###//
+import {Settings    } from "../Settings"
 import {CSS_Splitter} from "./Utils/CSS_Splitter/__main__"
 
+//###  NPM  ###//
+import webpack from "webpack"
 
-//#################//
-//###  Exports  ###//
-//#################//
 
-export const optimization:any = {
+const $: webpack.Options.Optimization = {
 
 	splitChunks: {
-		cacheGroups: _build_CacheGroups_From_RegExes(),
+		cacheGroups: {
+			CSS: {
+				name:               CSS_Splitter.get_ChunkName,
+				test:               Settings.css_FileBase_RegEx,
+				chunks:             "initial",
+				enforce:            true,
+				reuseExistingChunk: false,
+			},
+		},
 	},
 
 }
 
 
-//###############//
-//###  Utils  ###//
-//###############//
-
-function _build_CacheGroups_From_RegExes(){
-	const cacheGroups = {}
-
-	CSS_Splitter.fileRegExes.forEach((pattern, i) => {
-		cacheGroups[`Group${i}`] = {
-			name:    CSS_Splitter.get_ChunkName,
-			test:    /CSS\.styl$/,
-			chunks:  "all",
-			enforce: true,
-		}
-	})
-
-	return cacheGroups
-}
+export default $

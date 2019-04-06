@@ -5,30 +5,22 @@ import {Settings} from "../../../Settings"
 import path from "path"
 
 //###  NPM  ###//
-import escapeStringRegEx from "escape-string-regexp"
-import walk              from "klaw-sync"
+import walk         from "klaw-sync"
+import escape_RegEx from "escape-string-regexp"
 
+
+//#################//
+//###  Exports  ###//
+//#################//
 
 export class CSS_Splitter{
 
-	static get_ChunkName(module, chunks, cacheGroup_Key){
-		const filePath = (module.resource || module.issuer.resource)
-		const filePath_Head =  new RegExp("^" + escapeStringRegEx(Settings.sourcePath))
-		const fileBase =
-			filePath
-				.replace(filePath_Head, "")
-				.replace(/CSS\.styl$/,  "")
-				.replace(/\\$/,         "")
-		return fileBase
-	}
+	static get_ChunkName(module, chunks, cacheGroup_Key)
+		{return _get_ChunkName(module)}
 
 	static filePaths =
 		walk(Settings.sourcePath, {traverseAll:true, filter:_filter_CSS_MainFiles})
 			.map(fileData => fileData.path)
-
-	static fileRegExes =
-		CSS_Splitter.filePaths
-			.map(fileData => _get_CacheGroup_TestRegEx(fileData))
 
 }
 
@@ -37,13 +29,24 @@ export class CSS_Splitter{
 //###  Utils  ###//
 //###############//
 
+function _get_ChunkName(module){
+	const filePath = module.issuer.resource
+	if(!filePath)
+		{return}
+
+	const filePath_Head = new RegExp("^" + escape_RegEx(Settings.sourcePath))
+
+	const fileBase =
+		filePath
+			.replace(filePath_Head,               "")
+			.replace(Settings.css_FileBase_RegEx, "")
+			.replace(/\\$/,                       "")
+
+	return fileBase
+}
+
 function _filter_CSS_MainFiles(fileData){
 	const fileBase = path.basename(fileData.path)
 	const is_CSS_MainFile = (fileBase.toLowerCase() == "css.styl")
 	return is_CSS_MainFile
-}
-
-function _get_CacheGroup_TestRegEx(filePath:string){
-	const relativePath = filePath.replace(Settings.rootPath, "")
-	return new RegExp(".*" + escapeStringRegEx(relativePath) + "$")
 }
