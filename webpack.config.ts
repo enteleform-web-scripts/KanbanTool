@@ -18,8 +18,8 @@ const mainPage_Folder = `./${Settings.sourceFolder}/pages/__main__`
 
 // const mainPage_Folder = `./${srcPath.tail}/pages/__main__`
 
-const mainScript = `./${mainPage_Folder}/script.ts`
-const mainLayout = `./${mainPage_Folder}/layout.pug`
+const mainScript = `./${mainPage_Folder}/__main__.ts`
+const mainLayout = `./${mainPage_Folder}/__main__.pug`
 
 
 const config: ((env:any) => webpack.Configuration) = function(env:any){
