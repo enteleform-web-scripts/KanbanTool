@@ -40,7 +40,7 @@ function _get_ChunkName(module){
 		filePath
 			.replace(filePath_Head,               "" )
 			.replace(Settings.css_FileBase_RegEx, "" )
-			.replace(/\\$/,                       "" )
+			.replace(/(^\\)|(\\$)/g,              "" )
 			.replace(/\\/g,                       "/")
 	return fileBase
 }
