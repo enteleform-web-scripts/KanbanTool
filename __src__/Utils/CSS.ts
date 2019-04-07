@@ -9,8 +9,17 @@ import {get_FileText} from "~/Utils/_get_FileText"
 
 export class CSS{
 
-	static async apply(modulePath:string)
-		{_apply_CSS(modulePath)}
+	static async apply(modulePath:string){
+		const url = _get_ModuleCSS_URL(modulePath)
+
+		get_FileText(url)
+			.then(css => {
+				$("<style>")
+					.prop("type", "text/css")
+					.html(css)
+					.appendTo("head")
+			})
+	}
 
 }
 
@@ -19,21 +28,11 @@ export class CSS{
 //###  Utils  ###//
 //###############//
 
-function _apply_CSS(modulePath:string){
+function _get_ModuleCSS_URL(modulePath:string){
 	const relativePath = _remove_SourceDirectory(modulePath)
 	const cssPath      = `css/${relativePath}.css`
 	const url          = _add_BaseURL(cssPath)
-
-	get_FileText(url)
-		.then(css => {
-			console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
-			console.log(css)
-			console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
-			$("<style>")
-				.prop("type", "text/css")
-				.html(css)
-				.appendTo("head")
-		})
+	return url
 }
 
 function _remove_SourceDirectory(relativePath:string){
