@@ -91,9 +91,33 @@
   !*** ./__src__/Extensions/FunctionBar/TEMP.ts ***!
   \************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-eval("console.log(\"@@@ TEMP\");\r\n\n\n//# sourceURL=webpack:///./__src__/Extensions/FunctionBar/TEMP.ts?");
+"use strict";
+eval("/* WEBPACK VAR INJECTION */(function(__dirname) {\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst CSS_1 = __webpack_require__(/*! ~/Utils/CSS */ \"./__src__/Utils/CSS.ts\");\r\nconsole.log(\"@@@ TEMP\");\r\nCSS_1.CSS.apply(__dirname);\r\n\n/* WEBPACK VAR INJECTION */}.call(this, \"/\"))\n\n//# sourceURL=webpack:///./__src__/Extensions/FunctionBar/TEMP.ts?");
+
+/***/ }),
+
+/***/ "./__src__/Settings.json":
+/*!*******************************!*\
+  !*** ./__src__/Settings.json ***!
+  \*******************************/
+/*! exports provided: baseURL, _, default */
+/***/ (function(module) {
+
+eval("module.exports = {\"baseURL\":\"https://enteleform-extensions.github.io/KanbanTool\",\"_\":\"\"};\n\n//# sourceURL=webpack:///./__src__/Settings.json?");
+
+/***/ }),
+
+/***/ "./__src__/Utils/CSS.ts":
+/*!******************************!*\
+  !*** ./__src__/Utils/CSS.ts ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst Settings = __webpack_require__(/*! ~/Settings.json */ \"./__src__/Settings.json\");\r\nclass CSS {\r\n    static async apply(filePath) {\r\n        console.log(\">>> CSS >>>\", filePath);\r\n    }\r\n}\r\nexports.CSS = CSS;\r\nfunction _apply_CSS(css) {\r\n    console.log(\"!!!!!!!!!!!!!!!!!!!!!!!!\");\r\n    console.log(css);\r\n    console.log(\"!!!!!!!!!!!!!!!!!!!!!!!!\");\r\n    $(\"<style>\")\r\n        .prop(\"type\", \"text/css\")\r\n        .html(css)\r\n        .appendTo(\"head\");\r\n}\r\nfunction _add_BaseURL(filePath) {\r\n    const baseURL = Settings.baseURL;\r\n    let url = filePath.replace(/^\\.?\\//, `${baseURL}/`);\r\n    if (!url.startsWith(baseURL)) {\r\n        url = `${baseURL}/${filePath}`;\r\n    }\r\n    return url;\r\n}\r\n\n\n//# sourceURL=webpack:///./__src__/Utils/CSS.ts?");
 
 /***/ }),
 
