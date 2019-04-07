@@ -36,7 +36,7 @@ const _filePaths =
 
 function _filter_CSS_MainFiles(fileData){
 	const fileBase = path.basename(fileData.path)
-	const is_CSS_MainFile = (fileBase.toLowerCase() == Settings.css_FileBase)
+	const is_CSS_MainFile = (fileBase.toLowerCase() == Settings.css_FileBase.toLowerCase())
 	return is_CSS_MainFile
 }
 
