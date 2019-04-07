@@ -6,6 +6,11 @@ import escape_RegEx from "escape-string-regexp"
 
 
 class S{
+
+	//################//
+	//###  Source  ###//
+	//################//
+
 	static configFolder         = ".config"
 	static sourceFolder         = "__src__"
 	static distributionFolder   = "__dist__"
@@ -26,6 +31,14 @@ class S{
 	static mainPage_RelativePath = `./${S.sourceFolder}/${S.pagesFolder}/${S.mainName}`
 	static mainScript            = `./${S.mainPage_RelativePath}/${S.mainName}.ts`
 	static mainLayout            = `./${S.mainPage_RelativePath}/${S.mainName}.pug`
+
+
+	//##############//
+	//###  Dist  ###//
+	//##############//
+
+	static entryPoints_Folder = "EntryPoints"
+
 }
 
 export const Settings = S

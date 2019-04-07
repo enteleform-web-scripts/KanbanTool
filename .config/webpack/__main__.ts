@@ -7,12 +7,10 @@ import webpack from "webpack"
 
 export default (env:any): webpack.Configuration => ({
 
-	target:    "web",
-	// devtool:   "source-map",
-	// devServer: {contentBase:Settings.distributionFolder},
+	target: "web",
 
 	output: {
-		filename: "__Main__.js",
+		filename: "[name].js",
 		path:     Settings.distributionPath,
 	},
 

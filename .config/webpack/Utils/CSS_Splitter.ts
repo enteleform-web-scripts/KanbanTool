@@ -15,12 +15,11 @@ import escape_RegEx from "escape-string-regexp"
 
 export class CSS_Splitter{
 
+	static get css_EntryPoints()
+		{return _get_CSS_EntryPoints()}
+
 	static get_ChunkName(module, chunks, cacheGroup_Key)
 		{return _get_ChunkName(module)}
-
-	static filePaths =
-		walk(Settings.sourcePath, {traverseAll:true, filter:_filter_CSS_MainFiles})
-			.map(fileData => fileData.path)
 
 }
 
@@ -29,24 +28,44 @@ export class CSS_Splitter{
 //###  Utils  ###//
 //###############//
 
-function _get_ChunkName(module){
-	const filePath = module.issuer.resource
-	if(!filePath)
-		{return}
+const _filePath_Head = new RegExp("^" + escape_RegEx(Settings.sourcePath))
 
-	const filePath_Head = new RegExp("^" + escape_RegEx(Settings.sourcePath))
+const _filePaths =
+	walk(Settings.sourcePath, {traverseAll:true, filter:_filter_CSS_MainFiles})
+		.map(fileData => fileData.path)
 
-	const fileBase =
+function _get_RelativePath(filePath:string){
+	return(
 		filePath
-			.replace(filePath_Head,               "" )
+			.replace(_filePath_Head,              "" )
 			.replace(Settings.css_FileBase_RegEx, "" )
 			.replace(/(^\\)|(\\$)/g,              "" )
 			.replace(/\\/g,                       "/")
-	return fileBase
+	)
 }
 
 function _filter_CSS_MainFiles(fileData){
 	const fileBase = path.basename(fileData.path)
 	const is_CSS_MainFile = (fileBase.toLowerCase() == "css.styl")
 	return is_CSS_MainFile
+}
+
+function _get_CSS_EntryPoints(){
+	const entryPoints = {}
+
+	_filePaths.forEach(filePath => {
+		const fileBase = _get_RelativePath(filePath)
+		entryPoints[`${Settings.entryPoints_Folder}/${fileBase}`] = filePath
+	})
+
+	return entryPoints
+}
+
+
+function _get_ChunkName(module){
+	if(! module.issuer)
+		{return}
+
+	const filePath = module.issuer.resource
+	return _get_RelativePath(filePath)
 }
