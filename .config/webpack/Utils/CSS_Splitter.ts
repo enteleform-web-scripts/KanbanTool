@@ -34,6 +34,12 @@ const _filePaths =
 	walk(Settings.sourcePath, {traverseAll:true, filter:_filter_CSS_MainFiles})
 		.map(fileData => fileData.path)
 
+function _filter_CSS_MainFiles(fileData){
+	const fileBase = path.basename(fileData.path)
+	const is_CSS_MainFile = (fileBase.toLowerCase() == Settings.css_FileBase)
+	return is_CSS_MainFile
+}
+
 function _get_RelativePath(filePath:string){
 	return(
 		filePath
@@ -42,12 +48,6 @@ function _get_RelativePath(filePath:string){
 			.replace(/(^\\)|(\\$)/g,              "" )
 			.replace(/\\/g,                       "/")
 	)
-}
-
-function _filter_CSS_MainFiles(fileData){
-	const fileBase = path.basename(fileData.path)
-	const is_CSS_MainFile = (fileBase.toLowerCase() == "css.styl")
-	return is_CSS_MainFile
 }
 
 function _get_CSS_EntryPoints(){
