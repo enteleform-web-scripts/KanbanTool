@@ -10,7 +10,7 @@ console.log(CSS_Splitter.css_EntryPoints)
 console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 
 const $: (string | string[] | webpack.Entry | webpack.EntryFunc) = {
-	"__main__": Settings.mainScript,
+	"__Main__": Settings.mainScript,
 	...CSS_Splitter.css_EntryPoints,
 }
 
