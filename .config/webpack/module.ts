@@ -16,7 +16,7 @@ const $: webpack.Module = {
 			test: /\.pug?$/,
 			use: {
 				loader: "pug-loader",
-				options: {pretty: true}
+				options: {pretty: true},
 			},
 		},
 		{

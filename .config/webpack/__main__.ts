@@ -8,8 +8,8 @@ import webpack from "webpack"
 export default (env:any): webpack.Configuration => ({
 
 	target:    "web",
-	devtool:   "source-map",
-	devServer: {contentBase:Settings.distributionFolder},
+	// devtool:   "source-map",
+	// devServer: {contentBase:Settings.distributionFolder},
 
 	output: {
 		filename: "__Main__.js",
