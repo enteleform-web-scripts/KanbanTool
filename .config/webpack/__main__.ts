@@ -8,7 +8,7 @@ import webpack from "webpack"
 export default (env:any): webpack.Configuration => ({
 
 	target:    "web",
-	devtool:   "inline-source-map",
+	devtool:   "source-map",
 	devServer: {contentBase:Settings.distributionFolder},
 
 	output: {
