@@ -10,4 +10,4 @@ import "~/Extensions/FunctionBar/TEMP"
 // })
 
 //###  KeyBindings  ###
-// import "~/KeyBindings/Filter"
+import "~/KeyBindings/Filter"
