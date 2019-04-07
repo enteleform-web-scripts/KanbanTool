@@ -10,6 +10,8 @@ import {get_FileText} from "~/Utils/_get_FileText"
 export class CSS{
 
 	static async apply(filePath:string){
+		filePath = _remove_SourceDirectory(filePath)
+		// x.replace("__src__\\", "")
 		console.log(">>> CSS >>>", filePath)
 		// const url = _add_BaseURL(filePath)
 		// get_FileText(url)
@@ -22,6 +24,15 @@ export class CSS{
 //###############//
 //###  Utils  ###//
 //###############//
+
+function _remove_SourceDirectory(relativePath:string){
+	return (
+		relativePath
+			.split("\\")
+			.slice(1)
+			.join("/")
+	)
+}
 
 function _apply_CSS(css:string){
 	console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
