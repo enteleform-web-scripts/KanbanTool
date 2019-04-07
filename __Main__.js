@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./__src__/Extensions/CheckList/TEMP.ts":
+/*!**********************************************!*\
+  !*** ./__src__/Extensions/CheckList/TEMP.ts ***!
+  \**********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst jquery_1 = __importDefault(__webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\"));\r\nconst DELETE_KEYCODE = 46;\r\nconst selector__CheckList_Item = \"kt-taskview > form > div.kt-taskview-content > kt-checklist > li > .kt-checklist_item_content\";\r\nconst selector__CheckList_Item_SiblingsPrefix = \"#show > kt-cover > kt-taskview > form > div.kt-taskview-content > kt-checklist\";\r\nlet checkList_Item = null;\r\njquery_1.default(document).on(\"mouseover\", selector__CheckList_Item, (event) => {\r\n    checkList_Item = event.currentTarget;\r\n});\r\njquery_1.default(document).on(\"mouseout\", selector__CheckList_Item, (event) => {\r\n    checkList_Item = null;\r\n});\r\njquery_1.default(document).on(\"keydown\", (event) => {\r\n    if (checkList_Item && (event.keyCode == DELETE_KEYCODE)) {\r\n        const divIndex = get_DivIndex(checkList_Item);\r\n        const button__Delete = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > a.kt-remove > i.kt-icon-trash`);\r\n        button__Delete.click();\r\n    }\r\n});\r\njquery_1.default(document).on(\"click\", selector__CheckList_Item, (event) => {\r\n    if (event.ctrlKey) {\r\n        return;\r\n    }\r\n    event.preventDefault();\r\n    const div__CheckList_Item = event.currentTarget;\r\n    const divIndex = get_DivIndex(div__CheckList_Item);\r\n    setTimeout(() => {\r\n        const checkBox = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > input[type='checkbox']`);\r\n        checkBox.click();\r\n    }, 200);\r\n    setTimeout(() => {\r\n        const button__Edit = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > a.kt-edit > i.kt-icon-pencil-1`);\r\n        button__Edit.click();\r\n    }, 700);\r\n});\r\nfunction get_DivIndex(checkList_Item) {\r\n    return (jquery_1.default(checkList_Item).parent().index() + 1);\r\n}\r\n\n\n//# sourceURL=webpack:///./__src__/Extensions/CheckList/TEMP.ts?");
+
+/***/ }),
+
 /***/ "./__src__/Extensions/FunctionBar/CSS_Variables.json":
 /*!***********************************************************!*\
   !*** ./__src__/Extensions/FunctionBar/CSS_Variables.json ***!
@@ -97,15 +109,27 @@ eval("module.exports = {\"extension\":\"CustomExtension--FunctionBar\",\"legendC
 
 /***/ }),
 
-/***/ "./__src__/Extensions/FunctionBar/TEMP.ts":
-/*!************************************************!*\
-  !*** ./__src__/Extensions/FunctionBar/TEMP.ts ***!
-  \************************************************/
+/***/ "./__src__/Extensions/FunctionBar/TEMP_CardLegend.ts":
+/*!***********************************************************!*\
+  !*** ./__src__/Extensions/FunctionBar/TEMP_CardLegend.ts ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("/* WEBPACK VAR INJECTION */(function(__dirname) {\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst CSS_1 = __webpack_require__(/*! ~/Utils/CSS */ \"./__src__/Utils/CSS.ts\");\r\nCSS_1.CSS.apply(__dirname);\r\nconst jquery_1 = __importDefault(__webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\"));\r\nconst $ = jquery_1.default;\r\nconst hotkeys_js_1 = __importDefault(__webpack_require__(/*! hotkeys-js */ \"./node_modules/hotkeys-js/dist/hotkeys.esm.js\"));\r\nconst KanbanTool = window.KT;\r\nconst cssVariables = __webpack_require__(/*! ./CSS_Variables.json */ \"./__src__/Extensions/FunctionBar/CSS_Variables.json\");\r\nconst __ALL_ROWS__ = \"__ALL_ROWS__\";\r\nconst __ALL_COLUMNS__ = \"__ALL_COLUMNS__\";\r\nconst legendContainer = $(\"<div>\", { \"class\": cssVariables.legendContainer });\r\n$(\"body\").append(legendContainer);\r\nconst cardType_Legend = $(\"table.kt-extensions-card_legend\").detach();\r\nlet table = $(\"<table>\", { \"class\": cssVariables.extension });\r\nlet tableBody = $(\"<tbody>\");\r\nlet tableRow = $(\"<tr>\");\r\ntable.append(tableBody);\r\ntableBody.append(tableRow);\r\nlegendContainer.append(cardType_Legend);\r\nlegendContainer.append(table);\r\nclass Mode {\r\n    constructor({ name, rows, columns }) {\r\n        this.name = name;\r\n        this.rows = rows;\r\n        this.columns = columns;\r\n    }\r\n}\r\nlet modes = [\r\n    new Mode({ name: \"Work\", rows: [\"Daily\", \"Active\"], columns: [] }),\r\n    new Mode({ name: \"Plan\", rows: [__ALL_ROWS__], columns: [] }),\r\n];\r\nfunction get_SetMode_Callback(mode) {\r\n    return (event) => set_Mode(mode);\r\n}\r\nfunction get_KeyNumber(index) {\r\n    return (index + 1);\r\n}\r\nmodes.forEach((mode, i) => {\r\n    let keyNumber = get_KeyNumber(i);\r\n    const cell = $(\"<td>\", { \"class\": cssVariables.extension });\r\n    cell.text(`[${keyNumber}]  ${mode.name}`);\r\n    let set_Mode = get_SetMode_Callback(mode);\r\n    if (keyNumber !== null) {\r\n        hotkeys_js_1.default(`Alt+${keyNumber}`, set_Mode);\r\n    }\r\n    cell.on(\"click\", set_Mode);\r\n    tableRow.append(cell);\r\n});\r\nfunction get_ActiveBoard() {\r\n    const boards = KanbanTool.boards.filter(board => board.isOpen);\r\n    if (boards.length == 1) {\r\n        return boards[0];\r\n    }\r\n    else {\r\n        return null;\r\n    }\r\n}\r\nfunction set_Mode(mode) {\r\n    const target_AllRows = ((mode.rows.length == 1) && (mode.rows[0] == __ALL_ROWS__));\r\n    _set_RowStates(mode, target_AllRows);\r\n}\r\nfunction _get_TargetRows(mode) {\r\n    const board = get_ActiveBoard();\r\n    return (board.swimlanes()\r\n        .map((lane, index) => ({ lane, index }))\r\n        .filter(item => mode.rows.includes(item.lane.attributes.name))\r\n        .map(item => item.index));\r\n}\r\nfunction _set_RowStates(mode, target_AllRows) {\r\n    const rows = $.find(\"#show > div.kt-side-panel-slide > kt-board > tbody > tr\");\r\n    const targetRows = (target_AllRows) ? [] : _get_TargetRows(mode);\r\n    rows.forEach((row, i) => {\r\n        const $row = $(row);\r\n        if (target_AllRows || targetRows.includes(i)) {\r\n            $row.removeClass(\"kt-collapsed\");\r\n        }\r\n        else {\r\n            $row.addClass(\"kt-collapsed\");\r\n        }\r\n    });\r\n}\r\n\n/* WEBPACK VAR INJECTION */}.call(this, \"__src__\\\\Extensions\\\\FunctionBar\"))\n\n//# sourceURL=webpack:///./__src__/Extensions/FunctionBar/TEMP.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst KanbanTool_1 = __webpack_require__(/*! ~/Utils/KanbanTool */ \"./__src__/Utils/KanbanTool.ts\");\r\nconst legendIndex_Key_Map = {\r\n    0: 1,\r\n    1: 2,\r\n    2: 3,\r\n    3: 4,\r\n    4: 5,\r\n    5: 6,\r\n    6: 7,\r\n    7: 8,\r\n    8: 9,\r\n    9: 0,\r\n};\r\nconst numberKey_Count = Object.keys(legendIndex_Key_Map).length;\r\nlet card = null;\r\nfunction main() {\r\n    $(\"kt-board\").each(function () {\r\n        const board = this.props.board;\r\n        const cardTypes = board.cardTypes().active();\r\n        const cardType_Count = _get_CardType_Count(cardTypes);\r\n        if (!_board_HasLegend(board)) {\r\n            return;\r\n        }\r\n        _set_Card_HoverCallback(this);\r\n        for (let i = 0; (i < cardType_Count); i++) {\r\n            const cardType = cardTypes[i];\r\n            const keyNumber = legendIndex_Key_Map[i];\r\n            _add_LegendPrefix(keyNumber, cardType);\r\n            _set_CardType_KeyPressCallback(keyNumber, cardType);\r\n        }\r\n    });\r\n}\r\nfunction _set_Card_HoverCallback(element) {\r\n    const $element = $(element);\r\n    $element.on(\"mouseover\", \"kt-task\", (event) => {\r\n        card = event.currentTarget;\r\n    });\r\n    $element.on(\"mouseout\", \"kt-task\", (event) => {\r\n        card = null;\r\n    });\r\n}\r\nfunction _set_CardType_KeyPressCallback(keyNumber, cardType) {\r\n    $(window).on(`keydown.${keyNumber}`, (event) => {\r\n        if (card) {\r\n            card.props.task.save(\"card_type_id\", cardType.id);\r\n        }\r\n    });\r\n}\r\nfunction _add_LegendPrefix(keyNumber, cardType) {\r\n    const element = `.kt-extensions-card_legend [data-card_type_id=${cardType.id}]`;\r\n    const prefix = `[${keyNumber}] &nbsp;`;\r\n    $(element).prepend(prefix);\r\n}\r\nfunction _board_HasLegend(board) {\r\n    return KanbanTool_1.KanbanTool.extensionsManager.powerupSettings(\"CardLegend\", board).enabled;\r\n}\r\nfunction _get_CardType_Count(cardTypes) {\r\n    return Math.min(cardTypes.length, numberKey_Count);\r\n}\r\nmain();\r\n\n\n//# sourceURL=webpack:///./__src__/Extensions/FunctionBar/TEMP_CardLegend.ts?");
+
+/***/ }),
+
+/***/ "./__src__/Extensions/FunctionBar/TEMP_ModeLegend.ts":
+/*!***********************************************************!*\
+  !*** ./__src__/Extensions/FunctionBar/TEMP_ModeLegend.ts ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("/* WEBPACK VAR INJECTION */(function(__dirname) {\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst CSS_1 = __webpack_require__(/*! ~/Utils/CSS */ \"./__src__/Utils/CSS.ts\");\r\nCSS_1.CSS.apply(__dirname);\r\nconst jquery_1 = __importDefault(__webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\"));\r\nconst $ = jquery_1.default;\r\nconst hotkeys_js_1 = __importDefault(__webpack_require__(/*! hotkeys-js */ \"./node_modules/hotkeys-js/dist/hotkeys.esm.js\"));\r\nconst KanbanTool = window.KT;\r\nconst cssVariables = __webpack_require__(/*! ./CSS_Variables.json */ \"./__src__/Extensions/FunctionBar/CSS_Variables.json\");\r\nconst __ALL_ROWS__ = \"__ALL_ROWS__\";\r\nconst __ALL_COLUMNS__ = \"__ALL_COLUMNS__\";\r\nconst legendContainer = $(\"<div>\", { \"class\": cssVariables.legendContainer });\r\n$(\"body\").append(legendContainer);\r\nconst cardType_Legend = $(\"table.kt-extensions-card_legend\").detach();\r\nlet table = $(\"<table>\", { \"class\": cssVariables.extension });\r\nlet tableBody = $(\"<tbody>\");\r\nlet tableRow = $(\"<tr>\");\r\ntable.append(tableBody);\r\ntableBody.append(tableRow);\r\nlegendContainer.append(cardType_Legend);\r\nlegendContainer.append(table);\r\nclass Mode {\r\n    constructor({ name, rows, columns }) {\r\n        this.name = name;\r\n        this.rows = rows;\r\n        this.columns = columns;\r\n    }\r\n}\r\nlet modes = [\r\n    new Mode({ name: \"Work\", rows: [\"Daily\", \"Active\"], columns: [] }),\r\n    new Mode({ name: \"Plan\", rows: [__ALL_ROWS__], columns: [] }),\r\n];\r\nfunction get_SetMode_Callback(mode) {\r\n    return (event) => set_Mode(mode);\r\n}\r\nfunction get_KeyNumber(index) {\r\n    return (index + 1);\r\n}\r\nmodes.forEach((mode, i) => {\r\n    let keyNumber = get_KeyNumber(i);\r\n    const cell = $(\"<td>\", { \"class\": cssVariables.extension });\r\n    cell.text(`[${keyNumber}]  ${mode.name}`);\r\n    let set_Mode = get_SetMode_Callback(mode);\r\n    if (keyNumber !== null) {\r\n        hotkeys_js_1.default(`Alt+${keyNumber}`, set_Mode);\r\n    }\r\n    cell.on(\"click\", set_Mode);\r\n    tableRow.append(cell);\r\n});\r\nfunction get_ActiveBoard() {\r\n    const boards = KanbanTool.boards.filter(board => board.isOpen);\r\n    if (boards.length == 1) {\r\n        return boards[0];\r\n    }\r\n    else {\r\n        return null;\r\n    }\r\n}\r\nfunction set_Mode(mode) {\r\n    const target_AllRows = ((mode.rows.length == 1) && (mode.rows[0] == __ALL_ROWS__));\r\n    _set_RowStates(mode, target_AllRows);\r\n}\r\nfunction _get_TargetRows(mode) {\r\n    const board = get_ActiveBoard();\r\n    return (board.swimlanes()\r\n        .map((lane, index) => ({ lane, index }))\r\n        .filter(item => mode.rows.includes(item.lane.attributes.name))\r\n        .map(item => item.index));\r\n}\r\nfunction _set_RowStates(mode, target_AllRows) {\r\n    const rows = $.find(\"#show > div.kt-side-panel-slide > kt-board > tbody > tr\");\r\n    const targetRows = (target_AllRows) ? [] : _get_TargetRows(mode);\r\n    rows.forEach((row, i) => {\r\n        const $row = $(row);\r\n        if (target_AllRows || targetRows.includes(i)) {\r\n            $row.removeClass(\"kt-collapsed\");\r\n        }\r\n        else {\r\n            $row.addClass(\"kt-collapsed\");\r\n        }\r\n    });\r\n}\r\n\n/* WEBPACK VAR INJECTION */}.call(this, \"__src__\\\\Extensions\\\\FunctionBar\"))\n\n//# sourceURL=webpack:///./__src__/Extensions/FunctionBar/TEMP_ModeLegend.ts?");
 
 /***/ }),
 
@@ -144,6 +168,18 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nco
 
 /***/ }),
 
+/***/ "./__src__/Utils/KanbanTool.ts":
+/*!*************************************!*\
+  !*** ./__src__/Utils/KanbanTool.ts ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nexports.KanbanTool = window.KT;\r\n\n\n//# sourceURL=webpack:///./__src__/Utils/KanbanTool.ts?");
+
+/***/ }),
+
 /***/ "./__src__/Utils/KeyBinding.ts":
 /*!*************************************!*\
   !*** ./__src__/Utils/KeyBinding.ts ***!
@@ -176,7 +212,7 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nas
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n__webpack_require__(/*! ~/Extensions/FunctionBar/TEMP */ \"./__src__/Extensions/FunctionBar/TEMP.ts\");\r\n__webpack_require__(/*! ~/KeyBindings/Filter */ \"./__src__/KeyBindings/Filter.ts\");\r\n\n\n//# sourceURL=webpack:///./__src__/__main__/__main__.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n__webpack_require__(/*! ~/Extensions/CheckList/TEMP */ \"./__src__/Extensions/CheckList/TEMP.ts\");\r\n__webpack_require__(/*! ~/Extensions/FunctionBar/TEMP_ModeLegend */ \"./__src__/Extensions/FunctionBar/TEMP_ModeLegend.ts\");\r\n__webpack_require__(/*! ~/Extensions/FunctionBar/TEMP_CardLegend */ \"./__src__/Extensions/FunctionBar/TEMP_CardLegend.ts\");\r\n__webpack_require__(/*! ~/KeyBindings/Filter */ \"./__src__/KeyBindings/Filter.ts\");\r\n\n\n//# sourceURL=webpack:///./__src__/__main__/__main__.ts?");
 
 /***/ }),
 
