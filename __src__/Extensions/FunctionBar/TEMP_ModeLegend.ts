@@ -3,8 +3,7 @@ import {CSS} from "~/Utils/CSS"
 CSS.apply(__dirname)
 
 //###  NPM  ###//
-import jquery from "jquery"
-const $:any = jquery
+const $:any = require("jquery")
 import hotkeys from "hotkeys-js"
 
 const KanbanTool = (window as any).KT
