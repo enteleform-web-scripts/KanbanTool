@@ -117,7 +117,19 @@ eval("module.exports = {\"baseURL\":\"https://enteleform-extensions.github.io/Ka
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst Settings = __webpack_require__(/*! ~/Settings.json */ \"./__src__/Settings.json\");\r\nclass CSS {\r\n    static async apply(filePath) {\r\n        filePath = _remove_SourceDirectory(filePath);\r\n        console.log(\">>> CSS >>>\", filePath);\r\n    }\r\n}\r\nexports.CSS = CSS;\r\nfunction _remove_SourceDirectory(relativePath) {\r\n    return (relativePath\r\n        .split(\"\\\\\")\r\n        .slice(1)\r\n        .join(\"/\"));\r\n}\r\nfunction _apply_CSS(css) {\r\n    console.log(\"!!!!!!!!!!!!!!!!!!!!!!!!\");\r\n    console.log(css);\r\n    console.log(\"!!!!!!!!!!!!!!!!!!!!!!!!\");\r\n    $(\"<style>\")\r\n        .prop(\"type\", \"text/css\")\r\n        .html(css)\r\n        .appendTo(\"head\");\r\n}\r\nfunction _add_BaseURL(filePath) {\r\n    const baseURL = Settings.baseURL;\r\n    let url = filePath.replace(/^\\.?\\//, `${baseURL}/`);\r\n    if (!url.startsWith(baseURL)) {\r\n        url = `${baseURL}/${filePath}`;\r\n    }\r\n    return url;\r\n}\r\n\n\n//# sourceURL=webpack:///./__src__/Utils/CSS.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst Settings = __webpack_require__(/*! ~/Settings.json */ \"./__src__/Settings.json\");\r\nconst _get_FileText_1 = __webpack_require__(/*! ~/Utils/_get_FileText */ \"./__src__/Utils/_get_FileText.ts\");\r\nclass CSS {\r\n    static async apply(modulePath) { _apply_CSS(modulePath); }\r\n}\r\nexports.CSS = CSS;\r\nfunction _apply_CSS(modulePath) {\r\n    const relativePath = _remove_SourceDirectory(modulePath);\r\n    const cssPath = `${relativePath}.css`;\r\n    const url = _add_BaseURL(cssPath);\r\n    _get_FileText_1.get_FileText(url)\r\n        .then(css => {\r\n        console.log(\"!!!!!!!!!!!!!!!!!!!!!!!!\");\r\n        console.log(css);\r\n        console.log(\"!!!!!!!!!!!!!!!!!!!!!!!!\");\r\n        $(\"<style>\")\r\n            .prop(\"type\", \"text/css\")\r\n            .html(css)\r\n            .appendTo(\"head\");\r\n    });\r\n}\r\nfunction _remove_SourceDirectory(relativePath) {\r\n    return (relativePath\r\n        .split(\"\\\\\")\r\n        .slice(1)\r\n        .join(\"/\"));\r\n}\r\nfunction _add_BaseURL(relativePath) {\r\n    const baseURL = Settings.baseURL;\r\n    let url = relativePath.replace(/^\\.?\\/?/, `${baseURL}/`);\r\n    if (!url.startsWith(baseURL)) {\r\n        url = `${baseURL}/${relativePath}`;\r\n    }\r\n    return url;\r\n}\r\n\n\n//# sourceURL=webpack:///./__src__/Utils/CSS.ts?");
+
+/***/ }),
+
+/***/ "./__src__/Utils/_get_FileText.ts":
+/*!****************************************!*\
+  !*** ./__src__/Utils/_get_FileText.ts ***!
+  \****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nasync function get_FileText(url) {\r\n    const result = { value: null };\r\n    await _get_FileText(url, result);\r\n    return result.value;\r\n}\r\nexports.get_FileText = get_FileText;\r\nasync function _get_FileText(url, result) {\r\n    var file = new XMLHttpRequest();\r\n    file.open(\"GET\", url, false);\r\n    file.onreadystatechange = () => {\r\n        const fileAcquired = ((file.readyState === 4)\r\n            && ((file.status === 200) || (file.status == 0)));\r\n        if (fileAcquired) {\r\n            result.value = file.responseText;\r\n        }\r\n        else {\r\n            throw new Error(`\r\n\t\t\t\tUnable to resolve URL:\r\n\t\t\t\t\t'${url}'\r\n \t\t\t`);\r\n        }\r\n    };\r\n    file.send(null);\r\n}\r\n\n\n//# sourceURL=webpack:///./__src__/Utils/_get_FileText.ts?");
 
 /***/ }),
 
