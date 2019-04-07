@@ -16,7 +16,6 @@ class S{
 	static distributionFolder   = "__dist__"
 	static compiledConfigFolder = "__compiled__"
 	static staticFolder         = "Static"
-	static pagesFolder          = "pages"
 	static mainName             = "__main__"
 
 	static css_FileBase       = "CSS.styl"
@@ -28,7 +27,7 @@ class S{
 	static distributionPath = path.join(S.rootPath,   S.distributionFolder)
 	static staticPath       = path.join(S.sourcePath, S.staticFolder      )
 
-	static mainPage_RelativePath = `./${S.sourceFolder}/${S.pagesFolder}/${S.mainName}`
+	static mainPage_RelativePath = `./${S.sourceFolder}/${S.mainName}/`
 	static mainScript            = `./${S.mainPage_RelativePath}/${S.mainName}.ts`
 	static mainLayout            = `./${S.mainPage_RelativePath}/${S.mainName}.pug`
 
