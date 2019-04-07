@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./__src__/pages/__main__/__main__.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./__src__/__main__/__main__.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -144,15 +144,15 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nas
 
 /***/ }),
 
-/***/ "./__src__/pages/__main__/__main__.ts":
-/*!********************************************!*\
-  !*** ./__src__/pages/__main__/__main__.ts ***!
-  \********************************************/
+/***/ "./__src__/__main__/__main__.ts":
+/*!**************************************!*\
+  !*** ./__src__/__main__/__main__.ts ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconsole.log(\"@@@ __main__\");\r\n__webpack_require__(/*! ~/Extensions/FunctionBar/TEMP */ \"./__src__/Extensions/FunctionBar/TEMP.ts\");\r\n\n\n//# sourceURL=webpack:///./__src__/pages/__main__/__main__.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n__webpack_require__(/*! ~/Extensions/FunctionBar/TEMP */ \"./__src__/Extensions/FunctionBar/TEMP.ts\");\r\n\n\n//# sourceURL=webpack:///./__src__/__main__/__main__.ts?");
 
 /***/ }),
 
