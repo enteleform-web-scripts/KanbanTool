@@ -10,7 +10,7 @@ export default (env:any): webpack.Configuration => ({
 	target: "web",
 
 	node: {
-		__dirname: false
+		__dirname: true,
 	},
 
 	output: {
