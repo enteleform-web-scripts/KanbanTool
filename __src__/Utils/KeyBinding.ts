@@ -2,14 +2,11 @@
 import HotKeys from "hotkeys-js"
 
 
-//##############//
-//###  Init  ###//
-//##############//
+//###############//
+//###  Setup  ###//
+//###############//
 
-function disable_DefaultFilters(event)
-	{return true}
-
-HotKeys.filter = disable_DefaultFilters
+HotKeys.filter = _disable_DefaultFilters
 
 
 //#################//
@@ -44,6 +41,9 @@ interface _BindOptions
 
 const _bindOptions_Defaults =
 	{preventDefault: false}
+
+function _disable_DefaultFilters(event)
+	{return true}
 
 function _get_BindArguments(arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_BindOptions){
 	let callback, options

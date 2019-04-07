@@ -14,7 +14,7 @@ class FilterKeybindings{
 		searchField.focus()
 	}
 
-	@KeyBinding.add("Ctrl + Space", {preventDefault:false})
+	@KeyBinding.add("Ctrl + Space", {preventDefault:true})
 	static show_FilterMenu(event){
 		const filterMenu = $(".kt-board_search-filters_popover")
 		const displayValue =
