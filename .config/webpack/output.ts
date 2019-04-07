@@ -11,3 +11,6 @@ const $: webpack.Output = {
 	path:     Settings.distributionPath,
 
 }
+
+
+export default $

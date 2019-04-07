@@ -8,3 +8,6 @@ const $: (webpack.Node | false) = {
 	__filename: true,
 
 }
+
+
+export default $
