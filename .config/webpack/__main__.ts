@@ -9,13 +9,14 @@ export default (env:any): webpack.Configuration => ({
 
 	target: "web",
 
-	node: {
-		__dirname: true,
-	},
-
 	output: {
 		filename: "[name].js",
 		path:     Settings.distributionPath,
+	},
+
+	node: {
+		__dirname:  true,
+		__filename: true,
 	},
 
 	entry:        require("./entry"       ).default,

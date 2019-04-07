@@ -10,7 +10,7 @@ const $: webpack.Options.Optimization = {
 
 	splitChunks: {
 		cacheGroups: {
-			CSS: {
+			LOLOL: {
 				name:               CSS_Splitter.get_ChunkName,
 				test:               Settings.css_FileBase_RegEx,
 				chunks:             "initial",
