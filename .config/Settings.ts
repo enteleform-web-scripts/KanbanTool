@@ -37,7 +37,8 @@ class S{
 	//###  Dist  ###//
 	//##############//
 
-	static entryPoints_Folder = "EntryPoints"
+	static entryPointsFolder = "EntryPoints"
+	static cssFolder         = "css"
 
 }
 

@@ -15,11 +15,24 @@ import escape_RegEx from "escape-string-regexp"
 
 export class CSS_Splitter{
 
-	static get css_EntryPoints()
-		{return _get_CSS_EntryPoints()}
+	static get css_EntryPoints(){
+		const entryPoints = {}
 
-	static get_ChunkName(module, chunks, cacheGroup_Key)
-		{return _get_ChunkName(module)}
+		_filePaths.forEach(filePath => {
+			const fileBase = _get_RelativePath(filePath)
+			entryPoints[`${Settings.entryPointsFolder}/${fileBase}`] = filePath
+		})
+
+		return entryPoints
+	}
+
+	static get_ChunkName(module, chunks, cacheGroup_Key){
+		if(! module.issuer)
+			{return}
+
+		const filePath = module.issuer.resource
+		return _get_RelativePath(filePath)
+	}
 
 }
 
@@ -50,21 +63,3 @@ function _get_RelativePath(filePath:string){
 	)
 }
 
-function _get_CSS_EntryPoints(){
-	const entryPoints = {}
-
-	_filePaths.forEach(filePath => {
-		const fileBase = _get_RelativePath(filePath)
-		entryPoints[`${Settings.entryPoints_Folder}/${fileBase}`] = filePath
-	})
-
-	return entryPoints
-}
-
-function _get_ChunkName(module){
-	if(! module.issuer)
-		{return}
-
-	const filePath = module.issuer.resource
-	return _get_RelativePath(filePath)
-}

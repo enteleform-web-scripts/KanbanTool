@@ -21,7 +21,7 @@ export class CSS{
 
 function _apply_CSS(modulePath:string){
 	const relativePath = _remove_SourceDirectory(modulePath)
-	const cssPath      = `${relativePath}.css`
+	const cssPath      = `css/${relativePath}.css`
 	const url          = _add_BaseURL(cssPath)
 
 	get_FileText(url)

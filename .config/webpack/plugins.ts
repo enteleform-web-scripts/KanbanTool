@@ -24,8 +24,8 @@ const $: webpack.Plugin[] = [
 	}),
 
 	new MiniCssExtractPlugin({
-		filename:      "css/[name].css",
-		chunkFilename: "css/[name].css",
+		filename:      `${Settings.cssFolder}/[name].css`,
+		chunkFilename: `${Settings.cssFolder}/[name].css`,
 	}),
 
 	new CopyPlugin([

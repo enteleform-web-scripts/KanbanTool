@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {Settings} from "../Settings"
+import {load_ConfigSegments as load} from "./Utils/load_ConfigSegments"
 
 //###  NPM  ###//
 import webpack from "webpack"
@@ -9,20 +9,14 @@ export default (env:any): webpack.Configuration => ({
 
 	target: "web",
 
-	output: {
-		filename: "[name].js",
-		path:     Settings.distributionPath,
-	},
-
-	node: {
-		__dirname:  true,
-		__filename: true,
-	},
-
-	entry:        require("./entry"       ).default,
-	module:       require("./module"      ).default,
-	optimization: require("./optimization").default,
-	plugins:      require("./plugins"     ).default,
-	resolve:      require("./resolve"     ).default,
+	...load( __dirname,
+		"./entry",
+		"./module",
+		"./node",
+		"./optimization",
+		"./output",
+		"./plugins",
+		"./resolve",
+	)
 
 })
