@@ -9,6 +9,10 @@ export default (env:any): webpack.Configuration => ({
 
 	target: "web",
 
+	node: {
+		__dirname: false
+	},
+
 	output: {
 		filename: "[name].js",
 		path:     Settings.distributionPath,
