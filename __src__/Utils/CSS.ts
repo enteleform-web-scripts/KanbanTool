@@ -9,14 +9,8 @@ import {get_FileText} from "~/Utils/_get_FileText"
 
 export class CSS{
 
-	static async apply(filePath:string){
-		filePath = _remove_SourceDirectory(filePath)
-		// x.replace("__src__\\", "")
-		console.log(">>> CSS >>>", filePath)
-		// const url = _add_BaseURL(filePath)
-		// get_FileText(url)
-		// 	.then(fileText => _apply_CSS(fileText))
-	}
+	static async apply(modulePath:string)
+		{_apply_CSS(modulePath)}
 
 }
 
@@ -24,6 +18,23 @@ export class CSS{
 //###############//
 //###  Utils  ###//
 //###############//
+
+function _apply_CSS(modulePath:string){
+	const relativePath = _remove_SourceDirectory(modulePath)
+	const cssPath      = `${relativePath}.css`
+	const url          = _add_BaseURL(cssPath)
+
+	get_FileText(url)
+		.then(css => {
+			console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
+			console.log(css)
+			console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
+			$("<style>")
+				.prop("type", "text/css")
+				.html(css)
+				.appendTo("head")
+		})
+}
 
 function _remove_SourceDirectory(relativePath:string){
 	return (
@@ -34,20 +45,10 @@ function _remove_SourceDirectory(relativePath:string){
 	)
 }
 
-function _apply_CSS(css:string){
-	console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
-	console.log(css)
-	console.log("!!!!!!!!!!!!!!!!!!!!!!!!")
-	$("<style>")
-		.prop("type", "text/css")
-		.html(css)
-		.appendTo("head")
-}
-
-function _add_BaseURL(filePath:string){
+function _add_BaseURL(relativePath:string){
 	const baseURL = Settings.baseURL
-	let url = filePath.replace(/^\.?\//, `${baseURL}/`)
+	let url = relativePath.replace(/^\.?\/?/, `${baseURL}/`)
 	if(! url.startsWith(baseURL))
-		{url = `${baseURL}/${filePath}`}
+		{url = `${baseURL}/${relativePath}`}
 	return url
 }
