@@ -109,6 +109,18 @@ eval("/* WEBPACK VAR INJECTION */(function(__dirname) {\r\nvar __importDefault =
 
 /***/ }),
 
+/***/ "./__src__/KeyBindings/Filter.ts":
+/*!***************************************!*\
+  !*** ./__src__/KeyBindings/Filter.ts ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {\r\n    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;\r\n    if (typeof Reflect === \"object\" && typeof Reflect.decorate === \"function\") r = Reflect.decorate(decorators, target, key, desc);\r\n    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;\r\n    return c > 3 && r && Object.defineProperty(target, key, r), r;\r\n};\r\nvar __metadata = (this && this.__metadata) || function (k, v) {\r\n    if (typeof Reflect === \"object\" && typeof Reflect.metadata === \"function\") return Reflect.metadata(k, v);\r\n};\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst KeyBinding_1 = __webpack_require__(/*! ~/Utils/KeyBinding */ \"./__src__/Utils/KeyBinding.ts\");\r\nconst jquery_1 = __importDefault(__webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\"));\r\nconst $ = jquery_1.default;\r\nclass FilterKeybindings {\r\n    static focus_SearchField(event) {\r\n        const searchField = $(\"#kt-board_search-q\");\r\n        searchField.focus();\r\n    }\r\n    static show_FilterMenu(event) {\r\n        const filterMenu = $(\".kt-board_search-filters_popover\");\r\n        const displayValue = (filterMenu.css(\"display\") == \"none\")\r\n            ? \"block\"\r\n            : \"none\";\r\n        filterMenu.css(\"display\", displayValue);\r\n    }\r\n}\r\n__decorate([\r\n    KeyBinding_1.KeyBinding.add(\"Ctrl + F\", { preventDefault: true }),\r\n    __metadata(\"design:type\", Function),\r\n    __metadata(\"design:paramtypes\", [Object]),\r\n    __metadata(\"design:returntype\", void 0)\r\n], FilterKeybindings, \"focus_SearchField\", null);\r\n__decorate([\r\n    KeyBinding_1.KeyBinding.add(\"Ctrl + Space\", { preventDefault: false }),\r\n    __metadata(\"design:type\", Function),\r\n    __metadata(\"design:paramtypes\", [Object]),\r\n    __metadata(\"design:returntype\", void 0)\r\n], FilterKeybindings, \"show_FilterMenu\", null);\r\n\n\n//# sourceURL=webpack:///./__src__/KeyBindings/Filter.ts?");
+
+/***/ }),
+
 /***/ "./__src__/Settings.json":
 /*!*******************************!*\
   !*** ./__src__/Settings.json ***!
@@ -132,6 +144,18 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nco
 
 /***/ }),
 
+/***/ "./__src__/Utils/KeyBinding.ts":
+/*!*************************************!*\
+  !*** ./__src__/Utils/KeyBinding.ts ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nconst hotkeys_js_1 = __importDefault(__webpack_require__(/*! hotkeys-js */ \"./node_modules/hotkeys-js/dist/hotkeys.esm.js\"));\r\nfunction disable_DefaultFilters(event) { return true; }\r\nhotkeys_js_1.default.filter = disable_DefaultFilters;\r\nclass KeyBinding {\r\n    static add(hotKeys, arg_2, arg_3) {\r\n        const hotKeys_String = _convert_HotKeys_ToString(hotKeys);\r\n        const { callback, options } = _get_BindArguments(arg_2, arg_3);\r\n        if (callback) {\r\n            _add_KeyBinding(hotKeys_String, callback, options);\r\n        }\r\n        else {\r\n            return _get_Decorator(hotKeys_String, options);\r\n        }\r\n    }\r\n}\r\nexports.KeyBinding = KeyBinding;\r\nwindow.KeyBinding = KeyBinding;\r\nconst _bindOptions_Defaults = { preventDefault: false };\r\nfunction _get_BindArguments(arg_2, arg_3) {\r\n    let callback, options;\r\n    if (arg_2 instanceof Function)\r\n        callback = arg_2;\r\n    if (arg_3)\r\n        options = arg_3;\r\n    else if (arg_2)\r\n        options = arg_2;\r\n    options = { ..._bindOptions_Defaults, ...options };\r\n    return { callback, options };\r\n}\r\nfunction _add_KeyBinding(hotKeys, callback, options) {\r\n    hotkeys_js_1.default(hotKeys, (event) => {\r\n        if (options.preventDefault) {\r\n            event.preventDefault;\r\n        }\r\n        console.log(`[KeyBinding] '${hotKeys}'`);\r\n        callback(event);\r\n    });\r\n}\r\nfunction _get_Decorator(hotKeys, options) {\r\n    return (target, propertyKey, descriptor) => {\r\n        _add_KeyBinding(hotKeys, descriptor.value, options);\r\n        return descriptor;\r\n    };\r\n}\r\nfunction _convert_HotKeys_ToString(keys) {\r\n    return ((keys.constructor === Array)\r\n        ? keys.join(\", \")\r\n        : keys);\r\n}\r\n\n\n//# sourceURL=webpack:///./__src__/Utils/KeyBinding.ts?");
+
+/***/ }),
+
 /***/ "./__src__/Utils/_get_FileText.ts":
 /*!****************************************!*\
   !*** ./__src__/Utils/_get_FileText.ts ***!
@@ -152,7 +176,7 @@ eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\nas
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n__webpack_require__(/*! ~/Extensions/FunctionBar/TEMP */ \"./__src__/Extensions/FunctionBar/TEMP.ts\");\r\n\n\n//# sourceURL=webpack:///./__src__/__main__/__main__.ts?");
+eval("\r\nObject.defineProperty(exports, \"__esModule\", { value: true });\r\n__webpack_require__(/*! ~/Extensions/FunctionBar/TEMP */ \"./__src__/Extensions/FunctionBar/TEMP.ts\");\r\n__webpack_require__(/*! ~/KeyBindings/Filter */ \"./__src__/KeyBindings/Filter.ts\");\r\n\n\n//# sourceURL=webpack:///./__src__/__main__/__main__.ts?");
 
 /***/ }),
 
