@@ -34,9 +34,6 @@ export const bottom_FunctionBar = new FunctionBar({
 					Show.allColumns()
 				},
 			}),
-		],
-
-		[
 			new Entry({
 				name: "Plan",
 				on_Load: () => {
@@ -44,31 +41,31 @@ export const bottom_FunctionBar = new FunctionBar({
 					Show.allRows()
 				},
 			}),
-			new Entry({
-				name: "HideAll",
-				on_Load: () => {
-					Show.noColumns()
-					Show.noRows()
-				},
-			}),
 		],
 
-		[
-			new Entry({
-				name: "Fitness Math",
-				on_Load: () => {
-					Show.allRows()
-					Show.columns({include:["Fitness", "Math"]})
-				},
-			}),
-			new Entry({
-				name: "!(Fitness Math)",
-				on_Load: () => {
-					Show.allRows()
-					Show.columns({exclude:["Fitness", "Math"]})
-				},
-			}),
-		],
+		// [
+		// 	new Entry({
+		// 		name: "HideAll",
+		// 		on_Load: () => {
+		// 			Show.noColumns()
+		// 			Show.noRows()
+		// 		},
+		// 	}),
+		// 	new Entry({
+		// 		name: "Fitness Math",
+		// 		on_Load: () => {
+		// 			Show.allRows()
+		// 			Show.columns({include:["Fitness", "Math"]})
+		// 		},
+		// 	}),
+		// 	new Entry({
+		// 		name: "!(Fitness Math)",
+		// 		on_Load: () => {
+		// 			Show.allRows()
+		// 			Show.columns({exclude:["Fitness", "Math"]})
+		// 		},
+		// 	}),
+		// ],
 
 	],
 
