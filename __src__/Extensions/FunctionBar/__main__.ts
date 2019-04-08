@@ -134,6 +134,22 @@ function _validate_AutoMapped_VerticalRows(functionBar:FunctionBar){
 	}
 }
 
+function _get_Entry_KeyBinding(
+	functionBar: FunctionBar,
+	groupIndex:  number,
+	entry:       Entry,
+	entryIndex:  number,
+){
+	let keyBinding = null
+
+	if(functionBar.autoMap_KeyBindings)
+		{keyBinding = _autoMapped_Key_Rows[groupIndex][entryIndex]}
+	else if (entry.keyBinding)
+		{keyBinding = entry.keyBinding}
+
+	return keyBinding
+}
+
 function _initialize_VerticalEntry(
 	functionBar: FunctionBar,
 	groupIndex:  number,
@@ -141,24 +157,19 @@ function _initialize_VerticalEntry(
 	entryIndex:  number,
 	elements:    any,
 ){
-	if(entry.keyBinding || functionBar.autoMap_KeyBindings)
-		{_add_KeyBinding(functionBar, groupIndex, entry, entryIndex)}
+	const keyBinding = _get_Entry_KeyBinding(functionBar, groupIndex, entry, entryIndex)
+	if(keyBinding)
+		{_add_KeyBinding(functionBar, entry, keyBinding)}
 
-	const cell =_build_TableCell(entry, groupIndex, entryIndex)
+	const cell =_build_TableCell(entry, keyBinding)
 	elements.tableRows[groupIndex].append(cell)
 }
 
 function _add_KeyBinding(
 	functionBar: FunctionBar,
-	groupIndex:  number,
 	entry:       Entry,
-	entryIndex:  number,
+	keyBinding:  string,
 ){
-	let keyBinding:string = entry.keyBinding
-
-	if(functionBar.autoMap_KeyBindings)
-		{keyBinding = _autoMapped_Key_Rows[groupIndex][entryIndex]}
-
 	if(functionBar.keyBinding_Modifiers){
 		keyBinding =
 			[...functionBar.keyBinding_Modifiers, keyBinding]
@@ -199,12 +210,12 @@ function _build_Layout(entryGroups:Entry[][]){
 	}
 }
 
-function _build_TableCell(entry:Entry, groupIndex:number, entryIndex:number){
+function _build_TableCell(entry:Entry, keyBinding:string){
 	const cell = $("<td>", {"class":cssVariables.extension})
 
 	let text = entry.name
-	if(entry.keyBinding)
-		{text = `[${entry.keyBinding}]  ${name}`}
+	if(keyBinding)
+		{text = `[${keyBinding}]  ${text}`}
 
 	cell.text(text)
 	cell.on("click", entry.on_Load)
