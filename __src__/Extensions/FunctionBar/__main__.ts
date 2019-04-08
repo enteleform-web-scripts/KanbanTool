@@ -20,6 +20,7 @@ export class FunctionBar extends Module{
 	static Entry = Entry
 
 	static load(...entries:Entry[]){
+		console.log("@@@ FUNCTIONBAR.LOAD @@@")
 		entries.forEach((entry, i) => {
 			KeyBinding.add(
 				`Alt + ${i + 1}`,
