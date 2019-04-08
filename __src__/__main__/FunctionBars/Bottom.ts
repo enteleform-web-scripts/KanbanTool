@@ -40,15 +40,15 @@ export const bottom_FunctionBar = new FunctionBar({
 			new Entry({
 				name: "Plan",
 				on_Load: () => {
-					Show.allRows()
 					Show.allColumns()
+					Show.allRows()
 				},
 			}),
 			new Entry({
 				name: "HideAll",
 				on_Load: () => {
-					Show.noRows()
 					Show.noColumns()
+					Show.noRows()
 				},
 			}),
 		],
