@@ -124,6 +124,7 @@ function _get_ColumnEntries(){
 	return (
 		activeBoard.workflowStages()
 			// .filter(column => (column.attributes.parent_id == columns_RootParent_ID))
+			.filter((column, i) => (i > 0))
 	)
 }
 
