@@ -94,7 +94,7 @@ function _show(
 	const elements      = $.find(selector)
 	const targetIndexes = _get_TargetIndexes(targets, type, exclude)
 
-	_apply_CSS_Classes(elements, targetIndexes)
+	_set_TargetVisibility(elements, targetIndexes)
 }
 
 function _get_TargetIndexes(targets:_Target[], type:_Type, exclude:boolean){
@@ -149,12 +149,15 @@ function _validate_Target(
 	)
 }
 
-function _apply_CSS_Classes(elements:JQuery[], targetIndexes:number[]){
+function _set_TargetVisibility(elements:JQuery[], targetIndexes:number[]){
 	elements.forEach((element, i) => {
 		const $element = $(element)
-		if(targetIndexes.includes(i))
-			{$element.removeClass("kt-collapsed")}
-		else
-			{$element.addClass("kt-collapsed")}
+		const is_Collapsed = $element.hasClass("kt-collapsed")
+		const is_Target = targetIndexes.includes(i)
+		if(
+			(is_Target && is_Collapsed)
+			|| (!is_Target && !is_Collapsed)
+		)
+			{$element.click()}
 	})
 }
