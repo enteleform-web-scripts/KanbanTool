@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {KanbanTool, activeBoard} from "~/Utils/KanbanTool"
+import {activeBoard} from "~/Utils/KanbanTool"
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -84,7 +84,7 @@ function _show(
 	const elements      = $.find(selector)
 	const targetIndexes = _get_TargetIndexes(targets, type, exclude)
 
-	_apply_CSS_Class(elements, targetIndexes)
+	_apply_CSS_Classes(elements, targetIndexes)
 }
 
 function _get_TargetIndexes(targets:_Target[], type:_Type, exclude:boolean){
@@ -133,7 +133,7 @@ function _validate_Target(
 	)
 }
 
-function _apply_CSS_Class(elements:JQuery[], targetIndexes:number[]){
+function _apply_CSS_Classes(elements:JQuery[], targetIndexes:number[]){
 	elements.forEach((element, i) => {
 		const $element = $(element)
 		if(targetIndexes.includes(i))

@@ -1,3 +1,12 @@
+//###  Module: Exports  ###//
+import {
+	ModifierKey     as _ModifierKey,
+	AlphanumericKey as _AlphanumericKey,
+	CharacterKey    as _CharacterKey,
+	alphanumericKey_Rows,
+	characterKey_Rows,
+} from "./KeyGroups"
+
 //###  NPM  ###//
 import HotKeys from "hotkeys-js"
 
@@ -13,10 +22,13 @@ HotKeys.filter = _disable_DefaultFilters
 //###  Exports  ###//
 //#################//
 
-export namespace KeyBinding{
-	export function add(hotKeys:string|string[],                                           options?:{preventDefault:boolean}) // Decorator
-	export function add(hotKeys:string|string[], callback:((event:KeyboardEvent) => void), options?:{preventDefault:boolean}) // Function Call
-	export function add(hotKeys:string|string[], arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_BindOptions){
+export class KeyBinding{
+	static get alphanumericKey_Rows(){return [...alphanumericKey_Rows]}
+	static get characterKey_Rows   (){return [...characterKey_Rows   ]}
+
+	static add(hotKeys:string|string[],                                           options?:{preventDefault:boolean}) // Decorator
+	static add(hotKeys:string|string[], callback:((event:KeyboardEvent) => void), options?:{preventDefault:boolean}) // Function Call
+	static add(hotKeys:string|string[], arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_BindOptions){
 		const hotKeys_String = _convert_HotKeys_ToString(hotKeys)
 		const {callback, options} = _get_BindArguments(arg_2, arg_3)
 
@@ -25,6 +37,12 @@ export namespace KeyBinding{
 		else
 			{return _get_Decorator(hotKeys_String, options)}
 	}
+}
+
+export namespace KeyBinding{
+	export type ModifierKey     = _ModifierKey
+	export type AlphanumericKey = _AlphanumericKey
+	export type CharacterKey    = _CharacterKey
 }
 
 (window as any).KeyBinding = KeyBinding

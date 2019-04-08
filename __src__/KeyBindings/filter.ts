@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {KeyBinding} from "~/Utils/KeyBinding"
+import {KeyBinding} from "~/Utils/KeyBinding/__main__"
 
 //###  NPM  ###//
 import jquery from "jquery"
