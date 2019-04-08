@@ -27,7 +27,7 @@ export namespace Show{
 	export function columns({include, exclude}:{include?:_Target[], exclude?:_Target[]}){
 		_show({
 			type:     _Type.Columns,
-			selector: _topColumns_Selector,
+			selector: _allColumns_Selector,
 			targets:  (include) ? include : exclude,
 			exclude:  (exclude) ? true    : false,
 		})
@@ -84,8 +84,7 @@ enum _Type{
 type _Target = (string | number)
 
 const _rowSelector         = "kt-board > tbody > tr > th"
-const _topColumns_Selector = "kt-board > thead > tr > th"
-// const _topColumns_Selector = "kt-board > thead > tr:nth-child(1) > th"
+const _topColumns_Selector = "kt-board > thead > tr:nth-child(1) > th"
 const _allColumns_Selector = "kt-board > thead > tr > th"
 
 function _show(
@@ -123,9 +122,9 @@ function _get_ColumnEntries(){
 	const columns_RootParent_ID = columns_RootParent.attributes.id
 
 	return (
-		activeBoard.workflowStages()
-			// .filter(column => (column.attributes.parent_id == columns_RootParent_ID))
-			.filter((column, i) => (i > 0))
+		[...activeBoard.workflowStages()].slice(1)
+		// activeBoard.workflowStages()
+		// 	.filter(column => (column.attributes.parent_id == columns_RootParent_ID))
 	)
 }
 
