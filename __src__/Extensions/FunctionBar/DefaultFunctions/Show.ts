@@ -16,9 +16,9 @@ export namespace Show{
 	export function rows({include, exclude}:{include?:_Target[], exclude?:_Target[]}){
 		_show({
 			type:     _Type.Rows,
-			targets:  (include) ? include : exclude,
 			selector: _rowSelector,
-			exclude:  (exclude) ? true : false,
+			targets:  (include) ? include : exclude,
+			exclude:  (exclude) ? true    : false,
 		})
 	}
 
@@ -27,17 +27,17 @@ export namespace Show{
 	export function columns({include, exclude}:{include?:_Target[], exclude?:_Target[]}){
 		_show({
 			type:     _Type.Columns,
-			targets:  (include) ? include : exclude,
 			selector: _topColumns_Selector,
-			exclude:  (exclude) ? true : false,
+			targets:  (include) ? include : exclude,
+			exclude:  (exclude) ? true    : false,
 		})
 	}
 
 	export function allRows(){
 		_show({
 			type:     _Type.Rows,
-			targets:  _get_RowIndexes(),
 			selector: _rowSelector,
+			targets:  _get_RowIndexes(),
 			exclude:  false,
 		})
 	}
@@ -45,8 +45,8 @@ export namespace Show{
 	export function allColumns(){
 		_show({
 			type:     _Type.Columns,
-			targets:  _get_ColumnIndexes(),
 			selector: _allColumns_Selector,
+			targets:  _get_ColumnIndexes(),
 			exclude:  false,
 		})
 	}
@@ -54,8 +54,8 @@ export namespace Show{
 	export function noRows(){
 		_show({
 			type:     _Type.Rows,
-			targets:  _get_RowIndexes(),
 			selector: _rowSelector,
+			targets:  _get_RowIndexes(),
 			exclude:  true,
 		})
 	}
@@ -63,8 +63,8 @@ export namespace Show{
 	export function noColumns(){
 		_show({
 			type:     _Type.Columns,
-			targets:  _get_ColumnIndexes(),
 			selector: _allColumns_Selector,
+			targets:  _get_ColumnIndexes(),
 			exclude:  true,
 		})
 	}
@@ -88,11 +88,13 @@ const _topColumns_Selector = "kt-board > thead > tr:nth-child(1) > th"
 const _allColumns_Selector = "kt-board > thead > tr > th"
 
 function _show(
-	{type,       targets,           selector,        exclude        }:
-	{type:_Type, targets:_Target[], selector:string, exclude:boolean}
+	{type,       selector,        targets,           exclude        }:
+	{type:_Type, selector:string, targets:_Target[], exclude:boolean}
 ){
 	const elements      = $.find(selector)
 	const targetIndexes = _get_TargetIndexes(targets, type, exclude)
+
+	console.log(">>>", targetIndexes, elements)
 
 	_set_TargetVisibility(type, elements, targetIndexes)
 }
