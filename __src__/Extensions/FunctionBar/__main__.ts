@@ -22,11 +22,9 @@ export class FunctionBar extends Module{
 	static load(...entries:Entry[]){
 		entries.forEach((entry, i) => {
 			const keyNumber = (i + 1)
-			console.log("++", keyNumber)
-			const {on_Enter} = entry
 			KeyBinding.add(
 				`Alt + ${keyNumber}`,
-				on_Enter,
+				entry.on_Enter,
 				{preventDefault: true}
 			)
 		})

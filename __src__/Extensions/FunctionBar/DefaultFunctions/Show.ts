@@ -50,7 +50,7 @@ export namespace Show{
 
 		_show({
 			targets: columnIndexes,
-			type:    _Type.Rows,
+			type:    _Type.Columns,
 			exclude: false,
 		})
 	}
