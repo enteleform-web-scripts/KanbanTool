@@ -14,23 +14,23 @@ export const bottom_FunctionBar = new FunctionBar({
 
 		[
 			new Entry({
-				name: "Today",
+				name: "Active",
 				on_Load: () => {
-					Show.rows({include:["Daily", "Active"]})
+					Show.rows({include:["Routine", "Tasks"]})
 					Show.allColumns()
 				},
 			}),
 			new Entry({
 				name: "Routine",
 				on_Load: () => {
-					Show.rows({include:["Daily"]})
+					Show.rows({include:["Routine"]})
 					Show.allColumns()
 				},
 			}),
 			new Entry({
-				name: "Tasks",
+				name: "Today",
 				on_Load: () => {
-					Show.rows({include:["Active"]})
+					Show.rows({include:["Tasks"]})
 					Show.allColumns()
 				},
 			}),
