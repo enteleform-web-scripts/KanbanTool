@@ -13,10 +13,10 @@ HotKeys.filter = _disable_DefaultFilters
 //###  Exports  ###//
 //#################//
 
-export class KeyBinding{
-	static add(hotKeys:string|string[],                                           options?:{preventDefault:boolean}) // Decorator
-	static add(hotKeys:string|string[], callback:((event:KeyboardEvent) => void), options?:{preventDefault:boolean}) // Function Call
-	static add(hotKeys:string|string[], arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_BindOptions){
+export namespace KeyBinding{
+	export function add(hotKeys:string|string[],                                           options?:{preventDefault:boolean}) // Decorator
+	export function add(hotKeys:string|string[], callback:((event:KeyboardEvent) => void), options?:{preventDefault:boolean}) // Function Call
+	export function add(hotKeys:string|string[], arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_BindOptions){
 		const hotKeys_String = _convert_HotKeys_ToString(hotKeys)
 		const {callback, options} = _get_BindArguments(arg_2, arg_3)
 
@@ -39,7 +39,7 @@ type _KeyBinding_Callback = (event:KeyboardEvent) => void
 interface _BindOptions
 	{preventDefault: boolean}
 
-const _bindOptions_Defaults =
+const _BindOptions_Defaults =
 	{preventDefault: false}
 
 function _disable_DefaultFilters(event)
@@ -56,7 +56,7 @@ function _get_BindArguments(arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_Bi
 	else if (arg_2)
 		options = arg_2
 
-	options = {..._bindOptions_Defaults, ...options}
+	options = {..._BindOptions_Defaults, ...options}
 
 	return {callback, options}
 }

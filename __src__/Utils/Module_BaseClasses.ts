@@ -1,6 +1,6 @@
 
 export abstract class Module{
-	static load(features:{})
+	static load(...args:any)
 		{throw new Error("Module not implemented.")}
 }
 

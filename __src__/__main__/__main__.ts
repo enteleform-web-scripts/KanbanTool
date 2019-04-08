@@ -1,14 +1,34 @@
 
 //###  Extensions  ###
 // import "~/Extensions/CheckList/TEMP"
-// import "~/Extensions/FunctionBar/TEMP_ModeLegend"
+// import "~/Extensions/FB/TEMP_ModeLegend"
 // import "~/Extensions/FunctionBar/TEMP_CardLegend"
 
-import {FunctionBar} from "~/Extensions/FunctionBar/__main__"
-FunctionBar.load({
-	CardLegend: true,
-	ModeLegend: true,
-})
+import {FunctionBar as FB} from "~/Extensions/FunctionBar/__main__"
+import {Show} from "../Extensions/FunctionBar/DefaultFunctions/show";
+FB.load(
+	new FB.Entry({
+		name: "Work",
+		on_Enter: () => {
+			FB.Show.rows({include:["Daily", "Active"]})
+			FB.Show.allColumns()
+		},
+	}),
+	new FB.Entry({
+		name: "WorkExclude",
+		on_Enter: () => {
+			FB.Show.rows({exclude:["Daily", "Active"]})
+			FB.Show.allColumns()
+		},
+	}),
+	new FB.Entry({
+		name: "Plan",
+		on_Enter: () => {
+			FB.Show.allRows()
+			FB.Show.allColumns()
+		},
+	}),
+)
 
 //###  KeyBindings  ###
 // import "~/KeyBindings/Filter"
