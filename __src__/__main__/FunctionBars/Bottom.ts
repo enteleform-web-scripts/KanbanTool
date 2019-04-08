@@ -30,7 +30,7 @@ export const bottom_FunctionBar = new FunctionBar({
 			new Entry({
 				name: "Tasks",
 				on_Load: () => {
-					Show.rows({exclude:["Active"]})
+					Show.rows({include:["Active"]})
 					Show.allColumns()
 				},
 			}),
