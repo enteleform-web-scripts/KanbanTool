@@ -82,15 +82,12 @@ function _show(
 		: _columnSelector
 
 	const elements      = $.find(selector)
-	const targetIndexes = _get_TargetIndexes(targets, type)
-	console.log("------------------------------")
-	console.log(">>> elements >>>", elements)
-	console.log(">>> targetIndexes >>>", targetIndexes)
+	const targetIndexes = _get_TargetIndexes(targets, type, exclude)
 
 	_apply_CSS_Class(elements, targetIndexes)
 }
 
-function _get_TargetIndexes(targets:_Target[], type:_Type){
+function _get_TargetIndexes(targets:_Target[], type:_Type, exclude:boolean){
 	const entries =
 		(type == _Type.Rows)
 		? _get_RowEntries()
@@ -98,9 +95,9 @@ function _get_TargetIndexes(targets:_Target[], type:_Type){
 
 	return (
 		entries
-			.map   ((entry, i     ) => ({name:entry.attributes.name, index:i}) )
-			.filter(({name, index}) => _validate_Target({targets, name, index}))
-			.map   (({index      }) => index                                   )
+			.map   ((entry, i     ) => ({name:entry.attributes.name, index:i})          )
+			.filter(({name, index}) => _validate_Target({targets, name, index, exclude}))
+			.map   (({index      }) => index                                            )
 	)
 }
 
@@ -118,12 +115,21 @@ function _get_ColumnEntries(){
 	)
 }
 
-function _validate_Target({targets, name, index}){
+function _validate_Target(
+	{targets,           name,        index,        exclude        }:
+	{targets:_Target[], name:string, index:number, exclude:boolean}
+){
 	const entryValues = [name, index]
-	return (
+
+	const is_Valid =
 		targets.some(target => (
 			entryValues.includes(target)
 		))
+
+	return (
+		(exclude)
+		? !is_Valid
+		: is_Valid
 	)
 }
 

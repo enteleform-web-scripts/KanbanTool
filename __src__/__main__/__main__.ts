@@ -28,6 +28,13 @@ FB.load(
 			FB.Show.allColumns()
 		},
 	}),
+	new FB.Entry({
+		name: "HideAll",
+		on_Enter: () => {
+			FB.Show.rows({include:[]})
+			FB.Show.columns({include:[]})
+		},
+	}),
 )
 
 //###  KeyBindings  ###
