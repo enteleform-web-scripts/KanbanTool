@@ -215,7 +215,7 @@ function _build_TableCell(entry:Entry, keyBinding:string){
 
 	let text = entry.name
 	if(keyBinding)
-		{text = `[${keyBinding}]  ${text}`}
+		{text = `[${keyBinding.toUpperCase()}]  ${text}`}
 
 	cell.text(text)
 	cell.on("click", entry.on_Load)
