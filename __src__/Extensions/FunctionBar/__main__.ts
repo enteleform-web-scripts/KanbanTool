@@ -144,7 +144,7 @@ function _add_KeyBinding(
 	let keyBinding:string = entry.keyBinding
 
 	if(functionBar.autoMap_KeyBindings)
-		{keyBinding = KeyBinding.characterKey_Rows[groupIndex][entryIndex]}
+		{keyBinding = KeyBinding.alphanumericKey_Rows[groupIndex][entryIndex]}
 
 	if(functionBar.keyBinding_Modifiers){
 		keyBinding =
