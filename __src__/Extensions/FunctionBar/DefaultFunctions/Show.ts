@@ -84,7 +84,8 @@ enum _Type{
 type _Target = (string | number)
 
 const _rowSelector         = "kt-board > tbody > tr > th"
-const _topColumns_Selector = "kt-board > thead > tr:nth-child(1) > th"
+const _topColumns_Selector = "kt-board > thead > tr > th"
+// const _topColumns_Selector = "kt-board > thead > tr:nth-child(1) > th"
 const _allColumns_Selector = "kt-board > thead > tr > th"
 
 function _show(
