@@ -118,8 +118,8 @@ function _get_RowEntries(){
 }
 
 function _get_ColumnEntries(){
-	const columns_RootParent    = activeBoard.workflowStages().models[0]
-	const columns_RootParent_ID = columns_RootParent.attributes.id
+	// const columns_RootParent    = activeBoard.workflowStages().models[0]
+	// const columns_RootParent_ID = columns_RootParent.attributes.id
 
 	return (
 		[...activeBoard.workflowStages().toArray()].slice(1)
