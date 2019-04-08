@@ -101,18 +101,23 @@ export namespace FunctionBar{
 //###  Utils  ###//
 //###############//
 
+const _autoMapped_Key_Rows = KeyBinding.alphanumericKey_Rows
+
 const _HorizontalPositions = [
 	FunctionBar.Position.Left,
 	FunctionBar.Position.Right,
 ]
 
 function _validate_AutoMapped_VerticalRows(functionBar:FunctionBar){
+	if(! functionBar.autoMap_KeyBindings)
+		{return}
+
 	const valid_GroupCount =
-		(functionBar.entryGroups.length <= KeyBinding.characterKey_Rows.length)
+		(functionBar.entryGroups.length <= _autoMapped_Key_Rows.length)
 
 	const valid_KeyCounts =
 		functionBar.entryGroups.every((group, i) =>
-			(group.length <= KeyBinding.characterKey_Rows[i].length)
+			(group.length <= _autoMapped_Key_Rows[i].length)
 		)
 
 	if(! (valid_GroupCount && valid_KeyCounts)){
@@ -144,7 +149,7 @@ function _add_KeyBinding(
 	let keyBinding:string = entry.keyBinding
 
 	if(functionBar.autoMap_KeyBindings)
-		{keyBinding = KeyBinding.alphanumericKey_Rows[groupIndex][entryIndex]}
+		{keyBinding = _autoMapped_Key_Rows[groupIndex][entryIndex]}
 
 	if(functionBar.keyBinding_Modifiers){
 		keyBinding =
