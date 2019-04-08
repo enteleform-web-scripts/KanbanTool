@@ -83,6 +83,9 @@ function _show(
 
 	const elements      = $.find(selector)
 	const targetIndexes = _get_TargetIndexes(targets, type)
+	console.log("------------------------------")
+	console.log(">>> elements >>>", elements)
+	console.log(">>> targetIndexes >>>", targetIndexes)
 
 	_apply_CSS_Class(elements, targetIndexes)
 }
