@@ -122,7 +122,7 @@ function _get_ColumnEntries(){
 	// const columns_RootParent_ID = columns_RootParent.attributes.id
 
 	return (
-		[...activeBoard.workflowStages().toArray()].slice(1)
+		Array.from(activeBoard.workflowStages()).slice(1)
 		// activeBoard.workflowStages()
 		// 	.filter(column => (column.attributes.parent_id == columns_RootParent_ID))
 	)
