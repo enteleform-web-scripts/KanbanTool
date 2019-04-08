@@ -1,6 +1,6 @@
 
 //###  Extensions  ###
-// import "~/Extensions/CheckList/TEMP"
+import "~/Extensions/CheckList/TEMP"
 // import "~/Extensions/FB/TEMP_ModeLegend"
 // import "~/Extensions/FunctionBar/TEMP_CardLegend"
 
@@ -11,4 +11,4 @@ FunctionBar.load(
 )
 
 //###  KeyBindings  ###
-// import "~/KeyBindings/Filter"
+import "~/KeyBindings/Filter"
