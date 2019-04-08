@@ -21,8 +21,8 @@ const $:any = require("jquery")
 
 export class FunctionBar extends Module{
 
-	static Show          = Show
-	static Entry         = Entry
+	static Show  = Show
+	static Entry = Entry
 
 	position:             FunctionBar.Position
 	autoMap_KeyBindings:  boolean

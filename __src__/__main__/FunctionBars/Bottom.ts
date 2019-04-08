@@ -14,16 +14,23 @@ export const bottom_FunctionBar = new FunctionBar({
 
 		[
 			new Entry({
-				name: "Work",
+				name: "Today",
 				on_Load: () => {
 					Show.rows({include:["Daily", "Active"]})
 					Show.allColumns()
 				},
 			}),
 			new Entry({
-				name: "WorkExclude",
+				name: "Routine",
 				on_Load: () => {
-					Show.rows({exclude:["Daily", "Active"]})
+					Show.rows({include:["Daily"]})
+					Show.allColumns()
+				},
+			}),
+			new Entry({
+				name: "Tasks",
+				on_Load: () => {
+					Show.rows({exclude:["Active"]})
 					Show.allColumns()
 				},
 			}),
@@ -40,8 +47,8 @@ export const bottom_FunctionBar = new FunctionBar({
 			new Entry({
 				name: "HideAll",
 				on_Load: () => {
-					Show.rows({include:[]})
-					Show.columns({include:[]})
+					Show.noRows()
+					Show.noColumns()
 				},
 			}),
 		],

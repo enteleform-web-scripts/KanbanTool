@@ -15,9 +15,10 @@ export namespace Show{
 	export function rows({exclude         }:{exclude:(string|number)[]}             )
 	export function rows({include, exclude}:{include?:_Target[], exclude?:_Target[]}){
 		_show({
-			targets: (include) ? include : exclude,
-			type:    _Type.Rows,
-			exclude: (exclude) ? true : false,
+			type:     _Type.Rows,
+			targets:  (include) ? include : exclude,
+			selector: _rowSelector,
+			exclude:  (exclude) ? true : false,
 		})
 	}
 
@@ -25,33 +26,46 @@ export namespace Show{
 	export function columns({exclude         }:{exclude:(string|number)[]}             )
 	export function columns({include, exclude}:{include?:_Target[], exclude?:_Target[]}){
 		_show({
-			targets: (include) ? include : exclude,
-			type:    _Type.Columns,
-			exclude: (exclude) ? true : false,
+			type:     _Type.Columns,
+			targets:  (include) ? include : exclude,
+			selector: _topColumns_Selector,
+			exclude:  (exclude) ? true : false,
 		})
 	}
 
 	export function allRows(){
-		const rowIndexes =
-			_get_RowEntries()
-			.map((_, i) => i)
-
 		_show({
-			targets: rowIndexes,
-			type:    _Type.Rows,
-			exclude: false,
+			type:     _Type.Rows,
+			targets:  _get_RowIndexes(),
+			selector: _rowSelector,
+			exclude:  false,
 		})
 	}
 
 	export function allColumns(){
-		const columnIndexes =
-			_get_RowEntries()
-			.map((_, i) => i)
-
 		_show({
-			targets: columnIndexes,
-			type:    _Type.Columns,
-			exclude: false,
+			type:     _Type.Columns,
+			targets:  _get_ColumnIndexes(),
+			selector: _allColumns_Selector,
+			exclude:  false,
+		})
+	}
+
+	export function noRows(){
+		_show({
+			type:     _Type.Rows,
+			targets:  _get_RowIndexes(),
+			selector: _rowSelector,
+			exclude:  true,
+		})
+	}
+
+	export function noColumns(){
+		_show({
+			type:     _Type.Columns,
+			targets:  _get_ColumnIndexes(),
+			selector: _allColumns_Selector,
+			exclude:  true,
 		})
 	}
 
@@ -69,18 +83,14 @@ enum _Type{
 
 type _Target = (string | number)
 
-const _rowSelector    = "kt-board > tbody > tr"
-const _columnSelector = "kt-board > thead > tr:nth-child(1) > th"
+const _rowSelector         = "kt-board > tbody > tr"
+const _topColumns_Selector = "kt-board > thead > tr:nth-child(1) > th"
+const _allColumns_Selector = "kt-board > thead > tr > th"
 
 function _show(
-	{targets,           type,       exclude        }:
-	{targets:_Target[], type:_Type, exclude:boolean}
+	{type,       targets,           selector,        exclude        }:
+	{type:_Type, targets:_Target[], selector:string, exclude:boolean}
 ){
-	const selector =
-		(type == _Type.Rows)
-		? _rowSelector
-		: _columnSelector
-
 	const elements      = $.find(selector)
 	const targetIndexes = _get_TargetIndexes(targets, type, exclude)
 
@@ -114,6 +124,12 @@ function _get_ColumnEntries(){
 			.filter(column => (column.attributes.parent_id == columns_RootParent_ID))
 	)
 }
+
+function _get_RowIndexes()
+	{return _get_RowEntries().map((_, i) => i)}
+
+function _get_ColumnIndexes()
+	{return _get_ColumnEntries().map((_, i) => i)}
 
 function _validate_Target(
 	{targets,           name,        index,        exclude        }:
