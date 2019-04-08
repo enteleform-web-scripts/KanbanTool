@@ -53,6 +53,23 @@ export const bottom_FunctionBar = new FunctionBar({
 			}),
 		],
 
+		[
+			new Entry({
+				name: "Mind Math",
+				on_Load: () => {
+					Show.allRows()
+					Show.columns({include:["Mind", "Math"]})
+				},
+			}),
+			new Entry({
+				name: "!(Mind Math)",
+				on_Load: () => {
+					Show.allRows()
+					Show.columns({exclude:["Mind", "Math"]})
+				},
+			}),
+		],
+
 	],
 
 })
