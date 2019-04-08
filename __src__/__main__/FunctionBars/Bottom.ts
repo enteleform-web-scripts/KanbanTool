@@ -55,17 +55,17 @@ export const bottom_FunctionBar = new FunctionBar({
 
 		[
 			new Entry({
-				name: "Mind Math",
+				name: "Fitness Math",
 				on_Load: () => {
 					Show.allRows()
-					Show.columns({include:["Mind", "Math"]})
+					Show.columns({include:["Fitness", "Math"]})
 				},
 			}),
 			new Entry({
-				name: "!(Mind Math)",
+				name: "!(Fitness Math)",
 				on_Load: () => {
 					Show.allRows()
-					Show.columns({exclude:["Mind", "Math"]})
+					Show.columns({exclude:["Fitness", "Math"]})
 				},
 			}),
 		],
