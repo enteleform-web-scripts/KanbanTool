@@ -83,7 +83,7 @@ enum _Type{
 
 type _Target = (string | number)
 
-const _rowSelector         = "kt-board > tbody > tr"
+const _rowSelector         = "kt-board > tbody > tr > th"
 const _topColumns_Selector = "kt-board > thead > tr:nth-child(1) > th"
 const _allColumns_Selector = "kt-board > thead > tr > th"
 
@@ -94,7 +94,7 @@ function _show(
 	const elements      = $.find(selector)
 	const targetIndexes = _get_TargetIndexes(targets, type, exclude)
 
-	_set_TargetVisibility(elements, targetIndexes)
+	_set_TargetVisibility(type, elements, targetIndexes)
 }
 
 function _get_TargetIndexes(targets:_Target[], type:_Type, exclude:boolean){
@@ -149,15 +149,21 @@ function _validate_Target(
 	)
 }
 
-function _set_TargetVisibility(elements:JQuery[], targetIndexes:number[]){
+function _set_TargetVisibility(type:_Type, elements:JQuery[], targetIndexes:number[]){
 	elements.forEach((element, i) => {
 		const $element = $(element)
-		const is_Collapsed = $element.hasClass("kt-collapsed")
-		const is_Target = targetIndexes.includes(i)
+		const $collapsedElement =
+			(type == _Type.Rows)
+			? $element.parent()
+			: $element
+
+		const is_Collapsed = $collapsedElement.hasClass("kt-collapsed")
+		const is_Target    = targetIndexes.includes(i)
+
 		if(
 			(is_Target && is_Collapsed)
 			|| (!is_Target && !is_Collapsed)
 		)
-			{$element.click()}
+			{$collapsedElement.click()}
 	})
 }
