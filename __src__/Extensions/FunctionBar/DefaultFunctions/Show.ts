@@ -157,13 +157,13 @@ function _set_TargetVisibility(type:_Type, elements:JQuery[], targetIndexes:numb
 			? $element.parent()
 			: $element
 
-		const is_Collapsed = $collapsedElement.hasClass("kt-collapsed")
 		const is_Target    = targetIndexes.includes(i)
+		const is_Collapsed = $collapsedElement.hasClass("kt-collapsed")
 
 		if(
 			(is_Target && is_Collapsed)
 			|| (!is_Target && !is_Collapsed)
 		)
-			{$collapsedElement.click()}
+			{$element.click()}
 	})
 }
