@@ -1,6 +1,7 @@
 //###  Module: CSS  ###//
 import {CSS} from "~/Utils/CSS"
 CSS.apply(__dirname)
+const cssVariables = require("./CSS_Variables.json")
 
 //###  Module  ###//
 import {KeyBinding} from "~/Utils/KeyBinding/__main__"
@@ -9,6 +10,9 @@ import {Module    } from "~/Utils/Module_BaseClasses"
 //###  Module: Exports  ###//
 import {Entry} from "./Entry"
 import {Show } from "./DefaultFunctions/Show"
+
+//###  NPM  ###//
+const $:any = require("jquery")
 
 
 //#######################//
@@ -65,9 +69,11 @@ export class FunctionBar extends Module{
 	_initialize_VerticalBar(){
 		_validate_AutoMapped_VerticalRows(this)
 
+		const elements = _build_Layout(this.entryGroups)
+
 		this.entryGroups.forEach((group, groupIndex) => {
 			group.forEach((entry, entryIndex) => {
-				_initialize_VerticalEntry(this, group, groupIndex, entry, entryIndex)
+				_initialize_VerticalEntry(this, groupIndex, entry, entryIndex, elements)
 			})
 		})
 	}
@@ -130,18 +136,20 @@ function _validate_AutoMapped_VerticalRows(functionBar:FunctionBar){
 
 function _initialize_VerticalEntry(
 	functionBar: FunctionBar,
-	group:       Entry[],
 	groupIndex:  number,
 	entry:       Entry,
 	entryIndex:  number,
+	elements:    any,
 ){
 	if(entry.keyBinding || functionBar.autoMap_KeyBindings)
-		{_add_KeyBinding(functionBar, group, groupIndex, entry, entryIndex)}
+		{_add_KeyBinding(functionBar, groupIndex, entry, entryIndex)}
+
+	const cell =_build_TableCell(entry, groupIndex, entryIndex)
+	elements.tableRows[groupIndex].append(cell)
 }
 
 function _add_KeyBinding(
 	functionBar: FunctionBar,
-	group:       Entry[],
 	groupIndex:  number,
 	entry:       Entry,
 	entryIndex:  number,
@@ -162,4 +170,44 @@ function _add_KeyBinding(
 		entry.on_Load,
 		{preventDefault: true}
 	)
+}
+
+function _build_Layout(entryGroups:Entry[][]){
+	const legendContainer = $("<div>", {"class":cssVariables.legendContainer})
+
+	const cardType_Legend = $("table.kt-extensions-card_legend").detach()
+	const table           = $("<table>", {"class":cssVariables.extension})
+	const tableBody       = $("<tbody>")
+
+	$("body")      .append(legendContainer)
+	table          .append(tableBody      )
+	legendContainer.append(cardType_Legend)
+	legendContainer.append(table          )
+
+	const tableRows = []
+	entryGroups.forEach(group => {
+		const tableRow = $("<tr>")
+		tableBody.append(tableRow)
+		tableRows.push(tableRow)
+	})
+
+	return {
+		legendContainer,
+		table,
+		tableBody,
+		tableRows,
+	}
+}
+
+function _build_TableCell(entry:Entry, groupIndex:number, entryIndex:number){
+	const cell = $("<td>", {"class":cssVariables.extension})
+
+	let text = entry.name
+	if(entry.keyBinding)
+		{text = `[${entry.keyBinding}]  ${name}`}
+
+	cell.text(text)
+	cell.on("click", entry.on_Load)
+
+	return cell
 }

@@ -1,36 +1,24 @@
-// //###  Module  ###//
-// import {Entry     } from "./Entry"
-// import {Feature   } from "~/Utils/Module_BaseClasses"
-// import {KeyBinding} from "~/Utils/KeyBinding"
 
-
-// //###  Module: CSS  ###//
-// import {CSS} from "~/Utils/CSS"
-// CSS.apply(__dirname)
-// const cssVariables = require("./CSS_Variables.json")
-
-// //###  NPM  ###//
-// const $:any = require("jquery")
 
 
 // //#################//
 // //###  Exports  ###//
 // //#################//
 
-// export class ModeLegend extends Feature{
+// // export class ModeLegend extends Feature{
 
-// 	static load(){
-// 		const entries         = _TEMP_entries
-// 		const legendContainer = _build_LegendContainer()
+// // 	static load(){
+// // 		const entries         = _TEMP_entries
+// // 		const elements = _build_Layout()
 
-// 		entries.forEach( (mode, i) => {
-// 			const cell =_build_TableCell(i, mode)
-// 			legendContainer.tableRow.append(cell)
-// 		})
-// 		console.log(" - ModeLegend Loaded")
-// 	}
+// // 		entries.forEach( (mode, i) => {
+// // 			const cell =_build_TableCell(i, mode)
+// // 			elements.tableRow.append(cell)
+// // 		})
+// // 		console.log(" - ModeLegend Loaded")
+// // 	}
 
-// }
+// // }
 
 
 // //###############//
@@ -45,7 +33,7 @@
 // // 	new Mode({name:"Plan", rows:[__ALL_ROWS__],      columns:[]}),
 // // ]
 
-// function _build_LegendContainer(){
+// function _build_Layout(){
 // 	const legendContainer = $("<div>", {"class":cssVariables.legendContainer})
 
 // 	const cardType_Legend = $("table.kt-extensions-card_legend").detach()
