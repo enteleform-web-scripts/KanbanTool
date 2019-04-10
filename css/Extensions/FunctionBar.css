@@ -1,0 +1,28 @@
+.CustomExtension--FunctionBar {
+  width: 100%;
+  table-layout: fixed;
+  z-index: 10;
+  background: #444;
+}
+.CustomExtension--FunctionBar td {
+  background-color: #444;
+  color: #eee;
+  text-align: center;
+  padding: 2px;
+  cursor: pointer;
+  position: relative;
+  user-select: none;
+  border: 1px solid #d4d4d4;
+  box-shadow: 0 -1px 1px rgba(0,0,0,0.065);
+}
+.LegendContainer {
+  position: fixed;
+  bottom: 0;
+}
+.kt-extensions-card_legend {
+  position: static !important;
+}
+#show > div.kt-side-panel-slide {
+  margin-bottom: 70px !important;
+}
+
