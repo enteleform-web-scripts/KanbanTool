@@ -14,7 +14,5 @@ FunctionBar.load(
 import "~/KeyBindings/Filter"
 
 console.log("-------------------------")
-
 console.log("AYYYYYYYYYYYYYYYYYYY LMAO")
-
 console.log("-------------------------")
