@@ -12,3 +12,7 @@ FunctionBar.load(
 
 //###  KeyBindings  ###
 import "~/KeyBindings/Filter"
+
+console.log("-------------------------")
+console.log("AYYYYYYYYYYYYYYYYYYY LMAO")
+console.log("-------------------------")
