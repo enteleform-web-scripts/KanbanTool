@@ -8,8 +8,6 @@
   },
 
   "devDependencies": {
-    "@enteleform/path": "file:D:/Projects/Web/Packages/path",
-
     "@types/node": "^11.13.0",
     "ts-node":     "^8.0.3",
     "typescript":  "^3.4.1",
