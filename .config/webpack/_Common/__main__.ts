@@ -1,11 +1,11 @@
 //###  Module  ###//
-import {load_ConfigSegments as load} from "./Utils/load_ConfigSegments"
+import {load_ConfigSegments as load} from "../_Utils/load_ConfigSegments"
 
 //###  NPM  ###//
 import webpack from "webpack"
 
 
-export default (env:any): webpack.Configuration => ({
+export const Common: webpack.Configuration = {
 
 	target: "web",
 
@@ -19,4 +19,4 @@ export default (env:any): webpack.Configuration => ({
 		"./resolve",
 	)
 
-})
+}

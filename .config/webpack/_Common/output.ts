@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {Settings} from "../Settings"
+import {Settings} from "../../Settings"
 
 //###  NPM  ###//
 import webpack from "webpack"
@@ -7,7 +7,7 @@ import webpack from "webpack"
 
 const $: webpack.Output = {
 
-	filename: "[name].js",
+	filename: "[Name].js",
 	path:     Settings.distributionPath,
 
 }
