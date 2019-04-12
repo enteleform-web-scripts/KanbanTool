@@ -8,7 +8,7 @@ export const bottom_FunctionBar = new FunctionBar({
 
 	position:             Position.Bottom,
 	autoMap_KeyBindings:  true,
-	keyBinding_Modifiers: ["alt"],
+	keyBinding_Modifiers: ["shift", "alt"],
 
 	entryGroups:[
 
