@@ -87,8 +87,10 @@ function _build_VisibilityMap(headers:Header[], targets:_Target[], exclude:boole
 		headers.map(header => ({header, show_Element:false}))
 
 	headers.forEach((header, i) => {
+		const oneBased_Index = (header.index + 1)
+
 		const is_Target = (
-			targets.includes(header.index)
+			targets.includes(oneBased_Index)
 			|| targets.some(target => _match_Glob(header, target))
 		)
 

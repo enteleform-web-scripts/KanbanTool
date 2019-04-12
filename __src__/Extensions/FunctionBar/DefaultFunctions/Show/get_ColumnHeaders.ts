@@ -13,9 +13,8 @@ export function get_ColumnHeaders(){
 
 	const cellElements =
 		rowElements
-			.flatMap(row =>
-				$(row).children().toArray()
-			)
+			.flatMap(row => $(row).children().toArray())
+			.slice(1)
 
 	const all_ColumnModels =
 		activeBoard.workflowStages().toArray()

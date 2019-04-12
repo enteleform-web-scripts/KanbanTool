@@ -15,7 +15,6 @@ export class Header{
 		{index,        model,     clickElement,             collapseElement            }:
 		{index:number, model:any, clickElement:HTMLElement, collapseElement:HTMLElement}
 	){
-		console.log("@@@", index, model.name)
 		this.index           = index
 		this.clickElement    = clickElement
 		this.collapseElement = collapseElement
