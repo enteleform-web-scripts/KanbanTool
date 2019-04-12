@@ -132,17 +132,24 @@ class Header{
 function _get_ColumnHeaders(headerOrdered_ColumnModels:any[]){
 	const columnHeaders:Header[] = []
 	let   index = 0
+	let   parents = []
 
 	$("kt-board > thead").children().toArray().forEach((row, rowIndex) => {
+		const next_Parent_StartIndex = columnHeaders.length
+
 		$(row).children().toArray().forEach((cell, cellIndex) => {
 			const {name, id, parent_id} = headerOrdered_ColumnModels[index]
 
-			columnHeaders.push(
-				new Header({name, id, parentID:parent_id, element:cell})
-			)
+			const header = new Header({name, id, parentID:parent_id, element:cell})
+			parents.forEach(parent => {
+
+			})
+			columnHeaders.push(header)
 
 			index += 1
 		})
+
+		parents = columnHeaders.slice(next_Parent_StartIndex)
 	})
 
 	return columnHeaders
