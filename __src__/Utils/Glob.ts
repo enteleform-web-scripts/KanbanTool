@@ -45,9 +45,9 @@ function _escape(text:string){
 
 const _GLOB_TO_REGEX_MAP = [
 	{regEx:/\\\\/g,                  replacement:"\\\\"         },  //  backslashes
-	{regEx:/([^\\\\]+)\\\\\*\*\*$/g, replacement:"\\1(\\\\.*$)?"},  //  `\***`         #  match nested children + include parent
-	{regEx:/^\*\*\*$/g,              replacement:".*"           },  //  `***`          #  match all             + include nested children
-	{regEx:/^\*\*\\\\?\*$/g,         replacement:".*"           },  //  `**\*`         #  match all             + include nested children
+	{regEx:/([^\\\\]+)\\\\\*\*\*$/g, replacement:"\\1(\\\\.*$)?"},  //  only `\***`    #  match nested children + include parent
+	{regEx:/^\*\*\*$/g,              replacement:".*"           },  //  only `***`     #  match all             + include nested children
+	{regEx:/^\*\*\\\\?\*$/g,         replacement:".*"           },  //  only `**\*`    #  match all             + include nested children
 	{regEx:/(?<!^)\*\*\\\\\*$/g,     replacement:".*"           },  //  `\**\*`        #  match nested children @ parent
 	{regEx:/^\*\*$/g,                replacement:"[^\\\\]+"     },  //  only     `**`  #  match children        @ root (without suffix)
 	{regEx:/^\*\*/g,                 replacement:".*?"          },  //  leading  `**`  #  match children        @ root (with suffix)
