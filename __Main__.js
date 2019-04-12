@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555088246420)
+		const elapsedTime  = _get_ElapsedTime(1555090159483)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -10601,8 +10601,8 @@ function _initialize_VerticalEntry(functionBar, groupIndex, entry, entryIndex, e
     if (keyBinding) {
         _add_KeyBinding(functionBar, entry, keyBinding);
     }
-    const cell = _build_TableCell(entry, keyBinding);
-    elements.tableRows[groupIndex].append(cell);
+    const cell = _build_Cell(entry, keyBinding);
+    elements.rows[groupIndex].append(cell);
 }
 function _add_KeyBinding(functionBar, entry, keyBinding) {
     if (functionBar.keyBinding_Modifiers) {
@@ -10613,29 +10613,23 @@ function _add_KeyBinding(functionBar, entry, keyBinding) {
     __main__1.KeyBinding.add(keyBinding, entry.on_Load, { preventDefault: true });
 }
 function _build_Layout(entryGroups) {
-    const legendContainer = $("<div>", { "class": cssVariables.legendContainer });
     const cardType_Legend = $("table.kt-extensions-card_legend").detach();
-    const table = $("<table>", { "class": cssVariables.extension });
-    const tableBody = $("<tbody>");
+    const legendContainer = $("<div>", { "class": cssVariables.legendContainer });
     $("body").append(legendContainer);
-    table.append(tableBody);
     legendContainer.append(cardType_Legend);
-    legendContainer.append(table);
-    const tableRows = [];
+    const rows = [];
     entryGroups.forEach(group => {
-        const tableRow = $("<tr>");
-        tableBody.append(tableRow);
-        tableRows.push(tableRow);
+        const row = $("<div>", { "class": cssVariables.legendRow });
+        legendContainer.append(row);
+        rows.push(row);
     });
     return {
         legendContainer,
-        table,
-        tableBody,
-        tableRows,
+        rows,
     };
 }
-function _build_TableCell(entry, keyBinding) {
-    const cell = $("<td>", { "class": cssVariables.extension });
+function _build_Cell(entry, keyBinding) {
+    const cell = $("<div>", { "class": cssVariables.legendCell });
     let text = entry.name;
     if (keyBinding) {
         text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`;
@@ -10782,9 +10776,9 @@ module.exports = __webpack_require__(7);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(8);
-const __main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(2);
 const Bottom_1 = __webpack_require__(21);
-__main__1.FunctionBar.load(Bottom_1.bottom_FunctionBar);
+__Main__1.FunctionBar.load(Bottom_1.bottom_FunctionBar);
 __webpack_require__(22);
 
 
@@ -10924,7 +10918,7 @@ async function _get_FileText(url, result) {
 /* 12 */
 /***/ (function(module) {
 
-module.exports = {"extension":"CustomExtension--FunctionBar","legendContainer":"LegendContainer","_":""};
+module.exports = {"extension":"CustomExtension--FunctionBar","legendContainer":"LegendContainer","legendRow":"Row","legendCell":"Cell","_":""};
 
 /***/ }),
 /* 13 */
@@ -11648,9 +11642,9 @@ const _GLOB_TO_REGEX_MAP = [
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __main__1 = __webpack_require__(2);
-const { Entry, Position, Show } = __main__1.FunctionBar;
-exports.bottom_FunctionBar = new __main__1.FunctionBar({
+const __Main__1 = __webpack_require__(2);
+const { Entry, Position, Show } = __Main__1.FunctionBar;
+exports.bottom_FunctionBar = new __Main__1.FunctionBar({
     position: Position.Bottom,
     autoMap_KeyBindings: true,
     keyBinding_Modifiers: ["alt"],
