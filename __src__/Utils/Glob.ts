@@ -32,7 +32,7 @@ export class Glob{
 		let pattern =
 			_GLOB_TO_REGEX_MAP
 				.reduce( (pattern, {regEx, replacement}) => (
-					pattern.replace(regEx, _escape(replacement))
+					pattern.replace(regEx, replacement)
 				), this._globPattern)
 
 		pattern = ("^" + pattern + "$")
@@ -43,19 +43,21 @@ export class Glob{
 
 }
 
-function _escape(text:string){
-	return text.replace(/\\(?!\$)/g, "\\\\")
-}
+
+//###############//
+//###  Utils  ###//
+//###############//
 
 const _GLOB_TO_REGEX_MAP = [
-	{regEx:/([^\\]+)\\\*\*\*$/g, replacement:"\\$1(\\.*$)?"},  //  trailing `\***`  #  match nested children + include parent
-	{regEx:/^\*\*\\\*$/g,        replacement:".*"          },  //  exact    `**\*`  #  match all             + include nested children
-	{regEx:/(?<!^)\\\*\*\\\*$/g, replacement:"\\.*"        },  //  trailing `\**\*` #  match nested children @ parent
-	{regEx:/^\*\*$/g,            replacement:"[^\\\\]+"    },  //  exact    `**`    #  match children        @ root (without suffix)
-	{regEx:/^\*\*\\/g,           replacement:".*?\\"       },  //  leading  `**\`   #  match children        @ root (with suffix)
-	{regEx:/\\\*\*/g,            replacement:"\\[^\\\\]+"  },  //  middle   `\**`   #  match children        @ parent
-	{regEx:/^\*$/g,              replacement:"[^\\]+"      },  //  exact    `*`     #  match all             @ root
-	{regEx:/\\\*$/g,             replacement:"\\[^\\]+"    },  //  trailing `\*`    #  match children        @ parent
+	{regEx:/\\/g,                    replacement:"\\\\"            },  //  backslashes
+	{regEx:/([^\\]+)\\\\\*\*\*$/g,   replacement:"$1(\\\\.*$)?"    },  //  trailing `\***`  #  match nested children + include parent
+	{regEx:/^\*\*\\\\\*$/g,          replacement:".*"              },  //  exact    `**\*`  #  match all             + include nested children
+	{regEx:/(?<!^)\\\\\*\*\\\\\*$/g, replacement:"\\\\.*"          },  //  trailing `\**\*` #  match nested children @ parent
+	{regEx:/^\*\*$/g,                replacement:"[^\\\\\\\\]+"    },  //  exact    `**`    #  match children        @ root (without suffix)
+	{regEx:/^\*\*\\\\/g,             replacement:".*?\\\\"         },  //  leading  `**\`   #  match children        @ root (with suffix)
+	{regEx:/\\\\\*\*/g,              replacement:"\\\\[^\\\\\\\\]+"},  //  middle   `\**`   #  match children        @ parent
+	{regEx:/^\*$/g,                  replacement:"[^\\\\]+"        },  //  exact    `*`     #  match all             @ root
+	{regEx:/\\\\\*$/g,               replacement:"\\\\[^\\\\]+"    },  //  trailing `\*`    #  match children        @ parent
 ]
 
 
@@ -67,22 +69,24 @@ const _GLOB_TO_REGEX_MAP = [
 // import assert from "assert"
 
 // function test(path:string, glob:string, result:boolean){
-// 	// if(
-// 	assert(
+// 	if(
+// 	// assert(
 // 		(new Glob(glob).match(path) == result)
 // 	)
-// 	// {
-// 	// 	// console.log(`PASS   @ "${glob}".match("${path}"), ${new Glob(glob).regEx}`)
-// 	// }
-// 	// else{
-// 	// 	console.log(`FAILED @ "${glob}".match("${path}"), ${new Glob(glob).regEx}`)
-// 	// }
+// 	{
+// 		// console.log(`PASS   @ "${glob}".match("${path}"), ${new Glob(glob).regEx}`)
+// 	}
+// 	else{
+// 		console.log(`FAILED @ "${glob}".match("${path}"), ${new Glob(glob).regEx}`)
+// 	}
 // }
 
+// test("A", "A",     true)
 // test("A", "*",     true)
 // test("A", "**",    true)
 // test("A", "**\\*", true)
 
+// test("A\\B", "A\\B",     true)
 // test("A\\B", "*",        false)
 // test("A\\B", "**",       false)
 // test("A\\B", "**\\*",    true )
@@ -94,6 +98,7 @@ const _GLOB_TO_REGEX_MAP = [
 // test("A\\B", "B\\**\\*", false)
 // test("A\\B", "**\\B",    true )
 
+// test("A\\B\\C", "A\\B\\C",      true )
 // test("A\\B\\C", "*",            false)
 // test("A\\B\\C", "**",           false)
 // test("A\\B\\C", "**\\*",        true )
