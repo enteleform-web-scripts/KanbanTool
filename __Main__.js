@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555046919395)
+		const elapsedTime  = _get_ElapsedTime(1555047402851)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11403,29 +11403,27 @@ function _show({ type, targets, exclude }) {
     _set_Visibility(headers, targets, exclude);
 }
 function _set_Visibility(headers, targets, exclude) {
-    const visibilityMap = headers.map(header => ({ header, toggle: false }));
+    const visibilityMap = headers.map(header => ({ header, show_Element: false }));
     headers.forEach((header, i) => {
         const is_Target = (targets.includes(header.index)
             || targets.some(target => _match_Glob(header, target)));
-        const $element = $(header.element);
-        const is_Collapsed = $element.hasClass("kt-collapsed");
-        let toggle_ElementVisibility = ((is_Target && is_Collapsed)
-            || (!is_Target && !is_Collapsed));
-        toggle_ElementVisibility =
-            (exclude)
-                ? !toggle_ElementVisibility
-                : toggle_ElementVisibility;
-        if (toggle_ElementVisibility) {
+        if (is_Target) {
+            const show_Element = (exclude)
+                ? !is_Target
+                : is_Target;
             const targetHeaders = [header, ...header.parents];
             visibilityMap.forEach(entry => {
                 if (targetHeaders.includes(entry.header)) {
-                    entry.toggle = true;
+                    entry.show_Element = show_Element;
                 }
             });
         }
     });
-    visibilityMap.forEach(({ header, toggle }) => {
-        if (toggle) {
+    visibilityMap.forEach(({ header, show_Element }) => {
+        const is_Collapsed = $(header.element).hasClass("kt-collapsed");
+        let toggle_ElementVisibility = ((show_Element && is_Collapsed)
+            || (!show_Element && !is_Collapsed));
+        if (toggle_ElementVisibility) {
             header.element.click();
         }
     });
@@ -11610,7 +11608,7 @@ const { Entry, Position, Show } = __main__1.FunctionBar;
 exports.bottom_FunctionBar = new __main__1.FunctionBar({
     position: Position.Bottom,
     autoMap_KeyBindings: true,
-    keyBinding_Modifiers: ["alt"],
+    keyBinding_Modifiers: ["shift", "alt"],
     entryGroups: [
         [
             new Entry({
