@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555091360696)
+		const elapsedTime  = _get_ElapsedTime(1555091666780)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11451,10 +11451,11 @@ var Show;
 })(Show = exports.Show || (exports.Show = {}));
 var _Type;
 (function (_Type) {
-    _Type[_Type["Rows"] = 0] = "Rows";
-    _Type[_Type["Columns"] = 1] = "Columns";
+    _Type["Rows"] = "Rows";
+    _Type["Columns"] = "Columns";
 })(_Type || (_Type = {}));
 function _show({ type, targets, exclude }) {
+    console.log("----------", type.valueOf());
     const headers = (type == _Type.Rows)
         ? get_RowHeaders_1.get_RowHeaders()
         : get_ColumnHeaders_1.get_ColumnHeaders();

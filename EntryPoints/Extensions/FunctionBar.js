@@ -190,7 +190,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555091360696)
+		const elapsedTime  = _get_ElapsedTime(1555091666780)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
