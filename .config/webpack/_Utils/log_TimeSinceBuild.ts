@@ -12,7 +12,7 @@ export function get_log_TimeSinceBuild_Callback(){
 
 		const elapsedTime  = _get_ElapsedTime(${buildTime})
 		const buildMessage = \`<<< Built {  \${elapsedTime}  } Ago >>>\`
-		console.log(buildMessage)
+		console.log("\\n" + buildMessage + "\\n")
 	`)
 }
 
@@ -21,10 +21,8 @@ export function get_log_TimeSinceBuild_Callback(){
 //###  Utils  ###//
 //###############//
 
-// function _get_ElapsedTime(startTime:number){
 function _get_ElapsedTime(startTime:number){
-	const now = new Date()
-	const elapsed_MS = (now.getTime() - startTime)
+	const elapsed_MS = (new Date().getTime() - startTime)
 
 	const days         = Math.floor(((elapsed_MS / 1000) / 86400)     )
 	const hours        = Math.floor(((elapsed_MS / 1000) / 3600 ) % 24)
@@ -41,14 +39,12 @@ function _get_ElapsedTime(startTime:number){
 	return elapsedTime
 }
 
-// function _get_TimeString_Segment(title:string, value:number, parents:number[], mandatory:boolean){
-function _get_TimeString_Segment(title, value, parents, mandatory){
+function _get_TimeString_Segment(title:string, value:number, parents:number[], mandatory:boolean){
 	const parentValues_Exist = (
 		(parents.length > 0)
 		&& (Math.max(...parents) > 0)
 	)
 
-	console.log(title, parentValues_Exist, Math.max(...parents))
 	if(mandatory || value || parentValues_Exist){
 		const prefix =
 			(parentValues_Exist)
