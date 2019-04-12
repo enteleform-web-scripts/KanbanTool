@@ -55,18 +55,22 @@ function _build_Headers(columnHeader_CellElements:HTMLElement[], userModels:any[
 
 			children.forEach( ({child, parent}) => {
 				const child_QueueIndex = queue.indexOf(child)
-				const column_WasAdded = (child_QueueIndex == -1)
+				const column_WasAdded  = (child_QueueIndex == -1)
+
 				if(! column_WasAdded){
+					queue.splice(child_QueueIndex, 1)
+
+					const elementIndex = (headers.length)
+
+					const header = new Header({
+						model:   child,
+						element: columnHeader_CellElements[elementIndex],
+					})
+
+					headers.push(header)
+
 					if(parent instanceof Header)
 						{console.log("++", parent, child); parent.add_Child(child)}
-					queue.splice(child_QueueIndex, 1)
-					const elementIndex = (headers.length)
-					headers.push(
-						new Header({
-							model:   child,
-							element: columnHeader_CellElements[elementIndex],
-						})
-					)
 				}
 			})
 		})
