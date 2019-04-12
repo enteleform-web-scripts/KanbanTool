@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555045863063)
+		const elapsedTime  = _get_ElapsedTime(1555046919395)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11400,24 +11400,35 @@ function _show({ type, targets, exclude }) {
     const headers = (type == _Type.Rows)
         ? []
         : get_ColumnHeaders_1.get_ColumnHeaders();
-    headers.forEach(header => {
-        _set_Visibility(header, targets, exclude);
-    });
+    _set_Visibility(headers, targets, exclude);
 }
-function _set_Visibility(header, targets, exclude) {
-    const is_Target = (targets.includes(header.index)
-        || targets.some(target => _match_Glob(header, target)));
-    const $element = $(header.element);
-    const is_Collapsed = $element.hasClass("kt-collapsed");
-    let toggle_ElementVisibility = ((is_Target && is_Collapsed)
-        || (!is_Target && !is_Collapsed));
-    toggle_ElementVisibility =
-        (exclude)
-            ? !toggle_ElementVisibility
-            : toggle_ElementVisibility;
-    if (toggle_ElementVisibility) {
-        $element.click();
-    }
+function _set_Visibility(headers, targets, exclude) {
+    const visibilityMap = headers.map(header => ({ header, toggle: false }));
+    headers.forEach((header, i) => {
+        const is_Target = (targets.includes(header.index)
+            || targets.some(target => _match_Glob(header, target)));
+        const $element = $(header.element);
+        const is_Collapsed = $element.hasClass("kt-collapsed");
+        let toggle_ElementVisibility = ((is_Target && is_Collapsed)
+            || (!is_Target && !is_Collapsed));
+        toggle_ElementVisibility =
+            (exclude)
+                ? !toggle_ElementVisibility
+                : toggle_ElementVisibility;
+        if (toggle_ElementVisibility) {
+            const targetHeaders = [header, ...header.parents];
+            visibilityMap.forEach(entry => {
+                if (targetHeaders.includes(entry.header)) {
+                    entry.toggle = true;
+                }
+            });
+        }
+    });
+    visibilityMap.forEach(({ header, toggle }) => {
+        if (toggle) {
+            header.element.click();
+        }
+    });
 }
 function _match_Glob(header, target) {
     if (Number(target)) {
@@ -11513,6 +11524,15 @@ class Header {
         else {
             return this.name;
         }
+    }
+    get parents() {
+        let child = this;
+        const parents = [];
+        while (child.parent) {
+            parents.push(child.parent);
+            child = child.parent;
+        }
+        return parents;
     }
     add_Child(child) {
         child.parent = this;
