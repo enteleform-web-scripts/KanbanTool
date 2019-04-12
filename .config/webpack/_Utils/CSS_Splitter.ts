@@ -27,7 +27,7 @@ export class CSS_Splitter{
 	}
 
 	static get_ChunkName(module, chunks, cacheGroup_Key){
-		if(! module.issuer)
+		if(! (module.issuer && module.issuer.resource))
 			{return}
 
 		const filePath = module.issuer.resource
