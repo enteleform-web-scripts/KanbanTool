@@ -70,7 +70,7 @@ function _set_Visibility(headers:Header[], targets:_Target[], exclude:boolean){
 	const visibilityMap = _build_VisibilityMap(headers, targets, exclude)
 
 	visibilityMap.forEach( ({header, show_Element}) => {
-		const is_Collapsed = $(header.element).hasClass("kt-collapsed")
+		const is_Collapsed = $(header.collapseElement).hasClass("kt-collapsed")
 
 		let toggle_ElementVisibility = (
 			(show_Element && is_Collapsed)
@@ -78,7 +78,7 @@ function _set_Visibility(headers:Header[], targets:_Target[], exclude:boolean){
 		)
 
 		if(toggle_ElementVisibility)
-			{header.element.click()}
+			{header.clickElement.click()}
 	})
 }
 

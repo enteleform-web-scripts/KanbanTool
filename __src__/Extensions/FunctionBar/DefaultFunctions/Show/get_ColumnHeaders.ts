@@ -69,12 +69,14 @@ function _add_Header({queue, headers, columnHeader_CellElements, child, parent})
 	if(! column_WasAdded){
 		queue.splice(child_QueueIndex, 1)
 
-		const elementIndex = (headers.length)
+		const elementIndex = headers.length
+		const element      = columnHeader_CellElements[elementIndex]
 
 		const header = new Header({
-			model:   child,
-			element: columnHeader_CellElements[elementIndex],
-			index:   elementIndex,
+			index:           elementIndex,
+			model:           child,
+			clickElement:    element,
+			collapseElement: element,
 		})
 
 		headers.push(header)

@@ -3,23 +3,25 @@ export class Header{
 	children     = []
 	children_IDs = []
 
-	element:   HTMLElement
-	id:        number
-	index:     number
-	name:      string
-	parent_id: number
-	parent:    Header
+	clickElement:    HTMLElement
+	collapseElement: HTMLElement
+	id:              number
+	index:           number
+	name:            string
+	parent_id:       number
+	parent:          Header
 
 	constructor(
-		{model,     element,             index       }:
-		{model:any, element:HTMLElement, index:number}
+		{index,        model,     clickElement,             collapseElement            }:
+		{index:number, model:any, clickElement:HTMLElement, collapseElement:HTMLElement}
 	){
+		this.index           = index
+		this.clickElement    = clickElement
+		this.collapseElement = collapseElement
+
 		this.name      = model.name
 		this.id        = model.id
 		this.parent_id = model.parent_id
-
-		this.element = element
-		this.index   = index
 	}
 
 	get path(){

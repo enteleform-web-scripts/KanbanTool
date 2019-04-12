@@ -30,8 +30,9 @@ export function get_RowHeaders(){
 	const headers =
 		headerElements.map( (element, index) =>
 			new Header({
-				model: headerModels[index].attributes,
-				element,
+				model:           headerModels[index].attributes,
+				clickElement:    element,
+				collapseElement: $(element).parent(),
 				index,
 			})
 		)
