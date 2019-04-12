@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555052097984)
+		const elapsedTime  = _get_ElapsedTime(1555052583321)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11484,17 +11484,19 @@ function _build_VisibilityMap(headers, targets, exclude) {
         const is_Target = (targets.includes(oneBased_Index)
             || targets.some(target => _match_Glob(header, target)));
         if (is_Target) {
-            const show_Element = (exclude)
-                ? !is_Target
-                : is_Target;
             const headerTree = [header, ...header.parents];
             visibilityMap.forEach(entry => {
                 if (headerTree.includes(entry.header)) {
-                    entry.show_Element = show_Element;
+                    entry.show_Element = true;
                 }
             });
         }
     });
+    if (exclude) {
+        visibilityMap.forEach(entry => {
+            entry.show_Element = !(entry.show_Element);
+        });
+    }
     return visibilityMap;
 }
 function _match_Glob(header, target) {
