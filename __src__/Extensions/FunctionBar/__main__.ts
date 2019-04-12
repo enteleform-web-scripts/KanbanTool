@@ -161,8 +161,8 @@ function _initialize_VerticalEntry(
 	if(keyBinding)
 		{_add_KeyBinding(functionBar, entry, keyBinding)}
 
-	const cell =_build_TableCell(entry, keyBinding)
-	elements.tableRows[groupIndex].append(cell)
+	const cell =_build_Cell(entry, keyBinding)
+	elements.rows[groupIndex].append(cell)
 }
 
 function _add_KeyBinding(
@@ -184,34 +184,27 @@ function _add_KeyBinding(
 }
 
 function _build_Layout(entryGroups:Entry[][]){
+	const cardType_Legend = $("table.kt-extensions-card_legend").detach()
 	const legendContainer = $("<div>", {"class":cssVariables.legendContainer})
 
-	const cardType_Legend = $("table.kt-extensions-card_legend").detach()
-	const table           = $("<table>", {"class":cssVariables.extension})
-	const tableBody       = $("<tbody>")
-
 	$("body")      .append(legendContainer)
-	table          .append(tableBody      )
 	legendContainer.append(cardType_Legend)
-	legendContainer.append(table          )
 
-	const tableRows = []
+	const rows = []
 	entryGroups.forEach(group => {
-		const tableRow = $("<tr>")
-		tableBody.append(tableRow)
-		tableRows.push(tableRow)
+		const row = $("<div>", {"class":cssVariables.legendRow})
+		legendContainer.append(row)
+		rows.push(row)
 	})
 
 	return {
 		legendContainer,
-		table,
-		tableBody,
-		tableRows,
+		rows,
 	}
 }
 
-function _build_TableCell(entry:Entry, keyBinding:string){
-	const cell = $("<td>", {"class":cssVariables.extension})
+function _build_Cell(entry:Entry, keyBinding:string){
+	const cell = $("<div>", {"class":cssVariables.legendCell})
 
 	let text = entry.name
 	if(keyBinding)

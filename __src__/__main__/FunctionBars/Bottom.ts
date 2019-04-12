@@ -1,6 +1,6 @@
 
 //###  Module  ###
-import {FunctionBar} from "~/Extensions/FunctionBar/__main__"
+import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
 const {Entry, Position, Show} = FunctionBar
 
 

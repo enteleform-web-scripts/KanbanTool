@@ -11,20 +11,26 @@ json("./CSS_Variables.json")
 	z-index:       10
 	background:    #444
 
-	td
-		background-color:  #444
-		color:             #EEE
-		text-align:        center
-		padding:           2px
-		cursor:            pointer
-		position:          relative
-		user-select:       none
-		border:            1px solid #D4D4D4
-		box-shadow:        0 -1px 1px rgba(0,0,0,0.065)
-
 .{legendContainer}
-	position:  fixed
-	bottom:    0
+	position:       fixed
+	display:        flex
+	flex-direction: column
+	bottom:         0
+
+	.{legendRow}
+		display:        flex
+		flex-direction: row
+
+		.{legendCell}
+			flex-grow:         1
+			padding:           2px
+			user-select:       none
+			cursor:            pointer
+			background-color:  #444
+			color:             #EEE
+			border:            1px solid #D4D4D4
+			box-shadow:        0 -1px 1px rgba(0,0,0,0.065)
+			text-align:        center
 
 
 //###################//
