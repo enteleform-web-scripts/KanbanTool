@@ -1,8 +1,7 @@
 {
 
-	"extension":       "CustomExtension--FunctionBar",
-	"legendContainer": "LegendContainer",
-	"legendRow":       "Row",
-	"legendCell":      "Cell",
+	"root":       "CustomExtension--FunctionBar",
+	"legendRow":  "Row",
+	"legendCell": "Cell",
 
 "_":""}
