@@ -45,12 +45,13 @@ function _escape(text:string){
 
 const _GLOB_TO_REGEX_MAP = [
 	{regEx:/\\\\/g,                  replacement:"\\\\"         },  //  backslashes
-	{regEx:/([^\\\\]+)\\\\\*\*\*$/g, replacement:"\\1(\\\\.*$)?"},  //  `\***`             #  match nested children + include parent
-	{regEx:/^\*\*\\\\?\*$/g,         replacement:".*"           },  //  `\***` || `\**\*`  #  match all             + include nested children
-	{regEx:/(?<!^)\*\*\\\\\*$/g,     replacement:".*"           },  //  `\**\*`            #  match nested children @ parent
-	{regEx:/^\*\*$/g,                replacement:"[^\\\\]+"     },  //  only     `**`      #  match children        @ root (without suffix)
-	{regEx:/^\*\*/g,                 replacement:".*?"          },  //  leading  `**`      #  match children        @ root (with suffix)
-	{regEx:/\\\*\*(?=\\)?/g,         replacement:"\\.*?"        },  //  middle   `**`      #  match children        @ parent
-	{regEx:/^\*/g,                   replacement:"[^\\\\]+"     },  //  leading  `*`       #  match all             @ root
-	{regEx:/\\\*$/g,                 replacement:"\\[^\\\\]+"   },  //  trailing `*`       #  match children        @ parent
+	{regEx:/([^\\\\]+)\\\\\*\*\*$/g, replacement:"\\1(\\\\.*$)?"},  //  `\***`         #  match nested children + include parent
+	{regEx:/^\*\*\*$/g,              replacement:".*"           },  //  `***`          #  match all             + include nested children
+	{regEx:/^\*\*\\\\?\*$/g,         replacement:".*"           },  //  `**\*`         #  match all             + include nested children
+	{regEx:/(?<!^)\*\*\\\\\*$/g,     replacement:".*"           },  //  `\**\*`        #  match nested children @ parent
+	{regEx:/^\*\*$/g,                replacement:"[^\\\\]+"     },  //  only     `**`  #  match children        @ root (without suffix)
+	{regEx:/^\*\*/g,                 replacement:".*?"          },  //  leading  `**`  #  match children        @ root (with suffix)
+	{regEx:/\\\*\*(?=\\)?/g,         replacement:"\\.*?"        },  //  middle   `**`  #  match children        @ parent
+	{regEx:/^\*/g,                   replacement:"[^\\\\]+"     },  //  leading  `*`   #  match all             @ root
+	{regEx:/\\\*$/g,                 replacement:"\\[^\\\\]+"   },  //  trailing `*`   #  match children        @ parent
 ]
