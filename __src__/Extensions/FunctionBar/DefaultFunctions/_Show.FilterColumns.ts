@@ -3,6 +3,43 @@
 import {activeBoard} from "~/Utils/KanbanTool"
 
 
+class Header{
+	children     = []
+	children_IDs = []
+
+	name:     string
+	id:       number
+	parentID: number
+	parent:   Header
+	element:  HTMLElement
+
+	constructor(
+		{model,     element            }:
+		{model:any, element:HTMLElement}
+	){
+		this.name     = model.name
+		this.id       = model.id
+		this.parentID = model.parent_id
+		this.element  = element
+	}
+
+	get path(){
+		if(this.parent)
+			{return `${this.parent.path}\\${this.name}`}
+		else
+			{return this.name}
+	}
+
+	add_Child(child:Header){
+		child.parent = this
+
+		this.children    .push(child   )
+		this.children_IDs.push(child.id)
+	}
+
+}
+
+
 function _build_Headers(columnHeader_CellElements:HTMLElement[], userModels:any[], parentModels:any[]){
 	const queue            = [...userModels]
 	const headers:Header[] = []
@@ -100,42 +137,6 @@ console.log(columnHeaders.map(x => x.path))
 // 		})
 // })
 
-
-class Header{
-	children     = []
-	children_IDs = []
-
-	name:     string
-	id:       number
-	parentID: number
-	parent:   Header
-	element:  HTMLElement
-
-	constructor(
-		{model,     element            }:
-		{model:any, element:HTMLElement}
-	){
-		this.name     = model.name
-		this.id       = model.id
-		this.parentID = model.parent_id
-		this.element  = element
-	}
-
-	get path(){
-		if(this.parent)
-			{return `${this.parent.path}\\${this.name}`}
-		else
-			{return this.name}
-	}
-
-	add_Child(child:Header){
-		child.parent = this
-
-		this.children    .push(child   )
-		this.children_IDs.push(child.id)
-	}
-
-}
 
 
 
