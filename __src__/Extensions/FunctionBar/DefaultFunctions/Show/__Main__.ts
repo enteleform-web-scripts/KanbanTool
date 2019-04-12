@@ -95,18 +95,20 @@ function _build_VisibilityMap(headers:Header[], targets:_Target[], exclude:boole
 		)
 
 		if(is_Target){
-			const show_Element =
-				(exclude)
-				? !is_Target
-				: is_Target
-
 			const headerTree = [header, ...header.parents]
+
 			visibilityMap.forEach(entry => {
 				if(headerTree.includes(entry.header))
-					{entry.show_Element = show_Element}
+					{entry.show_Element = true}
 			})
 		}
 	})
+
+	if(exclude){
+		visibilityMap.forEach(entry => {
+			entry.show_Element = !(entry.show_Element)
+		})
+	}
 
 	return visibilityMap
 }
