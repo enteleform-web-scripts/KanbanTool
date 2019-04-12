@@ -28,13 +28,13 @@ export function get_RowHeaders(){
 	const headerElements = $.find("kt-board > tbody > tr > th")
 
 	const headers =
-		headerElements.map( (element, index) => {
+		headerElements.map( (element, index) =>
 			new Header({
 				model: headerModels[index],
 				element,
 				index,
 			})
-		})
+		)
 
 	return headers
 }
