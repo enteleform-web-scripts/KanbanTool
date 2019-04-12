@@ -92,9 +92,7 @@ function _show(
 		? []  // !!!!!!!!!!!!!!!!!!!!!!! TEMP !!!!!!!!!!!!!!!!!!!!!!!!!!!!!//
 		: get_ColumnHeaders()
 
-		headers.forEach(header => {
-			_set_Visibility(header, targets, exclude)
-		})
+		_set_Visibility(headers, targets, exclude)
 	}
 
 
@@ -110,27 +108,42 @@ function _show(
 
 
 
-function _set_Visibility(header:Header, targets:_Target[], exclude:boolean){
-	const is_Target = (
-		targets.includes(header.index)
-		|| targets.some(target => _match_Glob(header, target))
-	)
+function _set_Visibility(headers:Header[], targets:_Target[], exclude:boolean){
+	const visibilityMap =
+		headers.map(header => ({header, toggle:false}))
 
-	const $element     = $(header.element)
-	const is_Collapsed = $element.hasClass("kt-collapsed")
+	headers.forEach((header, i) => {
+		const is_Target = (
+			targets.includes(header.index)
+			|| targets.some(target => _match_Glob(header, target))
+		)
 
-	let toggle_ElementVisibility = (
-		(is_Target && is_Collapsed)
-		|| (!is_Target && !is_Collapsed)
-	)
+		const $element     = $(header.element)
+		const is_Collapsed = $element.hasClass("kt-collapsed")
 
-	toggle_ElementVisibility =
-		(exclude)
-		? !toggle_ElementVisibility
-		: toggle_ElementVisibility
+		let toggle_ElementVisibility = (
+			(is_Target && is_Collapsed)
+			|| (!is_Target && !is_Collapsed)
+		)
 
-	if(toggle_ElementVisibility)
-		{$element.click()}
+		toggle_ElementVisibility =
+			(exclude)
+			? !toggle_ElementVisibility
+			: toggle_ElementVisibility
+
+		if(toggle_ElementVisibility){
+			const targetHeaders = [header, ...header.parents]
+			visibilityMap.forEach(entry => {
+				if(targetHeaders.includes(entry.header))
+					{entry.toggle = true}
+			})
+		}
+	})
+
+	visibilityMap.forEach( ({header, toggle}) => {
+		if(toggle)
+			{header.element.click()}
+	})
 }
 
 function _match_Glob(header:Header, target:_Target){

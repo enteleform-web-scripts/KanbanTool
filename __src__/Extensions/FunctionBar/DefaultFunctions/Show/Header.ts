@@ -29,6 +29,18 @@ export class Header{
 			{return this.name}
 	}
 
+	get parents(){
+		let   child   : Header   = this
+		const parents : Header[] = []
+
+		while(child.parent){
+			parents.push(child.parent)
+			child = child.parent
+		}
+
+		return parents
+	}
+
 	add_Child(child:Header){
 		child.parent = this
 
