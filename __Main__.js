@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555051338401)
+		const elapsedTime  = _get_ElapsedTime(1555051835823)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -10722,6 +10722,7 @@ class Header {
     constructor({ index, model, clickElement, collapseElement }) {
         this.children = [];
         this.children_IDs = [];
+        console.log("@@@", index, model.name);
         this.index = index;
         this.clickElement = clickElement;
         this.collapseElement = collapseElement;
@@ -11691,13 +11692,6 @@ exports.bottom_FunctionBar = new __main__1.FunctionBar({
             }),
         ],
         [
-            new Entry({
-                name: "HideAll",
-                on_Load: () => {
-                    Show.noColumns();
-                    Show.noRows();
-                },
-            }),
             new Entry({
                 name: "Fitness Math",
                 on_Load: () => {
