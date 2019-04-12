@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555091666780)
+		const elapsedTime  = _get_ElapsedTime(1555091700064)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11455,10 +11455,10 @@ var _Type;
     _Type["Columns"] = "Columns";
 })(_Type || (_Type = {}));
 function _show({ type, targets, exclude }) {
-    console.log("----------", type.valueOf());
     const headers = (type == _Type.Rows)
         ? get_RowHeaders_1.get_RowHeaders()
         : get_ColumnHeaders_1.get_ColumnHeaders();
+    console.log("----------", type.valueOf(), headers);
     _set_Visibility(headers, targets, exclude);
 }
 function _set_Visibility(headers, targets, exclude) {
