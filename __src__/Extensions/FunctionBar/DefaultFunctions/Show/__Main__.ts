@@ -34,11 +34,11 @@ export namespace Show{
 		})
 	}
 
-	export function allRows   (){_show({type:_Type.Rows,    targets:["***"], exclude:false})}
-	export function allColumns(){_show({type:_Type.Columns, targets:["***"], exclude:false})}
+	export function allRows   (){_show({type:_Type.Rows,    targets:["**\\*"], exclude:false})}
+	export function allColumns(){_show({type:_Type.Columns, targets:["**\\*"], exclude:false})}
 
-	export function noRows   (){_show({type:_Type.Rows,    targets:["***"], exclude:true})}
-	export function noColumns(){_show({type:_Type.Columns, targets:["***"], exclude:true})}
+	export function noRows   (){_show({type:_Type.Rows,    targets:["**\\*"], exclude:true})}
+	export function noColumns(){_show({type:_Type.Columns, targets:["**\\*"], exclude:true})}
 
 }
 
