@@ -57,7 +57,8 @@ function _build_Headers(columnHeader_CellElements:HTMLElement[], userModels:any[
 				const child_QueueIndex = queue.indexOf(child)
 				const column_WasAdded = (child_QueueIndex == -1)
 				if(! column_WasAdded){
-					parent.add_Child(child)
+					if(parent instanceof Header)
+						{parent.add_Child(child)}
 					queue.splice(child_QueueIndex, 1)
 					const elementIndex = (headers.length)
 					headers.push(
