@@ -48,8 +48,8 @@ export namespace Show{
 //###############//
 
 enum _Type{
-	Rows,
-	Columns,
+	Rows    = "Rows",
+	Columns = "Columns",
 }
 
 type _Target = (string | number)
@@ -58,6 +58,7 @@ function _show(
 	{type,       targets,           exclude        }:
 	{type:_Type, targets:_Target[], exclude:boolean}
 ){
+	console.log("----------", type.valueOf())
 	const headers =
 		(type == _Type.Rows)
 		? get_RowHeaders()
