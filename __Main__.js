@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555049934048)
+		const elapsedTime  = _get_ElapsedTime(1555050627618)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -10719,14 +10719,15 @@ function _convert_HotKeys_ToString(keys) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 class Header {
-    constructor({ model, element, index }) {
+    constructor({ index, model, clickElement, collapseElement }) {
         this.children = [];
         this.children_IDs = [];
+        this.index = index;
+        this.clickElement = clickElement;
+        this.collapseElement = collapseElement;
         this.name = model.name;
         this.id = model.id;
         this.parent_id = model.parent_id;
-        this.element = element;
-        this.index = index;
     }
     get path() {
         if (this.parent) {
@@ -11468,11 +11469,11 @@ function _show({ type, targets, exclude }) {
 function _set_Visibility(headers, targets, exclude) {
     const visibilityMap = _build_VisibilityMap(headers, targets, exclude);
     visibilityMap.forEach(({ header, show_Element }) => {
-        const is_Collapsed = $(header.element).hasClass("kt-collapsed");
+        const is_Collapsed = $(header.collapseElement).hasClass("kt-collapsed");
         let toggle_ElementVisibility = ((show_Element && is_Collapsed)
             || (!show_Element && !is_Collapsed));
         if (toggle_ElementVisibility) {
-            header.element.click();
+            header.clickElement.click();
         }
     });
 }
@@ -11551,11 +11552,13 @@ function _add_Header({ queue, headers, columnHeader_CellElements, child, parent 
     const column_WasAdded = (child_QueueIndex == -1);
     if (!column_WasAdded) {
         queue.splice(child_QueueIndex, 1);
-        const elementIndex = (headers.length);
+        const elementIndex = headers.length;
+        const element = columnHeader_CellElements[elementIndex];
         const header = new Header_1.Header({
-            model: child,
-            element: columnHeader_CellElements[elementIndex],
             index: elementIndex,
+            model: child,
+            clickElement: element,
+            collapseElement: element,
         });
         headers.push(header);
         if (parent instanceof Header_1.Header) {
@@ -11580,7 +11583,8 @@ function get_RowHeaders() {
     const headerElements = $.find("kt-board > tbody > tr > th");
     const headers = headerElements.map((element, index) => new Header_1.Header({
         model: headerModels[index].attributes,
-        element,
+        clickElement: element,
+        collapseElement: $(element).parent(),
         index,
     }));
     return headers;
