@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555091226454)
+		const elapsedTime  = _get_ElapsedTime(1555091360696)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11481,6 +11481,7 @@ function _build_VisibilityMap(headers, targets, exclude) {
             const headerTree = (exclude)
                 ? [header, ...header.children]
                 : [header, ...header.parents];
+            console.log("@@@", header.name, headerTree);
             visibilityMap.forEach(entry => {
                 if (headerTree.includes(entry.header)) {
                     entry.show_Element = true;
