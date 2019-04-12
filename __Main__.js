@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555092526064)
+		const elapsedTime  = _get_ElapsedTime(1555093355492)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11518,9 +11518,12 @@ const Header_1 = __webpack_require__(4);
 const KanbanTool_1 = __webpack_require__(5);
 function get_ColumnHeaders() {
     const rowElements = $("kt-board > thead").children().toArray();
+    const swimLane_Count = KanbanTool_1.activeBoard.swimlanes().length;
     const cellElements = rowElements
-        .flatMap(row => $(row).children().toArray())
-        .slice(1);
+        .flatMap(row => $(row).children().toArray());
+    if (swimLane_Count > 1) {
+        cellElements.splice(0, 1);
+    }
     const all_ColumnModels = KanbanTool_1.activeBoard.workflowStages().toArray()
         .map(column => column.attributes);
     const root_ColumnModel = all_ColumnModels[0];
@@ -11669,13 +11672,6 @@ exports.bottom_FunctionBar = new __Main__1.FunctionBar({
                 on_Load: () => {
                     Show.allRows();
                     Show.columns({ include: ["**\\*"] });
-                },
-            }),
-            new Entry({
-                name: "***",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["***"] });
                 },
             }),
         ],
