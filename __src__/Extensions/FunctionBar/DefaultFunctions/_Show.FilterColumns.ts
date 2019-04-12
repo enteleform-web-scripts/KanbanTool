@@ -20,7 +20,6 @@ function _build_HeaderOrdered_ColumnModels(userModels:any[], parentModels:any[])
 				const child_QueueIndex = queue.indexOf(child)
 				const column_WasAdded = (child_QueueIndex == -1)
 				if(! column_WasAdded){
-					console.log("--", child_QueueIndex, child.name)
 					queue.splice(child_QueueIndex, 1)
 					orderedModels.push(child)
 				}
@@ -136,7 +135,7 @@ function _get_ColumnHeaders(headerOrdered_ColumnModels:any[]){
 
 	$("kt-board > thead").children().toArray().forEach((row, rowIndex) => {
 		$(row).children().toArray().forEach((cell, cellIndex) => {
-			const {id, parent_id} = headerOrdered_ColumnModels[index]
+			const {name, id, parent_id} = headerOrdered_ColumnModels[index]
 
 			columnHeaders.push(
 				new Header({name, id, parentID:parent_id, element:cell})
@@ -151,6 +150,7 @@ function _get_ColumnHeaders(headerOrdered_ColumnModels:any[]){
 
 const columnHeaders = _get_ColumnHeaders(headerOrdered_ColumnModels)
 console.log(">>>", columnHeaders)
+console.log(">>>", columnHeaders.map(x => x.element))
 console.log(">>>", columnHeaders.map(x => x.path))
 
 
