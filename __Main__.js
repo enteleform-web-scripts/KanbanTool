@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555051835823)
+		const elapsedTime  = _get_ElapsedTime(1555052097984)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -10722,7 +10722,6 @@ class Header {
     constructor({ index, model, clickElement, collapseElement }) {
         this.children = [];
         this.children_IDs = [];
-        console.log("@@@", index, model.name);
         this.index = index;
         this.clickElement = clickElement;
         this.collapseElement = collapseElement;
@@ -11481,7 +11480,8 @@ function _set_Visibility(headers, targets, exclude) {
 function _build_VisibilityMap(headers, targets, exclude) {
     const visibilityMap = headers.map(header => ({ header, show_Element: false }));
     headers.forEach((header, i) => {
-        const is_Target = (targets.includes(header.index)
+        const oneBased_Index = (header.index + 1);
+        const is_Target = (targets.includes(oneBased_Index)
             || targets.some(target => _match_Glob(header, target)));
         if (is_Target) {
             const show_Element = (exclude)
@@ -11519,7 +11519,8 @@ const KanbanTool_1 = __webpack_require__(5);
 function get_ColumnHeaders() {
     const rowElements = $("kt-board > thead").children().toArray();
     const cellElements = rowElements
-        .flatMap(row => $(row).children().toArray());
+        .flatMap(row => $(row).children().toArray())
+        .slice(1);
     const all_ColumnModels = KanbanTool_1.activeBoard.workflowStages().toArray()
         .map(column => column.attributes);
     const root_ColumnModel = all_ColumnModels[0];
