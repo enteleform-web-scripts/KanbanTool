@@ -30,7 +30,7 @@ export function get_RowHeaders(){
 	const headers =
 		headerElements.map( (element, index) =>
 			new Header({
-				model: headerModels[index],
+				model: headerModels[index].attributes,
 				element,
 				index,
 			})
