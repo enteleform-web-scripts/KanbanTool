@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555049343600)
+		const elapsedTime  = _get_ElapsedTime(1555049583317)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11579,7 +11579,7 @@ function get_RowHeaders() {
     const headerModels = KanbanTool_1.activeBoard.swimlanes().toArray();
     const headerElements = $.find("kt-board > tbody > tr > th");
     const headers = headerElements.map((element, index) => new Header_1.Header({
-        model: headerModels[index],
+        model: headerModels[index].attributes,
         element,
         index,
     }));
