@@ -95,6 +95,7 @@ const root_ColumnModel  = all_ColumnModels[0]
 
 const columnHeaders = _build_Headers(columnHeader_CellElements, user_ColumnModels, [root_ColumnModel])
 
+console.log(columnHeaders)
 console.log(columnHeaders.map(x => x.element))
 console.log(columnHeaders.map(x => x.path))
 
