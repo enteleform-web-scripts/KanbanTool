@@ -121,7 +121,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555042243064)
+		const elapsedTime  = _get_ElapsedTime(1555042322439)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -202,8 +202,7 @@ function _build_Headers(columnHeader_CellElements, userModels, parentModels) {
                     });
                     headers.push(header);
                     if (parent instanceof Header) {
-                        console.log("++", parent, child);
-                        parent.add_Child(child);
+                        parent.add_Child(header);
                     }
                 }
             });
