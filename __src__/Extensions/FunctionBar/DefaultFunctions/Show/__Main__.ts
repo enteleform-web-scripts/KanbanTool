@@ -100,6 +100,8 @@ function _build_VisibilityMap(headers:Header[], targets:_Target[], exclude:boole
 					? [header, ...header.children]
 					: [header, ...header.parents ]
 
+			console.log("@@@", header.name, headerTree)
+
 			visibilityMap.forEach(entry => {
 				if(headerTree.includes(entry.header))
 					{entry.show_Element = true}
