@@ -121,7 +121,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555041821012)
+		const elapsedTime  = _get_ElapsedTime(1555042243064)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -194,16 +194,17 @@ function _build_Headers(columnHeader_CellElements, userModels, parentModels) {
                 const child_QueueIndex = queue.indexOf(child);
                 const column_WasAdded = (child_QueueIndex == -1);
                 if (!column_WasAdded) {
+                    queue.splice(child_QueueIndex, 1);
+                    const elementIndex = (headers.length);
+                    const header = new Header({
+                        model: child,
+                        element: columnHeader_CellElements[elementIndex],
+                    });
+                    headers.push(header);
                     if (parent instanceof Header) {
                         console.log("++", parent, child);
                         parent.add_Child(child);
                     }
-                    queue.splice(child_QueueIndex, 1);
-                    const elementIndex = (headers.length);
-                    headers.push(new Header({
-                        model: child,
-                        element: columnHeader_CellElements[elementIndex],
-                    }));
                 }
             });
         });
