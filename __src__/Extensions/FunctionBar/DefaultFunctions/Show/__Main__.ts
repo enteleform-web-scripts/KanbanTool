@@ -58,11 +58,12 @@ function _show(
 	{type,       targets,           exclude        }:
 	{type:_Type, targets:_Target[], exclude:boolean}
 ){
-	console.log("----------", type.valueOf())
 	const headers =
 		(type == _Type.Rows)
 		? get_RowHeaders()
 		: get_ColumnHeaders()
+
+	console.log("----------", type.valueOf(), headers)
 
 	_set_Visibility(headers, targets, exclude)
 }
