@@ -130,26 +130,28 @@ class Header{
 // ]
 
 
-const columnHeader_Rows = []
-let   index = 0
+function _get_ColumnHeaders(headerOrdered_ColumnModels:any[]){
+	const columnHeaders:Header[] = []
+	let   index = 0
 
-$("kt-board > thead").children().toArray().forEach((row, rowIndex) => {
-	const headerRow = columnHeader_Rows[rowIndex] = []
-	$(row).children().toArray().forEach((cell, cellIndex) => {
-		const {id, parent_id} = headerOrdered_ColumnModels[index]
+	$("kt-board > thead").children().toArray().forEach((row, rowIndex) => {
+		$(row).children().toArray().forEach((cell, cellIndex) => {
+			const {id, parent_id} = headerOrdered_ColumnModels[index]
 
-		headerRow.push(
-			new Header({name, id, parentID:parent_id, element:cell})
-		)
+			columnHeaders.push(
+				new Header({name, id, parentID:parent_id, element:cell})
+			)
 
-		index += 1
-		// console.log(rowIndex, cellIndex, cell)
+			index += 1
+		})
 	})
-	columnHeader_Rows.push(headerRow)
-})
 
+	return columnHeaders
+}
 
-console.log(">>>", columnHeader_Rows)
+const columnHeaders = _get_ColumnHeaders(headerOrdered_ColumnModels)
+console.log(">>>", columnHeaders)
+console.log(">>>", columnHeaders.map(x => x.path))
 
 
 // const parent_Headers = headerRows[0]
