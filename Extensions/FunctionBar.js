@@ -1,1 +1,1 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["Extensions/FunctionBar"],[]]);
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],[]]);
