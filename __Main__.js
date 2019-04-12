@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555052583321)
+		const elapsedTime  = _get_ElapsedTime(1555088246420)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11484,7 +11484,9 @@ function _build_VisibilityMap(headers, targets, exclude) {
         const is_Target = (targets.includes(oneBased_Index)
             || targets.some(target => _match_Glob(header, target)));
         if (is_Target) {
-            const headerTree = [header, ...header.parents];
+            const headerTree = (exclude)
+                ? [header, ...header.children]
+                : [header, ...header.parents];
             visibilityMap.forEach(entry => {
                 if (headerTree.includes(entry.header)) {
                     entry.show_Element = true;
@@ -11609,9 +11611,9 @@ class Glob {
         this._build_RegEx();
     }
     get pattern() { return this._globPattern; }
-    get regex() { return this._regexPattern; }
+    get regEx() { return this._regexPattern; }
     match(path) {
-        return (path.match(this._regex)
+        return (path.match(this._regEx)
             ? true
             : false);
     }
@@ -11620,24 +11622,22 @@ class Glob {
             .reduce((pattern, { regEx, replacement }) => (pattern.replace(regEx, _escape(replacement))), this._globPattern);
         pattern = ("^" + pattern + "$");
         this._regexPattern = pattern;
-        this._regex = new RegExp(pattern);
+        this._regEx = new RegExp(pattern);
     }
 }
 exports.Glob = Glob;
 function _escape(text) {
-    return text.replace(/\\/g, "\\\\");
+    return text.replace(/\\(?!\$)/g, "\\\\");
 }
 const _GLOB_TO_REGEX_MAP = [
-    { regEx: /\\\\/g, replacement: "\\\\" },
-    { regEx: /([^\\\\]+)\\\\\*\*\*$/g, replacement: "\\1(\\\\.*$)?" },
-    { regEx: /^\*\*\*$/g, replacement: ".*" },
-    { regEx: /^\*\*\\\\?\*$/g, replacement: ".*" },
-    { regEx: /(?<!^)\*\*\\\\\*$/g, replacement: ".*" },
+    { regEx: /([^\\]+)\\\*\*\*$/g, replacement: "\\$1(\\.*$)?" },
+    { regEx: /^\*\*\\\*$/g, replacement: ".*" },
+    { regEx: /(?<!^)\\\*\*\\\*$/g, replacement: "\\.*" },
     { regEx: /^\*\*$/g, replacement: "[^\\\\]+" },
-    { regEx: /^\*\*/g, replacement: ".*?" },
-    { regEx: /\\\*\*(?=\\)?/g, replacement: "\\.*?" },
-    { regEx: /^\*/g, replacement: "[^\\\\]+" },
-    { regEx: /\\\*$/g, replacement: "\\[^\\\\]+" },
+    { regEx: /^\*\*\\/g, replacement: ".*?\\" },
+    { regEx: /\\\*\*/g, replacement: "\\[^\\\\]+" },
+    { regEx: /^\*$/g, replacement: "[^\\]+" },
+    { regEx: /\\\*$/g, replacement: "\\[^\\]+" },
 ];
 
 
