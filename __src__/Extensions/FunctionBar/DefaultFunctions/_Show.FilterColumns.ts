@@ -3,21 +3,14 @@
 import {activeBoard} from "~/Utils/KanbanTool"
 
 
-const allColumns =
-	activeBoard.workflowStages().toArray()
-		.map(column => column.attributes)
-
-const userColumns = allColumns.slice(1)
-const rootColumn  = allColumns[0]
-
-function _build_HeaderOrdered_Columns(parentColumns:any){
-	const queue          = [...userColumns]
-	const orderedColumns = []
+function _build_HeaderOrdered_ColumnModels(userModels:any[], parentModels:any[]){
+	const queue         = [...userModels]
+	const orderedModels = []
 
 	while(queue.length > 0){
-		const next_Parent_StartIndex = orderedColumns.length
+		const next_Parent_StartIndex = orderedModels.length
 
-		parentColumns.forEach(parent => {
+		parentModels.forEach(parent => {
 			const children =
 				queue.filter(column =>
 					(column.parent_id == parent.id)
@@ -29,19 +22,26 @@ function _build_HeaderOrdered_Columns(parentColumns:any){
 				if(! column_WasAdded){
 					console.log("--", child_QueueIndex, child.name)
 					queue.splice(child_QueueIndex, 1)
-					orderedColumns.push(child)
+					orderedModels.push(child)
 				}
 			})
 		})
 
-		parentColumns = orderedColumns.slice(next_Parent_StartIndex)
+		parentModels = orderedModels.slice(next_Parent_StartIndex)
 	}
 
-	return orderedColumns
+	return orderedModels
 }
 
-const headerOrdered_Columns = _build_HeaderOrdered_Columns([rootColumn])
-console.log(">>>", headerOrdered_Columns)
+
+const all_ColumnModels =
+	activeBoard.workflowStages().toArray()
+		.map(column => column.attributes)
+
+const user_ColumnModels = all_ColumnModels.slice(1)
+const root_ColumnModel  = all_ColumnModels[0]
+
+const headerOrdered_ColumnModels = _build_HeaderOrdered_ColumnModels(user_ColumnModels, [root_ColumnModel])
 
 
 
@@ -76,73 +76,80 @@ console.log(">>>", headerOrdered_Columns)
 
 
 
-// // const headers = $.find("kt-board > thead > tr > th")
-// // const columns = KT.boards.models[0].workflowStages().toArray()
+// const headers = $.find("kt-board > thead > tr > th")
+// const columns = KT.boards.models[0].workflowStages().toArray()
 
-// // $("kt-board > thead").children().toArray().forEach((row, rowIndex) => {
-// // 		$(row).children().toArray().forEach((cell, cellIndex) => {
-// // 			console.log(rowIndex, cellIndex, cell)
-// // 		})
-// // })
-
-
-// class Header{
-// 	children     = []
-// 	children_IDs = []
-
-// 	name:     string
-// 	id:       number
-// 	parentID: number
-// 	parent:   Header
-// 	element:  HTMLElement
-
-// 	constructor(
-// 		{name, id, parentID,  element            }:
-// 		{name, id, parentID?, element:HTMLElement}
-// 	){
-// 		this.name     = name
-// 		this.id       = id
-// 		this.parentID = parentID
-// 		this.element  = element
-// 	}
-
-// 	get path(){
-// 		if(this.parent)
-// 			{return `${this.parent.path}\\${this.name}`}
-// 		else
-// 			{return this.name}
-// 	}
-
-// 	add_Child(child:Header){
-// 		child.parent = this
-
-// 		this.children    .push(child   )
-// 		this.children_IDs.push(child.id)
-// 	}
-
-// }
+// $("kt-board > thead").children().toArray().forEach((row, rowIndex) => {
+// 		$(row).children().toArray().forEach((cell, cellIndex) => {
+// 			console.log(rowIndex, cellIndex, cell)
+// 		})
+// })
 
 
-// // const headerRows = [
-// // 	[new Header({name:"A", id:1}), new Header({name:"B", id:2}), new Header({name:"C", id:3})],
-// // 	[new Header({name:"1", id:21, parentID:2}), new Header({name:"2", id:22, parentID:2}), new Header({name:"3", id:23, parentID:2})],
-// // 	[new Header({name:"10", id:221, parentID:22}), new Header({name:"20", id:222, parentID:22})],
-// // ]
+class Header{
+	children     = []
+	children_IDs = []
+
+	name:     string
+	id:       number
+	parentID: number
+	parent:   Header
+	element:  HTMLElement
+
+	constructor(
+		{name,        id,        parentID,         element            }:
+		{name:string, id:number, parentID?:number, element:HTMLElement}
+	){
+		this.name     = name
+		this.id       = id
+		this.parentID = parentID
+		this.element  = element
+	}
+
+	get path(){
+		if(this.parent)
+			{return `${this.parent.path}\\${this.name}`}
+		else
+			{return this.name}
+	}
+
+	add_Child(child:Header){
+		child.parent = this
+
+		this.children    .push(child   )
+		this.children_IDs.push(child.id)
+	}
+
+}
 
 
-// // const headerRows = []
+// const headerRows = [
+// 	[new Header({name:"A", id:1}), new Header({name:"B", id:2}), new Header({name:"C", id:3})],
+// 	[new Header({name:"1", id:21, parentID:2}), new Header({name:"2", id:22, parentID:2}), new Header({name:"3", id:23, parentID:2})],
+// 	[new Header({name:"10", id:221, parentID:22}), new Header({name:"20", id:222, parentID:22})],
+// ]
 
-// // $("kt-board > thead").children().toArray().forEach((row, rowIndex) => {
-// // 	const headerRow = headerRows[rowIndex] = []
-// // 	$(row).children().toArray().forEach((cell, cellIndex) => {
-// // 		headerRow.push(
-// // 			new Header(name, id, parentID, cell)
-// // 		)
-// // 		// console.log(rowIndex, cellIndex, cell)
-// // 	})
-// // })
 
-// // console.log(">>>", headerRows)
+const columnHeader_Rows = []
+let   index = 0
+
+$("kt-board > thead").children().toArray().forEach((row, rowIndex) => {
+	const headerRow = columnHeader_Rows[rowIndex] = []
+	$(row).children().toArray().forEach((cell, cellIndex) => {
+		const {id, parent_id} = headerOrdered_ColumnModels[index]
+
+		headerRow.push(
+			new Header({name, id, parentID:parent_id, element:cell})
+		)
+
+		index += 1
+		// console.log(rowIndex, cellIndex, cell)
+	})
+	columnHeader_Rows.push(headerRow)
+})
+
+
+console.log(">>>", columnHeader_Rows)
 
 
 // const parent_Headers = headerRows[0]
@@ -203,4 +210,4 @@ console.log(">>>", headerOrdered_Columns)
 
 
 
-// console.log(headerOrdered_Columns.map(x => x.name))
+// // console.log(headerOrdered_Columns.map(x => x.name))
