@@ -8,6 +8,8 @@ import webpack from "webpack"
 
 const $: webpack.Options.Optimization = {
 
+	minimize: false,
+
 	splitChunks: {
 		cacheGroups: {
 			CSS: {
