@@ -4,11 +4,15 @@
 //#################//
 
 export function get_log_TimeSinceBuild_Callback(){
-	const elapsedTime  = _get_ElapsedTime(new Date())
-	const buildMessage = `<<< Built {  ${elapsedTime}  } Ago >>>`
+	const buildTime = new Date().getTime()
 
 	return () => (`
-		console.log("${buildMessage}")
+		${_get_ElapsedTime       .toString()}
+		${_get_TimeString_Segment.toString()}
+
+		const elapsedTime  = _get_ElapsedTime(${buildTime})
+		const buildMessage = \`<<< Built {  \${elapsedTime}  } Ago >>>\`
+		console.log(buildMessage)
 	`)
 }
 
@@ -17,10 +21,10 @@ export function get_log_TimeSinceBuild_Callback(){
 //###  Utils  ###//
 //###############//
 
-function _get_ElapsedTime(startTime:Date){
+// function _get_ElapsedTime(startTime:number){
+function _get_ElapsedTime(startTime:number){
 	const now = new Date()
-
-	const elapsed_MS = (now.getTime() - startTime.getTime())
+	const elapsed_MS = (now.getTime() - startTime)
 
 	const days         = Math.floor(((elapsed_MS / 1000) / 86400)     )
 	const hours        = Math.floor(((elapsed_MS / 1000) / 3600 ) % 24)
@@ -37,7 +41,8 @@ function _get_ElapsedTime(startTime:Date){
 	return elapsedTime
 }
 
-function _get_TimeString_Segment(title:string, value:number, parents:number[], mandatory:boolean){
+// function _get_TimeString_Segment(title:string, value:number, parents:number[], mandatory:boolean){
+function _get_TimeString_Segment(title, value, parents, mandatory){
 	const parentValues_Exist = (
 		(parents.length > 0)
 		&& (Math.max(...parents) > 0)
