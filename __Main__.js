@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555091700064)
+		const elapsedTime  = _get_ElapsedTime(1555092301741)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11615,25 +11615,23 @@ class Glob {
     }
     _build_RegEx() {
         let pattern = _GLOB_TO_REGEX_MAP
-            .reduce((pattern, { regEx, replacement }) => (pattern.replace(regEx, _escape(replacement))), this._globPattern);
+            .reduce((pattern, { regEx, replacement }) => (pattern.replace(regEx, replacement)), this._globPattern);
         pattern = ("^" + pattern + "$");
         this._regexPattern = pattern;
         this._regEx = new RegExp(pattern);
     }
 }
 exports.Glob = Glob;
-function _escape(text) {
-    return text.replace(/\\(?!\$)/g, "\\\\");
-}
 const _GLOB_TO_REGEX_MAP = [
-    { regEx: /([^\\]+)\\\*\*\*$/g, replacement: "\\$1(\\.*$)?" },
-    { regEx: /^\*\*\\\*$/g, replacement: ".*" },
-    { regEx: /(?<!^)\\\*\*\\\*$/g, replacement: "\\.*" },
-    { regEx: /^\*\*$/g, replacement: "[^\\\\]+" },
-    { regEx: /^\*\*\\/g, replacement: ".*?\\" },
-    { regEx: /\\\*\*/g, replacement: "\\[^\\\\]+" },
-    { regEx: /^\*$/g, replacement: "[^\\]+" },
-    { regEx: /\\\*$/g, replacement: "\\[^\\]+" },
+    { regEx: /\\/g, replacement: "\\\\" },
+    { regEx: /([^\\]+)\\\\\*\*\*$/g, replacement: "$1(\\\\.*$)?" },
+    { regEx: /^\*\*\\\\\*$/g, replacement: ".*" },
+    { regEx: /(?<!^)\\\\\*\*\\\\\*$/g, replacement: "\\\\.*" },
+    { regEx: /^\*\*$/g, replacement: "[^\\\\\\\\]+" },
+    { regEx: /^\*\*\\\\/g, replacement: ".*?\\\\" },
+    { regEx: /\\\\\*\*/g, replacement: "\\\\[^\\\\\\\\]+" },
+    { regEx: /^\*$/g, replacement: "[^\\\\]+" },
+    { regEx: /\\\\\*$/g, replacement: "\\\\[^\\\\]+" },
 ];
 
 
