@@ -63,8 +63,6 @@ function _show(
 		? get_RowHeaders()
 		: get_ColumnHeaders()
 
-	console.log("----------", type.valueOf(), headers)
-
 	_set_Visibility(headers, targets, exclude)
 }
 
@@ -101,8 +99,6 @@ function _build_VisibilityMap(headers:Header[], targets:_Target[], exclude:boole
 				(exclude)
 					? [header, ...header.children]
 					: [header, ...header.parents ]
-
-			console.log("@@@", header.name, headerTree)
 
 			visibilityMap.forEach(entry => {
 				if(headerTree.includes(entry.header))
