@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555047402851)
+		const elapsedTime  = _get_ElapsedTime(1555049205080)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -10510,13 +10510,13 @@ return jQuery;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS_1 = __webpack_require__(7);
+const CSS_1 = __webpack_require__(9);
 CSS_1.CSS.apply(__dirname);
-const cssVariables = __webpack_require__(10);
+const cssVariables = __webpack_require__(12);
 const __main__1 = __webpack_require__(3);
-const Module_BaseClasses_1 = __webpack_require__(13);
-const Entry_1 = __webpack_require__(14);
-const __Main__1 = __webpack_require__(15);
+const Module_BaseClasses_1 = __webpack_require__(15);
+const Entry_1 = __webpack_require__(16);
+const __Main__1 = __webpack_require__(17);
 const $ = __webpack_require__(0);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, autoMap_KeyBindings, keyBinding_Modifiers, entryGroups }) {
@@ -10657,8 +10657,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(11);
-const hotkeys_js_1 = __importDefault(__webpack_require__(12));
+const KeyGroups_1 = __webpack_require__(13);
+const hotkeys_js_1 = __importDefault(__webpack_require__(14));
 hotkeys_js_1.default.filter = _disable_DefaultFilters;
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
@@ -10715,8 +10715,43 @@ function _convert_HotKeys_ToString(keys) {
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(1);
-module.exports = __webpack_require__(5);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class Header {
+    constructor({ model, element, index }) {
+        this.children = [];
+        this.children_IDs = [];
+        this.name = model.name;
+        this.id = model.id;
+        this.parent_id = model.parent_id;
+        this.element = element;
+        this.index = index;
+    }
+    get path() {
+        if (this.parent) {
+            return `${this.parent.path}\\${this.name}`;
+        }
+        else {
+            return this.name;
+        }
+    }
+    get parents() {
+        let child = this;
+        const parents = [];
+        while (child.parent) {
+            parents.push(child.parent);
+            child = child.parent;
+        }
+        return parents;
+    }
+    add_Child(child) {
+        child.parent = this;
+        this.children.push(child);
+        this.children_IDs.push(child.id);
+    }
+}
+exports.Header = Header;
 
 
 /***/ }),
@@ -10726,15 +10761,34 @@ module.exports = __webpack_require__(5);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(6);
-const __main__1 = __webpack_require__(2);
-const Bottom_1 = __webpack_require__(20);
-__main__1.FunctionBar.load(Bottom_1.bottom_FunctionBar);
-__webpack_require__(21);
+exports.KanbanTool = window.KT;
+exports.activeBoard = exports.KanbanTool.boards.models[0];
 
 
 /***/ }),
 /* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(1);
+module.exports = __webpack_require__(7);
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(8);
+const __main__1 = __webpack_require__(2);
+const Bottom_1 = __webpack_require__(21);
+__main__1.FunctionBar.load(Bottom_1.bottom_FunctionBar);
+__webpack_require__(22);
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10783,14 +10837,14 @@ function get_DivIndex(checkList_Item) {
 
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings = __webpack_require__(8);
-const _get_FileText_1 = __webpack_require__(9);
+const Settings = __webpack_require__(10);
+const _get_FileText_1 = __webpack_require__(11);
 class CSS {
     static async apply(modulePath) {
         const url = _get_ModuleCSS_URL(modulePath);
@@ -10827,13 +10881,13 @@ function _add_BaseURL(relativePath) {
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module) {
 
 module.exports = {"baseURL":"https://enteleform-extensions.github.io/KanbanTool","_":""};
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10866,13 +10920,13 @@ async function _get_FileText(url, result) {
 
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module) {
 
 module.exports = {"extension":"CustomExtension--FunctionBar","legendContainer":"LegendContainer","_":""};
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10893,7 +10947,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11332,7 +11386,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11345,7 +11399,7 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11363,14 +11417,15 @@ exports.Entry = Entry;
 
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_ColumnHeaders_1 = __webpack_require__(16);
-const Glob_1 = __webpack_require__(19);
+const get_ColumnHeaders_1 = __webpack_require__(18);
+const get_RowHeaders_1 = __webpack_require__(19);
+const Glob_1 = __webpack_require__(20);
 const $ = __webpack_require__(0);
 var Show;
 (function (Show) {
@@ -11390,6 +11445,14 @@ var Show;
         });
     }
     Show.columns = columns;
+    function allRows() { _show({ type: _Type.Rows, targets: ["***"], exclude: false }); }
+    Show.allRows = allRows;
+    function allColumns() { _show({ type: _Type.Columns, targets: ["***"], exclude: false }); }
+    Show.allColumns = allColumns;
+    function noRows() { _show({ type: _Type.Rows, targets: ["***"], exclude: true }); }
+    Show.noRows = noRows;
+    function noColumns() { _show({ type: _Type.Columns, targets: ["***"], exclude: true }); }
+    Show.noColumns = noColumns;
 })(Show = exports.Show || (exports.Show = {}));
 var _Type;
 (function (_Type) {
@@ -11398,27 +11461,12 @@ var _Type;
 })(_Type || (_Type = {}));
 function _show({ type, targets, exclude }) {
     const headers = (type == _Type.Rows)
-        ? []
+        ? get_RowHeaders_1.get_RowHeaders()
         : get_ColumnHeaders_1.get_ColumnHeaders();
     _set_Visibility(headers, targets, exclude);
 }
 function _set_Visibility(headers, targets, exclude) {
-    const visibilityMap = headers.map(header => ({ header, show_Element: false }));
-    headers.forEach((header, i) => {
-        const is_Target = (targets.includes(header.index)
-            || targets.some(target => _match_Glob(header, target)));
-        if (is_Target) {
-            const show_Element = (exclude)
-                ? !is_Target
-                : is_Target;
-            const targetHeaders = [header, ...header.parents];
-            visibilityMap.forEach(entry => {
-                if (targetHeaders.includes(entry.header)) {
-                    entry.show_Element = show_Element;
-                }
-            });
-        }
-    });
+    const visibilityMap = _build_VisibilityMap(headers, targets, exclude);
     visibilityMap.forEach(({ header, show_Element }) => {
         const is_Collapsed = $(header.element).hasClass("kt-collapsed");
         let toggle_ElementVisibility = ((show_Element && is_Collapsed)
@@ -11427,6 +11475,25 @@ function _set_Visibility(headers, targets, exclude) {
             header.element.click();
         }
     });
+}
+function _build_VisibilityMap(headers, targets, exclude) {
+    const visibilityMap = headers.map(header => ({ header, show_Element: false }));
+    headers.forEach((header, i) => {
+        const is_Target = (targets.includes(header.index)
+            || targets.some(target => _match_Glob(header, target)));
+        if (is_Target) {
+            const show_Element = (exclude)
+                ? !is_Target
+                : is_Target;
+            const headerTree = [header, ...header.parents];
+            visibilityMap.forEach(entry => {
+                if (headerTree.includes(entry.header)) {
+                    entry.show_Element = show_Element;
+                }
+            });
+        }
+    });
+    return visibilityMap;
 }
 function _match_Glob(header, target) {
     if (Number(target)) {
@@ -11439,14 +11506,14 @@ function _match_Glob(header, target) {
 
 
 /***/ }),
-/* 16 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Header_1 = __webpack_require__(17);
-const KanbanTool_1 = __webpack_require__(18);
+const Header_1 = __webpack_require__(4);
+const KanbanTool_1 = __webpack_require__(5);
 function get_ColumnHeaders() {
     const rowElements = $("kt-board > thead").children().toArray();
     const cellElements = rowElements
@@ -11499,61 +11566,32 @@ function _add_Header({ queue, headers, columnHeader_CellElements, child, parent 
 
 
 /***/ }),
-/* 17 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-class Header {
-    constructor({ model, element, index }) {
-        this.children = [];
-        this.children_IDs = [];
-        this.name = model.name;
-        this.id = model.id;
-        this.parent_id = model.parent_id;
-        this.element = element;
-        this.index = index;
-    }
-    get path() {
-        if (this.parent) {
-            return `${this.parent.path}\\${this.name}`;
-        }
-        else {
-            return this.name;
-        }
-    }
-    get parents() {
-        let child = this;
-        const parents = [];
-        while (child.parent) {
-            parents.push(child.parent);
-            child = child.parent;
-        }
-        return parents;
-    }
-    add_Child(child) {
-        child.parent = this;
-        this.children.push(child);
-        this.children_IDs.push(child.id);
-    }
-}
-exports.Header = Header;
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.KanbanTool = window.KT;
-exports.activeBoard = exports.KanbanTool.boards.models[0];
-
-
-/***/ }),
 /* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Header_1 = __webpack_require__(4);
+const KanbanTool_1 = __webpack_require__(5);
+const $ = __webpack_require__(0);
+function get_RowHeaders() {
+    const headerModels = KanbanTool_1.activeBoard.swimlanes().toArray();
+    const headerElements = $.find("kt-board > tbody > tr > th");
+    const headers = headerElements.map((element, index) => {
+        new Header_1.Header({
+            model: headerModels[index],
+            element,
+            index,
+        });
+    });
+    return headers;
+}
+exports.get_RowHeaders = get_RowHeaders;
+
+
+/***/ }),
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11597,7 +11635,7 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11608,83 +11646,83 @@ const { Entry, Position, Show } = __main__1.FunctionBar;
 exports.bottom_FunctionBar = new __main__1.FunctionBar({
     position: Position.Bottom,
     autoMap_KeyBindings: true,
-    keyBinding_Modifiers: ["shift", "alt"],
+    keyBinding_Modifiers: ["alt"],
     entryGroups: [
         [
             new Entry({
-                name: "*",
+                name: "Active",
                 on_Load: () => {
-                    Show.columns({ include: ["*"] });
+                    Show.rows({ include: ["Routine", "Tasks.Active"] });
+                    Show.allColumns();
                 },
             }),
             new Entry({
-                name: "**",
+                name: "Plan",
                 on_Load: () => {
-                    Show.columns({ include: ["**"] });
-                },
-            }),
-            new Entry({
-                name: "**\\*",
-                on_Load: () => {
-                    Show.columns({ include: ["**\\*"] });
-                },
-            }),
-            new Entry({
-                name: "***",
-                on_Load: () => {
-                    Show.columns({ include: ["***"] });
+                    Show.allColumns();
+                    Show.allRows();
                 },
             }),
         ],
         [
             new Entry({
-                name: "B\\*",
+                name: "Routine",
                 on_Load: () => {
-                    Show.columns({ include: ["B\\*"] });
+                    Show.rows({ include: ["Routine"] });
+                    Show.allColumns();
                 },
             }),
             new Entry({
-                name: "B\\**",
+                name: "Today",
                 on_Load: () => {
-                    Show.columns({ include: ["B\\**"] });
+                    Show.rows({ include: ["Tasks.Active"] });
+                    Show.allColumns();
                 },
             }),
             new Entry({
-                name: "B\\**\\*",
+                name: "Routine.Short",
                 on_Load: () => {
-                    Show.columns({ include: ["B\\**\\*"] });
-                },
-            }),
-            new Entry({
-                name: "B\\***",
-                on_Load: () => {
-                    Show.columns({ include: ["B\\***"] });
+                    Show.rows({ include: ["Routine.Short"] });
+                    Show.allColumns();
                 },
             }),
         ],
         [
             new Entry({
-                name: "2\\*",
+                name: "HideAll",
                 on_Load: () => {
-                    Show.columns({ include: ["2\\*"] });
+                    Show.noColumns();
+                    Show.noRows();
                 },
             }),
             new Entry({
-                name: "2\\**",
+                name: "Fitness Math",
                 on_Load: () => {
-                    Show.columns({ include: ["2\\**"] });
+                    Show.allRows();
+                    Show.columns({ include: ["Fitness", "Math"] });
                 },
             }),
             new Entry({
-                name: "**\\2\\*",
+                name: "!(Fitness Math)",
                 on_Load: () => {
-                    Show.columns({ include: ["**\\2\\*"] });
+                    Show.allRows();
+                    Show.columns({ exclude: ["Fitness", "Math"] });
+                },
+            }),
+        ],
+        [
+            new Entry({
+                name: "HideAll",
+                on_Load: () => {
+                    Show.noColumns();
+                    Show.noRows();
                 },
             }),
             new Entry({
-                name: "**\\2\\**",
+                name: "ShowAll",
                 on_Load: () => {
-                    Show.columns({ include: ["**\\2\\**"] });
+                    Show.allColumns();
+                    Show.allRows();
                 },
             }),
         ],
@@ -11693,7 +11731,7 @@ exports.bottom_FunctionBar = new __main__1.FunctionBar({
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
