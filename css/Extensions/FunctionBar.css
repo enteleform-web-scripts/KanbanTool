@@ -1,20 +1,17 @@
 .CustomExtension--FunctionBar {
-  width: 100%;
-  table-layout: fixed;
-  z-index: 10;
-  background: #444;
-}
-.LegendContainer {
   position: fixed;
   display: flex;
   flex-direction: column;
+  z-index: 10;
+  width: 100%;
   bottom: 0;
+  background: #444;
 }
-.LegendContainer .Row {
+.CustomExtension--FunctionBar .Row {
   display: flex;
   flex-direction: row;
 }
-.LegendContainer .Row .Cell {
+.CustomExtension--FunctionBar .Row .Cell {
   flex-grow: 1;
   padding: 2px;
   user-select: none;

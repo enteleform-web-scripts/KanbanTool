@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555090342578)
+		const elapsedTime  = _get_ElapsedTime(1555090601096)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -10614,7 +10614,7 @@ function _add_KeyBinding(functionBar, entry, keyBinding) {
 }
 function _build_Layout(entryGroups) {
     const cardType_Legend = $("table.kt-extensions-card_legend").detach();
-    const legendContainer = $("<div>", { "class": cssVariables.legendContainer });
+    const legendContainer = $("<div>", { "class": cssVariables.root });
     $("body").append(legendContainer);
     legendContainer.append(cardType_Legend);
     const rows = [];
@@ -10918,7 +10918,7 @@ async function _get_FileText(url, result) {
 /* 12 */
 /***/ (function(module) {
 
-module.exports = {"extension":"CustomExtension--FunctionBar","legendContainer":"LegendContainer","legendRow":"Row","legendCell":"Cell","_":""};
+module.exports = {"root":"CustomExtension--FunctionBar","legendRow":"Row","legendCell":"Cell","_":""};
 
 /***/ }),
 /* 13 */
