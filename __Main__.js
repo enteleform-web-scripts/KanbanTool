@@ -1,1 +1,239 @@
-!function(e){var t={};function n(o){if(t[o])return t[o].exports;var r=t[o]={i:o,l:!1,exports:{}};return e[o].call(r.exports,r,r.exports,n),r.l=!0,r.exports}n.m=e,n.c=t,n.d=function(e,t,o){n.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:o})},n.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},n.t=function(e,t){if(1&t&&(e=n(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var o=Object.create(null);if(n.r(o),Object.defineProperty(o,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var r in e)n.d(o,r,function(t){return e[t]}.bind(null,r));return o},n.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return n.d(t,"a",t),t},n.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},n.p="",n(n.s=1)}([function(e,t){function n(e,t,n,o){const r=n.length>0&&Math.max(...n)>0;if(o||t||r){return`${r?",  ":""}${t}:${e=1==t?e:`${e}s`}`}return""}const o=`│  Built  {  ${function(e){const t=(new Date).getTime()-e,o=Math.floor(t/1e3/86400),r=Math.floor(t/1e3/3600%24),i=Math.floor(t/1e3/60%60),l=Math.floor(t/1e3%60);return Math.floor(t%1e3),""+n("day",o,[],!1)+n("hour",r,[o],!1)+n("minute",i,[o,r],!1)+n("second",l,[o,r,i],!0)}(1555041638673)}  }  Ago  │`,r="".padStart(o.length-2,"─");console.log(""+`\n┌${r}┐\n`+`${o}\n`+`└${r}┘\n`)},function(e,t,n){n(0),e.exports=n(2)},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),n(3)},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});const o=n(4);class r{constructor({model:e,element:t}){this.children=[],this.children_IDs=[],this.name=e.name,this.id=e.id,this.parent_id=e.parent_id,this.element=t}get path(){return this.parent?`${this.parent.path}\\${this.name}`:this.name}add_Child(e){e.parent=this,this.children.push(e),this.children_IDs.push(e.id)}}const i=$("kt-board > thead").children().toArray().flatMap(e=>$(e).children().toArray()),l=o.activeBoard.workflowStages().toArray().map(e=>e.attributes),a=function(e,t,n){const o=[...t],i=[];for(;o.length>0;){const t=i.length;n.forEach(t=>{o.filter(e=>e.parent_id==t.id).map(e=>({child:e,parent:t})).forEach(({child:t,parent:n})=>{const l=o.indexOf(t);if(-1!=l){n instanceof r&&(console.log("++",n,t),n.add_Child(t)),o.splice(l,1);const a=i.length;i.push(new r({model:t,element:e[a]}))}})}),n=i.slice(t)}return i}(i,l.slice(1),[l[0]]);console.log(a),console.log(a.map(e=>e.element)),console.log(a.map(e=>e.path))},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.KanbanTool=window.KT,t.activeBoard=t.KanbanTool.boards.models[0]}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports) {
+
+
+		function _get_ElapsedTime(startTime) {
+    const elapsed_MS = (new Date().getTime() - startTime);
+    const days = Math.floor(((elapsed_MS / 1000) / 86400));
+    const hours = Math.floor(((elapsed_MS / 1000) / 3600) % 24);
+    const minutes = Math.floor(((elapsed_MS / 1000) / 60) % 60);
+    const seconds = Math.floor((elapsed_MS / 1000) % 60);
+    const milliseconds = Math.floor(elapsed_MS % 1000);
+    const elapsedTime = (""
+        + _get_TimeString_Segment("day", days, [], false)
+        + _get_TimeString_Segment("hour", hours, [days], false)
+        + _get_TimeString_Segment("minute", minutes, [days, hours], false)
+        + _get_TimeString_Segment("second", seconds, [days, hours, minutes], true));
+    return elapsedTime;
+}
+		function _get_TimeString_Segment(title, value, parents, mandatory) {
+    const parentValues_Exist = ((parents.length > 0)
+        && (Math.max(...parents) > 0));
+    if (mandatory || value || parentValues_Exist) {
+        const prefix = (parentValues_Exist)
+            ? ",  "
+            : "";
+        title =
+            (value == 1)
+                ? title
+                : `${title}s`;
+        return `${prefix}${value}:${title}`;
+    }
+    else {
+        return "";
+    }
+}
+
+		const elapsedTime  = _get_ElapsedTime(1555041821012)
+		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
+		const divider      = "".padStart((buildMessage.length - 2), "─")
+
+		console.log(""
+			+ `\n┌${divider}┐\n`
+			+ `${buildMessage}\n`
+			+ `└${divider}┘\n`
+		)
+	
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(0);
+module.exports = __webpack_require__(2);
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(3);
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const KanbanTool_1 = __webpack_require__(4);
+class Header {
+    constructor({ model, element }) {
+        this.children = [];
+        this.children_IDs = [];
+        this.name = model.name;
+        this.id = model.id;
+        this.parent_id = model.parent_id;
+        this.element = element;
+    }
+    get path() {
+        if (this.parent) {
+            return `${this.parent.path}\\${this.name}`;
+        }
+        else {
+            return this.name;
+        }
+    }
+    add_Child(child) {
+        child.parent = this;
+        this.children.push(child);
+        this.children_IDs.push(child.id);
+    }
+}
+function _build_Headers(columnHeader_CellElements, userModels, parentModels) {
+    const queue = [...userModels];
+    const headers = [];
+    while (queue.length > 0) {
+        const next_Parent_StartIndex = headers.length;
+        parentModels.forEach(parent => {
+            const children = queue
+                .filter(column => (column.parent_id == parent.id))
+                .map(child => ({ child, parent }));
+            children.forEach(({ child, parent }) => {
+                const child_QueueIndex = queue.indexOf(child);
+                const column_WasAdded = (child_QueueIndex == -1);
+                if (!column_WasAdded) {
+                    if (parent instanceof Header) {
+                        console.log("++", parent, child);
+                        parent.add_Child(child);
+                    }
+                    queue.splice(child_QueueIndex, 1);
+                    const elementIndex = (headers.length);
+                    headers.push(new Header({
+                        model: child,
+                        element: columnHeader_CellElements[elementIndex],
+                    }));
+                }
+            });
+        });
+        parentModels = headers.slice(next_Parent_StartIndex);
+    }
+    return headers;
+}
+const columnHeader_RowElements = $("kt-board > thead").children().toArray();
+const columnHeader_CellElements = columnHeader_RowElements
+    .flatMap(row => $(row).children().toArray());
+const all_ColumnModels = KanbanTool_1.activeBoard.workflowStages().toArray()
+    .map(column => column.attributes);
+const user_ColumnModels = all_ColumnModels.slice(1);
+const root_ColumnModel = all_ColumnModels[0];
+const columnHeaders = _build_Headers(columnHeader_CellElements, user_ColumnModels, [root_ColumnModel]);
+console.log(columnHeaders);
+console.log(columnHeaders.map(x => x.element));
+console.log(columnHeaders.map(x => x.path));
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.KanbanTool = window.KT;
+exports.activeBoard = exports.KanbanTool.boards.models[0];
+
+
+/***/ })
+/******/ ]);
