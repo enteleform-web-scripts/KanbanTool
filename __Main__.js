@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555093355492)
+		const elapsedTime  = _get_ElapsedTime(1555093860225)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11458,7 +11458,6 @@ function _show({ type, targets, exclude }) {
     const headers = (type == _Type.Rows)
         ? get_RowHeaders_1.get_RowHeaders()
         : get_ColumnHeaders_1.get_ColumnHeaders();
-    console.log("----------", type.valueOf(), headers);
     _set_Visibility(headers, targets, exclude);
 }
 function _set_Visibility(headers, targets, exclude) {
@@ -11482,7 +11481,6 @@ function _build_VisibilityMap(headers, targets, exclude) {
             const headerTree = (exclude)
                 ? [header, ...header.children]
                 : [header, ...header.parents];
-            console.log("@@@", header.name, headerTree);
             visibilityMap.forEach(entry => {
                 if (headerTree.includes(entry.header)) {
                     entry.show_Element = true;
@@ -11654,107 +11652,40 @@ exports.bottom_FunctionBar = new __Main__1.FunctionBar({
     entryGroups: [
         [
             new Entry({
-                name: "*",
+                name: "Active",
                 on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["*"] });
+                    Show.rows({ include: ["Routine", "Tasks.Active"] });
+                    Show.allColumns();
                 },
             }),
             new Entry({
-                name: "**",
+                name: "Plan",
                 on_Load: () => {
+                    Show.allColumns();
                     Show.allRows();
-                    Show.columns({ include: ["**"] });
-                },
-            }),
-            new Entry({
-                name: "**\\*",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["**\\*"] });
                 },
             }),
         ],
         [
             new Entry({
-                name: "B\\*",
+                name: "Routine",
                 on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["B\\*"] });
+                    Show.rows({ include: ["Routine"] });
+                    Show.allColumns();
                 },
             }),
             new Entry({
-                name: "B\\**",
+                name: "Today",
                 on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["B\\**"] });
+                    Show.rows({ include: ["Tasks.Active"] });
+                    Show.allColumns();
                 },
             }),
             new Entry({
-                name: "B\\**\\*",
+                name: "Routine.Short",
                 on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["B\\**\\*"] });
-                },
-            }),
-            new Entry({
-                name: "B\\***",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["B\\***"] });
-                },
-            }),
-        ],
-        [
-            new Entry({
-                name: "2\\*",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["2\\*"] });
-                },
-            }),
-            new Entry({
-                name: "2\\**",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["2\\**"] });
-                },
-            }),
-            new Entry({
-                name: "**\\2\\*",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["**\\2\\*"] });
-                },
-            }),
-            new Entry({
-                name: "**\\2\\**",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["**\\2\\**"] });
-                },
-            }),
-        ],
-        [
-            new Entry({
-                name: "!(B\\2)",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ exclude: ["B\\2\\*"] });
-                },
-            }),
-            new Entry({
-                name: "!(B\\2\\*)",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ exclude: ["B\\2\\*"] });
-                },
-            }),
-            new Entry({
-                name: "!(B\\2\\21)",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ exclude: ["B\\2\\21"] });
+                    Show.rows({ include: ["Routine.Short"] });
+                    Show.allColumns();
                 },
             }),
         ],
