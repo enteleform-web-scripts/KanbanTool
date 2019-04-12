@@ -16,7 +16,7 @@ export class Glob{
 	get regex()
 		{return this._regexPattern}
 
-	match(path){
+	match(path:string){
 		return (
 			path.match(this._regex)
 			? true

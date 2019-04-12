@@ -9,7 +9,7 @@ import {Module    } from "~/Utils/Module_BaseClasses"
 
 //###  Module: Exports  ###//
 import {Entry} from "./Entry"
-import {Show } from "./DefaultFunctions/Show"
+import {Show } from "./DefaultFunctions/Show/__Main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
