@@ -68,6 +68,13 @@ export const bottom_FunctionBar = new FunctionBar({
 					Show.columns({exclude:["Fitness", "Math"]})
 				},
 			}),
+			new Entry({
+				name: "Music\\Theory",
+				on_Load: () => {
+					Show.allRows()
+					Show.columns({include:["Music\\Theory"]})
+				},
+			}),
 		],
 
 		[
