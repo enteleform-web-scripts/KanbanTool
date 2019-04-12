@@ -55,13 +55,6 @@ export const bottom_FunctionBar = new FunctionBar({
 
 		[
 			new Entry({
-				name: "HideAll",
-				on_Load: () => {
-					Show.noColumns()
-					Show.noRows()
-				},
-			}),
-			new Entry({
 				name: "Fitness Math",
 				on_Load: () => {
 					Show.allRows()

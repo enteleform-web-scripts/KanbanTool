@@ -1,17 +1,3 @@
-
-
-// const _rowSelector = "kt-board > tbody > tr > th"
-
-
-
-		// const $collapsedElement =
-		// 	(type == _Type.Rows)
-		// 	? $element.parent()
-		// 	: $element
-
-
-
-
 //###  Module  ###//
 import {Header     } from "./Header"
 import {activeBoard} from "~/Utils/KanbanTool"
@@ -19,9 +5,6 @@ import {activeBoard} from "~/Utils/KanbanTool"
 //###  NPM  ###//
 const $:any = require("jquery")
 
-//#################//
-//###  Exports  ###//
-//#################//
 
 export function get_RowHeaders(){
 	const headerModels   = activeBoard.swimlanes().toArray()
