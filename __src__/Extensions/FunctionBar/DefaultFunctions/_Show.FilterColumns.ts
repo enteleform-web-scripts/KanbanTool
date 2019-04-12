@@ -70,7 +70,7 @@ function _build_Headers(columnHeader_CellElements:HTMLElement[], userModels:any[
 					headers.push(header)
 
 					if(parent instanceof Header)
-						{console.log("++", parent, child); parent.add_Child(child)}
+						{parent.add_Child(header)}
 				}
 			})
 		})
