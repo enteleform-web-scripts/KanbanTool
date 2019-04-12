@@ -41,11 +41,10 @@ const $: webpack.Plugin[] = [
 
 	new WebpackBar(),
 
-	new WebpackBuildNotifierPlugin(),
+	// new WebpackBuildNotifierPlugin(),
 
 	new InjectPlugin(
 		get_log_TimeSinceBuild_Callback(),
-		// {entryName: 'entry name', order: ENTRY_ORDER.First},
 	),
 
 ]
