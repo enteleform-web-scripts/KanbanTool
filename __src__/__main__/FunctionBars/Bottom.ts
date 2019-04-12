@@ -116,13 +116,6 @@ export const bottom_FunctionBar = new FunctionBar({
 					Show.columns({include:["**\\*"]})
 				},
 			}),
-			new Entry({
-				name: "***",
-				on_Load: () => {
-					Show.allRows()
-					Show.columns({include:["***"]})
-				},
-			}),
 		],
 
 		[

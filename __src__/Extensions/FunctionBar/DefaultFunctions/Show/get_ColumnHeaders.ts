@@ -9,12 +9,15 @@ import {activeBoard} from "~/Utils/KanbanTool"
 //#################//
 
 export function get_ColumnHeaders(){
-	const rowElements = $("kt-board > thead").children().toArray()
+	const rowElements    = $("kt-board > thead").children().toArray()
+	const swimLane_Count = activeBoard.swimlanes().length
 
 	const cellElements =
 		rowElements
 			.flatMap(row => $(row).children().toArray())
-			.slice(1)
+
+	if(swimLane_Count > 1)
+		{cellElements.splice(0, 1)}
 
 	const all_ColumnModels =
 		activeBoard.workflowStages().toArray()
