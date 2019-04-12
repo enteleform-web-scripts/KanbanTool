@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555091061858)
+		const elapsedTime  = _get_ElapsedTime(1555091226454)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11701,6 +11701,13 @@ exports.bottom_FunctionBar = new __Main__1.FunctionBar({
                 on_Load: () => {
                     Show.allRows();
                     Show.columns({ exclude: ["Fitness", "Math"] });
+                },
+            }),
+            new Entry({
+                name: "Music\\Theory",
+                on_Load: () => {
+                    Show.allRows();
+                    Show.columns({ include: ["Music\\Theory"] });
                 },
             }),
         ],
