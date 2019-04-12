@@ -7,20 +7,20 @@ class Header{
 	children     = []
 	children_IDs = []
 
-	name:     string
-	id:       number
-	parentID: number
-	parent:   Header
-	element:  HTMLElement
+	name:      string
+	id:        number
+	parent_id: number
+	parent:    Header
+	element:   HTMLElement
 
 	constructor(
 		{model,     element            }:
 		{model:any, element:HTMLElement}
 	){
-		this.name     = model.name
-		this.id       = model.id
-		this.parentID = model.parent_id
-		this.element  = element
+		this.name      = model.name
+		this.id        = model.id
+		this.parent_id = model.parent_id
+		this.element   = element
 	}
 
 	get path(){
@@ -49,14 +49,15 @@ function _build_Headers(columnHeader_CellElements:HTMLElement[], userModels:any[
 
 		parentModels.forEach(parent => {
 			const children =
-				queue.filter(column =>
-					(column.parent_id == parent.id)
-				)
+				queue
+					.filter(column => (column.parent_id == parent.id))
+					.map   (child  => ({child, parent})              )
 
-			children.forEach(child => {
+			children.forEach( ({child, parent}) => {
 				const child_QueueIndex = queue.indexOf(child)
 				const column_WasAdded = (child_QueueIndex == -1)
 				if(! column_WasAdded){
+					parent.add_Child(child)
 					queue.splice(child_QueueIndex, 1)
 					const elementIndex = (headers.length)
 					headers.push(
