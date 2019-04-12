@@ -11,8 +11,13 @@ export function get_log_TimeSinceBuild_Callback(){
 		${_get_TimeString_Segment.toString()}
 
 		const elapsedTime  = _get_ElapsedTime(${buildTime})
-		const buildMessage = \`<<< Built {  \${elapsedTime}  } Ago >>>\`
-		console.log("\\n" + buildMessage + "\\n")
+		const buildMessage = \`<<<  Built  {  \${elapsedTime}  }  Ago >>>\`
+		const divider      = "".padStart((buildMessage.length - 6), "-")
+		console.log(""
+			+ \`<<<\${divider}>>>\`
+			+ buildMessage
+			+ \`<<<\${divider}>>>\`
+		)
 	`)
 }
 
