@@ -7,7 +7,7 @@ import webpack from "webpack"
 
 const $: webpack.Output = {
 
-	filename: "[Name].js",
+	filename: "[name].js",
 	path:     Settings.distributionPath,
 
 }

@@ -2,11 +2,13 @@
 import {Settings} from "../../Settings"
 
 //###  NPM  ###//
-import webpack              from "webpack"
-import HtmlWebpackPlugin    from "html-webpack-plugin"
-import CleanWebpackPlugin   from "clean-webpack-plugin"
-import CopyPlugin           from "copy-webpack-plugin"
-import MiniCssExtractPlugin from "mini-css-extract-plugin"
+import webpack                      from "webpack"
+import CleanWebpackPlugin           from "clean-webpack-plugin"
+import CopyPlugin                   from "copy-webpack-plugin"
+import HtmlWebpackPlugin            from "html-webpack-plugin"
+import MiniCssExtractPlugin         from "mini-css-extract-plugin"
+import WebpackBar                   from "webpackbar"
+const  WebpackBuildNotifierPlugin = require("webpack-build-notifier")
 
 
 const $: webpack.Plugin[] = [
@@ -34,6 +36,9 @@ const $: webpack.Plugin[] = [
 			to:   Settings.distributionPath,
 		},
 	]),
+
+	new WebpackBar(),
+	new WebpackBuildNotifierPlugin(),
 
 ]
 

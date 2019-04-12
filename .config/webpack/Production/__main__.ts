@@ -8,6 +8,9 @@ import webpack from "webpack"
 
 export default (env:any): webpack.Configuration => ({
 
+	mode: "production",
+
+
 	...Common,
 
 	...load( __dirname,

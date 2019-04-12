@@ -1,13 +1,89 @@
 
+//###  Module  ###//
+import {activeBoard} from "~/Utils/KanbanTool"
 
-// const headers = $.find("kt-board > thead > tr > th")
-// const columns = KT.boards.models[0].workflowStages().toArray()
 
-// $("kt-board > thead").children().toArray().forEach((row, rowIndex) => {
-// 		$(row).children().toArray().forEach((cell, cellIndex) => {
-// 			console.log(rowIndex, cellIndex, cell)
-// 		})
-// })
+const allColumns =
+	activeBoard.workflowStages().toArray()
+		.map(column => column.attributes)
+
+const userColumns = allColumns.slice(1)
+const rootColumn  = allColumns[0]
+
+function _build_HeaderOrdered_Columns(parentColumns:any){
+	const queue          = [...userColumns]
+	const orderedColumns = []
+
+	while(queue.length > 0){
+		const next_Parent_StartIndex = orderedColumns.length
+
+		parentColumns.forEach(parent => {
+			const children =
+				queue.filter(column =>
+					(column.parent_id == parent.id)
+				)
+
+			children.forEach(child => {
+				const child_QueueIndex = queue.indexOf(child)
+				const column_WasAdded = (child_QueueIndex == -1)
+				if(! column_WasAdded){
+					console.log("--", child_QueueIndex, child.name)
+					queue.splice(child_QueueIndex, 1)
+					orderedColumns.push(child)
+				}
+			})
+		})
+
+		parentColumns = orderedColumns.slice(next_Parent_StartIndex)
+	}
+
+	return orderedColumns
+}
+
+const headerOrdered_Columns = _build_HeaderOrdered_Columns([rootColumn])
+console.log(">>>", headerOrdered_Columns)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // const headers = $.find("kt-board > thead > tr > th")
+// // const columns = KT.boards.models[0].workflowStages().toArray()
+
+// // $("kt-board > thead").children().toArray().forEach((row, rowIndex) => {
+// // 		$(row).children().toArray().forEach((cell, cellIndex) => {
+// // 			console.log(rowIndex, cellIndex, cell)
+// // 		})
+// // })
 
 
 // class Header{
@@ -54,7 +130,7 @@
 // // ]
 
 
-// // headerRows = []
+// // const headerRows = []
 
 // // $("kt-board > thead").children().toArray().forEach((row, rowIndex) => {
 // // 	const headerRow = headerRows[rowIndex] = []
@@ -123,45 +199,8 @@
 
 
 
-// const allColumns =
-// 	activeBoard.workflowStages().toArray()
-// 		.map(column => column.attributes)
-
-// const userColumns = allColumns.slice(1)
-// const rootColumn  = allColumns[0]
 
 
 
-// function _build_HeaderOrdered_Columns(parentColumns:any){
-// 	const queue          = [...userColumns]
-// 	const orderedColumns = []
-
-// 	while(queue.length > 0){
-// 		const next_Parent_StartIndex = orderedColumns.length
-
-// 		parentColumns.forEach(parent => {
-// 			const children =
-// 				queue.filter(column =>
-// 					(column.parent_id == parent.id)
-// 				)
-
-// 			children.forEach(child => {
-// 				const child_QueueIndex = queue.indexOf(child)
-// 				const column_WasAdded = (child_QueueIndex == -1)
-// 				if(! column_WasAdded){
-// 					console.log("--", child_QueueIndex, child.name)
-// 					queue.splice(child_QueueIndex, 1)
-// 					orderedColumns.push(child)
-// 				}
-// 			})
-// 		})
-
-// 		parentColumns = orderedColumns.slice(next_Parent_StartIndex)
-// 	}
-
-// 	return orderedColumns
-// }
-
-// headerOrdered_Columns = _build_HeaderOrdered_Columns([rootColumn])
 
 // console.log(headerOrdered_Columns.map(x => x.name))
