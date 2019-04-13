@@ -27,6 +27,7 @@ export function get_Columns(){
 
 	console.log("---  COLUMNS  -------------------------")
 	console.log("elements:", headerElements)
+	console.log("cElements:", columns.map(x => x.clickElement))
 	console.log("columns:", columns)
 
 	return columns
