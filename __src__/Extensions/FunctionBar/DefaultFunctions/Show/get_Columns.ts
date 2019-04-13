@@ -26,7 +26,8 @@ export function get_Columns(){
 	_update_ColumnRelationships(columns)
 
 	console.log("---  COLUMNS  -------------------------")
-	console.log(columns)
+	console.log("elements:", headerElements)
+	console.log("columns:", columns)
 
 	return columns
 }
