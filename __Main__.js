@@ -121,7 +121,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555130154561)
+		const elapsedTime  = _get_ElapsedTime(1555130437924)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -140,10 +140,10 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 class TaskContainer {
-    constructor({ type, index, model, clickElement, collapseElement }) {
+    constructor({ type, domIndex, model, clickElement, collapseElement }) {
         this.children = [];
         this.type = type;
-        this.index = index;
+        this.domIndex = domIndex;
         this.model = model;
         this.clickElement = clickElement;
         this.collapseElement = collapseElement;
@@ -152,7 +152,7 @@ class TaskContainer {
         let child = this;
         const parents = [];
         while (child.parent) {
-            parents.push(child.parent);
+            parents.unshift(child.parent);
             child = child.parent;
         }
         return parents;
@@ -231,7 +231,7 @@ function get_Rows() {
     const models = KanbanTool_1.activeBoard.swimlanes().toArray();
     const rows = headerElements.map((element, i) => new TaskContainer_1.TaskContainer({
         type: TaskContainer_1.TaskContainer.Type.Row,
-        index: i,
+        domIndex: i,
         model: models[i],
         clickElement: element,
         collapseElement: $(element).parent(),
@@ -10628,7 +10628,7 @@ function get_Columns() {
     const models = _get_SortedModels();
     const columns = headerElements.map((element, i) => (new TaskContainer_1.TaskContainer({
         type: TaskContainer_1.TaskContainer.Type.Column,
-        index: i,
+        domIndex: i,
         model: models[i],
         clickElement: element,
         collapseElement: element,
