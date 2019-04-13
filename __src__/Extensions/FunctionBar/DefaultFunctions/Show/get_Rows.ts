@@ -21,9 +21,5 @@ export function get_Rows(){
 			})
 		)
 
-	console.log("---  ROWS  ----------------------------")
-	console.log("elements:", headerElements)
-	console.log("rows:", rows)
-
 	return rows
 }

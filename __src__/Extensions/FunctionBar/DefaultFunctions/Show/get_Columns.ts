@@ -25,12 +25,6 @@ export function get_Columns(){
 
 	_update_ColumnRelationships(columns)
 
-	console.log("---  COLUMNS  -------------------------")
-	console.log("elements:", headerElements)
-	console.log("cElements:", columns.map(x => x.clickElement))
-	console.log("cPaths:", columns.map(x => x.path))
-	console.log("columns:", columns)
-
 	return columns
 }
 
@@ -55,7 +49,7 @@ function _get_HeaderElements(){
 }
 
 function _get_SortedModels(){
-	// sorts column models to match DOM table structure (header elements)
+	// sorts column models to match DOM table structure (thead > tr > th)
 
 	const rootModel    = activeBoard.workflowStages().toArray()[0]
 	const sortedModels = []
