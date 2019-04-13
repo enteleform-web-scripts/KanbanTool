@@ -16,7 +16,7 @@ export function get_Columns(){
 		headerElements.map( (element, i) => (
 			new TaskContainer({
 				type:            TaskContainer.Type.Column,
-				index:           i,
+				domIndex:        i,
 				model:           models[i],
 				clickElement:    element,
 				collapseElement: element,

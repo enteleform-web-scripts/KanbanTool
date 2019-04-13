@@ -1,7 +1,7 @@
 
 export class TaskContainer{
 	type:            TaskContainer.Type
-	index:           number
+	domIndex:        number
 	model:           any
 	clickElement:    HTMLElement
 	collapseElement: HTMLElement
@@ -10,11 +10,11 @@ export class TaskContainer{
 	children: TaskContainer[] = []
 
 	constructor(
-		{type,                    index,        model,     clickElement,             collapseElement            }:
-		{type:TaskContainer.Type, index:number, model:any, clickElement:HTMLElement, collapseElement:HTMLElement}
+		{type,                    domIndex,        model,     clickElement,             collapseElement            }:
+		{type:TaskContainer.Type, domIndex:number, model:any, clickElement:HTMLElement, collapseElement:HTMLElement}
 	){
 		this.type            = type
-		this.index           = index
+		this.domIndex        = domIndex
 		this.model           = model
 		this.clickElement    = clickElement
 		this.collapseElement = collapseElement
@@ -25,7 +25,7 @@ export class TaskContainer{
 		const parents : TaskContainer[] = []
 
 		while(child.parent){
-			parents.push(child.parent)
+			parents.unshift(child.parent)
 			child = child.parent
 		}
 

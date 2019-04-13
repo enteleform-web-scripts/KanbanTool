@@ -85,7 +85,7 @@ function _build_VisibilityMap(containers:TaskContainer[], targets:_Target[], exc
 		containers.map(container => ({container, show_Element:false}))
 
 	containers.forEach((container, i) => {
-		const oneBased_Index = (container.index + 1)
+		const oneBased_Index = (container.domIndex + 1)
 
 		const is_Target = (
 			targets.includes(oneBased_Index)

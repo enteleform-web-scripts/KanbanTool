@@ -14,7 +14,7 @@ export function get_Rows(){
 		headerElements.map( (element, i) =>
 			new TaskContainer({
 				type:            TaskContainer.Type.Row,
-				index:           i,
+				domIndex:        i,
 				model:           models[i],
 				clickElement:    element,
 				collapseElement: $(element).parent(),
