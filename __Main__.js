@@ -121,7 +121,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555130971698)
+		const elapsedTime  = _get_ElapsedTime(1555131202272)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -10638,6 +10638,7 @@ function get_Columns() {
     console.log("---  COLUMNS  -------------------------");
     console.log("elements:", headerElements);
     console.log("cElements:", columns.map(x => x.clickElement));
+    console.log("cPaths:", columns.map(x => x.path));
     console.log("columns:", columns);
     return columns;
 }
