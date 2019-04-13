@@ -121,7 +121,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555134882166)
+		const elapsedTime  = _get_ElapsedTime(1555135629838)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -139,6 +139,19 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.KanbanTool = window.KT;
+exports.activeBoard = exports.KanbanTool.boards.models[0];
+exports.KanbanTool.activeBoard = exports.activeBoard;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const KanbanTool_1 = __webpack_require__(1);
 class TaskContainer {
     constructor({ type, domIndex, model, clickElement, collapseElement }) {
         this.children = [];
@@ -163,6 +176,14 @@ class TaskContainer {
             ? this.name
             : this._columnPath);
     }
+    get tasks() {
+        return (KanbanTool_1.activeBoard.tasks().filter(task => {
+            const taskContainer = (this.type == TaskContainer.Type.Row)
+                ? task.swimlane
+                : task.workflowStage;
+            return (taskContainer === this.model);
+        }));
+    }
     get _columnPath() {
         const tree = [...this.parents, this];
         const names = tree.map(container => container.name);
@@ -181,18 +202,6 @@ exports.TaskContainer = TaskContainer;
         Type[Type["Column"] = 1] = "Column";
     })(Type = TaskContainer.Type || (TaskContainer.Type = {}));
 })(TaskContainer = exports.TaskContainer || (exports.TaskContainer = {}));
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.KanbanTool = window.KT;
-exports.activeBoard = exports.KanbanTool.boards.models[0];
-exports.KanbanTool.activeBoard = exports.activeBoard;
 
 
 /***/ }),
@@ -223,8 +232,8 @@ get_Columns_1.get_Columns();
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(1);
-const KanbanTool_1 = __webpack_require__(2);
+const TaskContainer_1 = __webpack_require__(2);
+const KanbanTool_1 = __webpack_require__(1);
 const $ = __webpack_require__(6);
 function get_Rows() {
     const headerElements = $.find("kt-board > tbody > tr > th");
@@ -10622,8 +10631,8 @@ return jQuery;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(1);
-const KanbanTool_1 = __webpack_require__(2);
+const TaskContainer_1 = __webpack_require__(2);
+const KanbanTool_1 = __webpack_require__(1);
 function get_Columns() {
     const headerElements = _get_HeaderElements();
     const models = _get_SortedModels();
