@@ -121,7 +121,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555130437924)
+		const elapsedTime  = _get_ElapsedTime(1555130707272)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -236,8 +236,9 @@ function get_Rows() {
         clickElement: element,
         collapseElement: $(element).parent(),
     }));
-    console.log("---  ROWS  -------------------------");
-    console.log(rows);
+    console.log("---  ROWS  ----------------------------");
+    console.log("elements:", headerElements);
+    console.log("rows:", rows);
     return rows;
 }
 exports.get_Rows = get_Rows;
@@ -10635,7 +10636,8 @@ function get_Columns() {
     })));
     _update_ColumnRelationships(columns);
     console.log("---  COLUMNS  -------------------------");
-    console.log(columns);
+    console.log("elements:", headerElements);
+    console.log("columns:", columns);
     return columns;
 }
 exports.get_Columns = get_Columns;
