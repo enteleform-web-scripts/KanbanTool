@@ -58,21 +58,18 @@ function _get_SortedModels(){
 	// sorts column models to match DOM table structure (header elements)
 
 	const rootModel    = activeBoard.workflowStages().toArray()[0]
-	const userModels   = rootModel.children()
 	const sortedModels = []
 
-	function add_Models(parents){
-		sortedModels.push(...parents)
+	let row = rootModel.children()
 
-		const children =
-			parents.map(parent =>
-				parent.children()
-			)
+	while(row.length > 0){
+		sortedModels.push(...row)
 
-		add_Models(children)
+		row = row.flatMap(model =>
+			model.children()
+		)
 	}
 
-	add_Models(userModels)
 	return sortedModels
 }
 
