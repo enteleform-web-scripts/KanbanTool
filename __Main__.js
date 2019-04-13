@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555136333432)
+		const elapsedTime  = _get_ElapsedTime(1555137191796)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -11442,40 +11442,42 @@ const Glob_1 = __webpack_require__(20);
 const $ = __webpack_require__(0);
 var Show;
 (function (Show) {
-    function rows({ include, exclude }) {
+    function rows({ include, exclude, hide_IfEmpty }) {
         _show({
+            hide_IfEmpty,
             type: _Type.Row,
             targets: (include) ? include : exclude,
             exclude: (exclude) ? true : false,
         });
     }
     Show.rows = rows;
-    function columns({ include, exclude }) {
+    function columns({ include, exclude, hide_IfEmpty }) {
         _show({
+            hide_IfEmpty,
             type: _Type.Column,
             targets: (include) ? include : exclude,
             exclude: (exclude) ? true : false,
         });
     }
     Show.columns = columns;
-    function allRows() { _show({ type: _Type.Row, targets: ["**\\*"], exclude: false }); }
+    function allRows({ hide_IfEmpty } = {}) { _show({ type: _Type.Row, targets: ["**\\*"], exclude: false, hide_IfEmpty }); }
     Show.allRows = allRows;
-    function allColumns() { _show({ type: _Type.Column, targets: ["**\\*"], exclude: false }); }
+    function allColumns({ hide_IfEmpty } = {}) { _show({ type: _Type.Column, targets: ["**\\*"], exclude: false, hide_IfEmpty }); }
     Show.allColumns = allColumns;
-    function noRows() { _show({ type: _Type.Row, targets: ["**\\*"], exclude: true }); }
+    function noRows() { _show({ type: _Type.Row, targets: ["**\\*"], exclude: true, hide_IfEmpty: false }); }
     Show.noRows = noRows;
-    function noColumns() { _show({ type: _Type.Column, targets: ["**\\*"], exclude: true }); }
+    function noColumns() { _show({ type: _Type.Column, targets: ["**\\*"], exclude: true, hide_IfEmpty: false }); }
     Show.noColumns = noColumns;
 })(Show = exports.Show || (exports.Show = {}));
 const _Type = TaskContainer_1.TaskContainer.Type;
-function _show({ type, targets, exclude }) {
+function _show({ type, targets, exclude, hide_IfEmpty }) {
     const containers = (type == _Type.Row)
         ? get_Rows_1.get_Rows()
         : get_Columns_1.get_Columns();
-    _set_Visibility(containers, targets, exclude);
+    _set_Visibility(containers, targets, exclude, hide_IfEmpty);
 }
-function _set_Visibility(containers, targets, exclude) {
-    const visibilityMap = _build_VisibilityMap(containers, targets, exclude);
+function _set_Visibility(containers, targets, exclude, hide_IfEmpty) {
+    const visibilityMap = _build_VisibilityMap(containers, targets, exclude, hide_IfEmpty);
     visibilityMap.forEach(({ container, show_Element }) => {
         const is_Collapsed = $(container.collapseElement).hasClass("kt-collapsed");
         let toggle_ElementVisibility = ((show_Element && is_Collapsed)
@@ -11485,12 +11487,16 @@ function _set_Visibility(containers, targets, exclude) {
         }
     });
 }
-function _build_VisibilityMap(containers, targets, exclude) {
+function _build_VisibilityMap(containers, targets, exclude, hide_IfEmpty) {
     const visibilityMap = containers.map(container => ({ container, show_Element: false }));
     containers.forEach((container, i) => {
         const oneBased_Index = (container.domIndex + 1);
-        const is_Target = (targets.includes(oneBased_Index)
+        let is_Target = (targets.includes(oneBased_Index)
             || targets.some(target => _match_Glob(container, target)));
+        is_Target =
+            (hide_IfEmpty)
+                ? (is_Target && (container.tasks.length > 0))
+                : is_Target;
         if (is_Target) {
             const containerTree = (exclude)
                 ? [container, ...container.children]
@@ -11654,107 +11660,40 @@ exports.bottom_FunctionBar = new __Main__1.FunctionBar({
     entryGroups: [
         [
             new Entry({
-                name: "*",
+                name: "Active",
                 on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["*"] });
+                    Show.rows({ include: ["Routine", "Tasks.Active"] });
+                    Show.allColumns();
                 },
             }),
             new Entry({
-                name: "**",
+                name: "Plan",
                 on_Load: () => {
+                    Show.allColumns();
                     Show.allRows();
-                    Show.columns({ include: ["**"] });
-                },
-            }),
-            new Entry({
-                name: "**\\*",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["**\\*"] });
                 },
             }),
         ],
         [
             new Entry({
-                name: "B\\*",
+                name: "Routine",
                 on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["B\\*"] });
+                    Show.rows({ include: ["Routine"] });
+                    Show.allColumns({ hide_IfEmpty: true });
                 },
             }),
             new Entry({
-                name: "B\\**",
+                name: "Today",
                 on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["B\\**"] });
+                    Show.rows({ include: ["Tasks.Active"] });
+                    Show.allColumns({ hide_IfEmpty: true });
                 },
             }),
             new Entry({
-                name: "B\\**\\*",
+                name: "Routine.Short",
                 on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["B\\**\\*"] });
-                },
-            }),
-            new Entry({
-                name: "B\\***",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["B\\***"] });
-                },
-            }),
-        ],
-        [
-            new Entry({
-                name: "2\\*",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["2\\*"] });
-                },
-            }),
-            new Entry({
-                name: "2\\**",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["2\\**"] });
-                },
-            }),
-            new Entry({
-                name: "**\\2\\*",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["**\\2\\*"] });
-                },
-            }),
-            new Entry({
-                name: "**\\2\\**",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ include: ["**\\2\\**"] });
-                },
-            }),
-        ],
-        [
-            new Entry({
-                name: "!(B\\2)",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ exclude: ["B\\2\\*"] });
-                },
-            }),
-            new Entry({
-                name: "!(B\\2\\*)",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ exclude: ["B\\2\\*"] });
-                },
-            }),
-            new Entry({
-                name: "!(B\\2\\21)",
-                on_Load: () => {
-                    Show.allRows();
-                    Show.columns({ exclude: ["B\\2\\21"] });
+                    Show.rows({ include: ["Routine.Short"] });
+                    Show.allColumns({ hide_IfEmpty: true });
                 },
             }),
         ],
