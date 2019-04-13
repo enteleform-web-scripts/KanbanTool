@@ -50,8 +50,8 @@ export class TaskContainer{
 		return (
 			activeBoard.tasks().filter(task => {
 				const taskContainer = (this.type == TaskContainer.Type.Row)
-					? task.swimlane
-					: task.workflowStage
+					? task.swimlane()
+					: task.workflowStage()
 
 				return (taskContainer === this.model)
 			})
