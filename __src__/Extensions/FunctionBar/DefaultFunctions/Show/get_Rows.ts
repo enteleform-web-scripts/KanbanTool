@@ -21,7 +21,7 @@ export function get_Rows(){
 			})
 		)
 
-	console.log("---  COLUMNS  -------------------------")
+	console.log("---  ROWS  -------------------------")
 	console.log(rows)
 
 	return rows

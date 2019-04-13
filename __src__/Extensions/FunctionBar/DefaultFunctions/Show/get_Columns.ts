@@ -73,9 +73,8 @@ function _get_SortedModels(){
 function _update_ColumnRelationships(columns:TaskContainer[]){
 	columns.forEach(parent => {
 		columns.forEach(child => {
-			if(child.model.parent() == parent)
+			if(child.model.parent() == parent.model)
 				{parent.add_Child(child)}
 		})
 	})
-
 }
