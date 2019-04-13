@@ -121,7 +121,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555131797123)
+		const elapsedTime  = _get_ElapsedTime(1555134882166)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -10654,14 +10654,12 @@ function _get_HeaderElements() {
 }
 function _get_SortedModels() {
     const rootModel = KanbanTool_1.activeBoard.workflowStages().toArray()[0];
-    const userModels = rootModel.children();
     const sortedModels = [];
-    function add_Models(parents) {
-        sortedModels.push(...parents);
-        const children = parents.map(parent => parent.children());
-        add_Models(children);
+    let row = rootModel.children();
+    while (row.length > 0) {
+        sortedModels.push(...row);
+        row = row.flatMap(model => model.children());
     }
-    add_Models(userModels);
     return sortedModels;
 }
 function _update_ColumnRelationships(columns) {
