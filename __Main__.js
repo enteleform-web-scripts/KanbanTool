@@ -121,7 +121,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555135629838)
+		const elapsedTime  = _get_ElapsedTime(1555135758360)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -179,8 +179,8 @@ class TaskContainer {
     get tasks() {
         return (KanbanTool_1.activeBoard.tasks().filter(task => {
             const taskContainer = (this.type == TaskContainer.Type.Row)
-                ? task.swimlane
-                : task.workflowStage;
+                ? task.swimlane()
+                : task.workflowStage();
             return (taskContainer === this.model);
         }));
     }
