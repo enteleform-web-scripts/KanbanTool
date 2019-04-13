@@ -121,7 +121,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555130707272)
+		const elapsedTime  = _get_ElapsedTime(1555130971698)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -10637,6 +10637,7 @@ function get_Columns() {
     _update_ColumnRelationships(columns);
     console.log("---  COLUMNS  -------------------------");
     console.log("elements:", headerElements);
+    console.log("cElements:", columns.map(x => x.clickElement));
     console.log("columns:", columns);
     return columns;
 }
