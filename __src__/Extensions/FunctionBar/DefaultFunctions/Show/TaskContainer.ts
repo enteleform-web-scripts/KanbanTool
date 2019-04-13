@@ -1,4 +1,7 @@
 
+//###  Module  ###//
+import {activeBoard} from "~/Utils/KanbanTool"
+
 export class TaskContainer{
 	type:            TaskContainer.Type
 	domIndex:        number
@@ -40,6 +43,18 @@ export class TaskContainer{
 			(this.type == TaskContainer.Type.Row)
 			? this.name
 			: this._columnPath
+		)
+	}
+
+	get tasks(){
+		return (
+			activeBoard.tasks().filter(task => {
+				const taskContainer = (this.type == TaskContainer.Type.Row)
+					? task.swimlane
+					: task.workflowStage
+
+				return (taskContainer === this.model)
+			})
 		)
 	}
 
