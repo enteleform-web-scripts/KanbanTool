@@ -2,6 +2,11 @@
 //###  Module  ###//
 import {activeBoard} from "~/Utils/KanbanTool"
 
+
+//########################//
+//###  Exports: Class  ###//
+//########################//
+
 export class TaskContainer{
 	type:            TaskContainer.Type
 	domIndex:        number
@@ -73,6 +78,10 @@ export class TaskContainer{
 	}
 }
 
+
+//############################//
+//###  Exports: Namespace  ###//
+//############################//
 
 export namespace TaskContainer{
 
