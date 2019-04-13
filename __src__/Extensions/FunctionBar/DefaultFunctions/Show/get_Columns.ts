@@ -64,9 +64,12 @@ function _get_SortedModels(){
 	function add_Models(parents){
 		sortedModels.push(...parents)
 
-		for(const parent of parents){
-			add_Models(parent.children())
-		}
+		const children =
+			parents.map(parent =>
+				parent.children()
+			)
+
+		add_Models(children)
 	}
 
 	add_Models(userModels)
