@@ -121,7 +121,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555129775057)
+		const elapsedTime  = _get_ElapsedTime(1555130154561)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -236,7 +236,7 @@ function get_Rows() {
         clickElement: element,
         collapseElement: $(element).parent(),
     }));
-    console.log("---  COLUMNS  -------------------------");
+    console.log("---  ROWS  -------------------------");
     console.log(rows);
     return rows;
 }
@@ -10664,7 +10664,7 @@ function _get_SortedModels() {
 function _update_ColumnRelationships(columns) {
     columns.forEach(parent => {
         columns.forEach(child => {
-            if (child.model.parent() == parent) {
+            if (child.model.parent() == parent.model) {
                 parent.add_Child(child);
             }
         });
