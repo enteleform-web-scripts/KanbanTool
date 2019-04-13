@@ -10492,7 +10492,7 @@ return jQuery;
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555093860225)
+		const elapsedTime  = _get_ElapsedTime(1555123329321)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -10758,6 +10758,7 @@ exports.Header = Header;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
+exports.KanbanTool.activeBoard = exports.activeBoard;
 
 
 /***/ }),
