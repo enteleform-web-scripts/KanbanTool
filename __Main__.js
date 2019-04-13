@@ -121,7 +121,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555131202272)
+		const elapsedTime  = _get_ElapsedTime(1555131797123)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -10658,9 +10658,8 @@ function _get_SortedModels() {
     const sortedModels = [];
     function add_Models(parents) {
         sortedModels.push(...parents);
-        for (const parent of parents) {
-            add_Models(parent.children());
-        }
+        const children = parents.map(parent => parent.children());
+        add_Models(children);
     }
     add_Models(userModels);
     return sortedModels;
