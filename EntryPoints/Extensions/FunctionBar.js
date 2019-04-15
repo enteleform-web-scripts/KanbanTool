@@ -166,13 +166,13 @@
     const seconds = Math.floor((elapsed_MS / 1000) % 60);
     const milliseconds = Math.floor(elapsed_MS % 1000);
     const elapsedTime = (""
-        + _get_TimeString_Segment("day", days, [], false)
-        + _get_TimeString_Segment("hour", hours, [days], false)
-        + _get_TimeString_Segment("minute", minutes, [days, hours], false)
-        + _get_TimeString_Segment("second", seconds, [days, hours, minutes], true));
+        + _get_ElapsedTime_Segment("day", days, [], false)
+        + _get_ElapsedTime_Segment("hour", hours, [days], false)
+        + _get_ElapsedTime_Segment("minute", minutes, [days, hours], false)
+        + _get_ElapsedTime_Segment("second", seconds, [days, hours, minutes], true));
     return elapsedTime;
 }
-		function _get_TimeString_Segment(title, value, parents, mandatory) {
+		function _get_ElapsedTime_Segment(title, value, parents, mandatory) {
     const parentValues_Exist = ((parents.length > 0)
         && (Math.max(...parents) > 0));
     if (mandatory || value || parentValues_Exist) {
@@ -190,10 +190,10 @@
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555341312992)
+		const elapsedTime = _get_ElapsedTime(1555341388201)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     ${timeString}`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     ${timeStamp}`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
