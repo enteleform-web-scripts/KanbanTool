@@ -121,7 +121,7 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555338782034)
+		const elapsedTime  = _get_ElapsedTime(1555340431354)
 		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const divider      = "".padStart((buildMessage.length - 2), "─")
 
@@ -283,7 +283,17 @@ class TaskContainer {
         child.parent = this;
         this.children.push(child);
     }
-    click() { this._clickableElement.click(); }
+    show() {
+        if (this.is_Collapsed) {
+            this._click();
+        }
+    }
+    hide() {
+        if (!this.is_Collapsed) {
+            this._click();
+        }
+    }
+    _click() { this._clickableElement.click(); }
 }
 exports.TaskContainer = TaskContainer;
 (function (TaskContainer) {
