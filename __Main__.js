@@ -10504,10 +10504,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555341459884)
+		const elapsedTime = _get_ElapsedTime(1555342813631)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:17:39 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:40:13 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10528,10 +10528,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const KanbanTool_1 = __webpack_require__(1);
 const $ = __webpack_require__(0);
 class TaskContainer {
-    constructor({ type, domIndex, model, element }) {
+    constructor({ type, domIndex, modelIndex, model, element }) {
         this.children = [];
         this.type = type;
         this.domIndex = domIndex;
+        this.modelIndex = modelIndex;
         this.model = model;
         this._clickableElement = element;
         this._collapsibleElement =
@@ -10912,6 +10913,7 @@ function get_Rows() {
     const models = KanbanTool_1.activeBoard.swimlanes().toArray();
     const rows = headerElements.map((element, i) => new TaskContainer_1.TaskContainer({
         type: TaskContainer_1.TaskContainer.Type.Row,
+        modelIndex: i,
         domIndex: i,
         model: models[i],
         element: element,
@@ -10931,13 +10933,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(3);
 const KanbanTool_1 = __webpack_require__(1);
 function get_Columns() {
+    const models = KanbanTool_1.activeBoard.workflowStages().slice(1);
+    const sortedModels = _get_SortedModels();
     const headerElements = _get_HeaderElements();
-    const models = _get_SortedModels();
-    const columns = headerElements.map((element, i) => (new TaskContainer_1.TaskContainer({
+    const columns = sortedModels.map((model, i) => (new TaskContainer_1.TaskContainer({
         type: TaskContainer_1.TaskContainer.Type.Column,
         domIndex: i,
-        model: models[i],
-        element: element,
+        modelIndex: models.indexOf(model),
+        model: model,
+        element: headerElements[i],
     })));
     _update_ColumnRelationships(columns);
     return columns;
@@ -11708,7 +11712,7 @@ function _hide_Containers({ containers, emptyContainers }) {
         }
     });
 }
-function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_Indexes.includes(container.domIndex); }
+function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_Indexes.includes(container.modelIndex); }
 
 
 /***/ }),
