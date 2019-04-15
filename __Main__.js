@@ -10603,8 +10603,7 @@ function _update_OriginalLayout(legendContainer, position) {
         const $legendContainer = $(legendContainer);
         const board = document.querySelector("#show > div.kt-side-panel-slide");
         if (position == FunctionBar.Position.Top) {
-            const nav = document.querySelector("nav");
-            _set_Style(nav, "margin-top", `${$legendContainer.height()}px`);
+            _set_Style("nav", "margin-top", `${$legendContainer.height()}px`);
             _set_Style(board, "margin-top", `${$legendContainer.height()}px`);
         }
         if (position == FunctionBar.Position.Bottom) {
@@ -10612,7 +10611,7 @@ function _update_OriginalLayout(legendContainer, position) {
         }
     }, 1000);
 }
-function _set_Style(element, propertyName, propertyValue) { element.style.setProperty(propertyName, propertyValue, "important"); }
+function _set_Style(element, propertyName, propertyValue) { $(element).style.setProperty(propertyName, propertyValue, "important"); }
 
 /* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\FunctionBar"))
 
@@ -10665,10 +10664,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555353918785)
+		const elapsedTime = _get_ElapsedTime(1555354020985)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:45:18 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:47:00 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
