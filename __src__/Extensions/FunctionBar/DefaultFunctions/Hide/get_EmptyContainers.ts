@@ -1,20 +1,29 @@
 
 //###  Module  ###//
-import {activeBoard} from "~/Utils/KanbanTool"
+import {TaskContainer} from "../Show/TaskContainer"
+import {activeBoard  } from "~/Utils/KanbanTool"
 
 
 //#################//
 //###  Exports  ###//
 //#################//
 
-export function get_EmptyRows(){
-	const emptyCell_Map = _get_EmptyCell_Map()
-	return _get_EmptyRows(emptyCell_Map)
+export function get_EmptyRows(columns:TaskContainer[]){
+	const hiddenColumn_Indexes =
+		columns
+			.filter(column => column.is_Collapsed)
+			.map   (column => column.modelIndex  )
+
+	return _get_EmptyRows(hiddenColumn_Indexes)
 }
 
-export function get_EmptyColumns(){
-	const emptyCell_Map = _get_EmptyCell_Map()
-	return _get_EmptyColumns(emptyCell_Map)
+export function get_EmptyColumns(rows:TaskContainer[]){
+	const hiddenRow_Indexes =
+		rows
+			.filter(row => row.is_Collapsed)
+			.map   (row => row.modelIndex  )
+
+	return _get_EmptyColumns(hiddenRow_Indexes)
 }
 
 
@@ -46,12 +55,12 @@ function _get_Containers(){
 	}
 }
 
-function _get_Cell_IsEmpty(row:number, column:number){
+function _get_Cell_IsEmpty(row:any, column:any){
 	const tasks = _get_Tasks(row, column)
 	return (tasks.length == 0)
 }
 
-function _get_Tasks(row:number, column:number){
+function _get_Tasks(row:any, column:any){
 	return (
 		activeBoard.tasks()
 			.filter(task =>
@@ -61,10 +70,16 @@ function _get_Tasks(row:number, column:number){
 	)
 }
 
-function _get_EmptyRows(emptyCell_Map:boolean[][]){
-	const rowCount = emptyCell_Map.length
+function _get_EmptyRows(hiddenColumn_Indexes:number[]){
+	const emptyCell_Map = _get_EmptyCell_Map()
+	const rowCount      = emptyCell_Map.length
+	const emptyRows     = []
 
-	const emptyRows = []
+	hiddenColumn_Indexes.forEach(columnIndex => {
+		emptyCell_Map.forEach(row => {
+			row[columnIndex] = true
+		})
+	})
 
 	for(let rowIndex = 0; (rowIndex < rowCount); rowIndex++){
 		const row_IsEmpty =
@@ -79,10 +94,14 @@ function _get_EmptyRows(emptyCell_Map:boolean[][]){
 	return emptyRows
 }
 
-function _get_EmptyColumns(emptyCell_Map:boolean[][]){
-	const columnCount = emptyCell_Map[0].length
+function _get_EmptyColumns(hiddenRow_Indexes:number[]){
+	const emptyCell_Map = _get_EmptyCell_Map()
+	const columnCount   = emptyCell_Map[0].length
+	const emptyColumns  = []
 
-	const emptyColumns = []
+	hiddenRow_Indexes.forEach(rowIndex => {
+		emptyCell_Map[rowIndex].map(is_Empty => true)
+	})
 
 	for(let columnIndex = 0; (columnIndex < columnCount); columnIndex++){
 		const cells = emptyCell_Map.map(row => row[columnIndex])

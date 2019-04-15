@@ -16,16 +16,20 @@ export namespace Hide{
 	export function allColumns(){Show.columns({exclude:["**\\*"]})}
 
 	export function emptyRows(){
+		const columns = get_Columns()
+
 		_hide_Containers({
 			containers      : get_Rows(),
-			emptyContainers : get_EmptyRows(),
+			emptyContainers : get_EmptyRows(columns),
 		})
 	}
 
 	export function emptyColumns(){
+		const rows = get_Rows()
+
 		_hide_Containers({
 			containers      : get_Columns(),
-			emptyContainers : get_EmptyColumns(),
+			emptyContainers : get_EmptyColumns(rows),
 		})
 	}
 
