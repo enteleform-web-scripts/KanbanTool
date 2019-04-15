@@ -71,7 +71,7 @@ export class FunctionBar extends Module{
 	_initialize_VerticalBar(){
 		_validate_AutoMapped_VerticalRows(this)
 
-		const elements = _build_Layout(this.entryGroups)
+		const elements = _build_Layout(this.entryGroups, this.position)
 
 		this.entryGroups.forEach((group, groupIndex) => {
 			group.forEach((entry, entryIndex) => {
@@ -115,6 +115,13 @@ const _HorizontalPositions = [
 	FunctionBar.Position.Left,
 	FunctionBar.Position.Right,
 ]
+
+const _BarPosition_CSS_Map = {
+	[FunctionBar.Position.Left  ]: cssVariables.leftBar,
+	[FunctionBar.Position.Right ]: cssVariables.rightBar,
+	[FunctionBar.Position.Top   ]: cssVariables.topBar,
+	[FunctionBar.Position.Bottom]: cssVariables.bottomBar,
+}
 
 function _validate_AutoMapped_VerticalRows(functionBar:FunctionBar){
 	if(! functionBar.autoMap_KeyBindings)
@@ -185,8 +192,12 @@ function _add_KeyBinding(
 	)
 }
 
-function _build_Layout(entryGroups:Entry[][]){
-	const legendContainer = $("<div>", {"class":cssVariables.root})
+function _build_Layout(entryGroups:Entry[][], position:FunctionBar.Position){
+	const positionClass = _BarPosition_CSS_Map[position]
+	const legendContainer = $(
+		"<div>",
+		{"class":[cssVariables.root, positionClass].join()}
+	)
 	$("body").append(legendContainer)
 
 	const rows = []

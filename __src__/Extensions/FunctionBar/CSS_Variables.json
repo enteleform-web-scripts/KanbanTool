@@ -4,4 +4,9 @@
 	"legendRow":  "Row",
 	"legendCell": "Cell",
 
+	"topBar":    "Top_FunctionBar",
+	"bottomBar": "Bottom_FunctionBar",
+	"leftBar":   "Left_FunctionBar",
+	"rightBar":  "Right_FunctionBar",
+
 "_":""}
