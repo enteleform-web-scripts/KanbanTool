@@ -107,7 +107,17 @@ export class TaskContainer{
 		this.children.push(child)
 	}
 
-	click()
+	show(){
+		if(this.is_Collapsed)
+			{this._click()}
+	}
+
+	hide(){
+		if(! this.is_Collapsed)
+			{this._click()}
+	}
+
+	_click()
 		{this._clickableElement.click()}
 }
 

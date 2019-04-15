@@ -65,15 +65,10 @@ function _set_Visibility(containers:TaskContainer[], targets:_Target[], exclude:
 	const visibilityMap = _build_VisibilityMap(containers, targets, exclude)
 
 	visibilityMap.forEach( ({container, show_Element}) => {
-		const is_Collapsed = container.is_Collapsed
-
-		let toggle_ElementVisibility = (
-			(show_Element && is_Collapsed)
-			|| (!show_Element && !is_Collapsed)
-		)
-
-		if(toggle_ElementVisibility)
-			{container.click()}
+		if(show_Element)
+			{container.show()}
+		else
+			{container.hide()}
 	})
 }
 

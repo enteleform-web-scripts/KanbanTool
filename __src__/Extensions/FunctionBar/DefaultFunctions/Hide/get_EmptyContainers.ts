@@ -7,13 +7,14 @@ import {activeBoard} from "~/Utils/KanbanTool"
 //###  Exports  ###//
 //#################//
 
-export function get_EmptyContainers(){
+export function get_EmptyRows(){
 	const emptyCell_Map = _get_EmptyCell_Map()
+	return _get_EmptyColumns(emptyCell_Map)
+}
 
-	return {
-		emptyRows:    _get_EmptyRows   (emptyCell_Map),
-		emptyColumns: _get_EmptyColumns(emptyCell_Map),
-	}
+export function get_EmptyColumns(){
+	const emptyCell_Map = _get_EmptyCell_Map()
+	return _get_EmptyRows(emptyCell_Map)
 }
 
 

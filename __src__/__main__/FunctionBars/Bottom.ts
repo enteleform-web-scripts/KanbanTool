@@ -56,6 +56,21 @@ export const bottom_FunctionBar = new FunctionBar({
 			}),
 		],
 
+		[
+			new Entry({
+				name: "Hide.emptyColumns",
+				on_Load: () => {
+					Hide.emptyColumns()
+				},
+			}),
+			new Entry({
+				name: "Hide.emptyRows",
+				on_Load: () => {
+					Hide.emptyRows()
+				},
+			}),
+		],
+
 		// [
 		// 	new Entry({
 		// 		name: "Fitness Math",
