@@ -55,4 +55,4 @@ function _hide_Containers(
 }
 
 function _is_Empty(container:TaskContainer, emptyContainer_Indexes:number[])
-	{return emptyContainer_Indexes.includes(container.domIndex)}
+	{return emptyContainer_Indexes.includes(container.modelIndex)}

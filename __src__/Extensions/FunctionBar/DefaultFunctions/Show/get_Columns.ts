@@ -9,16 +9,18 @@ import {activeBoard  } from "~/Utils/KanbanTool"
 //#################//
 
 export function get_Columns(){
+	const models         = activeBoard.workflowStages().slice(1)
+	const sortedModels   = _get_SortedModels()
 	const headerElements = _get_HeaderElements()
-	const models         = _get_SortedModels()
 
 	const columns =
-		headerElements.map( (element, i) => (
+		sortedModels.map( (model, i) => (
 			new TaskContainer({
-				type:     TaskContainer.Type.Column,
-				domIndex: i,
-				model:    models[i],
-				element:  element,
+				type:       TaskContainer.Type.Column,
+				domIndex:   i,
+				modelIndex: models.indexOf(model),
+				model:      model,
+				element:    headerElements[i],
 			})
 		))
 

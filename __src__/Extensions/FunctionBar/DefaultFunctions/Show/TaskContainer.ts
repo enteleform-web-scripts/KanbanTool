@@ -13,6 +13,7 @@ const $:any = require("jquery")
 export class TaskContainer{
 	type:                TaskContainer.Type
 	domIndex:            number
+	modelIndex:          number
 	model:               any
 	_clickableElement:   HTMLElement
 	_collapsibleElement: HTMLElement
@@ -21,12 +22,13 @@ export class TaskContainer{
 	children: TaskContainer[] = []
 
 	constructor(
-		{type,                    domIndex,        model,     element            }:
-		{type:TaskContainer.Type, domIndex:number, model:any, element:HTMLElement}
+		{type,                    domIndex,        modelIndex,        model,     element            }:
+		{type:TaskContainer.Type, domIndex:number, modelIndex:number, model:any, element:HTMLElement}
 	){
-		this.type     = type
-		this.domIndex = domIndex
-		this.model    = model
+		this.type       = type
+		this.domIndex   = domIndex
+		this.modelIndex = modelIndex
+		this.model      = model
 
 		this._clickableElement = element
 

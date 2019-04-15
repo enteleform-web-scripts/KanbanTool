@@ -13,10 +13,11 @@ export function get_Rows(){
 	const rows =
 		headerElements.map( (element, i) =>
 			new TaskContainer({
-				type:     TaskContainer.Type.Row,
-				domIndex: i,
-				model:    models[i],
-				element:  element,
+				type:       TaskContainer.Type.Row,
+				modelIndex: i,
+				domIndex:   i,
+				model:      models[i],
+				element:    element,
 			})
 		)
 
