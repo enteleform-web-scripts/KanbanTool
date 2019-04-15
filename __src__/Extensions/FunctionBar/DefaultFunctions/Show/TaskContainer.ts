@@ -52,9 +52,8 @@ export class TaskContainer{
 		const descendants : TaskContainer[] = []
 
 		function add(container:TaskContainer){
-			descendants.push(container)
-
 			container.children.forEach(child => {
+				descendants.push(child)
 				add(child)
 			})
 		}
