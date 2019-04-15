@@ -10,6 +10,7 @@ const $:any = require("jquery")
 //###  Exports: Class  ###//
 //########################//
 
+console.log("LOLWUT")
 export class TaskContainer{
 	type:                TaskContainer.Type
 	domIndex:            number
