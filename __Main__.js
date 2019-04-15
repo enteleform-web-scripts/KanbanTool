@@ -10504,10 +10504,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555342813631)
+		const elapsedTime = _get_ElapsedTime(1555342942452)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:40:13 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:42:22 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11725,12 +11725,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const KanbanTool_1 = __webpack_require__(1);
 function get_EmptyRows() {
     const emptyCell_Map = _get_EmptyCell_Map();
-    return _get_EmptyColumns(emptyCell_Map);
+    return _get_EmptyRows(emptyCell_Map);
 }
 exports.get_EmptyRows = get_EmptyRows;
 function get_EmptyColumns() {
     const emptyCell_Map = _get_EmptyCell_Map();
-    return _get_EmptyRows(emptyCell_Map);
+    return _get_EmptyColumns(emptyCell_Map);
 }
 exports.get_EmptyColumns = get_EmptyColumns;
 function _get_EmptyCell_Map() {
