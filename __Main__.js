@@ -10601,13 +10601,13 @@ function _build_Cell(entry, keyBinding) {
 function _update_OriginalLayout(legendContainer, position) {
     setTimeout(() => {
         const $legendContainer = $(legendContainer);
-        const board = document.querySelector("#show > div.kt-side-panel-slide");
+        const $board = $("#show > div.kt-side-panel-slide");
         if (position == FunctionBar.Position.Top) {
             _set_Style("nav", "margin-top", `${$legendContainer.height()}px`);
-            _set_Style(board, "margin-top", `${$legendContainer.height()}px`);
+            _set_Style($board, "margin-top", `${$legendContainer.height()}px`);
         }
         if (position == FunctionBar.Position.Bottom) {
-            _set_Style(board, "margin-bottom", `${$legendContainer.height()}px`);
+            _set_Style($board, "margin-bottom", `${$legendContainer.height()}px`);
         }
     }, 1000);
 }
@@ -10664,10 +10664,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555354020985)
+		const elapsedTime = _get_ElapsedTime(1555354075208)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:47:00 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:47:55 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
