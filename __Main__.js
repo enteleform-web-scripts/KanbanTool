@@ -10504,10 +10504,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555346270265)
+		const elapsedTime = _get_ElapsedTime(1555346702811)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:37:50 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:45:02 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11677,7 +11677,7 @@ const _GLOB_TO_REGEX_MAP = [
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_EmptyContainers_1 = __webpack_require__(22);
+const get_emptyContainer_Indexes_1 = __webpack_require__(22);
 const get_Rows_1 = __webpack_require__(7);
 const get_Columns_1 = __webpack_require__(8);
 const __Main__1 = __webpack_require__(6);
@@ -11691,7 +11691,7 @@ var Hide;
         const columns = get_Columns_1.get_Columns();
         _hide_Containers({
             containers: get_Rows_1.get_Rows(),
-            emptyContainers: get_EmptyContainers_1.get_EmptyRows(columns),
+            emptyContainer_Indexes: get_emptyContainer_Indexes_1.get_EmptyRow_Indexes(columns),
         });
     }
     Hide.emptyRows = emptyRows;
@@ -11699,18 +11699,18 @@ var Hide;
         const rows = get_Rows_1.get_Rows();
         _hide_Containers({
             containers: get_Columns_1.get_Columns(),
-            emptyContainers: get_EmptyContainers_1.get_EmptyColumns(rows),
+            emptyContainer_Indexes: get_emptyContainer_Indexes_1.get_EmptyColumn_Indexes(rows),
         });
     }
     Hide.emptyColumns = emptyColumns;
 })(Hide = exports.Hide || (exports.Hide = {}));
-function _hide_Containers({ containers, emptyContainers }) {
+function _hide_Containers({ containers, emptyContainer_Indexes }) {
     containers.forEach(container => {
         const { descendants } = container;
         const has_Descendants = (descendants.length > 0);
-        if (!_is_Empty(container, emptyContainers)) { }
+        if (!_is_Empty(container, emptyContainer_Indexes)) { }
         else if ((!has_Descendants)
-            || ((has_Descendants) && descendants.every(child => _is_Empty(child, emptyContainers)))) {
+            || ((has_Descendants) && descendants.every(child => _is_Empty(child, emptyContainer_Indexes)))) {
             container.hide();
         }
     });
@@ -11726,20 +11726,20 @@ function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_In
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const KanbanTool_1 = __webpack_require__(1);
-function get_EmptyRows(columns) {
+function get_EmptyRow_Indexes(columns) {
     const hiddenColumn_Indexes = columns
         .filter(column => column.is_Collapsed)
         .map(column => column.modelIndex);
-    return _get_EmptyRows(hiddenColumn_Indexes);
+    return _get_EmptyRow_Indexes(hiddenColumn_Indexes);
 }
-exports.get_EmptyRows = get_EmptyRows;
-function get_EmptyColumns(rows) {
+exports.get_EmptyRow_Indexes = get_EmptyRow_Indexes;
+function get_EmptyColumn_Indexes(rows) {
     const hiddenRow_Indexes = rows
         .filter(row => row.is_Collapsed)
         .map(row => row.modelIndex);
-    return _get_EmptyColumns(hiddenRow_Indexes);
+    return _get_EmptyColumn_Indexes(hiddenRow_Indexes);
 }
-exports.get_EmptyColumns = get_EmptyColumns;
+exports.get_EmptyColumn_Indexes = get_EmptyColumn_Indexes;
 function _get_EmptyCell_Map() {
     const { rows, columns } = _get_Containers();
     const cellMap = Array.from({ length: rows.length })
@@ -11767,16 +11767,18 @@ function _get_Tasks(row, column) {
         .filter(task => (task.swimlane() === row)
         && (task.workflowStage() === column)));
 }
-function _get_EmptyRows(hiddenColumn_Indexes) {
+function _get_EmptyRow_Indexes(hiddenColumn_Indexes) {
     const emptyCell_Map = _get_EmptyCell_Map();
     const rowCount = emptyCell_Map.length;
     const emptyRows = [];
     console.log("HIDDEN COLUMNS:", hiddenColumn_Indexes);
+    console.log("emptyCell_Map.Before", emptyCell_Map);
     hiddenColumn_Indexes.forEach(columnIndex => {
         emptyCell_Map.forEach(row => {
             row[columnIndex] = true;
         });
     });
+    console.log("emptyCell_Map.After", emptyCell_Map);
     for (let rowIndex = 0; (rowIndex < rowCount); rowIndex++) {
         const row_IsEmpty = emptyCell_Map[rowIndex].every(is_Empty => (is_Empty == true));
         if (row_IsEmpty) {
@@ -11785,14 +11787,16 @@ function _get_EmptyRows(hiddenColumn_Indexes) {
     }
     return emptyRows;
 }
-function _get_EmptyColumns(hiddenRow_Indexes) {
+function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
     const emptyCell_Map = _get_EmptyCell_Map();
     const columnCount = emptyCell_Map[0].length;
     const emptyColumns = [];
     console.log("HIDDEN ROWS:", hiddenRow_Indexes);
+    console.log("emptyCell_Map.Before", emptyCell_Map);
     hiddenRow_Indexes.forEach(rowIndex => {
         emptyCell_Map[rowIndex].map(is_Empty => true);
     });
+    console.log("emptyCell_Map.After", emptyCell_Map);
     for (let columnIndex = 0; (columnIndex < columnCount); columnIndex++) {
         const cells = emptyCell_Map.map(row => row[columnIndex]);
         const column_IsEmpty = cells.every(is_Empty => (is_Empty == true));
