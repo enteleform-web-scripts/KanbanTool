@@ -10496,7 +10496,7 @@ class FunctionBar extends Module_BaseClasses_1.Module {
     }
     _initialize_VerticalBar() {
         _validate_AutoMapped_VerticalRows(this);
-        const elements = _build_Layout(this.entryGroups);
+        const elements = _build_Layout(this.entryGroups, this.position);
         this.entryGroups.forEach((group, groupIndex) => {
             group.forEach((entry, entryIndex) => {
                 _initialize_VerticalEntry(this, groupIndex, entry, entryIndex, elements);
@@ -10527,6 +10527,12 @@ const _HorizontalPositions = [
     FunctionBar.Position.Left,
     FunctionBar.Position.Right,
 ];
+const _BarPosition_CSS_Map = {
+    [FunctionBar.Position.Left]: cssVariables.leftBar,
+    [FunctionBar.Position.Right]: cssVariables.rightBar,
+    [FunctionBar.Position.Top]: cssVariables.topBar,
+    [FunctionBar.Position.Bottom]: cssVariables.bottomBar,
+};
 function _validate_AutoMapped_VerticalRows(functionBar) {
     if (!functionBar.autoMap_KeyBindings) {
         return;
@@ -10566,8 +10572,9 @@ function _add_KeyBinding(functionBar, entry, keyBinding) {
     }
     __main__1.KeyBinding.add(keyBinding, entry.on_Load, { preventDefault: true });
 }
-function _build_Layout(entryGroups) {
-    const legendContainer = $("<div>", { "class": cssVariables.root });
+function _build_Layout(entryGroups, position) {
+    const positionClass = _BarPosition_CSS_Map[position];
+    const legendContainer = $("<div>", { "class": [cssVariables.root, positionClass].join() });
     $("body").append(legendContainer);
     const rows = [];
     entryGroups.forEach(group => {
@@ -10642,10 +10649,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555349851913)
+		const elapsedTime = _get_ElapsedTime(1555350384142)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:37:31 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:46:24 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11133,7 +11140,7 @@ async function _get_FileText(url, result) {
 /* 15 */
 /***/ (function(module) {
 
-module.exports = {"root":"CustomExtension--FunctionBar","legendRow":"Row","legendCell":"Cell","_":""};
+module.exports = {"root":"CustomExtension--FunctionBar","legendRow":"Row","legendCell":"Cell","topBar":"Top_FunctionBar","bottomBar":"Bottom_FunctionBar","leftBar":"Left_FunctionBar","rightBar":"Right_FunctionBar","_":""};
 
 /***/ }),
 /* 16 */
@@ -11810,6 +11817,138 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(1);
 const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
 exports.default = new __Main__1.FunctionBar({
+    position: Position.Left,
+    entryGroups: [
+        [
+            new Entry({
+                name: "Show: All Rows",
+                on_Load: () => {
+                    Show.allRows();
+                },
+            }),
+            new Entry({
+                name: "Show: All Columns",
+                on_Load: () => {
+                    Show.allColumns();
+                },
+            }),
+            new Entry({
+                name: "Hide: Empty Rows",
+                on_Load: () => {
+                    Hide.emptyRows();
+                },
+            }),
+            new Entry({
+                name: "Hide: Empty Columns",
+                on_Load: () => {
+                    Hide.emptyColumns();
+                },
+            }),
+        ],
+    ],
+});
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(1);
+const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
+exports.default = new __Main__1.FunctionBar({
+    position: Position.Right,
+    entryGroups: [
+        [
+            new Entry({
+                name: "LOL",
+                on_Load: () => {
+                    Show.allRows();
+                },
+            }),
+            new Entry({
+                name: "WUT",
+                on_Load: () => {
+                    Show.allColumns();
+                },
+            }),
+        ],
+    ],
+});
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(1);
+const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
+exports.default = new __Main__1.FunctionBar({
+    position: Position.Top,
+    autoMap_KeyBindings: true,
+    keyBinding_Modifiers: ["alt"],
+    entryGroups: [
+        [
+            new Entry({
+                name: "Active",
+                on_Load: () => {
+                    Show.rows({ include: ["Routine", "Tasks.Active"] });
+                    Show.allColumns();
+                },
+            }),
+            new Entry({
+                name: "Plan",
+                on_Load: () => {
+                    Show.allColumns();
+                    Show.allRows();
+                },
+            }),
+        ],
+        [
+            new Entry({
+                name: "Routine",
+                on_Load: () => {
+                    Show.rows({ include: ["Routine"] });
+                    Show.allColumns();
+                    Hide.emptyColumns();
+                },
+            }),
+            new Entry({
+                name: "Today",
+                on_Load: () => {
+                    Show.rows({ include: ["Tasks.Active"] });
+                    Show.allColumns();
+                    Hide.emptyColumns();
+                },
+            }),
+            new Entry({
+                name: "Routine.Short",
+                on_Load: () => {
+                    Show.rows({ include: ["Routine.Short"] });
+                    Show.allColumns();
+                    Hide.emptyColumns();
+                },
+            }),
+        ],
+    ],
+});
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(1);
+const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
+exports.default = new __Main__1.FunctionBar({
     position: Position.Bottom,
     autoMap_KeyBindings: true,
     keyBinding_Modifiers: [],
@@ -11879,138 +12018,6 @@ exports.default = new __Main__1.FunctionBar({
                 name: "Hide.emptyColumns",
                 on_Load: () => {
                     Hide.emptyColumns();
-                },
-            }),
-        ],
-    ],
-});
-
-
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(1);
-const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
-exports.default = new __Main__1.FunctionBar({
-    position: Position.Top,
-    autoMap_KeyBindings: true,
-    keyBinding_Modifiers: ["alt"],
-    entryGroups: [
-        [
-            new Entry({
-                name: "Active",
-                on_Load: () => {
-                    Show.rows({ include: ["Routine", "Tasks.Active"] });
-                    Show.allColumns();
-                },
-            }),
-            new Entry({
-                name: "Plan",
-                on_Load: () => {
-                    Show.allColumns();
-                    Show.allRows();
-                },
-            }),
-        ],
-        [
-            new Entry({
-                name: "Routine",
-                on_Load: () => {
-                    Show.rows({ include: ["Routine"] });
-                    Show.allColumns();
-                    Hide.emptyColumns();
-                },
-            }),
-            new Entry({
-                name: "Today",
-                on_Load: () => {
-                    Show.rows({ include: ["Tasks.Active"] });
-                    Show.allColumns();
-                    Hide.emptyColumns();
-                },
-            }),
-            new Entry({
-                name: "Routine.Short",
-                on_Load: () => {
-                    Show.rows({ include: ["Routine.Short"] });
-                    Show.allColumns();
-                    Hide.emptyColumns();
-                },
-            }),
-        ],
-    ],
-});
-
-
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(1);
-const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
-exports.default = new __Main__1.FunctionBar({
-    position: Position.Left,
-    entryGroups: [
-        [
-            new Entry({
-                name: "Show: All Rows",
-                on_Load: () => {
-                    Show.allRows();
-                },
-            }),
-            new Entry({
-                name: "Show: All Columns",
-                on_Load: () => {
-                    Show.allColumns();
-                },
-            }),
-            new Entry({
-                name: "Hide: Empty Rows",
-                on_Load: () => {
-                    Hide.emptyRows();
-                },
-            }),
-            new Entry({
-                name: "Hide: Empty Columns",
-                on_Load: () => {
-                    Hide.emptyColumns();
-                },
-            }),
-        ],
-    ],
-});
-
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(1);
-const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
-exports.default = new __Main__1.FunctionBar({
-    position: Position.Right,
-    entryGroups: [
-        [
-            new Entry({
-                name: "LOL",
-                on_Load: () => {
-                    Show.allRows();
-                },
-            }),
-            new Entry({
-                name: "WUT",
-                on_Load: () => {
-                    Show.allColumns();
                 },
             }),
         ],
