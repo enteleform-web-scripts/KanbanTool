@@ -3,9 +3,23 @@
   display: flex;
   flex-direction: column;
   z-index: 10;
-  width: 100%;
-  bottom: 0;
   background: #444;
+}
+.CustomExtension--FunctionBar .Left_FunctionBar {
+  left: 0;
+  height: 100%;
+}
+.CustomExtension--FunctionBar .Right_FunctionBar {
+  right: 0;
+  height: 100%;
+}
+.CustomExtension--FunctionBar .Top_FunctionBar {
+  top: 0;
+  width: 100%;
+}
+.CustomExtension--FunctionBar .Bottom_FunctionBar {
+  bottom: 0;
+  width: 100%;
 }
 .CustomExtension--FunctionBar .Row {
   display: flex;

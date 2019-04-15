@@ -10574,7 +10574,7 @@ function _add_KeyBinding(functionBar, entry, keyBinding) {
 }
 function _build_Layout(entryGroups, position) {
     const positionClass = _BarPosition_CSS_Map[position];
-    const legendContainer = $("<div>", { "class": [cssVariables.root, positionClass].join() });
+    const legendContainer = $("<div>", { "class": [cssVariables.root, positionClass].join(" ") });
     $("body").append(legendContainer);
     const rows = [];
     entryGroups.forEach(group => {
@@ -10649,10 +10649,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555350384142)
+		const elapsedTime = _get_ElapsedTime(1555350897610)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:46:24 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:54:57 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
