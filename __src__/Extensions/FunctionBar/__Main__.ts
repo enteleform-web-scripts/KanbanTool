@@ -246,4 +246,4 @@ function _update_OriginalLayout(legendContainer:HTMLElement, position:FunctionBa
 }
 
 function _set_Style(element:(HTMLElement|JQuery|string), propertyName:string, propertyValue:string)
-	{$(element).style.setProperty(propertyName, propertyValue, "important")}
+	{$(element)[0].style.setProperty(propertyName, propertyValue, "important")}
