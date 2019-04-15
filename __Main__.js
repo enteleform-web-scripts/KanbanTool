@@ -10504,10 +10504,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555342942452)
+		const elapsedTime = _get_ElapsedTime(1555343404225)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:42:22 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:50:04 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10933,7 +10933,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(3);
 const KanbanTool_1 = __webpack_require__(1);
 function get_Columns() {
-    const models = KanbanTool_1.activeBoard.workflowStages().slice(1);
+    const models = KanbanTool_1.activeBoard.workflowStages()
+        .slice(1);
     const sortedModels = _get_SortedModels();
     const headerElements = _get_HeaderElements();
     const columns = sortedModels.map((model, i) => (new TaskContainer_1.TaskContainer({
@@ -11706,7 +11707,7 @@ function _hide_Containers({ containers, emptyContainers }) {
         const { descendants } = container;
         const has_Descendants = (descendants.length > 0);
         if (!_is_Empty(container, emptyContainers)) { }
-        else if (((has_Descendants) && descendants.some(child => _is_Empty(child, emptyContainers)))
+        else if (((has_Descendants) && descendants.every(child => _is_Empty(child, emptyContainers)))
             || (!has_Descendants)) {
             container.hide();
         }
