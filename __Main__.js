@@ -10460,158 +10460,6 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.KanbanTool = window.KT;
-exports.activeBoard = exports.KanbanTool.boards.models[0];
-exports.KanbanTool.activeBoard = exports.activeBoard;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports) {
-
-
-		function _get_ElapsedTime(startTime) {
-    const elapsed_MS = (new Date().getTime() - startTime);
-    const days = Math.floor(((elapsed_MS / 1000) / 86400));
-    const hours = Math.floor(((elapsed_MS / 1000) / 3600) % 24);
-    const minutes = Math.floor(((elapsed_MS / 1000) / 60) % 60);
-    const seconds = Math.floor((elapsed_MS / 1000) % 60);
-    const milliseconds = Math.floor(elapsed_MS % 1000);
-    const elapsedTime = (""
-        + _get_ElapsedTime_Segment("day", days, [], false)
-        + _get_ElapsedTime_Segment("hour", hours, [days], false)
-        + _get_ElapsedTime_Segment("minute", minutes, [days, hours], false)
-        + _get_ElapsedTime_Segment("second", seconds, [days, hours, minutes], true));
-    return elapsedTime;
-}
-		function _get_ElapsedTime_Segment(title, value, parents, mandatory) {
-    const parentValues_Exist = ((parents.length > 0)
-        && (Math.max(...parents) > 0));
-    if (mandatory || value || parentValues_Exist) {
-        const prefix = (parentValues_Exist)
-            ? ",  "
-            : "";
-        title =
-            (value == 1)
-                ? title
-                : `${title}s`;
-        return `${prefix}${value}:${title}`;
-    }
-    else {
-        return "";
-    }
-}
-
-		const elapsedTime = _get_ElapsedTime(1555347364757)
-
-		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:56:04 PM`.padEnd((line_1.length - 1)) + "│"
-		const divider = "".padStart((line_1.length - 2), "─")
-
-		console.log(""
-			+ `\n┌${divider}┐\n`
-			+ `${line_1}\n`
-			+ `${line_2}\n`
-			+ `└${divider}┘\n`
-		)
-	
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(1);
-const $ = __webpack_require__(0);
-class TaskContainer {
-    constructor({ type, domIndex, modelIndex, model, element }) {
-        this.children = [];
-        this.type = type;
-        this.domIndex = domIndex;
-        this.modelIndex = modelIndex;
-        this.model = model;
-        this._clickableElement = element;
-        this._collapsibleElement =
-            (this.type == TaskContainer.Type.Row)
-                ? $(element).parent()
-                : element;
-    }
-    get parents() {
-        let child = this;
-        const parents = [];
-        while (child.parent) {
-            parents.unshift(child.parent);
-            child = child.parent;
-        }
-        return parents;
-    }
-    get descendants() {
-        const descendants = [];
-        function add(container) {
-            container.children.forEach(child => {
-                descendants.push(child);
-                add(child);
-            });
-        }
-        add(this);
-        return descendants;
-    }
-    get name() { return this.model.attributes.name; }
-    get path() {
-        return ((this.type == TaskContainer.Type.Row)
-            ? this.name
-            : this._columnPath);
-    }
-    get tasks() {
-        return (KanbanTool_1.activeBoard.tasks().filter(task => {
-            const taskContainer = (this.type == TaskContainer.Type.Row)
-                ? task.swimlane()
-                : task.workflowStage();
-            return (taskContainer === this.model);
-        }));
-    }
-    get is_Collapsed() { return $(this._collapsibleElement).hasClass("kt-collapsed"); }
-    get is_Empty() { return (this.tasks.length == 0); }
-    get _columnPath() {
-        const tree = [...this.parents, this];
-        const names = tree.map(container => container.name);
-        return names.join("\\");
-    }
-    add_Child(child) {
-        child.parent = this;
-        this.children.push(child);
-    }
-    show() {
-        if (this.is_Collapsed) {
-            this._click();
-        }
-    }
-    hide() {
-        if (!this.is_Collapsed) {
-            this._click();
-        }
-    }
-    _click() { this._clickableElement.click(); }
-}
-exports.TaskContainer = TaskContainer;
-(function (TaskContainer) {
-    let Type;
-    (function (Type) {
-        Type[Type["Row"] = 0] = "Row";
-        Type[Type["Column"] = 1] = "Column";
-    })(Type = TaskContainer.Type || (TaskContainer.Type = {}));
-})(TaskContainer = exports.TaskContainer || (exports.TaskContainer = {}));
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const CSS_1 = __webpack_require__(12);
@@ -10719,10 +10567,8 @@ function _add_KeyBinding(functionBar, entry, keyBinding) {
     __main__1.KeyBinding.add(keyBinding, entry.on_Load, { preventDefault: true });
 }
 function _build_Layout(entryGroups) {
-    const cardType_Legend = $("table.kt-extensions-card_legend").detach();
     const legendContainer = $("<div>", { "class": cssVariables.root });
     $("body").append(legendContainer);
-    legendContainer.append(cardType_Legend);
     const rows = [];
     entryGroups.forEach(group => {
         const row = $("<div>", { "class": cssVariables.legendRow });
@@ -10746,6 +10592,158 @@ function _build_Cell(entry, keyBinding) {
 }
 
 /* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\FunctionBar"))
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.KanbanTool = window.KT;
+exports.activeBoard = exports.KanbanTool.boards.models[0];
+exports.KanbanTool.activeBoard = exports.activeBoard;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+
+		function _get_ElapsedTime(startTime) {
+    const elapsed_MS = (new Date().getTime() - startTime);
+    const days = Math.floor(((elapsed_MS / 1000) / 86400));
+    const hours = Math.floor(((elapsed_MS / 1000) / 3600) % 24);
+    const minutes = Math.floor(((elapsed_MS / 1000) / 60) % 60);
+    const seconds = Math.floor((elapsed_MS / 1000) % 60);
+    const milliseconds = Math.floor(elapsed_MS % 1000);
+    const elapsedTime = (""
+        + _get_ElapsedTime_Segment("day", days, [], false)
+        + _get_ElapsedTime_Segment("hour", hours, [days], false)
+        + _get_ElapsedTime_Segment("minute", minutes, [days, hours], false)
+        + _get_ElapsedTime_Segment("second", seconds, [days, hours, minutes], true));
+    return elapsedTime;
+}
+		function _get_ElapsedTime_Segment(title, value, parents, mandatory) {
+    const parentValues_Exist = ((parents.length > 0)
+        && (Math.max(...parents) > 0));
+    if (mandatory || value || parentValues_Exist) {
+        const prefix = (parentValues_Exist)
+            ? ",  "
+            : "";
+        title =
+            (value == 1)
+                ? title
+                : `${title}s`;
+        return `${prefix}${value}:${title}`;
+    }
+    else {
+        return "";
+    }
+}
+
+		const elapsedTime = _get_ElapsedTime(1555349729958)
+
+		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
+		const line_2  = `│  At     1:35:29 PM`.padEnd((line_1.length - 1)) + "│"
+		const divider = "".padStart((line_1.length - 2), "─")
+
+		console.log(""
+			+ `\n┌${divider}┐\n`
+			+ `${line_1}\n`
+			+ `${line_2}\n`
+			+ `└${divider}┘\n`
+		)
+	
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const KanbanTool_1 = __webpack_require__(2);
+const $ = __webpack_require__(0);
+class TaskContainer {
+    constructor({ type, domIndex, modelIndex, model, element }) {
+        this.children = [];
+        this.type = type;
+        this.domIndex = domIndex;
+        this.modelIndex = modelIndex;
+        this.model = model;
+        this._clickableElement = element;
+        this._collapsibleElement =
+            (this.type == TaskContainer.Type.Row)
+                ? $(element).parent()
+                : element;
+    }
+    get parents() {
+        let child = this;
+        const parents = [];
+        while (child.parent) {
+            parents.unshift(child.parent);
+            child = child.parent;
+        }
+        return parents;
+    }
+    get descendants() {
+        const descendants = [];
+        function add(container) {
+            container.children.forEach(child => {
+                descendants.push(child);
+                add(child);
+            });
+        }
+        add(this);
+        return descendants;
+    }
+    get name() { return this.model.attributes.name; }
+    get path() {
+        return ((this.type == TaskContainer.Type.Row)
+            ? this.name
+            : this._columnPath);
+    }
+    get tasks() {
+        return (KanbanTool_1.activeBoard.tasks().filter(task => {
+            const taskContainer = (this.type == TaskContainer.Type.Row)
+                ? task.swimlane()
+                : task.workflowStage();
+            return (taskContainer === this.model);
+        }));
+    }
+    get is_Collapsed() { return $(this._collapsibleElement).hasClass("kt-collapsed"); }
+    get is_Empty() { return (this.tasks.length == 0); }
+    get _columnPath() {
+        const tree = [...this.parents, this];
+        const names = tree.map(container => container.name);
+        return names.join("\\");
+    }
+    add_Child(child) {
+        child.parent = this;
+        this.children.push(child);
+    }
+    show() {
+        if (this.is_Collapsed) {
+            this._click();
+        }
+    }
+    hide() {
+        if (!this.is_Collapsed) {
+            this._click();
+        }
+    }
+    _click() { this._clickableElement.click(); }
+}
+exports.TaskContainer = TaskContainer;
+(function (TaskContainer) {
+    let Type;
+    (function (Type) {
+        Type[Type["Row"] = 0] = "Row";
+        Type[Type["Column"] = 1] = "Column";
+    })(Type = TaskContainer.Type || (TaskContainer.Type = {}));
+})(TaskContainer = exports.TaskContainer || (exports.TaskContainer = {}));
+
 
 /***/ }),
 /* 5 */
@@ -10818,7 +10816,7 @@ function _convert_HotKeys_ToString(keys) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(3);
+const TaskContainer_1 = __webpack_require__(4);
 const get_Rows_1 = __webpack_require__(7);
 const get_Columns_1 = __webpack_require__(8);
 const Glob_1 = __webpack_require__(20);
@@ -10905,8 +10903,8 @@ function _match_Glob(container, target) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(3);
-const KanbanTool_1 = __webpack_require__(1);
+const TaskContainer_1 = __webpack_require__(4);
+const KanbanTool_1 = __webpack_require__(2);
 const $ = __webpack_require__(0);
 function get_Rows() {
     const headerElements = $.find("kt-board > tbody > tr > th");
@@ -10930,8 +10928,8 @@ exports.get_Rows = get_Rows;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(3);
-const KanbanTool_1 = __webpack_require__(1);
+const TaskContainer_1 = __webpack_require__(4);
+const KanbanTool_1 = __webpack_require__(2);
 function get_Columns() {
     const models = KanbanTool_1.activeBoard.workflowStages()
         .slice(1);
@@ -10982,7 +10980,7 @@ function _update_ColumnRelationships(columns) {
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(2);
+__webpack_require__(3);
 module.exports = __webpack_require__(10);
 
 
@@ -10994,10 +10992,9 @@ module.exports = __webpack_require__(10);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(11);
-const __Main__1 = __webpack_require__(4);
-const Bottom_1 = __webpack_require__(23);
-__Main__1.FunctionBar.load(Bottom_1.bottom_FunctionBar);
-__webpack_require__(24);
+const __Main__1 = __webpack_require__(1);
+__Main__1.FunctionBar.load(__webpack_require__(23), __webpack_require__(24), __webpack_require__(25), __webpack_require__(26));
+__webpack_require__(27);
 
 
 /***/ }),
@@ -11725,7 +11722,7 @@ function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_In
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(1);
+const KanbanTool_1 = __webpack_require__(2);
 function get_EmptyRow_Indexes(columns) {
     const hiddenColumn_Indexes = columns
         .filter(column => column.is_Collapsed)
@@ -11810,12 +11807,12 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(4);
+const __Main__1 = __webpack_require__(1);
 const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
-exports.bottom_FunctionBar = new __Main__1.FunctionBar({
+exports.default = new __Main__1.FunctionBar({
     position: Position.Bottom,
     autoMap_KeyBindings: true,
-    keyBinding_Modifiers: ["alt"],
+    keyBinding_Modifiers: [],
     entryGroups: [
         [
             new Entry({
@@ -11891,6 +11888,138 @@ exports.bottom_FunctionBar = new __Main__1.FunctionBar({
 
 /***/ }),
 /* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(1);
+const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
+exports.default = new __Main__1.FunctionBar({
+    position: Position.Top,
+    autoMap_KeyBindings: true,
+    keyBinding_Modifiers: ["alt"],
+    entryGroups: [
+        [
+            new Entry({
+                name: "Active",
+                on_Load: () => {
+                    Show.rows({ include: ["Routine", "Tasks.Active"] });
+                    Show.allColumns();
+                },
+            }),
+            new Entry({
+                name: "Plan",
+                on_Load: () => {
+                    Show.allColumns();
+                    Show.allRows();
+                },
+            }),
+        ],
+        [
+            new Entry({
+                name: "Routine",
+                on_Load: () => {
+                    Show.rows({ include: ["Routine"] });
+                    Show.allColumns();
+                    Hide.emptyColumns();
+                },
+            }),
+            new Entry({
+                name: "Today",
+                on_Load: () => {
+                    Show.rows({ include: ["Tasks.Active"] });
+                    Show.allColumns();
+                    Hide.emptyColumns();
+                },
+            }),
+            new Entry({
+                name: "Routine.Short",
+                on_Load: () => {
+                    Show.rows({ include: ["Routine.Short"] });
+                    Show.allColumns();
+                    Hide.emptyColumns();
+                },
+            }),
+        ],
+    ],
+});
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(1);
+const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
+exports.default = new __Main__1.FunctionBar({
+    position: Position.Left,
+    entryGroups: [
+        [
+            new Entry({
+                name: "Show: All Rows",
+                on_Load: () => {
+                    Show.allRows();
+                },
+            }),
+            new Entry({
+                name: "Show: All Columns",
+                on_Load: () => {
+                    Show.allColumns();
+                },
+            }),
+            new Entry({
+                name: "Hide: Empty Rows",
+                on_Load: () => {
+                    Hide.emptyRows();
+                },
+            }),
+            new Entry({
+                name: "Hide: Empty Columns",
+                on_Load: () => {
+                    Hide.emptyColumns();
+                },
+            }),
+        ],
+    ],
+});
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(1);
+const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
+exports.default = new __Main__1.FunctionBar({
+    position: Position.Right,
+    entryGroups: [
+        [
+            new Entry({
+                name: "LOL",
+                on_Load: () => {
+                    Show.allRows();
+                },
+            }),
+            new Entry({
+                name: "WUT",
+                on_Load: () => {
+                    Show.allColumns();
+                },
+            }),
+        ],
+    ],
+});
+
+
+/***/ }),
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
