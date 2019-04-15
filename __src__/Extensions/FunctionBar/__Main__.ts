@@ -232,15 +232,15 @@ function _build_Cell(entry:Entry, keyBinding:string){
 function _update_OriginalLayout(legendContainer:HTMLElement, position:FunctionBar.Position){
 	setTimeout( () => {
 		const $legendContainer = $(legendContainer)
-		const board = (document as any).querySelector("#show > div.kt-side-panel-slide")
+		const $board           = $("#show > div.kt-side-panel-slide")
 
 		if(position == FunctionBar.Position.Top){
 			_set_Style("nav", "margin-top", `${$legendContainer.height()}px`)
-			_set_Style(board, "margin-top", `${$legendContainer.height()}px`)
+			_set_Style($board, "margin-top", `${$legendContainer.height()}px`)
 		}
 
 		if(position == FunctionBar.Position.Bottom){
-			_set_Style(board, "margin-bottom", `${$legendContainer.height()}px`)
+			_set_Style($board, "margin-bottom", `${$legendContainer.height()}px`)
 		}
 	}, 1000)
 }
