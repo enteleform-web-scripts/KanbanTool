@@ -235,12 +235,13 @@ function _update_OriginalLayout(legendContainer:HTMLElement, position:FunctionBa
 		const $board           = $("#show > div.kt-side-panel-slide")
 
 		if(position == FunctionBar.Position.Top){
-			_set_Style("nav", "margin-top", `${$legendContainer.height()}px`)
-			_set_Style($board, "margin-top", `${$legendContainer.height()}px`)
+			_set_Style(".navbar", "margin-top", `${$legendContainer.height()}px`)
+			_set_Style($board,    "margin-top", `${$legendContainer.height()}px`)
 		}
 
 		if(position == FunctionBar.Position.Bottom){
-			_set_Style($board, "margin-bottom", `${$legendContainer.height()}px`)
+			const padding = 10
+			_set_Style($board, "margin-bottom", `${$legendContainer.height() + padding}px`)
 		}
 	}, 1000)
 }
