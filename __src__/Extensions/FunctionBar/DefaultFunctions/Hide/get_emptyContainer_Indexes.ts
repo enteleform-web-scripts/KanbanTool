@@ -8,22 +8,22 @@ import {activeBoard  } from "~/Utils/KanbanTool"
 //###  Exports  ###//
 //#################//
 
-export function get_EmptyRows(columns:TaskContainer[]){
+export function get_EmptyRow_Indexes(columns:TaskContainer[]){
 	const hiddenColumn_Indexes =
 		columns
 			.filter(column => column.is_Collapsed)
 			.map   (column => column.modelIndex  )
 
-	return _get_EmptyRows(hiddenColumn_Indexes)
+	return _get_EmptyRow_Indexes(hiddenColumn_Indexes)
 }
 
-export function get_EmptyColumns(rows:TaskContainer[]){
+export function get_EmptyColumn_Indexes(rows:TaskContainer[]){
 	const hiddenRow_Indexes =
 		rows
 			.filter(row => row.is_Collapsed)
 			.map   (row => row.modelIndex  )
 
-	return _get_EmptyColumns(hiddenRow_Indexes)
+	return _get_EmptyColumn_Indexes(hiddenRow_Indexes)
 }
 
 
@@ -70,18 +70,20 @@ function _get_Tasks(row:any, column:any){
 	)
 }
 
-function _get_EmptyRows(hiddenColumn_Indexes:number[]){
+function _get_EmptyRow_Indexes(hiddenColumn_Indexes:number[]){
 	const emptyCell_Map = _get_EmptyCell_Map()
 	const rowCount      = emptyCell_Map.length
 	const emptyRows     = []
 
 	console.log("HIDDEN COLUMNS:", hiddenColumn_Indexes)
+	console.log("emptyCell_Map.Before", emptyCell_Map)
 
 	hiddenColumn_Indexes.forEach(columnIndex => {
 		emptyCell_Map.forEach(row => {
 			row[columnIndex] = true
 		})
 	})
+	console.log("emptyCell_Map.After", emptyCell_Map)
 
 	for(let rowIndex = 0; (rowIndex < rowCount); rowIndex++){
 		const row_IsEmpty =
@@ -96,16 +98,18 @@ function _get_EmptyRows(hiddenColumn_Indexes:number[]){
 	return emptyRows
 }
 
-function _get_EmptyColumns(hiddenRow_Indexes:number[]){
+function _get_EmptyColumn_Indexes(hiddenRow_Indexes:number[]){
 	const emptyCell_Map = _get_EmptyCell_Map()
 	const columnCount   = emptyCell_Map[0].length
 	const emptyColumns  = []
 
 	console.log("HIDDEN ROWS:", hiddenRow_Indexes)
+	console.log("emptyCell_Map.Before", emptyCell_Map)
 
 	hiddenRow_Indexes.forEach(rowIndex => {
 		emptyCell_Map[rowIndex].map(is_Empty => true)
 	})
+	console.log("emptyCell_Map.After", emptyCell_Map)
 
 	for(let columnIndex = 0; (columnIndex < columnCount); columnIndex++){
 		const cells = emptyCell_Map.map(row => row[columnIndex])
