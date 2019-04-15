@@ -107,7 +107,8 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes:number[]){
 	console.log("emptyCell_Map.Before", emptyCell_Map)
 
 	hiddenRow_Indexes.forEach(rowIndex => {
-		emptyCell_Map[rowIndex].map(is_Empty => true)
+		emptyCell_Map[rowIndex] =
+			emptyCell_Map[rowIndex].map(is_Empty => true)
 	})
 	console.log("emptyCell_Map.After", emptyCell_Map)
 
