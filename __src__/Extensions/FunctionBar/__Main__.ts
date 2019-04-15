@@ -235,8 +235,7 @@ function _update_OriginalLayout(legendContainer:HTMLElement, position:FunctionBa
 		const board = (document as any).querySelector("#show > div.kt-side-panel-slide")
 
 		if(position == FunctionBar.Position.Top){
-			const nav = (document as any).querySelector("nav")
-			_set_Style(nav,   "margin-top", `${$legendContainer.height()}px`)
+			_set_Style("nav", "margin-top", `${$legendContainer.height()}px`)
 			_set_Style(board, "margin-top", `${$legendContainer.height()}px`)
 		}
 
@@ -246,5 +245,5 @@ function _update_OriginalLayout(legendContainer:HTMLElement, position:FunctionBa
 	}, 1000)
 }
 
-function _set_Style(element:HTMLElement, propertyName:string, propertyValue:string)
-	{element.style.setProperty(propertyName, propertyValue, "important")}
+function _set_Style(element:(HTMLElement|JQuery|string), propertyName:string, propertyValue:string)
+	{$(element).style.setProperty(propertyName, propertyValue, "important")}
