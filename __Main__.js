@@ -10504,10 +10504,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555346702811)
+		const elapsedTime = _get_ElapsedTime(1555347077939)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:45:02 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:51:17 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11794,7 +11794,8 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
     console.log("HIDDEN ROWS:", hiddenRow_Indexes);
     console.log("emptyCell_Map.Before", emptyCell_Map);
     hiddenRow_Indexes.forEach(rowIndex => {
-        emptyCell_Map[rowIndex].map(is_Empty => true);
+        emptyCell_Map[rowIndex] =
+            emptyCell_Map[rowIndex].map(is_Empty => true);
     });
     console.log("emptyCell_Map.After", emptyCell_Map);
     for (let columnIndex = 0; (columnIndex < columnCount); columnIndex++) {
