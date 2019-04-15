@@ -75,15 +75,11 @@ function _get_EmptyRow_Indexes(hiddenColumn_Indexes:number[]){
 	const rowCount      = emptyCell_Map.length
 	const emptyRows     = []
 
-	console.log("HIDDEN COLUMNS:", hiddenColumn_Indexes)
-	console.log("emptyCell_Map.Before", emptyCell_Map)
-
 	hiddenColumn_Indexes.forEach(columnIndex => {
 		emptyCell_Map.forEach(row => {
 			row[columnIndex] = true
 		})
 	})
-	console.log("emptyCell_Map.After", emptyCell_Map)
 
 	for(let rowIndex = 0; (rowIndex < rowCount); rowIndex++){
 		const row_IsEmpty =
@@ -103,14 +99,10 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes:number[]){
 	const columnCount   = emptyCell_Map[0].length
 	const emptyColumns  = []
 
-	console.log("HIDDEN ROWS:", hiddenRow_Indexes)
-	console.log("emptyCell_Map.Before", emptyCell_Map)
-
 	hiddenRow_Indexes.forEach(rowIndex => {
 		emptyCell_Map[rowIndex] =
 			emptyCell_Map[rowIndex].map(is_Empty => true)
 	})
-	console.log("emptyCell_Map.After", emptyCell_Map)
 
 	for(let columnIndex = 0; (columnIndex < columnCount); columnIndex++){
 		const cells = emptyCell_Map.map(row => row[columnIndex])

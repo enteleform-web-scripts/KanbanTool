@@ -58,19 +58,27 @@ export const bottom_FunctionBar = new FunctionBar({
 
 		[
 			new Entry({
-				name: "Hide.emptyColumns",
+				name: "Show.allRows",
+				on_Load: () => {
+					Show.allRows()
+				},
+			}),
+			new Entry({
+				name: "Show.allColumns",
 				on_Load: () => {
 					Show.allColumns()
-					Show.allRows()
-					Hide.emptyColumns()
 				},
 			}),
 			new Entry({
 				name: "Hide.emptyRows",
 				on_Load: () => {
-					Show.allColumns()
-					Show.allRows()
 					Hide.emptyRows()
+				},
+			}),
+			new Entry({
+				name: "Hide.emptyColumns",
+				on_Load: () => {
+					Hide.emptyColumns()
 				},
 			}),
 		],
