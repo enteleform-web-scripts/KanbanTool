@@ -10504,10 +10504,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555345669252)
+		const elapsedTime = _get_ElapsedTime(1555346270265)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:27:49 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:37:50 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10527,7 +10527,6 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
 Object.defineProperty(exports, "__esModule", { value: true });
 const KanbanTool_1 = __webpack_require__(1);
 const $ = __webpack_require__(0);
-console.log("LOLWUT");
 class TaskContainer {
     constructor({ type, domIndex, modelIndex, model, element }) {
         this.children = [];
@@ -11772,6 +11771,7 @@ function _get_EmptyRows(hiddenColumn_Indexes) {
     const emptyCell_Map = _get_EmptyCell_Map();
     const rowCount = emptyCell_Map.length;
     const emptyRows = [];
+    console.log("HIDDEN COLUMNS:", hiddenColumn_Indexes);
     hiddenColumn_Indexes.forEach(columnIndex => {
         emptyCell_Map.forEach(row => {
             row[columnIndex] = true;
@@ -11789,6 +11789,7 @@ function _get_EmptyColumns(hiddenRow_Indexes) {
     const emptyCell_Map = _get_EmptyCell_Map();
     const columnCount = emptyCell_Map[0].length;
     const emptyColumns = [];
+    console.log("HIDDEN ROWS:", hiddenRow_Indexes);
     hiddenRow_Indexes.forEach(rowIndex => {
         emptyCell_Map[rowIndex].map(is_Empty => true);
     });
