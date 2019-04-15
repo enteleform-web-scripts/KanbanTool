@@ -10504,9 +10504,9 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555341250814)
+		const elapsedTime = _get_ElapsedTime(1555341312992)
 
-		const line_1  = `│  Built  {  ${line_1}  }  Ago  │`
+		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
 		const line_2  = `│  At     ${timeString}`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
