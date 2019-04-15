@@ -16,7 +16,7 @@ class S{
 	static distributionFolder   = "__dist__"
 	static compiledConfigFolder = "__compiled__"
 	static staticFolder         = "Static"
-	static mainName             = "__main__"
+	static mainName             = "__Main__"
 
 	static css_FileBase       = "CSS.styl"
 	static css_FileBase_RegEx = new RegExp(escape_RegEx(S.css_FileBase) + "$")

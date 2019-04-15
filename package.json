@@ -58,7 +58,7 @@
   },
 
   "scripts": {
-		"build:local": "webpack --config ./.config/webpack/Production/__main__.ts",
+		"build:local": "webpack --config ./.config/webpack/Production/__Main__.ts",
 
 		"build:push":   "npm-run-all build:push:*",
     "build:push:1": "npm run build:local",

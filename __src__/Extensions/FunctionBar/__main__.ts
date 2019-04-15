@@ -186,11 +186,8 @@ function _add_KeyBinding(
 }
 
 function _build_Layout(entryGroups:Entry[][]){
-	const cardType_Legend = $("table.kt-extensions-card_legend").detach()
 	const legendContainer = $("<div>", {"class":cssVariables.root})
-
-	$("body")      .append(legendContainer)
-	legendContainer.append(cardType_Legend)
+	$("body").append(legendContainer)
 
 	const rows = []
 	entryGroups.forEach(group => {

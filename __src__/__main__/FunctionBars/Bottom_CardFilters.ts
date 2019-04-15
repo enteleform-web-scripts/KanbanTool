@@ -4,11 +4,11 @@ import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
 const {Entry, Position, Show, Hide} = FunctionBar
 
 
-export const bottom_FunctionBar = new FunctionBar({
+export default new FunctionBar({
 
 	position:             Position.Bottom,
 	autoMap_KeyBindings:  true,
-	keyBinding_Modifiers: ["alt"],
+	keyBinding_Modifiers: [],
 
 	entryGroups:[
 
