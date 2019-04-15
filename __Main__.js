@@ -81,232 +81,11 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
-
-
-		function _get_ElapsedTime(startTime) {
-    const elapsed_MS = (new Date().getTime() - startTime);
-    const days = Math.floor(((elapsed_MS / 1000) / 86400));
-    const hours = Math.floor(((elapsed_MS / 1000) / 3600) % 24);
-    const minutes = Math.floor(((elapsed_MS / 1000) / 60) % 60);
-    const seconds = Math.floor((elapsed_MS / 1000) % 60);
-    const milliseconds = Math.floor(elapsed_MS % 1000);
-    const elapsedTime = (""
-        + _get_TimeString_Segment("day", days, [], false)
-        + _get_TimeString_Segment("hour", hours, [days], false)
-        + _get_TimeString_Segment("minute", minutes, [days, hours], false)
-        + _get_TimeString_Segment("second", seconds, [days, hours, minutes], true));
-    return elapsedTime;
-}
-		function _get_TimeString_Segment(title, value, parents, mandatory) {
-    const parentValues_Exist = ((parents.length > 0)
-        && (Math.max(...parents) > 0));
-    if (mandatory || value || parentValues_Exist) {
-        const prefix = (parentValues_Exist)
-            ? ",  "
-            : "";
-        title =
-            (value == 1)
-                ? title
-                : `${title}s`;
-        return `${prefix}${value}:${title}`;
-    }
-    else {
-        return "";
-    }
-}
-
-		const elapsedTime  = _get_ElapsedTime(1555340488795)
-		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const divider      = "".padStart((buildMessage.length - 2), "─")
-
-		console.log(""
-			+ `\n┌${divider}┐\n`
-			+ `${buildMessage}\n`
-			+ `└${divider}┘\n`
-		)
-	
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.KanbanTool = window.KT;
-exports.activeBoard = exports.KanbanTool.boards.models[0];
-exports.KanbanTool.activeBoard = exports.activeBoard;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(0);
-module.exports = __webpack_require__(3);
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const get_Columns_1 = __webpack_require__(4);
-const columns = get_Columns_1.get_Columns();
-const x = columns[3];
-console.log(x);
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
-const KanbanTool_1 = __webpack_require__(1);
-function get_Columns() {
-    const headerElements = _get_HeaderElements();
-    const models = _get_SortedModels();
-    const columns = headerElements.map((element, i) => (new TaskContainer_1.TaskContainer({
-        type: TaskContainer_1.TaskContainer.Type.Column,
-        domIndex: i,
-        model: models[i],
-        element: element,
-    })));
-    _update_ColumnRelationships(columns);
-    return columns;
-}
-exports.get_Columns = get_Columns;
-function _get_HeaderElements() {
-    const rows = $("kt-board > thead").children().toArray();
-    const swimLane_Count = KanbanTool_1.activeBoard.swimlanes().length;
-    const elements = rows.flatMap(row => $(row).children().toArray());
-    if (swimLane_Count > 1) {
-        elements.splice(0, 1);
-    }
-    return elements;
-}
-function _get_SortedModels() {
-    const rootModel = KanbanTool_1.activeBoard.workflowStages().toArray()[0];
-    const sortedModels = [];
-    let row = rootModel.children();
-    while (row.length > 0) {
-        sortedModels.push(...row);
-        row = row.flatMap(model => model.children());
-    }
-    return sortedModels;
-}
-function _update_ColumnRelationships(columns) {
-    columns.forEach(parent => {
-        columns.forEach(child => {
-            if (child.model.parent() == parent.model) {
-                parent.add_Child(child);
-            }
-        });
-    });
-}
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(1);
-const $ = __webpack_require__(6);
-class TaskContainer {
-    constructor({ type, domIndex, model, element }) {
-        this.children = [];
-        this.type = type;
-        this.domIndex = domIndex;
-        this.model = model;
-        this._clickableElement = element;
-        this._collapsibleElement =
-            (this.type == TaskContainer.Type.Row)
-                ? $(element).parent()
-                : element;
-    }
-    get parents() {
-        let child = this;
-        const parents = [];
-        while (child.parent) {
-            parents.unshift(child.parent);
-            child = child.parent;
-        }
-        return parents;
-    }
-    get descendants() {
-        const descendants = [];
-        function add(container) {
-            container.children.forEach(child => {
-                descendants.push(child);
-                add(child);
-            });
-        }
-        add(this);
-        return descendants;
-    }
-    get name() { return this.model.attributes.name; }
-    get path() {
-        return ((this.type == TaskContainer.Type.Row)
-            ? this.name
-            : this._columnPath);
-    }
-    get tasks() {
-        return (KanbanTool_1.activeBoard.tasks().filter(task => {
-            const taskContainer = (this.type == TaskContainer.Type.Row)
-                ? task.swimlane()
-                : task.workflowStage();
-            return (taskContainer === this.model);
-        }));
-    }
-    get is_Collapsed() { return $(this._collapsibleElement).hasClass("kt-collapsed"); }
-    get is_Empty() { return (this.tasks.length == 0); }
-    get _columnPath() {
-        const tree = [...this.parents, this];
-        const names = tree.map(container => container.name);
-        return names.join("\\");
-    }
-    add_Child(child) {
-        child.parent = this;
-        this.children.push(child);
-    }
-    show() {
-        if (this.is_Collapsed) {
-            this._click();
-        }
-    }
-    hide() {
-        if (!this.is_Collapsed) {
-            this._click();
-        }
-    }
-    _click() { this._clickableElement.click(); }
-}
-exports.TaskContainer = TaskContainer;
-(function (TaskContainer) {
-    let Type;
-    (function (Type) {
-        Type[Type["Row"] = 0] = "Row";
-        Type[Type["Column"] = 1] = "Column";
-    })(Type = TaskContainer.Type || (TaskContainer.Type = {}));
-})(TaskContainer = exports.TaskContainer || (exports.TaskContainer = {}));
-
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10674,6 +10453,1459 @@ if ( !noGlobal ) {
 
 return jQuery;
 } );
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.KanbanTool = window.KT;
+exports.activeBoard = exports.KanbanTool.boards.models[0];
+exports.KanbanTool.activeBoard = exports.activeBoard;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports) {
+
+
+		function _get_ElapsedTime(startTime) {
+    const elapsed_MS = (new Date().getTime() - startTime);
+    const days = Math.floor(((elapsed_MS / 1000) / 86400));
+    const hours = Math.floor(((elapsed_MS / 1000) / 3600) % 24);
+    const minutes = Math.floor(((elapsed_MS / 1000) / 60) % 60);
+    const seconds = Math.floor((elapsed_MS / 1000) % 60);
+    const milliseconds = Math.floor(elapsed_MS % 1000);
+    const elapsedTime = (""
+        + _get_TimeString_Segment("day", days, [], false)
+        + _get_TimeString_Segment("hour", hours, [days], false)
+        + _get_TimeString_Segment("minute", minutes, [days, hours], false)
+        + _get_TimeString_Segment("second", seconds, [days, hours, minutes], true));
+    return elapsedTime;
+}
+		function _get_TimeString_Segment(title, value, parents, mandatory) {
+    const parentValues_Exist = ((parents.length > 0)
+        && (Math.max(...parents) > 0));
+    if (mandatory || value || parentValues_Exist) {
+        const prefix = (parentValues_Exist)
+            ? ",  "
+            : "";
+        title =
+            (value == 1)
+                ? title
+                : `${title}s`;
+        return `${prefix}${value}:${title}`;
+    }
+    else {
+        return "";
+    }
+}
+
+		const elapsedTime = _get_ElapsedTime(1555341250814)
+
+		const line_1  = `│  Built  {  ${line_1}  }  Ago  │`
+		const line_2  = `│  At     ${timeString}`.padEnd((line_1.length - 1)) + "│"
+		const divider = "".padStart((line_1.length - 2), "─")
+
+		console.log(""
+			+ `\n┌${divider}┐\n`
+			+ `${line_1}\n`
+			+ `${line_2}\n`
+			+ `└${divider}┘\n`
+		)
+	
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const KanbanTool_1 = __webpack_require__(1);
+const $ = __webpack_require__(0);
+class TaskContainer {
+    constructor({ type, domIndex, model, element }) {
+        this.children = [];
+        this.type = type;
+        this.domIndex = domIndex;
+        this.model = model;
+        this._clickableElement = element;
+        this._collapsibleElement =
+            (this.type == TaskContainer.Type.Row)
+                ? $(element).parent()
+                : element;
+    }
+    get parents() {
+        let child = this;
+        const parents = [];
+        while (child.parent) {
+            parents.unshift(child.parent);
+            child = child.parent;
+        }
+        return parents;
+    }
+    get descendants() {
+        const descendants = [];
+        function add(container) {
+            container.children.forEach(child => {
+                descendants.push(child);
+                add(child);
+            });
+        }
+        add(this);
+        return descendants;
+    }
+    get name() { return this.model.attributes.name; }
+    get path() {
+        return ((this.type == TaskContainer.Type.Row)
+            ? this.name
+            : this._columnPath);
+    }
+    get tasks() {
+        return (KanbanTool_1.activeBoard.tasks().filter(task => {
+            const taskContainer = (this.type == TaskContainer.Type.Row)
+                ? task.swimlane()
+                : task.workflowStage();
+            return (taskContainer === this.model);
+        }));
+    }
+    get is_Collapsed() { return $(this._collapsibleElement).hasClass("kt-collapsed"); }
+    get is_Empty() { return (this.tasks.length == 0); }
+    get _columnPath() {
+        const tree = [...this.parents, this];
+        const names = tree.map(container => container.name);
+        return names.join("\\");
+    }
+    add_Child(child) {
+        child.parent = this;
+        this.children.push(child);
+    }
+    show() {
+        if (this.is_Collapsed) {
+            this._click();
+        }
+    }
+    hide() {
+        if (!this.is_Collapsed) {
+            this._click();
+        }
+    }
+    _click() { this._clickableElement.click(); }
+}
+exports.TaskContainer = TaskContainer;
+(function (TaskContainer) {
+    let Type;
+    (function (Type) {
+        Type[Type["Row"] = 0] = "Row";
+        Type[Type["Column"] = 1] = "Column";
+    })(Type = TaskContainer.Type || (TaskContainer.Type = {}));
+})(TaskContainer = exports.TaskContainer || (exports.TaskContainer = {}));
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(__dirname) {
+Object.defineProperty(exports, "__esModule", { value: true });
+const CSS_1 = __webpack_require__(12);
+CSS_1.CSS.apply(__dirname);
+const cssVariables = __webpack_require__(15);
+const __main__1 = __webpack_require__(5);
+const Module_BaseClasses_1 = __webpack_require__(18);
+const Entry_1 = __webpack_require__(19);
+const __Main__1 = __webpack_require__(6);
+const __Main__2 = __webpack_require__(21);
+const $ = __webpack_require__(0);
+class FunctionBar extends Module_BaseClasses_1.Module {
+    constructor({ position, autoMap_KeyBindings, keyBinding_Modifiers, entryGroups }) {
+        super();
+        this.position = position;
+        this.autoMap_KeyBindings = autoMap_KeyBindings;
+        this.keyBinding_Modifiers = keyBinding_Modifiers;
+        this.entryGroups = entryGroups;
+    }
+    static load(...functionBars) {
+        functionBars.forEach(functionBar => {
+            functionBar.initialize();
+        });
+    }
+    initialize() {
+        if (_HorizontalPositions.includes(this.position)) {
+            this._initialize_HorizontalBar();
+        }
+        else {
+            this._initialize_VerticalBar();
+        }
+    }
+    _initialize_HorizontalBar() {
+    }
+    _initialize_VerticalBar() {
+        _validate_AutoMapped_VerticalRows(this);
+        const elements = _build_Layout(this.entryGroups);
+        this.entryGroups.forEach((group, groupIndex) => {
+            group.forEach((entry, entryIndex) => {
+                _initialize_VerticalEntry(this, groupIndex, entry, entryIndex, elements);
+            });
+        });
+    }
+}
+FunctionBar.Show = __Main__1.Show;
+FunctionBar.Hide = __Main__2.Hide;
+FunctionBar.Entry = Entry_1.Entry;
+exports.FunctionBar = FunctionBar;
+(function (FunctionBar) {
+    let Position;
+    (function (Position) {
+        Position[Position["Left"] = 0] = "Left";
+        Position[Position["Right"] = 1] = "Right";
+        Position[Position["Top"] = 2] = "Top";
+        Position[Position["Bottom"] = 3] = "Bottom";
+    })(Position = FunctionBar.Position || (FunctionBar.Position = {}));
+    let KeyBinding_Mode;
+    (function (KeyBinding_Mode) {
+        KeyBinding_Mode[KeyBinding_Mode["Automatic"] = 0] = "Automatic";
+        KeyBinding_Mode[KeyBinding_Mode["Manual"] = 1] = "Manual";
+    })(KeyBinding_Mode = FunctionBar.KeyBinding_Mode || (FunctionBar.KeyBinding_Mode = {}));
+})(FunctionBar = exports.FunctionBar || (exports.FunctionBar = {}));
+const _autoMapped_Key_Rows = __main__1.KeyBinding.alphanumericKey_Rows;
+const _HorizontalPositions = [
+    FunctionBar.Position.Left,
+    FunctionBar.Position.Right,
+];
+function _validate_AutoMapped_VerticalRows(functionBar) {
+    if (!functionBar.autoMap_KeyBindings) {
+        return;
+    }
+    const valid_GroupCount = (functionBar.entryGroups.length <= _autoMapped_Key_Rows.length);
+    const valid_KeyCounts = functionBar.entryGroups.every((group, i) => (group.length <= _autoMapped_Key_Rows[i].length));
+    if (!(valid_GroupCount && valid_KeyCounts)) {
+        const position = functionBar.position.valueOf();
+        throw new Error(`
+			Invalid FunctionBar Group/Entry Count @ ${position} Bar
+		`);
+    }
+}
+function _get_Entry_KeyBinding(functionBar, groupIndex, entry, entryIndex) {
+    let keyBinding = null;
+    if (functionBar.autoMap_KeyBindings) {
+        keyBinding = _autoMapped_Key_Rows[groupIndex][entryIndex];
+    }
+    else if (entry.keyBinding) {
+        keyBinding = entry.keyBinding;
+    }
+    return keyBinding;
+}
+function _initialize_VerticalEntry(functionBar, groupIndex, entry, entryIndex, elements) {
+    const keyBinding = _get_Entry_KeyBinding(functionBar, groupIndex, entry, entryIndex);
+    if (keyBinding) {
+        _add_KeyBinding(functionBar, entry, keyBinding);
+    }
+    const cell = _build_Cell(entry, keyBinding);
+    elements.rows[groupIndex].append(cell);
+}
+function _add_KeyBinding(functionBar, entry, keyBinding) {
+    if (functionBar.keyBinding_Modifiers) {
+        keyBinding =
+            [...functionBar.keyBinding_Modifiers, keyBinding]
+                .join("+");
+    }
+    __main__1.KeyBinding.add(keyBinding, entry.on_Load, { preventDefault: true });
+}
+function _build_Layout(entryGroups) {
+    const cardType_Legend = $("table.kt-extensions-card_legend").detach();
+    const legendContainer = $("<div>", { "class": cssVariables.root });
+    $("body").append(legendContainer);
+    legendContainer.append(cardType_Legend);
+    const rows = [];
+    entryGroups.forEach(group => {
+        const row = $("<div>", { "class": cssVariables.legendRow });
+        legendContainer.append(row);
+        rows.push(row);
+    });
+    return {
+        legendContainer,
+        rows,
+    };
+}
+function _build_Cell(entry, keyBinding) {
+    const cell = $("<div>", { "class": cssVariables.legendCell });
+    let text = entry.name;
+    if (keyBinding) {
+        text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`;
+    }
+    cell.html(text);
+    cell.on("click", entry.on_Load);
+    return cell;
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\FunctionBar"))
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const KeyGroups_1 = __webpack_require__(16);
+const hotkeys_js_1 = __importDefault(__webpack_require__(17));
+hotkeys_js_1.default.filter = _disable_DefaultFilters;
+class KeyBinding {
+    static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
+    static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
+    static add(hotKeys, arg_2, arg_3) {
+        const hotKeys_String = _convert_HotKeys_ToString(hotKeys);
+        const { callback, options } = _get_BindArguments(arg_2, arg_3);
+        if (callback) {
+            _add_KeyBinding(hotKeys_String, callback, options);
+        }
+        else {
+            return _get_Decorator(hotKeys_String, options);
+        }
+    }
+}
+exports.KeyBinding = KeyBinding;
+window.KeyBinding = KeyBinding;
+const _BindOptions_Defaults = { preventDefault: false };
+function _disable_DefaultFilters(event) { return true; }
+function _get_BindArguments(arg_2, arg_3) {
+    let callback, options;
+    if (arg_2 instanceof Function)
+        callback = arg_2;
+    if (arg_3)
+        options = arg_3;
+    else if (arg_2)
+        options = arg_2;
+    options = { ..._BindOptions_Defaults, ...options };
+    return { callback, options };
+}
+function _add_KeyBinding(hotKeys, callback, options) {
+    hotkeys_js_1.default(hotKeys, (event) => {
+        if (options.preventDefault) {
+            event.preventDefault;
+        }
+        console.log(`[KeyBinding] '${hotKeys}'`);
+        callback(event);
+    });
+}
+function _get_Decorator(hotKeys, options) {
+    return (target, propertyKey, descriptor) => {
+        _add_KeyBinding(hotKeys, descriptor.value, options);
+        return descriptor;
+    };
+}
+function _convert_HotKeys_ToString(keys) {
+    return ((keys.constructor === Array)
+        ? keys.join(", ")
+        : keys);
+}
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const TaskContainer_1 = __webpack_require__(3);
+const get_Rows_1 = __webpack_require__(7);
+const get_Columns_1 = __webpack_require__(8);
+const Glob_1 = __webpack_require__(20);
+const $ = __webpack_require__(0);
+var Show;
+(function (Show) {
+    function rows({ include, exclude }) {
+        _show({
+            type: _Type.Row,
+            targets: (include) ? include : exclude,
+            exclude: (exclude) ? true : false,
+        });
+    }
+    Show.rows = rows;
+    function columns({ include, exclude }) {
+        _show({
+            type: _Type.Column,
+            targets: (include) ? include : exclude,
+            exclude: (exclude) ? true : false,
+        });
+    }
+    Show.columns = columns;
+    function allRows() { _show({ type: _Type.Row, targets: ["**\\*"], exclude: false }); }
+    Show.allRows = allRows;
+    function allColumns() { _show({ type: _Type.Column, targets: ["**\\*"], exclude: false }); }
+    Show.allColumns = allColumns;
+})(Show = exports.Show || (exports.Show = {}));
+const _Type = TaskContainer_1.TaskContainer.Type;
+function _show({ type, targets, exclude, }) {
+    const containers = (type == _Type.Row)
+        ? get_Rows_1.get_Rows()
+        : get_Columns_1.get_Columns();
+    _set_Visibility(containers, targets, exclude);
+}
+function _set_Visibility(containers, targets, exclude) {
+    const visibilityMap = _build_VisibilityMap(containers, targets, exclude);
+    visibilityMap.forEach(({ container, show_Element }) => {
+        if (show_Element) {
+            container.show();
+        }
+        else {
+            container.hide();
+        }
+    });
+}
+function _build_VisibilityMap(containers, targets, exclude) {
+    const visibilityMap = containers.map(container => ({ container, show_Element: false }));
+    containers.forEach((container, i) => {
+        const oneBased_Index = (container.domIndex + 1);
+        const is_Target = (targets.includes(oneBased_Index)
+            || targets.some(target => _match_Glob(container, target)));
+        if (is_Target) {
+            const containerTree = (exclude)
+                ? [container, ...container.children]
+                : [container, ...container.parents];
+            visibilityMap.forEach(entry => {
+                if (containerTree.includes(entry.container)) {
+                    entry.show_Element = true;
+                }
+            });
+        }
+    });
+    if (exclude) {
+        visibilityMap.forEach(entry => {
+            entry.show_Element = !(entry.show_Element);
+        });
+    }
+    return visibilityMap;
+}
+function _match_Glob(container, target) {
+    if (Number(target)) {
+        return false;
+    }
+    else {
+        return new Glob_1.Glob(target.toString()).match(container.path);
+    }
+}
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const TaskContainer_1 = __webpack_require__(3);
+const KanbanTool_1 = __webpack_require__(1);
+const $ = __webpack_require__(0);
+function get_Rows() {
+    const headerElements = $.find("kt-board > tbody > tr > th");
+    const models = KanbanTool_1.activeBoard.swimlanes().toArray();
+    const rows = headerElements.map((element, i) => new TaskContainer_1.TaskContainer({
+        type: TaskContainer_1.TaskContainer.Type.Row,
+        domIndex: i,
+        model: models[i],
+        element: element,
+    }));
+    return rows;
+}
+exports.get_Rows = get_Rows;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const TaskContainer_1 = __webpack_require__(3);
+const KanbanTool_1 = __webpack_require__(1);
+function get_Columns() {
+    const headerElements = _get_HeaderElements();
+    const models = _get_SortedModels();
+    const columns = headerElements.map((element, i) => (new TaskContainer_1.TaskContainer({
+        type: TaskContainer_1.TaskContainer.Type.Column,
+        domIndex: i,
+        model: models[i],
+        element: element,
+    })));
+    _update_ColumnRelationships(columns);
+    return columns;
+}
+exports.get_Columns = get_Columns;
+function _get_HeaderElements() {
+    const rows = $("kt-board > thead").children().toArray();
+    const swimLane_Count = KanbanTool_1.activeBoard.swimlanes().length;
+    const elements = rows.flatMap(row => $(row).children().toArray());
+    if (swimLane_Count > 1) {
+        elements.splice(0, 1);
+    }
+    return elements;
+}
+function _get_SortedModels() {
+    const rootModel = KanbanTool_1.activeBoard.workflowStages().toArray()[0];
+    const sortedModels = [];
+    let row = rootModel.children();
+    while (row.length > 0) {
+        sortedModels.push(...row);
+        row = row.flatMap(model => model.children());
+    }
+    return sortedModels;
+}
+function _update_ColumnRelationships(columns) {
+    columns.forEach(parent => {
+        columns.forEach(child => {
+            if (child.model.parent() == parent.model) {
+                parent.add_Child(child);
+            }
+        });
+    });
+}
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(2);
+module.exports = __webpack_require__(10);
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(11);
+const __Main__1 = __webpack_require__(4);
+const Bottom_1 = __webpack_require__(23);
+__Main__1.FunctionBar.load(Bottom_1.bottom_FunctionBar);
+__webpack_require__(24);
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const jquery_1 = __importDefault(__webpack_require__(0));
+const DELETE_KEYCODE = 46;
+const selector__CheckList_Item = "kt-taskview > form > div.kt-taskview-content > kt-checklist > li > .kt-checklist_item_content";
+const selector__CheckList_Item_SiblingsPrefix = "#show > kt-cover > kt-taskview > form > div.kt-taskview-content > kt-checklist";
+let checkList_Item = null;
+jquery_1.default(document).on("mouseover", selector__CheckList_Item, (event) => {
+    checkList_Item = event.currentTarget;
+});
+jquery_1.default(document).on("mouseout", selector__CheckList_Item, (event) => {
+    checkList_Item = null;
+});
+jquery_1.default(document).on("keydown", (event) => {
+    if (checkList_Item && (event.keyCode == DELETE_KEYCODE)) {
+        const divIndex = get_DivIndex(checkList_Item);
+        const button__Delete = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > a.kt-remove > i.kt-icon-trash`);
+        button__Delete.click();
+    }
+});
+jquery_1.default(document).on("click", selector__CheckList_Item, (event) => {
+    if (event.ctrlKey) {
+        return;
+    }
+    event.preventDefault();
+    const div__CheckList_Item = event.currentTarget;
+    const divIndex = get_DivIndex(div__CheckList_Item);
+    setTimeout(() => {
+        const checkBox = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > input[type='checkbox']`);
+        checkBox.click();
+    }, 200);
+    setTimeout(() => {
+        const button__Edit = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > a.kt-edit > i.kt-icon-pencil-1`);
+        button__Edit.click();
+    }, 700);
+});
+function get_DivIndex(checkList_Item) {
+    return (jquery_1.default(checkList_Item).parent().index() + 1);
+}
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Settings = __webpack_require__(13);
+const _get_FileText_1 = __webpack_require__(14);
+class CSS {
+    static async apply(modulePath) {
+        const url = _get_ModuleCSS_URL(modulePath);
+        _get_FileText_1.get_FileText(url)
+            .then(css => {
+            $("<style>")
+                .prop("type", "text/css")
+                .html(css)
+                .appendTo("head");
+        });
+    }
+}
+exports.CSS = CSS;
+function _get_ModuleCSS_URL(modulePath) {
+    const relativePath = _remove_SourceDirectory(modulePath);
+    const cssPath = `css/${relativePath}.css`;
+    const url = _add_BaseURL(cssPath);
+    return url;
+}
+function _remove_SourceDirectory(relativePath) {
+    return (relativePath
+        .split("\\")
+        .slice(1)
+        .join("/"));
+}
+function _add_BaseURL(relativePath) {
+    const baseURL = Settings.baseURL;
+    let url = relativePath.replace(/^\.?\/?/, `${baseURL}/`);
+    if (!url.startsWith(baseURL)) {
+        url = `${baseURL}/${relativePath}`;
+    }
+    return url;
+}
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module) {
+
+module.exports = {"baseURL":"https://enteleform-extensions.github.io/KanbanTool","_":""};
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+async function get_FileText(url) {
+    const result = { value: null };
+    await _get_FileText(url, result);
+    return result.value;
+}
+exports.get_FileText = get_FileText;
+async function _get_FileText(url, result) {
+    var file = new XMLHttpRequest();
+    file.open("GET", url, false);
+    file.onreadystatechange = () => {
+        const fileAcquired = ((file.readyState === 4)
+            && ((file.status === 200) || (file.status == 0)));
+        if (fileAcquired) {
+            result.value = file.responseText;
+        }
+        else {
+            throw new Error(`
+				Unable to resolve URL:
+					'${url}'
+ 			`);
+        }
+    };
+    file.send(null);
+}
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module) {
+
+module.exports = {"root":"CustomExtension--FunctionBar","legendRow":"Row","legendCell":"Cell","_":""};
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.alphanumericKey_Rows = [
+    ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
+    ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
+    ["a", "s", "d", "f", "g", "h", "j", "k", "l"],
+    ["z", "x", "c", "v", "b", "n", "m"],
+];
+exports.characterKey_Rows = [
+    ["~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="],
+    ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\"],
+    ["a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'"],
+    ["z", "x", "c", "v", "b", "n", "m", ",", ".", "/"],
+];
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/*!
+ * hotkeys-js v3.6.2
+ * A simple micro-library for defining and dispatching keyboard shortcuts. It has no dependencies.
+ * 
+ * Copyright (c) 2019 kenny wong <wowohoo@qq.com>
+ * http://jaywcjlove.github.io/hotkeys
+ * 
+ * Licensed under the MIT license.
+ */
+
+var isff = typeof navigator !== 'undefined' ? navigator.userAgent.toLowerCase().indexOf('firefox') > 0 : false;
+
+// 绑定事件
+function addEvent(object, event, method) {
+  if (object.addEventListener) {
+    object.addEventListener(event, method, false);
+  } else if (object.attachEvent) {
+    object.attachEvent('on' + event, function () {
+      method(window.event);
+    });
+  }
+}
+
+// 修饰键转换成对应的键码
+function getMods(modifier, key) {
+  var mods = key.slice(0, key.length - 1);
+  for (var i = 0; i < mods.length; i++) {
+    mods[i] = modifier[mods[i].toLowerCase()];
+  }return mods;
+}
+
+// 处理传的key字符串转换成数组
+function getKeys(key) {
+  if (!key) key = '';
+
+  key = key.replace(/\s/g, ''); // 匹配任何空白字符,包括空格、制表符、换页符等等
+  var keys = key.split(','); // 同时设置多个快捷键，以','分割
+  var index = keys.lastIndexOf('');
+
+  // 快捷键可能包含','，需特殊处理
+  for (; index >= 0;) {
+    keys[index - 1] += ',';
+    keys.splice(index, 1);
+    index = keys.lastIndexOf('');
+  }
+
+  return keys;
+}
+
+// 比较修饰键的数组
+function compareArray(a1, a2) {
+  var arr1 = a1.length >= a2.length ? a1 : a2;
+  var arr2 = a1.length >= a2.length ? a2 : a1;
+  var isIndex = true;
+
+  for (var i = 0; i < arr1.length; i++) {
+    if (arr2.indexOf(arr1[i]) === -1) isIndex = false;
+  }
+  return isIndex;
+}
+
+var _keyMap = { // 特殊键
+  backspace: 8,
+  tab: 9,
+  clear: 12,
+  enter: 13,
+  return: 13,
+  esc: 27,
+  escape: 27,
+  space: 32,
+  left: 37,
+  up: 38,
+  right: 39,
+  down: 40,
+  del: 46,
+  delete: 46,
+  ins: 45,
+  insert: 45,
+  home: 36,
+  end: 35,
+  pageup: 33,
+  pagedown: 34,
+  capslock: 20,
+  '⇪': 20,
+  ',': 188,
+  '.': 190,
+  '/': 191,
+  '`': 192,
+  '-': isff ? 173 : 189,
+  '=': isff ? 61 : 187,
+  ';': isff ? 59 : 186,
+  '\'': 222,
+  '[': 219,
+  ']': 221,
+  '\\': 220
+};
+
+var _modifier = { // 修饰键
+  '⇧': 16,
+  shift: 16,
+  '⌥': 18,
+  alt: 18,
+  option: 18,
+  '⌃': 17,
+  ctrl: 17,
+  control: 17,
+  '⌘': isff ? 224 : 91,
+  cmd: isff ? 224 : 91,
+  command: isff ? 224 : 91
+};
+var _downKeys = []; // 记录摁下的绑定键
+var modifierMap = {
+  16: 'shiftKey',
+  18: 'altKey',
+  17: 'ctrlKey'
+};
+var _mods = { 16: false, 18: false, 17: false };
+var _handlers = {};
+
+// F1~F12 特殊键
+for (var k = 1; k < 20; k++) {
+  _keyMap['f' + k] = 111 + k;
+}
+
+// 兼容Firefox处理
+modifierMap[isff ? 224 : 91] = 'metaKey';
+_mods[isff ? 224 : 91] = false;
+
+var _scope = 'all'; // 默认热键范围
+var isBindElement = false; // 是否绑定节点
+
+// 返回键码
+var code = function code(x) {
+  return _keyMap[x.toLowerCase()] || _modifier[x.toLowerCase()] || x.toUpperCase().charCodeAt(0);
+};
+
+// 设置获取当前范围（默认为'所有'）
+function setScope(scope) {
+  _scope = scope || 'all';
+}
+// 获取当前范围
+function getScope() {
+  return _scope || 'all';
+}
+// 获取摁下绑定键的键值
+function getPressedKeyCodes() {
+  return _downKeys.slice(0);
+}
+
+// 表单控件控件判断 返回 Boolean
+function filter(event) {
+  var target = event.target || event.srcElement;
+  var tagName = target.tagName;
+  // 忽略这些情况下快捷键无效
+
+  return !(tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA' || target.isContentEditable);
+}
+
+// 判断摁下的键是否为某个键，返回true或者false
+function isPressed(keyCode) {
+  if (typeof keyCode === 'string') {
+    keyCode = code(keyCode); // 转换成键码
+  }
+  return _downKeys.indexOf(keyCode) !== -1;
+}
+
+// 循环删除handlers中的所有 scope(范围)
+function deleteScope(scope, newScope) {
+  var handlers = void 0;
+  var i = void 0;
+
+  // 没有指定scope，获取scope
+  if (!scope) scope = getScope();
+
+  for (var key in _handlers) {
+    if (Object.prototype.hasOwnProperty.call(_handlers, key)) {
+      handlers = _handlers[key];
+      for (i = 0; i < handlers.length;) {
+        if (handlers[i].scope === scope) handlers.splice(i, 1);else i++;
+      }
+    }
+  }
+
+  // 如果scope被删除，将scope重置为all
+  if (getScope() === scope) setScope(newScope || 'all');
+}
+
+// 清除修饰键
+function clearModifier(event) {
+  var key = event.keyCode || event.which || event.charCode;
+  var i = _downKeys.indexOf(key);
+
+  // 从列表中清除按压过的键
+  if (i >= 0) {
+    _downKeys.splice(i, 1);
+  }
+  // 特殊处理 cmmand 键，在 cmmand 组合快捷键 keyup 只执行一次的问题
+  if (event.key && event.key.toLowerCase() === 'meta') {
+    _downKeys.splice(0, _downKeys.length);
+  }
+
+  // 修饰键 shiftKey altKey ctrlKey (command||metaKey) 清除
+  if (key === 93 || key === 224) key = 91;
+  if (key in _mods) {
+    _mods[key] = false;
+
+    // 将修饰键重置为false
+    for (var k in _modifier) {
+      if (_modifier[k] === key) hotkeys[k] = false;
+    }
+  }
+}
+
+// 解除绑定某个范围的快捷键
+function unbind(key, scope, method) {
+  var multipleKeys = getKeys(key);
+  var keys = void 0;
+  var mods = [];
+  var obj = void 0;
+  // 通过函数判断，是否解除绑定
+  // https://github.com/jaywcjlove/hotkeys/issues/44
+  if (typeof scope === 'function') {
+    method = scope;
+    scope = 'all';
+  }
+
+  for (var i = 0; i < multipleKeys.length; i++) {
+    // 将组合快捷键拆分为数组
+    keys = multipleKeys[i].split('+');
+
+    // 记录每个组合键中的修饰键的键码 返回数组
+    if (keys.length > 1) mods = getMods(_modifier, keys);
+
+    // 获取除修饰键外的键值key
+    key = keys[keys.length - 1];
+    key = key === '*' ? '*' : code(key);
+
+    // 判断是否传入范围，没有就获取范围
+    if (!scope) scope = getScope();
+
+    // 如何key不在 _handlers 中返回不做处理
+    if (!_handlers[key]) return;
+
+    // 清空 handlers 中数据，
+    // 让触发快捷键键之后没有事件执行到达解除快捷键绑定的目的
+    for (var r = 0; r < _handlers[key].length; r++) {
+      obj = _handlers[key][r];
+      // 通过函数判断，是否解除绑定，函数相等直接返回
+      var isMatchingMethod = method ? obj.method === method : true;
+
+      // 判断是否在范围内并且键值相同
+      if (isMatchingMethod && obj.scope === scope && compareArray(obj.mods, mods)) {
+        _handlers[key][r] = {};
+      }
+    }
+  }
+}
+
+// 对监听对应快捷键的回调函数进行处理
+function eventHandler(event, handler, scope) {
+  var modifiersMatch = void 0;
+
+  // 看它是否在当前范围
+  if (handler.scope === scope || handler.scope === 'all') {
+    // 检查是否匹配修饰符（如果有返回true）
+    modifiersMatch = handler.mods.length > 0;
+
+    for (var y in _mods) {
+      if (Object.prototype.hasOwnProperty.call(_mods, y)) {
+        if (!_mods[y] && handler.mods.indexOf(+y) > -1 || _mods[y] && handler.mods.indexOf(+y) === -1) modifiersMatch = false;
+      }
+    }
+
+    // 调用处理程序，如果是修饰键不做处理
+    if (handler.mods.length === 0 && !_mods[16] && !_mods[18] && !_mods[17] && !_mods[91] || modifiersMatch || handler.shortcut === '*') {
+      if (handler.method(event, handler) === false) {
+        if (event.preventDefault) event.preventDefault();else event.returnValue = false;
+        if (event.stopPropagation) event.stopPropagation();
+        if (event.cancelBubble) event.cancelBubble = true;
+      }
+    }
+  }
+}
+
+// 处理keydown事件
+function dispatch(event) {
+  var asterisk = _handlers['*'];
+  var key = event.keyCode || event.which || event.charCode;
+
+  // 搜集绑定的键
+  if (_downKeys.indexOf(key) === -1) _downKeys.push(key);
+
+  // Gecko(Firefox)的command键值224，在Webkit(Chrome)中保持一致
+  // Webkit左右command键值不一样
+  if (key === 93 || key === 224) key = 91;
+
+  if (key in _mods) {
+    _mods[key] = true;
+
+    // 将特殊字符的key注册到 hotkeys 上
+    for (var k in _modifier) {
+      if (_modifier[k] === key) hotkeys[k] = true;
+    }
+
+    if (!asterisk) return;
+  }
+
+  // 将modifierMap里面的修饰键绑定到event中
+  for (var e in _mods) {
+    if (Object.prototype.hasOwnProperty.call(_mods, e)) {
+      _mods[e] = event[modifierMap[e]];
+    }
+  }
+
+  // 表单控件过滤 默认表单控件不触发快捷键
+  if (!hotkeys.filter.call(this, event)) return;
+
+  // 获取范围 默认为all
+  var scope = getScope();
+
+  // 对任何快捷键都需要做的处理
+  if (asterisk) {
+    for (var i = 0; i < asterisk.length; i++) {
+      if (asterisk[i].scope === scope && (event.type === 'keydown' && !asterisk[i].keyup || event.type === 'keyup' && asterisk[i].keyup)) {
+        eventHandler(event, asterisk[i], scope);
+      }
+    }
+  }
+  // key 不在_handlers中返回
+  if (!(key in _handlers)) return;
+
+  for (var _i = 0; _i < _handlers[key].length; _i++) {
+    if (event.type === 'keydown' && !_handlers[key][_i].keyup || event.type === 'keyup' && _handlers[key][_i].keyup) {
+      if (_handlers[key][_i].key) {
+        var keyShortcut = _handlers[key][_i].key.split('+');
+        var _downKeysCurrent = []; // 记录当前按键键值
+        for (var a = 0; a < keyShortcut.length; a++) {
+          _downKeysCurrent.push(code(keyShortcut[a]));
+        }
+        _downKeysCurrent = _downKeysCurrent.sort();
+        if (_downKeysCurrent.join('') === _downKeys.sort().join('')) {
+          // 找到处理内容
+          eventHandler(event, _handlers[key][_i], scope);
+        }
+      }
+    }
+  }
+}
+
+function hotkeys(key, option, method) {
+  var keys = getKeys(key); // 需要处理的快捷键列表
+  var mods = [];
+  var scope = 'all'; // scope默认为all，所有范围都有效
+  var element = document; // 快捷键事件绑定节点
+  var i = 0;
+
+  // 对为设定范围的判断
+  if (method === undefined && typeof option === 'function') {
+    method = option;
+  }
+
+  if (Object.prototype.toString.call(option) === '[object Object]') {
+    if (option.scope) scope = option.scope; // eslint-disable-line
+    if (option.element) element = option.element; // eslint-disable-line
+  }
+
+  if (typeof option === 'string') scope = option;
+
+  // 对于每个快捷键进行处理
+  for (; i < keys.length; i++) {
+    key = keys[i].split('+'); // 按键列表
+    mods = [];
+
+    // 如果是组合快捷键取得组合快捷键
+    if (key.length > 1) mods = getMods(_modifier, key);
+
+    // 将非修饰键转化为键码
+    key = key[key.length - 1];
+    key = key === '*' ? '*' : code(key); // *表示匹配所有快捷键
+
+    // 判断key是否在_handlers中，不在就赋一个空数组
+    if (!(key in _handlers)) _handlers[key] = [];
+    _handlers[key].push({
+      keyup: option.keyup,
+      scope: scope,
+      mods: mods,
+      shortcut: keys[i],
+      method: method,
+      key: keys[i]
+    });
+  }
+  // 在全局document上设置快捷键
+  if (typeof element !== 'undefined' && !isBindElement) {
+    isBindElement = true;
+    addEvent(element, 'keydown', function (e) {
+      dispatch(e);
+    });
+    addEvent(element, 'keyup', function (e) {
+      dispatch(e);
+      clearModifier(e);
+    });
+  }
+}
+
+var _api = {
+  setScope: setScope,
+  getScope: getScope,
+  deleteScope: deleteScope,
+  getPressedKeyCodes: getPressedKeyCodes,
+  isPressed: isPressed,
+  filter: filter,
+  unbind: unbind
+};
+for (var a in _api) {
+  if (Object.prototype.hasOwnProperty.call(_api, a)) {
+    hotkeys[a] = _api[a];
+  }
+}
+
+if (typeof window !== 'undefined') {
+  var _hotkeys = window.hotkeys;
+  hotkeys.noConflict = function (deep) {
+    if (deep && window.hotkeys === hotkeys) {
+      window.hotkeys = _hotkeys;
+    }
+    return hotkeys;
+  };
+  window.hotkeys = hotkeys;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (hotkeys);
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class Module {
+    static load(...args) { throw new Error("Module not implemented."); }
+}
+exports.Module = Module;
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class Entry {
+    constructor({ name, color, keyBinding, on_Load, }) {
+        this.name = name;
+        this.color = color;
+        this.keyBinding = keyBinding;
+        this.on_Load = on_Load;
+    }
+}
+exports.Entry = Entry;
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class Glob {
+    constructor(pattern) {
+        this._globPattern = pattern;
+        this._build_RegEx();
+    }
+    get pattern() { return this._globPattern; }
+    get regEx() { return this._regexPattern; }
+    match(path) {
+        return (path.match(this._regEx)
+            ? true
+            : false);
+    }
+    _build_RegEx() {
+        let pattern = _GLOB_TO_REGEX_MAP
+            .reduce((pattern, { regEx, replacement }) => (pattern.replace(regEx, replacement)), this._globPattern);
+        pattern = ("^" + pattern + "$");
+        this._regexPattern = pattern;
+        this._regEx = new RegExp(pattern);
+    }
+}
+exports.Glob = Glob;
+const _GLOB_TO_REGEX_MAP = [
+    { regEx: /\\/g, replacement: "\\\\" },
+    { regEx: /([^\\]+)\\\\\*\*\*$/g, replacement: "$1(\\\\.*$)?" },
+    { regEx: /^\*\*\\\\\*$/g, replacement: ".*" },
+    { regEx: /(?<!^)\\\\\*\*\\\\\*$/g, replacement: "\\\\.*" },
+    { regEx: /^\*\*$/g, replacement: "[^\\\\\\\\]+" },
+    { regEx: /^\*\*\\\\/g, replacement: ".*?\\\\" },
+    { regEx: /\\\\\*\*/g, replacement: "\\\\[^\\\\\\\\]+" },
+    { regEx: /^\*$/g, replacement: "[^\\\\]+" },
+    { regEx: /\\\\\*$/g, replacement: "\\\\[^\\\\]+" },
+];
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const get_EmptyContainers_1 = __webpack_require__(22);
+const get_Rows_1 = __webpack_require__(7);
+const get_Columns_1 = __webpack_require__(8);
+const __Main__1 = __webpack_require__(6);
+var Hide;
+(function (Hide) {
+    function allRows() { __Main__1.Show.rows({ exclude: ["**\\*"] }); }
+    Hide.allRows = allRows;
+    function allColumns() { __Main__1.Show.columns({ exclude: ["**\\*"] }); }
+    Hide.allColumns = allColumns;
+    function emptyRows() {
+        _hide_Containers({
+            containers: get_Rows_1.get_Rows(),
+            emptyContainers: get_EmptyContainers_1.get_EmptyRows(),
+        });
+    }
+    Hide.emptyRows = emptyRows;
+    function emptyColumns() {
+        _hide_Containers({
+            containers: get_Columns_1.get_Columns(),
+            emptyContainers: get_EmptyContainers_1.get_EmptyColumns(),
+        });
+    }
+    Hide.emptyColumns = emptyColumns;
+})(Hide = exports.Hide || (exports.Hide = {}));
+function _hide_Containers({ containers, emptyContainers }) {
+    containers.forEach(container => {
+        const { descendants } = container;
+        const has_Descendants = (descendants.length > 0);
+        if (!_is_Empty(container, emptyContainers)) { }
+        else if (((has_Descendants) && descendants.some(child => _is_Empty(child, emptyContainers)))
+            || (!has_Descendants)) {
+            container.hide();
+        }
+    });
+}
+function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_Indexes.includes(container.domIndex); }
+
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const KanbanTool_1 = __webpack_require__(1);
+function get_EmptyRows() {
+    const emptyCell_Map = _get_EmptyCell_Map();
+    return _get_EmptyColumns(emptyCell_Map);
+}
+exports.get_EmptyRows = get_EmptyRows;
+function get_EmptyColumns() {
+    const emptyCell_Map = _get_EmptyCell_Map();
+    return _get_EmptyRows(emptyCell_Map);
+}
+exports.get_EmptyColumns = get_EmptyColumns;
+function _get_EmptyCell_Map() {
+    const { rows, columns } = _get_Containers();
+    const cellMap = Array.from({ length: rows.length })
+        .map(x => []);
+    rows.forEach((row, rowIndex) => {
+        columns.forEach(column => {
+            const is_Empty = _get_Cell_IsEmpty(row, column);
+            cellMap[rowIndex].push(is_Empty);
+        });
+    });
+    return cellMap;
+}
+function _get_Containers() {
+    return {
+        rows: KanbanTool_1.activeBoard.swimlanes().toArray(),
+        columns: KanbanTool_1.activeBoard.workflowStages().toArray().splice(1),
+    };
+}
+function _get_Cell_IsEmpty(row, column) {
+    const tasks = _get_Tasks(row, column);
+    return (tasks.length == 0);
+}
+function _get_Tasks(row, column) {
+    return (KanbanTool_1.activeBoard.tasks()
+        .filter(task => (task.swimlane() === row)
+        && (task.workflowStage() === column)));
+}
+function _get_EmptyRows(emptyCell_Map) {
+    const rowCount = emptyCell_Map.length;
+    const emptyRows = [];
+    for (let rowIndex = 0; (rowIndex < rowCount); rowIndex++) {
+        const row_IsEmpty = emptyCell_Map[rowIndex].every(is_Empty => (is_Empty == true));
+        if (row_IsEmpty) {
+            emptyRows.push(rowIndex);
+        }
+    }
+    return emptyRows;
+}
+function _get_EmptyColumns(emptyCell_Map) {
+    const columnCount = emptyCell_Map[0].length;
+    const emptyColumns = [];
+    for (let columnIndex = 0; (columnIndex < columnCount); columnIndex++) {
+        const cells = emptyCell_Map.map(row => row[columnIndex]);
+        const column_IsEmpty = cells.every(is_Empty => (is_Empty == true));
+        if (column_IsEmpty) {
+            emptyColumns.push(columnIndex);
+        }
+    }
+    return emptyColumns;
+}
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(4);
+const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
+exports.bottom_FunctionBar = new __Main__1.FunctionBar({
+    position: Position.Bottom,
+    autoMap_KeyBindings: true,
+    keyBinding_Modifiers: ["alt"],
+    entryGroups: [
+        [
+            new Entry({
+                name: "Active",
+                on_Load: () => {
+                    Show.rows({ include: ["Routine", "Tasks.Active"] });
+                    Show.allColumns();
+                },
+            }),
+            new Entry({
+                name: "Plan",
+                on_Load: () => {
+                    Show.allColumns();
+                    Show.allRows();
+                },
+            }),
+        ],
+        [
+            new Entry({
+                name: "Routine",
+                on_Load: () => {
+                    Show.rows({ include: ["Routine"] });
+                    Show.allColumns();
+                    Hide.emptyColumns();
+                },
+            }),
+            new Entry({
+                name: "Today",
+                on_Load: () => {
+                    Show.rows({ include: ["Tasks.Active"] });
+                    Show.allColumns();
+                    Hide.emptyColumns();
+                },
+            }),
+            new Entry({
+                name: "Routine.Short",
+                on_Load: () => {
+                    Show.rows({ include: ["Routine.Short"] });
+                    Show.allColumns();
+                    Hide.emptyColumns();
+                },
+            }),
+        ],
+        [
+            new Entry({
+                name: "Hide.emptyColumns",
+                on_Load: () => {
+                    Show.allColumns();
+                    Show.allRows();
+                    Hide.emptyColumns();
+                },
+            }),
+            new Entry({
+                name: "Hide.emptyRows",
+                on_Load: () => {
+                    Show.allColumns();
+                    Show.allRows();
+                    Hide.emptyRows();
+                },
+            }),
+        ],
+    ],
+});
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const __main__1 = __webpack_require__(5);
+const jquery_1 = __importDefault(__webpack_require__(0));
+const $ = jquery_1.default;
+class FilterKeybindings {
+    static focus_SearchField(event) {
+        const searchField = $("#kt-board_search-q");
+        searchField.focus();
+    }
+    static show_FilterMenu(event) {
+        const filterMenu = $(".kt-board_search-filters_popover");
+        const displayValue = (filterMenu.css("display") == "none")
+            ? "block"
+            : "none";
+        filterMenu.css("display", displayValue);
+    }
+}
+__decorate([
+    __main__1.KeyBinding.add("Ctrl + F", { preventDefault: true }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], FilterKeybindings, "focus_SearchField", null);
+__decorate([
+    __main__1.KeyBinding.add("Ctrl + Space", { preventDefault: true }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], FilterKeybindings, "show_FilterMenu", null);
 
 
 /***/ })

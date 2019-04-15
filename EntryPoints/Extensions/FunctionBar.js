@@ -147,14 +147,14 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([7,3,1]);
+/******/ 	deferredModules.push([25,3,1]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 0:
+/***/ 2:
 /***/ (function(module, exports) {
 
 
@@ -190,24 +190,27 @@
     }
 }
 
-		const elapsedTime  = _get_ElapsedTime(1555340488795)
-		const buildMessage = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const divider      = "".padStart((buildMessage.length - 2), "─")
+		const elapsedTime = _get_ElapsedTime(1555341250814)
+
+		const line_1  = `│  Built  {  ${line_1}  }  Ago  │`
+		const line_2  = `│  At     ${timeString}`.padEnd((line_1.length - 1)) + "│"
+		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
 			+ `\n┌${divider}┐\n`
-			+ `${buildMessage}\n`
+			+ `${line_1}\n`
+			+ `${line_2}\n`
 			+ `└${divider}┘\n`
 		)
 	
 
 /***/ }),
 
-/***/ 7:
+/***/ 25:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(0);
-module.exports = __webpack_require__(8);
+__webpack_require__(2);
+module.exports = __webpack_require__(26);
 
 
 /***/ })
