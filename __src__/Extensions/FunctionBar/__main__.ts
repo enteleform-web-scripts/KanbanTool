@@ -10,6 +10,7 @@ import {Module    } from "~/Utils/Module_BaseClasses"
 //###  Module: Exports  ###//
 import {Entry} from "./Entry"
 import {Show } from "./DefaultFunctions/Show/__Main__"
+import {Hide } from "./DefaultFunctions/Hide/__Main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -22,6 +23,7 @@ const $:any = require("jquery")
 export class FunctionBar extends Module{
 
 	static Show  = Show
+	static Hide  = Hide
 	static Entry = Entry
 
 	position:             FunctionBar.Position

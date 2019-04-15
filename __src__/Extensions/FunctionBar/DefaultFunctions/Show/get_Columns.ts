@@ -15,11 +15,10 @@ export function get_Columns(){
 	const columns =
 		headerElements.map( (element, i) => (
 			new TaskContainer({
-				type:            TaskContainer.Type.Column,
-				domIndex:        i,
-				model:           models[i],
-				clickElement:    element,
-				collapseElement: element,
+				type:     TaskContainer.Type.Column,
+				domIndex: i,
+				model:    models[i],
+				element:  element,
 			})
 		))
 
@@ -43,7 +42,7 @@ function _get_HeaderElements(){
 		)
 
 	if(swimLane_Count > 1)
-		{elements.splice(0, 1)}
+		{elements.splice(0, 1)} // removes empty top-left cell
 
 	return elements
 }
