@@ -47,7 +47,7 @@ function _hide_Containers(
 		if(! _is_Empty(container, emptyContainers))
 			{/* continue */}
 		else if(
-			((has_Descendants) && descendants.some(child => _is_Empty(child, emptyContainers)))
+			((has_Descendants) && descendants.every(child => _is_Empty(child, emptyContainers)))
 			|| (! has_Descendants)
 		)
 			{container.hide()}

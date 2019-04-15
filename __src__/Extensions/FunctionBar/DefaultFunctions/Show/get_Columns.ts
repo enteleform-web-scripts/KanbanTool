@@ -9,7 +9,10 @@ import {activeBoard  } from "~/Utils/KanbanTool"
 //#################//
 
 export function get_Columns(){
-	const models         = activeBoard.workflowStages().slice(1)
+	const models =
+		activeBoard.workflowStages()
+			.slice(1) // remove root model
+
 	const sortedModels   = _get_SortedModels()
 	const headerElements = _get_HeaderElements()
 
