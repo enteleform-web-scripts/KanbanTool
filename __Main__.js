@@ -10611,7 +10611,7 @@ function _update_OriginalLayout(legendContainer, position) {
         }
     }, 1000);
 }
-function _set_Style(element, propertyName, propertyValue) { $(element).style.setProperty(propertyName, propertyValue, "important"); }
+function _set_Style(element, propertyName, propertyValue) { $(element)[0].style.setProperty(propertyName, propertyValue, "important"); }
 
 /* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\FunctionBar"))
 
@@ -10664,10 +10664,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555354075208)
+		const elapsedTime = _get_ElapsedTime(1555354137807)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:47:55 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:48:57 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
