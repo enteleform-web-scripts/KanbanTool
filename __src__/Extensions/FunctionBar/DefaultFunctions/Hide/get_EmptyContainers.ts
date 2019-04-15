@@ -9,12 +9,12 @@ import {activeBoard} from "~/Utils/KanbanTool"
 
 export function get_EmptyRows(){
 	const emptyCell_Map = _get_EmptyCell_Map()
-	return _get_EmptyColumns(emptyCell_Map)
+	return _get_EmptyRows(emptyCell_Map)
 }
 
 export function get_EmptyColumns(){
 	const emptyCell_Map = _get_EmptyCell_Map()
-	return _get_EmptyRows(emptyCell_Map)
+	return _get_EmptyColumns(emptyCell_Map)
 }
 
 
