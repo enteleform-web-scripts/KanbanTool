@@ -196,7 +196,7 @@ function _build_Layout(entryGroups:Entry[][], position:FunctionBar.Position){
 	const positionClass = _BarPosition_CSS_Map[position]
 	const legendContainer = $(
 		"<div>",
-		{"class":[cssVariables.root, positionClass].join()}
+		{"class":[cssVariables.root, positionClass].join(" ")}
 	)
 	$("body").append(legendContainer)
 

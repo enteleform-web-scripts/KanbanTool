@@ -10,9 +10,20 @@ json("./CSS_Variables.json")
 	display:         flex
 	flex-direction:  column
 	z-index:         10
-	width:           100%
-	bottom:           0
 	background:      #444
+
+	.{leftBar}
+		left:    0
+		height:  100%
+	.{rightBar}
+		right:   0
+		height:  100%
+	.{topBar}
+		top:    0
+		width:  100%
+	.{bottomBar}
+		bottom:  0
+		width:   100%
 
 	.{legendRow}
 		display:        flex
