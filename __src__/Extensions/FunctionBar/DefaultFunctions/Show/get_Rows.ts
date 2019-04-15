@@ -6,6 +6,10 @@ import {activeBoard  } from "~/Utils/KanbanTool"
 const $:any = require("jquery")
 
 
+//#################//
+//###  Exports  ###//
+//#################//
+
 export function get_Rows(){
 	const headerElements = $.find("kt-board > tbody > tr > th")
 	const models         = activeBoard.swimlanes().toArray()
