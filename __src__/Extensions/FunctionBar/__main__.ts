@@ -78,6 +78,8 @@ export class FunctionBar extends Module{
 				_initialize_VerticalEntry(this, groupIndex, entry, entryIndex, elements)
 			})
 		})
+
+		_update_OriginalLayout(elements.legendContainer, this.position)
 	}
 
 }
@@ -224,4 +226,19 @@ function _build_Cell(entry:Entry, keyBinding:string){
 	cell.on("click", entry.on_Load)
 
 	return cell
+}
+
+
+function _update_OriginalLayout(legendContainer:HTMLElement, position:FunctionBar.Position){
+	const $legendContainer = $(legendContainer)
+
+	if(position == FunctionBar.Position.Top){
+		const board = (document as any).querySelector("#show > div.kt-side-panel-slide")
+		board.style.setProperty("margin-bottom", `${$legendContainer.height()}px`, "important")
+	}
+
+	if(position == FunctionBar.Position.Bottom){
+		const nav = (document as any).querySelector("nav")
+		nav.style.setProperty("margin-top", `${$legendContainer.height()}px`, "important")
+	}
 }
