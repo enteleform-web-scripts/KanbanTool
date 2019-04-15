@@ -18,7 +18,7 @@ export function get_log_TimeSinceBuild_Callback(){
 
 		const elapsedTime = _get_ElapsedTime(${posixTime})
 
-		const line_1  = \`│  Built  {  \${line_1}  }  Ago  │\`
+		const line_1  = \`│  Built  {  \${elapsedTime}  }  Ago  │\`
 		const line_2  = \`│  At     \${timeString}\`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
