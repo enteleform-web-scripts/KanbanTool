@@ -10502,6 +10502,7 @@ class FunctionBar extends Module_BaseClasses_1.Module {
                 _initialize_VerticalEntry(this, groupIndex, entry, entryIndex, elements);
             });
         });
+        _update_OriginalLayout(elements.legendContainer, this.position);
     }
 }
 FunctionBar.Show = __Main__1.Show;
@@ -10597,6 +10598,21 @@ function _build_Cell(entry, keyBinding) {
     cell.on("click", entry.on_Load);
     return cell;
 }
+function _update_OriginalLayout(legendContainer, position) {
+    const $legendContainer = $(legendContainer);
+    const board = document.querySelector("#show > div.kt-side-panel-slide");
+    if (position == FunctionBar.Position.Top) {
+        _set_Style(board, "margin-bottom", `${$legendContainer.height()}px`);
+    }
+    if (position == FunctionBar.Position.Bottom) {
+        const nav = document.querySelector("nav");
+        _set_Style(nav, "margin-top", `${$legendContainer.height()}px`);
+        _set_Style(board, "margin-top", `${$legendContainer.height()}px`);
+    }
+}
+function _set_Style(element, propertyName, propertyValue) {
+    element.style.setProperty(propertyName, propertyValue, "important");
+}
 
 /* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\FunctionBar"))
 
@@ -10649,10 +10665,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555351085450)
+		const elapsedTime = _get_ElapsedTime(1555352376585)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:58:05 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:19:36 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""

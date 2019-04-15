@@ -36,10 +36,4 @@
   box-shadow: 0 -1px 1px rgba(0,0,0,0.065);
   text-align: center;
 }
-.kt-extensions-card_legend {
-  position: static !important;
-}
-#show > div.kt-side-panel-slide {
-  margin-bottom: 70px !important;
-}
 
