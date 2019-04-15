@@ -4,19 +4,28 @@
 //#################//
 
 export function get_log_TimeSinceBuild_Callback(){
-	const buildTime = new Date().getTime()
+	const buildTime = new Date()
+	const posixTime = buildTime.getTime()
+
+	const timeString = buildTime.toLocaleString(
+		"en-US",
+		{hour12:true, hour:"numeric", minute:"numeric", second:"numeric"},
+	)
 
 	return () => (`
 		${_get_ElapsedTime       .toString()}
 		${_get_TimeString_Segment.toString()}
 
-		const elapsedTime  = _get_ElapsedTime(${buildTime})
-		const buildMessage = \`│  Built  {  \${elapsedTime}  }  Ago  │\`
-		const divider      = "".padStart((buildMessage.length - 2), "─")
+		const elapsedTime = _get_ElapsedTime(${posixTime})
+
+		const line_1  = \`│  Built  {  \${line_1}  }  Ago  │\`
+		const line_2  = \`│  At     \${timeString}\`.padEnd((line_1.length - 1)) + "│"
+		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
 			+ \`\\n┌\${divider}┐\\n\`
-			+ \`\${buildMessage}\\n\`
+			+ \`\${line_1}\\n\`
+			+ \`\${line_2}\\n\`
 			+ \`└\${divider}┘\\n\`
 		)
 	`)
