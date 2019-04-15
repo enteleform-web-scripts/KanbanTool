@@ -231,14 +231,19 @@ function _build_Cell(entry:Entry, keyBinding:string){
 
 function _update_OriginalLayout(legendContainer:HTMLElement, position:FunctionBar.Position){
 	const $legendContainer = $(legendContainer)
+	const board = (document as any).querySelector("#show > div.kt-side-panel-slide")
 
 	if(position == FunctionBar.Position.Top){
-		const board = (document as any).querySelector("#show > div.kt-side-panel-slide")
-		board.style.setProperty("margin-bottom", `${$legendContainer.height()}px`, "important")
+		_set_Style(board, "margin-bottom", `${$legendContainer.height()}px`)
 	}
 
 	if(position == FunctionBar.Position.Bottom){
 		const nav = (document as any).querySelector("nav")
-		nav.style.setProperty("margin-top", `${$legendContainer.height()}px`, "important")
+		_set_Style(nav,   "margin-top", `${$legendContainer.height()}px`)
+		_set_Style(board, "margin-top", `${$legendContainer.height()}px`)
 	}
+}
+
+function _set_Style(element:HTMLElement, propertyName:string, propertyValue:string){
+	element.style.setProperty(propertyName, propertyValue, "important")
 }
