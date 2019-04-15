@@ -10504,10 +10504,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555347077939)
+		const elapsedTime = _get_ElapsedTime(1555347364757)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:51:17 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:56:04 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11771,14 +11771,11 @@ function _get_EmptyRow_Indexes(hiddenColumn_Indexes) {
     const emptyCell_Map = _get_EmptyCell_Map();
     const rowCount = emptyCell_Map.length;
     const emptyRows = [];
-    console.log("HIDDEN COLUMNS:", hiddenColumn_Indexes);
-    console.log("emptyCell_Map.Before", emptyCell_Map);
     hiddenColumn_Indexes.forEach(columnIndex => {
         emptyCell_Map.forEach(row => {
             row[columnIndex] = true;
         });
     });
-    console.log("emptyCell_Map.After", emptyCell_Map);
     for (let rowIndex = 0; (rowIndex < rowCount); rowIndex++) {
         const row_IsEmpty = emptyCell_Map[rowIndex].every(is_Empty => (is_Empty == true));
         if (row_IsEmpty) {
@@ -11791,13 +11788,10 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
     const emptyCell_Map = _get_EmptyCell_Map();
     const columnCount = emptyCell_Map[0].length;
     const emptyColumns = [];
-    console.log("HIDDEN ROWS:", hiddenRow_Indexes);
-    console.log("emptyCell_Map.Before", emptyCell_Map);
     hiddenRow_Indexes.forEach(rowIndex => {
         emptyCell_Map[rowIndex] =
             emptyCell_Map[rowIndex].map(is_Empty => true);
     });
-    console.log("emptyCell_Map.After", emptyCell_Map);
     for (let columnIndex = 0; (columnIndex < columnCount); columnIndex++) {
         const cells = emptyCell_Map.map(row => row[columnIndex]);
         const column_IsEmpty = cells.every(is_Empty => (is_Empty == true));
@@ -11867,19 +11861,27 @@ exports.bottom_FunctionBar = new __Main__1.FunctionBar({
         ],
         [
             new Entry({
-                name: "Hide.emptyColumns",
+                name: "Show.allRows",
+                on_Load: () => {
+                    Show.allRows();
+                },
+            }),
+            new Entry({
+                name: "Show.allColumns",
                 on_Load: () => {
                     Show.allColumns();
-                    Show.allRows();
-                    Hide.emptyColumns();
                 },
             }),
             new Entry({
                 name: "Hide.emptyRows",
                 on_Load: () => {
-                    Show.allColumns();
-                    Show.allRows();
                     Hide.emptyRows();
+                },
+            }),
+            new Entry({
+                name: "Hide.emptyColumns",
+                on_Load: () => {
+                    Hide.emptyColumns();
                 },
             }),
         ],
