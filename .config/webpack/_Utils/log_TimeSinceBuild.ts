@@ -7,19 +7,19 @@ export function get_log_TimeSinceBuild_Callback(){
 	const buildTime = new Date()
 	const posixTime = buildTime.getTime()
 
-	const timeString = buildTime.toLocaleString(
+	const timeStamp = buildTime.toLocaleString(
 		"en-US",
 		{hour12:true, hour:"numeric", minute:"numeric", second:"numeric"},
 	)
 
 	return () => (`
-		${_get_ElapsedTime       .toString()}
-		${_get_TimeString_Segment.toString()}
+		${_get_ElapsedTime        .toString()}
+		${_get_ElapsedTime_Segment.toString()}
 
 		const elapsedTime = _get_ElapsedTime(${posixTime})
 
 		const line_1  = \`│  Built  {  \${elapsedTime}  }  Ago  │\`
-		const line_2  = \`│  At     \${timeString}\`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = \`│  At     \${timeStamp}\`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -46,15 +46,15 @@ function _get_ElapsedTime(startTime:number){
 	const milliseconds = Math.floor(elapsed_MS % 1000                 )
 
 	const elapsedTime = (""
-		+ _get_TimeString_Segment("day",    days,    [                    ], false)
-		+ _get_TimeString_Segment("hour",   hours,   [days                ], false)
-		+ _get_TimeString_Segment("minute", minutes, [days, hours         ], false)
-		+ _get_TimeString_Segment("second", seconds, [days, hours, minutes], true )
+		+ _get_ElapsedTime_Segment("day",    days,    [                    ], false)
+		+ _get_ElapsedTime_Segment("hour",   hours,   [days                ], false)
+		+ _get_ElapsedTime_Segment("minute", minutes, [days, hours         ], false)
+		+ _get_ElapsedTime_Segment("second", seconds, [days, hours, minutes], true )
 	)
 	return elapsedTime
 }
 
-function _get_TimeString_Segment(title:string, value:number, parents:number[], mandatory:boolean){
+function _get_ElapsedTime_Segment(title:string, value:number, parents:number[], mandatory:boolean){
 	const parentValues_Exist = (
 		(parents.length > 0)
 		&& (Math.max(...parents) > 0)
