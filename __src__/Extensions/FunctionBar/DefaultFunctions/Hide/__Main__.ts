@@ -3,19 +3,19 @@ import {get_EmptyRow_Indexes, get_EmptyColumn_Indexes} from "./get_emptyContaine
 import {TaskContainer                                } from "../Show/TaskContainer"
 import {get_Rows                                     } from "../Show/get_Rows"
 import {get_Columns                                  } from "../Show/get_Columns"
-import {Show                                         } from "../Show/__Main__";
+import Show                                            from "../Show/__Main__";
 
 
 //#################//
 //###  Exports  ###//
 //#################//
 
-export namespace Hide{
+export default class {
 
-	export function allRows   (){Show.rows   ({exclude:["**\\*"]})}
-	export function allColumns(){Show.columns({exclude:["**\\*"]})}
+	static allRows   (){Show.rows   ({exclude:["**\\*"]})}
+	static allColumns(){Show.columns({exclude:["**\\*"]})}
 
-	export function emptyRows(){
+	static emptyRows(){
 		const columns = get_Columns()
 
 		_hide_Containers({
@@ -24,7 +24,7 @@ export namespace Hide{
 		})
 	}
 
-	export function emptyColumns(){
+	static emptyColumns(){
 		const rows = get_Rows()
 
 		_hide_Containers({

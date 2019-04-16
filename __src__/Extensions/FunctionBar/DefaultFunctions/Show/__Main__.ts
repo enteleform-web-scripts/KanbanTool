@@ -12,11 +12,11 @@ const $:any = require("jquery")
 //###  Exports  ###//
 //#################//
 
-export namespace Show{
+export default class{
 
-	export function rows({include,        }:{include:(string|number)[]             })
-	export function rows({         exclude}:{exclude:(string|number)[]             })
-	export function rows({include, exclude}:{include?:_Target[], exclude?:_Target[]}){
+	static rows({include,        }:{include:(string|number)[]             })
+	static rows({         exclude}:{exclude:(string|number)[]             })
+	static rows({include, exclude}:{include?:_Target[], exclude?:_Target[]}){
 		_show({
 			type:    _Type.Row,
 			targets: (include) ? include : exclude,
@@ -24,9 +24,9 @@ export namespace Show{
 		})
 	}
 
-	export function columns({include,        }:{include:(string|number)[],            })
-	export function columns({         exclude}:{exclude:(string|number)[],            })
-	export function columns({include, exclude}:{include?:_Target[], exclude?:_Target[]}){
+	static columns({include,        }:{include:(string|number)[],            })
+	static columns({         exclude}:{exclude:(string|number)[],            })
+	static columns({include, exclude}:{include?:_Target[], exclude?:_Target[]}){
 		_show({
 			type:    _Type.Column,
 			targets: (include) ? include : exclude,
@@ -34,8 +34,8 @@ export namespace Show{
 		})
 	}
 
-	export function allRows   (){_show({type:_Type.Row,    targets:["**\\*"], exclude:false})}
-	export function allColumns(){_show({type:_Type.Column, targets:["**\\*"], exclude:false})}
+	static allRows   (){_show({type:_Type.Row,    targets:["**\\*"], exclude:false})}
+	static allColumns(){_show({type:_Type.Column, targets:["**\\*"], exclude:false})}
 
 }
 
