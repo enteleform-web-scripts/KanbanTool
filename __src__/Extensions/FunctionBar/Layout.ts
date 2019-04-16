@@ -1,6 +1,7 @@
 //###  Module: Pug  ###//
 import pug from "pug"
-const layoutHTML = pug.compileFile("./Layout.pug")
+const _layoutFile = require("!!raw-loader!./Layout.pug")
+const layoutHTML  = pug.compileFile(_layoutFile)
 console.log(">>>", layoutHTML)
 
 //###  Module: CSS  ###//

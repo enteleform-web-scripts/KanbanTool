@@ -13,7 +13,7 @@ const $: webpack.Module = {
 			use: "ts-loader",
 		},
 		{
-			test: /\.pug?$/,
+			test: /\.pug$/,
 			use: {
 				loader: "pug-loader",
 				options: {pretty: true},
