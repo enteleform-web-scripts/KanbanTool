@@ -1,3 +1,8 @@
+//###  Module: Pug  ###//
+import pug from "pug"
+const layoutHTML = pug.compileFile("./Layout.pug")
+console.log(">>>", layoutHTML)
+
 //###  Module: CSS  ###//
 const cssVariables = require("./CSS_Variables.json")
 
