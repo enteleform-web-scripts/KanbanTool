@@ -1,5 +1,5 @@
 //###  Module: Pug  ###//
-import pug from "pug"
+const pug = require("pug")
 const _layoutFile = require("!!raw-loader!./Layout.pug").default
 ;(window as any).pug = pug
 // const layoutHTML  = pug.compileFile(_layoutFile)
