@@ -11,8 +11,8 @@ import path from "path"
 const $: webpack.Resolve = {
 
 	alias: {
-		"~": Settings.sourcePath,
-		"pug": path.join(Settings.librariesPath, "pug/pug.js")
+		"~":   Settings.sourcePath,
+		"pug": path.join(Settings.librariesPath, "pug", "pug.js")
 	},
 
 	extensions: [
