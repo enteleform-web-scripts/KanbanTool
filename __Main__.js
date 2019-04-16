@@ -10571,10 +10571,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1555382303246)
+		const elapsedTime = _get_ElapsedTime(1555382818714)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:38:23 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     10:46:58 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11238,29 +11238,25 @@ const get_Rows_1 = __webpack_require__(11);
 const get_Columns_1 = __webpack_require__(12);
 const Glob_1 = __webpack_require__(24);
 const $ = __webpack_require__(0);
-var Show;
-(function (Show) {
-    function rows({ include, exclude }) {
+class default_1 {
+    static rows({ include, exclude }) {
         _show({
             type: _Type.Row,
             targets: (include) ? include : exclude,
             exclude: (exclude) ? true : false,
         });
     }
-    Show.rows = rows;
-    function columns({ include, exclude }) {
+    static columns({ include, exclude }) {
         _show({
             type: _Type.Column,
             targets: (include) ? include : exclude,
             exclude: (exclude) ? true : false,
         });
     }
-    Show.columns = columns;
-    function allRows() { _show({ type: _Type.Row, targets: ["**\\*"], exclude: false }); }
-    Show.allRows = allRows;
-    function allColumns() { _show({ type: _Type.Column, targets: ["**\\*"], exclude: false }); }
-    Show.allColumns = allColumns;
-})(Show = exports.Show || (exports.Show = {}));
+    static allRows() { _show({ type: _Type.Row, targets: ["**\\*"], exclude: false }); }
+    static allColumns() { _show({ type: _Type.Column, targets: ["**\\*"], exclude: false }); }
+}
+exports.default = default_1;
 const _Type = TaskContainer_1.TaskContainer.Type;
 function _show({ type, targets, exclude, }) {
     const containers = (type == _Type.Row)
@@ -11783,34 +11779,33 @@ const _GLOB_TO_REGEX_MAP = [
 
 "use strict";
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const get_emptyContainer_Indexes_1 = __webpack_require__(26);
 const get_Rows_1 = __webpack_require__(11);
 const get_Columns_1 = __webpack_require__(12);
-const __Main__1 = __webpack_require__(10);
-var Hide;
-(function (Hide) {
-    function allRows() { __Main__1.Show.rows({ exclude: ["**\\*"] }); }
-    Hide.allRows = allRows;
-    function allColumns() { __Main__1.Show.columns({ exclude: ["**\\*"] }); }
-    Hide.allColumns = allColumns;
-    function emptyRows() {
+const __Main__1 = __importDefault(__webpack_require__(10));
+class default_1 {
+    static allRows() { __Main__1.default.rows({ exclude: ["**\\*"] }); }
+    static allColumns() { __Main__1.default.columns({ exclude: ["**\\*"] }); }
+    static emptyRows() {
         const columns = get_Columns_1.get_Columns();
         _hide_Containers({
             containers: get_Rows_1.get_Rows(),
             emptyContainer_Indexes: get_emptyContainer_Indexes_1.get_EmptyRow_Indexes(columns),
         });
     }
-    Hide.emptyRows = emptyRows;
-    function emptyColumns() {
+    static emptyColumns() {
         const rows = get_Rows_1.get_Rows();
         _hide_Containers({
             containers: get_Columns_1.get_Columns(),
             emptyContainer_Indexes: get_emptyContainer_Indexes_1.get_EmptyColumn_Indexes(rows),
         });
     }
-    Hide.emptyColumns = emptyColumns;
-})(Hide = exports.Hide || (exports.Hide = {}));
+}
+exports.default = default_1;
 function _hide_Containers({ containers, emptyContainer_Indexes }) {
     containers.forEach(container => {
         const { descendants } = container;
