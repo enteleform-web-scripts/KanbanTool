@@ -1,8 +1,10 @@
 //###  Module: Pug  ###//
 import pug from "pug"
 const _layoutFile = require("!!raw-loader!./Layout.pug")
-const layoutHTML  = pug.compileFile(_layoutFile)
-console.log(">>>", layoutHTML)
+console.log(">>> layoutFile >>>", _layoutFile)
+;(window as any).pug = pug
+// const layoutHTML  = pug.compileFile(_layoutFile)
+// console.log(">>>", layoutHTML)
 
 //###  Module: CSS  ###//
 const cssVariables = require("./CSS_Variables.json")
