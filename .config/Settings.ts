@@ -14,7 +14,7 @@ class S{
 	static configFolder         = ".config"
 	static sourceFolder         = "__src__"
 	static distributionFolder   = "__dist__"
-	static compiledConfigFolder = "__compiled__"
+	static librariesFolder      = "__libs__"
 	static staticFolder         = "Static"
 	static mainName             = "__Main__"
 
@@ -22,9 +22,9 @@ class S{
 	static css_FileBase_RegEx = new RegExp(escape_RegEx(S.css_FileBase) + "$")
 
 	static rootPath         = path.resolve(".")
-	static configPath       = path.join(S.rootPath,   S.configFolder, S.compiledConfigFolder)
 	static sourcePath       = path.join(S.rootPath,   S.sourceFolder      )
 	static distributionPath = path.join(S.rootPath,   S.distributionFolder)
+	static librariesPath    = path.join(S.rootPath,   S.librariesFolder   )
 	static staticPath       = path.join(S.sourcePath, S.staticFolder      )
 
 	static mainPage_RelativePath = `./${S.sourceFolder}/${S.mainName}/`
