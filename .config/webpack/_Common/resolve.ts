@@ -12,7 +12,7 @@ const $: webpack.Resolve = {
 
 	alias: {
 		"~":   Settings.sourcePath,
-		"pug": path.join(Settings.librariesPath, "pug", "pug.js")
+		"pug": path.join(Settings.librariesPath, "pug")
 	},
 
 	extensions: [
