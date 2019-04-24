@@ -1,23 +1,23 @@
 {
 	"folders": [
 		{
-			// "path": "D:/Projects/Web/Scripts/KanbanTool/Extensions", // Desktop
-			"path": "C:/_/Projects/KanbanTool - Extensions",         // Laptop
+			"path": "D:/Projects/Web/Scripts/KanbanTool/Extensions", // Desktop
+			// "path": "C:/_/Projects/KanbanTool - Extensions",         // Laptop
 			"name": "___  CONFIG  _________________",
 		},
 		{
-			// "path": "D:/Projects/Web/Scripts/KanbanTool/Extensions/__src__", // Desktop
-			"path": "C:/_/Projects/KanbanTool - Extensions/__src__",         // Laptop
+			"path": "D:/Projects/Web/Scripts/KanbanTool/Extensions/__src__", // Desktop
+			// "path": "C:/_/Projects/KanbanTool - Extensions/__src__",         // Laptop
 			"name": "___  SRC  ____________________",
 		},
 		{
-			// "path": "D:/Projects/Web/Scripts/KanbanTool/Extensions/__dist__", // Desktop
-			"path": "C:/_/Projects/KanbanTool - Extensions/__dist__",         // Laptop
+			"path": "D:/Projects/Web/Scripts/KanbanTool/Extensions/__dist__", // Desktop
+			// "path": "C:/_/Projects/KanbanTool - Extensions/__dist__",         // Laptop
 			"name": "___  DIST  __________________",
 		},
 		{
-			// "path": "D:/Projects/Web/Scripts/KanbanTool/Extensions/.vscode", // Desktop
-			"path": "C:/_/Projects/KanbanTool - Extensions/.vscode",         // Laptop
+			"path": "D:/Projects/Web/Scripts/KanbanTool/Extensions/.vscode", // Desktop
+			// "path": "C:/_/Projects/KanbanTool - Extensions/.vscode",         // Laptop
 			"name": "___  VS  _____________________",
 		},
 	],

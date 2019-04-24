@@ -7,7 +7,7 @@ const {Entry, Position, Show, Hide} = FunctionBar
 export default new FunctionBar({
 
 	position:             Position.Bottom,
-	autoMap_KeyBindings:  true,
+	autoMap_KeyBindings:  false,
 	keyBinding_Modifiers: [],
 
 	entryGroups:[
