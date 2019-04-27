@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {KeyBinding} from "~/Utils/KeyBinding/__main__"
+import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
 
 
 export const css_Timeout_MS = 500

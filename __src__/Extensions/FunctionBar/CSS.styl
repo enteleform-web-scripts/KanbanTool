@@ -1,51 +1,102 @@
 json("./CSS_Variables.json")
 
 
-//################//
-//###  Custom  ###//
-//################//
+// .{root}
+// 	position:        fixed
+// 	display:         flex
+// 	flex-direction:  column
+// 	z-index:         10
+// 	background:      #444
 
-.{root}
-	position:        fixed
+// 	&.{leftBar  }{left:    0}
+// 	&.{rightBar }{right:   0}
+// 	&.{topBar   }{top:     0}
+// 	&.{bottomBar}{bottom:  0}
+
+// 	&.{leftBar}, &.{rightBar}
+// 		top:     0
+// 		height:  100%
+
+// 		.{legendRow}
+// 			flex-direction:  column
+
+// 			.{legendCell}
+// 				flex-grow:   unset
+// 				text-align:  left
+
+// 	&.{topBar}, &.{bottomBar}
+// 		width:  100%
+
+// 		.{legendRow}
+// 			flex-direction:  row
+
+// 			.{legendCell}
+// 				flex-grow:   1
+// 				text-align:  center
+
+// 	.{legendRow}
+// 		display:  flex
+
+// 		.{legendCell}
+// 			padding:           2px
+// 			user-select:       none
+// 			cursor:            pointer
+// 			background-color:  #444
+// 			color:             #EEE
+// 			border:            1px solid #D4D4D4
+// 			box-shadow:        0 -1px 1px rgba(0,0,0,0.065)
+
+
+
+
+.overlay
 	display:         flex
 	flex-direction:  column
-	z-index:         10
-	background:      #444
+	position:        fixed
+	top:             0
+	left:            0
+	width:           100%
+	height:          100%
 
-	&.{leftBar  }{left:    0}
-	&.{rightBar }{right:   0}
-	&.{topBar   }{top:     0}
-	&.{bottomBar}{bottom:  0}
+	.top
+		background:  #F77
+	.center
+		display:          flex
+		justify-content:  space-between
+		flex-direction:   row
+		flex-grow:  1
+		.left
+			background:  #7F7
+		.right
+			background:  #77F
+	.bottom
+		background:  #F7F
 
-	&.{leftBar}, &.{rightBar}
-		top:     0
-		height:  100%
+	.left, .right
+		display:          flex
+		flex-direction:   row
 
-		.{legendRow}
+		.column
+			display:         flex
 			flex-direction:  column
 
-			.{legendCell}
-				flex-grow:   unset
+			.cell
 				text-align:  left
 
-	&.{topBar}, &.{bottomBar}
-		width:  100%
+	.top, .bottom
+		display:         flex
+		flex-direction:  column
 
-		.{legendRow}
-			flex-direction:  row
+		.row
+			display:          flex
+			flex-direction:   row
+			justify-content:  center
 
-			.{legendCell}
-				flex-grow:   1
+			.cell
 				text-align:  center
 
-	.{legendRow}
-		display:  flex
 
-		.{legendCell}
-			padding:           2px
-			user-select:       none
-			cursor:            pointer
-			background-color:  #444
-			color:             #EEE
-			border:            1px solid #D4D4D4
-			box-shadow:        0 -1px 1px rgba(0,0,0,0.065)
+.cell
+	width:    100px
+	border:   1px solid black
+	padding:  5px

@@ -9,6 +9,10 @@ export const Common: webpack.Configuration = {
 
 	target: "web",
 
+	performance: {
+		hints: false,
+	},
+
 	...load( __dirname,
 		"./entry",
 		"./module",

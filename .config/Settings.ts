@@ -1,9 +1,6 @@
 //###  Node  ###//
 import path from "path"
 
-//###  NPM  ###//
-import escape_RegEx from "escape-string-regexp"
-
 
 class S{
 
@@ -18,8 +15,8 @@ class S{
 	static staticFolder         = "Static"
 	static mainName             = "__Main__"
 
-	static css_FileBase       = "CSS.styl"
-	static css_FileBase_RegEx = new RegExp(escape_RegEx(S.css_FileBase) + "$")
+	static css_FileBase = "CSS.styl"
+	static pug_FileBase = "Layout.pug"
 
 	static rootPath         = path.resolve(".")
 	static sourcePath       = path.join(S.rootPath,   S.sourceFolder      )

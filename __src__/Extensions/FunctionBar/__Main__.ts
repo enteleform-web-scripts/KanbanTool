@@ -7,7 +7,7 @@ import {autoMapped_Key_Rows                           } from "./Settings"
 import {Entry                                         } from "./Entry"
 import {Layout                                        } from "./Layout"
 import {Position, HorizontalPosition, VerticalPosition} from "./Position"
-import {KeyBinding                                    } from "~/Utils/KeyBinding/__main__"
+import {KeyBinding                                    } from "~/Utils/KeyBinding/__Main__"
 import {Module                                        } from "~/Utils/Module_BaseClasses"
 
 
