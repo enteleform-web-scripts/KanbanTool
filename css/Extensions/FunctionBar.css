@@ -1,3 +1,61 @@
+.CustomExtension--FunctionBar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  background: #444;
+}
+.CustomExtension--FunctionBar.Left_FunctionBar {
+  left: 0;
+}
+.CustomExtension--FunctionBar.Right_FunctionBar {
+  right: 0;
+}
+.CustomExtension--FunctionBar.Top_FunctionBar {
+  top: 0;
+}
+.CustomExtension--FunctionBar.Bottom_FunctionBar {
+  bottom: 0;
+}
+.CustomExtension--FunctionBar.Left_FunctionBar,
+.CustomExtension--FunctionBar.Right_FunctionBar {
+  top: 0;
+  height: 100%;
+}
+.CustomExtension--FunctionBar.Left_FunctionBar .Row,
+.CustomExtension--FunctionBar.Right_FunctionBar .Row {
+  flex-direction: column;
+}
+.CustomExtension--FunctionBar.Left_FunctionBar .Row .Cell,
+.CustomExtension--FunctionBar.Right_FunctionBar .Row .Cell {
+  flex-grow: unset;
+  text-align: left;
+}
+.CustomExtension--FunctionBar.Top_FunctionBar,
+.CustomExtension--FunctionBar.Bottom_FunctionBar {
+  width: 100%;
+}
+.CustomExtension--FunctionBar.Top_FunctionBar .Row,
+.CustomExtension--FunctionBar.Bottom_FunctionBar .Row {
+  flex-direction: row;
+}
+.CustomExtension--FunctionBar.Top_FunctionBar .Row .Cell,
+.CustomExtension--FunctionBar.Bottom_FunctionBar .Row .Cell {
+  flex-grow: 1;
+  text-align: center;
+}
+.CustomExtension--FunctionBar .Row {
+  display: flex;
+}
+.CustomExtension--FunctionBar .Row .Cell {
+  padding: 2px;
+  user-select: none;
+  cursor: pointer;
+  background-color: #444;
+  color: #eee;
+  border: 1px solid #d4d4d4;
+  box-shadow: 0 -1px 1px rgba(0,0,0,0.065);
+}
 .overlay {
   display: flex;
   flex-direction: column;
