@@ -12,7 +12,7 @@ const $: webpack.Options.Optimization = {
 	splitChunks: {
 		cacheGroups: {
 			CSS: css_Splitter.cacheGroup,
-			Pug: pug_Splitter.cacheGroup,
+			// Pug: pug_Splitter.cacheGroup,
 		},
 	},
 
