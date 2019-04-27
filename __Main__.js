@@ -1,6 +1,65 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/ 		var executeModules = data[2];
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 		// add entry modules from loaded chunk to deferred list
+/******/ 		deferredModules.push.apply(deferredModules, executeModules || []);
+/******/
+/******/ 		// run deferred modules when all chunks ready
+/******/ 		return checkDeferredModules();
+/******/ 	};
+/******/ 	function checkDeferredModules() {
+/******/ 		var result;
+/******/ 		for(var i = 0; i < deferredModules.length; i++) {
+/******/ 			var deferredModule = deferredModules[i];
+/******/ 			var fulfilled = true;
+/******/ 			for(var j = 1; j < deferredModule.length; j++) {
+/******/ 				var depId = deferredModule[j];
+/******/ 				if(installedChunks[depId] !== 0) fulfilled = false;
+/******/ 			}
+/******/ 			if(fulfilled) {
+/******/ 				deferredModules.splice(i--, 1);
+/******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+/******/ 			}
+/******/ 		}
+/******/ 		return result;
+/******/ 	}
+/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
+/******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		3: 0
+/******/ 	};
+/******/
+/******/ 	var deferredModules = [];
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -79,9 +138,18 @@
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/
+/******/ 	// add entry module to deferred list
+/******/ 	deferredModules.push([11,2]);
+/******/ 	// run deferred modules when ready
+/******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -10462,13 +10530,13 @@ return jQuery;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS_1 = __webpack_require__(16);
+const CSS_1 = __webpack_require__(14);
 CSS_1.CSS.apply(__dirname);
 const Settings_1 = __webpack_require__(4);
 const Entry_1 = __webpack_require__(19);
-const Layout_1 = __webpack_require__(21);
-const Position_1 = __webpack_require__(9);
-const Module_BaseClasses_1 = __webpack_require__(24);
+const Layout_1 = __webpack_require__(20);
+const Position_1 = __webpack_require__(7);
+const Module_BaseClasses_1 = __webpack_require__(23);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, autoMap_KeyBindings, keyBinding_Modifiers, entryGroups }) {
         super();
@@ -10509,8 +10577,8 @@ class FunctionBar extends Module_BaseClasses_1.Module {
 }
 FunctionBar.Entry = Entry_1.Entry;
 FunctionBar.Position = Position_1.Position;
-FunctionBar.Show = __webpack_require__(10).default;
-FunctionBar.Hide = __webpack_require__(26).default;
+FunctionBar.Show = __webpack_require__(8).default;
+FunctionBar.Hide = __webpack_require__(25).default;
 exports.FunctionBar = FunctionBar;
 (function (FunctionBar) {
     let KeyBinding_Mode;
@@ -10571,10 +10639,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1556105902994)
+		const elapsedTime = _get_ElapsedTime(1556375396740)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     7:38:22 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     10:29:56 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10592,13 +10660,77 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __main__1 = __webpack_require__(6);
+const __Main__1 = __webpack_require__(5);
 exports.css_Timeout_MS = 500;
-exports.autoMapped_Key_Rows = __main__1.KeyBinding.alphanumericKey_Rows;
+exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
 
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const KeyGroups_1 = __webpack_require__(17);
+const hotkeys_js_1 = __importDefault(__webpack_require__(18));
+hotkeys_js_1.default.filter = _disable_DefaultFilters;
+class KeyBinding {
+    static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
+    static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
+    static add(hotKeys, arg_2, arg_3) {
+        const hotKeys_String = _convert_HotKeys_ToString(hotKeys);
+        const { callback, options } = _get_BindArguments(arg_2, arg_3);
+        if (callback) {
+            _add_KeyBinding(hotKeys_String, callback, options);
+        }
+        else {
+            return _get_Decorator(hotKeys_String, options);
+        }
+    }
+}
+exports.KeyBinding = KeyBinding;
+window.KeyBinding = KeyBinding;
+const _BindOptions_Defaults = { preventDefault: false };
+function _disable_DefaultFilters(event) { return true; }
+function _get_BindArguments(arg_2, arg_3) {
+    let callback, options;
+    if (arg_2 instanceof Function)
+        callback = arg_2;
+    if (arg_3)
+        options = arg_3;
+    else if (arg_2)
+        options = arg_2;
+    options = { ..._BindOptions_Defaults, ...options };
+    return { callback, options };
+}
+function _add_KeyBinding(hotKeys, callback, options) {
+    hotkeys_js_1.default(hotKeys, (event) => {
+        if (options.preventDefault) {
+            event.preventDefault;
+        }
+        console.log(`[KeyBinding] '${hotKeys}'`);
+        callback(event);
+    });
+}
+function _get_Decorator(hotKeys, options) {
+    return (target, propertyKey, descriptor) => {
+        _add_KeyBinding(hotKeys, descriptor.value, options);
+        return descriptor;
+    };
+}
+function _convert_HotKeys_ToString(keys) {
+    return ((keys.constructor === Array)
+        ? keys.join(", ")
+        : keys);
+}
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10687,7 +10819,207 @@ exports.TaskContainer = TaskContainer;
 
 
 /***/ }),
-/* 6 */
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var Position;
+(function (Position) {
+    Position[Position["Left"] = 0] = "Left";
+    Position[Position["Right"] = 1] = "Right";
+    Position[Position["Top"] = 2] = "Top";
+    Position[Position["Bottom"] = 3] = "Bottom";
+})(Position = exports.Position || (exports.Position = {}));
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const TaskContainer_1 = __webpack_require__(6);
+const get_Rows_1 = __webpack_require__(9);
+const get_Columns_1 = __webpack_require__(10);
+const Glob_1 = __webpack_require__(24);
+const $ = __webpack_require__(0);
+class default_1 {
+    static rows({ include, exclude }) {
+        _show({
+            type: _Type.Row,
+            targets: (include) ? include : exclude,
+            exclude: (exclude) ? true : false,
+        });
+    }
+    static columns({ include, exclude }) {
+        _show({
+            type: _Type.Column,
+            targets: (include) ? include : exclude,
+            exclude: (exclude) ? true : false,
+        });
+    }
+    static allRows() { _show({ type: _Type.Row, targets: ["**\\*"], exclude: false }); }
+    static allColumns() { _show({ type: _Type.Column, targets: ["**\\*"], exclude: false }); }
+}
+exports.default = default_1;
+const _Type = TaskContainer_1.TaskContainer.Type;
+function _show({ type, targets, exclude, }) {
+    const containers = (type == _Type.Row)
+        ? get_Rows_1.get_Rows()
+        : get_Columns_1.get_Columns();
+    _set_Visibility(containers, targets, exclude);
+}
+function _set_Visibility(containers, targets, exclude) {
+    const visibilityMap = _build_VisibilityMap(containers, targets, exclude);
+    visibilityMap.forEach(({ container, show_Element }) => {
+        if (show_Element) {
+            container.show();
+        }
+        else {
+            container.hide();
+        }
+    });
+}
+function _build_VisibilityMap(containers, targets, exclude) {
+    const visibilityMap = containers.map(container => ({ container, show_Element: false }));
+    containers.forEach((container, i) => {
+        const oneBased_Index = (container.domIndex + 1);
+        const is_Target = (targets.includes(oneBased_Index)
+            || targets.some(target => _match_Glob(container, target)));
+        if (is_Target) {
+            const containerTree = (exclude)
+                ? [container, ...container.children]
+                : [container, ...container.parents];
+            visibilityMap.forEach(entry => {
+                if (containerTree.includes(entry.container)) {
+                    entry.show_Element = true;
+                }
+            });
+        }
+    });
+    if (exclude) {
+        visibilityMap.forEach(entry => {
+            entry.show_Element = !(entry.show_Element);
+        });
+    }
+    return visibilityMap;
+}
+function _match_Glob(container, target) {
+    if (Number(target)) {
+        return false;
+    }
+    else {
+        return new Glob_1.Glob(target.toString()).match(container.path);
+    }
+}
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const TaskContainer_1 = __webpack_require__(6);
+const KanbanTool_1 = __webpack_require__(2);
+const $ = __webpack_require__(0);
+function get_Rows() {
+    const headerElements = $.find("kt-board > tbody > tr > th");
+    const models = KanbanTool_1.activeBoard.swimlanes().toArray();
+    const rows = headerElements.map((element, i) => new TaskContainer_1.TaskContainer({
+        type: TaskContainer_1.TaskContainer.Type.Row,
+        modelIndex: i,
+        domIndex: i,
+        model: models[i],
+        element: element,
+    }));
+    return rows;
+}
+exports.get_Rows = get_Rows;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const TaskContainer_1 = __webpack_require__(6);
+const KanbanTool_1 = __webpack_require__(2);
+function get_Columns() {
+    const models = KanbanTool_1.activeBoard.workflowStages()
+        .slice(1);
+    const sortedModels = _get_SortedModels();
+    const headerElements = _get_HeaderElements();
+    const columns = sortedModels.map((model, i) => (new TaskContainer_1.TaskContainer({
+        type: TaskContainer_1.TaskContainer.Type.Column,
+        domIndex: i,
+        modelIndex: models.indexOf(model),
+        model: model,
+        element: headerElements[i],
+    })));
+    _update_ColumnRelationships(columns);
+    return columns;
+}
+exports.get_Columns = get_Columns;
+function _get_HeaderElements() {
+    const rows = $("kt-board > thead").children().toArray();
+    const swimLane_Count = KanbanTool_1.activeBoard.swimlanes().length;
+    const elements = rows.flatMap(row => $(row).children().toArray());
+    if (swimLane_Count > 1) {
+        elements.splice(0, 1);
+    }
+    return elements;
+}
+function _get_SortedModels() {
+    const rootModel = KanbanTool_1.activeBoard.workflowStages().toArray()[0];
+    const sortedModels = [];
+    let row = rootModel.children();
+    while (row.length > 0) {
+        sortedModels.push(...row);
+        row = row.flatMap(model => model.children());
+    }
+    return sortedModels;
+}
+function _update_ColumnRelationships(columns) {
+    columns.forEach(parent => {
+        columns.forEach(child => {
+            if (child.model.parent() == parent.model) {
+                parent.add_Child(child);
+            }
+        });
+    });
+}
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(3);
+module.exports = __webpack_require__(12);
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(13);
+const __Main__1 = __webpack_require__(1);
+__Main__1.FunctionBar.load(__webpack_require__(27).default, __webpack_require__(28).default, __webpack_require__(29).default, __webpack_require__(30).default);
+__webpack_require__(31);
+
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10696,62 +11028,130 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(7);
-const hotkeys_js_1 = __importDefault(__webpack_require__(8));
-hotkeys_js_1.default.filter = _disable_DefaultFilters;
-class KeyBinding {
-    static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
-    static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
-    static add(hotKeys, arg_2, arg_3) {
-        const hotKeys_String = _convert_HotKeys_ToString(hotKeys);
-        const { callback, options } = _get_BindArguments(arg_2, arg_3);
-        if (callback) {
-            _add_KeyBinding(hotKeys_String, callback, options);
-        }
-        else {
-            return _get_Decorator(hotKeys_String, options);
-        }
+const jquery_1 = __importDefault(__webpack_require__(0));
+const DELETE_KEYCODE = 46;
+const selector__CheckList_Item = "kt-taskview > form > div.kt-taskview-content > kt-checklist > li > .kt-checklist_item_content";
+const selector__CheckList_Item_SiblingsPrefix = "#show > kt-cover > kt-taskview > form > div.kt-taskview-content > kt-checklist";
+let checkList_Item = null;
+jquery_1.default(document).on("mouseover", selector__CheckList_Item, (event) => {
+    checkList_Item = event.currentTarget;
+});
+jquery_1.default(document).on("mouseout", selector__CheckList_Item, (event) => {
+    checkList_Item = null;
+});
+jquery_1.default(document).on("keydown", (event) => {
+    if (checkList_Item && (event.keyCode == DELETE_KEYCODE)) {
+        const divIndex = get_DivIndex(checkList_Item);
+        const button__Delete = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > a.kt-remove > i.kt-icon-trash`);
+        button__Delete.click();
     }
-}
-exports.KeyBinding = KeyBinding;
-window.KeyBinding = KeyBinding;
-const _BindOptions_Defaults = { preventDefault: false };
-function _disable_DefaultFilters(event) { return true; }
-function _get_BindArguments(arg_2, arg_3) {
-    let callback, options;
-    if (arg_2 instanceof Function)
-        callback = arg_2;
-    if (arg_3)
-        options = arg_3;
-    else if (arg_2)
-        options = arg_2;
-    options = { ..._BindOptions_Defaults, ...options };
-    return { callback, options };
-}
-function _add_KeyBinding(hotKeys, callback, options) {
-    hotkeys_js_1.default(hotKeys, (event) => {
-        if (options.preventDefault) {
-            event.preventDefault;
-        }
-        console.log(`[KeyBinding] '${hotKeys}'`);
-        callback(event);
-    });
-}
-function _get_Decorator(hotKeys, options) {
-    return (target, propertyKey, descriptor) => {
-        _add_KeyBinding(hotKeys, descriptor.value, options);
-        return descriptor;
-    };
-}
-function _convert_HotKeys_ToString(keys) {
-    return ((keys.constructor === Array)
-        ? keys.join(", ")
-        : keys);
+});
+jquery_1.default(document).on("click", selector__CheckList_Item, (event) => {
+    if (event.ctrlKey) {
+        return;
+    }
+    event.preventDefault();
+    const div__CheckList_Item = event.currentTarget;
+    const divIndex = get_DivIndex(div__CheckList_Item);
+    setTimeout(() => {
+        const checkBox = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > input[type='checkbox']`);
+        checkBox.click();
+    }, 200);
+    setTimeout(() => {
+        const button__Edit = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > a.kt-edit > i.kt-icon-pencil-1`);
+        button__Edit.click();
+    }, 700);
+});
+function get_DivIndex(checkList_Item) {
+    return (jquery_1.default(checkList_Item).parent().index() + 1);
 }
 
 
 /***/ }),
-/* 7 */
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Settings = __webpack_require__(15);
+const _get_FileText_1 = __webpack_require__(16);
+class CSS {
+    static async apply(modulePath) {
+        const url = _get_ModuleCSS_URL(modulePath);
+        _get_FileText_1.get_FileText(url)
+            .then(css => {
+            $("<style>")
+                .prop("type", "text/css")
+                .html(css)
+                .appendTo("head");
+        });
+    }
+}
+exports.CSS = CSS;
+function _get_ModuleCSS_URL(modulePath) {
+    const relativePath = _remove_SourceDirectory(modulePath);
+    const cssPath = `css/${relativePath}.css`;
+    const url = _add_BaseURL(cssPath);
+    return url;
+}
+function _remove_SourceDirectory(relativePath) {
+    return (relativePath
+        .split("\\")
+        .slice(1)
+        .join("/"));
+}
+function _add_BaseURL(relativePath) {
+    const baseURL = Settings.baseURL;
+    let url = relativePath.replace(/^\.?\/?/, `${baseURL}/`);
+    if (!url.startsWith(baseURL)) {
+        url = `${baseURL}/${relativePath}`;
+    }
+    return url;
+}
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module) {
+
+module.exports = {"baseURL":"https://enteleform-extensions.github.io/KanbanTool","_":""};
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+async function get_FileText(url) {
+    const result = { value: null };
+    await _get_FileText(url, result);
+    return result.value;
+}
+exports.get_FileText = get_FileText;
+async function _get_FileText(url, result) {
+    var file = new XMLHttpRequest();
+    file.open("GET", url, false);
+    file.onreadystatechange = () => {
+        const fileAcquired = ((file.readyState === 4)
+            && ((file.status === 200) || (file.status == 0)));
+        if (fileAcquired) {
+            result.value = file.responseText;
+        }
+        else {
+            throw new Error(`
+				Unable to resolve URL:
+					'${url}'
+ 			`);
+        }
+    };
+    file.send(null);
+}
+
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10772,7 +11172,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 8 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11211,338 +11611,6 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var Position;
-(function (Position) {
-    Position[Position["Left"] = 0] = "Left";
-    Position[Position["Right"] = 1] = "Right";
-    Position[Position["Top"] = 2] = "Top";
-    Position[Position["Bottom"] = 3] = "Bottom";
-})(Position = exports.Position || (exports.Position = {}));
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
-const get_Rows_1 = __webpack_require__(11);
-const get_Columns_1 = __webpack_require__(12);
-const Glob_1 = __webpack_require__(25);
-const $ = __webpack_require__(0);
-class default_1 {
-    static rows({ include, exclude }) {
-        _show({
-            type: _Type.Row,
-            targets: (include) ? include : exclude,
-            exclude: (exclude) ? true : false,
-        });
-    }
-    static columns({ include, exclude }) {
-        _show({
-            type: _Type.Column,
-            targets: (include) ? include : exclude,
-            exclude: (exclude) ? true : false,
-        });
-    }
-    static allRows() { _show({ type: _Type.Row, targets: ["**\\*"], exclude: false }); }
-    static allColumns() { _show({ type: _Type.Column, targets: ["**\\*"], exclude: false }); }
-}
-exports.default = default_1;
-const _Type = TaskContainer_1.TaskContainer.Type;
-function _show({ type, targets, exclude, }) {
-    const containers = (type == _Type.Row)
-        ? get_Rows_1.get_Rows()
-        : get_Columns_1.get_Columns();
-    _set_Visibility(containers, targets, exclude);
-}
-function _set_Visibility(containers, targets, exclude) {
-    const visibilityMap = _build_VisibilityMap(containers, targets, exclude);
-    visibilityMap.forEach(({ container, show_Element }) => {
-        if (show_Element) {
-            container.show();
-        }
-        else {
-            container.hide();
-        }
-    });
-}
-function _build_VisibilityMap(containers, targets, exclude) {
-    const visibilityMap = containers.map(container => ({ container, show_Element: false }));
-    containers.forEach((container, i) => {
-        const oneBased_Index = (container.domIndex + 1);
-        const is_Target = (targets.includes(oneBased_Index)
-            || targets.some(target => _match_Glob(container, target)));
-        if (is_Target) {
-            const containerTree = (exclude)
-                ? [container, ...container.children]
-                : [container, ...container.parents];
-            visibilityMap.forEach(entry => {
-                if (containerTree.includes(entry.container)) {
-                    entry.show_Element = true;
-                }
-            });
-        }
-    });
-    if (exclude) {
-        visibilityMap.forEach(entry => {
-            entry.show_Element = !(entry.show_Element);
-        });
-    }
-    return visibilityMap;
-}
-function _match_Glob(container, target) {
-    if (Number(target)) {
-        return false;
-    }
-    else {
-        return new Glob_1.Glob(target.toString()).match(container.path);
-    }
-}
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
-const KanbanTool_1 = __webpack_require__(2);
-const $ = __webpack_require__(0);
-function get_Rows() {
-    const headerElements = $.find("kt-board > tbody > tr > th");
-    const models = KanbanTool_1.activeBoard.swimlanes().toArray();
-    const rows = headerElements.map((element, i) => new TaskContainer_1.TaskContainer({
-        type: TaskContainer_1.TaskContainer.Type.Row,
-        modelIndex: i,
-        domIndex: i,
-        model: models[i],
-        element: element,
-    }));
-    return rows;
-}
-exports.get_Rows = get_Rows;
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
-const KanbanTool_1 = __webpack_require__(2);
-function get_Columns() {
-    const models = KanbanTool_1.activeBoard.workflowStages()
-        .slice(1);
-    const sortedModels = _get_SortedModels();
-    const headerElements = _get_HeaderElements();
-    const columns = sortedModels.map((model, i) => (new TaskContainer_1.TaskContainer({
-        type: TaskContainer_1.TaskContainer.Type.Column,
-        domIndex: i,
-        modelIndex: models.indexOf(model),
-        model: model,
-        element: headerElements[i],
-    })));
-    _update_ColumnRelationships(columns);
-    return columns;
-}
-exports.get_Columns = get_Columns;
-function _get_HeaderElements() {
-    const rows = $("kt-board > thead").children().toArray();
-    const swimLane_Count = KanbanTool_1.activeBoard.swimlanes().length;
-    const elements = rows.flatMap(row => $(row).children().toArray());
-    if (swimLane_Count > 1) {
-        elements.splice(0, 1);
-    }
-    return elements;
-}
-function _get_SortedModels() {
-    const rootModel = KanbanTool_1.activeBoard.workflowStages().toArray()[0];
-    const sortedModels = [];
-    let row = rootModel.children();
-    while (row.length > 0) {
-        sortedModels.push(...row);
-        row = row.flatMap(model => model.children());
-    }
-    return sortedModels;
-}
-function _update_ColumnRelationships(columns) {
-    columns.forEach(parent => {
-        columns.forEach(child => {
-            if (child.model.parent() == parent.model) {
-                parent.add_Child(child);
-            }
-        });
-    });
-}
-
-
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(3);
-module.exports = __webpack_require__(14);
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(15);
-const __Main__1 = __webpack_require__(1);
-__Main__1.FunctionBar.load(__webpack_require__(28).default, __webpack_require__(29).default, __webpack_require__(30).default, __webpack_require__(31).default);
-__webpack_require__(32);
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const jquery_1 = __importDefault(__webpack_require__(0));
-const DELETE_KEYCODE = 46;
-const selector__CheckList_Item = "kt-taskview > form > div.kt-taskview-content > kt-checklist > li > .kt-checklist_item_content";
-const selector__CheckList_Item_SiblingsPrefix = "#show > kt-cover > kt-taskview > form > div.kt-taskview-content > kt-checklist";
-let checkList_Item = null;
-jquery_1.default(document).on("mouseover", selector__CheckList_Item, (event) => {
-    checkList_Item = event.currentTarget;
-});
-jquery_1.default(document).on("mouseout", selector__CheckList_Item, (event) => {
-    checkList_Item = null;
-});
-jquery_1.default(document).on("keydown", (event) => {
-    if (checkList_Item && (event.keyCode == DELETE_KEYCODE)) {
-        const divIndex = get_DivIndex(checkList_Item);
-        const button__Delete = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > a.kt-remove > i.kt-icon-trash`);
-        button__Delete.click();
-    }
-});
-jquery_1.default(document).on("click", selector__CheckList_Item, (event) => {
-    if (event.ctrlKey) {
-        return;
-    }
-    event.preventDefault();
-    const div__CheckList_Item = event.currentTarget;
-    const divIndex = get_DivIndex(div__CheckList_Item);
-    setTimeout(() => {
-        const checkBox = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > input[type='checkbox']`);
-        checkBox.click();
-    }, 200);
-    setTimeout(() => {
-        const button__Edit = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > a.kt-edit > i.kt-icon-pencil-1`);
-        button__Edit.click();
-    }, 700);
-});
-function get_DivIndex(checkList_Item) {
-    return (jquery_1.default(checkList_Item).parent().index() + 1);
-}
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const Settings = __webpack_require__(17);
-const _get_FileText_1 = __webpack_require__(18);
-class CSS {
-    static async apply(modulePath) {
-        const url = _get_ModuleCSS_URL(modulePath);
-        _get_FileText_1.get_FileText(url)
-            .then(css => {
-            $("<style>")
-                .prop("type", "text/css")
-                .html(css)
-                .appendTo("head");
-        });
-    }
-}
-exports.CSS = CSS;
-function _get_ModuleCSS_URL(modulePath) {
-    const relativePath = _remove_SourceDirectory(modulePath);
-    const cssPath = `css/${relativePath}.css`;
-    const url = _add_BaseURL(cssPath);
-    return url;
-}
-function _remove_SourceDirectory(relativePath) {
-    return (relativePath
-        .split("\\")
-        .slice(1)
-        .join("/"));
-}
-function _add_BaseURL(relativePath) {
-    const baseURL = Settings.baseURL;
-    let url = relativePath.replace(/^\.?\/?/, `${baseURL}/`);
-    if (!url.startsWith(baseURL)) {
-        url = `${baseURL}/${relativePath}`;
-    }
-    return url;
-}
-
-
-/***/ }),
-/* 17 */
-/***/ (function(module) {
-
-module.exports = {"baseURL":"https://enteleform-extensions.github.io/KanbanTool","_":""};
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-async function get_FileText(url) {
-    const result = { value: null };
-    await _get_FileText(url, result);
-    return result.value;
-}
-exports.get_FileText = get_FileText;
-async function _get_FileText(url, result) {
-    var file = new XMLHttpRequest();
-    file.open("GET", url, false);
-    file.onreadystatechange = () => {
-        const fileAcquired = ((file.readyState === 4)
-            && ((file.status === 200) || (file.status == 0)));
-        if (fileAcquired) {
-            result.value = file.responseText;
-        }
-        else {
-            throw new Error(`
-				Unable to resolve URL:
-					'${url}'
- 			`);
-        }
-    };
-    file.send(null);
-}
-
-
-/***/ }),
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11550,7 +11618,7 @@ async function _get_FileText(url, result) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(4);
-const __Main__1 = __webpack_require__(20);
+const __Main__1 = __webpack_require__(5);
 class Entry {
     constructor({ name, color, keyBinding, on_Load, }) {
         this.name = name;
@@ -11593,75 +11661,11 @@ exports.Entry = Entry;
 
 "use strict";
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(7);
-const hotkeys_js_1 = __importDefault(__webpack_require__(8));
-hotkeys_js_1.default.filter = _disable_DefaultFilters;
-class KeyBinding {
-    static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
-    static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
-    static add(hotKeys, arg_2, arg_3) {
-        const hotKeys_String = _convert_HotKeys_ToString(hotKeys);
-        const { callback, options } = _get_BindArguments(arg_2, arg_3);
-        if (callback) {
-            _add_KeyBinding(hotKeys_String, callback, options);
-        }
-        else {
-            return _get_Decorator(hotKeys_String, options);
-        }
-    }
-}
-exports.KeyBinding = KeyBinding;
-window.KeyBinding = KeyBinding;
-const _BindOptions_Defaults = { preventDefault: false };
-function _disable_DefaultFilters(event) { return true; }
-function _get_BindArguments(arg_2, arg_3) {
-    let callback, options;
-    if (arg_2 instanceof Function)
-        callback = arg_2;
-    if (arg_3)
-        options = arg_3;
-    else if (arg_2)
-        options = arg_2;
-    options = { ..._BindOptions_Defaults, ...options };
-    return { callback, options };
-}
-function _add_KeyBinding(hotKeys, callback, options) {
-    hotkeys_js_1.default(hotKeys, (event) => {
-        if (options.preventDefault) {
-            event.preventDefault;
-        }
-        console.log(`[KeyBinding] '${hotKeys}'`);
-        callback(event);
-    });
-}
-function _get_Decorator(hotKeys, options) {
-    return (target, propertyKey, descriptor) => {
-        _add_KeyBinding(hotKeys, descriptor.value, options);
-        return descriptor;
-    };
-}
-function _convert_HotKeys_ToString(keys) {
-    return ((keys.constructor === Array)
-        ? keys.join(", ")
-        : keys);
-}
-
-
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const _layoutFile = __webpack_require__(22).default;
-const cssVariables = __webpack_require__(23);
+const _layoutFile = __webpack_require__(21).default;
+const cssVariables = __webpack_require__(22);
 const Settings_1 = __webpack_require__(4);
-const Position_1 = __webpack_require__(9);
+const Position_1 = __webpack_require__(7);
 const $ = __webpack_require__(0);
 class Layout {
     constructor(entryGroups, position) {
@@ -11715,21 +11719,14 @@ function _set_Style(element, propertyName, propertyValue) { $(element)[0].style.
 
 
 /***/ }),
+/* 21 */,
 /* 22 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".overlay\r\n\t.top\r\n\t\t.row\r\n\t\t\t.cell A\r\n\t\t\t.cell B\r\n\t\t\t.cell C\r\n\t\t.row\r\n\t\t\t.cell D\r\n\t\t\t.cell E\r\n\t\t\t.cell F\r\n\t.center\r\n\t\t.left\r\n\t\t\t.column\r\n\t\t\t\t.cell A\r\n\t\t\t\t.cell B\r\n\t\t\t\t.cell C\r\n\t\t\t.column\r\n\t\t\t\t.cell D\r\n\t\t\t\t.cell E\r\n\t\t\t\t.cell F\r\n\r\n\t\t.right\r\n\t\t\t.column\r\n\t\t\t\t.cell A\r\n\t\t\t\t.cell B\r\n\t\t\t\t.cell C\r\n\t\t\t.column\r\n\t\t\t\t.cell D\r\n\t\t\t\t.cell E\r\n\t\t\t\t.cell F\r\n\t.bottom\r\n\t\t.row\r\n\t\t\t.cell A\r\n\t\t\t.cell B\r\n\t\t\t.cell C\r\n\t\t.row\r\n\t\t\t.cell D\r\n\t\t\t.cell E\r\n\t\t\t.cell F\r\n");
-
-/***/ }),
-/* 23 */
 /***/ (function(module) {
 
 module.exports = {"root":"CustomExtension--FunctionBar","legendRow":"Row","legendCell":"Cell","topBar":"Top_FunctionBar","bottomBar":"Bottom_FunctionBar","leftBar":"Left_FunctionBar","rightBar":"Right_FunctionBar","_":""};
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11742,7 +11739,7 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11783,7 +11780,7 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11792,10 +11789,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(27);
-const get_Rows_1 = __webpack_require__(11);
-const get_Columns_1 = __webpack_require__(12);
-const __Main__1 = __importDefault(__webpack_require__(10));
+const get_emptyContainer_Indexes_1 = __webpack_require__(26);
+const get_Rows_1 = __webpack_require__(9);
+const get_Columns_1 = __webpack_require__(10);
+const __Main__1 = __importDefault(__webpack_require__(8));
 class default_1 {
     static allRows() { __Main__1.default.rows({ exclude: ["**\\*"] }); }
     static allColumns() { __Main__1.default.columns({ exclude: ["**\\*"] }); }
@@ -11830,7 +11827,7 @@ function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_In
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11915,7 +11912,7 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11957,7 +11954,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11987,7 +11984,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12047,7 +12044,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12133,7 +12130,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12151,7 +12148,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const __main__1 = __webpack_require__(6);
+const __Main__1 = __webpack_require__(5);
 const jquery_1 = __importDefault(__webpack_require__(0));
 const $ = jquery_1.default;
 class FilterKeybindings {
@@ -12168,13 +12165,13 @@ class FilterKeybindings {
     }
 }
 __decorate([
-    __main__1.KeyBinding.add("Ctrl + F", { preventDefault: true }),
+    __Main__1.KeyBinding.add("Ctrl + F", { preventDefault: true }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], FilterKeybindings, "focus_SearchField", null);
 __decorate([
-    __main__1.KeyBinding.add("Ctrl + Space", { preventDefault: true }),
+    __Main__1.KeyBinding.add("Ctrl + Space", { preventDefault: true }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)

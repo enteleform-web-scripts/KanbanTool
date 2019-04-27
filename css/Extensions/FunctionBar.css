@@ -1,59 +1,62 @@
-.CustomExtension--FunctionBar {
-  position: fixed;
+.overlay {
   display: flex;
   flex-direction: column;
-  z-index: 10;
-  background: #444;
-}
-.CustomExtension--FunctionBar.Left_FunctionBar {
+  position: fixed;
+  top: 0;
   left: 0;
-}
-.CustomExtension--FunctionBar.Right_FunctionBar {
-  right: 0;
-}
-.CustomExtension--FunctionBar.Top_FunctionBar {
-  top: 0;
-}
-.CustomExtension--FunctionBar.Bottom_FunctionBar {
-  bottom: 0;
-}
-.CustomExtension--FunctionBar.Left_FunctionBar,
-.CustomExtension--FunctionBar.Right_FunctionBar {
-  top: 0;
+  width: 100%;
   height: 100%;
 }
-.CustomExtension--FunctionBar.Left_FunctionBar .Row,
-.CustomExtension--FunctionBar.Right_FunctionBar .Row {
-  flex-direction: column;
+.overlay .top {
+  background: #f77;
 }
-.CustomExtension--FunctionBar.Left_FunctionBar .Row .Cell,
-.CustomExtension--FunctionBar.Right_FunctionBar .Row .Cell {
-  flex-grow: unset;
-  text-align: left;
+.overlay .center {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-grow: 1;
 }
-.CustomExtension--FunctionBar.Top_FunctionBar,
-.CustomExtension--FunctionBar.Bottom_FunctionBar {
-  width: 100%;
+.overlay .center .left {
+  background: #7f7;
 }
-.CustomExtension--FunctionBar.Top_FunctionBar .Row,
-.CustomExtension--FunctionBar.Bottom_FunctionBar .Row {
+.overlay .center .right {
+  background: #77f;
+}
+.overlay .bottom {
+  background: #f7f;
+}
+.overlay .left,
+.overlay .right {
+  display: flex;
   flex-direction: row;
 }
-.CustomExtension--FunctionBar.Top_FunctionBar .Row .Cell,
-.CustomExtension--FunctionBar.Bottom_FunctionBar .Row .Cell {
-  flex-grow: 1;
+.overlay .left .column,
+.overlay .right .column {
+  display: flex;
+  flex-direction: column;
+}
+.overlay .left .column .cell,
+.overlay .right .column .cell {
+  text-align: left;
+}
+.overlay .top,
+.overlay .bottom {
+  display: flex;
+  flex-direction: column;
+}
+.overlay .top .row,
+.overlay .bottom .row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.overlay .top .row .cell,
+.overlay .bottom .row .cell {
   text-align: center;
 }
-.CustomExtension--FunctionBar .Row {
-  display: flex;
-}
-.CustomExtension--FunctionBar .Row .Cell {
-  padding: 2px;
-  user-select: none;
-  cursor: pointer;
-  background-color: #444;
-  color: #eee;
-  border: 1px solid #d4d4d4;
-  box-shadow: 0 -1px 1px rgba(0,0,0,0.065);
+.cell {
+  width: 100px;
+  border: 1px solid #000;
+  padding: 5px;
 }
 
