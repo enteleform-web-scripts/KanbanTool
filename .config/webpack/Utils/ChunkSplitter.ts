@@ -27,7 +27,7 @@ export class ChunkSplitter{
 		const entryPoints = {}
 
 		this._filePaths.forEach(filePath => {
-			const relativePath = this._get_RelativePath(filePath)
+			const relativePath = this._get_Relative_DirectoryPath(filePath)
 			entryPoints[`${Settings.entryPointsFolder}/${relativePath}`] = filePath
 		})
 
@@ -44,6 +44,20 @@ export class ChunkSplitter{
 		}
 	}
 
+	get templates(){
+		return this._filePaths.map(filePath => {
+			const relativePath = path.join(
+				Settings.htmlFolder,
+				this._get_Relative_FilePath(filePath)
+			)
+
+			return {
+				filename: relativePath,
+				template: filePath,
+			}
+		})
+	}
+
 	get _filePaths(){
 		return (
 			walk(Settings.sourcePath, {traverseAll:true, filter:this._filter_Files.bind(this)})
@@ -56,7 +70,7 @@ export class ChunkSplitter{
 			{return}
 
 		const filePath = module.issuer.resource
-		return this._get_RelativePath(filePath)
+		return this._get_Relative_DirectoryPath(filePath)
 	}
 
 	_filter_Files(fileData){
@@ -66,11 +80,20 @@ export class ChunkSplitter{
 		return is_TargetFile
 	}
 
-	_get_RelativePath(filePath:string){
+	_get_Relative_DirectoryPath(filePath:string){
 		return(
 			filePath
 				.replace(_filePath_Head,      "" )
 				.replace(this._fileBase_RegEx, "" )
+				.replace(/(^\\)|(\\$)/g,      "" )
+				.replace(/\\/g,               "/")
+		)
+	}
+
+	_get_Relative_FilePath(filePath:string){
+		return(
+			filePath
+				.replace(_filePath_Head,      "" )
 				.replace(/(^\\)|(\\$)/g,      "" )
 				.replace(/\\/g,               "/")
 		)

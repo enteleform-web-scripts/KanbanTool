@@ -1,6 +1,6 @@
 //###  Module  ###//
-import {Settings     } from "../../Settings"
-import {ChunkSplitter} from "../_Utils/ChunkSplitter"
+import {Settings     } from "../../../Settings"
+import {ChunkSplitter} from "../../Utils/ChunkSplitter"
 
 
 export const css_Splitter = new ChunkSplitter(Settings.css_FileBase)

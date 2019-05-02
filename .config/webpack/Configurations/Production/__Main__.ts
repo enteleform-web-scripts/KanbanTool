@@ -1,6 +1,6 @@
 //###  Module  ###//
 import {Common                     } from "../_Common/__Main__"
-import {load_ConfigSegments as load} from "../_Utils/load_ConfigSegments"
+import {load_ConfigSegments as load} from "../../Utils/load_ConfigSegments"
 
 //###  NPM  ###//
 import webpack from "webpack"

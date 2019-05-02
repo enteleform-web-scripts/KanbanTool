@@ -1,13 +1,17 @@
 //###  Module  ###//
-import {Settings                       } from "../../Settings"
-import {get_log_TimeSinceBuild_Callback} from "../_Utils/log_TimeSinceBuild"
+import {Settings                       } from "../../../Settings"
+import {get_log_TimeSinceBuild_Callback} from "../../Utils/log_TimeSinceBuild"
+import {pug_Splitter                   } from "./__Shared__"
+
+//###  Node  ###//
+import path from "path"
 
 //###  NPM  ###//
 import webpack                      from "webpack"
 import CleanWebpackPlugin           from "clean-webpack-plugin"
 import CopyPlugin                   from "copy-webpack-plugin"
 import HtmlWebpackPlugin            from "html-webpack-plugin"
-import InjectPlugin, {ENTRY_ORDER}  from "webpack-inject-plugin"
+import InjectPlugin                 from "webpack-inject-plugin"
 import MiniCssExtractPlugin         from "mini-css-extract-plugin"
 import WebpackBar                   from "webpackbar"
 const  WebpackBuildNotifierPlugin = require("webpack-build-notifier")
@@ -27,10 +31,17 @@ const $: webpack.Plugin[] = [
 		template: Settings.mainLayout,
 	}),
 
+	...pug_Splitter.templates.map(template => (
+			new HtmlWebpackPlugin(template)
+	)),
+
 	new MiniCssExtractPlugin({
 		filename:      `${Settings.cssFolder}/[name].css`,
 		chunkFilename: `${Settings.cssFolder}/[name].css`,
 	}),
+
+	// extract_HTML,
+	// extract_CSS,
 
 	new CopyPlugin([
 		{

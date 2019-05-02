@@ -35,6 +35,7 @@ class S{
 
 	static entryPointsFolder = "EntryPoints"
 	static cssFolder         = "css"
+	static htmlFolder        = "html"
 
 }
 
