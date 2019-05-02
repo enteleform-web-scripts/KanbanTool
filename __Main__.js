@@ -10468,7 +10468,7 @@ const Settings_1 = __webpack_require__(4);
 const Entry_1 = __webpack_require__(19);
 const Layout_1 = __webpack_require__(20);
 const Position_1 = __webpack_require__(7);
-const Module_BaseClasses_1 = __webpack_require__(23);
+const Module_BaseClasses_1 = __webpack_require__(22);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, autoMap_KeyBindings, keyBinding_Modifiers, entryGroups }) {
         super();
@@ -10510,7 +10510,7 @@ class FunctionBar extends Module_BaseClasses_1.Module {
 FunctionBar.Entry = Entry_1.Entry;
 FunctionBar.Position = Position_1.Position;
 FunctionBar.Show = __webpack_require__(8).default;
-FunctionBar.Hide = __webpack_require__(25).default;
+FunctionBar.Hide = __webpack_require__(24).default;
 exports.FunctionBar = FunctionBar;
 (function (FunctionBar) {
     let KeyBinding_Mode;
@@ -10571,10 +10571,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1556375846577)
+		const elapsedTime = _get_ElapsedTime(1556821001542)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:37:26 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:16:41 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10776,7 +10776,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(6);
 const get_Rows_1 = __webpack_require__(9);
 const get_Columns_1 = __webpack_require__(10);
-const Glob_1 = __webpack_require__(24);
+const Glob_1 = __webpack_require__(23);
 const $ = __webpack_require__(0);
 class default_1 {
     static rows({ include, exclude }) {
@@ -10946,8 +10946,8 @@ module.exports = __webpack_require__(12);
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(13);
 const __Main__1 = __webpack_require__(1);
-__Main__1.FunctionBar.load(__webpack_require__(27).default, __webpack_require__(28).default, __webpack_require__(29).default, __webpack_require__(30).default);
-__webpack_require__(31);
+__Main__1.FunctionBar.load(__webpack_require__(26).default, __webpack_require__(27).default, __webpack_require__(28).default, __webpack_require__(29).default);
+__webpack_require__(30);
 
 
 /***/ }),
@@ -11594,8 +11594,7 @@ exports.Entry = Entry;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const _layoutFile = __webpack_require__(21).default;
-const cssVariables = __webpack_require__(22);
+const cssVariables = __webpack_require__(21);
 const Settings_1 = __webpack_require__(4);
 const Position_1 = __webpack_require__(7);
 const $ = __webpack_require__(0);
@@ -11652,20 +11651,12 @@ function _set_Style(element, propertyName, propertyValue) { $(element)[0].style.
 
 /***/ }),
 /* 21 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".overlay\r\n\t.top\r\n\t\t.row\r\n\t\t\t.cell A\r\n\t\t\t.cell B\r\n\t\t\t.cell C\r\n\t\t.row\r\n\t\t\t.cell D\r\n\t\t\t.cell E\r\n\t\t\t.cell F\r\n\t.center\r\n\t\t.left\r\n\t\t\t.column\r\n\t\t\t\t.cell A\r\n\t\t\t\t.cell B\r\n\t\t\t\t.cell C\r\n\t\t\t.column\r\n\t\t\t\t.cell D\r\n\t\t\t\t.cell E\r\n\t\t\t\t.cell F\r\n\r\n\t\t.right\r\n\t\t\t.column\r\n\t\t\t\t.cell A\r\n\t\t\t\t.cell B\r\n\t\t\t\t.cell C\r\n\t\t\t.column\r\n\t\t\t\t.cell D\r\n\t\t\t\t.cell E\r\n\t\t\t\t.cell F\r\n\t.bottom\r\n\t\t.row\r\n\t\t\t.cell A\r\n\t\t\t.cell B\r\n\t\t\t.cell C\r\n\t\t.row\r\n\t\t\t.cell D\r\n\t\t\t.cell E\r\n\t\t\t.cell F\r\n");
-
-/***/ }),
-/* 22 */
 /***/ (function(module) {
 
 module.exports = {"root":"CustomExtension--FunctionBar","legendRow":"Row","legendCell":"Cell","topBar":"Top_FunctionBar","bottomBar":"Bottom_FunctionBar","leftBar":"Left_FunctionBar","rightBar":"Right_FunctionBar","_":""};
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11678,7 +11669,7 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11719,7 +11710,7 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11728,7 +11719,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(26);
+const get_emptyContainer_Indexes_1 = __webpack_require__(25);
 const get_Rows_1 = __webpack_require__(9);
 const get_Columns_1 = __webpack_require__(10);
 const __Main__1 = __importDefault(__webpack_require__(8));
@@ -11766,7 +11757,7 @@ function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_In
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11851,7 +11842,7 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11893,7 +11884,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11923,7 +11914,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11983,7 +11974,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12069,7 +12060,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
