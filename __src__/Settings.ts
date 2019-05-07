@@ -17,8 +17,8 @@ class S{
 	static staticFolder         = "Static"
 	static mainName             = "__Main__"
 
-	static css_FileBase = "CSS.styl"
-	static pug_FileBase = "Layout.pug"
+	static css_FileBase = "__CSS__.styl"
+	static pug_FileBase = "__HTML__.pug"
 
 	static rootPath         = path.resolve(".")
 	static sourcePath       = path.join(S.rootPath,   S.sourceFolder      )
