@@ -35,10 +35,12 @@ function _inject_CSS(modulePath:string){
 
 function _inject_HTML(modulePath:string){
 	const url = _get_FileURL(modulePath, {folder:Settings.htmlFolder, extension:"html"})
+	console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+	console.log(url)
 
 	_get_FileText(url)
 		.then(html => {
-			console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+			console.log("-------------------------------")
 			console.log(html)
 			console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			// $("body").prepend(html)
