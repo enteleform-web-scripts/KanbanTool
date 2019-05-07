@@ -10570,10 +10570,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1557244230698)
+		const elapsedTime = _get_ElapsedTime(1557244421240)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:50:30 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:53:41 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11016,7 +11016,7 @@ function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
 }
 exports.inject = inject;
 function _inject_CSS(modulePath) {
-    const url = _get_FileURL(modulePath, { folder: Settings_1.Settings.cssFolder, extension: "css" });
+    const url = _get_FileURL(modulePath, { folder: Settings_1.Settings.cssFolder, extension: Settings_1.Settings.cssExtension });
     _get_FileText(url)
         .then(css => {
         $("<style>")
@@ -11026,7 +11026,7 @@ function _inject_CSS(modulePath) {
     });
 }
 function _inject_HTML(modulePath) {
-    const url = _get_FileURL(modulePath, { folder: Settings_1.Settings.htmlFolder, extension: "html" });
+    const url = _get_FileURL(modulePath, { folder: Settings_1.Settings.htmlFolder, extension: Settings_1.Settings.htmlExtension });
     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     console.log(url);
     _get_FileText(url)
@@ -11114,6 +11114,8 @@ S.mainLayout = `./${S.mainPage_RelativePath}/${S.mainName}.pug`;
 S.entryPointsFolder = "EntryPoints";
 S.cssFolder = "css";
 S.htmlFolder = "html";
+S.cssExtension = "css";
+S.htmlExtension = "lolwut";
 exports.Settings = S;
 
 
