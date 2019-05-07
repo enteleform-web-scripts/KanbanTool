@@ -10570,10 +10570,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1557244637796)
+		const elapsedTime = _get_ElapsedTime(1557244838031)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:57:17 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:00:38 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11031,6 +11031,7 @@ function _inject_HTML(modulePath) {
     console.log(url);
     _get_FileText(url)
         .then(html => {
+        html = _strip_HTML_ExcessData(html);
         console.log("-------------------------------");
         console.log(html);
         console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -11078,6 +11079,11 @@ function _add_BaseURL(relativePath) {
         url = `${baseURL}/${relativePath}`;
     }
     return url;
+}
+function _strip_HTML_ExcessData(html) {
+    return (html
+        .replace(/<head>.*?<\/head>/, "")
+        .replace(/<script.*?<\/script>/, ""));
 }
 
 
