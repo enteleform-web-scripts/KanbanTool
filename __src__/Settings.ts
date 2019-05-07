@@ -8,6 +8,8 @@ class S{
 	//###  Source  ###//
 	//################//
 
+	static baseURL = "https://enteleform-extensions.github.io/KanbanTool"
+
 	static configFolder         = ".config"
 	static sourceFolder         = "__src__"
 	static distributionFolder   = "__dist__"

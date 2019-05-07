@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {Settings} from "../../../Settings"
+import {Settings} from "../../../../__src__/Settings"
 
 //###  NPM  ###//
 import webpack from "webpack"

@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {Settings} from "../../../Settings"
+import {Settings         } from "../../../../__src__/Settings"
 import {build_ModuleRules} from "../../Utils/build_ModuleRules"
 // import {extract_HTML, extract_CSS} from "./__Shared__"
 

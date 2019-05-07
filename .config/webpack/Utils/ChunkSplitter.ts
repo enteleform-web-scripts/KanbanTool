@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {Settings} from "../../Settings"
+import {Settings} from "../../../__src__/Settings"
 
 //###  Node  ###//
 import path from "path"
@@ -45,15 +45,17 @@ export class ChunkSplitter{
 	}
 
 	get templates(){
-		return this._filePaths.map(filePath => {
+		return this._filePaths.map(sourcePath => {
 			const relativePath = path.join(
 				Settings.htmlFolder,
-				this._get_Relative_FilePath(filePath)
+				this._get_Relative_FilePath(sourcePath)
 			)
 
+			const destinationPath = _replace_Extension(relativePath, ".html")
+
 			return {
-				filename: relativePath,
-				template: filePath,
+				filename: destinationPath,
+				template: sourcePath,
 			}
 		})
 	}
@@ -83,10 +85,10 @@ export class ChunkSplitter{
 	_get_Relative_DirectoryPath(filePath:string){
 		return(
 			filePath
-				.replace(_filePath_Head,      "" )
+				.replace(_filePath_Head,       "" )
 				.replace(this._fileBase_RegEx, "" )
-				.replace(/(^\\)|(\\$)/g,      "" )
-				.replace(/\\/g,               "/")
+				.replace(/(^\\)|(\\$)/g,       "" )
+				.replace(/\\/g,                "/")
 		)
 	}
 
@@ -107,3 +109,7 @@ export class ChunkSplitter{
 //###############//
 
 const _filePath_Head = new RegExp("^" + escape_RegEx(Settings.sourcePath))
+
+function _replace_Extension(filePath:string, newExtension:string){
+	return filePath.replace(/\.[^\.]+$/, `.${newExtension}`)
+}

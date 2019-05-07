@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {Settings                  } from "../../../Settings"
+import {Settings                  } from "../../../../__src__/Settings"
 import {css_Splitter, pug_Splitter} from "./__Shared__"
 
 //###  NPM  ###//

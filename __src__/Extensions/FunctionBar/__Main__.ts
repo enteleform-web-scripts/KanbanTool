@@ -1,6 +1,5 @@
-//###  Module: CSS  ###//
-import {CSS} from "~/Utils/CSS"
-CSS.apply(__dirname)
+//###  Module: HTML_Injector  ###//
+require("~/Utils/HTML_Injector").inject(__dirname, {CSS:true, HTML:true})
 
 //###  Module  ###//
 import {autoMapped_Key_Rows                           } from "./Settings"

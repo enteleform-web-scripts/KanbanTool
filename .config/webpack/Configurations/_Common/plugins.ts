@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {Settings                       } from "../../../Settings"
+import {Settings                       } from "../../../../__src__/Settings"
 import {get_log_TimeSinceBuild_Callback} from "../../Utils/log_TimeSinceBuild"
 import {pug_Splitter                   } from "./__Shared__"
 
