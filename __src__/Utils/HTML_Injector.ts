@@ -35,16 +35,11 @@ function _inject_CSS(modulePath:string){
 
 function _inject_HTML(modulePath:string){
 	const url = _get_FileURL(modulePath, {folder:Settings.htmlFolder, extension:Settings.htmlExtension})
-	console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-	console.log(url)
 
 	_get_FileText(url)
 		.then(html => {
 			html = _strip_HTML_ExcessData(html)
-			console.log("-------------------------------")
-			console.log(html)
-			console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-			// $("body").prepend(html)
+			$("body").prepend(html)
 		})
 }
 
