@@ -40,6 +40,7 @@ function _inject_HTML(modulePath:string){
 
 	_get_FileText(url)
 		.then(html => {
+			html = _strip_HTML_ExcessData(html)
 			console.log("-------------------------------")
 			console.log(html)
 			console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -105,4 +106,12 @@ function _add_BaseURL(relativePath:string){
 	if(! url.startsWith(baseURL))
 		{url = `${baseURL}/${relativePath}`}
 	return url
+}
+
+function _strip_HTML_ExcessData(html){
+	return (
+		html
+			.replace(/<head>.*?<\/head>/,    "")
+			.replace(/<script.*?<\/script>/, "")
+	)
 }
