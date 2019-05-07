@@ -52,7 +52,7 @@ export class ChunkSplitter{
 			)
 
 			return {
-				filename: `${relative_DirectoryPath}.raw`,
+				filename: `${relative_DirectoryPath}.${Settings.htmlExtension}`,
 				template: sourcePath,
 			}
 		})

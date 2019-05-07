@@ -39,6 +39,9 @@ class S{
 	static cssFolder         = "css"
 	static htmlFolder        = "html"
 
+	static cssExtension  = "css"
+	static htmlExtension = "lolwut"
+
 }
 
 export const Settings = S

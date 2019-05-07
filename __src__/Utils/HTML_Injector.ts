@@ -22,7 +22,7 @@ export function inject(
 //###############//
 
 function _inject_CSS(modulePath:string){
-	const url = _get_FileURL(modulePath, {folder:Settings.cssFolder, extension:"css"})
+	const url = _get_FileURL(modulePath, {folder:Settings.cssFolder, extension:Settings.cssExtension})
 
 	_get_FileText(url)
 		.then(css => {
@@ -34,7 +34,7 @@ function _inject_CSS(modulePath:string){
 }
 
 function _inject_HTML(modulePath:string){
-	const url = _get_FileURL(modulePath, {folder:Settings.htmlFolder, extension:"html"})
+	const url = _get_FileURL(modulePath, {folder:Settings.htmlFolder, extension:Settings.htmlExtension})
 	console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 	console.log(url)
 
