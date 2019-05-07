@@ -46,15 +46,13 @@ export class ChunkSplitter{
 
 	get templates(){
 		return this._filePaths.map(sourcePath => {
-			const relativePath = path.join(
+			const relative_DirectoryPath = path.join(
 				Settings.htmlFolder,
-				this._get_Relative_FilePath(sourcePath)
+				this._get_Relative_DirectoryPath(sourcePath)
 			)
 
-			const destinationPath = _replace_Extension(relativePath, ".html")
-
 			return {
-				filename: destinationPath,
+				filename: `${relative_DirectoryPath}.html`,
 				template: sourcePath,
 			}
 		})
@@ -89,15 +87,6 @@ export class ChunkSplitter{
 				.replace(this._fileBase_RegEx, "" )
 				.replace(/(^\\)|(\\$)/g,       "" )
 				.replace(/\\/g,                "/")
-		)
-	}
-
-	_get_Relative_FilePath(filePath:string){
-		return(
-			filePath
-				.replace(_filePath_Head,      "" )
-				.replace(/(^\\)|(\\$)/g,      "" )
-				.replace(/\\/g,               "/")
 		)
 	}
 
