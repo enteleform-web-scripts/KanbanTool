@@ -10462,13 +10462,12 @@ return jQuery;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS_1 = __webpack_require__(14);
-CSS_1.CSS.apply(__dirname);
+__webpack_require__(14).inject(__dirname, { CSS: true, HTML: true });
 const Settings_1 = __webpack_require__(4);
-const Entry_1 = __webpack_require__(19);
-const Layout_1 = __webpack_require__(20);
+const Entry_1 = __webpack_require__(20);
+const Layout_1 = __webpack_require__(21);
 const Position_1 = __webpack_require__(7);
-const Module_BaseClasses_1 = __webpack_require__(22);
+const Module_BaseClasses_1 = __webpack_require__(23);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, autoMap_KeyBindings, keyBinding_Modifiers, entryGroups }) {
         super();
@@ -10510,7 +10509,7 @@ class FunctionBar extends Module_BaseClasses_1.Module {
 FunctionBar.Entry = Entry_1.Entry;
 FunctionBar.Position = Position_1.Position;
 FunctionBar.Show = __webpack_require__(8).default;
-FunctionBar.Hide = __webpack_require__(24).default;
+FunctionBar.Hide = __webpack_require__(25).default;
 exports.FunctionBar = FunctionBar;
 (function (FunctionBar) {
     let KeyBinding_Mode;
@@ -10571,10 +10570,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1556821001542)
+		const elapsedTime = _get_ElapsedTime(1557243181222)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:16:41 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:33:01 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10607,8 +10606,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(17);
-const hotkeys_js_1 = __importDefault(__webpack_require__(18));
+const KeyGroups_1 = __webpack_require__(18);
+const hotkeys_js_1 = __importDefault(__webpack_require__(19));
 hotkeys_js_1.default.filter = _disable_DefaultFilters;
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
@@ -10776,7 +10775,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(6);
 const get_Rows_1 = __webpack_require__(9);
 const get_Columns_1 = __webpack_require__(10);
-const Glob_1 = __webpack_require__(23);
+const Glob_1 = __webpack_require__(24);
 const $ = __webpack_require__(0);
 class default_1 {
     static rows({ include, exclude }) {
@@ -10946,8 +10945,8 @@ module.exports = __webpack_require__(12);
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(13);
 const __Main__1 = __webpack_require__(1);
-__Main__1.FunctionBar.load(__webpack_require__(26).default, __webpack_require__(27).default, __webpack_require__(28).default, __webpack_require__(29).default);
-__webpack_require__(30);
+__Main__1.FunctionBar.load(__webpack_require__(27).default, __webpack_require__(28).default, __webpack_require__(29).default, __webpack_require__(30).default);
+__webpack_require__(31);
 
 
 /***/ }),
@@ -11006,63 +11005,47 @@ function get_DivIndex(checkList_Item) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings = __webpack_require__(15);
-const _get_FileText_1 = __webpack_require__(16);
-class CSS {
-    static async apply(modulePath) {
-        const url = _get_ModuleCSS_URL(modulePath);
-        _get_FileText_1.get_FileText(url)
-            .then(css => {
-            $("<style>")
-                .prop("type", "text/css")
-                .html(css)
-                .appendTo("head");
-        });
+const Settings_1 = __webpack_require__(15);
+function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
+    if (CSS) {
+        _inject_CSS(modulePath);
+    }
+    if (HTML) {
+        _inject_HTML(modulePath);
     }
 }
-exports.CSS = CSS;
-function _get_ModuleCSS_URL(modulePath) {
-    const relativePath = _remove_SourceDirectory(modulePath);
-    const cssPath = `css/${relativePath}.css`;
-    const url = _add_BaseURL(cssPath);
-    return url;
+exports.inject = inject;
+function _inject_CSS(modulePath) {
+    const url = _get_FileURL(modulePath, { folder: Settings_1.Settings.cssFolder, extension: "css" });
+    _get_FileText(url)
+        .then(css => {
+        $("<style>")
+            .prop("type", "text/css")
+            .html(css)
+            .appendTo("head");
+    });
 }
-function _remove_SourceDirectory(relativePath) {
-    return (relativePath
-        .split("\\")
-        .slice(1)
-        .join("/"));
+function _inject_HTML(modulePath) {
+    const url = _get_FileURL(modulePath, { folder: Settings_1.Settings.cssFolder, extension: "css" });
+    _get_FileText(url)
+        .then(html => {
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        console.log(html);
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    });
 }
-function _add_BaseURL(relativePath) {
-    const baseURL = Settings.baseURL;
-    let url = relativePath.replace(/^\.?\/?/, `${baseURL}/`);
-    if (!url.startsWith(baseURL)) {
-        url = `${baseURL}/${relativePath}`;
-    }
-    return url;
-}
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module) {
-
-module.exports = {"baseURL":"https://enteleform-extensions.github.io/KanbanTool","_":""};
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-async function get_FileText(url) {
+async function _get_FileText(url) {
     const result = { value: null };
-    await _get_FileText(url, result);
+    await __get_FileText(url, result);
     return result.value;
 }
-exports.get_FileText = get_FileText;
-async function _get_FileText(url, result) {
+function _get_FileURL(modulePath, { folder, extension }) {
+    const relativePath = _remove_SourceDirectory(modulePath);
+    const filePath = `${folder}/${relativePath}.${extension}`;
+    const url = _add_BaseURL(filePath);
+    return url;
+}
+async function __get_FileText(url, result) {
     var file = new XMLHttpRequest();
     file.open("GET", url, false);
     file.onreadystatechange = () => {
@@ -11080,10 +11063,481 @@ async function _get_FileText(url, result) {
     };
     file.send(null);
 }
+function _remove_SourceDirectory(relativePath) {
+    return (relativePath
+        .split("\\")
+        .slice(1)
+        .join("/"));
+}
+function _add_BaseURL(relativePath) {
+    const baseURL = Settings_1.Settings.baseURL;
+    let url = relativePath.replace(/^\.?\/?/, `${baseURL}/`);
+    if (!url.startsWith(baseURL)) {
+        url = `${baseURL}/${relativePath}`;
+    }
+    return url;
+}
 
 
 /***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const path_1 = __importDefault(__webpack_require__(16));
+class S {
+}
+S.baseURL = "https://enteleform-extensions.github.io/KanbanTool";
+S.configFolder = ".config";
+S.sourceFolder = "__src__";
+S.distributionFolder = "__dist__";
+S.librariesFolder = "__libs__";
+S.staticFolder = "Static";
+S.mainName = "__Main__";
+S.css_FileBase = "CSS.styl";
+S.pug_FileBase = "Layout.pug";
+S.rootPath = path_1.default.resolve(".");
+S.sourcePath = path_1.default.join(S.rootPath, S.sourceFolder);
+S.distributionPath = path_1.default.join(S.rootPath, S.distributionFolder);
+S.librariesPath = path_1.default.join(S.rootPath, S.librariesFolder);
+S.staticPath = path_1.default.join(S.sourcePath, S.staticFolder);
+S.mainPage_RelativePath = `./${S.sourceFolder}/${S.mainName}/`;
+S.mainScript = `./${S.mainPage_RelativePath}/${S.mainName}.ts`;
+S.mainLayout = `./${S.mainPage_RelativePath}/${S.mainName}.pug`;
+S.entryPointsFolder = "EntryPoints";
+S.cssFolder = "css";
+S.htmlFolder = "html";
+exports.Settings = S;
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+// resolves . and .. elements in a path array with directory names there
+// must be no slashes, empty elements, or device names (c:\) in the array
+// (so also no leading and trailing slashes - it does not distinguish
+// relative and absolute paths)
+function normalizeArray(parts, allowAboveRoot) {
+  // if the path tries to go above the root, `up` ends up > 0
+  var up = 0;
+  for (var i = parts.length - 1; i >= 0; i--) {
+    var last = parts[i];
+    if (last === '.') {
+      parts.splice(i, 1);
+    } else if (last === '..') {
+      parts.splice(i, 1);
+      up++;
+    } else if (up) {
+      parts.splice(i, 1);
+      up--;
+    }
+  }
+
+  // if the path is allowed to go above the root, restore leading ..s
+  if (allowAboveRoot) {
+    for (; up--; up) {
+      parts.unshift('..');
+    }
+  }
+
+  return parts;
+}
+
+// Split a filename into [root, dir, basename, ext], unix version
+// 'root' is just a slash, or nothing.
+var splitPathRe =
+    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
+var splitPath = function(filename) {
+  return splitPathRe.exec(filename).slice(1);
+};
+
+// path.resolve([from ...], to)
+// posix version
+exports.resolve = function() {
+  var resolvedPath = '',
+      resolvedAbsolute = false;
+
+  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
+    var path = (i >= 0) ? arguments[i] : process.cwd();
+
+    // Skip empty and invalid entries
+    if (typeof path !== 'string') {
+      throw new TypeError('Arguments to path.resolve must be strings');
+    } else if (!path) {
+      continue;
+    }
+
+    resolvedPath = path + '/' + resolvedPath;
+    resolvedAbsolute = path.charAt(0) === '/';
+  }
+
+  // At this point the path should be resolved to a full absolute path, but
+  // handle relative paths to be safe (might happen when process.cwd() fails)
+
+  // Normalize the path
+  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
+    return !!p;
+  }), !resolvedAbsolute).join('/');
+
+  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
+};
+
+// path.normalize(path)
+// posix version
+exports.normalize = function(path) {
+  var isAbsolute = exports.isAbsolute(path),
+      trailingSlash = substr(path, -1) === '/';
+
+  // Normalize the path
+  path = normalizeArray(filter(path.split('/'), function(p) {
+    return !!p;
+  }), !isAbsolute).join('/');
+
+  if (!path && !isAbsolute) {
+    path = '.';
+  }
+  if (path && trailingSlash) {
+    path += '/';
+  }
+
+  return (isAbsolute ? '/' : '') + path;
+};
+
+// posix version
+exports.isAbsolute = function(path) {
+  return path.charAt(0) === '/';
+};
+
+// posix version
+exports.join = function() {
+  var paths = Array.prototype.slice.call(arguments, 0);
+  return exports.normalize(filter(paths, function(p, index) {
+    if (typeof p !== 'string') {
+      throw new TypeError('Arguments to path.join must be strings');
+    }
+    return p;
+  }).join('/'));
+};
+
+
+// path.relative(from, to)
+// posix version
+exports.relative = function(from, to) {
+  from = exports.resolve(from).substr(1);
+  to = exports.resolve(to).substr(1);
+
+  function trim(arr) {
+    var start = 0;
+    for (; start < arr.length; start++) {
+      if (arr[start] !== '') break;
+    }
+
+    var end = arr.length - 1;
+    for (; end >= 0; end--) {
+      if (arr[end] !== '') break;
+    }
+
+    if (start > end) return [];
+    return arr.slice(start, end - start + 1);
+  }
+
+  var fromParts = trim(from.split('/'));
+  var toParts = trim(to.split('/'));
+
+  var length = Math.min(fromParts.length, toParts.length);
+  var samePartsLength = length;
+  for (var i = 0; i < length; i++) {
+    if (fromParts[i] !== toParts[i]) {
+      samePartsLength = i;
+      break;
+    }
+  }
+
+  var outputParts = [];
+  for (var i = samePartsLength; i < fromParts.length; i++) {
+    outputParts.push('..');
+  }
+
+  outputParts = outputParts.concat(toParts.slice(samePartsLength));
+
+  return outputParts.join('/');
+};
+
+exports.sep = '/';
+exports.delimiter = ':';
+
+exports.dirname = function(path) {
+  var result = splitPath(path),
+      root = result[0],
+      dir = result[1];
+
+  if (!root && !dir) {
+    // No dirname whatsoever
+    return '.';
+  }
+
+  if (dir) {
+    // It has a dirname, strip trailing slash
+    dir = dir.substr(0, dir.length - 1);
+  }
+
+  return root + dir;
+};
+
+
+exports.basename = function(path, ext) {
+  var f = splitPath(path)[2];
+  // TODO: make this comparison case-insensitive on windows?
+  if (ext && f.substr(-1 * ext.length) === ext) {
+    f = f.substr(0, f.length - ext.length);
+  }
+  return f;
+};
+
+
+exports.extname = function(path) {
+  return splitPath(path)[3];
+};
+
+function filter (xs, f) {
+    if (xs.filter) return xs.filter(f);
+    var res = [];
+    for (var i = 0; i < xs.length; i++) {
+        if (f(xs[i], i, xs)) res.push(xs[i]);
+    }
+    return res;
+}
+
+// String.prototype.substr - negative index don't work in IE8
+var substr = 'ab'.substr(-1) === 'b'
+    ? function (str, start, len) { return str.substr(start, len) }
+    : function (str, start, len) {
+        if (start < 0) start = str.length + start;
+        return str.substr(start, len);
+    }
+;
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(17)))
+
+/***/ }),
 /* 17 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11104,7 +11558,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11543,7 +11997,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11588,13 +12042,13 @@ exports.Entry = Entry;
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const cssVariables = __webpack_require__(21);
+const cssVariables = __webpack_require__(22);
 const Settings_1 = __webpack_require__(4);
 const Position_1 = __webpack_require__(7);
 const $ = __webpack_require__(0);
@@ -11650,13 +12104,13 @@ function _set_Style(element, propertyName, propertyValue) { $(element)[0].style.
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module) {
 
 module.exports = {"root":"CustomExtension--FunctionBar","legendRow":"Row","legendCell":"Cell","topBar":"Top_FunctionBar","bottomBar":"Bottom_FunctionBar","leftBar":"Left_FunctionBar","rightBar":"Right_FunctionBar","_":""};
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11669,7 +12123,7 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11710,7 +12164,7 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11719,7 +12173,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(25);
+const get_emptyContainer_Indexes_1 = __webpack_require__(26);
 const get_Rows_1 = __webpack_require__(9);
 const get_Columns_1 = __webpack_require__(10);
 const __Main__1 = __importDefault(__webpack_require__(8));
@@ -11757,7 +12211,7 @@ function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_In
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11842,7 +12296,7 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11884,7 +12338,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11914,7 +12368,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11974,7 +12428,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12060,7 +12514,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
