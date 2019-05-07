@@ -40,7 +40,7 @@ class S{
 	static htmlFolder        = "html"
 
 	static cssExtension  = "css"
-	static htmlExtension = "txt"
+	static htmlExtension = "html"
 
 }
 

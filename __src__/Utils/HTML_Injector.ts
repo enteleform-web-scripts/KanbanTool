@@ -111,7 +111,7 @@ function _add_BaseURL(relativePath:string){
 function _strip_HTML_ExcessData(html){
 	return (
 		html
-			.replace(/<head>.*?<\/head>/,    "")
-			.replace(/<script.*?<\/script>/, "")
+			.replace(/<head>.*?<\/head>/,     "")
+			.replace(/<script.*?<\/script>/g, "")
 	)
 }
