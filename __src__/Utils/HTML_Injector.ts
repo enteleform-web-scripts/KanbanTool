@@ -34,7 +34,7 @@ function _inject_CSS(modulePath:string){
 }
 
 function _inject_HTML(modulePath:string){
-	const url = _get_FileURL(modulePath, {folder:Settings.cssFolder, extension:"css"})
+	const url = _get_FileURL(modulePath, {folder:Settings.htmlFolder, extension:"html"})
 
 	_get_FileText(url)
 		.then(html => {
