@@ -62,6 +62,7 @@
 .CustomExtension__FunctionBar .top .row .cell,
 .CustomExtension__FunctionBar .bottom .row .cell {
   text-align: center;
+  white-space: nowrap;
 }
 .CustomExtension__FunctionBar .top .row.stretch,
 .CustomExtension__FunctionBar .bottom .row.stretch {
