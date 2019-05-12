@@ -6,6 +6,7 @@
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 1000;
 }
 .CustomExtension__FunctionBar .top {
   background: #f77;
@@ -73,5 +74,8 @@ body > .kt-side-panel-slide {
   margin-top: var(--KanbanToolOffsets_TopHeight) !important;
   margin-left: var(--KanbanToolOffsets_LeftWidth) !important;
   margin-right: var(--KanbanToolOffsets_RightWidth) !important;
+}
+.kt-side-panel-slide > .kt-extensions-swimlane_labels {
+  left: var(--KanbanToolOffsets_LeftWidth) !important;
 }
 
