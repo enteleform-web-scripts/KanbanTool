@@ -10463,10 +10463,11 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(13).inject(__dirname, { CSS: true, HTML: true });
-const Settings_1 = __webpack_require__(6);
+const Settings_1 = __webpack_require__(4);
 const Entry_1 = __webpack_require__(19);
-const Position_1 = __webpack_require__(20);
-const Module_BaseClasses_1 = __webpack_require__(21);
+const Layout_1 = __webpack_require__(20);
+const Position_1 = __webpack_require__(23);
+const Module_BaseClasses_1 = __webpack_require__(24);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, autoMap_KeyBindings, keyBinding_Modifiers, entryGroups }) {
         super();
@@ -10481,6 +10482,7 @@ class FunctionBar extends Module_BaseClasses_1.Module {
         });
     }
     initialize() {
+        Layout_1.Layout.update_OriginalLayout();
     }
     _validate_AutoMapped_Rows() {
         if (!this.autoMap_KeyBindings) {
@@ -10499,7 +10501,7 @@ class FunctionBar extends Module_BaseClasses_1.Module {
 FunctionBar.Entry = Entry_1.Entry;
 FunctionBar.Position = Position_1.Position;
 FunctionBar.Show = __webpack_require__(7).default;
-FunctionBar.Hide = __webpack_require__(23).default;
+FunctionBar.Hide = __webpack_require__(26).default;
 exports.FunctionBar = FunctionBar;
 (function (FunctionBar) {
     let KeyBinding_Mode;
@@ -10560,10 +10562,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1557627597832)
+		const elapsedTime = _get_ElapsedTime(1557627978417)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:19:57 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     10:26:18 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10576,6 +10578,18 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(5);
+exports.css_Timeout_MS = 500;
+exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10639,7 +10653,7 @@ function _convert_HotKeys_ToString(keys) {
 
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10728,28 +10742,16 @@ exports.TaskContainer = TaskContainer;
 
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(4);
-exports.css_Timeout_MS = 500;
-exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
-
-
-/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
+const TaskContainer_1 = __webpack_require__(6);
 const get_Rows_1 = __webpack_require__(8);
 const get_Columns_1 = __webpack_require__(9);
-const Glob_1 = __webpack_require__(22);
+const Glob_1 = __webpack_require__(25);
 const $ = __webpack_require__(0);
 class default_1 {
     static rows({ include, exclude }) {
@@ -10829,7 +10831,7 @@ function _match_Glob(container, target) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
+const TaskContainer_1 = __webpack_require__(6);
 const KanbanTool_1 = __webpack_require__(2);
 const $ = __webpack_require__(0);
 function get_Rows() {
@@ -10854,7 +10856,7 @@ exports.get_Rows = get_Rows;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
+const TaskContainer_1 = __webpack_require__(6);
 const KanbanTool_1 = __webpack_require__(2);
 function get_Columns() {
     const models = KanbanTool_1.activeBoard.workflowStages()
@@ -10919,8 +10921,8 @@ module.exports = __webpack_require__(11);
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(12);
 const __Main__1 = __webpack_require__(1);
-__Main__1.FunctionBar.load(__webpack_require__(25).default, __webpack_require__(26).default, __webpack_require__(27).default, __webpack_require__(28).default);
-__webpack_require__(29);
+__Main__1.FunctionBar.load(__webpack_require__(28).default, __webpack_require__(29).default, __webpack_require__(30).default, __webpack_require__(31).default);
+__webpack_require__(32);
 
 
 /***/ }),
@@ -11983,8 +11985,8 @@ if (typeof window !== 'undefined') {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(6);
-const __Main__1 = __webpack_require__(4);
+const Settings_1 = __webpack_require__(4);
+const __Main__1 = __webpack_require__(5);
 class Entry {
     constructor({ name, color, keyBinding, on_Load, }) {
         this.name = name;
@@ -12028,6 +12030,66 @@ exports.Entry = Entry;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const cssVariables = __webpack_require__(21);
+const Settings_1 = __webpack_require__(4);
+const __main__1 = __webpack_require__(22);
+const $ = __webpack_require__(0);
+var Layout;
+(function (Layout) {
+    function update_OriginalLayout() {
+        setTimeout(() => {
+            __main__1.set_CSS_Variable("KanbanToolOffsets_TopHeight", `${100}px`);
+            __main__1.set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${100}px`);
+            __main__1.set_CSS_Variable("KanbanToolOffsets_RightWidth", `${100}px`);
+        }, Settings_1.css_Timeout_MS);
+    }
+    Layout.update_OriginalLayout = update_OriginalLayout;
+})(Layout = exports.Layout || (exports.Layout = {}));
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module) {
+
+module.exports = {"container":"CustomExtension__FunctionBar","_":""};
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function set_CSS_Variable(key, value) { document.documentElement.style.setProperty(`--${key}`, value); }
+exports.set_CSS_Variable = set_CSS_Variable;
+function get_CSS_Variable(key) { return _get_CSS_Variable_Value(`--${key}`); }
+exports.get_CSS_Variable = get_CSS_Variable;
+function get_CSS_Variables() {
+    const variables = {};
+    const styleSheets = [...document.styleSheets]
+        .flatMap(sheet => _get_CSS_Variable_Keys(sheet));
+    styleSheets.forEach(key => {
+        variables[key] = _get_CSS_Variable_Value(key);
+    });
+    return variables;
+}
+exports.get_CSS_Variables = get_CSS_Variables;
+function _get_CSS_Variable_Keys(styleSheet) {
+    const cssRules = [...styleSheet.cssRules];
+    const rootRules = cssRules.filter(rule => (rule.selectorText == ":root"));
+    const keys = rootRules.flatMap(rule => [...rule.style]);
+    return keys;
+}
+function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documentElement).getPropertyValue(key); }
+
+
+/***/ }),
+/* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 var Position;
 (function (Position) {
     Position[Position["Left"] = 0] = "Left";
@@ -12038,7 +12100,7 @@ var Position;
 
 
 /***/ }),
-/* 21 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12051,7 +12113,7 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 22 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12092,7 +12154,7 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 23 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12101,7 +12163,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(24);
+const get_emptyContainer_Indexes_1 = __webpack_require__(27);
 const get_Rows_1 = __webpack_require__(8);
 const get_Columns_1 = __webpack_require__(9);
 const __Main__1 = __importDefault(__webpack_require__(7));
@@ -12139,7 +12201,7 @@ function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_In
 
 
 /***/ }),
-/* 24 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12224,7 +12286,7 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 
 /***/ }),
-/* 25 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12266,7 +12328,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 26 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12296,7 +12358,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 27 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12356,7 +12418,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 28 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12442,7 +12504,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 29 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12460,7 +12522,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(4);
+const __Main__1 = __webpack_require__(5);
 const jquery_1 = __importDefault(__webpack_require__(0));
 const $ = jquery_1.default;
 class FilterKeybindings {
