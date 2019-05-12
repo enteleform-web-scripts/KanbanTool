@@ -10485,16 +10485,7 @@ class FunctionBar extends Module_BaseClasses_1.Module {
         this._validate_AutoMapped_Rows();
         setTimeout(this._build_Layout, Settings_1.css_Timeout_MS);
     }
-    _build_Layout() {
-        this.layout = new Layout_1.Layout(this.entryGroups, this.position);
-        this.entryGroups.forEach((group, groupIndex) => {
-            group.forEach((entry, entryIndex) => {
-                const keyBinding = entry.initialize_KeyBinding(this.autoMap_KeyBindings, this.keyBinding_Modifiers, groupIndex, entryIndex);
-                this.layout.add_Cell(entry, groupIndex, keyBinding);
-            });
-        });
-        this.layout.update_OriginalLayout();
-    }
+    _build_Layout() { this.layout = new Layout_1.Layout(this); }
     _validate_AutoMapped_Rows() {
         if (!this.autoMap_KeyBindings) {
             return;
@@ -10573,10 +10564,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1557675196963)
+		const elapsedTime = _get_ElapsedTime(1557680464757)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:33:16 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:01:04 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12062,21 +12053,27 @@ const Position_1 = __webpack_require__(7);
 const __main__1 = __webpack_require__(23);
 const $ = __webpack_require__(0);
 class Layout {
-    constructor(entryGroups, position) {
-        this.position = position;
-        this._build(entryGroups);
+    constructor(functionBar) {
+        this._functionBar = functionBar;
+        this._build();
+        this._update_OriginalLayout();
     }
-    _build(entryGroups) {
-        const { selectorTail, subContainer_Class } = _BarComponent_Map[this.position];
+    _build() {
+        const { autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position } = this._functionBar;
+        const { selectorTail, subContainer_Class } = _BarComponent_Map[position];
         const containerSelector = [`.${cssVariables.container}`, selectorTail].join(" > ");
         this.container = $(containerSelector);
         console.log(">>>", containerSelector);
         console.log(">>>", document.querySelector(containerSelector));
         this.subContainers = [];
-        entryGroups.forEach(group => {
+        entryGroups.forEach((group, groupIndex) => {
             const subContainer = $("<div>", { class: subContainer_Class });
             this.container.append(subContainer);
             this.subContainers.push(subContainer);
+            group.forEach((entry, entryIndex) => {
+                const keyBinding = entry.initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex);
+                this.add_Cell(entry, groupIndex, keyBinding);
+            });
         });
     }
     add_Cell(entry, groupIndex, keyBinding) {
@@ -12089,7 +12086,7 @@ class Layout {
         cell.on("click", entry.on_Load);
         this.subContainers[groupIndex].append(cell);
     }
-    update_OriginalLayout() {
+    _update_OriginalLayout() {
         __main__1.set_CSS_Variable("KanbanToolOffsets_NavHeight", `${$("nav.navbar").height()}px`);
         __main__1.set_CSS_Variable("KanbanToolOffsets_TopHeight", `${$("." + cssVariables.container + " > .top").height()}px`);
         __main__1.set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${$("." + cssVariables.container + " > .center > .left").width()}px`);
