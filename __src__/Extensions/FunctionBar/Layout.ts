@@ -9,9 +9,10 @@
 const cssVariables = require("./CSS_Variables.json")
 
 //###  Module  ###//
-import {css_Timeout_MS} from "./Settings"
-import {Entry         } from "./Entry"
-import {Position      } from "./Position"
+import {css_Timeout_MS  } from "./Settings"
+import {Entry           } from "./Entry"
+import {Position        } from "./Position"
+import {set_CSS_Variable} from "~/Utils/CSS_Variables/__main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -21,75 +22,78 @@ const $:any = require("jquery")
 //###  Exports  ###//
 //#################//
 
-export class Layout{
+export namespace Layout{
 
-	container: HTMLElement
-	rows:      HTMLElement[]
-	position:  Position
+	// container: HTMLElement
+	// rows:      HTMLElement[]
+	// position:  Position
 
-	constructor(entryGroups:Entry[][], position:Position){
-		this.position = position
-		this._build(entryGroups)
-	}
+	// constructor(entryGroups:Entry[][], position:Position){
+	// 	this.position = position
+	// 	this._build(entryGroups)
+	// }
 
-	_build(entryGroups:Entry[][]){
-		const positionClass = _BarPosition_CSS_Map[this.position]
-		this.container = $(
-			"<div>",
-			{"class":[cssVariables.root, positionClass].join(" ")}
-		)
-		$("body").append(this.container)
+	// _build(entryGroups:Entry[][]){
+	// 	const positionClass = _BarPosition_CSS_Map[this.position]
+	// 	this.container = $(
+	// 		"<div>",
+	// 		{"class":[cssVariables.root, positionClass].join(" ")}
+	// 	)
+	// 	$("body").append(this.container)
 
-		this.rows = []
-		entryGroups.forEach(group => {
-			const row = $("<div>", {"class":cssVariables.legendRow})
-			this.container.append(row)
-			this.rows.push(row)
-		})
-	}
+	// 	this.rows = []
+	// 	entryGroups.forEach(group => {
+	// 		const row = $("<div>", {"class":cssVariables.legendRow})
+	// 		this.container.append(row)
+	// 		this.rows.push(row)
+	// 	})
+	// }
 
-	add_Cell(entry:Entry, groupIndex:number, keyBinding:string){
-		const cell = $("<div>", {"class":cssVariables.legendCell})
+	// add_Cell(entry:Entry, groupIndex:number, keyBinding:string){
+	// 	const cell = $("<div>", {"class":cssVariables.legendCell})
 
-		let text = entry.name
-		if(keyBinding)
-			{text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`}
+	// 	let text = entry.name
+	// 	if(keyBinding)
+	// 		{text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`}
 
-		cell.html(text)
-		cell.on("click", entry.on_Load)
+	// 	cell.html(text)
+	// 	cell.on("click", entry.on_Load)
 
-		this.rows[groupIndex].append(cell)
-	}
+	// 	this.rows[groupIndex].append(cell)
+	// }
 
-	update_OriginalLayout(){
+	export function update_OriginalLayout(){
 		setTimeout( () => {
-			const $container = $(this.container)
-			const $board           = $("#show > div.kt-side-panel-slide")
+			set_CSS_Variable("KanbanToolOffsets_TopHeight",  `${100}px`)
+			set_CSS_Variable("KanbanToolOffsets_LeftWidth",  `${100}px`)
+			set_CSS_Variable("KanbanToolOffsets_RightWidth", `${100}px`)
+			// const $container = $(this.container)
+			// const $board           = $("#show > div.kt-side-panel-slide")
 
-			if(this.position == Position.Top){
-				_set_Style(".navbar", "margin-top", `${$container.height()}px`)
-				_set_Style($board,    "margin-top", `${$container.height()}px`)
-			}
-			else if(this.position == Position.Bottom){
-				const padding = 10
-				_set_Style($board, "margin-bottom", `${$container.height() + padding}px`)
-			}
+			// if(this.position == Position.Top){
+			// 	_set_Style(".navbar", "margin-top", `${$container.height()}px`)
+			// 	_set_Style($board,    "margin-top", `${$container.height()}px`)
+			// }
+			// else if(this.position == Position.Bottom){
+			// 	const padding = 10
+			// 	_set_Style($board, "margin-bottom", `${$container.height() + padding}px`)
+			// }
 		}, css_Timeout_MS)
 	}
 
 }
 
 
-//###############//
-//###  Utils  ###//
-//###############//
+// //###############//
+// //###  Utils  ###//
+// //###############//
 
-const _BarPosition_CSS_Map = {
-	[Position.Left  ]: cssVariables.leftBar,
-	[Position.Right ]: cssVariables.rightBar,
-	[Position.Top   ]: cssVariables.topBar,
-	[Position.Bottom]: cssVariables.bottomBar,
-}
+// const _BarPosition_CSS_Map = {
+// 	[Position.Left  ]: cssVariables.leftBar,
+// 	[Position.Right ]: cssVariables.rightBar,
+// 	[Position.Top   ]: cssVariables.topBar,
+// 	[Position.Bottom]: cssVariables.bottomBar,
+// }
 
-function _set_Style(element:(HTMLElement|JQuery|string), propertyName:string, propertyValue:string)
-	{$(element)[0].style.setProperty(propertyName, propertyValue, "important")}
+// function _set_Style(element:(HTMLElement|JQuery|string), propertyName:string, propertyValue:string)
+// 	{$(element)[0].style.setProperty(propertyName, propertyValue, "important")}

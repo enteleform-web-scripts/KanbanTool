@@ -22,7 +22,7 @@ export class FunctionBar extends Module{
 	static Show  = require("./DefaultFunctions/Show/__Main__").default
 	static Hide  = require("./DefaultFunctions/Hide/__Main__").default
 
-	layout:               Layout
+	// layout:               Layout
 	position:             Position
 	autoMap_KeyBindings:  boolean
 	keyBinding_Modifiers: KeyBinding.ModifierKey[]
@@ -56,6 +56,7 @@ export class FunctionBar extends Module{
 	}
 
 	initialize(){
+		Layout.update_OriginalLayout()
 		// this._validate_AutoMapped_Rows()
 
 		// this.layout = new Layout(this.entryGroups, this.position)
