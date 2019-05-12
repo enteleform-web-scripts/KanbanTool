@@ -7,15 +7,16 @@
   width: 100%;
   height: 100%;
   z-index: 1000;
+  pointer-events: none;
+}
+.CustomExtension__FunctionBar .left,
+.CustomExtension__FunctionBar .right,
+.CustomExtension__FunctionBar .top,
+.CustomExtension__FunctionBar .bottom {
+  pointer-events: auto;
 }
 .CustomExtension__FunctionBar .top {
   background: #f77;
-}
-.CustomExtension__FunctionBar .center {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  flex-grow: 1;
 }
 .CustomExtension__FunctionBar .center .left {
   background: #7f7;
@@ -26,18 +27,24 @@
 .CustomExtension__FunctionBar .bottom {
   background: #f7f;
 }
-.CustomExtension__FunctionBar .left,
-.CustomExtension__FunctionBar .right {
+.CustomExtension__FunctionBar .center {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-grow: 1;
+}
+.CustomExtension__FunctionBar .center .left,
+.CustomExtension__FunctionBar .center .right {
   display: flex;
   flex-direction: row;
 }
-.CustomExtension__FunctionBar .left .column,
-.CustomExtension__FunctionBar .right .column {
+.CustomExtension__FunctionBar .center .left .column,
+.CustomExtension__FunctionBar .center .right .column {
   display: flex;
   flex-direction: column;
 }
-.CustomExtension__FunctionBar .left .column .cell,
-.CustomExtension__FunctionBar .right .column .cell {
+.CustomExtension__FunctionBar .center .left .column .cell,
+.CustomExtension__FunctionBar .center .right .column .cell {
   text-align: left;
 }
 .CustomExtension__FunctionBar .top,
