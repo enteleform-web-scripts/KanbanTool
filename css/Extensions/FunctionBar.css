@@ -92,12 +92,9 @@ nav.navbar {
 nav.navbar > .navbar-inner {
   background-color: #f3f3f4 !important;
 }
-.kt-hint-labels-container .kt-hint-label {
-  border-bottom: solid #ddd 1px !important;
-  background-color: #f9f9f9 !important;
-}
+.kt-hint-labels-container .kt-hint-label,
 .kt-extensions-swimlane_labels ._swimlane_label {
-  border-right: solid #ddd 1px !important;
+  border: solid #ddd 1px !important;
   background-color: #f9f9f9 !important;
 }
 
