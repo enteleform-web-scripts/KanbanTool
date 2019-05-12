@@ -10466,15 +10466,16 @@ __webpack_require__(14).inject(__dirname, { CSS: true, HTML: true });
 const Settings_1 = __webpack_require__(4);
 const Entry_1 = __webpack_require__(20);
 const Layout_1 = __webpack_require__(21);
-const Position_1 = __webpack_require__(7);
 const Module_BaseClasses_1 = __webpack_require__(24);
+const Position_1 = __webpack_require__(7);
 class FunctionBar extends Module_BaseClasses_1.Module {
-    constructor({ position, autoMap_KeyBindings, keyBinding_Modifiers, entryGroups }) {
+    constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells }) {
         super();
         this.position = position;
         this.autoMap_KeyBindings = autoMap_KeyBindings;
         this.keyBinding_Modifiers = keyBinding_Modifiers;
         this.entryGroups = entryGroups;
+        this.stretchCells = stretchCells;
     }
     static load(...functionBars) {
         functionBars.forEach(functionBar => {
@@ -10485,6 +10486,8 @@ class FunctionBar extends Module_BaseClasses_1.Module {
         this._validate_AutoMapped_Rows();
         this.layout = new Layout_1.Layout(this);
     }
+    get is_HorizontalBar() { return Position_1.is_HorizontalPosition(this.position); }
+    get is_VerticalBar() { return Position_1.is_VerticalPosition(this.position); }
     _validate_AutoMapped_Rows() {
         if (!this.autoMap_KeyBindings) {
             return;
@@ -10563,10 +10566,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1557681050163)
+		const elapsedTime = _get_ElapsedTime(1557683131194)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:10:50 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:45:31 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10756,6 +10759,10 @@ var Position;
     Position[Position["Top"] = 2] = "Top";
     Position[Position["Bottom"] = 3] = "Bottom";
 })(Position = exports.Position || (exports.Position = {}));
+function is_HorizontalPosition(position) { return ((position == Position.Left) || (position == Position.Right)); }
+exports.is_HorizontalPosition = is_HorizontalPosition;
+function is_VerticalPosition(position) { return ((position == Position.Top) || (position == Position.Bottom)); }
+exports.is_VerticalPosition = is_VerticalPosition;
 
 
 /***/ }),
@@ -12061,12 +12068,15 @@ class Layout {
         }, Settings_1.css_Timeout_MS);
     }
     _build() {
-        const { autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position } = this._functionBar;
-        const { selectorTail, subContainer_Class } = _BarComponent_Map[position];
+        const { autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position, is_VerticalBar, stretchCells } = this._functionBar;
+        let { selectorTail, subContainer_Class } = _BarComponent_Map[position];
         const containerSelector = [`.${cssVariables.container}`, selectorTail].join(" > ");
         this.container = $(containerSelector);
         console.log(">>>", containerSelector);
         console.log(">>>", document.querySelector(containerSelector));
+        if (is_VerticalBar && stretchCells) {
+            subContainer_Class = `${subContainer_Class} .stretch`;
+        }
         this.subContainers = [];
         entryGroups.forEach((group, groupIndex) => {
             const subContainer = $("<div>", { class: subContainer_Class });
@@ -12411,6 +12421,7 @@ exports.default = new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
     keyBinding_Modifiers: ["ctrl", "shift", "alt"],
+    stretchCells: false,
     entryGroups: [
         [
             new Entry({
@@ -12471,6 +12482,7 @@ exports.default = new __Main__1.FunctionBar({
     position: Position.Bottom,
     autoMap_KeyBindings: false,
     keyBinding_Modifiers: [],
+    stretchCells: true,
     entryGroups: [
         [
             new Entry({
