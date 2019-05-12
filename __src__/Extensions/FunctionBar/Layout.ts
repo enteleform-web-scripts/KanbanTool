@@ -34,12 +34,9 @@ export class Layout{
 	}
 
 	_build(entryGroups:Entry[][]){
-		const {selector, subContainer_Class} = _BarComponent_Map[this.position]
-		this.container = $(
-			"<div>",
-			{class:[cssVariables.container, selector].join(" > ")}
-		)
-		$("body").append(this.container)
+		const {selectorTail, subContainer_Class} = _BarComponent_Map[this.position]
+		const containerSelector = [cssVariables.container, selectorTail].join(" > ")
+		this.container = $(containerSelector)
 
 		this.subContainers = []
 		entryGroups.forEach(group => {
@@ -79,8 +76,8 @@ export class Layout{
 // //###############//
 
 const _BarComponent_Map = {
-	[Position.Left  ]: {selector:".center > .left",  subContainer_Class:"column"},
-	[Position.Right ]: {selector:".center > .right", subContainer_Class:"column"},
-	[Position.Top   ]: {selector:".top",             subContainer_Class:"row"   },
-	[Position.Bottom]: {selector:".bottom",          subContainer_Class:"row"   },
+	[Position.Left  ]: {selectorTail:".center > .left",  subContainer_Class:"column"},
+	[Position.Right ]: {selectorTail:".center > .right", subContainer_Class:"column"},
+	[Position.Top   ]: {selectorTail:".top",             subContainer_Class:"row"   },
+	[Position.Bottom]: {selectorTail:".bottom",          subContainer_Class:"row"   },
 }
