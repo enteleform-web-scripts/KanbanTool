@@ -64,9 +64,9 @@ export namespace Layout{
 
 	export function update_OriginalLayout(){
 		setTimeout( () => {
-			set_CSS_Variable("KanbanToolOffsets_TopHeight",  `${100}px`)
-			set_CSS_Variable("KanbanToolOffsets_LeftWidth",  `${100}px`)
-			set_CSS_Variable("KanbanToolOffsets_RightWidth", `${100}px`)
+			set_CSS_Variable("KanbanToolOffsets_TopHeight",  `${$("." + cssVariables.container + " > .top"            ).height()}px`)
+			set_CSS_Variable("KanbanToolOffsets_LeftWidth",  `${$("." + cssVariables.container + " > .center > .left" ).width() }px`)
+			set_CSS_Variable("KanbanToolOffsets_RightWidth", `${$("." + cssVariables.container + " > .center > .right").width() }px`)
 			// const $container = $(this.container)
 			// const $board           = $("#show > div.kt-side-panel-slide")
 
