@@ -47,7 +47,9 @@ json("./CSS_Variables.json")
 // 			box-shadow:        0 -1px 1px rgba(0,0,0,0.065)
 
 
-
+//################//
+//###  Custom  ###//
+//################//
 
 .{container}
 	display:         flex
@@ -110,9 +112,12 @@ json("./CSS_Variables.json")
 
 
 
+//####################//
 //###  KanbanTool  ###//
+//####################//
 
 :root
+	--KanbanToolOffsets_NavHeight:   0px
 	--KanbanToolOffsets_TopHeight:   0px
 	--KanbanToolOffsets_LeftWidth:   0px
 	--KanbanToolOffsets_RightWidth:  0px
@@ -123,9 +128,9 @@ nav.navbar
 	width:        calc(100% - (var(--KanbanToolOffsets_LeftWidth) + var(--KanbanToolOffsets_RightWidth)))  !important
 
 .kt-side-panel-slide > kt-board
-	margin-top:    var(--KanbanToolOffsets_TopHeight )  !important
-	margin-left:   var(--KanbanToolOffsets_LeftWidth )  !important
-	margin-right:  var(--KanbanToolOffsets_RightWidth)  !important
+	margin-top:    calc(var(--KanbanToolOffsets_TopHeight) + var(--KanbanToolOffsets_NavHeight))  !important
+	margin-left:   var(--KanbanToolOffsets_LeftWidth )                                            !important
+	margin-right:  var(--KanbanToolOffsets_RightWidth)                                            !important
 
 .kt-side-panel-slide > .kt-extensions-swimlane_labels
 	left:  var(--KanbanToolOffsets_LeftWidth )  !important
