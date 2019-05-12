@@ -22,63 +22,52 @@ const $:any = require("jquery")
 //###  Exports  ###//
 //#################//
 
-export namespace Layout{
+export class Layout{
 
-	// container: HTMLElement
-	// rows:      HTMLElement[]
-	// position:  Position
+	container:     HTMLElement
+	subContainers: HTMLElement[]
+	position:      Position
 
-	// constructor(entryGroups:Entry[][], position:Position){
-	// 	this.position = position
-	// 	this._build(entryGroups)
-	// }
+	constructor(entryGroups:Entry[][], position:Position){
+		this.position = position
+		this._build(entryGroups)
+	}
 
-	// _build(entryGroups:Entry[][]){
-	// 	const positionClass = _BarPosition_CSS_Map[this.position]
-	// 	this.container = $(
-	// 		"<div>",
-	// 		{"class":[cssVariables.root, positionClass].join(" ")}
-	// 	)
-	// 	$("body").append(this.container)
+	_build(entryGroups:Entry[][]){
+		const {selector, subContainer_Class} = _BarComponent_Map[this.position]
+		this.container = $(
+			"<div>",
+			{class:[cssVariables.container, selector].join(" > ")}
+		)
+		$("body").append(this.container)
 
-	// 	this.rows = []
-	// 	entryGroups.forEach(group => {
-	// 		const row = $("<div>", {"class":cssVariables.legendRow})
-	// 		this.container.append(row)
-	// 		this.rows.push(row)
-	// 	})
-	// }
+		this.subContainers = []
+		entryGroups.forEach(group => {
+			const subContainer = $("<div>", {class:subContainer_Class})
+			this.container.append(subContainer)
+			this.subContainers.push(subContainer)
+		})
+	}
 
-	// add_Cell(entry:Entry, groupIndex:number, keyBinding:string){
-	// 	const cell = $("<div>", {"class":cssVariables.legendCell})
+	add_Cell(entry:Entry, groupIndex:number, keyBinding:string){
+		const cell = $("<div>", {class:"cell"})
 
-	// 	let text = entry.name
-	// 	if(keyBinding)
-	// 		{text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`}
+		let text = entry.name
+		if(keyBinding)
+			{text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`}
 
-	// 	cell.html(text)
-	// 	cell.on("click", entry.on_Load)
+		cell.html(text)
+		cell.on("click", entry.on_Load)
 
-	// 	this.rows[groupIndex].append(cell)
-	// }
+		this.subContainers[groupIndex].append(cell)
+	}
 
-	export function update_OriginalLayout(){
+	update_OriginalLayout(){
 		setTimeout( () => {
 			set_CSS_Variable("KanbanToolOffsets_NavHeight",  `${$("nav.navbar"                                        ).height()}px`)
 			set_CSS_Variable("KanbanToolOffsets_TopHeight",  `${$("." + cssVariables.container + " > .top"            ).height()}px`)
 			set_CSS_Variable("KanbanToolOffsets_LeftWidth",  `${$("." + cssVariables.container + " > .center > .left" ).width() }px`)
 			set_CSS_Variable("KanbanToolOffsets_RightWidth", `${$("." + cssVariables.container + " > .center > .right").width() }px`)
-			// const $container = $(this.container)
-			// const $board           = $("#show > div.kt-side-panel-slide")
-
-			// if(this.position == Position.Top){
-			// 	_set_Style(".navbar", "margin-top", `${$container.height()}px`)
-			// 	_set_Style($board,    "margin-top", `${$container.height()}px`)
-			// }
-			// else if(this.position == Position.Bottom){
-			// 	const padding = 10
-			// 	_set_Style($board, "margin-bottom", `${$container.height() + padding}px`)
-			// }
 		}, css_Timeout_MS)
 	}
 
@@ -89,12 +78,9 @@ export namespace Layout{
 // //###  Utils  ###//
 // //###############//
 
-// const _BarPosition_CSS_Map = {
-// 	[Position.Left  ]: cssVariables.leftBar,
-// 	[Position.Right ]: cssVariables.rightBar,
-// 	[Position.Top   ]: cssVariables.topBar,
-// 	[Position.Bottom]: cssVariables.bottomBar,
-// }
-
-// function _set_Style(element:(HTMLElement|JQuery|string), propertyName:string, propertyValue:string)
-// 	{$(element)[0].style.setProperty(propertyName, propertyValue, "important")}
+const _BarComponent_Map = {
+	[Position.Left  ]: {selector:".center > .left",  subContainer_Class:"column"},
+	[Position.Right ]: {selector:".center > .right", subContainer_Class:"column"},
+	[Position.Top   ]: {selector:".top",             subContainer_Class:"row"   },
+	[Position.Bottom]: {selector:".bottom",          subContainer_Class:"row"   },
+}

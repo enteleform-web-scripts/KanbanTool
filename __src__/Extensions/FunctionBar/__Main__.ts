@@ -22,7 +22,7 @@ export class FunctionBar extends Module{
 	static Show  = require("./DefaultFunctions/Show/__Main__").default
 	static Hide  = require("./DefaultFunctions/Hide/__Main__").default
 
-	// layout:               Layout
+	layout:               Layout
 	position:             Position
 	autoMap_KeyBindings:  boolean
 	keyBinding_Modifiers: KeyBinding.ModifierKey[]
@@ -56,19 +56,18 @@ export class FunctionBar extends Module{
 	}
 
 	initialize(){
-		Layout.update_OriginalLayout()
-		// this._validate_AutoMapped_Rows()
+		this._validate_AutoMapped_Rows()
 
-		// this.layout = new Layout(this.entryGroups, this.position)
+		this.layout = new Layout(this.entryGroups, this.position)
 
-		// this.entryGroups.forEach((group, groupIndex) => {
-		// 	group.forEach((entry, entryIndex) => {
-		// 		const keyBinding = entry.initialize_KeyBinding(this.autoMap_KeyBindings, this.keyBinding_Modifiers, groupIndex, entryIndex)
-		// 		this.layout.add_Cell(entry, groupIndex, keyBinding)
-		// 	})
-		// })
+		this.entryGroups.forEach((group, groupIndex) => {
+			group.forEach((entry, entryIndex) => {
+				const keyBinding = entry.initialize_KeyBinding(this.autoMap_KeyBindings, this.keyBinding_Modifiers, groupIndex, entryIndex)
+				this.layout.add_Cell(entry, groupIndex, keyBinding)
+			})
+		})
 
-		// this.layout.update_OriginalLayout()
+		this.layout.update_OriginalLayout()
 	}
 
 	_validate_AutoMapped_Rows(){
