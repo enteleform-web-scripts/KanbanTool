@@ -52,7 +52,6 @@ export class Layout{
 		})
 	}
 
-
 	add_Cell(entry:Entry, groupIndex:number, keyBinding:string){
 		const cell = $("<div>", {class:"cell"})
 
