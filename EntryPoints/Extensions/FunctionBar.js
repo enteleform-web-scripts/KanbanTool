@@ -190,10 +190,10 @@
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1557625603657)
+		const elapsedTime = _get_ElapsedTime(1557626610612)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     9:46:43 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     10:03:30 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
