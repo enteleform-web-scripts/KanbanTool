@@ -10570,10 +10570,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1557669558856)
+		const elapsedTime = _get_ElapsedTime(1557674341319)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     9:59:18 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:19:01 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12065,9 +12065,9 @@ class Layout {
         this._build(entryGroups);
     }
     _build(entryGroups) {
-        const { selector, subContainer_Class } = _BarComponent_Map[this.position];
-        this.container = $("<div>", { class: [cssVariables.container, selector].join(" > ") });
-        $("body").append(this.container);
+        const { selectorTail, subContainer_Class } = _BarComponent_Map[this.position];
+        const containerSelector = [cssVariables.container, selectorTail].join(" > ");
+        this.container = $(containerSelector);
         this.subContainers = [];
         entryGroups.forEach(group => {
             const subContainer = $("<div>", { class: subContainer_Class });
@@ -12096,10 +12096,10 @@ class Layout {
 }
 exports.Layout = Layout;
 const _BarComponent_Map = {
-    [Position_1.Position.Left]: { selector: ".center > .left", subContainer_Class: "column" },
-    [Position_1.Position.Right]: { selector: ".center > .right", subContainer_Class: "column" },
-    [Position_1.Position.Top]: { selector: ".top", subContainer_Class: "row" },
-    [Position_1.Position.Bottom]: { selector: ".bottom", subContainer_Class: "row" },
+    [Position_1.Position.Left]: { selectorTail: ".center > .left", subContainer_Class: "column" },
+    [Position_1.Position.Right]: { selectorTail: ".center > .right", subContainer_Class: "column" },
+    [Position_1.Position.Top]: { selectorTail: ".top", subContainer_Class: "row" },
+    [Position_1.Position.Bottom]: { selectorTail: ".bottom", subContainer_Class: "row" },
 };
 
 
