@@ -1,10 +1,3 @@
-//###  Module: Pug  ###//
-// const pug = require("pug")
-// const _layoutFile = require("!!raw-loader!./Layout.pug").default
-// ;(window as any).pug = pug
-// const layoutHTML  = pug.compileFile(_layoutFile)
-// console.log(">>>", layoutHTML)
-
 //###  Module: CSS  ###//
 const cssVariables = require("./CSS_Variables.json")
 
@@ -30,8 +23,10 @@ export class Layout{
 
 	constructor(functionBar){
 		this._functionBar = functionBar
-		this._build()
-		this._update_OriginalLayout()
+		setTimeout(() => {
+			this._build()
+			this._update_OriginalLayout()
+		}, css_Timeout_MS)
 	}
 
 	_build(){

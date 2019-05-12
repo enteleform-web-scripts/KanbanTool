@@ -2,7 +2,7 @@
 require("~/Utils/HTML_Injector").inject(__dirname, {CSS:true, HTML:true})
 
 //###  Module  ###//
-import {autoMapped_Key_Rows, css_Timeout_MS           } from "./Settings"
+import {autoMapped_Key_Rows                           } from "./Settings"
 import {Entry                                         } from "./Entry"
 import {Layout                                        } from "./Layout"
 import {Position, HorizontalPosition, VerticalPosition} from "./Position"
@@ -57,11 +57,8 @@ export class FunctionBar extends Module{
 
 	initialize(){
 		this._validate_AutoMapped_Rows()
-		setTimeout(this._build_Layout, css_Timeout_MS)
+		this.layout = new Layout(this)
 	}
-
-	_build_Layout()
-		{this.layout = new Layout(this)}
 
 	_validate_AutoMapped_Rows(){
 		if(! this.autoMap_KeyBindings)
