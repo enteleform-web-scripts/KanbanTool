@@ -98,7 +98,7 @@ nav.navbar > .navbar-inner {
   border: solid #ddd 1px !important;
   border-left: none !important;
 }
-.kt-hint-labels-container :first-child {
+.kt-hint-labels-container:first-child {
   border-left: solid #ddd 1px !important;
 }
 .kt-extensions-swimlane_labels ._swimlane_label {
@@ -107,7 +107,7 @@ nav.navbar > .navbar-inner {
   border: solid #ddd 1px !important;
   border-top: none !important;
 }
-.kt-extensions-swimlane_labels :first-child {
+.kt-extensions-swimlane_labels:first-child {
   border-top: solid #ddd 1px !important;
 }
 
