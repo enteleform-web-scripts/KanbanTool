@@ -36,7 +36,7 @@ export class Layout{
 		this.container = $(containerSelector)
 
 		if(is_VerticalBar && stretchCells)
-			{subContainer_Class = `${subContainer_Class} stretch`}
+			{subContainer_Class += " stretch"}
 
 		this.subContainers = []
 
