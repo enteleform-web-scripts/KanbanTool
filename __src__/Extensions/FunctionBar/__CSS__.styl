@@ -49,7 +49,7 @@ json("./CSS_Variables.json")
 
 
 
-.overlay
+.{container}
 	display:         flex
 	flex-direction:  column
 	position:        fixed
@@ -96,20 +96,27 @@ json("./CSS_Variables.json")
 			.cell
 				text-align:  center
 
+	.cell
+		width:    100px
+		border:   1px solid black
+		padding:  5px
 
-.cell
-	width:    100px
-	border:   1px solid black
-	padding:  5px
 
 
 
 //###  KanbanTool  ###//
 
+:root
+	--KanbanToolOffsets_TopHeight:   0px
+	--KanbanToolOffsets_LeftWidth:   0px
+	--KanbanToolOffsets_RightWidth:  0px
+
 nav.navbar
-	margin-top:   62px                      !important
-	margin-left:  224px                     !important
-	width:        calc(100% - (224 * 2)px)  !important
+	margin-top:   var(--KanbanToolOffsets_TopHeight)                                                       !important
+	margin-left:  var(--KanbanToolOffsets_LeftWidth)                                                       !important
+	width:        calc(100% - (var(--KanbanToolOffsets_LeftWidth) + var(--KanbanToolOffsets_RightWidth)))  !important
 
 body > .kt-side-panel-slide
-	margin-top:  62px  !important
+	margin-top:    var(--KanbanToolOffsets_TopHeight )  !important
+	margin-left:   var(--KanbanToolOffsets_LeftWidth )  !important
+	margin-right:  var(--KanbanToolOffsets_RightWidth)  !important

@@ -1,12 +1,5 @@
 {
 
-	"root":       "CustomExtension--FunctionBar",
-	"legendRow":  "Row",
-	"legendCell": "Cell",
-
-	"topBar":    "Top_FunctionBar",
-	"bottomBar": "Bottom_FunctionBar",
-	"leftBar":   "Left_FunctionBar",
-	"rightBar":  "Right_FunctionBar",
+	"container": "CustomExtension__FunctionBar",
 
 "_":""}
