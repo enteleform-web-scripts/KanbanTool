@@ -30,12 +30,15 @@ export class Layout{
 	}
 
 	_build(){
-		const {autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position} = this._functionBar
-		const {selectorTail, subContainer_Class} = _BarComponent_Map[position]
+		const {autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position, is_VerticalBar, stretchCells} = this._functionBar
+		let {selectorTail, subContainer_Class} = _BarComponent_Map[position]
 		const containerSelector = [`.${cssVariables.container}`, selectorTail].join(" > ")
 		this.container = $(containerSelector)
 		console.log(">>>", containerSelector)
 		console.log(">>>", document.querySelector(containerSelector))
+
+		if(is_VerticalBar && stretchCells)
+			{subContainer_Class = `${subContainer_Class} .stretch`}
 
 		this.subContainers = []
 

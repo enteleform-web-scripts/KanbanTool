@@ -9,6 +9,7 @@ export default new FunctionBar({
 	position:             Position.Bottom,
 	autoMap_KeyBindings:  false,
 	keyBinding_Modifiers: [],
+	stretchCells:         true,
 
 	entryGroups:[
 

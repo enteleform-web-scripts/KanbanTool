@@ -5,9 +5,13 @@ require("~/Utils/HTML_Injector").inject(__dirname, {CSS:true, HTML:true})
 import {autoMapped_Key_Rows                           } from "./Settings"
 import {Entry                                         } from "./Entry"
 import {Layout                                        } from "./Layout"
-import {Position, HorizontalPosition, VerticalPosition} from "./Position"
 import {KeyBinding                                    } from "~/Utils/KeyBinding/__Main__"
 import {Module                                        } from "~/Utils/Module_BaseClasses"
+import {
+	Position,
+	HorizontalPosition, VerticalPosition,
+	is_HorizontalPosition, is_VerticalPosition,
+} from "./Position"
 
 
 //#######################//
@@ -27,24 +31,26 @@ export class FunctionBar extends Module{
 	autoMap_KeyBindings:  boolean
 	keyBinding_Modifiers: KeyBinding.ModifierKey[]
 	entryGroups:          Entry[][]
+	stretchCells:         boolean
 
-	constructor(
+	constructor(  //  Left / Right
 		{position,                    entryGroups          }:
 		{position:HorizontalPosition, entryGroups:Entry[][]}
 	)
-	constructor(
-		{position,                  autoMap_KeyBindings,         keyBinding_Modifiers,                          entryGroups          }:
-		{position:VerticalPosition, autoMap_KeyBindings:boolean, keyBinding_Modifiers:KeyBinding.ModifierKey[], entryGroups:Entry[][]}
+	constructor(  //  Top / Bottom
+		{position,                  entryGroups,           autoMap_KeyBindings,         keyBinding_Modifiers,                          stretchCells        }:
+		{position:VerticalPosition, entryGroups:Entry[][], autoMap_KeyBindings:boolean, keyBinding_Modifiers:KeyBinding.ModifierKey[], stretchCells:boolean}
 	)
 	constructor(
-		{position,          autoMap_KeyBindings,          keyBinding_Modifiers,                           entryGroups          }:
-		{position:Position, autoMap_KeyBindings?:boolean, keyBinding_Modifiers?:KeyBinding.ModifierKey[], entryGroups:Entry[][]}
+		{position,          entryGroups,           autoMap_KeyBindings,          keyBinding_Modifiers,                           stretchCells         }:
+		{position:Position, entryGroups:Entry[][], autoMap_KeyBindings?:boolean, keyBinding_Modifiers?:KeyBinding.ModifierKey[], stretchCells?:boolean}
 	){
 		super()
 		this.position             = position
 		this.autoMap_KeyBindings  = autoMap_KeyBindings
 		this.keyBinding_Modifiers = keyBinding_Modifiers
 		this.entryGroups          = entryGroups
+		this.stretchCells         = stretchCells
 	}
 
 	static load(
@@ -59,6 +65,13 @@ export class FunctionBar extends Module{
 		this._validate_AutoMapped_Rows()
 		this.layout = new Layout(this)
 	}
+
+
+	get is_HorizontalBar()
+		{return is_HorizontalPosition(this.position)}
+
+	get is_VerticalBar()
+		{return is_VerticalPosition(this.position)}
 
 	_validate_AutoMapped_Rows(){
 		if(! this.autoMap_KeyBindings)

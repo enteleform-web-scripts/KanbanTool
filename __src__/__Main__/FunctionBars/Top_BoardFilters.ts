@@ -9,6 +9,7 @@ export default new FunctionBar({
 	position:             Position.Top,
 	autoMap_KeyBindings:  true,
 	keyBinding_Modifiers: ["ctrl", "shift", "alt"],
+	stretchCells:         false,
 
 	entryGroups:[
 
