@@ -35,7 +35,7 @@ export class Layout{
 
 	_build(entryGroups:Entry[][]){
 		const {selectorTail, subContainer_Class} = _BarComponent_Map[this.position]
-		const containerSelector = [cssVariables.container, selectorTail].join(" > ")
+		const containerSelector = [`.${cssVariables.container}`, selectorTail].join(" > ")
 		this.container = $(containerSelector)
 
 		this.subContainers = []
