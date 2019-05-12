@@ -60,18 +60,8 @@ export class FunctionBar extends Module{
 		setTimeout(this._build_Layout, css_Timeout_MS)
 	}
 
-	_build_Layout(){
-		this.layout = new Layout(this.entryGroups, this.position)
-
-		this.entryGroups.forEach((group, groupIndex) => {
-			group.forEach((entry, entryIndex) => {
-				const keyBinding = entry.initialize_KeyBinding(this.autoMap_KeyBindings, this.keyBinding_Modifiers, groupIndex, entryIndex)
-				this.layout.add_Cell(entry, groupIndex, keyBinding)
-			})
-		})
-
-		this.layout.update_OriginalLayout()
-	}
+	_build_Layout()
+		{this.layout = new Layout(this)}
 
 	_validate_AutoMapped_Rows(){
 		if(! this.autoMap_KeyBindings)

@@ -24,29 +24,38 @@ const $:any = require("jquery")
 
 export class Layout{
 
+	_functionBar:  any // FunctionBar
 	container:     HTMLElement
 	subContainers: HTMLElement[]
-	position:      Position
 
-	constructor(entryGroups:Entry[][], position:Position){
-		this.position = position
-		this._build(entryGroups)
+	constructor(functionBar){
+		this._functionBar = functionBar
+		this._build()
+		this._update_OriginalLayout()
 	}
 
-	_build(entryGroups:Entry[][]){
-		const {selectorTail, subContainer_Class} = _BarComponent_Map[this.position]
+	_build(){
+		const {autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position} = this._functionBar
+		const {selectorTail, subContainer_Class} = _BarComponent_Map[position]
 		const containerSelector = [`.${cssVariables.container}`, selectorTail].join(" > ")
 		this.container = $(containerSelector)
 		console.log(">>>", containerSelector)
 		console.log(">>>", document.querySelector(containerSelector))
 
 		this.subContainers = []
-		entryGroups.forEach(group => {
+
+		entryGroups.forEach((group, groupIndex) => {
 			const subContainer = $("<div>", {class:subContainer_Class})
 			this.container.append(subContainer)
 			this.subContainers.push(subContainer)
+
+			group.forEach((entry, entryIndex) => {
+				const keyBinding = entry.initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex)
+				this.add_Cell(entry, groupIndex, keyBinding)
+			})
 		})
 	}
+
 
 	add_Cell(entry:Entry, groupIndex:number, keyBinding:string){
 		const cell = $("<div>", {class:"cell"})
@@ -61,7 +70,7 @@ export class Layout{
 		this.subContainers[groupIndex].append(cell)
 	}
 
-	update_OriginalLayout(){
+	_update_OriginalLayout(){
 		// setTimeout( () => {
 		set_CSS_Variable("KanbanToolOffsets_NavHeight",  `${$("nav.navbar"                                        ).height()}px`)
 		set_CSS_Variable("KanbanToolOffsets_TopHeight",  `${$("." + cssVariables.container + " > .top"            ).height()}px`)
