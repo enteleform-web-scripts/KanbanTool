@@ -51,7 +51,7 @@
 .CustomExtension__FunctionBar .bottom {
   display: flex;
   flex-direction: column;
-  margin: 0;
+  margin: auto;
 }
 .CustomExtension__FunctionBar .top .row,
 .CustomExtension__FunctionBar .bottom .row {
@@ -65,7 +65,7 @@
 }
 .CustomExtension__FunctionBar .top .row.stretch,
 .CustomExtension__FunctionBar .bottom .row.stretch {
-  margin: auto;
+  margin: 0;
 }
 .CustomExtension__FunctionBar .cell {
   flex: 1;
