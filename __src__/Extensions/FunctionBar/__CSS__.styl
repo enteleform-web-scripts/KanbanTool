@@ -112,9 +112,9 @@ json("./CSS_Variables.json")
 
 
 
-//####################//
-//###  KanbanTool  ###//
-//####################//
+//#############################//
+//###  KanbanTool - Layout  ###//
+//#############################//
 
 :root
 	--KanbanToolOffsets_NavHeight:   0px
@@ -138,13 +138,15 @@ nav.navbar
 .kt-hint-labels-container
 	top:  calc(var(--KanbanToolOffsets_TopHeight) - 8px)  !important
 
+
+//############################//
+//###  KanbanTool - Style  ###//
+//############################//
+
 nav.navbar > .navbar-inner
 	background-color:  rgba(243,243,244,1)  !important
 
-.kt-hint-labels-container .kt-hint-label
-	border-bottom:    solid #DDD 1px  !important
-	background-color: #F9F9F9         !important
-
+.kt-hint-labels-container .kt-hint-label,
 .kt-extensions-swimlane_labels ._swimlane_label
-	border-right:     solid #DDD 1px  !important
+	border:           solid #DDD 1px  !important
 	background-color: #F9F9F9         !important
