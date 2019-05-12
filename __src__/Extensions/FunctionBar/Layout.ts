@@ -37,6 +37,8 @@ export class Layout{
 		const {selectorTail, subContainer_Class} = _BarComponent_Map[this.position]
 		const containerSelector = [`.${cssVariables.container}`, selectorTail].join(" > ")
 		this.container = $(containerSelector)
+		console.log(">>>", containerSelector)
+		console.log(">>>", document.querySelector(containerSelector))
 
 		this.subContainers = []
 		entryGroups.forEach(group => {
