@@ -92,9 +92,22 @@ nav.navbar {
 nav.navbar > .navbar-inner {
   background-color: #f3f3f4 !important;
 }
-.kt-hint-labels-container .kt-hint-label,
-.kt-extensions-swimlane_labels ._swimlane_label {
-  border: solid #ddd 1px !important;
+.kt-hint-labels-container .kt-hint-label {
+  margin: 0 !important;
   background-color: #f9f9f9 !important;
+  border: solid #ddd 1px !important;
+  border-left: none !important;
+}
+.kt-hint-labels-container .kt-hint-label :first-child {
+  border-left: solid #ddd 1px !important;
+}
+.kt-extensions-swimlane_labels ._swimlane_label {
+  margin: 0 !important;
+  background-color: #f9f9f9 !important;
+  border: solid #ddd 1px !important;
+  border-top: none !important;
+}
+.kt-extensions-swimlane_labels ._swimlane_label :first-child {
+  border-top: solid #ddd 1px !important;
 }
 
