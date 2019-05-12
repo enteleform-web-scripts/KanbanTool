@@ -10570,10 +10570,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1557674341319)
+		const elapsedTime = _get_ElapsedTime(1557674571585)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:19:01 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:22:51 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12066,7 +12066,7 @@ class Layout {
     }
     _build(entryGroups) {
         const { selectorTail, subContainer_Class } = _BarComponent_Map[this.position];
-        const containerSelector = [cssVariables.container, selectorTail].join(" > ");
+        const containerSelector = [`.${cssVariables.container}`, selectorTail].join(" > ");
         this.container = $(containerSelector);
         this.subContainers = [];
         entryGroups.forEach(group => {
