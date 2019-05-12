@@ -86,4 +86,7 @@ nav.navbar {
 .kt-side-panel-slide > .kt-extensions-swimlane_labels {
   left: var(--KanbanToolOffsets_LeftWidth) !important;
 }
+.kt-hint-labels-container {
+  top: calc(var(--KanbanToolOffsets_TopHeight) - 8px) !important;
+}
 
