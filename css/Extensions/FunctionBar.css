@@ -87,12 +87,12 @@
 }
 nav.navbar {
   margin-top: var(--KanbanToolOffsets_TopHeight) !important;
-  margin-bottom: var(--KanbanToolOffsets_TopHeight) !important;
   margin-left: var(--KanbanToolOffsets_LeftWidth) !important;
   width: calc(100% - (var(--KanbanToolOffsets_LeftWidth) + var(--KanbanToolOffsets_RightWidth))) !important;
 }
 .kt-side-panel-slide > kt-board {
   margin-top: calc(var(--KanbanToolOffsets_TopHeight) + var(--KanbanToolOffsets_NavHeight)) !important;
+  margin-bottom: var(--KanbanToolOffsets_TopHeight) !important;
   margin-left: var(--KanbanToolOffsets_LeftWidth) !important;
   margin-right: var(--KanbanToolOffsets_RightWidth) !important;
 }
