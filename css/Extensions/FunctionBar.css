@@ -16,7 +16,18 @@
 .CustomExtension__FunctionBar .bottom {
   pointer-events: auto;
   background: #c6c6cc;
-  border: 1px solid var(--BorderColor);
+}
+.CustomExtension__FunctionBar .left {
+  border-right: 1px solid var(--BorderColor);
+}
+.CustomExtension__FunctionBar .right {
+  border-left: 1px solid var(--BorderColor);
+}
+.CustomExtension__FunctionBar .top {
+  border-bottom: 1px solid var(--BorderColor);
+}
+.CustomExtension__FunctionBar .bottom {
+  border-top: 1px solid var(--BorderColor);
 }
 .CustomExtension__FunctionBar .center {
   display: flex;
