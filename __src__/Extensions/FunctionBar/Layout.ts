@@ -2,10 +2,10 @@
 const cssVariables = require("./CSS_Variables.json")
 
 //###  Module  ###//
-import {css_Timeout_MS  } from "./Settings"
-import {Entry           } from "./Entry"
-import {Position        } from "./Position"
-import {set_CSS_Variable} from "~/Utils/CSS_Variables/__main__"
+import {css_Timeout_MS                    } from "./Settings"
+import {Entry                             } from "./Entry"
+import {Position                          } from "./Position"
+import {get_CSS_Variable, set_CSS_Variable} from "~/Utils/CSS_Variables/__main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -66,12 +66,20 @@ export class Layout{
 	}
 
 	_update_OriginalLayout(){
-		// setTimeout( () => {
-		set_CSS_Variable("KanbanToolOffsets_NavHeight",  `${$("nav.navbar"                                        ).height()}px`)
-		set_CSS_Variable("KanbanToolOffsets_TopHeight",  `${$("." + cssVariables.container + " > .top"            ).height()}px`)
-		set_CSS_Variable("KanbanToolOffsets_LeftWidth",  `${$("." + cssVariables.container + " > .center > .left" ).width() }px`)
-		set_CSS_Variable("KanbanToolOffsets_RightWidth", `${$("." + cssVariables.container + " > .center > .right").width() }px`)
-		// }, css_Timeout_MS)
+		const navbarHeight = $("nav.navbar").height()
+		set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`)
+
+		const topRow_Height = $(`.${cssVariables.container} > .top`).height()
+		set_CSS_Variable("KanbanToolOffsets_TopHeight", `${topRow_Height}px`)
+
+		const leftColumn_Width = $(`.${cssVariables.container} > .center > .left`).width()
+		set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${leftColumn_Width}px`)
+
+		const rightColumn_Width = $(`.${cssVariables.container} > .center > .right`).width()
+		set_CSS_Variable("KanbanToolOffsets_RightWidth", `${rightColumn_Width}px`)
+
+		const top_Offset = (navbarHeight + topRow_Height)
+		set_CSS_Variable("KanbanToolOffsets_TopOffset", `${top_Offset}px`)
 	}
 
 }
