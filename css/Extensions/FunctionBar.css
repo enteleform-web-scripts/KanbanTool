@@ -1,4 +1,5 @@
 .CustomExtension__FunctionBar {
+  --BorderColor: #ababb1;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -15,6 +16,7 @@
 .CustomExtension__FunctionBar .bottom {
   pointer-events: auto;
   background: #c6c6cc;
+  border: 1px solid var(--BorderColor);
 }
 .CustomExtension__FunctionBar .center {
   display: flex;
@@ -66,7 +68,7 @@
   padding: 5px;
   user-select: none;
   cursor: pointer;
-  border: 1px solid #ababb1;
+  border: 1px solid var(--BorderColor);
   background: #d9d9de;
   color: #505052;
 }
