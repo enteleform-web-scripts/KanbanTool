@@ -6,6 +6,9 @@ json("./CSS_Variables.json")
 //################//
 
 .{container}
+
+	--BorderColor:  #ABABB1
+
 	display:         flex
 	flex-direction:  column
 	position:        fixed
@@ -19,6 +22,7 @@ json("./CSS_Variables.json")
 	.left, .right, .top, .bottom
 		pointer-events:  auto
 		background:      #C6C6CC
+		border:          1px solid var(--BorderColor)
 
 	.center
 		display:          flex
@@ -62,7 +66,7 @@ json("./CSS_Variables.json")
 		padding:      5px
 		user-select:  none
 		cursor:       pointer
-		border:       1px solid #ABABB1
+		border:       1px solid var(--BorderColor)
 		background:   #D9D9DE
 		color:        #505052
 
