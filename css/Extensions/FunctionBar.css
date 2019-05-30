@@ -84,6 +84,7 @@
   --KanbanToolOffsets_TopHeight: 0px;
   --KanbanToolOffsets_LeftWidth: 0px;
   --KanbanToolOffsets_RightWidth: 0px;
+  --KanbanToolOffsets_TopOffset: 0px;
 }
 nav.navbar {
   margin-top: var(--KanbanToolOffsets_TopHeight) !important;
@@ -91,8 +92,8 @@ nav.navbar {
   width: calc(100% - (var(--KanbanToolOffsets_LeftWidth) + var(--KanbanToolOffsets_RightWidth))) !important;
 }
 .kt-side-panel-slide > kt-board {
-  margin-top: calc(var(--KanbanToolOffsets_TopHeight) + var(--KanbanToolOffsets_NavHeight)) !important;
-  margin-bottom: var(--KanbanToolOffsets_TopHeight) !important;
+  margin-top: var(--KanbanToolOffsets_TopOffset) !important;
+  margin-bottom: var(--KanbanToolOffsets_TopOffset) !important;
   margin-left: var(--KanbanToolOffsets_LeftWidth) !important;
   margin-right: var(--KanbanToolOffsets_RightWidth) !important;
 }

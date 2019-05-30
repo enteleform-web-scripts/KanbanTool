@@ -10566,10 +10566,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559231716459)
+		const elapsedTime = _get_ElapsedTime(1559232324519)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:55:16 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:05:24 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12097,10 +12097,16 @@ class Layout {
         this.subContainers[groupIndex].append(cell);
     }
     _update_OriginalLayout() {
-        __main__1.set_CSS_Variable("KanbanToolOffsets_NavHeight", `${$("nav.navbar").height()}px`);
-        __main__1.set_CSS_Variable("KanbanToolOffsets_TopHeight", `${$("." + cssVariables.container + " > .top").height()}px`);
-        __main__1.set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${$("." + cssVariables.container + " > .center > .left").width()}px`);
-        __main__1.set_CSS_Variable("KanbanToolOffsets_RightWidth", `${$("." + cssVariables.container + " > .center > .right").width()}px`);
+        const navbarHeight = $("nav.navbar").height();
+        __main__1.set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`);
+        const topRow_Height = $(`.${cssVariables.container} > .top`).height();
+        __main__1.set_CSS_Variable("KanbanToolOffsets_TopHeight", `${topRow_Height}px`);
+        const leftColumn_Width = $(`.${cssVariables.container} > .center > .left`).width();
+        __main__1.set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${leftColumn_Width}px`);
+        const rightColumn_Width = $(`.${cssVariables.container} > .center > .right`).width();
+        __main__1.set_CSS_Variable("KanbanToolOffsets_RightWidth", `${rightColumn_Width}px`);
+        const top_Offset = (navbarHeight + topRow_Height);
+        __main__1.set_CSS_Variable("KanbanToolOffsets_TopOffset", `${top_Offset}px`);
     }
 }
 exports.Layout = Layout;
