@@ -22,7 +22,11 @@ json("./CSS_Variables.json")
 	.left, .right, .top, .bottom
 		pointer-events:  auto
 		background:      #C6C6CC
-		border:          1px solid var(--BorderColor)
+
+	.left  {border-right:  1px solid var(--BorderColor);}
+	.right {border-left:   1px solid var(--BorderColor);}
+	.top   {border-bottom: 1px solid var(--BorderColor);}
+	.bottom{border-top:    1px solid var(--BorderColor);}
 
 	.center
 		display:          flex
