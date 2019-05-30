@@ -2,10 +2,10 @@
 const cssVariables = require("./CSS_Variables.json")
 
 //###  Module  ###//
-import {css_Timeout_MS                    } from "./Settings"
-import {Entry                             } from "./Entry"
-import {Position                          } from "./Position"
-import {get_CSS_Variable, set_CSS_Variable} from "~/Utils/CSS_Variables/__main__"
+import {css_Timeout_MS  } from "./Settings"
+import {Entry           } from "./Entry"
+import {Position        } from "./Position"
+import {set_CSS_Variable} from "~/Utils/CSS_Variables/__main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
