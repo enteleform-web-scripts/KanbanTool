@@ -15,14 +15,22 @@ export default new FunctionBar({
 
 		[
 			new Entry({
-				name: "Active",
+				name: "Today",
+				on_Load: () => {
+					Show.rows({include:["Routine", "Tasks.Active"]})
+					Show.allColumns()
+					Hide.emptyColumns()
+				},
+			}),
+			new Entry({
+				name: "Today.All",
 				on_Load: () => {
 					Show.rows({include:["Routine", "Tasks.Active"]})
 					Show.allColumns()
 				},
 			}),
 			new Entry({
-				name: "Plan",
+				name: "All",
 				on_Load: () => {
 					Show.allColumns()
 					Show.allRows()
@@ -40,7 +48,7 @@ export default new FunctionBar({
 				},
 			}),
 			new Entry({
-				name: "Today",
+				name: "Tasks.Active",
 				on_Load: () => {
 					Show.rows({include:["Tasks.Active"]})
 					Show.allColumns()
