@@ -68,8 +68,12 @@
 .CustomExtension__FunctionBar .bottom .row.stretch {
   margin: 0;
 }
-.CustomExtension__FunctionBar .cell {
+.CustomExtension__FunctionBar .top .row.stretch .cell,
+.CustomExtension__FunctionBar .bottom .row.stretch .cell {
   flex: 1;
+}
+.CustomExtension__FunctionBar .cell {
+  flex: 0;
   border: 1px solid #000;
   padding: 5px;
   user-select: none;
