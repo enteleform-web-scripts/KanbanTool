@@ -108,10 +108,10 @@ function _get_ContainerToggle_Callback(position:Position){
 	const container = $(containerSelector)
 
 	return () => {
-		if(container.hasClass(cssVariables.hidden))
-			{container.removeClass(cssVariables.hidden)}
+		if(container.hasClass(cssVariables.collapsed))
+			{container.removeClass(cssVariables.collapsed)}
 		else
-			{container.addClass(cssVariables.hidden)}
+			{container.addClass(cssVariables.collapsed)}
 
 		_update_OriginalLayout()
 	}

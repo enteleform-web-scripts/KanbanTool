@@ -24,11 +24,6 @@ json("./CSS_Variables.json")
 		pointer-events:  auto
 		background:      #C6C6CC
 
-		&.hidden *
-			display:  none
-			width:    0
-			height:   0
-
 	.left
 		border-right:   1px solid var(--BorderColor)
 	.right
@@ -84,15 +79,27 @@ json("./CSS_Variables.json")
 		background:   #D9D9DE
 		color:        #505052
 
-	.left   > .column.collapsed,
-	.right  > .column.collapsed,
-	.top    > .row.collapsed,
-	.bottom > .row.collapsed
-		&.hidden
-			display:  none
+	// .column.collapsed:not(.fancy),
+	// .row.hidden
+	// 	&*
+	// 		display:  none
 
-	.left  > .column.collapsed > .cell,
-	.right > .column.collapsed > .cell
+// .top.collapsed > :not(.expand-button)
+// 	display:  none
+
+// .top:not(.collapsed) > .expand-button
+// 	display:  none
+
+
+	// .left   > .column.expand-button,
+	// .right  > .column.expand-button,
+	// .top    > .row.expand-button,
+	// .bottom > .row.expand-button
+	// 	&.hidden
+	// 		display:  none
+
+	.left  > .column.expand-button > .cell,
+	.right > .column.expand-button > .cell
 		display:          flex
 		flex:             1
 		flex-direction:   column
@@ -100,8 +107,8 @@ json("./CSS_Variables.json")
 		padding:          0 2px 0 1px
 		font-size:        15pt
 
-	.top    > .row.collapsed > .cell,
-	.bottom > .row.collapsed > .cell
+	.top    > .row.expand-button > .cell,
+	.bottom > .row.expand-button > .cell
 		padding:      0 0 2px 0
 		line-height:  18px
 		font-size:    14pt
