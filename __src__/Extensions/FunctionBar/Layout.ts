@@ -34,24 +34,24 @@ export class Layout{
 	}
 
 	static initialize_KeyBindings(){
-		const element_KeyMap = [
-			{position:Position.Left,   key:"up"    as KeyBinding.Key},
-			{position:Position.Right,  key:"down"  as KeyBinding.Key},
-			{position:Position.Top,    key:"left"  as KeyBinding.Key},
-			{position:Position.Bottom, key:"right" as KeyBinding.Key},
-		]
+		setTimeout(() => {
+			const element_KeyMap = [
+				{position:Position.Left,   key:"up"    as KeyBinding.Key},
+				{position:Position.Right,  key:"down"  as KeyBinding.Key},
+				{position:Position.Top,    key:"left"  as KeyBinding.Key},
+				{position:Position.Bottom, key:"right" as KeyBinding.Key},
+			]
 
-		element_KeyMap.forEach((entry) => {
-			const callback = _get_ContainerToggle_Callback(entry.position)
+			element_KeyMap.forEach((entry) => {
+				const callback = _get_ContainerToggle_Callback(entry.position)
 
-			console.log(">>>", [entry.key, ...functionBar_ToggleModifiers])
-
-			KeyBinding.add(
-				[entry.key, ...functionBar_ToggleModifiers],
-				callback,
-				{preventDefault: true}
-			)
-		})
+				KeyBinding.add(
+					[entry.key, ...functionBar_ToggleModifiers],
+					callback,
+					{preventDefault: true}
+				)
+			})
+		}, css_Timeout_MS)
 	}
 
 	add_Cell(entry:Entry, groupIndex:number, keyBinding:string){
