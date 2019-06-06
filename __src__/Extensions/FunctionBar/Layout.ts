@@ -22,8 +22,8 @@ const $:any = require("jquery")
 export class Layout{
 
 	_functionBar:  any // FunctionBar
-	container:     HTMLElement
-	subContainers: HTMLElement[]
+	container:     JQuery
+	subContainers: JQuery[]
 
 	constructor(functionBar){
 		this._functionBar = functionBar
@@ -71,6 +71,7 @@ export class Layout{
 		const {autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position, is_VerticalBar, stretchCells} = this._functionBar
 		let {containerSelector, subContainer_Class} = _BarComponent_Map[position]
 		this.container = $(containerSelector)
+		this.container.removeClass(cssVariables.empty)
 
 		if(is_VerticalBar && stretchCells)
 			{subContainer_Class += " stretch"}
