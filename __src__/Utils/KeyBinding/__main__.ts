@@ -3,6 +3,7 @@ import {
 	ModifierKey     as _ModifierKey,
 	AlphanumericKey as _AlphanumericKey,
 	CharacterKey    as _CharacterKey,
+	Key             as _Key,
 	alphanumericKey_Rows,
 	characterKey_Rows,
 } from "./KeyGroups"
@@ -43,6 +44,7 @@ export namespace KeyBinding{
 	export type ModifierKey     = _ModifierKey
 	export type AlphanumericKey = _AlphanumericKey
 	export type CharacterKey    = _CharacterKey
+	export type Key             = _Key
 }
 
 (window as any).KeyBinding = KeyBinding

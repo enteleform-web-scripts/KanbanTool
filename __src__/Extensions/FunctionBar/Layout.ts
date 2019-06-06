@@ -2,10 +2,14 @@
 const cssVariables = require("./CSS_Variables.json")
 
 //###  Module  ###//
-import {css_Timeout_MS  } from "./Settings"
 import {Entry           } from "./Entry"
 import {Position        } from "./Position"
 import {set_CSS_Variable} from "~/Utils/CSS_Variables/__main__"
+import {KeyBinding      } from "~/Utils/KeyBinding/__Main__"
+import {
+	css_Timeout_MS,
+	functionBar_ToggleModifiers,
+} from "./Settings"
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -29,10 +33,41 @@ export class Layout{
 		}, css_Timeout_MS)
 	}
 
+	static initialize_KeyBindings(){
+		const element_KeyMap = [
+			{position:Position.Left,   key:"up"    as KeyBinding.Key},
+			{position:Position.Right,  key:"down"  as KeyBinding.Key},
+			{position:Position.Top,    key:"left"  as KeyBinding.Key},
+			{position:Position.Bottom, key:"right" as KeyBinding.Key},
+		]
+
+		element_KeyMap.forEach((entry) => {
+			const callback = _get_ContainerToggle_Callback(entry.position)
+
+			KeyBinding.add(
+				[entry.key, ...functionBar_ToggleModifiers],
+				callback,
+				{preventDefault: true}
+			)
+		})
+	}
+
+	add_Cell(entry:Entry, groupIndex:number, keyBinding:string){
+		const cell = $("<div>", {class:"cell"})
+
+		let text = entry.name
+		if(keyBinding)
+			{text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`}
+
+		cell.html(text)
+		cell.on("click", entry.on_Load)
+
+		this.subContainers[groupIndex].append(cell)
+	}
+
 	_build(){
 		const {autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position, is_VerticalBar, stretchCells} = this._functionBar
-		let {selectorTail, subContainer_Class} = _BarComponent_Map[position]
-		const containerSelector = [`.${cssVariables.container}`, selectorTail].join(" > ")
+		let {containerSelector, subContainer_Class} = _BarComponent_Map[position]
 		this.container = $(containerSelector)
 
 		if(is_VerticalBar && stretchCells)
@@ -50,19 +85,6 @@ export class Layout{
 				this.add_Cell(entry, groupIndex, keyBinding)
 			})
 		})
-	}
-
-	add_Cell(entry:Entry, groupIndex:number, keyBinding:string){
-		const cell = $("<div>", {class:"cell"})
-
-		let text = entry.name
-		if(keyBinding)
-			{text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`}
-
-		cell.html(text)
-		cell.on("click", entry.on_Load)
-
-		this.subContainers[groupIndex].append(cell)
 	}
 
 	_update_OriginalLayout(){
@@ -85,13 +107,27 @@ export class Layout{
 }
 
 
-// //###############//
-// //###  Utils  ###//
-// //###############//
+//###############//
+//###  Utils  ###//
+//###############//
+
+const _hiddenClass = "hidden"
 
 const _BarComponent_Map = {
-	[Position.Left  ]: {selectorTail:".center > .left",  subContainer_Class:"column"},
-	[Position.Right ]: {selectorTail:".center > .right", subContainer_Class:"column"},
-	[Position.Top   ]: {selectorTail:".top",             subContainer_Class:"row"   },
-	[Position.Bottom]: {selectorTail:".bottom",          subContainer_Class:"row"   },
+	[Position.Left  ]: {containerSelector:`.${cssVariables.container} > .center > .left`,  subContainer_Class:"column"},
+	[Position.Right ]: {containerSelector:`.${cssVariables.container} > .center > .right`, subContainer_Class:"column"},
+	[Position.Top   ]: {containerSelector:`.${cssVariables.container} > .top`,             subContainer_Class:"row"   },
+	[Position.Bottom]: {containerSelector:`.${cssVariables.container} > .bottom`,          subContainer_Class:"row"   },
+}
+
+function _get_ContainerToggle_Callback(position:Position){
+	const {containerSelector} = _BarComponent_Map[position]
+	const container = $(containerSelector)
+
+	return () => {
+		if(container.hasClass(_hiddenClass))
+			{container.removeClass(_hiddenClass)}
+		else
+			{container.addClass(_hiddenClass)}
+	}
 }

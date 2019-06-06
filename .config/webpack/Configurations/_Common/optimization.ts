@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {css_Splitter, pug_Splitter} from "./__Shared__"
+import {css_Splitter} from "./__Shared__"
 
 //###  NPM  ###//
 import webpack from "webpack"
@@ -12,7 +12,6 @@ const $: webpack.Options.Optimization = {
 	splitChunks: {
 		cacheGroups: {
 			CSS: css_Splitter.cacheGroup,
-			// Pug: pug_Splitter.cacheGroup,
 		},
 	},
 

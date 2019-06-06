@@ -98,7 +98,3 @@ export class ChunkSplitter{
 //###############//
 
 const _filePath_Head = new RegExp("^" + escape_RegEx(Settings.sourcePath))
-
-function _replace_Extension(filePath:string, newExtension:string){
-	return filePath.replace(/\.[^\.]+$/, `.${newExtension}`)
-}

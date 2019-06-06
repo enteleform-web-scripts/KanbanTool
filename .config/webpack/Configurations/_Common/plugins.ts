@@ -40,9 +40,6 @@ const $: webpack.Plugin[] = [
 		chunkFilename: `${Settings.cssFolder}/[name].css`,
 	}),
 
-	// extract_HTML,
-	// extract_CSS,
-
 	new CopyPlugin([
 		{
 			from: Settings.staticPath,

@@ -2,11 +2,11 @@
 require("~/Utils/HTML_Injector").inject(__dirname, {CSS:true, HTML:true})
 
 //###  Module  ###//
-import {autoMapped_Key_Rows                           } from "./Settings"
-import {Entry                                         } from "./Entry"
-import {Layout                                        } from "./Layout"
-import {KeyBinding                                    } from "~/Utils/KeyBinding/__Main__"
-import {Module                                        } from "~/Utils/Module_BaseClasses"
+import {autoMapped_Key_Rows} from "./Settings"
+import {Entry              } from "./Entry"
+import {Layout             } from "./Layout"
+import {KeyBinding         } from "~/Utils/KeyBinding/__Main__"
+import {Module             } from "~/Utils/Module_BaseClasses"
 import {
 	Position,
 	HorizontalPosition, VerticalPosition,
@@ -33,11 +33,11 @@ export class FunctionBar extends Module{
 	entryGroups:          Entry[][]
 	stretchCells:         boolean
 
-	constructor(  //  Left / Right
+	constructor(  //  Left || Right
 		{position,                    entryGroups          }:
 		{position:HorizontalPosition, entryGroups:Entry[][]}
 	)
-	constructor(  //  Top / Bottom
+	constructor(  //  Top || Bottom
 		{position,                  entryGroups,           autoMap_KeyBindings,         keyBinding_Modifiers,                          stretchCells        }:
 		{position:VerticalPosition, entryGroups:Entry[][], autoMap_KeyBindings:boolean, keyBinding_Modifiers:KeyBinding.ModifierKey[], stretchCells:boolean}
 	)
@@ -59,6 +59,8 @@ export class FunctionBar extends Module{
 		functionBars.forEach(functionBar => {
 			functionBar.initialize()
 		})
+
+		Layout.initialize_KeyBindings()
 	}
 
 	initialize(){
