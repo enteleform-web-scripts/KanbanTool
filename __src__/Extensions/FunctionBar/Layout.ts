@@ -29,7 +29,7 @@ export class Layout{
 		this._functionBar = functionBar
 		setTimeout(() => {
 			this._build()
-			this._update_OriginalLayout()
+			_update_OriginalLayout()
 		}, css_Timeout_MS)
 	}
 
@@ -89,23 +89,6 @@ export class Layout{
 		})
 	}
 
-	_update_OriginalLayout(){
-		const navbarHeight = $("nav.navbar").height()
-		set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`)
-
-		const topRow_Height = $(`.${cssVariables.container} > .top`).height()
-		set_CSS_Variable("KanbanToolOffsets_TopHeight", `${topRow_Height}px`)
-
-		const leftColumn_Width = $(`.${cssVariables.container} > .center > .left`).width()
-		set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${leftColumn_Width}px`)
-
-		const rightColumn_Width = $(`.${cssVariables.container} > .center > .right`).width()
-		set_CSS_Variable("KanbanToolOffsets_RightWidth", `${rightColumn_Width}px`)
-
-		const top_Offset = (navbarHeight + topRow_Height)
-		set_CSS_Variable("KanbanToolOffsets_TopOffset", `${top_Offset}px`)
-	}
-
 }
 
 
@@ -129,5 +112,24 @@ function _get_ContainerToggle_Callback(position:Position){
 			{container.removeClass(cssVariables.hidden)}
 		else
 			{container.addClass(cssVariables.hidden)}
+
+		_update_OriginalLayout()
 	}
+}
+
+function _update_OriginalLayout(){
+	const navbarHeight = $("nav.navbar").height()
+	set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`)
+
+	const topRow_Height = $(`.${cssVariables.container} > .top`).height()
+	set_CSS_Variable("KanbanToolOffsets_TopHeight", `${topRow_Height}px`)
+
+	const leftColumn_Width = $(`.${cssVariables.container} > .center > .left`).width()
+	set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${leftColumn_Width}px`)
+
+	const rightColumn_Width = $(`.${cssVariables.container} > .center > .right`).width()
+	set_CSS_Variable("KanbanToolOffsets_RightWidth", `${rightColumn_Width}px`)
+
+	const top_Offset = (navbarHeight + topRow_Height)
+	set_CSS_Variable("KanbanToolOffsets_TopOffset", `${top_Offset}px`)
 }
