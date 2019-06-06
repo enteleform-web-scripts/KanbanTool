@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559850878222)
+		const elapsedTime = _get_ElapsedTime(1559856309755)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:54:38 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:25:09 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12163,11 +12163,11 @@ function _get_ContainerToggle_Callback(position) {
     const { containerSelector } = _BarComponent_Map[position];
     const container = $(containerSelector);
     return () => {
-        if (container.hasClass(cssVariables.hidden)) {
-            container.removeClass(cssVariables.hidden);
+        if (container.hasClass(cssVariables.collapsed)) {
+            container.removeClass(cssVariables.collapsed);
         }
         else {
-            container.addClass(cssVariables.hidden);
+            container.addClass(cssVariables.collapsed);
         }
         _update_OriginalLayout();
     };
@@ -12190,7 +12190,7 @@ function _update_OriginalLayout() {
 /* 22 */
 /***/ (function(module) {
 
-module.exports = {"container":"CustomExtension__FunctionBar","hidden":"hidden","_":""};
+module.exports = {"container":"CustomExtension__FunctionBar","hidden":"hidden","collapsed":"collapsed","_":""};
 
 /***/ }),
 /* 23 */

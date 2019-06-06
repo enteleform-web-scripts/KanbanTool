@@ -18,14 +18,6 @@
   pointer-events: auto;
   background: #c6c6cc;
 }
-.CustomExtension__FunctionBar .left.hidden *,
-.CustomExtension__FunctionBar .right.hidden *,
-.CustomExtension__FunctionBar .top.hidden *,
-.CustomExtension__FunctionBar .bottom.hidden * {
-  display: none;
-  width: 0;
-  height: 0;
-}
 .CustomExtension__FunctionBar .left {
   border-right: 1px solid var(--BorderColor);
 }
@@ -92,14 +84,8 @@
   background: #d9d9de;
   color: #505052;
 }
-.CustomExtension__FunctionBar .left > .column.collapsed.hidden,
-.CustomExtension__FunctionBar .right > .column.collapsed.hidden,
-.CustomExtension__FunctionBar .top > .row.collapsed.hidden,
-.CustomExtension__FunctionBar .bottom > .row.collapsed.hidden {
-  display: none;
-}
-.CustomExtension__FunctionBar .left > .column.collapsed > .cell,
-.CustomExtension__FunctionBar .right > .column.collapsed > .cell {
+.left > .column.expand-button > .cell,
+.right > .column.expand-button > .cell {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -107,8 +93,8 @@
   padding: 0 2px 0 1px;
   font-size: 15pt;
 }
-.CustomExtension__FunctionBar .top > .row.collapsed > .cell,
-.CustomExtension__FunctionBar .bottom > .row.collapsed > .cell {
+.top > .row.expand-button > .cell,
+.bottom > .row.expand-button > .cell {
   padding: 0 0 2px 0;
   line-height: 18px;
   font-size: 14pt;
