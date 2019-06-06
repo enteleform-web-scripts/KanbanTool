@@ -92,6 +92,21 @@
   background: #d9d9de;
   color: #505052;
 }
+.CustomExtension__FunctionBar .left > .column.collapsed > .cell,
+.CustomExtension__FunctionBar .right > .column.collapsed > .cell {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 2px 0 1px;
+  font-size: 15pt;
+}
+.CustomExtension__FunctionBar .top > .row.collapsed> .cell,
+.CustomExtension__FunctionBar .bottom > .row.collapsed> .cell {
+  padding: 0 0 2px 0;
+  line-height: 18px;
+  font-size: 14pt;
+}
 :root {
   --KanbanToolOffsets_NavHeight: 0px;
   --KanbanToolOffsets_TopHeight: 0px;
