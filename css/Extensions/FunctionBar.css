@@ -22,7 +22,8 @@
 .CustomExtension__FunctionBar .right.hidden,
 .CustomExtension__FunctionBar .top.hidden,
 .CustomExtension__FunctionBar .bottom.hidden {
-  display: none !important;
+  width: 0;
+  height: 0;
 }
 .CustomExtension__FunctionBar .left {
   border-right: 1px solid var(--BorderColor);
