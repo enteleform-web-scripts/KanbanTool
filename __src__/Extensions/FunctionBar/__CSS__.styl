@@ -24,9 +24,10 @@ json("./CSS_Variables.json")
 		pointer-events:  auto
 		background:      #C6C6CC
 
-		&.hidden
-			width:   0
-			height:  0
+		&.hidden *
+			display:  none
+			width:    0
+			height:   0
 
 	.left
 		border-right:   1px solid var(--BorderColor)
