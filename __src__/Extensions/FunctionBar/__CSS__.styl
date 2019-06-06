@@ -7,7 +7,8 @@ json("./CSS_Variables.json")
 
 .{container}
 
-	--BorderColor:  #ABABB1
+	--BorderColor:         #ABABB1
+	--ExpandButton_Color:  #6A6A6A
 
 	display:         flex
 	flex-direction:  column
@@ -85,22 +86,22 @@ json("./CSS_Variables.json")
 		&:not(.collapsed) > .expand-button
 			display:  none
 
-	.left  > .column.expand-button > .cell,
-	.right > .column.expand-button > .cell
-		display:          flex
-		flex:             1
-		flex-direction:   column
-		justify-content:  center
-		padding:          0 2px 0 1px
-		font-size:        15pt
-		color:            #6A6A6A
+	.left, .right
+		.column.expand-button > .cell,
+			display:          flex
+			flex:             1
+			flex-direction:   column
+			justify-content:  center
+			padding:          0 2px 0 1px
+			font-size:        15pt
+			color:            var(--ExpandButton_Color)
 
-	.top    > .row.expand-button > .cell,
-	.bottom > .row.expand-button > .cell
-		padding:      0 0 2px 0
-		line-height:  18px
-		font-size:    14pt
-		color:        #6A6A6A
+	.top, .bottom
+		.row.expand-button > .cell
+			padding:      0 0 2px 0
+			line-height:  18px
+			font-size:    14pt
+			color:        var(--ExpandButton_Color)
 
 //#############################//
 //###  KanbanTool - Layout  ###//
@@ -118,14 +119,16 @@ nav.navbar
 	margin-left:  var(--KanbanToolOffsets_LeftWidth)                                                       !important
 	width:        calc(100% - (var(--KanbanToolOffsets_LeftWidth) + var(--KanbanToolOffsets_RightWidth)))  !important
 
-.kt-side-panel-slide > kt-board
-	margin-top:     var(--KanbanToolOffsets_TopOffset )  !important
-	margin-bottom:  var(--KanbanToolOffsets_TopOffset )  !important
-	margin-left:    var(--KanbanToolOffsets_LeftWidth )  !important
-	margin-right:   var(--KanbanToolOffsets_RightWidth)  !important
+.kt-side-panel-slide
 
-.kt-side-panel-slide > .kt-extensions-swimlane_labels
-	left:  var(--KanbanToolOffsets_LeftWidth )  !important
+	kt-board
+		margin-top:     var(--KanbanToolOffsets_TopOffset )  !important
+		margin-bottom:  var(--KanbanToolOffsets_TopOffset )  !important
+		margin-left:    var(--KanbanToolOffsets_LeftWidth )  !important
+		margin-right:   var(--KanbanToolOffsets_RightWidth)  !important
+
+	.kt-extensions-swimlane_labels
+		left:  var(--KanbanToolOffsets_LeftWidth )  !important
 
 .kt-hint-labels-container
 	top:  calc(var(--KanbanToolOffsets_TopHeight) - 8px)  !important
@@ -138,11 +141,11 @@ nav.navbar
 nav.navbar > .navbar-inner
 	background-color:  rgba(243, 243, 244, 1)  !important
 
-.kt-hint-labels-container .kt-hint-label
+.kt-hint-labels-container.kt-hint-label
 	background-color:  #F9F9F9         !important
 	border:            solid #DDD 1px  !important
 
-.kt-extensions-swimlane_labels ._swimlane_label
+.kt-extensions-swimlane_labels._swimlane_label
 	margin:            0               !important
 	background-color:  #F9F9F9         !important
 	border:            solid #DDD 1px  !important
