@@ -84,6 +84,10 @@
   background: #d9d9de;
   color: #505052;
 }
+.CustomExtension__FunctionBar .left.empty,
+.CustomExtension__FunctionBar .right.empty,
+.CustomExtension__FunctionBar .top.empty,
+.CustomExtension__FunctionBar .bottom.empty,
 .CustomExtension__FunctionBar .left.collapsed > :not(.expand-button),
 .CustomExtension__FunctionBar .right.collapsed > :not(.expand-button),
 .CustomExtension__FunctionBar .top.collapsed > :not(.expand-button),
