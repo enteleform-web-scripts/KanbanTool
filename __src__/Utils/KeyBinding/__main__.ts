@@ -1,9 +1,13 @@
 //###  Module: Exports  ###//
 import {
-	ModifierKey     as _ModifierKey,
-	AlphanumericKey as _AlphanumericKey,
-	CharacterKey    as _CharacterKey,
-	Key             as _Key,
+	ModifierKey      as _ModifierKey,
+	ModifierKeys     as _ModifierKeys,
+	AlphanumericKey  as _AlphanumericKey,
+	AlphanumericKeys as _AlphanumericKeys,
+	CharacterKey     as _CharacterKey,
+	CharacterKeys    as _CharacterKeys,
+	Key              as _Key,
+	Keys             as _Keys,
 	alphanumericKey_Rows,
 	characterKey_Rows,
 } from "./KeyGroups"
@@ -41,10 +45,14 @@ export class KeyBinding{
 }
 
 export namespace KeyBinding{
-	export type ModifierKey     = _ModifierKey
-	export type AlphanumericKey = _AlphanumericKey
-	export type CharacterKey    = _CharacterKey
-	export type Key             = _Key
+	export type  ModifierKey      = _ModifierKey
+	export const ModifierKeys     = _ModifierKeys
+	export type  AlphanumericKey  = _AlphanumericKey
+	export const AlphanumericKeys = _AlphanumericKeys
+	export type  CharacterKey     = _CharacterKey
+	export const CharacterKeys    = _CharacterKeys
+	export type  Key              = _Key
+	export const Keys             = _Keys
 }
 
 (window as any).KeyBinding = KeyBinding
@@ -99,8 +107,19 @@ function _get_Decorator(hotKeys:string, options:_BindOptions){
 
 function _convert_HotKeys_ToString(keys:KeyBinding.Key|KeyBinding.Key[]){
 	return (
-			(keys.constructor === Array)
-			? (keys as Array<string>).join(" + ")
+			(keys instanceof Array)
+			? _get_HotKey_Array_AsString(keys)
 			: (keys as string)
 	)
+}
+
+function _get_HotKey_Array_AsString(keys:KeyBinding.Key[]){
+	const sortedKeys = [...keys].sort((a, b) => {
+		if(_ModifierKeys.includes(a))
+			{return -1}
+		else
+			{return 0}
+	})
+
+	return sortedKeys.join(" + ")
 }
