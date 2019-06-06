@@ -10463,7 +10463,7 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(14).inject(__dirname, { CSS: true, HTML: true });
-const Settings_1 = __webpack_require__(4);
+const Settings_1 = __webpack_require__(5);
 const Entry_1 = __webpack_require__(20);
 const Layout_1 = __webpack_require__(21);
 const Module_BaseClasses_1 = __webpack_require__(24);
@@ -10481,6 +10481,7 @@ class FunctionBar extends Module_BaseClasses_1.Module {
         functionBars.forEach(functionBar => {
             functionBar.initialize();
         });
+        Layout_1.Layout.initialize_KeyBindings();
     }
     initialize() {
         this._validate_AutoMapped_Rows();
@@ -10519,81 +10520,6 @@ exports.FunctionBar = FunctionBar;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.KanbanTool = window.KT;
-exports.activeBoard = exports.KanbanTool.boards.models[0];
-exports.KanbanTool.activeBoard = exports.activeBoard;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-
-		function _get_ElapsedTime(startTime) {
-    const elapsed_MS = (new Date().getTime() - startTime);
-    const days = Math.floor(((elapsed_MS / 1000) / 86400));
-    const hours = Math.floor(((elapsed_MS / 1000) / 3600) % 24);
-    const minutes = Math.floor(((elapsed_MS / 1000) / 60) % 60);
-    const seconds = Math.floor((elapsed_MS / 1000) % 60);
-    const milliseconds = Math.floor(elapsed_MS % 1000);
-    const elapsedTime = (""
-        + _get_ElapsedTime_Segment("day", days, [], false)
-        + _get_ElapsedTime_Segment("hour", hours, [days], false)
-        + _get_ElapsedTime_Segment("minute", minutes, [days, hours], false)
-        + _get_ElapsedTime_Segment("second", seconds, [days, hours, minutes], true));
-    return elapsedTime;
-}
-		function _get_ElapsedTime_Segment(title, value, parents, mandatory) {
-    const parentValues_Exist = ((parents.length > 0)
-        && (Math.max(...parents) > 0));
-    if (mandatory || value || parentValues_Exist) {
-        const prefix = (parentValues_Exist)
-            ? ",  "
-            : "";
-        title =
-            (value == 1)
-                ? title
-                : `${title}s`;
-        return `${prefix}${value}:${title}`;
-    }
-    else {
-        return "";
-    }
-}
-
-		const elapsedTime = _get_ElapsedTime(1559234577474)
-
-		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:42:57 PM`.padEnd((line_1.length - 1)) + "│"
-		const divider = "".padStart((line_1.length - 2), "─")
-
-		console.log(""
-			+ `\n┌${divider}┐\n`
-			+ `${line_1}\n`
-			+ `${line_2}\n`
-			+ `└${divider}┘\n`
-		)
-	
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(5);
-exports.css_Timeout_MS = 500;
-exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10657,13 +10583,89 @@ function _convert_HotKeys_ToString(keys) {
 
 
 /***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.KanbanTool = window.KT;
+exports.activeBoard = exports.KanbanTool.boards.models[0];
+exports.KanbanTool.activeBoard = exports.activeBoard;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+
+		function _get_ElapsedTime(startTime) {
+    const elapsed_MS = (new Date().getTime() - startTime);
+    const days = Math.floor(((elapsed_MS / 1000) / 86400));
+    const hours = Math.floor(((elapsed_MS / 1000) / 3600) % 24);
+    const minutes = Math.floor(((elapsed_MS / 1000) / 60) % 60);
+    const seconds = Math.floor((elapsed_MS / 1000) % 60);
+    const milliseconds = Math.floor(elapsed_MS % 1000);
+    const elapsedTime = (""
+        + _get_ElapsedTime_Segment("day", days, [], false)
+        + _get_ElapsedTime_Segment("hour", hours, [days], false)
+        + _get_ElapsedTime_Segment("minute", minutes, [days, hours], false)
+        + _get_ElapsedTime_Segment("second", seconds, [days, hours, minutes], true));
+    return elapsedTime;
+}
+		function _get_ElapsedTime_Segment(title, value, parents, mandatory) {
+    const parentValues_Exist = ((parents.length > 0)
+        && (Math.max(...parents) > 0));
+    if (mandatory || value || parentValues_Exist) {
+        const prefix = (parentValues_Exist)
+            ? ",  "
+            : "";
+        title =
+            (value == 1)
+                ? title
+                : `${title}s`;
+        return `${prefix}${value}:${title}`;
+    }
+    else {
+        return "";
+    }
+}
+
+		const elapsedTime = _get_ElapsedTime(1559841961378)
+
+		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
+		const line_2  = `│  At     1:26:01 PM`.padEnd((line_1.length - 1)) + "│"
+		const divider = "".padStart((line_1.length - 2), "─")
+
+		console.log(""
+			+ `\n┌${divider}┐\n`
+			+ `${line_1}\n`
+			+ `${line_2}\n`
+			+ `└${divider}┘\n`
+		)
+	
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(2);
+exports.css_Timeout_MS = 500;
+exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
+exports.functionBar_ToggleModifiers = ["alt"];
+
+
+/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(2);
+const KanbanTool_1 = __webpack_require__(3);
 const $ = __webpack_require__(0);
 class TaskContainer {
     constructor({ type, domIndex, modelIndex, model, element }) {
@@ -10856,7 +10858,7 @@ function _match_Glob(container, target) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(6);
-const KanbanTool_1 = __webpack_require__(2);
+const KanbanTool_1 = __webpack_require__(3);
 const $ = __webpack_require__(0);
 function get_Rows() {
     const headerElements = $.find("kt-board > tbody > tr > th");
@@ -10881,7 +10883,7 @@ exports.get_Rows = get_Rows;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(6);
-const KanbanTool_1 = __webpack_require__(2);
+const KanbanTool_1 = __webpack_require__(3);
 function get_Columns() {
     const models = KanbanTool_1.activeBoard.workflowStages()
         .slice(1);
@@ -10932,7 +10934,7 @@ function _update_ColumnRelationships(columns) {
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(3);
+__webpack_require__(4);
 module.exports = __webpack_require__(12);
 
 
@@ -12009,8 +12011,8 @@ if (typeof window !== 'undefined') {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(4);
-const __Main__1 = __webpack_require__(5);
+const Settings_1 = __webpack_require__(5);
+const __Main__1 = __webpack_require__(2);
 class Entry {
     constructor({ name, color, keyBinding, on_Load, }) {
         this.name = name;
@@ -12055,9 +12057,10 @@ exports.Entry = Entry;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const cssVariables = __webpack_require__(22);
-const Settings_1 = __webpack_require__(4);
 const Position_1 = __webpack_require__(7);
 const __main__1 = __webpack_require__(23);
+const __Main__1 = __webpack_require__(2);
+const Settings_1 = __webpack_require__(5);
 const $ = __webpack_require__(0);
 class Layout {
     constructor(functionBar) {
@@ -12067,10 +12070,31 @@ class Layout {
             this._update_OriginalLayout();
         }, Settings_1.css_Timeout_MS);
     }
+    static initialize_KeyBindings() {
+        const element_KeyMap = [
+            { position: Position_1.Position.Left, key: "up" },
+            { position: Position_1.Position.Right, key: "down" },
+            { position: Position_1.Position.Top, key: "left" },
+            { position: Position_1.Position.Bottom, key: "right" },
+        ];
+        element_KeyMap.forEach((entry) => {
+            const callback = _get_ContainerToggle_Callback(entry.position);
+            __Main__1.KeyBinding.add([entry.key, ...Settings_1.functionBar_ToggleModifiers], callback, { preventDefault: true });
+        });
+    }
+    add_Cell(entry, groupIndex, keyBinding) {
+        const cell = $("<div>", { class: "cell" });
+        let text = entry.name;
+        if (keyBinding) {
+            text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`;
+        }
+        cell.html(text);
+        cell.on("click", entry.on_Load);
+        this.subContainers[groupIndex].append(cell);
+    }
     _build() {
         const { autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position, is_VerticalBar, stretchCells } = this._functionBar;
-        let { selectorTail, subContainer_Class } = _BarComponent_Map[position];
-        const containerSelector = [`.${cssVariables.container}`, selectorTail].join(" > ");
+        let { containerSelector, subContainer_Class } = _BarComponent_Map[position];
         this.container = $(containerSelector);
         if (is_VerticalBar && stretchCells) {
             subContainer_Class += " stretch";
@@ -12086,16 +12110,6 @@ class Layout {
             });
         });
     }
-    add_Cell(entry, groupIndex, keyBinding) {
-        const cell = $("<div>", { class: "cell" });
-        let text = entry.name;
-        if (keyBinding) {
-            text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`;
-        }
-        cell.html(text);
-        cell.on("click", entry.on_Load);
-        this.subContainers[groupIndex].append(cell);
-    }
     _update_OriginalLayout() {
         const navbarHeight = $("nav.navbar").height();
         __main__1.set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`);
@@ -12110,12 +12124,25 @@ class Layout {
     }
 }
 exports.Layout = Layout;
+const _hiddenClass = "hidden";
 const _BarComponent_Map = {
-    [Position_1.Position.Left]: { selectorTail: ".center > .left", subContainer_Class: "column" },
-    [Position_1.Position.Right]: { selectorTail: ".center > .right", subContainer_Class: "column" },
-    [Position_1.Position.Top]: { selectorTail: ".top", subContainer_Class: "row" },
-    [Position_1.Position.Bottom]: { selectorTail: ".bottom", subContainer_Class: "row" },
+    [Position_1.Position.Left]: { containerSelector: `.${cssVariables.container} > .center > .left`, subContainer_Class: "column" },
+    [Position_1.Position.Right]: { containerSelector: `.${cssVariables.container} > .center > .right`, subContainer_Class: "column" },
+    [Position_1.Position.Top]: { containerSelector: `.${cssVariables.container} > .top`, subContainer_Class: "row" },
+    [Position_1.Position.Bottom]: { containerSelector: `.${cssVariables.container} > .bottom`, subContainer_Class: "row" },
 };
+function _get_ContainerToggle_Callback(position) {
+    const { containerSelector } = _BarComponent_Map[position];
+    const container = $(containerSelector);
+    return () => {
+        if (container.hasClass(_hiddenClass)) {
+            container.removeClass(_hiddenClass);
+        }
+        else {
+            container.addClass(_hiddenClass);
+        }
+    };
+}
 
 
 /***/ }),
@@ -12262,7 +12289,7 @@ function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_In
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(2);
+const KanbanTool_1 = __webpack_require__(3);
 function get_EmptyRow_Indexes(columns) {
     const hiddenColumn_Indexes = columns
         .filter(column => column.is_Collapsed)
@@ -12587,7 +12614,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(5);
+const __Main__1 = __webpack_require__(2);
 const jquery_1 = __importDefault(__webpack_require__(0));
 const $ = jquery_1.default;
 class FilterKeybindings {
