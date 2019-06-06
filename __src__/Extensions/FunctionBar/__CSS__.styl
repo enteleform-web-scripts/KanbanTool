@@ -84,11 +84,15 @@ json("./CSS_Variables.json")
 	// 	&*
 	// 		display:  none
 
-// .top.collapsed > :not(.expand-button)
-// 	display:  none
-
-// .top:not(.collapsed) > .expand-button
-// 	display:  none
+	.left  .collapsed > :not(.expand-button),
+	.right .collapsed > :not(.expand-button),
+	.top   .collapsed > :not(.expand-button),
+	.bottom.collapsed > :not(.expand-button),
+	.left  :not(.collapsed) > .expand-button,
+	.right :not(.collapsed) > .expand-button,
+	.top   :not(.collapsed) > .expand-button,
+	.bottom:not(.collapsed) > .expand-button,
+		display:  none
 
 
 	// .left   > .column.expand-button,
