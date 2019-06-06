@@ -79,28 +79,10 @@ json("./CSS_Variables.json")
 		background:   #D9D9DE
 		color:        #505052
 
-	// .column.collapsed:not(.fancy),
-	// .row.hidden
-	// 	&*
-	// 		display:  none
-
-	.left  .collapsed > :not(.expand-button),
-	.right .collapsed > :not(.expand-button),
-	.top   .collapsed > :not(.expand-button),
-	.bottom.collapsed > :not(.expand-button),
-	.left  :not(.collapsed) > .expand-button,
-	.right :not(.collapsed) > .expand-button,
-	.top   :not(.collapsed) > .expand-button,
-	.bottom:not(.collapsed) > .expand-button,
-		display:  none
-
-
-	// .left   > .column.expand-button,
-	// .right  > .column.expand-button,
-	// .top    > .row.expand-button,
-	// .bottom > .row.expand-button
-	// 	&.hidden
-	// 		display:  none
+	.left, .right, .top, .bottom
+		&.collapsed > :not(.expand-button),
+		&:not(.collapsed) > .expand-button
+			display:  none
 
 	.left  > .column.expand-button > .cell,
 	.right > .column.expand-button > .cell
