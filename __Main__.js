@@ -10631,10 +10631,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559844163996)
+		const elapsedTime = _get_ElapsedTime(1559844406664)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:02:43 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:06:46 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12074,6 +12074,7 @@ class Layout {
         ];
         element_KeyMap.forEach((entry) => {
             const callback = _get_ContainerToggle_Callback(entry.position);
+            console.log(">>>", [entry.key, ...Settings_1.functionBar_ToggleModifiers]);
             __Main__1.KeyBinding.add([entry.key, ...Settings_1.functionBar_ToggleModifiers], callback, { preventDefault: true });
         });
     }
