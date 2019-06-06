@@ -10631,10 +10631,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559844089663)
+		const elapsedTime = _get_ElapsedTime(1559844163996)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:01:29 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:02:43 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10655,7 +10655,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(2);
 exports.css_Timeout_MS = 500;
 exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
-exports.functionBar_ToggleModifiers = ["alt"];
+exports.functionBar_ToggleModifiers = ["shift", "alt"];
 
 
 /***/ }),
