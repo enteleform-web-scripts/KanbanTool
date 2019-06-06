@@ -44,6 +44,8 @@ export class Layout{
 		element_KeyMap.forEach((entry) => {
 			const callback = _get_ContainerToggle_Callback(entry.position)
 
+			console.log(">>>", [entry.key, ...functionBar_ToggleModifiers])
+
 			KeyBinding.add(
 				[entry.key, ...functionBar_ToggleModifiers],
 				callback,
