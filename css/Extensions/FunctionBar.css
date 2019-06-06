@@ -92,6 +92,12 @@
   background: #d9d9de;
   color: #505052;
 }
+.CustomExtension__FunctionBar .left > .column.collapsed.hidden,
+.CustomExtension__FunctionBar .right > .column.collapsed.hidden,
+.CustomExtension__FunctionBar .top > .row.collapse.hidden,
+.CustomExtension__FunctionBar .bottom > .row.collapse.hidden {
+  display: none;
+}
 .CustomExtension__FunctionBar .left > .column.collapsed > .cell,
 .CustomExtension__FunctionBar .right > .column.collapsed > .cell {
   display: flex;
