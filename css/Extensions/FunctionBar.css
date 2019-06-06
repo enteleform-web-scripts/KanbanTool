@@ -94,8 +94,8 @@
 }
 .CustomExtension__FunctionBar .left > .column.collapsed.hidden,
 .CustomExtension__FunctionBar .right > .column.collapsed.hidden,
-.CustomExtension__FunctionBar .top > .row.collapse.hidden,
-.CustomExtension__FunctionBar .bottom > .row.collapse.hidden {
+.CustomExtension__FunctionBar .top > .row.collapsed.hidden,
+.CustomExtension__FunctionBar .bottom > .row.collapsed.hidden {
   display: none;
 }
 .CustomExtension__FunctionBar .left > .column.collapsed > .cell,
@@ -107,8 +107,8 @@
   padding: 0 2px 0 1px;
   font-size: 15pt;
 }
-.CustomExtension__FunctionBar .top > .row.collapsed> .cell,
-.CustomExtension__FunctionBar .bottom > .row.collapsed> .cell {
+.CustomExtension__FunctionBar .top > .row.collapsed > .cell,
+.CustomExtension__FunctionBar .bottom > .row.collapsed > .cell {
   padding: 0 0 2px 0;
   line-height: 18px;
   font-size: 14pt;
