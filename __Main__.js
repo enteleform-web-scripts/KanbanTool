@@ -10546,6 +10546,12 @@ class KeyBinding {
     }
 }
 exports.KeyBinding = KeyBinding;
+(function (KeyBinding) {
+    KeyBinding.ModifierKeys = KeyGroups_1.ModifierKeys;
+    KeyBinding.AlphanumericKeys = KeyGroups_1.AlphanumericKeys;
+    KeyBinding.CharacterKeys = KeyGroups_1.CharacterKeys;
+    KeyBinding.Keys = KeyGroups_1.Keys;
+})(KeyBinding = exports.KeyBinding || (exports.KeyBinding = {}));
 window.KeyBinding = KeyBinding;
 const _BindOptions_Defaults = { preventDefault: false };
 function _disable_DefaultFilters(event) { return true; }
@@ -10576,9 +10582,20 @@ function _get_Decorator(hotKeys, options) {
     };
 }
 function _convert_HotKeys_ToString(keys) {
-    return ((keys.constructor === Array)
-        ? keys.join(" + ")
+    return ((keys instanceof Array)
+        ? _get_HotKey_Array_AsString(keys)
         : keys);
+}
+function _get_HotKey_Array_AsString(keys) {
+    const sortedKeys = [...keys].sort((a, b) => {
+        if (KeyGroups_1.ModifierKeys.includes(a)) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
+    });
+    return sortedKeys.join(" + ");
 }
 
 
@@ -10631,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559844406664)
+		const elapsedTime = _get_ElapsedTime(1559847000468)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:06:46 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:50:00 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11551,6 +11568,33 @@ process.umask = function() { return 0; };
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ModifierKeys = [
+    "ctrl", "shift", "alt"
+];
+exports.AlphanumericKeys = [
+    "1", "2", "3", "4", "5", "6", "7", "8", "9", "0",
+    "q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+    "a", "s", "d", "f", "g", "h", "j", "k", "l",
+    "z", "x", "c", "v", "b", "n", "m"
+];
+exports.CharacterKeys = [
+    "~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
+    "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\",
+    "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'",
+    "z", "x", "c", "v", "b", "n", "m", ",", ".", "/"
+];
+exports.Keys = [
+    "ctrl", "shift", "alt",
+    "~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
+    "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\",
+    "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'",
+    "z", "x", "c", "v", "b", "n", "m", ",", ".", "/",
+    "backspace", "tab", "clear", "enter", "return", "esc", "escape", "space",
+    "up", "down", "left", "right", "home", "end", "pageup", "pagedown",
+    "del", "delete",
+    "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10",
+    "f11", "f12", "f13", "f14", "f15", "f16", "f17", "f18", "f19"
+];
 exports.alphanumericKey_Rows = [
     ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"],
     ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"],
