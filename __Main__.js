@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559847000468)
+		const elapsedTime = _get_ElapsedTime(1559847234917)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:50:00 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:53:54 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12110,17 +12110,18 @@ class Layout {
         }, Settings_1.css_Timeout_MS);
     }
     static initialize_KeyBindings() {
-        const element_KeyMap = [
-            { position: Position_1.Position.Left, key: "up" },
-            { position: Position_1.Position.Right, key: "down" },
-            { position: Position_1.Position.Top, key: "left" },
-            { position: Position_1.Position.Bottom, key: "right" },
-        ];
-        element_KeyMap.forEach((entry) => {
-            const callback = _get_ContainerToggle_Callback(entry.position);
-            console.log(">>>", [entry.key, ...Settings_1.functionBar_ToggleModifiers]);
-            __Main__1.KeyBinding.add([entry.key, ...Settings_1.functionBar_ToggleModifiers], callback, { preventDefault: true });
-        });
+        setTimeout(() => {
+            const element_KeyMap = [
+                { position: Position_1.Position.Left, key: "up" },
+                { position: Position_1.Position.Right, key: "down" },
+                { position: Position_1.Position.Top, key: "left" },
+                { position: Position_1.Position.Bottom, key: "right" },
+            ];
+            element_KeyMap.forEach((entry) => {
+                const callback = _get_ContainerToggle_Callback(entry.position);
+                __Main__1.KeyBinding.add([entry.key, ...Settings_1.functionBar_ToggleModifiers], callback, { preventDefault: true });
+            });
+        }, Settings_1.css_Timeout_MS);
     }
     add_Cell(entry, groupIndex, keyBinding) {
         const cell = $("<div>", { class: "cell" });
