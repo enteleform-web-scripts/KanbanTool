@@ -36,10 +36,10 @@ export class Layout{
 	static initialize_KeyBindings(){
 		setTimeout(() => {
 			const element_KeyMap = [
-				{position:Position.Left,   key:"left"  },
-				{position:Position.Right,  key:"right" },
-				{position:Position.Top,    key:"top"   },
-				{position:Position.Bottom, key:"bottom"},
+				{position:Position.Left,   key:"left" },
+				{position:Position.Right,  key:"right"},
+				{position:Position.Top,    key:"up"   },
+				{position:Position.Bottom, key:"down" },
 			]
 
 			element_KeyMap.forEach((entry) => {
