@@ -100,9 +100,8 @@
   display: none;
 }
 .CustomExtension__FunctionBar .left .column.expand-button > .cell,
-.CustomExtension__FunctionBar .right .column.expand-button > .cell,
-.CustomExtension__FunctionBar .left display: flex,
-.CustomExtension__FunctionBar .right display: flex {
+.CustomExtension__FunctionBar .right .column.expand-button > .cell {
+  display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: center;
