@@ -84,6 +84,13 @@ json("./CSS_Variables.json")
 		background:   #D9D9DE
 		color:        #505052
 
+	.left   > .column.collapsed,
+	.right  > .column.collapsed,
+	.top    > .row.collapse,
+	.bottom > .row.collapse
+		&.hidden
+			display:  none
+
 	.left  > .column.collapsed > .cell,
 	.right > .column.collapsed > .cell
 		display:          flex
