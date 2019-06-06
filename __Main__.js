@@ -10577,7 +10577,7 @@ function _get_Decorator(hotKeys, options) {
 }
 function _convert_HotKeys_ToString(keys) {
     return ((keys.constructor === Array)
-        ? keys.join(", ")
+        ? keys.join(" + ")
         : keys);
 }
 
@@ -10631,10 +10631,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559843261935)
+		const elapsedTime = _get_ElapsedTime(1559844089663)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:47:41 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:01:29 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
