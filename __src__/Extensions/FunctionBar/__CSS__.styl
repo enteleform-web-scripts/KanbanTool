@@ -84,6 +84,21 @@ json("./CSS_Variables.json")
 		background:   #D9D9DE
 		color:        #505052
 
+	.left  > .column.collapsed > .cell,
+	.right > .column.collapsed > .cell
+		display:          flex
+		flex:             1
+		flex-direction:   column
+		justify-content:  center
+		padding:          0 2px 0 1px
+		font-size:        15pt
+
+	.top    > .row.collapsed> .cell,
+	.bottom > .row.collapsed> .cell
+		padding:      0 0 2px 0
+		line-height:  18px
+		font-size:    14pt
+
 //#############################//
 //###  KanbanTool - Layout  ###//
 //#############################//
