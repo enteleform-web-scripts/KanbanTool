@@ -27,9 +27,9 @@ export class KeyBinding{
 	static get alphanumericKey_Rows(){return [...alphanumericKey_Rows]}
 	static get characterKey_Rows   (){return [...characterKey_Rows   ]}
 
-	static add(hotKeys:string|string[],                                           options?:{preventDefault:boolean}) // Decorator
-	static add(hotKeys:string|string[], callback:((event:KeyboardEvent) => void), options?:{preventDefault:boolean}) // Function Call
-	static add(hotKeys:string|string[], arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_BindOptions){
+	static add(hotKeys:KeyBinding.Key|KeyBinding.Key[],                                           options?:{preventDefault:boolean}) // Decorator
+	static add(hotKeys:KeyBinding.Key|KeyBinding.Key[], callback:((event:KeyboardEvent) => void), options?:{preventDefault:boolean}) // Function Call
+	static add(hotKeys:KeyBinding.Key|KeyBinding.Key[], arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_BindOptions){
 		const hotKeys_String = _convert_HotKeys_ToString(hotKeys)
 		const {callback, options} = _get_BindArguments(arg_2, arg_3)
 
@@ -97,7 +97,7 @@ function _get_Decorator(hotKeys:string, options:_BindOptions){
 	}
 }
 
-function _convert_HotKeys_ToString(keys:string|string[]){
+function _convert_HotKeys_ToString(keys:KeyBinding.Key|KeyBinding.Key[]){
 	return (
 			(keys.constructor === Array)
 			? (keys as Array<string>).join(", ")

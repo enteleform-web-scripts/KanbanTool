@@ -49,17 +49,11 @@ export class Entry{
 	}
 
 	_add_KeyBinding(
-		keyBinding:           string,
+		keyBinding:           KeyBinding.CharacterKey,
 		keyBinding_Modifiers: KeyBinding.ModifierKey[],
 	){
-		if(keyBinding_Modifiers){
-			keyBinding =
-				[...keyBinding_Modifiers, keyBinding]
-				.join("+")
-		}
-
 		KeyBinding.add(
-			keyBinding,
+			[...keyBinding_Modifiers, keyBinding],
 			this.on_Load,
 			{preventDefault: true}
 		)

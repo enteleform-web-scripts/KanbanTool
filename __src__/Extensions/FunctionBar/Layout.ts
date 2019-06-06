@@ -111,8 +111,6 @@ export class Layout{
 //###  Utils  ###//
 //###############//
 
-const _hiddenClass = "hidden"
-
 const _BarComponent_Map = {
 	[Position.Left  ]: {containerSelector:`.${cssVariables.container} > .center > .left`,  subContainer_Class:"column"},
 	[Position.Right ]: {containerSelector:`.${cssVariables.container} > .center > .right`, subContainer_Class:"column"},
@@ -125,9 +123,9 @@ function _get_ContainerToggle_Callback(position:Position){
 	const container = $(containerSelector)
 
 	return () => {
-		if(container.hasClass(_hiddenClass))
-			{container.removeClass(_hiddenClass)}
+		if(container.hasClass(cssVariables.hidden))
+			{container.removeClass(cssVariables.hidden)}
 		else
-			{container.addClass(_hiddenClass)}
+			{container.addClass(cssVariables.hidden)}
 	}
 }

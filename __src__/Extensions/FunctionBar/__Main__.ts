@@ -47,10 +47,10 @@ export class FunctionBar extends Module{
 	){
 		super()
 		this.position             = position
-		this.autoMap_KeyBindings  = autoMap_KeyBindings
-		this.keyBinding_Modifiers = keyBinding_Modifiers
 		this.entryGroups          = entryGroups
-		this.stretchCells         = stretchCells
+		this.autoMap_KeyBindings  = (autoMap_KeyBindings  || false)
+		this.keyBinding_Modifiers = (keyBinding_Modifiers || []   )
+		this.stretchCells         = (stretchCells         || false)
 	}
 
 	static load(
