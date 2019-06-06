@@ -80,6 +80,7 @@ json("./CSS_Variables.json")
 		color:        #505052
 
 	.left, .right, .top, .bottom
+		&.empty,
 		&.collapsed > :not(.expand-button),
 		&:not(.collapsed) > .expand-button
 			display:  none
