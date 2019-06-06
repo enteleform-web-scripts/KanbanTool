@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559847396803)
+		const elapsedTime = _get_ElapsedTime(1559847491949)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:56:36 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:58:11 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12114,8 +12114,8 @@ class Layout {
             const element_KeyMap = [
                 { position: Position_1.Position.Left, key: "left" },
                 { position: Position_1.Position.Right, key: "right" },
-                { position: Position_1.Position.Top, key: "top" },
-                { position: Position_1.Position.Bottom, key: "bottom" },
+                { position: Position_1.Position.Top, key: "up" },
+                { position: Position_1.Position.Bottom, key: "down" },
             ];
             element_KeyMap.forEach((entry) => {
                 const callback = _get_ContainerToggle_Callback(entry.position);

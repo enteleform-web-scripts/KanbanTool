@@ -22,7 +22,7 @@
 .CustomExtension__FunctionBar .right.hidden,
 .CustomExtension__FunctionBar .top.hidden,
 .CustomExtension__FunctionBar .bottom.hidden {
-  display: none;
+  display: none !important;
 }
 .CustomExtension__FunctionBar .left {
   border-right: 1px solid var(--BorderColor);
