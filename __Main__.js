@@ -10472,10 +10472,10 @@ class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells }) {
         super();
         this.position = position;
-        this.autoMap_KeyBindings = autoMap_KeyBindings;
-        this.keyBinding_Modifiers = keyBinding_Modifiers;
         this.entryGroups = entryGroups;
-        this.stretchCells = stretchCells;
+        this.autoMap_KeyBindings = (autoMap_KeyBindings || false);
+        this.keyBinding_Modifiers = (keyBinding_Modifiers || []);
+        this.stretchCells = (stretchCells || false);
     }
     static load(...functionBars) {
         functionBars.forEach(functionBar => {
@@ -10631,10 +10631,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559841961378)
+		const elapsedTime = _get_ElapsedTime(1559843261935)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:26:01 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:47:41 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12038,12 +12038,7 @@ class Entry {
         return keyBinding;
     }
     _add_KeyBinding(keyBinding, keyBinding_Modifiers) {
-        if (keyBinding_Modifiers) {
-            keyBinding =
-                [...keyBinding_Modifiers, keyBinding]
-                    .join("+");
-        }
-        __Main__1.KeyBinding.add(keyBinding, this.on_Load, { preventDefault: true });
+        __Main__1.KeyBinding.add([...keyBinding_Modifiers, keyBinding], this.on_Load, { preventDefault: true });
     }
 }
 exports.Entry = Entry;
@@ -12124,7 +12119,6 @@ class Layout {
     }
 }
 exports.Layout = Layout;
-const _hiddenClass = "hidden";
 const _BarComponent_Map = {
     [Position_1.Position.Left]: { containerSelector: `.${cssVariables.container} > .center > .left`, subContainer_Class: "column" },
     [Position_1.Position.Right]: { containerSelector: `.${cssVariables.container} > .center > .right`, subContainer_Class: "column" },
@@ -12135,11 +12129,11 @@ function _get_ContainerToggle_Callback(position) {
     const { containerSelector } = _BarComponent_Map[position];
     const container = $(containerSelector);
     return () => {
-        if (container.hasClass(_hiddenClass)) {
-            container.removeClass(_hiddenClass);
+        if (container.hasClass(cssVariables.hidden)) {
+            container.removeClass(cssVariables.hidden);
         }
         else {
-            container.addClass(_hiddenClass);
+            container.addClass(cssVariables.hidden);
         }
     };
 }
@@ -12149,7 +12143,7 @@ function _get_ContainerToggle_Callback(position) {
 /* 22 */
 /***/ (function(module) {
 
-module.exports = {"container":"CustomExtension__FunctionBar","_":""};
+module.exports = {"container":"CustomExtension__FunctionBar","hidden":"hidden","_":""};
 
 /***/ }),
 /* 23 */
@@ -12631,13 +12625,13 @@ class FilterKeybindings {
     }
 }
 __decorate([
-    __Main__1.KeyBinding.add("Ctrl + F", { preventDefault: true }),
+    __Main__1.KeyBinding.add(["ctrl", "f"], { preventDefault: true }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], FilterKeybindings, "focus_SearchField", null);
 __decorate([
-    __Main__1.KeyBinding.add("Ctrl + Space", { preventDefault: true }),
+    __Main__1.KeyBinding.add(["ctrl", "space"], { preventDefault: true }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
