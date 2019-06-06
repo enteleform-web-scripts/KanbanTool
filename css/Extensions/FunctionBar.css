@@ -18,10 +18,11 @@
   pointer-events: auto;
   background: #c6c6cc;
 }
-.CustomExtension__FunctionBar .left.hidden,
-.CustomExtension__FunctionBar .right.hidden,
-.CustomExtension__FunctionBar .top.hidden,
-.CustomExtension__FunctionBar .bottom.hidden {
+.CustomExtension__FunctionBar .left.hidden *,
+.CustomExtension__FunctionBar .right.hidden *,
+.CustomExtension__FunctionBar .top.hidden *,
+.CustomExtension__FunctionBar .bottom.hidden * {
+  display: none;
   width: 0;
   height: 0;
 }
