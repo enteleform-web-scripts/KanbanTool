@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559848097651)
+		const elapsedTime = _get_ElapsedTime(1559848327282)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:08:17 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:12:07 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12106,7 +12106,7 @@ class Layout {
         this._functionBar = functionBar;
         setTimeout(() => {
             this._build();
-            this._update_OriginalLayout();
+            _update_OriginalLayout();
         }, Settings_1.css_Timeout_MS);
     }
     static initialize_KeyBindings() {
@@ -12151,18 +12151,6 @@ class Layout {
             });
         });
     }
-    _update_OriginalLayout() {
-        const navbarHeight = $("nav.navbar").height();
-        __main__1.set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`);
-        const topRow_Height = $(`.${cssVariables.container} > .top`).height();
-        __main__1.set_CSS_Variable("KanbanToolOffsets_TopHeight", `${topRow_Height}px`);
-        const leftColumn_Width = $(`.${cssVariables.container} > .center > .left`).width();
-        __main__1.set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${leftColumn_Width}px`);
-        const rightColumn_Width = $(`.${cssVariables.container} > .center > .right`).width();
-        __main__1.set_CSS_Variable("KanbanToolOffsets_RightWidth", `${rightColumn_Width}px`);
-        const top_Offset = (navbarHeight + topRow_Height);
-        __main__1.set_CSS_Variable("KanbanToolOffsets_TopOffset", `${top_Offset}px`);
-    }
 }
 exports.Layout = Layout;
 const _BarComponent_Map = {
@@ -12181,7 +12169,20 @@ function _get_ContainerToggle_Callback(position) {
         else {
             container.addClass(cssVariables.hidden);
         }
+        _update_OriginalLayout();
     };
+}
+function _update_OriginalLayout() {
+    const navbarHeight = $("nav.navbar").height();
+    __main__1.set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`);
+    const topRow_Height = $(`.${cssVariables.container} > .top`).height();
+    __main__1.set_CSS_Variable("KanbanToolOffsets_TopHeight", `${topRow_Height}px`);
+    const leftColumn_Width = $(`.${cssVariables.container} > .center > .left`).width();
+    __main__1.set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${leftColumn_Width}px`);
+    const rightColumn_Width = $(`.${cssVariables.container} > .center > .right`).width();
+    __main__1.set_CSS_Variable("KanbanToolOffsets_RightWidth", `${rightColumn_Width}px`);
+    const top_Offset = (navbarHeight + topRow_Height);
+    __main__1.set_CSS_Variable("KanbanToolOffsets_TopOffset", `${top_Offset}px`);
 }
 
 
