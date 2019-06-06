@@ -1,5 +1,6 @@
 .CustomExtension__FunctionBar {
   --BorderColor: #ababb1;
+  --ExpandButton_Color: #6a6a6a;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -98,22 +99,23 @@
 .CustomExtension__FunctionBar .bottom:not(.collapsed) > .expand-button {
   display: none;
 }
-.CustomExtension__FunctionBar .left > .column.expand-button > .cell,
-.CustomExtension__FunctionBar .right > .column.expand-button > .cell {
-  display: flex;
+.CustomExtension__FunctionBar .left .column.expand-button > .cell,
+.CustomExtension__FunctionBar .right .column.expand-button > .cell,
+.CustomExtension__FunctionBar .left display: flex,
+.CustomExtension__FunctionBar .right display: flex {
   flex: 1;
   flex-direction: column;
   justify-content: center;
   padding: 0 2px 0 1px;
   font-size: 15pt;
-  color: #6a6a6a;
+  color: var(--ExpandButton_Color);
 }
-.CustomExtension__FunctionBar .top > .row.expand-button > .cell,
-.CustomExtension__FunctionBar .bottom > .row.expand-button > .cell {
+.CustomExtension__FunctionBar .top .row.expand-button > .cell,
+.CustomExtension__FunctionBar .bottom .row.expand-button > .cell {
   padding: 0 0 2px 0;
   line-height: 18px;
   font-size: 14pt;
-  color: #6a6a6a;
+  color: var(--ExpandButton_Color);
 }
 :root {
   --KanbanToolOffsets_NavHeight: 0px;
@@ -127,13 +129,13 @@ nav.navbar {
   margin-left: var(--KanbanToolOffsets_LeftWidth) !important;
   width: calc(100% - (var(--KanbanToolOffsets_LeftWidth) + var(--KanbanToolOffsets_RightWidth))) !important;
 }
-.kt-side-panel-slide > kt-board {
+.kt-side-panel-slide kt-board {
   margin-top: var(--KanbanToolOffsets_TopOffset) !important;
   margin-bottom: var(--KanbanToolOffsets_TopOffset) !important;
   margin-left: var(--KanbanToolOffsets_LeftWidth) !important;
   margin-right: var(--KanbanToolOffsets_RightWidth) !important;
 }
-.kt-side-panel-slide > .kt-extensions-swimlane_labels {
+.kt-side-panel-slide .kt-extensions-swimlane_labels {
   left: var(--KanbanToolOffsets_LeftWidth) !important;
 }
 .kt-hint-labels-container {
@@ -142,17 +144,17 @@ nav.navbar {
 nav.navbar > .navbar-inner {
   background-color: #f3f3f4 !important;
 }
-.kt-hint-labels-container .kt-hint-label {
+.kt-hint-labels-container.kt-hint-label {
   background-color: #f9f9f9 !important;
   border: solid #ddd 1px !important;
 }
-.kt-extensions-swimlane_labels ._swimlane_label {
+.kt-extensions-swimlane_labels._swimlane_label {
   margin: 0 !important;
   background-color: #f9f9f9 !important;
   border: solid #ddd 1px !important;
   border-top: none !important;
 }
-.kt-extensions-swimlane_labels ._swimlane_label:first-child {
+.kt-extensions-swimlane_labels._swimlane_label:first-child {
   border-top: solid #ddd 1px !important;
 }
 
