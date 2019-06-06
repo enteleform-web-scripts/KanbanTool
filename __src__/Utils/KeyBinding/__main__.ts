@@ -100,7 +100,7 @@ function _get_Decorator(hotKeys:string, options:_BindOptions){
 function _convert_HotKeys_ToString(keys:KeyBinding.Key|KeyBinding.Key[]){
 	return (
 			(keys.constructor === Array)
-			? (keys as Array<string>).join(", ")
+			? (keys as Array<string>).join(" + ")
 			: (keys as string)
 	)
 }
