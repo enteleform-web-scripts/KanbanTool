@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559857388735)
+		const elapsedTime = _get_ElapsedTime(1559857457109)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:43:08 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:44:17 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10964,8 +10964,8 @@ module.exports = __webpack_require__(12);
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(13);
 const __Main__1 = __webpack_require__(1);
-__Main__1.FunctionBar.load(__webpack_require__(28).default, __webpack_require__(29).default, __webpack_require__(30).default, __webpack_require__(31).default);
-__webpack_require__(32);
+__Main__1.FunctionBar.load(__webpack_require__(28).default, __webpack_require__(29).default, __webpack_require__(30).default);
+__webpack_require__(31);
 
 
 /***/ }),
@@ -12552,93 +12552,6 @@ exports.default = new __Main__1.FunctionBar({
 
 /***/ }),
 /* 31 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(1);
-const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
-exports.default = new __Main__1.FunctionBar({
-    position: Position.Bottom,
-    autoMap_KeyBindings: false,
-    keyBinding_Modifiers: [],
-    stretchCells: true,
-    entryGroups: [
-        [
-            new Entry({
-                name: "Active",
-                on_Load: () => {
-                    Show.rows({ include: ["Routine", "Tasks.Active"] });
-                    Show.allColumns();
-                },
-            }),
-            new Entry({
-                name: "Plan",
-                on_Load: () => {
-                    Show.allColumns();
-                    Show.allRows();
-                },
-            }),
-        ],
-        [
-            new Entry({
-                name: "Routine",
-                on_Load: () => {
-                    Show.rows({ include: ["Routine"] });
-                    Show.allColumns();
-                    Hide.emptyColumns();
-                },
-            }),
-            new Entry({
-                name: "Today",
-                on_Load: () => {
-                    Show.rows({ include: ["Tasks.Active"] });
-                    Show.allColumns();
-                    Hide.emptyColumns();
-                },
-            }),
-            new Entry({
-                name: "Routine.Short",
-                on_Load: () => {
-                    Show.rows({ include: ["Routine.Short"] });
-                    Show.allColumns();
-                    Hide.emptyColumns();
-                },
-            }),
-        ],
-        [
-            new Entry({
-                name: "Show.allRows",
-                on_Load: () => {
-                    Show.allRows();
-                },
-            }),
-            new Entry({
-                name: "Show.allColumns",
-                on_Load: () => {
-                    Show.allColumns();
-                },
-            }),
-            new Entry({
-                name: "Hide.emptyRows",
-                on_Load: () => {
-                    Hide.emptyRows();
-                },
-            }),
-            new Entry({
-                name: "Hide.emptyColumns",
-                on_Load: () => {
-                    Hide.emptyColumns();
-                },
-            }),
-        ],
-    ],
-});
-
-
-/***/ }),
-/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
