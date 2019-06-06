@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559857185915)
+		const elapsedTime = _get_ElapsedTime(1559857388735)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:39:45 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:43:08 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12137,6 +12137,7 @@ class Layout {
         const { autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position, is_VerticalBar, stretchCells } = this._functionBar;
         let { containerSelector, subContainer_Class } = _BarComponent_Map[position];
         this.container = $(containerSelector);
+        this.container.removeClass(cssVariables.empty);
         if (is_VerticalBar && stretchCells) {
             subContainer_Class += " stretch";
         }
@@ -12190,7 +12191,7 @@ function _update_OriginalLayout() {
 /* 22 */
 /***/ (function(module) {
 
-module.exports = {"container":"CustomExtension__FunctionBar","hidden":"hidden","collapsed":"collapsed","_":""};
+module.exports = {"container":"CustomExtension__FunctionBar","collapsed":"collapsed","empty":"empty","_":""};
 
 /***/ }),
 /* 23 */
