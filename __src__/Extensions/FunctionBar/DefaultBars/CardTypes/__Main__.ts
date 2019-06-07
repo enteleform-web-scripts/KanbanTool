@@ -23,19 +23,15 @@ export function get_CardType_FunctionBar(options:{
 	keyBinding_Modifiers: KeyBinding.ModifierKey[],
 	stretchCells:         boolean,
 	rowCounts?:           number[]
+}={
+	position:             Position.Bottom,
+	autoMap_KeyBindings:  true,
+	keyBinding_Modifiers: [],
+	stretchCells:         true,
 }){
 	if(options.rowCounts)
 		{return get_ManualRow_FunctionBar(options)}
 	else{
 		{return get_AutoRow_FunctionBar(options)}
 	}
-}
-
-export function get_Basic_CardType_FunctionBar(){
-	return get_CardType_FunctionBar({
-		position:             Position.Bottom,
-		autoMap_KeyBindings:  true,
-		keyBinding_Modifiers: [],
-		stretchCells:         false,
-	})
 }
