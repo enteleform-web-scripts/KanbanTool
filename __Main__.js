@@ -10671,10 +10671,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559944382655)
+		const elapsedTime = _get_ElapsedTime(1559944513467)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:53:02 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:55:13 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12559,7 +12559,7 @@ class CardType_Filter {
     static get enabled() { return CardType_Filter._filterButton.hasClass("kt-board_search-filter--active"); }
     static get disabled() { return !(this.enabled); }
     static get _filterButton() { return $(`.kt-board_search-filter:nth-child(${Settings_1.cardType_Filter_Index})`); }
-    static get _cardType_Buttons() { return $(".kt-board_search-processors-card_types").children(); }
+    static get _cardType_Buttons() { return Array.from($(".kt-board_search-processors-card_types").children()); }
     static get _enabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > .kt-board_search-processors-card_types--active")); }
     static get _disabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)")); }
     static enable() {
