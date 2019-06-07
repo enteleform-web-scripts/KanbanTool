@@ -5,6 +5,14 @@ import {activeBoard} from "~/Utils/KanbanTool"
 
 const _cardTypes = activeBoard.cardTypes().active()
 
+const cardTypes =
+	activeBoard.cardTypes().active().map(
+		({attributes}) => ({
+			color: attributes.color_attrs.rgb,
+			name:  attributes.name,
+		})
+	)
+console.log(cardTypes)
 
 export namespace _CardType_Manager{
 	let _entryIndex = -1
