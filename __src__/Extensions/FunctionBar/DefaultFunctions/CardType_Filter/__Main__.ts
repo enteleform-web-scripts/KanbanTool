@@ -16,8 +16,8 @@ export class CardType_Filter{
 	static get _filterButton()
 		{return $(`.kt-board_search-filter:nth-child(${cardType_Filter_Index})`)}
 
-	static get _cardType_Buttons()
-		{return $(".kt-board_search-processors-card_types").children()}
+	static get _cardType_Buttons(): JQuery[]
+		{return Array.from($(".kt-board_search-processors-card_types").children())}
 
 	static get _enabled_CardType_Buttons(): JQuery[]
 		{return Array.from($.find(".kt-board_search-processors-card_types > .kt-board_search-processors-card_types--active"))}
