@@ -63,7 +63,7 @@ export class FunctionBar extends Module{
 			functionBar.initialize()
 		})
 
-		Layout.initialize_KeyBindings()
+		Layout.initialize_ToggleBindings()
 	}
 
 	initialize(){

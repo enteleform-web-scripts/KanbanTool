@@ -34,17 +34,21 @@ export class Layout{
 		}, css_Timeout_MS)
 	}
 
-	static initialize_KeyBindings(){
+	static initialize_ToggleBindings(){
 		setTimeout(() => {
-			const element_KeyMap = [
+			const toggleMap = [
 				{position:Position.Left,   key:"left" },
 				{position:Position.Right,  key:"right"},
 				{position:Position.Top,    key:"up"   },
 				{position:Position.Bottom, key:"down" },
 			]
 
-			element_KeyMap.forEach((entry) => {
+			toggleMap.forEach((entry) => {
 				const callback = _get_ContainerToggle_Callback(entry.position)
+				const {toggleButton_Selector} = _BarComponent_Map[entry.position]
+
+				const toggleButton = $(toggleButton_Selector)
+				toggleButton.on("click", callback)
 
 				KeyBinding.add(
 					[(entry.key as KeyBinding.Key), ...functionBar_ToggleModifiers],
@@ -107,10 +111,10 @@ export class Layout{
 //###############//
 
 const _BarComponent_Map = {
-	[Position.Left  ]: {containerSelector:`.${cssVariables.container} > .center > .left`,  subContainer_Class:"column"},
-	[Position.Right ]: {containerSelector:`.${cssVariables.container} > .center > .right`, subContainer_Class:"column"},
-	[Position.Top   ]: {containerSelector:`.${cssVariables.container} > .top`,             subContainer_Class:"row"   },
-	[Position.Bottom]: {containerSelector:`.${cssVariables.container} > .bottom`,          subContainer_Class:"row"   },
+	[Position.Left  ]: {containerSelector:`.${cssVariables.container} > .center > .left`,  subContainer_Class:"column", toggleButton_Selector:".left   > .expand-button > .cell"},
+	[Position.Right ]: {containerSelector:`.${cssVariables.container} > .center > .right`, subContainer_Class:"column", toggleButton_Selector:".right  > .expand-button > .cell"},
+	[Position.Top   ]: {containerSelector:`.${cssVariables.container} > .top`,             subContainer_Class:"row",    toggleButton_Selector:".top    > .expand-button > .cell"},
+	[Position.Bottom]: {containerSelector:`.${cssVariables.container} > .bottom`,          subContainer_Class:"row",    toggleButton_Selector:".bottom > .expand-button > .cell"},
 }
 
 function _get_ContainerToggle_Callback(position:Position){
