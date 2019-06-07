@@ -10648,10 +10648,10 @@ function _get_HotKey_Array_AsString(keys) {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559876396175)
+		const elapsedTime = _get_ElapsedTime(1559876775805)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:59:56 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:06:15 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12597,6 +12597,11 @@ exports.default = new __Main__1.FunctionBar({
 Object.defineProperty(exports, "__esModule", { value: true });
 const KanbanTool_1 = __webpack_require__(2);
 const _cardTypes = KanbanTool_1.activeBoard.cardTypes().active();
+const cardTypes = KanbanTool_1.activeBoard.cardTypes().active().map(({ attributes }) => ({
+    color: attributes.color_attrs.rgb,
+    name: attributes.name,
+}));
+console.log(cardTypes);
 var _CardType_Manager;
 (function (_CardType_Manager) {
     let _entryIndex = -1;
