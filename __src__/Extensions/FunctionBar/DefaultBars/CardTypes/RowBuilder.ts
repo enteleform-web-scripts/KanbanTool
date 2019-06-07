@@ -88,6 +88,8 @@ function _get_Auto_CardType_Rows(){
 			cardType_Row.push(cardType)
 			cardIndex += 1
 		}
+
+		console.log(">>>", cardType_Rows)
 	}
 
 	return cardType_Rows
