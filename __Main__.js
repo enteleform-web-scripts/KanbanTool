@@ -10672,10 +10672,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559950778859)
+		const elapsedTime = _get_ElapsedTime(1559951879568)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     7:39:38 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:57:59 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12420,16 +12420,20 @@ class default_1 {
 exports.default = default_1;
 function _hide_Containers({ containers, emptyContainer_Indexes }) {
     containers.forEach(container => {
-        const { descendants } = container;
-        const has_Descendants = (descendants.length > 0);
-        if (!_is_Empty(container, emptyContainer_Indexes)) { }
-        else if ((!has_Descendants)
-            || ((has_Descendants) && descendants.every(child => _is_Empty(child, emptyContainer_Indexes)))) {
+        if (_is_Empty(container, emptyContainer_Indexes)) {
             container.hide();
         }
     });
 }
-function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_Indexes.includes(container.modelIndex); }
+function _is_Empty(container, emptyContainer_Indexes) {
+    const { descendants } = container;
+    const has_Descendants = (descendants.length > 0);
+    const container_IsEmpty = emptyContainer_Indexes.includes(container.modelIndex);
+    const descendants_AreEmpty = (has_Descendants
+        && descendants.every(child => _is_Empty(child, emptyContainer_Indexes)));
+    return ((container_IsEmpty && (!has_Descendants))
+        || descendants_AreEmpty);
+}
 
 
 /***/ }),
