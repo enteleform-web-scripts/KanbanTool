@@ -10672,10 +10672,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559948122220)
+		const elapsedTime = _get_ElapsedTime(1559948417993)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:55:22 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:00:17 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12500,7 +12500,6 @@ function _update_MergedOptions_CellWidth(options) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(30);
 const KanbanTool_1 = __webpack_require__(1);
-__Main__1.CardType_Filter.enable();
 var CallbackManager;
 (function (CallbackManager) {
     let _entryIndex = -1;
@@ -12537,7 +12536,7 @@ var CallbackManager;
         return (cell) => { _update_CardType(cardType); };
     }
     function _get_OnClick(cardType) {
-        return () => { window.alert(`LOLOL @ ${cardType.name}`); };
+        return () => { __Main__1.CardType_Filter.toggle_CardTypes(cardType.index); };
     }
     function _update_CardType(cardType) {
         if (_card) {
@@ -12574,22 +12573,13 @@ class CardType_Filter {
             CardType_Filter._filterButton.click();
         }
     }
-    static enable_All_CardTypes() {
-        CardType_Filter._disabled_CardType_Buttons.forEach(button => {
-            button.click();
-        });
-    }
-    static disable_All_CardTypes() {
-        CardType_Filter._enabled_CardType_Buttons.forEach(button => {
-            button.click();
-        });
-    }
     static enable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._disabled_CardType_Buttons); }
     static disable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._enabled_CardType_Buttons); }
     static toggle_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._cardType_Buttons); }
 }
 exports.CardType_Filter = CardType_Filter;
-window.CF = CardType_Filter;
+CardType_Filter.enable();
+CardType_Filter.enable_CardTypes();
 function _set_CardType_States(ids, target_CardTypes) {
     const cardType_Buttons = CardType_Filter._cardType_Buttons;
     const apply_State_To_AllCardTypes = (ids.length == 0);
