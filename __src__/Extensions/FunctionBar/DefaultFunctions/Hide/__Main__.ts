@@ -45,18 +45,24 @@ function _hide_Containers(
 	{containers:TaskContainer[], emptyContainer_Indexes:number[]}
 ){
 	containers.forEach(container => {
-		const {descendants}   = container
-		const has_Descendants = (descendants.length > 0)
-
-		if(! _is_Empty(container, emptyContainer_Indexes))
-			{/* continue */}
-		else if(
-			(! has_Descendants)
-			|| ((has_Descendants) && descendants.every(child => _is_Empty(child, emptyContainer_Indexes)))
-		)
+		if(_is_Empty(container, emptyContainer_Indexes))
 			{container.hide()}
 	})
 }
 
-function _is_Empty(container:TaskContainer, emptyContainer_Indexes:number[])
-	{return emptyContainer_Indexes.includes(container.modelIndex)}
+function _is_Empty(container:TaskContainer, emptyContainer_Indexes:number[]){
+	const {descendants}   = container
+	const has_Descendants = (descendants.length > 0)
+
+	const container_IsEmpty = emptyContainer_Indexes.includes(container.modelIndex)
+
+	const descendants_AreEmpty = (
+		has_Descendants
+		&& descendants.every(child => _is_Empty(child, emptyContainer_Indexes))
+	)
+
+	return (
+		(container_IsEmpty && (! has_Descendants))
+		|| descendants_AreEmpty
+	)
+}
