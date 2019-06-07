@@ -3,7 +3,7 @@
 //###  Extensions  ###//
 //####################//
 
-import "~/Extensions/CheckList/TEMP"
+import "~/Extensions/TODO_CheckList/TEMP"
 
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
 FunctionBar.load(

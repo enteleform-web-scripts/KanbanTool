@@ -1,240 +1,127 @@
 
-//###  Module  ###
+//###  Module  ###//
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
 const {Entry, Position, Show, Hide} = FunctionBar
+import {KeyBinding } from "~/Utils/KeyBinding/__Main__"
+import {activeBoard} from "~/Utils/KanbanTool"
 
+
+//###############//
+//###  Setup  ###//
+//###############//
+
+_CardType_Manager.set_Card_HoverCallback()
+
+
+//################//
+//###  Export  ###//
+//################//
 
 export default new FunctionBar({
 
 	position:             Position.Bottom,
-	autoMap_KeyBindings:  false,
+	autoMap_KeyBindings:  true,
 	keyBinding_Modifiers: [],
-	stretchCells:         true,
+	stretchCells:         false,
 
 	entryGroups:[
 
 		[
 			new Entry({
-				name: "Active",
-				on_Load: () => {
-					Show.rows({include:["Routine", "Tasks.Active"]})
-					Show.allColumns()
-				},
+				name:       "Today.Low",
+				// keyBinding: "1",
+				on_Load: _CardType_Manager.get_OnLoad(),
 			}),
 			new Entry({
-				name: "Plan",
-				on_Load: () => {
-					Show.allColumns()
-					Show.allRows()
-				},
+				name:       "Today.Medium",
+				// keyBinding: "2",
+				on_Load: _CardType_Manager.get_OnLoad(),
+			}),
+			new Entry({
+				name:       "Today.High",
+				// keyBinding: "3",
+				on_Load: _CardType_Manager.get_OnLoad(),
+			}),
+			new Entry({
+				name:       "Today.Urgent",
+				// keyBinding: "4",
+				on_Load: _CardType_Manager.get_OnLoad(),
+			}),
+		],
+		[
+			new Entry({
+				name:       "Low",
+				// keyBinding: "1",
+				on_Load: _CardType_Manager.get_OnLoad(),
+			}),
+			new Entry({
+				name:       "Medium",
+				// keyBinding: "2",
+				on_Load: _CardType_Manager.get_OnLoad(),
+			}),
+			new Entry({
+				name:       "High",
+				// keyBinding: "3",
+				on_Load: _CardType_Manager.get_OnLoad(),
+			}),
+			new Entry({
+				name:       "Urgent",
+				// keyBinding: "4",
+				on_Load: _CardType_Manager.get_OnLoad(),
 			}),
 		],
 
 		[
 			new Entry({
-				name: "Routine",
-				on_Load: () => {
-					Show.rows({include:["Routine"]})
-					Show.allColumns()
-					Hide.emptyColumns()
-				},
+				name:       "DailyTask",
+				// keyBinding: "1",
+				on_Load: _CardType_Manager.get_OnLoad(),
 			}),
 			new Entry({
-				name: "Today",
-				on_Load: () => {
-					Show.rows({include:["Tasks.Active"]})
-					Show.allColumns()
-					Hide.emptyColumns()
-				},
-			}),
-			new Entry({
-				name: "Routine.Short",
-				on_Load: () => {
-					Show.rows({include:["Routine.Short"]})
-					Show.allColumns()
-					Hide.emptyColumns()
-				},
+				name:       "Book",
+				// keyBinding: "2",
+				on_Load: _CardType_Manager.get_OnLoad(),
 			}),
 		],
-
-		[
-			new Entry({
-				name: "Show.allRows",
-				on_Load: () => {
-					Show.allRows()
-				},
-			}),
-			new Entry({
-				name: "Show.allColumns",
-				on_Load: () => {
-					Show.allColumns()
-				},
-			}),
-			new Entry({
-				name: "Hide.emptyRows",
-				on_Load: () => {
-					Hide.emptyRows()
-				},
-			}),
-			new Entry({
-				name: "Hide.emptyColumns",
-				on_Load: () => {
-					Hide.emptyColumns()
-				},
-			}),
-		],
-
-		// [
-		// 	new Entry({
-		// 		name: "Fitness Math",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["Fitness", "Math"]})
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "!(Fitness Math)",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({exclude:["Fitness", "Math"]})
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "Music\\Theory",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["Music\\Theory"]})
-		// 		},
-		// 	}),
-		// ],
-
-		// [
-		// 	new Entry({
-		// 		name: "HideAll",
-		// 		on_Load: () => {
-		// 			Hide.allColumns()
-		// 			Hide.allRows()
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "ShowAll",
-		// 		on_Load: () => {
-		// 			Show.allColumns()
-		// 			Show.allRows()
-		// 		},
-		// 	}),
-		// ],
-
-		// [
-		// 	new Entry({
-		// 		name: "*",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["*"]})
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "**",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["**"]})
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "**\\*",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["**\\*"]})
-		// 		},
-		// 	}),
-		// ],
-
-		// [
-		// 	new Entry({
-		// 		name: "B\\*",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["B\\*"]})
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "B\\**",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["B\\**"]})
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "B\\**\\*",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["B\\**\\*"]})
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "B\\***",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["B\\***"]})
-		// 		},
-		// 	}),
-		// ],
-
-		// [
-		// 	new Entry({
-		// 		name: "2\\*",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["2\\*"]})
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "2\\**",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["2\\**"]})
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "**\\2\\*",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["**\\2\\*"]})
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "**\\2\\**",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({include:["**\\2\\**"]})
-		// 		},
-		// 	}),
-		// ],
-
-		// [
-		// 	new Entry({
-		// 		name: "!(B\\2)",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({exclude:["B\\2\\*"]})
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "!(B\\2\\*)",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({exclude:["B\\2\\*"]})
-		// 		},
-		// 	}),
-		// 	new Entry({
-		// 		name: "!(B\\2\\21)",
-		// 		on_Load: () => {
-		// 			Show.allRows()
-		// 			Show.columns({exclude:["B\\2\\21"]})
-		// 		},
-		// 	}),
-		// ],
 
 	],
 
 })
+
+
+//###############//
+//###  Utils  ###//
+//###############//
+
+const _cardTypes = activeBoard.cardTypes().active()
+
+namespace _CardType_Manager{
+	let _entryIndex = -1
+	let _card       = undefined
+
+	export function set_Card_HoverCallback(){
+		const $element = $("kt-board")
+
+		$element.on("mouseover", "kt-task", (event) => {
+			_card = event.currentTarget
+		})
+
+		$element.on("mouseout", "kt-task", (event) => {
+			_card = null
+		})
+	}
+
+	export function get_OnLoad(){
+		_entryIndex += 1
+		const cardType = _cardTypes[_entryIndex]
+		return () =>
+			{_update_CardType(cardType)}
+	}
+
+	function _update_CardType(cardType){
+		if(_card)
+			{_card.props.task.save("card_type_id", cardType.id)}
+	}
+
+}
+
