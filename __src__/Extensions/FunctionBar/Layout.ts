@@ -45,10 +45,13 @@ export class Layout{
 
 			toggleMap.forEach((entry) => {
 				const callback = _get_ContainerToggle_Callback(entry.position)
-				const {toggleButton_Selector} = _BarComponent_Map[entry.position]
+				const {containerSelector, toggleButton_Selector} = _BarComponent_Map[entry.position]
 
 				const toggleButton = $(toggleButton_Selector)
 				toggleButton.on("click", callback)
+
+				const container = $(containerSelector)
+				container.on("dblclick", callback)
 
 				KeyBinding.add(
 					[(entry.key as KeyBinding.Key), ...functionBar_ToggleModifiers],
