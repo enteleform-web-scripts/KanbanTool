@@ -14,7 +14,8 @@ const cardTypes =
 	)
 console.log(cardTypes)
 
-export namespace _CardType_Manager{
+
+export namespace CardType_Manager{
 	let _entryIndex = -1
 	let _card       = undefined
 

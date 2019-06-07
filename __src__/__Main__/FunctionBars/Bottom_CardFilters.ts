@@ -2,15 +2,15 @@
 //###  Module  ###//
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
 const {Entry, Position, Show, Hide} = FunctionBar
-import {_CardType_Manager} from "./Bottom_CardFilters_Utils"
+import {CardType_Manager} from "./Bottom_CardFilters_Utils"
 
 
 //###############//
 //###  Setup  ###//
 //###############//
 
-_CardType_Manager.set_Card_HoverCallback()
-const get_OnLoad = _CardType_Manager.get_OnLoad
+CardType_Manager.set_Card_HoverCallback()
+const get_OnLoad = CardType_Manager.get_OnLoad
 
 
 //################//
