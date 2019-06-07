@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559885940999)
+		const elapsedTime = _get_ElapsedTime(1559886261665)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:39:00 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:44:21 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12486,18 +12486,20 @@ const __Main__1 = __webpack_require__(1);
 const get_Rows_1 = __webpack_require__(30);
 const Position_1 = __webpack_require__(6);
 CardType_Manager_1.CardType_Manager.set_Card_HoverCallback();
-function get_CardType_FunctionBar(options = {
+function get_CardType_FunctionBar(options) {
+    const cardType_Rows = (options.rowCounts)
+        ? get_Rows_1.get_Manual_CardType_Rows(options.rowCounts)
+        : get_Rows_1.get_Auto_CardType_Rows();
+    return _build_FunctionBar({ ..._Default_RowBuilder_Options, ...options }, cardType_Rows);
+}
+exports.get_CardType_FunctionBar = get_CardType_FunctionBar;
+const _Default_RowBuilder_Options = {
     position: Position_1.Position.Bottom,
     autoMap_KeyBindings: true,
     keyBinding_Modifiers: [],
     stretchCells: true,
-}) {
-    const cardType_Rows = (options.rowCounts)
-        ? get_Rows_1.get_Manual_CardType_Rows(options.rowCounts)
-        : get_Rows_1.get_Auto_CardType_Rows();
-    return _build_FunctionBar(options, cardType_Rows);
-}
-exports.get_CardType_FunctionBar = get_CardType_FunctionBar;
+    rowCounts: undefined,
+};
 function _build_FunctionBar(options, cardType_Rows) {
     const entryGroups = cardType_Rows.map(row => row.map(cardType => new __Main__1.FunctionBar.Entry({
         name: cardType.name,
