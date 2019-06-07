@@ -24,30 +24,31 @@ export namespace CallbackManager{
 		_entryIndex += 1
 		const cardType = cardTypes[_entryIndex]
 
+		return _get_Callbacks(cardType)
+	}
+
+	function _get_Callbacks(cardType){
 		return {
-			on_Layout:     _get_OnLayout    (cardType),
-			on_KeyBinding: _get_OnKeyBinding(cardType),
-			on_Click:      _get_OnClick     (cardType),
+			on_Layout: function(cell:JQuery){
+				cell.css({
+					"box-shadow":  `inset 0 7px 0 0 ${cardType.bgColor}, inset 0 8px 0 0 #AAA`,
+					"padding-top": "14px",
+				})
+			},
+
+			on_KeyBinding: function(event:KeyboardEvent, cell:JQuery){
+				_update_CardType(cardType)
+			},
+
+			on_Click: function(event:JQuery.ClickEvent, cell:JQuery){
+				CardType_Filter.toggle_CardTypes(cardType.index)
+			},
+
+			on_DoubleClick: function(event:JQuery.DoubleClickEvent, cell:JQuery){
+				CardType_Filter.disable_CardTypes()
+				CardType_Filter.enable_CardTypes(cardType.index)
+			},
 		}
-	}
-
-	function _get_OnLayout(cardType){
-		return (cell:JQuery) => {
-			cell.css({
-				"box-shadow":  `inset 0 7px 0 0 ${cardType.bgColor}, inset 0 8px 0 0 #AAA`,
-				"padding-top": "14px",
-			})
-		}
-	}
-
-	function _get_OnKeyBinding(cardType){
-		return (cell:JQuery) =>
-			{_update_CardType(cardType)}
-	}
-
-	function _get_OnClick(cardType){
-		return () =>
-			{CardType_Filter.toggle_CardTypes(cardType.index)}
 	}
 
 	function _update_CardType(cardType){

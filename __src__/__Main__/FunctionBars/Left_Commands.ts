@@ -2,7 +2,7 @@
 //###  Module  ###//
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
 const {Entry, Position, Show, Hide} = FunctionBar
-
+import {CardType_Filter} from "~/Extensions/FunctionBar/DefaultFunctions/CardType_Filter/__Main__"
 
 export default new FunctionBar({
 
@@ -33,6 +33,21 @@ export default new FunctionBar({
 				name: "Hide: Empty Columns",
 				callback: () => {
 					Hide.emptyColumns()
+				},
+			}),
+		],
+
+		[
+			new Entry({
+				name: "Filter: Enable All",
+				callback: () => {
+					CardType_Filter.enable_CardTypes()
+				},
+			}),
+			new Entry({
+				name: "Filter: Disable All",
+				callback: () => {
+					CardType_Filter.disable_CardTypes()
 				},
 			}),
 		],

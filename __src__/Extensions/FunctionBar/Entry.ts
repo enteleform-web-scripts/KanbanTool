@@ -8,13 +8,14 @@ import {KeyBinding         } from "~/Utils/KeyBinding/__Main__"
 //#################//
 
 export class Entry{
-	name:          string
-	callback:      ((cell:JQuery) => void)
-	on_Click:      ((cell:JQuery) => void)
-	on_KeyBinding: ((cell:JQuery) => void)
-	on_Layout:     ((cell:JQuery) => void)
-	keyBinding:    KeyBinding.CharacterKey
-	color:         string
+	name:           string
+	on_Layout:      ((cell:JQuery                               ) => void)
+	callback:       ((event:any,                     cell:JQuery) => void)
+	on_KeyBinding:  ((event:KeyboardEvent,           cell:JQuery) => void)
+	on_Click:       ((event:JQuery.ClickEvent,       cell:JQuery) => void)
+	on_DoubleClick: ((event:JQuery.DoubleClickEvent, cell:JQuery) => void)
+	keyBinding:     KeyBinding.CharacterKey
+	color:          string
 
 	cell: JQuery
 
@@ -22,29 +23,32 @@ export class Entry{
 		name,
 		callback,
 		on_Click,
+		on_DoubleClick,
 		on_KeyBinding,
 		on_Layout,
 		keyBinding,
 		color,
 	}:{
-		name:           string,
-		callback?:      ((cell:JQuery) => void),
-		on_Click?:      ((cell:JQuery) => void),
-		on_KeyBinding?: ((cell:JQuery) => void),
-		on_Layout?:     ((cell:JQuery) => void),
-		keyBinding?:    KeyBinding.AlphanumericKey,
-		color?:         string,
+		name:            string,
+		on_Layout?:      ((cell:JQuery                               ) => void),
+		callback?:       ((event:any,                     cell:JQuery) => void),
+		on_KeyBinding?:  ((event:KeyboardEvent,           cell:JQuery) => void),
+		on_Click?:       ((event:JQuery.ClickEvent,       cell:JQuery) => void),
+		on_DoubleClick?: ((event:JQuery.DoubleClickEvent, cell:JQuery) => void),
+		keyBinding?:     KeyBinding.AlphanumericKey,
+		color?:          string,
 	}
 	){
 		callback = (callback || emptyCallback)
 
-		this.name          = name
-		this.callback      = callback
-		this.on_Click      = (on_Click      || callback     )
-		this.on_KeyBinding = (on_KeyBinding || callback     )
-		this.on_Layout     = (on_Layout     || emptyCallback)
-		this.keyBinding    = keyBinding
-		this.color         = color
+		this.name           = name
+		this.callback       = callback
+		this.on_Layout      = (on_Layout     || emptyCallback)
+		this.on_KeyBinding  = (on_KeyBinding || callback     )
+		this.on_Click       = (event:JQuery.ClickEvent,       cell:JQuery) => {event.stopPropagation(); (on_Click       || callback)(event, cell)}
+		this.on_DoubleClick = (event:JQuery.DoubleClickEvent, cell:JQuery) => {event.stopPropagation(); (on_DoubleClick || callback)(event, cell)}
+		this.keyBinding     = keyBinding
+		this.color          = color
 	}
 
 	initialize_KeyBinding(
@@ -82,7 +86,7 @@ export class Entry{
 	){
 		KeyBinding.add(
 			[...keyBinding_Modifiers, keyBinding],
-			(event:KeyboardEvent) => this.on_KeyBinding(this.cell),
+			(event:KeyboardEvent) => this.on_KeyBinding(event, this.cell),
 			{preventDefault: true}
 		)
 	}
@@ -94,5 +98,5 @@ export class Entry{
 //###  Utils  ###//
 //###############//
 
-const emptyCallback = ((cell:JQuery) => {})
+const emptyCallback = ((...args:any[]) => {})
 

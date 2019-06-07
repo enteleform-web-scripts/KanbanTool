@@ -69,12 +69,7 @@ export class Layout{
 		if(keyBinding)
 			{text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`}
 
-		cell.html(text)
-		cell.on("click", (event) => entry.on_Click(cell))
-		cell.on("dblclick", (event) => event.stopPropagation())
-		entry.on_Layout(cell)
-		this._apply_CellProperties(cell)
-
+		this._initialize_Cell(entry, cell, text)
 		this.subContainers[groupIndex].append(cell)
 	}
 
@@ -99,6 +94,14 @@ export class Layout{
 				this.add_Cell(entry, groupIndex, keyBinding)
 			})
 		})
+	}
+
+	_initialize_Cell(entry:Entry, cell:JQuery, cellText:string,){
+		cell.on("click",    (event:JQuery.ClickEvent      ) => entry.on_Click      (event, cell))
+		cell.on("dblclick", (event:JQuery.DoubleClickEvent) => entry.on_DoubleClick(event, cell))
+		cell.html(cellText)
+		entry.on_Layout(cell)
+		this._apply_CellProperties(cell)
 	}
 
 	_apply_CellProperties(cell:JQuery){
