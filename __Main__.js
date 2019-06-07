@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559886399801)
+		const elapsedTime = _get_ElapsedTime(1559886927953)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:46:39 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:55:27 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10981,23 +10981,23 @@ var CardType_Manager;
         _entryIndex += 1;
         const cardType = exports.cardTypes[_entryIndex];
         return {
-            callback: _get_Callback(cardType),
             on_Layout: _get_OnLayout(cardType),
+            on_KeyBinding: _get_OnKeyBinding(cardType),
             on_Click: _get_OnClick(cardType),
         };
     }
     CardType_Manager.get_Callbacks = get_Callbacks;
-    function _get_Callback(cardType) {
-        return (cell) => { _update_CardType(cardType); };
-    }
     function _get_OnLayout(cardType) {
         return (cell) => {
             cell.css("background-color", cardType.bgColor);
             cell.css("color", cardType.fgColor);
         };
     }
+    function _get_OnKeyBinding(cardType) {
+        return (cell) => { _update_CardType(cardType); };
+    }
     function _get_OnClick(cardType) {
-        return () => { window.alert(`LOL @ ${cardType.name}`); };
+        return () => { window.alert(`LOLOL @ ${cardType.name}`); };
     }
     function _update_CardType(cardType) {
         if (_card) {
@@ -12119,13 +12119,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(5);
 const __Main__1 = __webpack_require__(2);
 class Entry {
-    constructor({ name, callback, keyBinding, on_Layout, on_Click, color, }) {
+    constructor({ name, callback, on_Click, on_KeyBinding, on_Layout, keyBinding, color, }) {
         this.name = name;
-        this.color = color;
-        this.keyBinding = keyBinding;
-        this.callback = callback;
-        this.on_Layout = (on_Layout || ((cell) => { }));
+        this.callback = (callback || ((cell) => { }));
         this.on_Click = (on_Click || callback);
+        this.on_KeyBinding = (on_KeyBinding || callback);
+        this.on_Layout = (on_Layout || ((cell) => { }));
+        this.keyBinding = keyBinding;
+        this.color = color;
     }
     initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex) {
         const keyBinding = this._get_Entry_KeyBinding(autoMap_KeyBindings, groupIndex, entryIndex);
@@ -12145,7 +12146,7 @@ class Entry {
         return keyBinding;
     }
     _add_KeyBinding(keyBinding, keyBinding_Modifiers) {
-        __Main__1.KeyBinding.add([...keyBinding_Modifiers, keyBinding], (event) => this.callback(this.cell), { preventDefault: true });
+        __Main__1.KeyBinding.add([...keyBinding_Modifiers, keyBinding], (event) => this.on_KeyBinding(this.cell), { preventDefault: true });
     }
 }
 exports.Entry = Entry;
@@ -12482,8 +12483,8 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const CardType_Manager_1 = __webpack_require__(11);
-const __Main__1 = __webpack_require__(1);
 const get_Rows_1 = __webpack_require__(30);
+const __Main__1 = __webpack_require__(1);
 const Position_1 = __webpack_require__(6);
 CardType_Manager_1.CardType_Manager.set_Card_HoverCallback();
 function get_CardType_FunctionBar(options) {
