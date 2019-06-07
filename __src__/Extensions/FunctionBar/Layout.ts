@@ -70,10 +70,8 @@ export class Layout{
 			{text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`}
 
 		cell.html(text)
-		cell.on("click", (event) => {
-			entry.on_Click(cell)
-			event.stopPropagation()
-		})
+		cell.on("click", (event) => entry.on_Click(cell))
+		cell.on("dblclick", (event) => event.stopPropagation())
 		entry.on_Layout(cell)
 		this._apply_CellProperties(cell)
 
