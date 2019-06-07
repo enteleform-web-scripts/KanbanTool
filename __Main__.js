@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559884382236)
+		const elapsedTime = _get_ElapsedTime(1559884574983)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:13:02 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:16:14 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12499,12 +12499,15 @@ function get_CardType_FunctionBar(options) {
     }
 }
 exports.get_CardType_FunctionBar = get_CardType_FunctionBar;
-exports.Basic_CardType_FunctionBar = get_CardType_FunctionBar({
-    position: Position_1.Position.Bottom,
-    autoMap_KeyBindings: true,
-    keyBinding_Modifiers: [],
-    stretchCells: false,
-});
+function get_Basic_CardType_FunctionBar() {
+    return get_CardType_FunctionBar({
+        position: Position_1.Position.Bottom,
+        autoMap_KeyBindings: true,
+        keyBinding_Modifiers: [],
+        stretchCells: false,
+    });
+}
+exports.get_Basic_CardType_FunctionBar = get_Basic_CardType_FunctionBar;
 
 
 /***/ }),
