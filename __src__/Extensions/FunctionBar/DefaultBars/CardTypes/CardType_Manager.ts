@@ -11,8 +11,8 @@ export const cardTypes =
 			bgColor: attributes.color_attrs.rgb,
 			fgColor: (
 				attributes.color_attrs.invert
-				? "#000"
-				: "#FFF"
+				? "#FFF"
+				: "#000"
 			),
 		})
 	)

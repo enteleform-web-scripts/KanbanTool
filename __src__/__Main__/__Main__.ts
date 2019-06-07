@@ -13,13 +13,13 @@ FunctionBar.load(
 	require("./FunctionBars/Right_Misc"        ).default,
 	require("./FunctionBars/Top_BoardFilters"  ).default,
 	Basic_CardType_FunctionBar,
-	// get_CardType_FunctionBar({
-	// 	position:             FunctionBar.Position.Bottom,
-	// 	autoMap_KeyBindings:  true,
-	// 	keyBinding_Modifiers: [],
-	// 	stretchCells:         false,
-	// 	rowCounts:            [3, 2]
-	// }),
+	get_CardType_FunctionBar({
+		position:             FunctionBar.Position.Top,
+		autoMap_KeyBindings:  true,
+		keyBinding_Modifiers: [],
+		stretchCells:         false,
+		rowCounts:            [4, 3]
+	}),
 )
 
 //#####################//
