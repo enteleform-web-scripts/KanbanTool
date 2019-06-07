@@ -1,10 +1,10 @@
 
 //###  Module  ###//
-import {CardType_Manager} from "./CardType_Manager"
-import {FunctionBar} from "../../__Main__"
+import {CardType_Manager                                } from "./CardType_Manager"
 import {get_Manual_CardType_Rows, get_Auto_CardType_Rows} from "./get_Rows"
-import {Position, VerticalPosition} from "../../Position";
-import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
+import {FunctionBar                                     } from "../../__Main__"
+import {Position, VerticalPosition                      } from "../../Position";
+import {KeyBinding                                      } from "~/Utils/KeyBinding/__Main__"
 
 
 //###############//

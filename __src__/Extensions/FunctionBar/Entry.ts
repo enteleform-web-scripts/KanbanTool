@@ -4,36 +4,41 @@ import {KeyBinding         } from "~/Utils/KeyBinding/__Main__"
 
 
 export class Entry{
-	name:       string
-	color:      string
-	keyBinding: KeyBinding.CharacterKey
-	callback:   ((cell:JQuery) => void)
-	on_Layout:  ((cell:JQuery) => void)
-	on_Click:   ((cell:JQuery) => void)
-	cell:       JQuery
+	name:          string
+	callback:      ((cell:JQuery) => void)
+	on_Click:      ((cell:JQuery) => void)
+	on_KeyBinding: ((cell:JQuery) => void)
+	on_Layout:     ((cell:JQuery) => void)
+	keyBinding:    KeyBinding.CharacterKey
+	color:         string
+
+	cell: JQuery
 
 	constructor({
 		name,
 		callback,
-		keyBinding,
-		on_Layout,
 		on_Click,
+		on_KeyBinding,
+		on_Layout,
+		keyBinding,
 		color,
 	}:{
-		name:        string,
-		callback:    ((cell:JQuery) => void),
-		keyBinding?: KeyBinding.AlphanumericKey,
-		on_Layout?:  ((cell:JQuery) => void),
-		on_Click?:   ((cell:JQuery) => void),
-		color?:      string,
+		name:           string,
+		callback?:      ((cell:JQuery) => void),
+		on_Click?:      ((cell:JQuery) => void),
+		on_KeyBinding?: ((cell:JQuery) => void),
+		on_Layout?:     ((cell:JQuery) => void),
+		keyBinding?:    KeyBinding.AlphanumericKey,
+		color?:         string,
 	}
 	){
-		this.name       = name
-		this.color      = color
-		this.keyBinding = keyBinding
-		this.callback   = callback
-		this.on_Layout  = (on_Layout || ((cell:JQuery) => {}))
-		this.on_Click   = (on_Click || callback)
+		this.name          = name
+		this.callback      = (callback      || ((cell:JQuery) => {}))
+		this.on_Click      = (on_Click      || callback             )
+		this.on_KeyBinding = (on_KeyBinding || callback             )
+		this.on_Layout     = (on_Layout     || ((cell:JQuery) => {}))
+		this.keyBinding    = keyBinding
+		this.color         = color
 	}
 
 	initialize_KeyBinding(
@@ -71,7 +76,7 @@ export class Entry{
 	){
 		KeyBinding.add(
 			[...keyBinding_Modifiers, keyBinding],
-			(event:KeyboardEvent) => this.callback(this.cell),
+			(event:KeyboardEvent) => this.on_KeyBinding(this.cell),
 			{preventDefault: true}
 		)
 	}

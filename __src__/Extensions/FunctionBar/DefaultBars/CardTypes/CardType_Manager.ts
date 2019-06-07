@@ -39,15 +39,10 @@ export namespace CardType_Manager{
 		const cardType = cardTypes[_entryIndex]
 
 		return {
-			callback:  _get_Callback(cardType),
-			on_Layout: _get_OnLayout(cardType),
-			on_Click:  _get_OnClick (cardType),
+			on_Layout:     _get_OnLayout    (cardType),
+			on_KeyBinding: _get_OnKeyBinding(cardType),
+			on_Click:      _get_OnClick     (cardType),
 		}
-	}
-
-	function _get_Callback(cardType){
-		return (cell:JQuery) =>
-			{_update_CardType(cardType)}
 	}
 
 	function _get_OnLayout(cardType){
@@ -57,9 +52,14 @@ export namespace CardType_Manager{
 		}
 	}
 
+	function _get_OnKeyBinding(cardType){
+		return (cell:JQuery) =>
+			{_update_CardType(cardType)}
+	}
+
 	function _get_OnClick(cardType){
 		return () =>
-			{window.alert(`LOL @ ${cardType.name}`)}
+			{window.alert(`LOLOL @ ${cardType.name}`)}
 	}
 
 	function _update_CardType(cardType){
