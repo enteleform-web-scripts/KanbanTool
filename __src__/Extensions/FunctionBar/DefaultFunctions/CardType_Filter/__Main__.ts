@@ -67,12 +67,17 @@ function _set_CardType_States(
 	indexes:          number[],
 	target_CardTypes: JQuery[],
 ){
-	const apply_State_To_AllCards = (indexes.length == 0)
-	if(apply_State_To_AllCards)
-		{indexes = CardType_Filter._cardType_Buttons.map((value, index) => index)}
+	console.log("----------")
+	console.log("START:", indexes)
+	const cardType_Buttons = CardType_Filter._cardType_Buttons
+
+	const apply_State_To_AllCardTypes = (indexes.length == 0)
+	if(apply_State_To_AllCardTypes)
+		{indexes = cardType_Buttons.map((value, index) => index)}
+	console.log("END:", indexes)
 
 	indexes.forEach(index => {
-		const button = CardType_Filter._cardType_Buttons[index]
+		const button = cardType_Buttons[index]
 		if(target_CardTypes.includes(button))
 			{button.click()}
 	})
