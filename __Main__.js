@@ -10671,10 +10671,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559942811612)
+		const elapsedTime = _get_ElapsedTime(1559943795150)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:26:51 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:43:15 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12582,33 +12582,23 @@ class CardType_Filter {
             button.click();
         });
     }
-    static enable_CardTypes(...indexes) {
-        const disabled_CardType_Buttons = CardType_Filter._disabled_CardType_Buttons;
-        indexes.forEach(index => {
-            const button = CardType_Filter._cardType_Buttons[index];
-            if (disabled_CardType_Buttons.includes(button)) {
-                button.click();
-            }
-        });
-    }
-    static disable_CardTypes(...indexes) {
-        const enabled_CardType_Buttons = CardType_Filter._enabled_CardType_Buttons;
-        indexes.forEach(index => {
-            const button = CardType_Filter._cardType_Buttons[index];
-            if (enabled_CardType_Buttons.includes(button)) {
-                button.click();
-            }
-        });
-    }
-    static toggle_CardTypes(...indexes) {
-        indexes.forEach(index => {
-            const button = CardType_Filter._cardType_Buttons[index];
-            button.click();
-        });
-    }
+    static enable_CardTypes(...indexes) { _set_CardType_States(indexes, CardType_Filter._disabled_CardType_Buttons); }
+    static disable_CardTypes(...indexes) { _set_CardType_States(indexes, CardType_Filter._enabled_CardType_Buttons); }
+    static toggle_CardTypes(...indexes) { _set_CardType_States(indexes, CardType_Filter._cardType_Buttons); }
 }
 exports.CardType_Filter = CardType_Filter;
 window.CF = CardType_Filter;
+function _set_CardType_States(indexes, target_CardTypes) {
+    if (indexes.length > 0) {
+        indexes = CardType_Filter._cardType_Buttons.map((value, index) => index);
+    }
+    indexes.forEach(index => {
+        const button = CardType_Filter._cardType_Buttons[index];
+        if (target_CardTypes.includes(button)) {
+            button.click();
+        }
+    });
+}
 
 
 /***/ }),
