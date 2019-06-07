@@ -12,7 +12,7 @@ FunctionBar.load(
 	require("./FunctionBars/Left_Commands"     ).default,
 	require("./FunctionBars/Right_Misc"        ).default,
 	require("./FunctionBars/Top_BoardFilters"  ).default,
-	Basic_CardType_FunctionBar,
+	// Basic_CardType_FunctionBar,
 	get_CardType_FunctionBar({
 		position:             FunctionBar.Position.Top,
 		autoMap_KeyBindings:  true,
