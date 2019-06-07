@@ -9,17 +9,31 @@ export class Entry{
 	keyBinding: KeyBinding.CharacterKey
 	callback:   ((cell:JQuery) => void)
 	on_Layout:  ((cell:JQuery) => void)
+	on_Click:   ((cell:JQuery) => void)
 	cell:       JQuery
 
-	constructor(
-		{name,        color,         keyBinding,                             callback,                         on_Layout,                        }:
-		{name:string, color?:string, keyBinding?:KeyBinding.AlphanumericKey, callback:((cell:JQuery) => void), on_Layout?:((cell:JQuery) => void)}
+	constructor({
+		name,
+		callback,
+		keyBinding,
+		on_Layout,
+		on_Click,
+		color,
+	}:{
+		name:        string,
+		callback:    ((cell:JQuery) => void),
+		keyBinding?: KeyBinding.AlphanumericKey,
+		on_Layout?:  ((cell:JQuery) => void),
+		on_Click?:   ((cell:JQuery) => void),
+		color?:      string,
+	}
 	){
 		this.name       = name
 		this.color      = color
 		this.keyBinding = keyBinding
 		this.callback   = callback
 		this.on_Layout  = (on_Layout || ((cell:JQuery) => {}))
+		this.on_Click   = (on_Click || callback)
 	}
 
 	initialize_KeyBinding(

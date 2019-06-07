@@ -63,7 +63,7 @@ export class Layout{
 			{text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`}
 
 		cell.html(text)
-		cell.on("click", () => entry.callback(cell))
+		cell.on("click", () => entry.on_Click(cell))
 		entry.on_Layout(cell)
 
 		this.subContainers[groupIndex].append(cell)

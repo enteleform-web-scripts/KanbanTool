@@ -41,19 +41,25 @@ export namespace CardType_Manager{
 		return {
 			callback:  _get_Callback(cardType),
 			on_Layout: _get_OnLayout(cardType),
+			on_Click:  _get_OnClick (cardType),
 		}
 	}
 
-	export function _get_Callback(cardType){
-		return () =>
+	function _get_Callback(cardType){
+		return (cell:JQuery) =>
 			{_update_CardType(cardType)}
 	}
 
-	export function _get_OnLayout(cardType){
+	function _get_OnLayout(cardType){
 		return (cell:JQuery) => {
 			cell.css("background-color", cardType.bgColor)
 			cell.css("color",            cardType.fgColor)
 		}
+	}
+
+	function _get_OnClick(cardType){
+		return () =>
+			{window.alert(`LOL @ ${cardType.name}`)}
 	}
 
 	function _update_CardType(cardType){
