@@ -31,9 +31,11 @@ export function get_CardType_FunctionBar(options:{
 	}
 }
 
-export const Basic_CardType_FunctionBar = get_CardType_FunctionBar({
-	position:             Position.Bottom,
-	autoMap_KeyBindings:  true,
-	keyBinding_Modifiers: [],
-	stretchCells:         false,
-})
+export function get_Basic_CardType_FunctionBar(){
+	return get_CardType_FunctionBar({
+		position:             Position.Bottom,
+		autoMap_KeyBindings:  true,
+		keyBinding_Modifiers: [],
+		stretchCells:         false,
+	})
+}
