@@ -24,18 +24,16 @@ export function get_CardType_FunctionBar(options:{
 	keyBinding_Modifiers?: KeyBinding.ModifierKey[],
 	stretchCells?:         boolean,
 	rowCounts?:            number[]
-}={
-	position:             Position.Bottom,
-	autoMap_KeyBindings:  true,
-	keyBinding_Modifiers: [],
-	stretchCells:         true,
 }){
 	const cardType_Rows =
 		(options.rowCounts)
 		? get_Manual_CardType_Rows(options.rowCounts)
 		: get_Auto_CardType_Rows()
 
-	return _build_FunctionBar(options as any, cardType_Rows)
+	return _build_FunctionBar(
+		{..._Default_RowBuilder_Options, ...options} as any,
+		cardType_Rows,
+	)
 }
 
 
@@ -49,6 +47,14 @@ interface _RowBuilder_Options{
 	keyBinding_Modifiers: KeyBinding.ModifierKey[],
 	stretchCells:         boolean,
 	rowCounts:            number[]
+}
+
+const _Default_RowBuilder_Options = {
+	position:             Position.Bottom,
+	autoMap_KeyBindings:  true,
+	keyBinding_Modifiers: [],
+	stretchCells:         true,
+	rowCounts:            undefined,
 }
 
 function _build_FunctionBar(options:_RowBuilder_Options, cardType_Rows:any[][]){
