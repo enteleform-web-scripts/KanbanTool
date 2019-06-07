@@ -199,10 +199,10 @@ module.exports = __webpack_require__(36);
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559883574430)
+		const elapsedTime = _get_ElapsedTime(1559883926230)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:59:34 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:05:26 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
