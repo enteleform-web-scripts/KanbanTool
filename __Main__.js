@@ -10465,7 +10465,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
 exports.KanbanTool.activeBoard = exports.activeBoard;
-exports.cardTypes = exports.activeBoard.cardTypes().active().map(({ attributes }) => ({
+exports.cardTypes = exports.activeBoard.cardTypes().active().map(({ attributes }, index) => ({
+    index: index,
     id: attributes.id,
     name: attributes.name,
     bgColor: attributes.color_attrs.rgb,
@@ -10671,10 +10672,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559944578456)
+		const elapsedTime = _get_ElapsedTime(1559947992682)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:56:18 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:53:12 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12554,6 +12555,7 @@ var CallbackManager;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(4);
+const KanbanTool_1 = __webpack_require__(1);
 const $ = __webpack_require__(0);
 class CardType_Filter {
     static get enabled() { return CardType_Filter._filterButton.hasClass("kt-board_search-filter--active"); }
@@ -12582,24 +12584,50 @@ class CardType_Filter {
             button.click();
         });
     }
-    static enable_CardTypes(...indexes) { _set_CardType_States(indexes, CardType_Filter._disabled_CardType_Buttons); }
-    static disable_CardTypes(...indexes) { _set_CardType_States(indexes, CardType_Filter._enabled_CardType_Buttons); }
-    static toggle_CardTypes(...indexes) { _set_CardType_States(indexes, CardType_Filter._cardType_Buttons); }
+    static enable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._disabled_CardType_Buttons); }
+    static disable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._enabled_CardType_Buttons); }
+    static toggle_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._cardType_Buttons); }
 }
 exports.CardType_Filter = CardType_Filter;
 window.CF = CardType_Filter;
-function _set_CardType_States(indexes, target_CardTypes) {
+function _set_CardType_States(ids, target_CardTypes) {
     const cardType_Buttons = CardType_Filter._cardType_Buttons;
-    const apply_State_To_AllCardTypes = (indexes.length == 0);
+    const apply_State_To_AllCardTypes = (ids.length == 0);
     if (apply_State_To_AllCardTypes) {
-        indexes = cardType_Buttons.map((value, index) => index);
+        ids = cardType_Buttons.map((value, index) => index);
     }
-    indexes.forEach(index => {
+    for (const id of ids) {
+        const index = _get_CardType_Index(id);
+        if (!index) {
+            continue;
+        }
         const button = cardType_Buttons[index];
         if (target_CardTypes.includes(button)) {
             button.click();
         }
-    });
+    }
+}
+function _get_CardType_FromName(name) {
+    const matches = KanbanTool_1.cardTypes.filter(cardType => (cardType.name == name));
+    if (matches.length > 0) {
+        return matches[0];
+    }
+    else {
+        return undefined;
+    }
+}
+function _get_CardType_Index(id) {
+    let index;
+    if (typeof id == "string") {
+        const cardType = _get_CardType_FromName(id);
+        index = (cardType)
+            ? cardType.index
+            : undefined;
+    }
+    else {
+        index = id;
+    }
+    return index;
 }
 
 
