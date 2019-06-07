@@ -10649,10 +10649,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559932513025)
+		const elapsedTime = _get_ElapsedTime(1559932874862)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:35:13 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:41:14 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10991,8 +10991,8 @@ var CardType_Manager;
     function _get_OnLayout(cardType) {
         return (cell) => {
             cell.css({
-                "box-shadow": `inset 0px 10px 0px -5px ${cardType.bgColor}, inset 0px 16px 0px -10px #AAA`,
-                "padding-top": "12px",
+                "box-shadow": `inset 0 7px 0 0 ${cardType.bgColor}, inset 0 8px 0 0 #AAA`,
+                "padding-top": "14px",
             });
         };
     }
