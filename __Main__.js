@@ -10649,10 +10649,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559934207825)
+		const elapsedTime = _get_ElapsedTime(1559934760158)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:03:27 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:12:40 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12652,16 +12652,16 @@ exports.default = new __Main__1.FunctionBar({
             new Entry({
                 name: "Today",
                 callback: () => {
-                    Show.rows({ include: ["Routine", "Tasks.Active"] });
                     Show.allColumns();
+                    Show.rows({ include: ["Routine", "Tasks.Active"] });
                     Hide.emptyColumns();
                 },
             }),
             new Entry({
                 name: "Today.All",
                 callback: () => {
-                    Show.rows({ include: ["Routine", "Tasks.Active"] });
                     Show.allColumns();
+                    Show.rows({ include: ["Routine", "Tasks.Active"] });
                 },
             }),
             new Entry({
@@ -12676,24 +12676,24 @@ exports.default = new __Main__1.FunctionBar({
             new Entry({
                 name: "Routine",
                 callback: () => {
-                    Show.rows({ include: ["Routine"] });
                     Show.allColumns();
+                    Show.rows({ include: ["Routine"] });
                     Hide.emptyColumns();
                 },
             }),
             new Entry({
                 name: "Tasks.Active",
                 callback: () => {
-                    Show.rows({ include: ["Tasks.Active"] });
                     Show.allColumns();
+                    Show.rows({ include: ["Tasks.Active"] });
                     Hide.emptyColumns();
                 },
             }),
             new Entry({
                 name: "Routine.Short",
                 callback: () => {
-                    Show.rows({ include: ["Routine.Short"] });
                     Show.allColumns();
+                    Show.rows({ include: ["Routine.Short"] });
                     Hide.emptyColumns();
                 },
             }),
