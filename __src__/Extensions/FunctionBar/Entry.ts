@@ -3,6 +3,10 @@ import {autoMapped_Key_Rows} from "./Settings"
 import {KeyBinding         } from "~/Utils/KeyBinding/__Main__"
 
 
+//#################//
+//###  Exports  ###//
+//#################//
+
 export class Entry{
 	name:          string
 	callback:      ((cell:JQuery) => void)
@@ -32,11 +36,13 @@ export class Entry{
 		color?:         string,
 	}
 	){
+		callback = (callback || emptyCallback)
+
 		this.name          = name
-		this.callback      = (callback      || ((cell:JQuery) => {}))
-		this.on_Click      = (on_Click      || callback             )
-		this.on_KeyBinding = (on_KeyBinding || callback             )
-		this.on_Layout     = (on_Layout     || ((cell:JQuery) => {}))
+		this.callback      = callback
+		this.on_Click      = (on_Click      || callback     )
+		this.on_KeyBinding = (on_KeyBinding || callback     )
+		this.on_Layout     = (on_Layout     || emptyCallback)
 		this.keyBinding    = keyBinding
 		this.color         = color
 	}
@@ -84,4 +90,9 @@ export class Entry{
 }
 
 
+//###############//
+//###  Utils  ###//
+//###############//
+
+const emptyCallback = ((cell:JQuery) => {})
 
