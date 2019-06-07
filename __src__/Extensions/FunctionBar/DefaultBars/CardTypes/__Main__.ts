@@ -34,10 +34,7 @@ export function get_CardType_FunctionBar(options:{
 		: get_Auto_CardType_Rows()
 
 	const mergedOptions = {..._Default_RowBuilder_Options, ...options}
-
-	if(options.cellWidth)
-		{mergedOptions.cellProperties.push({functionName:"width", args:[options.cellWidth]})}
-	delete mergedOptions.cellWidth
+	_update_MergedOptions_CellWidth(mergedOptions)
 
 	return _build_FunctionBar(
 		mergedOptions as any,
@@ -82,4 +79,19 @@ function _build_FunctionBar(options:_RowBuilder_Options, cardType_Rows:any[][]){
 		...options,
 		entryGroups,
 	})
+}
+
+function _update_MergedOptions_CellWidth(options){
+	if(options.cellWidth){
+		options.cellProperties.push({
+			functionName:"css",
+			args:[{
+				"width":     options.cellWidth,
+				"min-width": options.cellWidth,
+				"max-width": options.cellWidth,
+			}]
+		})
+	}
+
+	delete options.cellWidth
 }
