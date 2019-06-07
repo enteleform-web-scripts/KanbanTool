@@ -44,31 +44,12 @@ export class CardType_Filter{
 		})
 	}
 
-	static enable_CardTypes(...indexes:number[]){
-		const disabled_CardType_Buttons = CardType_Filter._disabled_CardType_Buttons
-
-		indexes.forEach(index => {
-			const button = CardType_Filter._cardType_Buttons[index]
-			if(disabled_CardType_Buttons.includes(button))
-				{button.click()}
-		})
-	}
-	static disable_CardTypes(...indexes:number[]){
-		const enabled_CardType_Buttons = CardType_Filter._enabled_CardType_Buttons
-
-		indexes.forEach(index => {
-			const button = CardType_Filter._cardType_Buttons[index]
-			if(enabled_CardType_Buttons.includes(button))
-				{button.click()}
-		})
-	}
-
-	static toggle_CardTypes(...indexes:number[]){
-		indexes.forEach(index => {
-			const button = CardType_Filter._cardType_Buttons[index]
-			button.click()
-		})
-	}
+	static enable_CardTypes(...indexes:number[])
+		{_set_CardType_States(indexes, CardType_Filter._disabled_CardType_Buttons)}
+	static disable_CardTypes(...indexes:number[])
+		{_set_CardType_States(indexes, CardType_Filter._enabled_CardType_Buttons)}
+	static toggle_CardTypes(...indexes:number[])
+		{_set_CardType_States(indexes, CardType_Filter._cardType_Buttons)}
 
 }
 
@@ -76,3 +57,23 @@ export class CardType_Filter{
 //###  !!! TEMPORARY !!!  ###//
 //###  !!!!!!!!!!!!!!!!!  ###//
 (window as any).CF = CardType_Filter
+
+
+//###############//
+//###  Utils  ###//
+//###############//
+
+function _set_CardType_States(
+	indexes:          number[],
+	target_CardTypes: JQuery[],
+){
+	// apply state @ all cards
+	if(indexes.length > 0)
+		{indexes = CardType_Filter._cardType_Buttons.map((value, index) => index)}
+
+	indexes.forEach(index => {
+		const button = CardType_Filter._cardType_Buttons[index]
+		if(target_CardTypes.includes(button))
+			{button.click()}
+	})
+}
