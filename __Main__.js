@@ -10649,10 +10649,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559934040723)
+		const elapsedTime = _get_ElapsedTime(1559934207825)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:00:40 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:03:27 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12191,7 +12191,7 @@ class Layout {
                 const { containerSelector, toggleButton_Selector } = _BarComponent_Map[entry.position];
                 const toggleButton = $(toggleButton_Selector);
                 toggleButton.on("click", callback);
-                const container = $(containerSelector);
+                const container = $(`${containerSelector}:not(.${cssVariables.collapsed})`);
                 container.on("dblclick", callback);
                 __Main__1.KeyBinding.add([entry.key, ...Settings_1.functionBar_ToggleModifiers], callback, { preventDefault: true });
             });
