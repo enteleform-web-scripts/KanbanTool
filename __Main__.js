@@ -10524,6 +10524,18 @@ exports.FunctionBar = FunctionBar;
 
 "use strict";
 
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.KanbanTool = window.KT;
+exports.activeBoard = exports.KanbanTool.boards.models[0];
+exports.KanbanTool.activeBoard = exports.activeBoard;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -10600,18 +10612,6 @@ function _get_HotKey_Array_AsString(keys) {
 
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.KanbanTool = window.KT;
-exports.activeBoard = exports.KanbanTool.boards.models[0];
-exports.KanbanTool.activeBoard = exports.activeBoard;
-
-
-/***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559873902775)
+		const elapsedTime = _get_ElapsedTime(1559876146483)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:18:22 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     10:55:46 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10669,7 +10669,7 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(3);
 exports.css_Timeout_MS = 500;
 exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
 exports.functionBar_ToggleModifiers = ["shift", "alt"];
@@ -10682,7 +10682,7 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(3);
+const KanbanTool_1 = __webpack_require__(2);
 const $ = __webpack_require__(0);
 class TaskContainer {
     constructor({ type, domIndex, modelIndex, model, element }) {
@@ -10875,7 +10875,7 @@ function _match_Glob(container, target) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(6);
-const KanbanTool_1 = __webpack_require__(3);
+const KanbanTool_1 = __webpack_require__(2);
 const $ = __webpack_require__(0);
 function get_Rows() {
     const headerElements = $.find("kt-board > tbody > tr > th");
@@ -10900,7 +10900,7 @@ exports.get_Rows = get_Rows;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(6);
-const KanbanTool_1 = __webpack_require__(3);
+const KanbanTool_1 = __webpack_require__(2);
 function get_Columns() {
     const models = KanbanTool_1.activeBoard.workflowStages()
         .slice(1);
@@ -12056,7 +12056,7 @@ if (typeof window !== 'undefined') {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(5);
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(3);
 class Entry {
     constructor({ name, color, keyBinding, on_Load, }) {
         this.name = name;
@@ -12098,7 +12098,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cssVariables = __webpack_require__(22);
 const Position_1 = __webpack_require__(7);
 const __main__1 = __webpack_require__(23);
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(3);
 const Settings_1 = __webpack_require__(5);
 const $ = __webpack_require__(0);
 class Layout {
@@ -12331,7 +12331,7 @@ function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_In
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(3);
+const KanbanTool_1 = __webpack_require__(2);
 function get_EmptyRow_Indexes(columns) {
     const hiddenColumn_Indexes = columns
         .filter(column => column.is_Collapsed)
@@ -12559,82 +12559,89 @@ exports.default = new __Main__1.FunctionBar({
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(1);
 const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
+const KanbanTool_1 = __webpack_require__(2);
+_CardType_Manager.set_Card_HoverCallback();
 exports.default = new __Main__1.FunctionBar({
     position: Position.Bottom,
-    autoMap_KeyBindings: false,
+    autoMap_KeyBindings: true,
     keyBinding_Modifiers: [],
-    stretchCells: true,
+    stretchCells: false,
     entryGroups: [
         [
             new Entry({
-                name: "Active",
-                on_Load: () => {
-                    Show.rows({ include: ["Routine", "Tasks.Active"] });
-                    Show.allColumns();
-                },
+                name: "Today.Low",
+                on_Load: _CardType_Manager.get_OnLoad(),
             }),
             new Entry({
-                name: "Plan",
-                on_Load: () => {
-                    Show.allColumns();
-                    Show.allRows();
-                },
-            }),
-        ],
-        [
-            new Entry({
-                name: "Routine",
-                on_Load: () => {
-                    Show.rows({ include: ["Routine"] });
-                    Show.allColumns();
-                    Hide.emptyColumns();
-                },
+                name: "Today.Medium",
+                on_Load: _CardType_Manager.get_OnLoad(),
             }),
             new Entry({
-                name: "Today",
-                on_Load: () => {
-                    Show.rows({ include: ["Tasks.Active"] });
-                    Show.allColumns();
-                    Hide.emptyColumns();
-                },
+                name: "Today.High",
+                on_Load: _CardType_Manager.get_OnLoad(),
             }),
             new Entry({
-                name: "Routine.Short",
-                on_Load: () => {
-                    Show.rows({ include: ["Routine.Short"] });
-                    Show.allColumns();
-                    Hide.emptyColumns();
-                },
+                name: "Today.Urgent",
+                on_Load: _CardType_Manager.get_OnLoad(),
             }),
         ],
         [
             new Entry({
-                name: "Show.allRows",
-                on_Load: () => {
-                    Show.allRows();
-                },
+                name: "Low",
+                on_Load: _CardType_Manager.get_OnLoad(),
             }),
             new Entry({
-                name: "Show.allColumns",
-                on_Load: () => {
-                    Show.allColumns();
-                },
+                name: "Medium",
+                on_Load: _CardType_Manager.get_OnLoad(),
             }),
             new Entry({
-                name: "Hide.emptyRows",
-                on_Load: () => {
-                    Hide.emptyRows();
-                },
+                name: "High",
+                on_Load: _CardType_Manager.get_OnLoad(),
             }),
             new Entry({
-                name: "Hide.emptyColumns",
-                on_Load: () => {
-                    Hide.emptyColumns();
-                },
+                name: "Urgent",
+                on_Load: _CardType_Manager.get_OnLoad(),
+            }),
+        ],
+        [
+            new Entry({
+                name: "DailyTask",
+                on_Load: _CardType_Manager.get_OnLoad(),
+            }),
+            new Entry({
+                name: "Book",
+                on_Load: _CardType_Manager.get_OnLoad(),
             }),
         ],
     ],
 });
+const _cardTypes = KanbanTool_1.activeBoard.cardTypes().active();
+var _CardType_Manager;
+(function (_CardType_Manager) {
+    let _entryIndex = -1;
+    let _card = undefined;
+    function set_Card_HoverCallback() {
+        const $element = $("kt-board");
+        $element.on("mouseover", "kt-task", (event) => {
+            _card = event.currentTarget;
+        });
+        $element.on("mouseout", "kt-task", (event) => {
+            _card = null;
+        });
+    }
+    _CardType_Manager.set_Card_HoverCallback = set_Card_HoverCallback;
+    function get_OnLoad() {
+        _entryIndex += 1;
+        const cardType = _cardTypes[_entryIndex];
+        return () => { _update_CardType(cardType); };
+    }
+    _CardType_Manager.get_OnLoad = get_OnLoad;
+    function _update_CardType(cardType) {
+        if (_card) {
+            _card.props.task.save("card_type_id", cardType.id);
+        }
+    }
+})(_CardType_Manager || (_CardType_Manager = {}));
 
 
 /***/ }),
@@ -12656,7 +12663,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(3);
 const jquery_1 = __importDefault(__webpack_require__(0));
 const $ = jquery_1.default;
 class FilterKeybindings {
