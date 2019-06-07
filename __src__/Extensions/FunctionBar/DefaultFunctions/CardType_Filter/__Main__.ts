@@ -67,14 +67,11 @@ function _set_CardType_States(
 	indexes:          number[],
 	target_CardTypes: JQuery[],
 ){
-	console.log("----------")
-	console.log("START:", indexes)
 	const cardType_Buttons = CardType_Filter._cardType_Buttons
 
 	const apply_State_To_AllCardTypes = (indexes.length == 0)
 	if(apply_State_To_AllCardTypes)
 		{indexes = cardType_Buttons.map((value, index) => index)}
-	console.log("END:", indexes)
 
 	indexes.forEach(index => {
 		const button = cardType_Buttons[index]
