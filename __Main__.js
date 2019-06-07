@@ -10649,10 +10649,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559933817504)
+		const elapsedTime = _get_ElapsedTime(1559933983690)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:56:57 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:59:43 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12188,9 +12188,11 @@ class Layout {
             ];
             toggleMap.forEach((entry) => {
                 const callback = _get_ContainerToggle_Callback(entry.position);
-                const { toggleButton_Selector } = _BarComponent_Map[entry.position];
+                const { containerSelector, toggleButton_Selector } = _BarComponent_Map[entry.position];
                 const toggleButton = $(toggleButton_Selector);
                 toggleButton.on("click", callback);
+                const container = $(containerSelector);
+                container.on("dblclick", callback);
                 __Main__1.KeyBinding.add([entry.key, ...Settings_1.functionBar_ToggleModifiers], callback, { preventDefault: true });
             });
         }, Settings_1.css_Timeout_MS);
