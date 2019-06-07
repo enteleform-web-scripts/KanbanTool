@@ -3,6 +3,7 @@ require("~/Utils/HTML_Injector").inject(__dirname, {CSS:true, HTML:true})
 
 //###  Module  ###//
 import {autoMapped_Key_Rows} from "./Settings"
+import {CellProperty       } from "./CellProperty"
 import {Entry              } from "./Entry"
 import {Layout             } from "./Layout"
 import {KeyBinding         } from "~/Utils/KeyBinding/__Main__"
@@ -32,18 +33,19 @@ export class FunctionBar extends Module{
 	keyBinding_Modifiers: KeyBinding.ModifierKey[]
 	entryGroups:          Entry[][]
 	stretchCells:         boolean
+	cellProperties:       CellProperty[]
 
 	constructor(  //  Left || Right
-		{position,                    entryGroups          }:
-		{position:HorizontalPosition, entryGroups:Entry[][]}
+		{position,                    entryGroups,           cellProperties                }:
+		{position:HorizontalPosition, entryGroups:Entry[][], cellProperties?:CellProperty[]}
 	)
 	constructor(  //  Top || Bottom
-		{position,                  entryGroups,           autoMap_KeyBindings,         keyBinding_Modifiers,                          stretchCells        }:
-		{position:VerticalPosition, entryGroups:Entry[][], autoMap_KeyBindings:boolean, keyBinding_Modifiers:KeyBinding.ModifierKey[], stretchCells:boolean}
+		{position,                  entryGroups,           autoMap_KeyBindings,         keyBinding_Modifiers,                          stretchCells,         cellProperties                }:
+		{position:VerticalPosition, entryGroups:Entry[][], autoMap_KeyBindings:boolean, keyBinding_Modifiers:KeyBinding.ModifierKey[], stretchCells:boolean, cellProperties?:CellProperty[]}
 	)
 	constructor(
-		{position,          entryGroups,           autoMap_KeyBindings,          keyBinding_Modifiers,                           stretchCells         }:
-		{position:Position, entryGroups:Entry[][], autoMap_KeyBindings?:boolean, keyBinding_Modifiers?:KeyBinding.ModifierKey[], stretchCells?:boolean}
+		{position,          entryGroups,           autoMap_KeyBindings,          keyBinding_Modifiers,                           stretchCells,          cellProperties                }:
+		{position:Position, entryGroups:Entry[][], autoMap_KeyBindings?:boolean, keyBinding_Modifiers?:KeyBinding.ModifierKey[], stretchCells?:boolean, cellProperties?:CellProperty[]}
 	){
 		super()
 		this.position             = position
@@ -51,6 +53,7 @@ export class FunctionBar extends Module{
 		this.autoMap_KeyBindings  = (autoMap_KeyBindings  || false)
 		this.keyBinding_Modifiers = (keyBinding_Modifiers || []   )
 		this.stretchCells         = (stretchCells         || false)
+		this.cellProperties       = (cellProperties       || []   )
 	}
 
 	static load(

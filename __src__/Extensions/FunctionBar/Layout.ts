@@ -10,6 +10,7 @@ import {
 	css_Timeout_MS,
 	functionBar_ToggleModifiers,
 } from "./Settings"
+import {CellProperty} from "./CellProperty";
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -65,6 +66,7 @@ export class Layout{
 		cell.html(text)
 		cell.on("click", () => entry.on_Click(cell))
 		entry.on_Layout(cell)
+		this._apply_CellProperties(cell)
 
 		this.subContainers[groupIndex].append(cell)
 	}
@@ -90,6 +92,11 @@ export class Layout{
 				this.add_Cell(entry, groupIndex, keyBinding)
 			})
 		})
+	}
+
+	_apply_CellProperties(cell:JQuery){
+		for(const {functionName, args} of this._functionBar.cellProperties)
+			{cell[functionName as string](...args)}
 	}
 
 }

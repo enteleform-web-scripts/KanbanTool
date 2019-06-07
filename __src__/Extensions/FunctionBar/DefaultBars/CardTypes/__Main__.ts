@@ -3,6 +3,7 @@
 import {CardType_Manager                                } from "./CardType_Manager"
 import {get_Manual_CardType_Rows, get_Auto_CardType_Rows} from "./get_Rows"
 import {FunctionBar                                     } from "../../__Main__"
+import {CellProperty                                    } from "../../CellProperty"
 import {Position, VerticalPosition                      } from "../../Position";
 import {KeyBinding                                      } from "~/Utils/KeyBinding/__Main__"
 
@@ -23,15 +24,23 @@ export function get_CardType_FunctionBar(options:{
 	autoMap_KeyBindings?:  boolean,
 	keyBinding_Modifiers?: KeyBinding.ModifierKey[],
 	stretchCells?:         boolean,
-	rowCounts?:            number[]
+	rowCounts?:            number[],
+	cellWidth?:            number,
+	cellProperties?:       CellProperty[]
 }){
 	const cardType_Rows =
 		(options.rowCounts)
 		? get_Manual_CardType_Rows(options.rowCounts)
 		: get_Auto_CardType_Rows()
 
+	const mergedOptions = {..._Default_RowBuilder_Options, ...options}
+
+	if(options.cellWidth)
+		{mergedOptions.cellProperties.push({functionName:"width", args:[options.cellWidth]})}
+	delete mergedOptions.cellWidth
+
 	return _build_FunctionBar(
-		{..._Default_RowBuilder_Options, ...options} as any,
+		mergedOptions as any,
 		cardType_Rows,
 	)
 }
@@ -46,7 +55,8 @@ interface _RowBuilder_Options{
 	autoMap_KeyBindings:  boolean,
 	keyBinding_Modifiers: KeyBinding.ModifierKey[],
 	stretchCells:         boolean,
-	rowCounts:            number[]
+	rowCounts:            number[],
+	cellProperties:       CellProperty[],
 }
 
 const _Default_RowBuilder_Options = {
@@ -55,6 +65,7 @@ const _Default_RowBuilder_Options = {
 	keyBinding_Modifiers: [],
 	stretchCells:         true,
 	rowCounts:            undefined,
+	cellProperties:       [],
 }
 
 function _build_FunctionBar(options:_RowBuilder_Options, cardType_Rows:any[][]){
