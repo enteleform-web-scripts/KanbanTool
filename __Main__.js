@@ -10649,10 +10649,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559927937577)
+		const elapsedTime = _get_ElapsedTime(1559932484733)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:18:57 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:34:44 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10990,8 +10990,10 @@ var CardType_Manager;
     CardType_Manager.get_Callbacks = get_Callbacks;
     function _get_OnLayout(cardType) {
         return (cell) => {
-            cell.css("background-color", cardType.bgColor);
-            cell.css("color", cardType.fgColor);
+            cell.css({
+                "box-shadow": `inset 0px 10px 0px -5px yellow, inset 0px 16px 0px -10px ${cardType.bgColor}`,
+                "padding-top": "12px",
+            });
         };
     }
     function _get_OnKeyBinding(cardType) {
