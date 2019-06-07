@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559884574983)
+		const elapsedTime = _get_ElapsedTime(1559884706891)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:16:14 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:18:26 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11023,13 +11023,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(14);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(29);
-__Main__1.FunctionBar.load(__webpack_require__(31).default, __webpack_require__(32).default, __webpack_require__(33).default, __Main__2.get_CardType_FunctionBar({
-    position: __Main__1.FunctionBar.Position.Bottom,
-    autoMap_KeyBindings: true,
-    keyBinding_Modifiers: [],
-    stretchCells: false,
-    rowCounts: [4, 3]
-}));
+__Main__1.FunctionBar.load(__webpack_require__(31).default, __webpack_require__(32).default, __webpack_require__(33).default, __Main__2.get_CardType_FunctionBar());
 __webpack_require__(34);
 
 
@@ -12488,7 +12482,12 @@ const CardType_Manager_1 = __webpack_require__(11);
 const RowBuilder_1 = __webpack_require__(30);
 const Position_1 = __webpack_require__(6);
 CardType_Manager_1.CardType_Manager.set_Card_HoverCallback();
-function get_CardType_FunctionBar(options) {
+function get_CardType_FunctionBar(options = {
+    position: Position_1.Position.Bottom,
+    autoMap_KeyBindings: true,
+    keyBinding_Modifiers: [],
+    stretchCells: true,
+}) {
     if (options.rowCounts) {
         return RowBuilder_1.get_ManualRow_FunctionBar(options);
     }
@@ -12499,15 +12498,6 @@ function get_CardType_FunctionBar(options) {
     }
 }
 exports.get_CardType_FunctionBar = get_CardType_FunctionBar;
-function get_Basic_CardType_FunctionBar() {
-    return get_CardType_FunctionBar({
-        position: Position_1.Position.Bottom,
-        autoMap_KeyBindings: true,
-        keyBinding_Modifiers: [],
-        stretchCells: false,
-    });
-}
-exports.get_Basic_CardType_FunctionBar = get_Basic_CardType_FunctionBar;
 
 
 /***/ }),
