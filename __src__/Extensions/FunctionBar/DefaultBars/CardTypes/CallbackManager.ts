@@ -3,7 +3,7 @@
 import {CardType_Filter} from "../../DefaultFunctions/CardType_Filter/__Main__"
 import {cardTypes      } from "~/Utils/KanbanTool"
 
-CardType_Filter.enable()
+
 export namespace CallbackManager{
 	let _entryIndex = -1
 	let _card       = undefined
@@ -47,7 +47,7 @@ export namespace CallbackManager{
 
 	function _get_OnClick(cardType){
 		return () =>
-			{window.alert(`LOLOL @ ${cardType.name}`)}
+			{CardType_Filter.toggle_CardTypes(cardType.index)}
 	}
 
 	function _update_CardType(cardType){

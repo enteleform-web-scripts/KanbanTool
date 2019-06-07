@@ -34,27 +34,17 @@ export class CardType_Filter{
 			{CardType_Filter._filterButton.click()}
 	}
 
-	static enable_All_CardTypes(){
-		CardType_Filter._disabled_CardType_Buttons.forEach(button => {
-			button.click()
-		})
-	}
-	static disable_All_CardTypes(){
-		CardType_Filter._enabled_CardType_Buttons.forEach(button => {
-			button.click()
-		})
-	}
-
 	static enable_CardTypes (...ids:(number|string)[]){_set_CardType_States(ids, CardType_Filter._disabled_CardType_Buttons)}
 	static disable_CardTypes(...ids:(number|string)[]){_set_CardType_States(ids, CardType_Filter._enabled_CardType_Buttons )}
 	static toggle_CardTypes (...ids:(number|string)[]){_set_CardType_States(ids, CardType_Filter._cardType_Buttons         )}
 
 }
 
-//###  !!!!!!!!!!!!!!!!!  ###//
-//###  !!! TEMPORARY !!!  ###//
-//###  !!!!!!!!!!!!!!!!!  ###//
-(window as any).CF = CardType_Filter
+//##############//
+//###  Init  ###//
+//##############//
+CardType_Filter.enable()
+CardType_Filter.enable_CardTypes()
 
 
 //###############//
