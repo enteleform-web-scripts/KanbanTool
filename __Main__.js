@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559886927953)
+		const elapsedTime = _get_ElapsedTime(1559888762889)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:55:27 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:26:02 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12120,11 +12120,12 @@ const Settings_1 = __webpack_require__(5);
 const __Main__1 = __webpack_require__(2);
 class Entry {
     constructor({ name, callback, on_Click, on_KeyBinding, on_Layout, keyBinding, color, }) {
+        callback = (callback || emptyCallback);
         this.name = name;
-        this.callback = (callback || ((cell) => { }));
+        this.callback = callback;
         this.on_Click = (on_Click || callback);
         this.on_KeyBinding = (on_KeyBinding || callback);
-        this.on_Layout = (on_Layout || ((cell) => { }));
+        this.on_Layout = (on_Layout || emptyCallback);
         this.keyBinding = keyBinding;
         this.color = color;
     }
@@ -12150,6 +12151,7 @@ class Entry {
     }
 }
 exports.Entry = Entry;
+const emptyCallback = ((cell) => { });
 
 
 /***/ }),
