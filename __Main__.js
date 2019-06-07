@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559884706891)
+		const elapsedTime = _get_ElapsedTime(1559885535278)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:18:26 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:32:15 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11023,7 +11023,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(14);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(29);
-__Main__1.FunctionBar.load(__webpack_require__(31).default, __webpack_require__(32).default, __webpack_require__(33).default, __Main__2.get_CardType_FunctionBar());
+__Main__1.FunctionBar.load(__webpack_require__(31).default, __webpack_require__(32).default, __webpack_require__(33).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [2, 2, 3] }));
 __webpack_require__(34);
 
 
@@ -12479,7 +12479,8 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const CardType_Manager_1 = __webpack_require__(11);
-const RowBuilder_1 = __webpack_require__(30);
+const __Main__1 = __webpack_require__(1);
+const get_Rows_1 = __webpack_require__(30);
 const Position_1 = __webpack_require__(6);
 CardType_Manager_1.CardType_Manager.set_Card_HoverCallback();
 function get_CardType_FunctionBar(options = {
@@ -12488,16 +12489,22 @@ function get_CardType_FunctionBar(options = {
     keyBinding_Modifiers: [],
     stretchCells: true,
 }) {
-    if (options.rowCounts) {
-        return RowBuilder_1.get_ManualRow_FunctionBar(options);
-    }
-    else {
-        {
-            return RowBuilder_1.get_AutoRow_FunctionBar(options);
-        }
-    }
+    const cardType_Rows = (options.rowCounts)
+        ? get_Rows_1.get_Manual_CardType_Rows(options.rowCounts)
+        : get_Rows_1.get_Auto_CardType_Rows();
+    return _build_FunctionBar(options, cardType_Rows);
 }
 exports.get_CardType_FunctionBar = get_CardType_FunctionBar;
+function _build_FunctionBar(options, cardType_Rows) {
+    const entryGroups = cardType_Rows.map(row => row.map(cardType => new __Main__1.FunctionBar.Entry({
+        name: cardType.name,
+        ...CardType_Manager_1.CardType_Manager.get_Callbacks(),
+    })));
+    return new __Main__1.FunctionBar({
+        ...options,
+        entryGroups,
+    });
+}
 
 
 /***/ }),
@@ -12507,41 +12514,12 @@ exports.get_CardType_FunctionBar = get_CardType_FunctionBar;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(1);
-const { Entry } = __Main__1.FunctionBar;
 const CardType_Manager_1 = __webpack_require__(11);
-const __Main__2 = __webpack_require__(2);
-function get_AutoRow_FunctionBar(options) {
-    return _build_FunctionBar({
-        cardType_Rows: _get_Auto_CardType_Rows(),
-        ...options,
-    });
-}
-exports.get_AutoRow_FunctionBar = get_AutoRow_FunctionBar;
-function get_ManualRow_FunctionBar(options) {
-    return _build_FunctionBar({
-        cardType_Rows: _get_Manual_CardType_Rows(options.rowCounts),
-        ...options,
-    });
-}
-exports.get_ManualRow_FunctionBar = get_ManualRow_FunctionBar;
-function _build_FunctionBar({ position, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cardType_Rows, }) {
-    const entryGroups = cardType_Rows.map(row => row.map(cardType => new Entry({
-        name: cardType.name,
-        ...CardType_Manager_1.CardType_Manager.get_Callbacks(),
-    })));
-    return new __Main__1.FunctionBar({
-        position,
-        autoMap_KeyBindings,
-        keyBinding_Modifiers,
-        stretchCells,
-        entryGroups,
-    });
-}
-function _get_Auto_CardType_Rows() {
+const __Main__1 = __webpack_require__(2);
+function get_Auto_CardType_Rows() {
     let cardType_Rows = [];
     let cardIndex = 0;
-    for (const keyRow of __Main__2.KeyBinding.alphanumericKey_Rows) {
+    for (const keyRow of __Main__1.KeyBinding.alphanumericKey_Rows) {
         if (_cardTypes_Exhausted(cardIndex)) {
             break;
         }
@@ -12558,8 +12536,8 @@ function _get_Auto_CardType_Rows() {
     }
     return cardType_Rows;
 }
-function _cardTypes_Exhausted(cardIndex) { return (cardIndex == CardType_Manager_1.cardTypes.length); }
-function _get_Manual_CardType_Rows(rowCounts) {
+exports.get_Auto_CardType_Rows = get_Auto_CardType_Rows;
+function get_Manual_CardType_Rows(rowCounts) {
     const rows = [];
     let startIndex = 0;
     for (let i = 0; (i < rowCounts.length); i++) {
@@ -12571,6 +12549,8 @@ function _get_Manual_CardType_Rows(rowCounts) {
     }
     return rows;
 }
+exports.get_Manual_CardType_Rows = get_Manual_CardType_Rows;
+function _cardTypes_Exhausted(cardIndex) { return (cardIndex == CardType_Manager_1.cardTypes.length); }
 
 
 /***/ }),
