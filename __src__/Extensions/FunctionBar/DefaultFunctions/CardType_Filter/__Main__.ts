@@ -67,8 +67,8 @@ function _set_CardType_States(
 	indexes:          number[],
 	target_CardTypes: JQuery[],
 ){
-	// apply state @ all cards
-	if(indexes.length == 0)
+	const apply_State_To_AllCards = (indexes.length == 0)
+	if(apply_State_To_AllCards)
 		{indexes = CardType_Filter._cardType_Buttons.map((value, index) => index)}
 
 	indexes.forEach(index => {
