@@ -50,7 +50,7 @@ export class Layout{
 				const toggleButton = $(toggleButton_Selector)
 				toggleButton.on("click", callback)
 
-				const container = $(containerSelector)
+				const container = $(`${containerSelector}:not(.${cssVariables.collapsed})`)
 				container.on("dblclick", callback)
 
 				KeyBinding.add(
