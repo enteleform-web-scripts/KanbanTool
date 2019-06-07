@@ -73,7 +73,7 @@ function _set_CardType_States(
 
 	for(const id of ids){
 		const index = _get_CardType_Index(id)
-		if(! index)
+		if(index == undefined)
 			{continue}
 
 		const button = cardType_Buttons[index]
