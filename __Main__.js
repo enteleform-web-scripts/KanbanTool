@@ -10460,69 +10460,6 @@ return jQuery;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(__dirname) {
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(15).inject(__dirname, { CSS: true, HTML: true });
-const Settings_1 = __webpack_require__(5);
-const Entry_1 = __webpack_require__(21);
-const Layout_1 = __webpack_require__(22);
-const Module_BaseClasses_1 = __webpack_require__(25);
-const Position_1 = __webpack_require__(6);
-class FunctionBar extends Module_BaseClasses_1.Module {
-    constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells }) {
-        super();
-        this.position = position;
-        this.entryGroups = entryGroups;
-        this.autoMap_KeyBindings = (autoMap_KeyBindings || false);
-        this.keyBinding_Modifiers = (keyBinding_Modifiers || []);
-        this.stretchCells = (stretchCells || false);
-    }
-    static load(...functionBars) {
-        functionBars.forEach(functionBar => {
-            functionBar.initialize();
-        });
-        Layout_1.Layout.initialize_KeyBindings();
-    }
-    initialize() {
-        this._validate_AutoMapped_Rows();
-        this.layout = new Layout_1.Layout(this);
-    }
-    get is_HorizontalBar() { return Position_1.is_HorizontalPosition(this.position); }
-    get is_VerticalBar() { return Position_1.is_VerticalPosition(this.position); }
-    _validate_AutoMapped_Rows() {
-        if (!this.autoMap_KeyBindings) {
-            return;
-        }
-        const valid_GroupCount = (this.entryGroups.length <= Settings_1.autoMapped_Key_Rows.length);
-        const valid_KeyCounts = this.entryGroups.every((group, i) => (group.length <= Settings_1.autoMapped_Key_Rows[i].length));
-        if (!(valid_GroupCount && valid_KeyCounts)) {
-            const position = this.position.valueOf();
-            throw new Error(`
-				Invalid FunctionBar Group/Entry Count @ ${position} Bar
-			`);
-        }
-    }
-}
-FunctionBar.Entry = Entry_1.Entry;
-FunctionBar.Position = Position_1.Position;
-FunctionBar.Show = __webpack_require__(8).default;
-FunctionBar.Hide = __webpack_require__(27).default;
-exports.FunctionBar = FunctionBar;
-(function (FunctionBar) {
-    let KeyBinding_Mode;
-    (function (KeyBinding_Mode) {
-        KeyBinding_Mode[KeyBinding_Mode["Automatic"] = 0] = "Automatic";
-        KeyBinding_Mode[KeyBinding_Mode["Manual"] = 1] = "Manual";
-    })(KeyBinding_Mode = FunctionBar.KeyBinding_Mode || (FunctionBar.KeyBinding_Mode = {}));
-})(FunctionBar = exports.FunctionBar || (exports.FunctionBar = {}));
-
-/* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\FunctionBar"))
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -10600,7 +10537,7 @@ function _get_HotKey_Array_AsString(keys) {
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10610,6 +10547,70 @@ exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
 exports.KanbanTool.activeBoard = exports.activeBoard;
 
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(__dirname) {
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(15).inject(__dirname, { CSS: true, HTML: true });
+const Settings_1 = __webpack_require__(5);
+const Entry_1 = __webpack_require__(21);
+const Layout_1 = __webpack_require__(22);
+const Module_BaseClasses_1 = __webpack_require__(25);
+const Position_1 = __webpack_require__(6);
+class FunctionBar extends Module_BaseClasses_1.Module {
+    constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
+        super();
+        this.position = position;
+        this.entryGroups = entryGroups;
+        this.autoMap_KeyBindings = (autoMap_KeyBindings || false);
+        this.keyBinding_Modifiers = (keyBinding_Modifiers || []);
+        this.stretchCells = (stretchCells || false);
+        this.cellProperties = (cellProperties || []);
+    }
+    static load(...functionBars) {
+        functionBars.forEach(functionBar => {
+            functionBar.initialize();
+        });
+        Layout_1.Layout.initialize_KeyBindings();
+    }
+    initialize() {
+        this._validate_AutoMapped_Rows();
+        this.layout = new Layout_1.Layout(this);
+    }
+    get is_HorizontalBar() { return Position_1.is_HorizontalPosition(this.position); }
+    get is_VerticalBar() { return Position_1.is_VerticalPosition(this.position); }
+    _validate_AutoMapped_Rows() {
+        if (!this.autoMap_KeyBindings) {
+            return;
+        }
+        const valid_GroupCount = (this.entryGroups.length <= Settings_1.autoMapped_Key_Rows.length);
+        const valid_KeyCounts = this.entryGroups.every((group, i) => (group.length <= Settings_1.autoMapped_Key_Rows[i].length));
+        if (!(valid_GroupCount && valid_KeyCounts)) {
+            const position = this.position.valueOf();
+            throw new Error(`
+				Invalid FunctionBar Group/Entry Count @ ${position} Bar
+			`);
+        }
+    }
+}
+FunctionBar.Entry = Entry_1.Entry;
+FunctionBar.Position = Position_1.Position;
+FunctionBar.Show = __webpack_require__(8).default;
+FunctionBar.Hide = __webpack_require__(27).default;
+exports.FunctionBar = FunctionBar;
+(function (FunctionBar) {
+    let KeyBinding_Mode;
+    (function (KeyBinding_Mode) {
+        KeyBinding_Mode[KeyBinding_Mode["Automatic"] = 0] = "Automatic";
+        KeyBinding_Mode[KeyBinding_Mode["Manual"] = 1] = "Manual";
+    })(KeyBinding_Mode = FunctionBar.KeyBinding_Mode || (FunctionBar.KeyBinding_Mode = {}));
+})(FunctionBar = exports.FunctionBar || (exports.FunctionBar = {}));
+
+/* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\FunctionBar"))
 
 /***/ }),
 /* 4 */
@@ -10648,10 +10649,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559889010839)
+		const elapsedTime = _get_ElapsedTime(1559926934795)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:30:10 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:02:14 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10669,7 +10670,7 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(1);
 exports.css_Timeout_MS = 500;
 exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
 exports.functionBar_ToggleModifiers = ["shift", "alt"];
@@ -10702,7 +10703,7 @@ exports.is_VerticalPosition = is_VerticalPosition;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(3);
+const KanbanTool_1 = __webpack_require__(2);
 const $ = __webpack_require__(0);
 class TaskContainer {
     constructor({ type, domIndex, modelIndex, model, element }) {
@@ -10875,7 +10876,7 @@ function _match_Glob(container, target) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(7);
-const KanbanTool_1 = __webpack_require__(3);
+const KanbanTool_1 = __webpack_require__(2);
 const $ = __webpack_require__(0);
 function get_Rows() {
     const headerElements = $.find("kt-board > tbody > tr > th");
@@ -10900,7 +10901,7 @@ exports.get_Rows = get_Rows;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(7);
-const KanbanTool_1 = __webpack_require__(3);
+const KanbanTool_1 = __webpack_require__(2);
 function get_Columns() {
     const models = KanbanTool_1.activeBoard.workflowStages()
         .slice(1);
@@ -10954,7 +10955,7 @@ function _update_ColumnRelationships(columns) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(3);
+const KanbanTool_1 = __webpack_require__(2);
 exports.cardTypes = KanbanTool_1.activeBoard.cardTypes().active().map(({ attributes }) => ({
     id: attributes.id,
     name: attributes.name,
@@ -11023,10 +11024,10 @@ module.exports = __webpack_require__(13);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(14);
-const __Main__1 = __webpack_require__(1);
+const __Main__1 = __webpack_require__(3);
 const __Main__2 = __webpack_require__(29);
-__Main__1.FunctionBar.load(__webpack_require__(31).default, __webpack_require__(32).default, __webpack_require__(33).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 3], stretchCells: false }));
-__webpack_require__(34);
+__Main__1.FunctionBar.load(__webpack_require__(31).default, __webpack_require__(32).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 3], cellWidth: 150, stretchCells: false }));
+__webpack_require__(33);
 
 
 /***/ }),
@@ -12117,7 +12118,7 @@ if (typeof window !== 'undefined') {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(5);
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(1);
 class Entry {
     constructor({ name, callback, on_Click, on_KeyBinding, on_Layout, keyBinding, color, }) {
         callback = (callback || emptyCallback);
@@ -12164,7 +12165,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cssVariables = __webpack_require__(23);
 const Position_1 = __webpack_require__(6);
 const __main__1 = __webpack_require__(24);
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(1);
 const Settings_1 = __webpack_require__(5);
 const $ = __webpack_require__(0);
 class Layout {
@@ -12199,6 +12200,7 @@ class Layout {
         cell.html(text);
         cell.on("click", () => entry.on_Click(cell));
         entry.on_Layout(cell);
+        this._apply_CellProperties(cell);
         this.subContainers[groupIndex].append(cell);
     }
     _build() {
@@ -12219,6 +12221,11 @@ class Layout {
                 this.add_Cell(entry, groupIndex, keyBinding);
             });
         });
+    }
+    _apply_CellProperties(cell) {
+        for (const { functionName, args } of this._functionBar.cellProperties) {
+            cell[functionName](...args);
+        }
     }
 }
 exports.Layout = Layout;
@@ -12399,7 +12406,7 @@ function _is_Empty(container, emptyContainer_Indexes) { return emptyContainer_In
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(3);
+const KanbanTool_1 = __webpack_require__(2);
 function get_EmptyRow_Indexes(columns) {
     const hiddenColumn_Indexes = columns
         .filter(column => column.is_Collapsed)
@@ -12486,14 +12493,19 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const CardType_Manager_1 = __webpack_require__(11);
 const get_Rows_1 = __webpack_require__(30);
-const __Main__1 = __webpack_require__(1);
+const __Main__1 = __webpack_require__(3);
 const Position_1 = __webpack_require__(6);
 CardType_Manager_1.CardType_Manager.set_Card_HoverCallback();
 function get_CardType_FunctionBar(options) {
     const cardType_Rows = (options.rowCounts)
         ? get_Rows_1.get_Manual_CardType_Rows(options.rowCounts)
         : get_Rows_1.get_Auto_CardType_Rows();
-    return _build_FunctionBar({ ..._Default_RowBuilder_Options, ...options }, cardType_Rows);
+    const mergedOptions = { ..._Default_RowBuilder_Options, ...options };
+    if (options.cellWidth) {
+        mergedOptions.cellProperties.push({ functionName: "width", args: [options.cellWidth] });
+    }
+    delete mergedOptions.cellWidth;
+    return _build_FunctionBar(mergedOptions, cardType_Rows);
 }
 exports.get_CardType_FunctionBar = get_CardType_FunctionBar;
 const _Default_RowBuilder_Options = {
@@ -12502,6 +12514,7 @@ const _Default_RowBuilder_Options = {
     keyBinding_Modifiers: [],
     stretchCells: true,
     rowCounts: undefined,
+    cellProperties: [],
 };
 function _build_FunctionBar(options, cardType_Rows) {
     const entryGroups = cardType_Rows.map(row => row.map(cardType => new __Main__1.FunctionBar.Entry({
@@ -12523,7 +12536,7 @@ function _build_FunctionBar(options, cardType_Rows) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const CardType_Manager_1 = __webpack_require__(11);
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(1);
 function get_Auto_CardType_Rows() {
     let cardType_Rows = [];
     let cardIndex = 0;
@@ -12568,7 +12581,7 @@ function _cardTypes_Exhausted(cardIndex) { return (cardIndex == CardType_Manager
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(1);
+const __Main__1 = __webpack_require__(3);
 const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
 exports.default = new __Main__1.FunctionBar({
     position: Position.Left,
@@ -12610,37 +12623,7 @@ exports.default = new __Main__1.FunctionBar({
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(1);
-const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
-exports.default = new __Main__1.FunctionBar({
-    position: Position.Right,
-    entryGroups: [
-        [
-            new Entry({
-                name: "LOL",
-                callback: () => {
-                    Show.allRows();
-                },
-            }),
-            new Entry({
-                name: "WUT",
-                callback: () => {
-                    Show.allColumns();
-                },
-            }),
-        ],
-    ],
-});
-
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(1);
+const __Main__1 = __webpack_require__(3);
 const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
 exports.default = new __Main__1.FunctionBar({
     position: Position.Top,
@@ -12703,7 +12686,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12721,7 +12704,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(1);
 const jquery_1 = __importDefault(__webpack_require__(0));
 const $ = jquery_1.default;
 class FilterKeybindings {
