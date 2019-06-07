@@ -13,25 +13,25 @@ export default new FunctionBar({
 		[
 			new Entry({
 				name: "Show: All Rows",
-				on_Load: () => {
+				callback: () => {
 					Show.allRows()
 				},
 			}),
 			new Entry({
 				name: "Show: All Columns",
-				on_Load: () => {
+				callback: () => {
 					Show.allColumns()
 				},
 			}),
 			new Entry({
 				name: "Hide: Empty Rows",
-				on_Load: () => {
+				callback: () => {
 					Hide.emptyRows()
 				},
 			}),
 			new Entry({
 				name: "Hide: Empty Columns",
-				on_Load: () => {
+				callback: () => {
 					Hide.emptyColumns()
 				},
 			}),

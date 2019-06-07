@@ -56,13 +56,15 @@ export class Layout{
 
 	add_Cell(entry:Entry, groupIndex:number, keyBinding:string){
 		const cell = $("<div>", {class:"cell"})
+		entry.cell = cell
 
 		let text = entry.name
 		if(keyBinding)
 			{text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`}
 
 		cell.html(text)
-		cell.on("click", entry.on_Load)
+		cell.on("click", () => entry.callback(cell))
+		entry.on_Layout(cell)
 
 		this.subContainers[groupIndex].append(cell)
 	}

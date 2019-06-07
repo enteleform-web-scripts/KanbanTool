@@ -7,16 +7,19 @@ export class Entry{
 	name:       string
 	color:      string
 	keyBinding: KeyBinding.CharacterKey
-	on_Load:    (() => void)
+	callback:   ((cell:JQuery) => void)
+	on_Layout:  ((cell:JQuery) => void)
+	cell:       JQuery
 
 	constructor(
-		{name,        color,         keyBinding,                             on_Load,            }:
-		{name:string, color?:string, keyBinding?:KeyBinding.AlphanumericKey, on_Load:(() => void)}
+		{name,        color,         keyBinding,                             callback,                         on_Layout,                        }:
+		{name:string, color?:string, keyBinding?:KeyBinding.AlphanumericKey, callback:((cell:JQuery) => void), on_Layout?:((cell:JQuery) => void)}
 	){
 		this.name       = name
 		this.color      = color
 		this.keyBinding = keyBinding
-		this.on_Load    = on_Load
+		this.callback   = callback
+		this.on_Layout  = (on_Layout || ((cell:JQuery) => {}))
 	}
 
 	initialize_KeyBinding(
@@ -54,7 +57,7 @@ export class Entry{
 	){
 		KeyBinding.add(
 			[...keyBinding_Modifiers, keyBinding],
-			this.on_Load,
+			(event:KeyboardEvent) => this.callback(this.cell),
 			{preventDefault: true}
 		)
 	}

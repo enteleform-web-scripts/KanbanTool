@@ -16,7 +16,7 @@ export default new FunctionBar({
 		[
 			new Entry({
 				name: "Today",
-				on_Load: () => {
+				callback: () => {
 					Show.rows({include:["Routine", "Tasks.Active"]})
 					Show.allColumns()
 					Hide.emptyColumns()
@@ -24,14 +24,14 @@ export default new FunctionBar({
 			}),
 			new Entry({
 				name: "Today.All",
-				on_Load: () => {
+				callback: () => {
 					Show.rows({include:["Routine", "Tasks.Active"]})
 					Show.allColumns()
 				},
 			}),
 			new Entry({
 				name: "All",
-				on_Load: () => {
+				callback: () => {
 					Show.allColumns()
 					Show.allRows()
 				},
@@ -41,7 +41,7 @@ export default new FunctionBar({
 		[
 			new Entry({
 				name: "Routine",
-				on_Load: () => {
+				callback: () => {
 					Show.rows({include:["Routine"]})
 					Show.allColumns()
 					Hide.emptyColumns()
@@ -49,7 +49,7 @@ export default new FunctionBar({
 			}),
 			new Entry({
 				name: "Tasks.Active",
-				on_Load: () => {
+				callback: () => {
 					Show.rows({include:["Tasks.Active"]})
 					Show.allColumns()
 					Hide.emptyColumns()
@@ -57,7 +57,7 @@ export default new FunctionBar({
 			}),
 			new Entry({
 				name: "Routine.Short",
-				on_Load: () => {
+				callback: () => {
 					Show.rows({include:["Routine.Short"]})
 					Show.allColumns()
 					Hide.emptyColumns()

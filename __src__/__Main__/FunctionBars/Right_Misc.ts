@@ -13,13 +13,13 @@ export default new FunctionBar({
 		[
 			new Entry({
 				name: "LOL",
-				on_Load: () => {
+				callback: () => {
 					Show.allRows()
 				},
 			}),
 			new Entry({
 				name: "WUT",
-				on_Load: () => {
+				callback: () => {
 					Show.allColumns()
 				},
 			}),

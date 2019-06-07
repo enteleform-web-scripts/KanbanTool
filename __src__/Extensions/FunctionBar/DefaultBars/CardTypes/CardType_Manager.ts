@@ -3,16 +3,19 @@
 import {activeBoard} from "~/Utils/KanbanTool"
 
 
-const _cardTypes = activeBoard.cardTypes().active()
-
-const cardTypes =
+export const cardTypes =
 	activeBoard.cardTypes().active().map(
 		({attributes}) => ({
-			color: attributes.color_attrs.rgb,
-			name:  attributes.name,
+			id:      attributes.id,
+			name:    attributes.name,
+			bgColor: attributes.color_attrs.rgb,
+			fgColor: (
+				attributes.color_attrs.invert
+				? "#000"
+				: "#FFF"
+			),
 		})
 	)
-console.log(cardTypes)
 
 
 export namespace CardType_Manager{
@@ -31,11 +34,26 @@ export namespace CardType_Manager{
 		})
 	}
 
-	export function get_OnLoad(){
+	export function get_Callbacks(){
 		_entryIndex += 1
-		const cardType = _cardTypes[_entryIndex]
+		const cardType = cardTypes[_entryIndex]
+
+		return {
+			callback:  _get_Callback(cardType),
+			on_Layout: _get_OnLayout(cardType),
+		}
+	}
+
+	export function _get_Callback(cardType){
 		return () =>
 			{_update_CardType(cardType)}
+	}
+
+	export function _get_OnLayout(cardType){
+		return (cell:JQuery) => {
+			cell.css("background-color", cardType.bgColor)
+			cell.css("color",            cardType.fgColor)
+		}
 	}
 
 	function _update_CardType(cardType){
