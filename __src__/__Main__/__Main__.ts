@@ -11,14 +11,7 @@ FunctionBar.load(
 	require("./FunctionBars/Left_Commands"     ).default,
 	require("./FunctionBars/Right_Misc"        ).default,
 	require("./FunctionBars/Top_BoardFilters"  ).default,
-	get_CardType_FunctionBar(),
-	// get_CardType_FunctionBar({
-	// 	position:             FunctionBar.Position.Bottom,
-	// 	autoMap_KeyBindings:  true,
-	// 	keyBinding_Modifiers: [],
-	// 	stretchCells:         false,
-	// 	rowCounts:            [4, 3]
-	// }),
+	get_CardType_FunctionBar({rowCounts: [2, 2, 3]}),
 )
 
 //#####################//
