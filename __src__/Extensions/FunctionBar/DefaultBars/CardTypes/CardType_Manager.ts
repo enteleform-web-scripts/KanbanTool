@@ -50,8 +50,8 @@ export namespace CardType_Manager{
 			cell.css({
 				// "background-color": cardType.bgColor,
 				// "color":            cardType.fgColor,
-				"box-shadow":  `inset 0px 10px 0px -5px ${cardType.bgColor}, inset 0px 16px 0px -10px #AAA`,
-				"padding-top": "12px",
+				"box-shadow":  `inset 0 7px 0 0 ${cardType.bgColor}, inset 0 8px 0 0 #AAA`,
+				"padding-top": "14px",
 			})
 		}
 	}
