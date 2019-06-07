@@ -10648,10 +10648,10 @@ function _get_HotKey_Array_AsString(keys) {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559876146483)
+		const elapsedTime = _get_ElapsedTime(1559876396175)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:55:46 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     10:59:56 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10965,7 +10965,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(13);
 const __Main__1 = __webpack_require__(1);
 __Main__1.FunctionBar.load(__webpack_require__(28).default, __webpack_require__(29).default, __webpack_require__(30).default, __webpack_require__(31).default);
-__webpack_require__(32);
+__webpack_require__(33);
 
 
 /***/ }),
@@ -12559,8 +12559,9 @@ exports.default = new __Main__1.FunctionBar({
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(1);
 const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
-const KanbanTool_1 = __webpack_require__(2);
-_CardType_Manager.set_Card_HoverCallback();
+const Bottom_CardFilters_Utils_1 = __webpack_require__(32);
+Bottom_CardFilters_Utils_1._CardType_Manager.set_Card_HoverCallback();
+const get_OnLoad = Bottom_CardFilters_Utils_1._CardType_Manager.get_OnLoad;
 exports.default = new __Main__1.FunctionBar({
     position: Position.Bottom,
     autoMap_KeyBindings: true,
@@ -12568,53 +12569,33 @@ exports.default = new __Main__1.FunctionBar({
     stretchCells: false,
     entryGroups: [
         [
-            new Entry({
-                name: "Today.Low",
-                on_Load: _CardType_Manager.get_OnLoad(),
-            }),
-            new Entry({
-                name: "Today.Medium",
-                on_Load: _CardType_Manager.get_OnLoad(),
-            }),
-            new Entry({
-                name: "Today.High",
-                on_Load: _CardType_Manager.get_OnLoad(),
-            }),
-            new Entry({
-                name: "Today.Urgent",
-                on_Load: _CardType_Manager.get_OnLoad(),
-            }),
+            new Entry({ name: "Today.Low", on_Load: get_OnLoad() }),
+            new Entry({ name: "Today.Medium", on_Load: get_OnLoad() }),
+            new Entry({ name: "Today.High", on_Load: get_OnLoad() }),
+            new Entry({ name: "Today.Urgent", on_Load: get_OnLoad() }),
         ],
         [
-            new Entry({
-                name: "Low",
-                on_Load: _CardType_Manager.get_OnLoad(),
-            }),
-            new Entry({
-                name: "Medium",
-                on_Load: _CardType_Manager.get_OnLoad(),
-            }),
-            new Entry({
-                name: "High",
-                on_Load: _CardType_Manager.get_OnLoad(),
-            }),
-            new Entry({
-                name: "Urgent",
-                on_Load: _CardType_Manager.get_OnLoad(),
-            }),
+            new Entry({ name: "Low", on_Load: get_OnLoad() }),
+            new Entry({ name: "Medium", on_Load: get_OnLoad() }),
+            new Entry({ name: "High", on_Load: get_OnLoad() }),
+            new Entry({ name: "Urgent", on_Load: get_OnLoad() }),
         ],
         [
-            new Entry({
-                name: "DailyTask",
-                on_Load: _CardType_Manager.get_OnLoad(),
-            }),
-            new Entry({
-                name: "Book",
-                on_Load: _CardType_Manager.get_OnLoad(),
-            }),
+            new Entry({ name: "DailyTask", on_Load: get_OnLoad() }),
+            new Entry({ name: "Book", on_Load: get_OnLoad() }),
         ],
     ],
 });
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const KanbanTool_1 = __webpack_require__(2);
 const _cardTypes = KanbanTool_1.activeBoard.cardTypes().active();
 var _CardType_Manager;
 (function (_CardType_Manager) {
@@ -12641,11 +12622,11 @@ var _CardType_Manager;
             _card.props.task.save("card_type_id", cardType.id);
         }
     }
-})(_CardType_Manager || (_CardType_Manager = {}));
+})(_CardType_Manager = exports._CardType_Manager || (exports._CardType_Manager = {}));
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
