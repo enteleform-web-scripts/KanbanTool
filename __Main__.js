@@ -10671,10 +10671,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559943795150)
+		const elapsedTime = _get_ElapsedTime(1559943882091)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:43:15 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:44:42 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12589,7 +12589,7 @@ class CardType_Filter {
 exports.CardType_Filter = CardType_Filter;
 window.CF = CardType_Filter;
 function _set_CardType_States(indexes, target_CardTypes) {
-    if (indexes.length > 0) {
+    if (indexes.length == 0) {
         indexes = CardType_Filter._cardType_Buttons.map((value, index) => index);
     }
     indexes.forEach(index => {
