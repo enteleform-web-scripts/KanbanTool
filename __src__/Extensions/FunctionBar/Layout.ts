@@ -10,7 +10,6 @@ import {
 	css_Timeout_MS,
 	functionBar_ToggleModifiers,
 } from "./Settings"
-import {CellProperty} from "./CellProperty";
 
 //###  NPM  ###//
 const $:any = require("jquery")

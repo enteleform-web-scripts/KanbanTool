@@ -2,8 +2,7 @@
 import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
 
 //###  NPM  ###//
-import jquery from "jquery"
-const $:any = jquery
+const $:any = require("jquery")
 
 
 class FilterKeybindings{

@@ -1,10 +1,10 @@
 
 //###  Module  ###//
-import {CardType_Manager                                } from "./CardType_Manager"
+import {CallbackManager                                 } from "./CallbackManager"
 import {get_Manual_CardType_Rows, get_Auto_CardType_Rows} from "./get_Rows"
 import {FunctionBar                                     } from "../../__Main__"
 import {CellProperty                                    } from "../../CellProperty"
-import {Position, VerticalPosition                      } from "../../Position";
+import {Position, VerticalPosition                      } from "../../Position"
 import {KeyBinding                                      } from "~/Utils/KeyBinding/__Main__"
 
 
@@ -12,7 +12,7 @@ import {KeyBinding                                      } from "~/Utils/KeyBindi
 //###  Setup  ###//
 //###############//
 
-CardType_Manager.set_Card_HoverCallback()
+CallbackManager.set_Card_HoverCallback()
 
 
 //#################//
@@ -70,7 +70,7 @@ function _build_FunctionBar(options:_RowBuilder_Options, cardType_Rows:any[][]){
 		row.map(cardType =>
 			new FunctionBar.Entry({
 				name: cardType.name,
-				...CardType_Manager.get_Callbacks(),
+				...CallbackManager.get_Callbacks(),
 			}),
 		)
 	)

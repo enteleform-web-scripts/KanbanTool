@@ -1,6 +1,7 @@
 //###  NPM  ###//
-import $ from "jquery";
+const $:any = require("jquery")
 
+export const lol = "wut"
 
 const DELETE_KEYCODE = 46
 

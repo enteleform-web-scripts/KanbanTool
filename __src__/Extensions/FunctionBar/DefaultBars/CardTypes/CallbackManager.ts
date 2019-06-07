@@ -1,24 +1,10 @@
 
 //###  Module  ###//
-import {activeBoard} from "~/Utils/KanbanTool"
+import {CardType_Filter} from "../../DefaultFunctions/CardType_Filter/__Main__"
+import {cardTypes      } from "~/Utils/KanbanTool"
 
-
-export const cardTypes =
-	activeBoard.cardTypes().active().map(
-		({attributes}) => ({
-			id:      attributes.id,
-			name:    attributes.name,
-			bgColor: attributes.color_attrs.rgb,
-			fgColor: (
-				attributes.color_attrs.invert
-				? "#FFF"
-				: "#000"
-			),
-		})
-	)
-
-
-export namespace CardType_Manager{
+CardType_Filter.enable()
+export namespace CallbackManager{
 	let _entryIndex = -1
 	let _card       = undefined
 
