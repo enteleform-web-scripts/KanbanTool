@@ -10648,10 +10648,10 @@ function _get_HotKey_Array_AsString(keys) {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559876775805)
+		const elapsedTime = _get_ElapsedTime(1559876810394)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:06:15 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:06:50 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12560,8 +12560,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(1);
 const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
 const Bottom_CardFilters_Utils_1 = __webpack_require__(32);
-Bottom_CardFilters_Utils_1._CardType_Manager.set_Card_HoverCallback();
-const get_OnLoad = Bottom_CardFilters_Utils_1._CardType_Manager.get_OnLoad;
+Bottom_CardFilters_Utils_1.CardType_Manager.set_Card_HoverCallback();
+const get_OnLoad = Bottom_CardFilters_Utils_1.CardType_Manager.get_OnLoad;
 exports.default = new __Main__1.FunctionBar({
     position: Position.Bottom,
     autoMap_KeyBindings: true,
@@ -12602,8 +12602,8 @@ const cardTypes = KanbanTool_1.activeBoard.cardTypes().active().map(({ attribute
     name: attributes.name,
 }));
 console.log(cardTypes);
-var _CardType_Manager;
-(function (_CardType_Manager) {
+var CardType_Manager;
+(function (CardType_Manager) {
     let _entryIndex = -1;
     let _card = undefined;
     function set_Card_HoverCallback() {
@@ -12615,19 +12615,19 @@ var _CardType_Manager;
             _card = null;
         });
     }
-    _CardType_Manager.set_Card_HoverCallback = set_Card_HoverCallback;
+    CardType_Manager.set_Card_HoverCallback = set_Card_HoverCallback;
     function get_OnLoad() {
         _entryIndex += 1;
         const cardType = _cardTypes[_entryIndex];
         return () => { _update_CardType(cardType); };
     }
-    _CardType_Manager.get_OnLoad = get_OnLoad;
+    CardType_Manager.get_OnLoad = get_OnLoad;
     function _update_CardType(cardType) {
         if (_card) {
             _card.props.task.save("card_type_id", cardType.id);
         }
     }
-})(_CardType_Manager = exports._CardType_Manager || (exports._CardType_Manager = {}));
+})(CardType_Manager = exports.CardType_Manager || (exports.CardType_Manager = {}));
 
 
 /***/ }),
