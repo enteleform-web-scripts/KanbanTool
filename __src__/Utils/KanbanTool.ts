@@ -6,7 +6,8 @@ KanbanTool.activeBoard = activeBoard
 
 export const cardTypes =
 	activeBoard.cardTypes().active().map(
-		({attributes}) => ({
+		({attributes}, index) => ({
+			index:   index,
 			id:      attributes.id,
 			name:    attributes.name,
 			bgColor: attributes.color_attrs.rgb,
