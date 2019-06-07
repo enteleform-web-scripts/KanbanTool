@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559885535278)
+		const elapsedTime = _get_ElapsedTime(1559885940999)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:32:15 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:39:00 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10983,20 +10983,22 @@ var CardType_Manager;
         return {
             callback: _get_Callback(cardType),
             on_Layout: _get_OnLayout(cardType),
+            on_Click: _get_OnClick(cardType),
         };
     }
     CardType_Manager.get_Callbacks = get_Callbacks;
     function _get_Callback(cardType) {
-        return () => { _update_CardType(cardType); };
+        return (cell) => { _update_CardType(cardType); };
     }
-    CardType_Manager._get_Callback = _get_Callback;
     function _get_OnLayout(cardType) {
         return (cell) => {
             cell.css("background-color", cardType.bgColor);
             cell.css("color", cardType.fgColor);
         };
     }
-    CardType_Manager._get_OnLayout = _get_OnLayout;
+    function _get_OnClick(cardType) {
+        return () => { window.alert(`LOL @ ${cardType.name}`); };
+    }
     function _update_CardType(cardType) {
         if (_card) {
             _card.props.task.save("card_type_id", cardType.id);
@@ -12117,12 +12119,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(5);
 const __Main__1 = __webpack_require__(2);
 class Entry {
-    constructor({ name, color, keyBinding, callback, on_Layout, }) {
+    constructor({ name, callback, keyBinding, on_Layout, on_Click, color, }) {
         this.name = name;
         this.color = color;
         this.keyBinding = keyBinding;
         this.callback = callback;
         this.on_Layout = (on_Layout || ((cell) => { }));
+        this.on_Click = (on_Click || callback);
     }
     initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex) {
         const keyBinding = this._get_Entry_KeyBinding(autoMap_KeyBindings, groupIndex, entryIndex);
@@ -12191,7 +12194,7 @@ class Layout {
             text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`;
         }
         cell.html(text);
-        cell.on("click", () => entry.callback(cell));
+        cell.on("click", () => entry.on_Click(cell));
         entry.on_Layout(cell);
         this.subContainers[groupIndex].append(cell);
     }
