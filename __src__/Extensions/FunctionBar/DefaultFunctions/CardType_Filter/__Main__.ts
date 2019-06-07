@@ -19,10 +19,10 @@ export class CardType_Filter{
 	static get _cardType_Buttons()
 		{return $(".kt-board_search-processors-card_types").children()}
 
-	static get _enabled_CardType_Buttons()
-		{return $.find(".kt-board_search-processors-card_types > .kt-board_search-processors-card_types--active")}
-	static get _disabled_CardType_Buttons()
-		{return $.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)")}
+	static get _enabled_CardType_Buttons(): JQuery[]
+		{return Array.from($.find(".kt-board_search-processors-card_types > .kt-board_search-processors-card_types--active"))}
+	static get _disabled_CardType_Buttons(): JQuery[]
+		{return Array.from($.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)"))}
 
 	static enable(){
 		if(CardType_Filter.disabled)
