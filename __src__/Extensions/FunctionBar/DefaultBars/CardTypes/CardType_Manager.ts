@@ -48,9 +48,7 @@ export namespace CardType_Manager{
 	function _get_OnLayout(cardType){
 		return (cell:JQuery) => {
 			cell.css({
-				// "background-color": cardType.bgColor,
-				// "color":            cardType.fgColor,
-				"box-shadow":  `inset 7px 0 0 0 ${cardType.bgColor}, inset 8px 0 0 0 #AAA`,
+				"box-shadow":  `inset 0 7px 0 0 ${cardType.bgColor}, inset 0 8px 0 0 #AAA`,
 				"padding-top": "14px",
 			})
 		}
