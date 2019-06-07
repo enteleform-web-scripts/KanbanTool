@@ -10,6 +10,7 @@
   height: 100%;
   z-index: 1000;
   pointer-events: none;
+  user-select: none;
 }
 .CustomExtension__FunctionBar .left,
 .CustomExtension__FunctionBar .right,
@@ -82,7 +83,6 @@
   min-height: fit-content;
   padding: 5px;
   overflow: hidden;
-  user-select: none;
   cursor: pointer;
   border: 1px solid var(--BorderColor);
   background: #d9d9de;
