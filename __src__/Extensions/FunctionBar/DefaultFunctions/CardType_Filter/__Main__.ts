@@ -33,12 +33,12 @@ export class CardType_Filter{
 			{CardType_Filter._filterButton.click()}
 	}
 
-	static add_All_CardTypes(){
+	static enable_All_CardTypes(){
 		CardType_Filter._disabled_CardType_Buttons.forEach(button => {
 			button.click()
 		})
 	}
-	static remove_All_CardTypes(){
+	static disable_All_CardTypes(){
 		CardType_Filter._enabled_CardType_Buttons.forEach(button => {
 			button.click()
 		})
