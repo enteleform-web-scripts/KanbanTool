@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559888762889)
+		const elapsedTime = _get_ElapsedTime(1559889010839)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:26:02 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:30:10 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12645,7 +12645,7 @@ const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
 exports.default = new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
-    keyBinding_Modifiers: ["ctrl", "shift", "alt"],
+    keyBinding_Modifiers: ["shift", "alt"],
     stretchCells: false,
     entryGroups: [
         [
