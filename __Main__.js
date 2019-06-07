@@ -10649,10 +10649,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559926934795)
+		const elapsedTime = _get_ElapsedTime(1559927531951)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:02:14 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:12:11 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12501,10 +12501,7 @@ function get_CardType_FunctionBar(options) {
         ? get_Rows_1.get_Manual_CardType_Rows(options.rowCounts)
         : get_Rows_1.get_Auto_CardType_Rows();
     const mergedOptions = { ..._Default_RowBuilder_Options, ...options };
-    if (options.cellWidth) {
-        mergedOptions.cellProperties.push({ functionName: "width", args: [options.cellWidth] });
-    }
-    delete mergedOptions.cellWidth;
+    _update_MergedOptions_CellWidth(mergedOptions);
     return _build_FunctionBar(mergedOptions, cardType_Rows);
 }
 exports.get_CardType_FunctionBar = get_CardType_FunctionBar;
@@ -12525,6 +12522,19 @@ function _build_FunctionBar(options, cardType_Rows) {
         ...options,
         entryGroups,
     });
+}
+function _update_MergedOptions_CellWidth(options) {
+    if (options.cellWidth) {
+        options.cellProperties.push({
+            functionName: "css",
+            args: [{
+                    "width": options.cellWidth,
+                    "min-width": options.cellWidth,
+                    "max-width": options.cellWidth,
+                }]
+        });
+    }
+    delete options.cellWidth;
 }
 
 
