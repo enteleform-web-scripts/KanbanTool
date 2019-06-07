@@ -14,7 +14,7 @@ FunctionBar.load(
 	require("./FunctionBars/Top_BoardFilters"  ).default,
 	// Basic_CardType_FunctionBar,
 	get_CardType_FunctionBar({
-		position:             FunctionBar.Position.Top,
+		position:             FunctionBar.Position.Bottom,
 		autoMap_KeyBindings:  true,
 		keyBinding_Modifiers: [],
 		stretchCells:         false,
