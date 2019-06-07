@@ -10648,10 +10648,10 @@ exports.KanbanTool.activeBoard = exports.activeBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559886261665)
+		const elapsedTime = _get_ElapsedTime(1559886399801)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:44:21 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:46:39 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11025,7 +11025,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(14);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(29);
-__Main__1.FunctionBar.load(__webpack_require__(31).default, __webpack_require__(32).default, __webpack_require__(33).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [2, 2, 3] }));
+__Main__1.FunctionBar.load(__webpack_require__(31).default, __webpack_require__(32).default, __webpack_require__(33).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 3], stretchCells: false }));
 __webpack_require__(34);
 
 
