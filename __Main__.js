@@ -10575,7 +10575,7 @@ class FunctionBar extends Module_BaseClasses_1.Module {
         functionBars.forEach(functionBar => {
             functionBar.initialize();
         });
-        Layout_1.Layout.initialize_KeyBindings();
+        Layout_1.Layout.initialize_ToggleBindings();
     }
     initialize() {
         this._validate_AutoMapped_Rows();
@@ -10649,10 +10649,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559933116538)
+		const elapsedTime = _get_ElapsedTime(1559933817504)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:45:16 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:56:57 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12178,16 +12178,19 @@ class Layout {
             _update_OriginalLayout();
         }, Settings_1.css_Timeout_MS);
     }
-    static initialize_KeyBindings() {
+    static initialize_ToggleBindings() {
         setTimeout(() => {
-            const element_KeyMap = [
+            const toggleMap = [
                 { position: Position_1.Position.Left, key: "left" },
                 { position: Position_1.Position.Right, key: "right" },
                 { position: Position_1.Position.Top, key: "up" },
                 { position: Position_1.Position.Bottom, key: "down" },
             ];
-            element_KeyMap.forEach((entry) => {
+            toggleMap.forEach((entry) => {
                 const callback = _get_ContainerToggle_Callback(entry.position);
+                const { toggleButton_Selector } = _BarComponent_Map[entry.position];
+                const toggleButton = $(toggleButton_Selector);
+                toggleButton.on("click", callback);
                 __Main__1.KeyBinding.add([entry.key, ...Settings_1.functionBar_ToggleModifiers], callback, { preventDefault: true });
             });
         }, Settings_1.css_Timeout_MS);
@@ -12232,10 +12235,10 @@ class Layout {
 }
 exports.Layout = Layout;
 const _BarComponent_Map = {
-    [Position_1.Position.Left]: { containerSelector: `.${cssVariables.container} > .center > .left`, subContainer_Class: "column" },
-    [Position_1.Position.Right]: { containerSelector: `.${cssVariables.container} > .center > .right`, subContainer_Class: "column" },
-    [Position_1.Position.Top]: { containerSelector: `.${cssVariables.container} > .top`, subContainer_Class: "row" },
-    [Position_1.Position.Bottom]: { containerSelector: `.${cssVariables.container} > .bottom`, subContainer_Class: "row" },
+    [Position_1.Position.Left]: { containerSelector: `.${cssVariables.container} > .center > .left`, subContainer_Class: "column", toggleButton_Selector: ".left   > .expand-button > .cell" },
+    [Position_1.Position.Right]: { containerSelector: `.${cssVariables.container} > .center > .right`, subContainer_Class: "column", toggleButton_Selector: ".right  > .expand-button > .cell" },
+    [Position_1.Position.Top]: { containerSelector: `.${cssVariables.container} > .top`, subContainer_Class: "row", toggleButton_Selector: ".top    > .expand-button > .cell" },
+    [Position_1.Position.Bottom]: { containerSelector: `.${cssVariables.container} > .bottom`, subContainer_Class: "row", toggleButton_Selector: ".bottom > .expand-button > .cell" },
 };
 function _get_ContainerToggle_Callback(position) {
     const { containerSelector } = _BarComponent_Map[position];
