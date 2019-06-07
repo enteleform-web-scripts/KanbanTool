@@ -50,7 +50,7 @@ export namespace CardType_Manager{
 			cell.css({
 				// "background-color": cardType.bgColor,
 				// "color":            cardType.fgColor,
-				"box-shadow":  `inset 0px 10px 0px -5px yellow, inset 0px 16px 0px -10px ${cardType.bgColor}`,
+				"box-shadow":  `inset 0px 10px 0px -5px ${cardType.bgColor}, inset 0px 16px 0px -10px #AAA`,
 				"padding-top": "12px",
 			})
 		}
