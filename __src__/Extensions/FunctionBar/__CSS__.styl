@@ -120,15 +120,17 @@ json("./CSS_Variables.json")
 
 	.cell.activeFilter,
 	.cell.inactiveFilter
-		padding-top: 14px;
+		--filterColor:  #000
+		padding-top:    14px
 
 	.cell.activeFilter
-		// box-shadow: rgba(255, 235, 59, 0.5) 0px 7px 0px 0px inset, rgb(170, 170, 170) 0px 8px 0px 0px inset;
+		box-shadow:  inset 0 7px 0 0 var(--filterColor), inset 0 8px 0 0 #AAA
 
 	.cell.inactiveFilter
-		// box-shadow: rgba(255, 235, 59, 0.5) 0px 7px 0px 0px inset, rgb(170, 170, 170) 0px 8px 0px 0px inset;
-		background:  #777
-		color:       #000
+		box-shadow:  inset 0 7px 0 0 var(--filterColor), inset 0 8px 0 0 #AAA
+		// box-shadow:  inset 0 7px 0 0 alpha(var(--filterColor), 0.5), inset 0 8px 0 0 #AAA
+		background:   #777
+		color:        #000
 
 
 //#############################//

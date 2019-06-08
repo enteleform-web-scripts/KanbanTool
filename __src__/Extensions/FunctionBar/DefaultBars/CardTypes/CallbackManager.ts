@@ -2,11 +2,11 @@
 const cssVariables = require("../../CSS_Variables.json")
 
 //###  Module  ###//
-import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
-import {CardType  } from "~/Utils/KanbanTool/_CardType"
+import {KeyBinding      } from "~/Utils/KeyBinding/__Main__"
+import {CardType        } from "~/Utils/KanbanTool/_CardType"
+import {set_CSS_Variable} from "~/Utils/CSS_Variables/__Main__"
 import {
 	CardType_Filter,
-	Show, Hide,
 	cardTypes,
 } from "~/Utils/KanbanTool/__Main__"
 
@@ -41,9 +41,7 @@ export namespace CallbackManager{
 	function _get_Callbacks(cardType:CardType){
 		return {
 			on_Layout: function(cell:JQuery){
-				cell.css({
-					"box-shadow": `inset 0 7px 0 0 ${cardType.bgColor}, inset 0 8px 0 0 #AAA`,
-				})
+				set_CSS_Variable(cell, cssVariables.filterColor, cardType.bgColor)
 
 				const update_CSS = _get_UpdateCSS_Callback(cell, cardType)
 				CardType_Filter.on_Update(update_CSS)
