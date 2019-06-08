@@ -43,8 +43,11 @@ export class KeyBinding{
 			{return _get_Decorator(hotKeys_String, options)}
 	}
 
-	static is_Pressed(...modifierKey:_ModifierKey[])
-		{return modifierKey.every(key => _isPressed_ModifierMap[key])}
+	static is_Pressed(...modifierKey:_ModifierKey[]){
+		return modifierKey.every(key =>
+			_isPressed_CallbackMap[key]()
+		)
+	}
 }
 
 export namespace KeyBinding{
@@ -73,10 +76,10 @@ interface _BindOptions
 const _BindOptions_Defaults =
 	{preventDefault: false}
 
-const _isPressed_ModifierMap = {
-	ctrl:  HotKeys.ctrl,
-	shift: HotKeys.shift,
-	alt:   HotKeys.alt,
+const _isPressed_CallbackMap = {
+	ctrl:  () => HotKeys.ctrl,
+	shift: () => HotKeys.shift,
+	alt:   () => HotKeys.alt,
 }
 
 function _disable_DefaultFilters(event)
