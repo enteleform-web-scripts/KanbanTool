@@ -1,3 +1,6 @@
+//###  Module  ###//
+import {is_JQuery} from "../is_JQuery"
+
 
 //#################//
 //###  Exports  ###//
@@ -49,7 +52,7 @@ export function get_CSS_Variables(){
 
 function _get_Arguments(arg_1, arg_2, arg_3){
 	let [element, key, value] =
-		(arg_1.jquery !== undefined)
+		is_JQuery(arg_1)
 		? [arg_1 as JQuery, arg_2, arg_3]
 		: [undefined,       arg_1, arg_2]
 
