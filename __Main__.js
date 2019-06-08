@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560030653135)
+		const elapsedTime = _get_ElapsedTime(1560030764108)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:50:53 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:52:44 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12746,7 +12746,7 @@ var CallbackManager;
             on_Layout: function (cell) {
                 setTimeout(() => {
                     __Main__2.set_CSS_Variable(cell, cssVariables.filterColor, cardType.bgColor);
-                    console.log("@@@ STYLE UPDATE");
+                    console.log("@@@ STYLE UPDATE", cell);
                 }, 1000);
                 const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
                 __Main__3.CardType_Filter.on_Update(update_CSS);
