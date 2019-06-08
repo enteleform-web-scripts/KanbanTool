@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560031873591)
+		const elapsedTime = _get_ElapsedTime(1560032551123)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:11:13 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:22:31 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12758,7 +12758,6 @@ var CallbackManager;
     function _get_Callbacks(cardType) {
         return {
             on_Layout: function (cell) {
-                __Main__2.set_CSS_Variable(cell, cssVariables.filterColor, cardType.bgColor);
                 const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
                 __Main__3.CardType_Filter.on_Update(update_CSS);
                 update_CSS();
@@ -12788,10 +12787,12 @@ function _get_UpdateCSS_Callback(cell, cardType) {
         if (__Main__3.CardType_Filter.cardType_IsEnabled(cardType)) {
             cell.addClass(cssVariables.activeFilter);
             cell.removeClass(cssVariables.inactiveFilter);
+            __Main__2.set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + "FF"));
         }
         else {
             cell.removeClass(cssVariables.activeFilter);
             cell.addClass(cssVariables.inactiveFilter);
+            __Main__2.set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + "88"));
         }
     };
 }
