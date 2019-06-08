@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560020133248)
+		const elapsedTime = _get_ElapsedTime(1560020285079)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:55:33 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:58:05 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12356,11 +12356,9 @@ CardType_Filter.show_AllCards_ID = Symbol();
 CardType_Filter._onUpdate_Callbacks = [];
 exports.CardType_Filter = CardType_Filter;
 __Main__2.on_PageLoad(() => {
-    console.log("@@@ CardTypeFilter.1");
     CardType_Filter.enable();
 });
 __Main__2.on_PageLoad(CardType_Filter.show_AllCards_ID, () => {
-    console.log("@@@ CardTypeFilter.2");
     CardType_Filter.enable();
     CardType_Filter.enable_CardTypes();
 });
@@ -12844,7 +12842,7 @@ const { Entry, Position } = __Main__1.FunctionBar;
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
 const activeTask_Columns = ["Routine", "Tasks.Active"];
-const functionBar = new __Main__1.FunctionBar({
+exports.default = new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
     keyBinding_Modifiers: ["shift", "alt"],
@@ -12881,7 +12879,7 @@ const functionBar = new __Main__1.FunctionBar({
         ],
     ],
 });
-exports.default = functionBar;
+__Main__3.remove_PageLoad_Callback(__Main__3.CardType_Filter.show_AllCards_ID);
 const _secondaryCallback = () => { __Main__3.Hide.emptyColumns(); };
 function get_Callbacks(callback) {
     return {
