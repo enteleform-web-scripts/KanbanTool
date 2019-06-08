@@ -21,9 +21,9 @@ export function on_PageLoad(callback:(() => void)                            )
 export function on_PageLoad(id:Symbol, callback:(() => void)                 )
 export function on_PageLoad(arg_1?:(Symbol|(() => void)), arg_2?:(() => void)){
 	const [id, callback] =
-		(arg_1 instanceof Symbol)
-		? [arg_1,    arg_2]
-		: [Symbol(), arg_1]
+		(typeof arg_1 == "symbol")
+		? [arg_1,    arg_2 as (() => void)]
+		: [Symbol(), arg_1 as (() => void)]
 
 	_on_PageLoad_Callbacks.push({id, callback})
 }
