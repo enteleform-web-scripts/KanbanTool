@@ -25,6 +25,9 @@ export function get_CSS_Variable(arg_1?, arg_2?             ){
 		{return _get_CSS_Variable_Value(key)}
 }
 
+;(window as any).set_CSS_Variable = set_CSS_Variable
+;(window as any).get_CSS_Variable = get_CSS_Variable
+
 export function get_CSS_Variables(){
 	const variables = {}
 
