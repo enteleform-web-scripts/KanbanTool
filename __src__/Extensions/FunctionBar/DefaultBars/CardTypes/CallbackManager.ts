@@ -85,7 +85,7 @@ function _get_UpdateCSS_Callback(cell:JQuery, cardType:CardType){
 		else{
 			cell.removeClass(cssVariables.activeFilter  )
 			cell.addClass   (cssVariables.inactiveFilter)
-			alpha = "66"
+			alpha = "AA"
 		}
 
 		set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + alpha))
