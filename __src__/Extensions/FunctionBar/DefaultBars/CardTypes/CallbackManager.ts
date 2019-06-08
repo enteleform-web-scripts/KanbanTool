@@ -43,7 +43,7 @@ export namespace CallbackManager{
 			on_Layout: function(cell:JQuery){
 				setTimeout(() => {
 					set_CSS_Variable(cell, cssVariables.filterColor, cardType.bgColor)
-					console.log("@@@ STYLE UPDATE")
+					console.log("@@@ STYLE UPDATE", cell)
 				}, 1000)
 				// cell.attr("style", `--filterColor: ${cardType.bgColor}`)
 				// console.log(">>>", cell, cssVariables.filterColor, cardType.bgColor)
