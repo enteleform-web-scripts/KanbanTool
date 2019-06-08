@@ -1,6 +1,6 @@
 //###  Module  ###//
-import {cardType_Filter_Index} from "../Settings"
-import {cardTypes            } from "~/Utils/KanbanTool/__Main__"
+import {cardType_Filter_Index, pageLoad_Timeout_MS} from "../Settings"
+import {cardTypes                                 } from "~/Utils/KanbanTool/__Main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -49,8 +49,10 @@ export class CardType_Filter{
 //###  Init  ###//
 //##############//
 
-CardType_Filter.enable()
-CardType_Filter.enable_CardTypes()
+setTimeout(() => {
+	CardType_Filter.enable()
+	CardType_Filter.enable_CardTypes()
+}, pageLoad_Timeout_MS)
 
 
 //###############//
