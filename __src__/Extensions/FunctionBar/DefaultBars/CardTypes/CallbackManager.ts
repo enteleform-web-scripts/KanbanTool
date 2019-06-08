@@ -75,15 +75,19 @@ export namespace CallbackManager{
 
 function _get_UpdateCSS_Callback(cell:JQuery, cardType:CardType){
 	return () => {
+		let alpha
+
 		if(CardType_Filter.cardType_IsEnabled(cardType)){
 			cell.addClass   (cssVariables.activeFilter  )
 			cell.removeClass(cssVariables.inactiveFilter)
-			set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + "FF"))
+			alpha = "FF"
 		}
 		else{
 			cell.removeClass(cssVariables.activeFilter  )
 			cell.addClass   (cssVariables.inactiveFilter)
-			set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + "66"))
+			alpha = "66"
 		}
+
+		set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + alpha))
 	}
 }
