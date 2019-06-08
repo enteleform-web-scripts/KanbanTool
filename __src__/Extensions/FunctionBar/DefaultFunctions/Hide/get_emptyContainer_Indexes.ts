@@ -56,9 +56,13 @@ function _get_Containers(){
 }
 
 function _get_Cell_IsEmpty(row:any, column:any){
-	const tasks = _get_Tasks(row, column)
-	console.log(">>>", tasks)
-	// $("[data-task-id=23124095]")
+	const tasks =
+		_get_Tasks(row, column)
+			.filter(task => {
+				const element = $(`[data-task-id=${task.attributes.id}]`)
+				return !(element.hasClass("kt-board_search--filtered_out"))
+			})
+	console.log(">>>", `${_get_Tasks(row, column).length} => ${tasks.length}`)
 	return (tasks.length == 0)
 }
 
