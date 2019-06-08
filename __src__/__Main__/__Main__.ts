@@ -10,7 +10,7 @@ import {get_CardType_FunctionBar} from "~/Extensions/FunctionBar/DefaultBars/Car
 FunctionBar.load(
 	require("./FunctionBars/Left_Commands"   ).default,
 	require("./FunctionBars/Top_BoardFilters").default,
-	get_CardType_FunctionBar({rowCounts:[4, 3], cellWidth:150, stretchCells:false}),
+	get_CardType_FunctionBar({rowCounts:[4, 4, 2], cellWidth:150, stretchCells:false}),
 )
 
 //#####################//

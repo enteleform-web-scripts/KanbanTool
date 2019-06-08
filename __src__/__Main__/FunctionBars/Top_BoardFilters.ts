@@ -13,8 +13,7 @@ import {
 //###  Setup  ###//
 //###############//
 
-const todayTasks_Columns = ["Routine", "Tasks.Active"]
-const todayTasks_RegEx   = /^(Today.*)|(DailyTask)/
+const activeTask_Columns = ["Routine", "Tasks.Active"]
 
 
 //################//
@@ -35,16 +34,16 @@ export default new FunctionBar({
 				name: "Today",
 				...get_LayeredCallbacks(() => {
 					Show.allColumns()
-					Show.rows({include:todayTasks_Columns})
+					Show.rows({include:activeTask_Columns})
 					CardType_Filter.disable_CardTypes()
-					CardType_Filter.enable_CardTypes(todayTasks_RegEx)
+					CardType_Filter.enable_CardTypes(/^(Today.*)|(DailyTask)/)
 				})
 			}),
 			new Entry({
 				name: "Tasks",
 				...get_LayeredCallbacks(() => {
 					Show.allColumns()
-					Show.rows({include:["Routine"]})
+					Show.rows({include:activeTask_Columns})
 					CardType_Filter.enable_CardTypes()
 				}),
 			}),
