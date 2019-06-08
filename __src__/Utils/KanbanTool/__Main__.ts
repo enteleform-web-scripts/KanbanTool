@@ -3,15 +3,6 @@ import {onPageLoad_Timeout_MS} from "./Settings"
 import {CardType             } from "./_CardType"
 
 
-//#########################//
-//###  Exports: Nested  ###//
-//#########################//
-
-export {CardType_Filter} from "./CardType_Filter/__Main__"
-export {Show           } from "./Show/__Main__"
-export {Hide           } from "./Hide/__Main__"
-
-
 //###############//
 //###  Setup  ###//
 //###############//
@@ -43,6 +34,16 @@ export const cardTypes: CardType[] =
 			),
 		})
 	)
+
+
+//#########################//
+//###  Exports: Nested  ###//
+//#########################//
+
+export {CardType_Filter} from "./CardType_Filter/__Main__"
+export {Show           } from "./Show/__Main__"
+export {Hide           } from "./Hide/__Main__"
+
 
 //##############//
 //###  Init  ###//
