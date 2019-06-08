@@ -2,6 +2,7 @@
 //###  Module  ###//
 import {CardType_Filter} from "../../DefaultFunctions/CardType_Filter/__Main__"
 import {cardTypes      } from "~/Utils/KanbanTool"
+import {KeyBinding} from "../../../../Utils/KeyBinding/__Main__";
 
 
 export namespace CallbackManager{
@@ -42,7 +43,6 @@ export namespace CallbackManager{
 
 			on_Click: function(event:JQuery.ClickEvent, cell:JQuery){
 				// CardType_Filter.toggle_CardTypes(cardType.index)
-				const KeyBinding = require("../../../../Utils/KeyBinding/__Main__")
 				console.log(`ctrl:${KeyBinding.is_Pressed("ctrl")}, shift:${KeyBinding.is_Pressed("shift")}, alt:${KeyBinding.is_Pressed("alt")}, `)
 			},
 
