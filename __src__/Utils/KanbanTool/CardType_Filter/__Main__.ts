@@ -1,6 +1,11 @@
 //###  Module  ###//
-import {cardType_Filter_Index } from "../Settings"
-import {cardTypes, on_PageLoad} from "~/Utils/KanbanTool/__Main__"
+import {cardType_Filter_Index} from "../Settings"
+import {KeyBinding           } from "~/Utils/KeyBinding/__Main__"
+import {
+	cardTypes,
+	on_PageLoad,
+	Show, Hide,
+} from "~/Utils/KanbanTool/__Main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -54,6 +59,11 @@ on_PageLoad(() => {
 	CardType_Filter.enable_CardTypes()
 })
 
+KeyBinding.add(["ctrl", "`"], () => {
+	Hide.emptyColumns()
+	Hide.emptyRows()
+})
+
 
 //###############//
 //###  Utils  ###//
@@ -70,7 +80,6 @@ function _set_CardType_States(
 		{ids = allButtons.map((value, index) => index)}
 
 	ids = _process_RegExp_IDs(allButtons, targetButtons, ids)
-	console.log(">>>", ids)
 
 	for(const id of ids){
 		const index = _get_CardType_Index(id as (number|string))
