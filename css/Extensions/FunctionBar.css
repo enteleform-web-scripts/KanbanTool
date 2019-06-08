@@ -120,9 +120,14 @@
 }
 .CustomExtension__FunctionBar .cell.activeFilter,
 .CustomExtension__FunctionBar .cell.inactiveFilter {
+  --filterColor: #000;
   padding-top: 14px;
 }
+.CustomExtension__FunctionBar .cell.activeFilter {
+  box-shadow: inset 0 7px 0 0 var(--filterColor), inset 0 8px 0 0 #aaa;
+}
 .CustomExtension__FunctionBar .cell.inactiveFilter {
+  box-shadow: inset 0 7px 0 0 var(--filterColor), inset 0 8px 0 0 #aaa;
   background: #777;
   color: #000;
 }

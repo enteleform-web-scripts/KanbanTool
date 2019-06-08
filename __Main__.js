@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 14);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -91,7 +91,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(9);
+const Settings_1 = __webpack_require__(10);
 const _CardType_1 = __webpack_require__(25);
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
@@ -121,7 +121,7 @@ exports.cardTypes = exports.activeBoard.cardTypes().active().map(({ attributes }
 }));
 var __Main__1 = __webpack_require__(26);
 exports.CardType_Filter = __Main__1.CardType_Filter;
-var __Main__2 = __webpack_require__(10);
+var __Main__2 = __webpack_require__(11);
 exports.Show = __Main__2.Show;
 var __Main__3 = __webpack_require__(28);
 exports.Hide = __Main__3.Hide;
@@ -141,8 +141,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(20);
-const hotkeys_js_1 = __importDefault(__webpack_require__(21));
+const KeyGroups_1 = __webpack_require__(21);
+const hotkeys_js_1 = __importDefault(__webpack_require__(22));
 hotkeys_js_1.default.filter = _disable_DefaultFilters;
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
@@ -10598,10 +10598,10 @@ return jQuery;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(16).inject(__dirname, { CSS: true, HTML: true });
+__webpack_require__(17).inject(__dirname, { CSS: true, HTML: true });
 const Settings_1 = __webpack_require__(5);
-const Entry_1 = __webpack_require__(22);
-const Layout_1 = __webpack_require__(23);
+const Entry_1 = __webpack_require__(23);
+const Layout_1 = __webpack_require__(24);
 const Module_BaseClasses_1 = __webpack_require__(30);
 const Position_1 = __webpack_require__(6);
 class FunctionBar extends Module_BaseClasses_1.Module {
@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560023573002)
+		const elapsedTime = _get_ElapsedTime(1560024600339)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:52:53 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     4:10:00 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10829,10 +10829,66 @@ exports.TaskContainer = TaskContainer;
 /* 8 */
 /***/ (function(module) {
 
-module.exports = {"container":"CustomExtension__FunctionBar","collapsed":"collapsed","empty":"empty","activeFilter":"activeFilter","inactiveFilter":"inactiveFilter","_":""};
+module.exports = {"container":"CustomExtension__FunctionBar","collapsed":"collapsed","empty":"empty","activeFilter":"activeFilter","inactiveFilter":"inactiveFilter","filterColor":"filterColor","_":""};
 
 /***/ }),
 /* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function set_CSS_Variable(arg_1, arg_2, arg_3) {
+    const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
+    if (element) {
+        element.get(0).style.setProperty(key, value);
+    }
+    else {
+        document.documentElement.style.setProperty(key, value);
+    }
+}
+exports.set_CSS_Variable = set_CSS_Variable;
+function get_CSS_Variable(arg_1, arg_2) {
+    const { element, key } = _get_Arguments(arg_1, arg_2, undefined);
+    if (element) {
+        return element.get(0).style.getPropertyValue(key);
+    }
+    else {
+        return _get_CSS_Variable_Value(key);
+    }
+}
+exports.get_CSS_Variable = get_CSS_Variable;
+function get_CSS_Variables() {
+    const variables = {};
+    const styleSheets = [...document.styleSheets]
+        .flatMap(sheet => _get_CSS_Variable_Keys(sheet));
+    styleSheets.forEach(key => {
+        variables[key] = _get_CSS_Variable_Value(key);
+    });
+    return variables;
+}
+exports.get_CSS_Variables = get_CSS_Variables;
+function _get_Arguments(arg_1, arg_2, arg_3) {
+    let [element, key, value] = (arg_1 instanceof jQuery)
+        ? [arg_1, arg_2, arg_3]
+        : [undefined, arg_1, arg_2];
+    return {
+        element,
+        value,
+        key: `--${key}`
+    };
+}
+function _get_CSS_Variable_Keys(styleSheet) {
+    const cssRules = [...styleSheet.cssRules];
+    const rootRules = cssRules.filter(rule => (rule.selectorText == ":root"));
+    const keys = rootRules.flatMap(rule => [...rule.style]);
+    return keys;
+}
+function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documentElement).getPropertyValue(key); }
+
+
+/***/ }),
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10843,15 +10899,15 @@ exports.onPageLoad_Timeout_MS = 500;
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(7);
-const get_Rows_1 = __webpack_require__(11);
-const get_Columns_1 = __webpack_require__(12);
+const get_Rows_1 = __webpack_require__(12);
+const get_Columns_1 = __webpack_require__(13);
 const Glob_1 = __webpack_require__(27);
 const $ = __webpack_require__(2);
 class Show {
@@ -10926,7 +10982,7 @@ function _match_Glob(container, target) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10951,7 +11007,7 @@ exports.get_Rows = get_Rows;
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11006,21 +11062,21 @@ function _update_ColumnRelationships(columns) {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(4);
-module.exports = __webpack_require__(14);
+module.exports = __webpack_require__(15);
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(15);
+__webpack_require__(16);
 const __Main__1 = __webpack_require__(3);
 const __Main__2 = __webpack_require__(31);
 __Main__1.FunctionBar.load(__webpack_require__(34).default, __webpack_require__(35).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 4, 2], cellWidth: 125, stretchCells: false }));
@@ -11028,7 +11084,7 @@ __webpack_require__(36);
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11075,13 +11131,13 @@ function get_DivIndex(checkList_Item) {
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(17);
+const Settings_1 = __webpack_require__(18);
 function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
     if (CSS) {
         _inject_CSS(modulePath);
@@ -11160,7 +11216,7 @@ function _strip_HTML_ExcessData(html) {
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11169,7 +11225,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(__webpack_require__(18));
+const path_1 = __importDefault(__webpack_require__(19));
 class S {
 }
 S.baseURL = "https://enteleform-extensions.github.io/KanbanTool";
@@ -11198,7 +11254,7 @@ exports.Settings = S;
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -11426,10 +11482,10 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(19)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(20)))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -11619,7 +11675,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11667,7 +11723,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12106,7 +12162,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12152,7 +12208,7 @@ const emptyCallback = ((...args) => { });
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12161,7 +12217,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cssVariables = __webpack_require__(8);
 const Settings_1 = __webpack_require__(5);
 const Position_1 = __webpack_require__(6);
-const __Main__1 = __webpack_require__(24);
+const __Main__1 = __webpack_require__(9);
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
 const $ = __webpack_require__(2);
@@ -12269,65 +12325,6 @@ function _update_OriginalLayout() {
 
 
 /***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-function set_CSS_Variable(arg_1, arg_2, arg_3) {
-    const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
-    if (element) {
-        element.get(0).style.setProperty(key, value);
-    }
-    else {
-        document.documentElement.style.setProperty(key, value);
-    }
-}
-exports.set_CSS_Variable = set_CSS_Variable;
-function get_CSS_Variable(arg_1, arg_2) {
-    const { element, key } = _get_Arguments(arg_1, arg_2, undefined);
-    if (element) {
-        return element.get(0).style.getPropertyValue(key);
-    }
-    else {
-        return _get_CSS_Variable_Value(key);
-    }
-}
-exports.get_CSS_Variable = get_CSS_Variable;
-;
-window.set_CSS_Variable = set_CSS_Variable;
-window.get_CSS_Variable = get_CSS_Variable;
-function get_CSS_Variables() {
-    const variables = {};
-    const styleSheets = [...document.styleSheets]
-        .flatMap(sheet => _get_CSS_Variable_Keys(sheet));
-    styleSheets.forEach(key => {
-        variables[key] = _get_CSS_Variable_Value(key);
-    });
-    return variables;
-}
-exports.get_CSS_Variables = get_CSS_Variables;
-function _get_Arguments(arg_1, arg_2, arg_3) {
-    let [element, key, value] = (arg_1 instanceof jQuery)
-        ? [arg_1, arg_2, arg_3]
-        : [undefined, arg_1, arg_2];
-    return {
-        element,
-        value,
-        key: `--${key}`
-    };
-}
-function _get_CSS_Variable_Keys(styleSheet) {
-    const cssRules = [...styleSheet.cssRules];
-    const rootRules = cssRules.filter(rule => (rule.selectorText == ":root"));
-    const keys = rootRules.flatMap(rule => [...rule.style]);
-    return keys;
-}
-function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documentElement).getPropertyValue(key); }
-
-
-/***/ }),
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12353,7 +12350,7 @@ exports.CardType = CardType;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(9);
+const Settings_1 = __webpack_require__(10);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(0);
 const $ = __webpack_require__(2);
@@ -12517,9 +12514,9 @@ const _GLOB_TO_REGEX_MAP = [
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const get_emptyContainer_Indexes_1 = __webpack_require__(29);
-const get_Rows_1 = __webpack_require__(11);
-const get_Columns_1 = __webpack_require__(12);
-const __Main__1 = __webpack_require__(10);
+const get_Rows_1 = __webpack_require__(12);
+const get_Columns_1 = __webpack_require__(13);
+const __Main__1 = __webpack_require__(11);
 class Hide {
     static allRows() { __Main__1.Show.rows({ exclude: ["**\\*"] }); }
     static allColumns() { __Main__1.Show.columns({ exclude: ["**\\*"] }); }
@@ -12722,7 +12719,8 @@ function _update_MergedOptions_CellWidth(options) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const cssVariables = __webpack_require__(8);
 const __Main__1 = __webpack_require__(1);
-const __Main__2 = __webpack_require__(0);
+const __Main__2 = __webpack_require__(9);
+const __Main__3 = __webpack_require__(0);
 var CallbackManager;
 (function (CallbackManager) {
     let _entryIndex = -1;
@@ -12739,18 +12737,16 @@ var CallbackManager;
     CallbackManager.set_Card_HoverCallback = set_Card_HoverCallback;
     function get_Callbacks() {
         _entryIndex += 1;
-        const cardType = __Main__2.cardTypes[_entryIndex];
+        const cardType = __Main__3.cardTypes[_entryIndex];
         return _get_Callbacks(cardType);
     }
     CallbackManager.get_Callbacks = get_Callbacks;
     function _get_Callbacks(cardType) {
         return {
             on_Layout: function (cell) {
-                cell.css({
-                    "box-shadow": `inset 0 7px 0 0 ${cardType.bgColor}, inset 0 8px 0 0 #AAA`,
-                });
+                __Main__2.set_CSS_Variable(cell, cssVariables.filterColor, cardType.bgColor);
                 const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
-                __Main__2.CardType_Filter.on_Update(update_CSS);
+                __Main__3.CardType_Filter.on_Update(update_CSS);
                 update_CSS();
             },
             on_KeyBinding: function (event, cell) {
@@ -12758,11 +12754,11 @@ var CallbackManager;
             },
             on_Click: function (event, cell) {
                 if (__Main__1.KeyBinding.is_Pressed("ctrl")) {
-                    __Main__2.CardType_Filter.disable_CardTypes();
-                    __Main__2.CardType_Filter.enable_CardTypes(cardType.index);
+                    __Main__3.CardType_Filter.disable_CardTypes();
+                    __Main__3.CardType_Filter.enable_CardTypes(cardType.index);
                 }
                 else {
-                    __Main__2.CardType_Filter.toggle_CardTypes(cardType.index);
+                    __Main__3.CardType_Filter.toggle_CardTypes(cardType.index);
                 }
             },
         };
@@ -12775,7 +12771,7 @@ var CallbackManager;
 })(CallbackManager = exports.CallbackManager || (exports.CallbackManager = {}));
 function _get_UpdateCSS_Callback(cell, cardType) {
     return () => {
-        if (__Main__2.CardType_Filter.cardType_IsEnabled(cardType)) {
+        if (__Main__3.CardType_Filter.cardType_IsEnabled(cardType)) {
             cell.addClass(cssVariables.activeFilter);
             cell.removeClass(cssVariables.inactiveFilter);
         }
