@@ -10678,10 +10678,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559970694836)
+		const elapsedTime = _get_ElapsedTime(1559970831528)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:11:34 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:13:51 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12860,7 +12860,7 @@ const functionBar = new __Main__1.FunctionBar({
 });
 exports.default = functionBar;
 __Main__3.on_PageLoad(() => {
-    functionBar.entryGroups[0][0].on_KeyBinding(null, null);
+    functionBar.entryGroups[0][1].on_KeyBinding(null, null);
 });
 const _secondaryCallback = () => { __Main__3.Hide.emptyColumns(); };
 function get_Callbacks(callback) {
