@@ -10672,10 +10672,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559953595328)
+		const elapsedTime = _get_ElapsedTime(1559953656464)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     8:26:35 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     8:27:36 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12482,8 +12482,9 @@ function _get_Cell_IsEmpty(row, column) {
         const element = $(`[data-task-id=${task.attributes.id}]`);
         return !(element.hasClass("kt-board_search--filtered_out"));
     });
-    if (_get_Tasks(row, column).length != tasks.length) {
-        console.log(`>>> ${row}, ${column}`);
+    const _TEMP_A_ = _get_Tasks(row, column).length;
+    if (_TEMP_A_.length != tasks.length) {
+        console.log(`>>> @[${row}, ${column}]  ${_TEMP_A_.length} => ${tasks.length}`);
     }
     return (tasks.length == 0);
 }
