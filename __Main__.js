@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560020033132)
+		const elapsedTime = _get_ElapsedTime(1560020088878)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:53:53 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:54:48 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12356,9 +12356,11 @@ CardType_Filter.show_AllCards_ID = Symbol();
 CardType_Filter._onUpdate_Callbacks = [];
 exports.CardType_Filter = CardType_Filter;
 __Main__2.on_PageLoad(() => {
+    console.log("@@@ CardTypeFilter.1");
     CardType_Filter.enable();
 });
 __Main__2.on_PageLoad(CardType_Filter.show_AllCards_ID, () => {
+    console.log("@@@ CardTypeFilter.2");
     CardType_Filter.enable();
     CardType_Filter.enable_CardTypes();
 });
