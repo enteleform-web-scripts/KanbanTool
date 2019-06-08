@@ -10678,10 +10678,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559966271565)
+		const elapsedTime = _get_ElapsedTime(1559966662964)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:57:51 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:04:22 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12313,7 +12313,8 @@ exports.CardType = CardType;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(8);
-const __Main__1 = __webpack_require__(0);
+const __Main__1 = __webpack_require__(2);
+const __Main__2 = __webpack_require__(0);
 const $ = __webpack_require__(1);
 class CardType_Filter {
     static get enabled() { return CardType_Filter._filterButton.hasClass("kt-board_search-filter--active"); }
@@ -12337,9 +12338,13 @@ class CardType_Filter {
     static toggle_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._cardType_Buttons); }
 }
 exports.CardType_Filter = CardType_Filter;
-__Main__1.on_PageLoad(() => {
+__Main__2.on_PageLoad(() => {
     CardType_Filter.enable();
     CardType_Filter.enable_CardTypes();
+});
+__Main__1.KeyBinding.add(["ctrl", "`"], () => {
+    __Main__2.Hide.emptyColumns();
+    __Main__2.Hide.emptyRows();
 });
 function _set_CardType_States(ids, targetButtons) {
     const allButtons = CardType_Filter._cardType_Buttons;
@@ -12348,7 +12353,6 @@ function _set_CardType_States(ids, targetButtons) {
         ids = allButtons.map((value, index) => index);
     }
     ids = _process_RegExp_IDs(allButtons, targetButtons, ids);
-    console.log(">>>", ids);
     for (const id of ids) {
         const index = _get_CardType_Index(id);
         if (index == undefined) {
@@ -12363,7 +12367,7 @@ function _set_CardType_States(ids, targetButtons) {
 function _process_RegExp_IDs(allButtons, targetButtons, ids) {
     const patterns = ids.filter(id => (id instanceof RegExp));
     ids = ids.filter(id => !(id instanceof RegExp));
-    const matchingButton_Indexes = __Main__1.cardTypes
+    const matchingButton_Indexes = __Main__2.cardTypes
         .filter(cardType => patterns.some(pattern => pattern.exec(cardType.name) ? true : false))
         .map(cardType => ({ button: allButtons[cardType.index], index: cardType.index }))
         .filter(({ button }) => targetButtons.includes(button))
@@ -12386,7 +12390,7 @@ function _get_CardType_Index(id) {
     return index;
 }
 function _get_CardType_FromName(name) {
-    const matches = __Main__1.cardTypes.filter(cardType => (cardType.name == name));
+    const matches = __Main__2.cardTypes.filter(cardType => (cardType.name == name));
     if (matches.length > 0) {
         return matches[0];
     }
