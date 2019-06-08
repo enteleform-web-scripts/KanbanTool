@@ -1,6 +1,6 @@
 //###  Module  ###//
 import {TaskContainer} from "./TaskContainer"
-import {activeBoard  } from "~/Utils/KanbanTool"
+import {activeBoard  } from "~/Utils/KanbanTool/__Main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")

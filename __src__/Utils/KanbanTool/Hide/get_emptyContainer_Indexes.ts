@@ -1,7 +1,7 @@
 
 //###  Module  ###//
 import {TaskContainer} from "../Show/TaskContainer"
-import {activeBoard  } from "~/Utils/KanbanTool"
+import {activeBoard  } from "~/Utils/KanbanTool/__Main__"
 
 
 //#################//

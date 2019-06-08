@@ -1,8 +1,12 @@
 
 //###  Module  ###//
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
-const {Entry, Position, Show, Hide} = FunctionBar
-import {CardType_Filter} from "~/Extensions/FunctionBar/DefaultFunctions/CardType_Filter/__Main__"
+const {Entry, Position} = FunctionBar
+import {
+	CardType_Filter,
+	Show, Hide,
+} from "~/Utils/KanbanTool/__Main__"
+
 
 export default new FunctionBar({
 

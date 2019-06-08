@@ -1,6 +1,6 @@
 
 //###  Module  ###//
-import {cardTypes } from "~/Utils/KanbanTool"
+import {cardTypes } from "~/Utils/KanbanTool/__Main__"
 import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
 
 

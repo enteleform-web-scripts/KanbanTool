@@ -1,9 +1,16 @@
 
 //###  Module  ###//
-import {CardType_Filter} from "../../DefaultFunctions/CardType_Filter/__Main__"
-import {cardTypes      } from "~/Utils/KanbanTool"
-import {KeyBinding     } from "~/Utils/KeyBinding/__Main__"
+import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
+import {
+	CardType_Filter,
+	Show, Hide,
+	cardTypes,
+} from "~/Utils/KanbanTool/__Main__"
 
+
+//#################//
+//###  Exports  ###//
+//#################//
 
 export namespace CallbackManager{
 	let _entryIndex = -1
@@ -42,13 +49,12 @@ export namespace CallbackManager{
 			},
 
 			on_Click: function(event:JQuery.ClickEvent, cell:JQuery){
-				// CardType_Filter.toggle_CardTypes(cardType.index)
-				console.log(`ctrl:${KeyBinding.is_Pressed("ctrl")}, shift:${KeyBinding.is_Pressed("shift")}, alt:${KeyBinding.is_Pressed("alt")}, `)
-			},
-
-			on_DoubleClick: function(event:JQuery.DoubleClickEvent, cell:JQuery){
-				CardType_Filter.disable_CardTypes()
-				CardType_Filter.enable_CardTypes(cardType.index)
+				if(KeyBinding.is_Pressed("ctrl")){
+					CardType_Filter.disable_CardTypes()
+					CardType_Filter.enable_CardTypes(cardType.index)
+				}
+				else
+					{CardType_Filter.toggle_CardTypes(cardType.index)}
 			},
 		}
 	}

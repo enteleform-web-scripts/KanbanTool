@@ -12,7 +12,7 @@ const $:any = require("jquery")
 //###  Exports  ###//
 //#################//
 
-export default class{
+export class Show{
 
 	static rows({include,        }:{include:(string|number)[]             })
 	static rows({         exclude}:{exclude:(string|number)[]             })

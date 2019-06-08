@@ -4,7 +4,7 @@ const cssVariables = require("./CSS_Variables.json")
 //###  Module  ###//
 import {Entry           } from "./Entry"
 import {Position        } from "./Position"
-import {set_CSS_Variable} from "~/Utils/CSS_Variables/__main__"
+import {set_CSS_Variable} from "~/Utils/CSS_Variables/__Main__"
 import {KeyBinding      } from "~/Utils/KeyBinding/__Main__"
 import {
 	css_Timeout_MS,

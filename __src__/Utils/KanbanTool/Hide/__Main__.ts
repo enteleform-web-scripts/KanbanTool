@@ -3,14 +3,14 @@ import {get_EmptyRow_Indexes, get_EmptyColumn_Indexes} from "./get_emptyContaine
 import {TaskContainer                                } from "../Show/TaskContainer"
 import {get_Rows                                     } from "../Show/get_Rows"
 import {get_Columns                                  } from "../Show/get_Columns"
-import Show                                            from "../Show/__Main__";
+import {Show                                         } from "../Show/__Main__"
 
 
 //#################//
 //###  Exports  ###//
 //#################//
 
-export default class {
+export class Hide{
 
 	static allRows   (){Show.rows   ({exclude:["**\\*"]})}
 	static allColumns(){Show.columns({exclude:["**\\*"]})}

@@ -1,7 +1,11 @@
 
 //###  Module  ###//
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
-const {Entry, Position, Show, Hide} = FunctionBar
+const {Entry, Position} = FunctionBar
+import {
+	CardType_Filter,
+	Show, Hide,
+} from "~/Utils/KanbanTool/__Main__"
 
 
 export default new FunctionBar({
@@ -19,6 +23,8 @@ export default new FunctionBar({
 				callback: () => {
 					Show.allColumns()
 					Show.rows({include:["Routine", "Tasks.Active"]})
+					CardType_Filter.disable_CardTypes()
+					CardType_Filter.enable_CardTypes(/Task.*/)
 					Hide.emptyColumns()
 				},
 			}),

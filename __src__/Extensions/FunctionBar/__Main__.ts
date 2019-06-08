@@ -24,9 +24,6 @@ export class FunctionBar extends Module{
 	static Entry    = Entry
 	static Position = Position
 
-	static Show  = require("./DefaultFunctions/Show/__Main__").default
-	static Hide  = require("./DefaultFunctions/Hide/__Main__").default
-
 	layout:               Layout
 	position:             Position
 	autoMap_KeyBindings:  boolean
