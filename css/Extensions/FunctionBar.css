@@ -118,6 +118,14 @@
   font-size: 14pt;
   color: var(--ExpandButton_Color);
 }
+.CustomExtension__FunctionBar .cell.activeFilter,
+.CustomExtension__FunctionBar .cell.inactiveFilter {
+  padding-top: 14px;
+}
+.CustomExtension__FunctionBar .cell.inactiveFilter {
+  background: #777;
+  color: #000;
+}
 :root {
   --KanbanToolOffsets_NavHeight: 0px;
   --KanbanToolOffsets_TopHeight: 0px;
