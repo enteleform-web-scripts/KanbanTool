@@ -10678,10 +10678,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559955338967)
+		const elapsedTime = _get_ElapsedTime(1559955444154)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     8:55:38 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     8:57:24 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12594,6 +12594,7 @@ function _update_MergedOptions_CellWidth(options) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(11);
 const KanbanTool_1 = __webpack_require__(1);
+const __Main__2 = __webpack_require__(2);
 var CallbackManager;
 (function (CallbackManager) {
     let _entryIndex = -1;
@@ -12626,8 +12627,7 @@ var CallbackManager;
                 _update_CardType(cardType);
             },
             on_Click: function (event, cell) {
-                const KeyBinding = __webpack_require__(2);
-                console.log(`ctrl:${KeyBinding.is_Pressed("ctrl")}, shift:${KeyBinding.is_Pressed("shift")}, alt:${KeyBinding.is_Pressed("alt")}, `);
+                console.log(`ctrl:${__Main__2.KeyBinding.is_Pressed("ctrl")}, shift:${__Main__2.KeyBinding.is_Pressed("shift")}, alt:${__Main__2.KeyBinding.is_Pressed("alt")}, `);
             },
             on_DoubleClick: function (event, cell) {
                 __Main__1.CardType_Filter.disable_CardTypes();
