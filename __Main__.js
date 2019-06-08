@@ -10674,10 +10674,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559963187023)
+		const elapsedTime = _get_ElapsedTime(1559963366623)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:06:27 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:09:26 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12448,8 +12448,10 @@ class CardType_Filter {
     static toggle_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._cardType_Buttons); }
 }
 exports.CardType_Filter = CardType_Filter;
-CardType_Filter.enable();
-CardType_Filter.enable_CardTypes();
+setTimeout(() => {
+    CardType_Filter.enable();
+    CardType_Filter.enable_CardTypes();
+}, Settings_1.pageLoad_Timeout_MS);
 function _set_CardType_States(ids, targetButtons) {
     const allButtons = CardType_Filter._cardType_Buttons;
     const apply_State_To_AllCardTypes = (ids.length == 0);
@@ -12513,6 +12515,7 @@ function _get_CardType_FromName(name) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cardType_Filter_Index = 5;
+exports.pageLoad_Timeout_MS = 500;
 
 
 /***/ }),
