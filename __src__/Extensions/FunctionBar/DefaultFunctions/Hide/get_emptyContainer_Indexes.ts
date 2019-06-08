@@ -57,6 +57,8 @@ function _get_Containers(){
 
 function _get_Cell_IsEmpty(row:any, column:any){
 	const tasks = _get_Tasks(row, column)
+	console.log(">>>", tasks)
+	// $("[data-task-id=23124095]")
 	return (tasks.length == 0)
 }
 
