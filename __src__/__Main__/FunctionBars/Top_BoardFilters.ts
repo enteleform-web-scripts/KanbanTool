@@ -7,6 +7,7 @@ import {
 	CardType_Filter,
 	on_PageLoad,
 	Show, Hide,
+	remove_PageLoad_Callback,
 } from "~/Utils/KanbanTool/__Main__"
 
 
@@ -43,6 +44,7 @@ const functionBar = new FunctionBar({
 			}),
 			new Entry({
 				name: "Tasks",
+				on_Layout: (cell:JQuery) => {this.on_KeyBinding(null, null)},
 				...get_Callbacks(() => {
 					Show.allColumns()
 					Show.rows({include:activeTask_Columns})
@@ -70,9 +72,7 @@ export default functionBar
 //###  Init  ###//
 //##############//
 
-on_PageLoad(() => {
-	functionBar.entryGroups[0][1].on_KeyBinding(null, null) // Tasks
-})
+remove_PageLoad_Callback(CardType_Filter.show_AllCards_ID)
 
 
 //###############//

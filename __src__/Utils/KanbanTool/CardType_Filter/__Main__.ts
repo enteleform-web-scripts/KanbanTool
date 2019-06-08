@@ -17,6 +17,10 @@ const $:any = require("jquery")
 
 export class CardType_Filter{
 
+	static show_AllCards_ID = Symbol()
+
+	static _onUpdate_Callbacks:(() => void)[] = []
+
 	static get enabled()
 		{return CardType_Filter._filterButton.hasClass("kt-board_search-filter--active")}
 
@@ -47,6 +51,12 @@ export class CardType_Filter{
 	static disable_CardTypes(...ids:(number|string|RegExp)[]){_set_CardType_States(ids, CardType_Filter._enabled_CardType_Buttons )}
 	static toggle_CardTypes (...ids:(number|string|RegExp)[]){_set_CardType_States(ids, CardType_Filter._cardType_Buttons         )}
 
+	static on_Update(){
+		CardType_Filter._onUpdate_Callbacks.forEach(callback =>
+			callback()
+		)
+	}
+
 }
 
 
@@ -55,6 +65,9 @@ export class CardType_Filter{
 //##############//
 
 on_PageLoad(() => {
+	CardType_Filter.enable()
+})
+on_PageLoad(CardType_Filter.show_AllCards_ID, () => {
 	CardType_Filter.enable()
 	CardType_Filter.enable_CardTypes()
 })
