@@ -1,5 +1,6 @@
 //###  Module  ###//
-import {CardType} from "./_CardType"
+import {onPageLoad_Timeout_MS} from "./Settings"
+import {CardType             } from "./_CardType"
 
 
 //#########################//
@@ -11,12 +12,22 @@ export {Show           } from "./Show/__Main__"
 export {Hide           } from "./Hide/__Main__"
 
 
+//###############//
+//###  Setup  ###//
+//###############//
+
+const _on_PageLoad_Callbacks:(() => void)[] = []
+
+
 //########################//
 //###  Exports: Local  ###//
 //########################//
 
 export const KanbanTool  = (window as any).KT
 export const activeBoard = KanbanTool.boards.models[0]
+
+export function on_PageLoad(callback:(() => void))
+	{_on_PageLoad_Callbacks.push(callback)}
 
 export const cardTypes: CardType[] =
 	activeBoard.cardTypes().active().map(
@@ -33,12 +44,14 @@ export const cardTypes: CardType[] =
 		})
 	)
 
-console.log("!!! 1 !!!", cardTypes)
-console.log("!!! 2 !!!", activeBoard.cardTypes().active())
-console.log("!!! 3 !!!", activeBoard.cardTypes())
-
 //##############//
 //###  Init  ###//
 //##############//
 
 KanbanTool.activeBoard = activeBoard
+
+setTimeout(() => {
+	_on_PageLoad_Callbacks.forEach(callback =>
+		callback()
+	)
+}, onPageLoad_Timeout_MS)

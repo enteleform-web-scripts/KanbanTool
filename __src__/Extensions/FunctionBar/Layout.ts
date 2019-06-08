@@ -2,14 +2,12 @@
 const cssVariables = require("./CSS_Variables.json")
 
 //###  Module  ###//
-import {Entry           } from "./Entry"
-import {Position        } from "./Position"
-import {set_CSS_Variable} from "~/Utils/CSS_Variables/__Main__"
-import {KeyBinding      } from "~/Utils/KeyBinding/__Main__"
-import {
-	css_Timeout_MS,
-	functionBar_ToggleModifiers,
-} from "./Settings"
+import {functionBar_ToggleModifiers} from "./Settings"
+import {Entry                      } from "./Entry"
+import {Position                   } from "./Position"
+import {set_CSS_Variable           } from "~/Utils/CSS_Variables/__Main__"
+import {KeyBinding                 } from "~/Utils/KeyBinding/__Main__"
+import {on_PageLoad                } from "~/Utils/KanbanTool/__Main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -27,14 +25,14 @@ export class Layout{
 
 	constructor(functionBar){
 		this._functionBar = functionBar
-		setTimeout(() => {
+		on_PageLoad(() => {
 			this._build()
 			_update_OriginalLayout()
-		}, css_Timeout_MS)
+		})
 	}
 
 	static initialize_ToggleBindings(){
-		setTimeout(() => {
+		on_PageLoad(() => {
 			const toggleMap = [
 				{position:Position.Left,   key:"left" },
 				{position:Position.Right,  key:"right"},
@@ -58,7 +56,7 @@ export class Layout{
 					{preventDefault: true}
 				)
 			})
-		}, css_Timeout_MS)
+		})
 	}
 
 	add_Cell(entry:Entry, groupIndex:number, keyBinding:string){
