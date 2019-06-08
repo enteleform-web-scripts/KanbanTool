@@ -2,11 +2,24 @@
 //###  Module  ###//
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
 const {Entry, Position} = FunctionBar
+import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
 import {
 	CardType_Filter,
 	Show, Hide,
 } from "~/Utils/KanbanTool/__Main__"
 
+
+//###############//
+//###  Setup  ###//
+//###############//
+
+const todayTasks_Columns = ["Routine", "Tasks.Active"]
+const todayTasks_RegEx   = /^(Today.*)|(DailyTask)/
+
+
+//################//
+//###  Export  ###//
+//################//
 
 export default new FunctionBar({
 
@@ -20,53 +33,27 @@ export default new FunctionBar({
 		[
 			new Entry({
 				name: "Today",
-				callback: () => {
+				...get_LayeredCallbacks(() => {
 					Show.allColumns()
-					Show.rows({include:["Routine", "Tasks.Active"]})
+					Show.rows({include:todayTasks_Columns})
 					CardType_Filter.disable_CardTypes()
-					CardType_Filter.enable_CardTypes(/^Task.*/)
-					Hide.emptyColumns()
-				},
+					CardType_Filter.enable_CardTypes(todayTasks_RegEx)
+				})
 			}),
 			new Entry({
-				name: "Today.All",
-				callback: () => {
+				name: "Tasks",
+				...get_LayeredCallbacks(() => {
 					Show.allColumns()
-					Show.rows({include:["Routine", "Tasks.Active"]})
-				},
+					Show.rows({include:["Routine"]})
+					CardType_Filter.enable_CardTypes()
+				}),
 			}),
 			new Entry({
-				name: "All",
+				name: "Planning",
 				callback: () => {
 					Show.allColumns()
 					Show.allRows()
-				},
-			}),
-		],
-
-		[
-			new Entry({
-				name: "Routine",
-				callback: () => {
-					Show.allColumns()
-					Show.rows({include:["Routine"]})
-					Hide.emptyColumns()
-				},
-			}),
-			new Entry({
-				name: "Tasks.Active",
-				callback: () => {
-					Show.allColumns()
-					Show.rows({include:["Tasks.Active"]})
-					Hide.emptyColumns()
-				},
-			}),
-			new Entry({
-				name: "Routine.Short",
-				callback: () => {
-					Show.allColumns()
-					Show.rows({include:["Routine.Short"]})
-					Hide.emptyColumns()
+					CardType_Filter.enable_CardTypes()
 				},
 			}),
 		],
@@ -74,3 +61,25 @@ export default new FunctionBar({
 	],
 
 })
+
+
+//###############//
+//###  Utils  ###//
+//###############//
+
+const _secondaryCallback =
+	() => {Hide.emptyColumns()}
+
+function get_LayeredCallbacks(callback:(() => void)){
+	return {
+		on_KeyBinding: (event:KeyboardEvent, cell:JQuery) => {
+			callback()
+			_secondaryCallback()
+		},
+		on_Click: (event:JQuery.ClickEvent, cell:JQuery) => {
+			callback()
+			if(! KeyBinding.is_Pressed("ctrl"))
+				{_secondaryCallback()}
+		}
+	}
+}
