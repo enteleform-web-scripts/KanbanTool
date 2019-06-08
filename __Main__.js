@@ -10678,10 +10678,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559970351919)
+		const elapsedTime = _get_ElapsedTime(1559970616900)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:05:51 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:10:16 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12822,7 +12822,7 @@ const { Entry, Position } = __Main__1.FunctionBar;
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
 const activeTask_Columns = ["Routine", "Tasks.Active"];
-exports.default = new __Main__1.FunctionBar({
+const functionBar = new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
     keyBinding_Modifiers: ["shift", "alt"],
@@ -12857,6 +12857,10 @@ exports.default = new __Main__1.FunctionBar({
             }),
         ],
     ],
+});
+exports.default = functionBar;
+__Main__3.on_PageLoad(() => {
+    functionBar.entryGroups[0][0].on_Click(null, null);
 });
 const _secondaryCallback = () => { __Main__3.Hide.emptyColumns(); };
 function get_Callbacks(callback) {
