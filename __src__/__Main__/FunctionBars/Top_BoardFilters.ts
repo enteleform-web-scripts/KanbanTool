@@ -22,7 +22,7 @@ const activeTask_Columns = ["Routine", "Tasks.Active"]
 //###  Export  ###//
 //################//
 
-const functionBar = new FunctionBar({
+export default new FunctionBar({
 
 	position:             Position.Top,
 	autoMap_KeyBindings:  true,
@@ -65,14 +65,12 @@ const functionBar = new FunctionBar({
 
 })
 
-export default functionBar
-
 
 //##############//
 //###  Init  ###//
 //##############//
 
-// remove_PageLoad_Callback(CardType_Filter.show_AllCards_ID)
+remove_PageLoad_Callback(CardType_Filter.show_AllCards_ID)
 
 
 //###############//

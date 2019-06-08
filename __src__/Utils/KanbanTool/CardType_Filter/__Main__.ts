@@ -65,21 +65,20 @@ export class CardType_Filter{
 //##############//
 
 on_PageLoad(() => {
-	console.log("@@@ CardTypeFilter.1")
 	CardType_Filter.enable()
 })
-on_PageLoad(CardType_Filter.show_AllCards_ID, () => {
-	console.log("@@@ CardTypeFilter.2")
+
+on_PageLoad(CardType_Filter.show_AllCards_ID, ()=>{
 	CardType_Filter.enable()
 	CardType_Filter.enable_CardTypes()
 })
 
-KeyBinding.add(["ctrl", "`"], () => {
+KeyBinding.add(["ctrl", "`"], ()=>{
 	Hide.emptyColumns()
 	Hide.emptyRows()
 })
 
-KeyBinding.add(["ctrl", "shift", "`"], () => {
+KeyBinding.add(["ctrl", "shift", "`"], ()=>{
 	Show.allColumns()
 	Show.allRows()
 	CardType_Filter.enable_CardTypes()
