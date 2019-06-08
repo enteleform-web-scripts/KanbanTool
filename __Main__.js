@@ -10678,10 +10678,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559969687965)
+		const elapsedTime = _get_ElapsedTime(1559970106407)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:54:47 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:01:46 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12829,11 +12829,12 @@ exports.default = new __Main__1.FunctionBar({
     autoMap_KeyBindings: true,
     keyBinding_Modifiers: ["shift", "alt"],
     stretchCells: false,
+    cellProperties: [{ functionName: "css", args: ["min-width", "90px"] }],
     entryGroups: [
         [
             new Entry({
                 name: "Today",
-                ...get_LayeredCallbacks(() => {
+                ...get_Callbacks(() => {
                     __Main__3.Show.allColumns();
                     __Main__3.Show.rows({ include: activeTask_Columns });
                     __Main__3.CardType_Filter.disable_CardTypes();
@@ -12842,7 +12843,7 @@ exports.default = new __Main__1.FunctionBar({
             }),
             new Entry({
                 name: "Tasks",
-                ...get_LayeredCallbacks(() => {
+                ...get_Callbacks(() => {
                     __Main__3.Show.allColumns();
                     __Main__3.Show.rows({ include: activeTask_Columns });
                     __Main__3.CardType_Filter.enable_CardTypes();
@@ -12850,7 +12851,7 @@ exports.default = new __Main__1.FunctionBar({
             }),
             new Entry({
                 name: "Planning",
-                ...get_LayeredCallbacks(() => {
+                ...get_Callbacks(() => {
                     __Main__3.Show.allColumns();
                     __Main__3.Show.allRows();
                     __Main__3.CardType_Filter.enable_CardTypes();
@@ -12860,7 +12861,7 @@ exports.default = new __Main__1.FunctionBar({
     ],
 });
 const _secondaryCallback = () => { __Main__3.Hide.emptyColumns(); };
-function get_LayeredCallbacks(callback) {
+function get_Callbacks(callback) {
     return {
         on_KeyBinding: (event, cell) => {
             callback();
