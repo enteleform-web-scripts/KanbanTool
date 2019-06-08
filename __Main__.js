@@ -97,7 +97,7 @@ const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
 function on_PageLoad(arg_1, arg_2) {
-    const [id, callback] = (arg_1 instanceof Symbol)
+    const [id, callback] = (typeof arg_1 == "symbol")
         ? [arg_1, arg_2]
         : [Symbol(), arg_1];
     _on_PageLoad_Callbacks.push({ id, callback });
@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560018723548)
+		const elapsedTime = _get_ElapsedTime(1560018995166)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:32:03 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:36:35 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
