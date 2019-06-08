@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560022347084)
+		const elapsedTime = _get_ElapsedTime(1560022458376)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:32:27 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:34:18 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12401,9 +12401,7 @@ function _set_CardType_States(ids, targetButtons) {
             button.click();
         }
     }
-    setTimeout(() => {
-        CardType_Filter._on_Update();
-    }, 100);
+    CardType_Filter._on_Update();
 }
 function _process_RegExp_IDs(allButtons, targetButtons, ids) {
     const patterns = ids.filter(id => (id instanceof RegExp));
@@ -12724,7 +12722,6 @@ var CallbackManager;
                 });
                 const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
                 __Main__2.CardType_Filter.on_Update(update_CSS);
-                update_CSS();
             },
             on_KeyBinding: function (event, cell) {
                 _update_CardType(cardType);
@@ -12883,6 +12880,7 @@ exports.default = new __Main__1.FunctionBar({
         [
             new Entry({
                 name: "Today",
+                on_Layout: function (cell) { this.on_KeyBinding(null, null); },
                 ...get_Callbacks(() => {
                     __Main__3.Show.allColumns();
                     __Main__3.Show.rows({ include: activeTask_Columns });
@@ -12892,7 +12890,6 @@ exports.default = new __Main__1.FunctionBar({
             }),
             new Entry({
                 name: "Tasks",
-                on_Layout: function (cell) { this.on_KeyBinding(null, null); },
                 ...get_Callbacks(() => {
                     __Main__3.Show.allColumns();
                     __Main__3.Show.rows({ include: activeTask_Columns });
