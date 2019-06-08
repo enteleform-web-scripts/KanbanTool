@@ -49,11 +49,11 @@ export default new FunctionBar({
 			}),
 			new Entry({
 				name: "Planning",
-				callback: () => {
+				...get_LayeredCallbacks(() => {
 					Show.allColumns()
 					Show.allRows()
 					CardType_Filter.enable_CardTypes()
-				},
+				}),
 			}),
 		],
 
