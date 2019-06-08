@@ -33,6 +33,9 @@ export const cardTypes: CardType[] =
 		})
 	)
 
+console.log("!!! 1 !!!", cardTypes)
+console.log("!!! 2 !!!", activeBoard.cardTypes().active())
+console.log("!!! 3 !!!", activeBoard.cardTypes())
 
 //##############//
 //###  Init  ###//
