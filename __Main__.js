@@ -10502,7 +10502,9 @@ class KeyBinding {
             return _get_Decorator(hotKeys_String, options);
         }
     }
-    static is_Pressed(...modifierKey) { return modifierKey.every(key => _isPressed_ModifierMap[key]); }
+    static is_Pressed(...modifierKey) {
+        return modifierKey.every(key => _isPressed_CallbackMap[key]());
+    }
 }
 exports.KeyBinding = KeyBinding;
 (function (KeyBinding) {
@@ -10513,10 +10515,10 @@ exports.KeyBinding = KeyBinding;
 })(KeyBinding = exports.KeyBinding || (exports.KeyBinding = {}));
 window.KeyBinding = KeyBinding;
 const _BindOptions_Defaults = { preventDefault: false };
-const _isPressed_ModifierMap = {
-    ctrl: hotkeys_js_1.default.ctrl,
-    shift: hotkeys_js_1.default.shift,
-    alt: hotkeys_js_1.default.alt,
+const _isPressed_CallbackMap = {
+    ctrl: () => hotkeys_js_1.default.ctrl,
+    shift: () => hotkeys_js_1.default.shift,
+    alt: () => hotkeys_js_1.default.alt,
 };
 function _disable_DefaultFilters(event) { return true; }
 function _get_BindArguments(arg_2, arg_3) {
@@ -10678,10 +10680,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559955444154)
+		const elapsedTime = _get_ElapsedTime(1559955569919)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     8:57:24 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     8:59:29 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
