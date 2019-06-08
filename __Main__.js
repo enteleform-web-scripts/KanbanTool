@@ -123,6 +123,95 @@ setTimeout(() => {
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const KeyGroups_1 = __webpack_require__(19);
+const hotkeys_js_1 = __importDefault(__webpack_require__(20));
+hotkeys_js_1.default.filter = _disable_DefaultFilters;
+class KeyBinding {
+    static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
+    static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
+    static add(hotKeys, arg_2, arg_3) {
+        const hotKeys_String = _convert_HotKeys_ToString(hotKeys);
+        const { callback, options } = _get_BindArguments(arg_2, arg_3);
+        if (callback) {
+            _add_KeyBinding(hotKeys_String, callback, options);
+        }
+        else {
+            return _get_Decorator(hotKeys_String, options);
+        }
+    }
+    static is_Pressed(...modifierKey) {
+        return modifierKey.every(key => _isPressed_CallbackMap[key]());
+    }
+}
+exports.KeyBinding = KeyBinding;
+(function (KeyBinding) {
+    KeyBinding.ModifierKeys = KeyGroups_1.ModifierKeys;
+    KeyBinding.AlphanumericKeys = KeyGroups_1.AlphanumericKeys;
+    KeyBinding.CharacterKeys = KeyGroups_1.CharacterKeys;
+    KeyBinding.Keys = KeyGroups_1.Keys;
+})(KeyBinding = exports.KeyBinding || (exports.KeyBinding = {}));
+window.KeyBinding = KeyBinding;
+const _BindOptions_Defaults = { preventDefault: false };
+const _isPressed_CallbackMap = {
+    ctrl: () => hotkeys_js_1.default.ctrl,
+    shift: () => hotkeys_js_1.default.shift,
+    alt: () => hotkeys_js_1.default.alt,
+};
+function _disable_DefaultFilters(event) { return true; }
+function _get_BindArguments(arg_2, arg_3) {
+    let callback, options;
+    if (arg_2 instanceof Function)
+        callback = arg_2;
+    if (arg_3)
+        options = arg_3;
+    else if (arg_2)
+        options = arg_2;
+    options = { ..._BindOptions_Defaults, ...options };
+    return { callback, options };
+}
+function _add_KeyBinding(hotKeys, callback, options) {
+    hotkeys_js_1.default(hotKeys, (event) => {
+        if (options.preventDefault) {
+            event.preventDefault;
+        }
+        console.log(`[KeyBinding] '${hotKeys}'`);
+        callback(event);
+    });
+}
+function _get_Decorator(hotKeys, options) {
+    return (target, propertyKey, descriptor) => {
+        _add_KeyBinding(hotKeys, descriptor.value, options);
+        return descriptor;
+    };
+}
+function _convert_HotKeys_ToString(keys) {
+    return ((keys instanceof Array)
+        ? _get_HotKey_Array_AsString(keys)
+        : keys);
+}
+function _get_HotKey_Array_AsString(keys) {
+    const sortedKeys = [...keys].sort((a, b) => {
+        if (KeyGroups_1.ModifierKeys.includes(a)) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
+    });
+    return sortedKeys.join(" + ");
+}
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -10491,95 +10580,6 @@ return jQuery;
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(19);
-const hotkeys_js_1 = __importDefault(__webpack_require__(20));
-hotkeys_js_1.default.filter = _disable_DefaultFilters;
-class KeyBinding {
-    static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
-    static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
-    static add(hotKeys, arg_2, arg_3) {
-        const hotKeys_String = _convert_HotKeys_ToString(hotKeys);
-        const { callback, options } = _get_BindArguments(arg_2, arg_3);
-        if (callback) {
-            _add_KeyBinding(hotKeys_String, callback, options);
-        }
-        else {
-            return _get_Decorator(hotKeys_String, options);
-        }
-    }
-    static is_Pressed(...modifierKey) {
-        return modifierKey.every(key => _isPressed_CallbackMap[key]());
-    }
-}
-exports.KeyBinding = KeyBinding;
-(function (KeyBinding) {
-    KeyBinding.ModifierKeys = KeyGroups_1.ModifierKeys;
-    KeyBinding.AlphanumericKeys = KeyGroups_1.AlphanumericKeys;
-    KeyBinding.CharacterKeys = KeyGroups_1.CharacterKeys;
-    KeyBinding.Keys = KeyGroups_1.Keys;
-})(KeyBinding = exports.KeyBinding || (exports.KeyBinding = {}));
-window.KeyBinding = KeyBinding;
-const _BindOptions_Defaults = { preventDefault: false };
-const _isPressed_CallbackMap = {
-    ctrl: () => hotkeys_js_1.default.ctrl,
-    shift: () => hotkeys_js_1.default.shift,
-    alt: () => hotkeys_js_1.default.alt,
-};
-function _disable_DefaultFilters(event) { return true; }
-function _get_BindArguments(arg_2, arg_3) {
-    let callback, options;
-    if (arg_2 instanceof Function)
-        callback = arg_2;
-    if (arg_3)
-        options = arg_3;
-    else if (arg_2)
-        options = arg_2;
-    options = { ..._BindOptions_Defaults, ...options };
-    return { callback, options };
-}
-function _add_KeyBinding(hotKeys, callback, options) {
-    hotkeys_js_1.default(hotKeys, (event) => {
-        if (options.preventDefault) {
-            event.preventDefault;
-        }
-        console.log(`[KeyBinding] '${hotKeys}'`);
-        callback(event);
-    });
-}
-function _get_Decorator(hotKeys, options) {
-    return (target, propertyKey, descriptor) => {
-        _add_KeyBinding(hotKeys, descriptor.value, options);
-        return descriptor;
-    };
-}
-function _convert_HotKeys_ToString(keys) {
-    return ((keys instanceof Array)
-        ? _get_HotKey_Array_AsString(keys)
-        : keys);
-}
-function _get_HotKey_Array_AsString(keys) {
-    const sortedKeys = [...keys].sort((a, b) => {
-        if (KeyGroups_1.ModifierKeys.includes(a)) {
-            return -1;
-        }
-        else {
-            return 0;
-        }
-    });
-    return sortedKeys.join(" + ");
-}
-
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10678,10 +10678,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559966662964)
+		const elapsedTime = _get_ElapsedTime(1559968839606)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:04:22 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:40:39 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10699,7 +10699,7 @@ exports.FunctionBar = FunctionBar;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(1);
 exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
 exports.functionBar_ToggleModifiers = ["shift", "alt"];
 
@@ -10732,7 +10732,7 @@ exports.is_VerticalPosition = is_VerticalPosition;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 class TaskContainer {
     constructor({ type, domIndex, modelIndex, model, element }) {
         this.children = [];
@@ -10835,7 +10835,7 @@ const TaskContainer_1 = __webpack_require__(7);
 const get_Rows_1 = __webpack_require__(10);
 const get_Columns_1 = __webpack_require__(11);
 const Glob_1 = __webpack_require__(27);
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 class Show {
     static rows({ include, exclude }) {
         _show({
@@ -10916,7 +10916,7 @@ function _match_Glob(container, target) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(7);
 const __Main__1 = __webpack_require__(0);
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 function get_Rows() {
     const headerElements = $.find("kt-board > tbody > tr > th");
     const models = __Main__1.activeBoard.swimlanes().toArray();
@@ -11016,7 +11016,7 @@ __webpack_require__(36);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 exports.lol = "wut";
 const DELETE_KEYCODE = 46;
 const selector__CheckList_Item = "kt-taskview > form > div.kt-taskview-content > kt-checklist > li > .kt-checklist_item_content";
@@ -12095,7 +12095,7 @@ if (typeof window !== 'undefined') {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(5);
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(1);
 class Entry {
     constructor({ name, callback, on_Click, on_DoubleClick, on_KeyBinding, on_Layout, keyBinding, color, }) {
         callback = (callback || emptyCallback);
@@ -12144,9 +12144,9 @@ const cssVariables = __webpack_require__(23);
 const Settings_1 = __webpack_require__(5);
 const Position_1 = __webpack_require__(6);
 const __Main__1 = __webpack_require__(24);
-const __Main__2 = __webpack_require__(2);
+const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 class Layout {
     constructor(functionBar) {
         this._functionBar = functionBar;
@@ -12313,9 +12313,9 @@ exports.CardType = CardType;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(8);
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(0);
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 class CardType_Filter {
     static get enabled() { return CardType_Filter._filterButton.hasClass("kt-board_search-filter--active"); }
     static get disabled() { return !(this.enabled); }
@@ -12345,6 +12345,11 @@ __Main__2.on_PageLoad(() => {
 __Main__1.KeyBinding.add(["ctrl", "`"], () => {
     __Main__2.Hide.emptyColumns();
     __Main__2.Hide.emptyRows();
+});
+__Main__1.KeyBinding.add(["ctrl", "shift", "`"], () => {
+    __Main__2.Show.allColumns();
+    __Main__2.Show.allRows();
+    CardType_Filter.enable_CardTypes();
 });
 function _set_CardType_States(ids, targetButtons) {
     const allButtons = CardType_Filter._cardType_Buttons;
@@ -12652,7 +12657,7 @@ function _update_MergedOptions_CellWidth(options) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(0);
 var CallbackManager;
 (function (CallbackManager) {
@@ -12712,7 +12717,7 @@ var CallbackManager;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
-const __Main__2 = __webpack_require__(2);
+const __Main__2 = __webpack_require__(1);
 function get_Auto_CardType_Rows() {
     let cardType_Rows = [];
     let cardIndex = 0;
@@ -12816,7 +12821,10 @@ exports.default = new __Main__1.FunctionBar({
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(3);
 const { Entry, Position } = __Main__1.FunctionBar;
-const __Main__2 = __webpack_require__(0);
+const __Main__2 = __webpack_require__(1);
+const __Main__3 = __webpack_require__(0);
+const todayTasks_Columns = ["Routine", "Tasks.Active"];
+const todayTasks_RegEx = /^(Today.*)|(DailyTask)/;
 exports.default = new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
@@ -12826,57 +12834,47 @@ exports.default = new __Main__1.FunctionBar({
         [
             new Entry({
                 name: "Today",
-                callback: () => {
-                    __Main__2.Show.allColumns();
-                    __Main__2.Show.rows({ include: ["Routine", "Tasks.Active"] });
-                    __Main__2.CardType_Filter.disable_CardTypes();
-                    __Main__2.CardType_Filter.enable_CardTypes(/^Task.*/);
-                    __Main__2.Hide.emptyColumns();
-                },
+                ...get_LayeredCallbacks(() => {
+                    __Main__3.Show.allColumns();
+                    __Main__3.Show.rows({ include: todayTasks_Columns });
+                    __Main__3.CardType_Filter.disable_CardTypes();
+                    __Main__3.CardType_Filter.enable_CardTypes(todayTasks_RegEx);
+                })
             }),
             new Entry({
-                name: "Today.All",
-                callback: () => {
-                    __Main__2.Show.allColumns();
-                    __Main__2.Show.rows({ include: ["Routine", "Tasks.Active"] });
-                },
+                name: "Tasks",
+                ...get_LayeredCallbacks(() => {
+                    __Main__3.Show.allColumns();
+                    __Main__3.Show.rows({ include: ["Routine"] });
+                    __Main__3.CardType_Filter.enable_CardTypes();
+                }),
             }),
             new Entry({
-                name: "All",
+                name: "Planning",
                 callback: () => {
-                    __Main__2.Show.allColumns();
-                    __Main__2.Show.allRows();
-                },
-            }),
-        ],
-        [
-            new Entry({
-                name: "Routine",
-                callback: () => {
-                    __Main__2.Show.allColumns();
-                    __Main__2.Show.rows({ include: ["Routine"] });
-                    __Main__2.Hide.emptyColumns();
-                },
-            }),
-            new Entry({
-                name: "Tasks.Active",
-                callback: () => {
-                    __Main__2.Show.allColumns();
-                    __Main__2.Show.rows({ include: ["Tasks.Active"] });
-                    __Main__2.Hide.emptyColumns();
-                },
-            }),
-            new Entry({
-                name: "Routine.Short",
-                callback: () => {
-                    __Main__2.Show.allColumns();
-                    __Main__2.Show.rows({ include: ["Routine.Short"] });
-                    __Main__2.Hide.emptyColumns();
+                    __Main__3.Show.allColumns();
+                    __Main__3.Show.allRows();
+                    __Main__3.CardType_Filter.enable_CardTypes();
                 },
             }),
         ],
     ],
 });
+const _secondaryCallback = () => { __Main__3.Hide.emptyColumns(); };
+function get_LayeredCallbacks(callback) {
+    return {
+        on_KeyBinding: (event, cell) => {
+            callback();
+            _secondaryCallback();
+        },
+        on_Click: (event, cell) => {
+            callback();
+            if (!__Main__2.KeyBinding.is_Pressed("ctrl")) {
+                _secondaryCallback();
+            }
+        }
+    };
+}
 
 
 /***/ }),
@@ -12895,8 +12893,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(2);
-const $ = __webpack_require__(1);
+const __Main__1 = __webpack_require__(1);
+const $ = __webpack_require__(2);
 class FilterKeybindings {
     static focus_SearchField(event) {
         const searchField = $("#kt-board_search-q");
