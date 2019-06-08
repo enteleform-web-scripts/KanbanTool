@@ -10678,10 +10678,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559968839606)
+		const elapsedTime = _get_ElapsedTime(1559969499937)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:40:39 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:51:39 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11005,7 +11005,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(14);
 const __Main__1 = __webpack_require__(3);
 const __Main__2 = __webpack_require__(31);
-__Main__1.FunctionBar.load(__webpack_require__(34).default, __webpack_require__(35).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 3], cellWidth: 150, stretchCells: false }));
+__Main__1.FunctionBar.load(__webpack_require__(34).default, __webpack_require__(35).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 4, 2], cellWidth: 150, stretchCells: false }));
 __webpack_require__(36);
 
 
@@ -12823,8 +12823,7 @@ const __Main__1 = __webpack_require__(3);
 const { Entry, Position } = __Main__1.FunctionBar;
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
-const todayTasks_Columns = ["Routine", "Tasks.Active"];
-const todayTasks_RegEx = /^(Today.*)|(DailyTask)/;
+const activeTask_Columns = ["Routine", "Tasks.Active"];
 exports.default = new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
@@ -12836,16 +12835,16 @@ exports.default = new __Main__1.FunctionBar({
                 name: "Today",
                 ...get_LayeredCallbacks(() => {
                     __Main__3.Show.allColumns();
-                    __Main__3.Show.rows({ include: todayTasks_Columns });
+                    __Main__3.Show.rows({ include: activeTask_Columns });
                     __Main__3.CardType_Filter.disable_CardTypes();
-                    __Main__3.CardType_Filter.enable_CardTypes(todayTasks_RegEx);
+                    __Main__3.CardType_Filter.enable_CardTypes(/^(Today.*)|(DailyTask)/);
                 })
             }),
             new Entry({
                 name: "Tasks",
                 ...get_LayeredCallbacks(() => {
                     __Main__3.Show.allColumns();
-                    __Main__3.Show.rows({ include: ["Routine"] });
+                    __Main__3.Show.rows({ include: activeTask_Columns });
                     __Main__3.CardType_Filter.enable_CardTypes();
                 }),
             }),
