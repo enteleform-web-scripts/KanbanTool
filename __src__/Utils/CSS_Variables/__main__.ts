@@ -3,11 +3,30 @@
 //###  Exports  ###//
 //#################//
 
-export function set_CSS_Variable(key:string, value:any)
-	{document.documentElement.style.setProperty(`--${key}`, value)}
+export function set_CSS_Variable(key:string,                  value:(string|number))
+export function set_CSS_Variable(element:JQuery,  key:string, value:(string|number))
+export function set_CSS_Variable(arg_1?, arg_2?, arg_3?                            ){
+	const {element, key, value} = _get_Arguments(arg_1, arg_2, arg_3)
 
-export function get_CSS_Variable(key:string)
-	{return _get_CSS_Variable_Value(`--${key}`)}
+	if(element)
+		{element.get(0).style.setProperty(key, value)}
+	else
+		{document.documentElement.style.setProperty(key, value)}
+}
+
+export function get_CSS_Variable(key:string,                )
+export function get_CSS_Variable(element:JQuery,  key:string)
+export function get_CSS_Variable(arg_1?, arg_2?             ){
+	const {element, key} = _get_Arguments(arg_1, arg_2, undefined)
+
+	if(element)
+		{return element.get(0).style.getPropertyValue(key)}
+	else
+		{return _get_CSS_Variable_Value(key)}
+}
+
+;(window as any).set_CSS_Variable = set_CSS_Variable
+;(window as any).get_CSS_Variable = get_CSS_Variable
 
 export function get_CSS_Variables(){
 	const variables = {}
@@ -27,6 +46,19 @@ export function get_CSS_Variables(){
 //###############//
 //###  Utils  ###//
 //###############//
+
+function _get_Arguments(arg_1, arg_2, arg_3){
+	let [element, key, value] =
+		(arg_1 instanceof jQuery)
+		? [arg_1 as JQuery, arg_2, arg_3]
+		: [undefined,       arg_1, arg_2]
+
+	return {
+		element,
+		value,
+		key: `--${key}`
+	}
+}
 
 function _get_CSS_Variable_Keys(styleSheet:StyleSheet){
 	const cssRules = [...(styleSheet as CSSStyleSheet).cssRules]
