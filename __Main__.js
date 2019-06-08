@@ -92,7 +92,7 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(10);
-const _CardType_1 = __webpack_require__(25);
+const _CardType_1 = __webpack_require__(26);
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
@@ -119,11 +119,11 @@ exports.cardTypes = exports.activeBoard.cardTypes().active().map(({ attributes }
         ? "#FFF"
         : "#000"),
 }));
-var __Main__1 = __webpack_require__(26);
+var __Main__1 = __webpack_require__(27);
 exports.CardType_Filter = __Main__1.CardType_Filter;
 var __Main__2 = __webpack_require__(11);
 exports.Show = __Main__2.Show;
-var __Main__3 = __webpack_require__(28);
+var __Main__3 = __webpack_require__(29);
 exports.Hide = __Main__3.Hide;
 exports.KanbanTool.activeBoard = exports.activeBoard;
 setTimeout(() => {
@@ -10602,7 +10602,7 @@ __webpack_require__(17).inject(__dirname, { CSS: true, HTML: true });
 const Settings_1 = __webpack_require__(5);
 const Entry_1 = __webpack_require__(23);
 const Layout_1 = __webpack_require__(24);
-const Module_BaseClasses_1 = __webpack_require__(30);
+const Module_BaseClasses_1 = __webpack_require__(31);
 const Position_1 = __webpack_require__(6);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560031559704)
+		const elapsedTime = _get_ElapsedTime(1560031795780)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:05:59 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:09:55 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10838,6 +10838,7 @@ module.exports = {"container":"CustomExtension__FunctionBar","collapsed":"collap
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const is_JQuery_1 = __webpack_require__(25);
 function set_CSS_Variable(arg_1, arg_2, arg_3) {
     console.log(`-----------------------------`);
     console.log(`{arg_1:'${arg_1}', arg_2:'${arg_2}', arg_3:'${arg_3}'}`);
@@ -10872,7 +10873,7 @@ function get_CSS_Variables() {
 }
 exports.get_CSS_Variables = get_CSS_Variables;
 function _get_Arguments(arg_1, arg_2, arg_3) {
-    let [element, key, value] = (arg_1.jquery !== undefined)
+    let [element, key, value] = is_JQuery_1.is_JQuery(arg_1)
         ? [arg_1, arg_2, arg_3]
         : [undefined, arg_1, arg_2];
     return {
@@ -10911,7 +10912,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(7);
 const get_Rows_1 = __webpack_require__(12);
 const get_Columns_1 = __webpack_require__(13);
-const Glob_1 = __webpack_require__(27);
+const Glob_1 = __webpack_require__(28);
 const $ = __webpack_require__(2);
 class Show {
     static rows({ include, exclude }) {
@@ -11081,9 +11082,9 @@ module.exports = __webpack_require__(15);
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(16);
 const __Main__1 = __webpack_require__(3);
-const __Main__2 = __webpack_require__(31);
-__Main__1.FunctionBar.load(__webpack_require__(34).default, __webpack_require__(35).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 4, 2], cellWidth: 125, stretchCells: false }));
-__webpack_require__(36);
+const __Main__2 = __webpack_require__(32);
+__Main__1.FunctionBar.load(__webpack_require__(35).default, __webpack_require__(36).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 4, 2], cellWidth: 125, stretchCells: false }));
+__webpack_require__(37);
 
 
 /***/ }),
@@ -12334,6 +12335,19 @@ function _update_OriginalLayout() {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+function is_JQuery(obj) {
+    return (obj && (obj instanceof jQuery || obj.constructor.prototype.jquery));
+}
+exports.is_JQuery = is_JQuery;
+
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 class CardType {
     constructor({ index, id, name, bgColor, fgColor }) {
         this.index = index;
@@ -12347,7 +12361,7 @@ exports.CardType = CardType;
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12469,7 +12483,7 @@ function _get_CardType_FromName(name) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12510,13 +12524,13 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(29);
+const get_emptyContainer_Indexes_1 = __webpack_require__(30);
 const get_Rows_1 = __webpack_require__(12);
 const get_Columns_1 = __webpack_require__(13);
 const __Main__1 = __webpack_require__(11);
@@ -12558,7 +12572,7 @@ function _is_Empty(container, emptyContainer_Indexes) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12647,7 +12661,7 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12660,14 +12674,14 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CallbackManager_1 = __webpack_require__(32);
-const get_Rows_1 = __webpack_require__(33);
+const CallbackManager_1 = __webpack_require__(33);
+const get_Rows_1 = __webpack_require__(34);
 const __Main__1 = __webpack_require__(3);
 const Position_1 = __webpack_require__(6);
 CallbackManager_1.CallbackManager.set_Card_HoverCallback();
@@ -12714,7 +12728,7 @@ function _update_MergedOptions_CellWidth(options) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12790,7 +12804,7 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12836,7 +12850,7 @@ function _cardTypes_Exhausted(cardIndex) { return (cardIndex == __Main__1.cardTy
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12891,7 +12905,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12958,7 +12972,7 @@ function get_Callbacks(callback) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
