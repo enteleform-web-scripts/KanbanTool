@@ -10678,10 +10678,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559969499937)
+		const elapsedTime = _get_ElapsedTime(1559969687965)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:51:39 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:54:47 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11005,7 +11005,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(14);
 const __Main__1 = __webpack_require__(3);
 const __Main__2 = __webpack_require__(31);
-__Main__1.FunctionBar.load(__webpack_require__(34).default, __webpack_require__(35).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 4, 2], cellWidth: 150, stretchCells: false }));
+__Main__1.FunctionBar.load(__webpack_require__(34).default, __webpack_require__(35).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 4, 2], cellWidth: 125, stretchCells: false }));
 __webpack_require__(36);
 
 
@@ -12850,11 +12850,11 @@ exports.default = new __Main__1.FunctionBar({
             }),
             new Entry({
                 name: "Planning",
-                callback: () => {
+                ...get_LayeredCallbacks(() => {
                     __Main__3.Show.allColumns();
                     __Main__3.Show.allRows();
                     __Main__3.CardType_Filter.enable_CardTypes();
-                },
+                }),
             }),
         ],
     ],
