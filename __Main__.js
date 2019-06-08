@@ -93,12 +93,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(8);
 const _CardType_1 = __webpack_require__(25);
-var __Main__1 = __webpack_require__(26);
-exports.CardType_Filter = __Main__1.CardType_Filter;
-var __Main__2 = __webpack_require__(9);
-exports.Show = __Main__2.Show;
-var __Main__3 = __webpack_require__(28);
-exports.Hide = __Main__3.Hide;
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
@@ -113,6 +107,12 @@ exports.cardTypes = exports.activeBoard.cardTypes().active().map(({ attributes }
         ? "#FFF"
         : "#000"),
 }));
+var __Main__1 = __webpack_require__(26);
+exports.CardType_Filter = __Main__1.CardType_Filter;
+var __Main__2 = __webpack_require__(9);
+exports.Show = __Main__2.Show;
+var __Main__3 = __webpack_require__(28);
+exports.Hide = __Main__3.Hide;
 exports.KanbanTool.activeBoard = exports.activeBoard;
 setTimeout(() => {
     _on_PageLoad_Callbacks.forEach(callback => callback());
@@ -10678,10 +10678,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559966029892)
+		const elapsedTime = _get_ElapsedTime(1559966202515)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:53:49 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:56:42 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
