@@ -47,7 +47,7 @@ export namespace CallbackManager{
 
 				const update_CSS = _get_UpdateCSS_Callback(cell, cardType)
 				CardType_Filter.on_Update(update_CSS)
-				// update_CSS()
+				update_CSS()
 			},
 
 			on_KeyBinding: function(event:KeyboardEvent, cell:JQuery){
