@@ -6,6 +6,8 @@
 export function set_CSS_Variable(key:string,                  value:(string|number))
 export function set_CSS_Variable(element:JQuery,  key:string, value:(string|number))
 export function set_CSS_Variable(arg_1?, arg_2?, arg_3?                            ){
+	console.log(`-----------------------------`)
+	console.log(`{arg_1:'${arg_1}', arg_2:'${arg_2}', arg_3:'${arg_3}'}`)
 	const {element, key, value} = _get_Arguments(arg_1, arg_2, arg_3)
 	console.log(`{element:'${element}', key:'${key}', value:'${value}'}`)
 
