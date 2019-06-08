@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560020088878)
+		const elapsedTime = _get_ElapsedTime(1560020133248)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:54:48 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:55:33 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12882,7 +12882,6 @@ const functionBar = new __Main__1.FunctionBar({
     ],
 });
 exports.default = functionBar;
-__Main__3.remove_PageLoad_Callback(__Main__3.CardType_Filter.show_AllCards_ID);
 const _secondaryCallback = () => { __Main__3.Hide.emptyColumns(); };
 function get_Callbacks(callback) {
     return {
