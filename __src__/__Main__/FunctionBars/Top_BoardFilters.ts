@@ -24,7 +24,7 @@ export default new FunctionBar({
 					Show.allColumns()
 					Show.rows({include:["Routine", "Tasks.Active"]})
 					CardType_Filter.disable_CardTypes()
-					CardType_Filter.enable_CardTypes(/Task.*/)
+					CardType_Filter.enable_CardTypes(/^Task.*/)
 					Hide.emptyColumns()
 				},
 			}),
