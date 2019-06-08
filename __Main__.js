@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560030965590)
+		const elapsedTime = _get_ElapsedTime(1560031048747)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:56:05 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:57:28 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10839,6 +10839,8 @@ module.exports = {"container":"CustomExtension__FunctionBar","collapsed":"collap
 
 Object.defineProperty(exports, "__esModule", { value: true });
 function set_CSS_Variable(arg_1, arg_2, arg_3) {
+    console.log(`-----------------------------`);
+    console.log(`{arg_1:'${arg_1}', arg_2:'${arg_2}', arg_3:'${arg_3}'}`);
     const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
     console.log(`{element:'${element}', key:'${key}', value:'${value}'}`);
     if (element) {
