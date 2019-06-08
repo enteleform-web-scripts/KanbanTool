@@ -10678,10 +10678,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559970106407)
+		const elapsedTime = _get_ElapsedTime(1559970351919)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:01:46 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:05:51 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12770,39 +12770,37 @@ exports.default = new __Main__1.FunctionBar({
     entryGroups: [
         [
             new Entry({
-                name: "Show: All Rows",
+                name: "Show_Rows",
                 callback: () => {
                     __Main__2.Show.allRows();
                 },
             }),
             new Entry({
-                name: "Show: All Columns",
+                name: "Show_Columns",
                 callback: () => {
                     __Main__2.Show.allColumns();
                 },
             }),
             new Entry({
-                name: "Hide: Empty Rows",
+                name: "Hide_Rows",
                 callback: () => {
                     __Main__2.Hide.emptyRows();
                 },
             }),
             new Entry({
-                name: "Hide: Empty Columns",
+                name: "Hide_Columns",
                 callback: () => {
                     __Main__2.Hide.emptyColumns();
                 },
             }),
-        ],
-        [
             new Entry({
-                name: "Filter: Enable All",
+                name: "Filter_All",
                 callback: () => {
                     __Main__2.CardType_Filter.enable_CardTypes();
                 },
             }),
             new Entry({
-                name: "Filter: Disable All",
+                name: "Filter_None",
                 callback: () => {
                     __Main__2.CardType_Filter.disable_CardTypes();
                 },
