@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560031795780)
+		const elapsedTime = _get_ElapsedTime(1560031873591)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:09:55 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:11:13 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10840,10 +10840,7 @@ module.exports = {"container":"CustomExtension__FunctionBar","collapsed":"collap
 Object.defineProperty(exports, "__esModule", { value: true });
 const is_JQuery_1 = __webpack_require__(25);
 function set_CSS_Variable(arg_1, arg_2, arg_3) {
-    console.log(`-----------------------------`);
-    console.log(`{arg_1:'${arg_1}', arg_2:'${arg_2}', arg_3:'${arg_3}'}`);
     const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
-    console.log(`{element:'${element}', key:'${key}', value:'${value}'}`);
     if (element) {
         element.get(0).style.setProperty(key, value);
     }
@@ -12761,10 +12758,7 @@ var CallbackManager;
     function _get_Callbacks(cardType) {
         return {
             on_Layout: function (cell) {
-                setTimeout(() => {
-                    __Main__2.set_CSS_Variable(cell, cssVariables.filterColor, cardType.bgColor);
-                    console.log("@@@ STYLE UPDATE", cell);
-                }, 1000);
+                __Main__2.set_CSS_Variable(cell, cssVariables.filterColor, cardType.bgColor);
                 const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
                 __Main__3.CardType_Filter.on_Update(update_CSS);
                 update_CSS();
