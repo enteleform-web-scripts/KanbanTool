@@ -63,7 +63,7 @@ function _get_Cell_IsEmpty(row:any, column:any){
 				return !(element.hasClass("kt-board_search--filtered_out"))
 			})
 
-	const _TEMP_A_ = _get_Tasks(row, column).length
+	const _TEMP_A_ = _get_Tasks(row, column)
 	if(_TEMP_A_.length != tasks.length)
 		{console.log(`>>> @[${row}, ${column}]  ${_TEMP_A_.length} => ${tasks.length}`)}
 	return (tasks.length == 0)
