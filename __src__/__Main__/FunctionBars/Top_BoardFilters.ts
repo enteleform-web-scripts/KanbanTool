@@ -26,13 +26,14 @@ export default new FunctionBar({
 	autoMap_KeyBindings:  true,
 	keyBinding_Modifiers: ["shift", "alt"],
 	stretchCells:         false,
+	cellProperties:       [{functionName:"css", args:["min-width", "90px"]}],
 
 	entryGroups:[
 
 		[
 			new Entry({
 				name: "Today",
-				...get_LayeredCallbacks(() => {
+				...get_Callbacks(() => {
 					Show.allColumns()
 					Show.rows({include:activeTask_Columns})
 					CardType_Filter.disable_CardTypes()
@@ -41,7 +42,7 @@ export default new FunctionBar({
 			}),
 			new Entry({
 				name: "Tasks",
-				...get_LayeredCallbacks(() => {
+				...get_Callbacks(() => {
 					Show.allColumns()
 					Show.rows({include:activeTask_Columns})
 					CardType_Filter.enable_CardTypes()
@@ -49,7 +50,7 @@ export default new FunctionBar({
 			}),
 			new Entry({
 				name: "Planning",
-				...get_LayeredCallbacks(() => {
+				...get_Callbacks(() => {
 					Show.allColumns()
 					Show.allRows()
 					CardType_Filter.enable_CardTypes()
@@ -69,7 +70,7 @@ export default new FunctionBar({
 const _secondaryCallback =
 	() => {Hide.emptyColumns()}
 
-function get_LayeredCallbacks(callback:(() => void)){
+function get_Callbacks(callback:(() => void)){
 	return {
 		on_KeyBinding: (event:KeyboardEvent, cell:JQuery) => {
 			callback()
