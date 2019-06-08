@@ -71,7 +71,7 @@ export default functionBar
 //##############//
 
 on_PageLoad(() => {
-	functionBar.entryGroups[0][0].on_KeyBinding(null, null)
+	functionBar.entryGroups[0][1].on_KeyBinding(null, null) // Tasks
 })
 
 
