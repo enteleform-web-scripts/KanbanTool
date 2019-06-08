@@ -72,7 +72,7 @@ export default functionBar
 //###  Init  ###//
 //##############//
 
-remove_PageLoad_Callback(CardType_Filter.show_AllCards_ID)
+// remove_PageLoad_Callback(CardType_Filter.show_AllCards_ID)
 
 
 //###############//
