@@ -65,9 +65,11 @@ export class CardType_Filter{
 //##############//
 
 on_PageLoad(() => {
+	console.log("@@@ CardTypeFilter.1")
 	CardType_Filter.enable()
 })
 on_PageLoad(CardType_Filter.show_AllCards_ID, () => {
+	console.log("@@@ CardTypeFilter.2")
 	CardType_Filter.enable()
 	CardType_Filter.enable_CardTypes()
 })
