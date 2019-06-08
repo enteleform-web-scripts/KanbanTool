@@ -130,7 +130,9 @@ function _set_CardType_States(
 			{button.click()}
 	}
 
-	CardType_Filter._on_Update()
+	setTimeout(() => {
+		CardType_Filter._on_Update()
+	}, 100)
 }
 
 function _process_RegExp_IDs(allButtons:JQuery[], targetButtons:JQuery[], ids:(number|string|RegExp)[]){
