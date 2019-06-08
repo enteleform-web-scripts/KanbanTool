@@ -10672,10 +10672,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559953223418)
+		const elapsedTime = _get_ElapsedTime(1559953428519)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     8:20:23 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     8:23:48 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12477,8 +12477,12 @@ function _get_Containers() {
     };
 }
 function _get_Cell_IsEmpty(row, column) {
-    const tasks = _get_Tasks(row, column);
-    console.log(">>>", tasks);
+    const tasks = _get_Tasks(row, column)
+        .filter(task => {
+        const element = $(`[data-task-id=${task.attributes.id}]`);
+        return !(element.hasClass("kt-board_search--filtered_out"));
+    });
+    console.log(">>>", `${_get_Tasks(row, column).length} => ${tasks.length}`);
     return (tasks.length == 0);
 }
 function _get_Tasks(row, column) {
