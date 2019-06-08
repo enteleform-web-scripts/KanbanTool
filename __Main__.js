@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560031048747)
+		const elapsedTime = _get_ElapsedTime(1560031254367)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:57:28 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:00:54 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10872,7 +10872,7 @@ function get_CSS_Variables() {
 }
 exports.get_CSS_Variables = get_CSS_Variables;
 function _get_Arguments(arg_1, arg_2, arg_3) {
-    let [element, key, value] = (arg_1 instanceof jQuery)
+    let [element, key, value] = (arg_1.constructor === jQuery)
         ? [arg_1, arg_2, arg_3]
         : [undefined, arg_1, arg_2];
     return {
