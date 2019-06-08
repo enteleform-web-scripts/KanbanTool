@@ -20,40 +20,37 @@ export default new FunctionBar({
 
 		[
 			new Entry({
-				name: "Show: All Rows",
+				name: "Show_Rows",
 				callback: () => {
 					Show.allRows()
 				},
 			}),
 			new Entry({
-				name: "Show: All Columns",
+				name: "Show_Columns",
 				callback: () => {
 					Show.allColumns()
 				},
 			}),
 			new Entry({
-				name: "Hide: Empty Rows",
+				name: "Hide_Rows",
 				callback: () => {
 					Hide.emptyRows()
 				},
 			}),
 			new Entry({
-				name: "Hide: Empty Columns",
+				name: "Hide_Columns",
 				callback: () => {
 					Hide.emptyColumns()
 				},
 			}),
-		],
-
-		[
 			new Entry({
-				name: "Filter: Enable All",
+				name: "Filter_All",
 				callback: () => {
 					CardType_Filter.enable_CardTypes()
 				},
 			}),
 			new Entry({
-				name: "Filter: Disable All",
+				name: "Filter_None",
 				callback: () => {
 					CardType_Filter.disable_CardTypes()
 				},
