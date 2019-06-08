@@ -45,8 +45,8 @@ export class Entry{
 		this.callback       = callback.bind(this)
 		this.on_Layout      = (on_Layout     || emptyCallback).bind(this)
 		this.on_KeyBinding  = (on_KeyBinding || callback     ).bind(this)
-		this.on_Click       = ((event:JQuery.ClickEvent,       cell:JQuery) => {event.stopPropagation(); (on_Click       || callback).bind(this)(event, cell)}).bind(this)
-		this.on_DoubleClick = ((event:JQuery.DoubleClickEvent, cell:JQuery) => {event.stopPropagation(); (on_DoubleClick || callback).bind(this)(event, cell)}).bind(this)
+		this.on_Click       = (event:JQuery.ClickEvent,       cell:JQuery) => {event.stopPropagation(); (on_Click       || callback).bind(this)(event, cell)}
+		this.on_DoubleClick = (event:JQuery.DoubleClickEvent, cell:JQuery) => {event.stopPropagation(); (on_DoubleClick || callback).bind(this)(event, cell)}
 		this.keyBinding     = keyBinding
 		this.color          = color
 	}
