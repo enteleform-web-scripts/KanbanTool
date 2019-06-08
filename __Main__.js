@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560019977344)
+		const elapsedTime = _get_ElapsedTime(1560020033132)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:52:57 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:53:53 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12115,8 +12115,8 @@ class Entry {
         this.callback = callback.bind(this);
         this.on_Layout = (on_Layout || emptyCallback).bind(this);
         this.on_KeyBinding = (on_KeyBinding || callback).bind(this);
-        this.on_Click = (event, cell) => { event.stopPropagation(); (on_Click || callback).bind(this)(event, cell); };
-        this.on_DoubleClick = (event, cell) => { event.stopPropagation(); (on_DoubleClick || callback).bind(this)(event, cell); };
+        this.on_Click = (event, cell) => { event.stopPropagation(); (on_Click || callback)(event, cell); };
+        this.on_DoubleClick = (event, cell) => { event.stopPropagation(); (on_DoubleClick || callback)(event, cell); };
         this.keyBinding = keyBinding;
         this.color = color;
     }
