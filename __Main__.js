@@ -10678,10 +10678,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559966202515)
+		const elapsedTime = _get_ElapsedTime(1559966271565)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:56:42 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:57:51 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12826,7 +12826,7 @@ exports.default = new __Main__1.FunctionBar({
                     __Main__2.Show.allColumns();
                     __Main__2.Show.rows({ include: ["Routine", "Tasks.Active"] });
                     __Main__2.CardType_Filter.disable_CardTypes();
-                    __Main__2.CardType_Filter.enable_CardTypes(/Task.*/);
+                    __Main__2.CardType_Filter.enable_CardTypes(/^Task.*/);
                     __Main__2.Hide.emptyColumns();
                 },
             }),
