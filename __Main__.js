@@ -10672,10 +10672,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559951879568)
+		const elapsedTime = _get_ElapsedTime(1559953223418)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     7:57:59 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     8:20:23 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12478,6 +12478,7 @@ function _get_Containers() {
 }
 function _get_Cell_IsEmpty(row, column) {
     const tasks = _get_Tasks(row, column);
+    console.log(">>>", tasks);
     return (tasks.length == 0);
 }
 function _get_Tasks(row, column) {
