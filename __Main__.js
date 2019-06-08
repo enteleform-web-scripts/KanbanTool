@@ -109,6 +109,9 @@ exports.cardTypes = exports.activeBoard.cardTypes().active().map(({ attributes }
         ? "#FFF"
         : "#000"),
 }));
+console.log("!!! 1 !!!", exports.cardTypes);
+console.log("!!! 2 !!!", exports.activeBoard.cardTypes().active());
+console.log("!!! 3 !!!", exports.activeBoard.cardTypes());
 exports.KanbanTool.activeBoard = exports.activeBoard;
 
 
@@ -10671,10 +10674,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559963092267)
+		const elapsedTime = _get_ElapsedTime(1559963187023)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:04:52 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:06:27 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12469,7 +12472,6 @@ function _set_CardType_States(ids, targetButtons) {
 function _process_RegExp_IDs(allButtons, targetButtons, ids) {
     const patterns = ids.filter(id => (id instanceof RegExp));
     ids = ids.filter(id => !(id instanceof RegExp));
-    console.log("!!!", __Main__1.cardTypes);
     const matchingButton_Indexes = __Main__1.cardTypes
         .filter(cardType => patterns.some(pattern => pattern.exec(cardType.name) ? true : false))
         .map(cardType => ({ button: allButtons[cardType.index], index: cardType.index }))
