@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560033866341)
+		const elapsedTime = _get_ElapsedTime(1560034030002)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:44:26 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:47:10 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12793,7 +12793,7 @@ function _get_UpdateCSS_Callback(cell, cardType) {
         else {
             cell.removeClass(cssVariables.activeFilter);
             cell.addClass(cssVariables.inactiveFilter);
-            alpha = "66";
+            alpha = "AA";
         }
         __Main__2.set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + alpha));
     };
