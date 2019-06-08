@@ -81,11 +81,39 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const _CardType_1 = __webpack_require__(27);
+var __Main__1 = __webpack_require__(28);
+exports.CardType_Filter = __Main__1.CardType_Filter;
+var __Main__2 = __webpack_require__(8);
+exports.Show = __Main__2.Show;
+var __Main__3 = __webpack_require__(31);
+exports.Hide = __Main__3.Hide;
+exports.KanbanTool = window.KT;
+exports.activeBoard = exports.KanbanTool.boards.models[0];
+exports.cardTypes = exports.activeBoard.cardTypes().active().map(({ attributes }, index) => new _CardType_1.CardType({
+    index: index,
+    id: attributes.id,
+    name: attributes.name,
+    bgColor: attributes.color_attrs.rgb,
+    fgColor: (attributes.color_attrs.invert
+        ? "#FFF"
+        : "#000"),
+}));
+exports.KanbanTool.activeBoard = exports.activeBoard;
+
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10456,27 +10484,6 @@ return jQuery;
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.KanbanTool = window.KT;
-exports.activeBoard = exports.KanbanTool.boards.models[0];
-exports.KanbanTool.activeBoard = exports.activeBoard;
-exports.cardTypes = exports.activeBoard.cardTypes().active().map(({ attributes }, index) => ({
-    index: index,
-    id: attributes.id,
-    name: attributes.name,
-    bgColor: attributes.color_attrs.rgb,
-    fgColor: (attributes.color_attrs.invert
-        ? "#FFF"
-        : "#000"),
-}));
-
-
-/***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10486,8 +10493,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(19);
-const hotkeys_js_1 = __importDefault(__webpack_require__(20));
+const KeyGroups_1 = __webpack_require__(18);
+const hotkeys_js_1 = __importDefault(__webpack_require__(19));
 hotkeys_js_1.default.filter = _disable_DefaultFilters;
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
@@ -10572,11 +10579,11 @@ function _get_HotKey_Array_AsString(keys) {
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(15).inject(__dirname, { CSS: true, HTML: true });
-const Settings_1 = __webpack_require__(4);
-const Entry_1 = __webpack_require__(21);
-const Layout_1 = __webpack_require__(22);
-const Module_BaseClasses_1 = __webpack_require__(25);
+__webpack_require__(14).inject(__dirname, { CSS: true, HTML: true });
+const Settings_1 = __webpack_require__(5);
+const Entry_1 = __webpack_require__(20);
+const Layout_1 = __webpack_require__(21);
+const Module_BaseClasses_1 = __webpack_require__(24);
 const Position_1 = __webpack_require__(6);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
@@ -10616,8 +10623,6 @@ class FunctionBar extends Module_BaseClasses_1.Module {
 }
 FunctionBar.Entry = Entry_1.Entry;
 FunctionBar.Position = Position_1.Position;
-FunctionBar.Show = __webpack_require__(8).default;
-FunctionBar.Hide = __webpack_require__(27).default;
 exports.FunctionBar = FunctionBar;
 (function (FunctionBar) {
     let KeyBinding_Mode;
@@ -10631,20 +10636,6 @@ exports.FunctionBar = FunctionBar;
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(2);
-exports.cardType_Filter_Index = 5;
-exports.css_Timeout_MS = 500;
-exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
-exports.functionBar_ToggleModifiers = ["shift", "alt"];
-
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports) {
 
 
@@ -10680,10 +10671,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559955569919)
+		const elapsedTime = _get_ElapsedTime(1559962957699)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     8:59:29 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:02:37 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10693,6 +10684,19 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
 			+ `└${divider}┘\n`
 		)
 	
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(2);
+exports.css_Timeout_MS = 500;
+exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
+exports.functionBar_ToggleModifiers = ["shift", "alt"];
+
 
 /***/ }),
 /* 6 */
@@ -10721,8 +10725,8 @@ exports.is_VerticalPosition = is_VerticalPosition;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(1);
-const $ = __webpack_require__(0);
+const __Main__1 = __webpack_require__(0);
+const $ = __webpack_require__(1);
 class TaskContainer {
     constructor({ type, domIndex, modelIndex, model, element }) {
         this.children = [];
@@ -10763,7 +10767,7 @@ class TaskContainer {
             : this._columnPath);
     }
     get tasks() {
-        return (KanbanTool_1.activeBoard.tasks().filter(task => {
+        return (__Main__1.activeBoard.tasks().filter(task => {
             const taskContainer = (this.type == TaskContainer.Type.Row)
                 ? task.swimlane()
                 : task.workflowStage();
@@ -10813,9 +10817,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(7);
 const get_Rows_1 = __webpack_require__(9);
 const get_Columns_1 = __webpack_require__(10);
-const Glob_1 = __webpack_require__(26);
-const $ = __webpack_require__(0);
-class default_1 {
+const Glob_1 = __webpack_require__(30);
+const $ = __webpack_require__(1);
+class Show {
     static rows({ include, exclude }) {
         _show({
             type: _Type.Row,
@@ -10833,7 +10837,7 @@ class default_1 {
     static allRows() { _show({ type: _Type.Row, targets: ["**\\*"], exclude: false }); }
     static allColumns() { _show({ type: _Type.Column, targets: ["**\\*"], exclude: false }); }
 }
-exports.default = default_1;
+exports.Show = Show;
 const _Type = TaskContainer_1.TaskContainer.Type;
 function _show({ type, targets, exclude, }) {
     const containers = (type == _Type.Row)
@@ -10894,11 +10898,11 @@ function _match_Glob(container, target) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(7);
-const KanbanTool_1 = __webpack_require__(1);
-const $ = __webpack_require__(0);
+const __Main__1 = __webpack_require__(0);
+const $ = __webpack_require__(1);
 function get_Rows() {
     const headerElements = $.find("kt-board > tbody > tr > th");
-    const models = KanbanTool_1.activeBoard.swimlanes().toArray();
+    const models = __Main__1.activeBoard.swimlanes().toArray();
     const rows = headerElements.map((element, i) => new TaskContainer_1.TaskContainer({
         type: TaskContainer_1.TaskContainer.Type.Row,
         modelIndex: i,
@@ -10919,9 +10923,9 @@ exports.get_Rows = get_Rows;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(7);
-const KanbanTool_1 = __webpack_require__(1);
+const __Main__1 = __webpack_require__(0);
 function get_Columns() {
-    const models = KanbanTool_1.activeBoard.workflowStages()
+    const models = __Main__1.activeBoard.workflowStages()
         .slice(1);
     const sortedModels = _get_SortedModels();
     const headerElements = _get_HeaderElements();
@@ -10938,7 +10942,7 @@ function get_Columns() {
 exports.get_Columns = get_Columns;
 function _get_HeaderElements() {
     const rows = $("kt-board > thead").children().toArray();
-    const swimLane_Count = KanbanTool_1.activeBoard.swimlanes().length;
+    const swimLane_Count = __Main__1.activeBoard.swimlanes().length;
     const elements = rows.flatMap(row => $(row).children().toArray());
     if (swimLane_Count > 1) {
         elements.splice(0, 1);
@@ -10946,7 +10950,7 @@ function _get_HeaderElements() {
     return elements;
 }
 function _get_SortedModels() {
-    const rootModel = KanbanTool_1.activeBoard.workflowStages().toArray()[0];
+    const rootModel = __Main__1.activeBoard.workflowStages().toArray()[0];
     const sortedModels = [];
     let row = rootModel.children();
     while (row.length > 0) {
@@ -10970,83 +10974,22 @@ function _update_ColumnRelationships(columns) {
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(4);
-const KanbanTool_1 = __webpack_require__(1);
-const $ = __webpack_require__(0);
-class CardType_Filter {
-    static get enabled() { return CardType_Filter._filterButton.hasClass("kt-board_search-filter--active"); }
-    static get disabled() { return !(this.enabled); }
-    static get _filterButton() { return $(`.kt-board_search-filter:nth-child(${Settings_1.cardType_Filter_Index})`); }
-    static get _cardType_Buttons() { return Array.from($(".kt-board_search-processors-card_types").children()); }
-    static get _enabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > .kt-board_search-processors-card_types--active")); }
-    static get _disabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)")); }
-    static enable() {
-        if (CardType_Filter.disabled) {
-            CardType_Filter._filterButton.click();
-        }
-    }
-    static disable() {
-        if (CardType_Filter.enabled) {
-            CardType_Filter._filterButton.click();
-        }
-    }
-    static enable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._disabled_CardType_Buttons); }
-    static disable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._enabled_CardType_Buttons); }
-    static toggle_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._cardType_Buttons); }
-}
-exports.CardType_Filter = CardType_Filter;
-CardType_Filter.enable();
-CardType_Filter.enable_CardTypes();
-function _set_CardType_States(ids, target_CardTypes) {
-    const cardType_Buttons = CardType_Filter._cardType_Buttons;
-    const apply_State_To_AllCardTypes = (ids.length == 0);
-    if (apply_State_To_AllCardTypes) {
-        ids = cardType_Buttons.map((value, index) => index);
-    }
-    for (const id of ids) {
-        const index = _get_CardType_Index(id);
-        if (index == undefined) {
-            continue;
-        }
-        const button = cardType_Buttons[index];
-        if (target_CardTypes.includes(button)) {
-            button.click();
-        }
-    }
-}
-function _get_CardType_FromName(name) {
-    const matches = KanbanTool_1.cardTypes.filter(cardType => (cardType.name == name));
-    if (matches.length > 0) {
-        return matches[0];
-    }
-    else {
-        return undefined;
-    }
-}
-function _get_CardType_Index(id) {
-    let index;
-    if (typeof id == "string") {
-        const cardType = _get_CardType_FromName(id);
-        index = (cardType)
-            ? cardType.index
-            : undefined;
-    }
-    else {
-        index = id;
-    }
-    return index;
-}
+__webpack_require__(4);
+module.exports = __webpack_require__(12);
 
 
 /***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(5);
-module.exports = __webpack_require__(13);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(13);
+const __Main__1 = __webpack_require__(3);
+const __Main__2 = __webpack_require__(25);
+__Main__1.FunctionBar.load(__webpack_require__(34).default, __webpack_require__(35).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 3], cellWidth: 150, stretchCells: false }));
+__webpack_require__(36);
 
 
 /***/ }),
@@ -11056,21 +10999,7 @@ module.exports = __webpack_require__(13);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(14);
-const __Main__1 = __webpack_require__(3);
-const __Main__2 = __webpack_require__(29);
-__Main__1.FunctionBar.load(__webpack_require__(32).default, __webpack_require__(33).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 3], cellWidth: 150, stretchCells: false }));
-__webpack_require__(34);
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const $ = __webpack_require__(0);
+const $ = __webpack_require__(1);
 exports.lol = "wut";
 const DELETE_KEYCODE = 46;
 const selector__CheckList_Item = "kt-taskview > form > div.kt-taskview-content > kt-checklist > li > .kt-checklist_item_content";
@@ -11111,13 +11040,13 @@ function get_DivIndex(checkList_Item) {
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(16);
+const Settings_1 = __webpack_require__(15);
 function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
     if (CSS) {
         _inject_CSS(modulePath);
@@ -11196,7 +11125,7 @@ function _strip_HTML_ExcessData(html) {
 
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11205,7 +11134,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(__webpack_require__(17));
+const path_1 = __importDefault(__webpack_require__(16));
 class S {
 }
 S.baseURL = "https://enteleform-extensions.github.io/KanbanTool";
@@ -11234,7 +11163,7 @@ exports.Settings = S;
 
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -11462,10 +11391,10 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(18)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(17)))
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -11655,7 +11584,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11671,14 +11600,14 @@ exports.AlphanumericKeys = [
     "z", "x", "c", "v", "b", "n", "m"
 ];
 exports.CharacterKeys = [
-    "~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
+    "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
     "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\",
     "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'",
     "z", "x", "c", "v", "b", "n", "m", ",", ".", "/"
 ];
 exports.Keys = [
     "ctrl", "shift", "alt",
-    "~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
+    "`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "=",
     "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\",
     "a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'",
     "z", "x", "c", "v", "b", "n", "m", ",", ".", "/",
@@ -11695,7 +11624,7 @@ exports.alphanumericKey_Rows = [
     ["z", "x", "c", "v", "b", "n", "m"],
 ];
 exports.characterKey_Rows = [
-    ["~", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="],
+    ["`", "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "-", "="],
     ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "[", "]", "\\"],
     ["a", "s", "d", "f", "g", "h", "j", "k", "l", ";", "'"],
     ["z", "x", "c", "v", "b", "n", "m", ",", ".", "/"],
@@ -11703,7 +11632,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12142,13 +12071,13 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(4);
+const Settings_1 = __webpack_require__(5);
 const __Main__1 = __webpack_require__(2);
 class Entry {
     constructor({ name, callback, on_Click, on_DoubleClick, on_KeyBinding, on_Layout, keyBinding, color, }) {
@@ -12188,18 +12117,18 @@ const emptyCallback = ((...args) => { });
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const cssVariables = __webpack_require__(23);
+const cssVariables = __webpack_require__(22);
 const Position_1 = __webpack_require__(6);
-const __main__1 = __webpack_require__(24);
-const __Main__1 = __webpack_require__(2);
-const Settings_1 = __webpack_require__(4);
-const $ = __webpack_require__(0);
+const __Main__1 = __webpack_require__(23);
+const __Main__2 = __webpack_require__(2);
+const Settings_1 = __webpack_require__(5);
+const $ = __webpack_require__(1);
 class Layout {
     constructor(functionBar) {
         this._functionBar = functionBar;
@@ -12223,7 +12152,7 @@ class Layout {
                 toggleButton.on("click", callback);
                 const container = $(`${containerSelector}:not(.${cssVariables.collapsed})`);
                 container.on("dblclick", callback);
-                __Main__1.KeyBinding.add([entry.key, ...Settings_1.functionBar_ToggleModifiers], callback, { preventDefault: true });
+                __Main__2.KeyBinding.add([entry.key, ...Settings_1.functionBar_ToggleModifiers], callback, { preventDefault: true });
             });
         }, Settings_1.css_Timeout_MS);
     }
@@ -12291,26 +12220,26 @@ function _get_ContainerToggle_Callback(position) {
 }
 function _update_OriginalLayout() {
     const navbarHeight = $("nav.navbar").height();
-    __main__1.set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`);
+    __Main__1.set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`);
     const topRow_Height = $(`.${cssVariables.container} > .top`).height();
-    __main__1.set_CSS_Variable("KanbanToolOffsets_TopHeight", `${topRow_Height}px`);
+    __Main__1.set_CSS_Variable("KanbanToolOffsets_TopHeight", `${topRow_Height}px`);
     const leftColumn_Width = $(`.${cssVariables.container} > .center > .left`).width();
-    __main__1.set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${leftColumn_Width}px`);
+    __Main__1.set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${leftColumn_Width}px`);
     const rightColumn_Width = $(`.${cssVariables.container} > .center > .right`).width();
-    __main__1.set_CSS_Variable("KanbanToolOffsets_RightWidth", `${rightColumn_Width}px`);
+    __Main__1.set_CSS_Variable("KanbanToolOffsets_RightWidth", `${rightColumn_Width}px`);
     const top_Offset = (navbarHeight + topRow_Height);
-    __main__1.set_CSS_Variable("KanbanToolOffsets_TopOffset", `${top_Offset}px`);
+    __Main__1.set_CSS_Variable("KanbanToolOffsets_TopOffset", `${top_Offset}px`);
 }
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module) {
 
 module.exports = {"container":"CustomExtension__FunctionBar","collapsed":"collapsed","empty":"empty","_":""};
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12340,7 +12269,7 @@ function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documen
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12353,195 +12282,14 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-class Glob {
-    constructor(pattern) {
-        this._globPattern = pattern;
-        this._build_RegEx();
-    }
-    get pattern() { return this._globPattern; }
-    get regEx() { return this._regexPattern; }
-    match(path) {
-        return (path.match(this._regEx)
-            ? true
-            : false);
-    }
-    _build_RegEx() {
-        let pattern = _GLOB_TO_REGEX_MAP
-            .reduce((pattern, { regEx, replacement }) => (pattern.replace(regEx, replacement)), this._globPattern);
-        pattern = ("^" + pattern + "$");
-        this._regexPattern = pattern;
-        this._regEx = new RegExp(pattern);
-    }
-}
-exports.Glob = Glob;
-const _GLOB_TO_REGEX_MAP = [
-    { regEx: /\\/g, replacement: "\\\\" },
-    { regEx: /([^\\]+)\\\\\*\*\*$/g, replacement: "$1(\\\\.*$)?" },
-    { regEx: /^\*\*\\\\\*$/g, replacement: ".*" },
-    { regEx: /(?<!^)\\\\\*\*\\\\\*$/g, replacement: "\\\\.*" },
-    { regEx: /^\*\*$/g, replacement: "[^\\\\\\\\]+" },
-    { regEx: /^\*\*\\\\/g, replacement: ".*?\\\\" },
-    { regEx: /\\\\\*\*/g, replacement: "\\\\[^\\\\\\\\]+" },
-    { regEx: /^\*$/g, replacement: "[^\\\\]+" },
-    { regEx: /\\\\\*$/g, replacement: "\\\\[^\\\\]+" },
-];
-
-
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(28);
-const get_Rows_1 = __webpack_require__(9);
-const get_Columns_1 = __webpack_require__(10);
-const __Main__1 = __importDefault(__webpack_require__(8));
-class default_1 {
-    static allRows() { __Main__1.default.rows({ exclude: ["**\\*"] }); }
-    static allColumns() { __Main__1.default.columns({ exclude: ["**\\*"] }); }
-    static emptyRows() {
-        const columns = get_Columns_1.get_Columns();
-        _hide_Containers({
-            containers: get_Rows_1.get_Rows(),
-            emptyContainer_Indexes: get_emptyContainer_Indexes_1.get_EmptyRow_Indexes(columns),
-        });
-    }
-    static emptyColumns() {
-        const rows = get_Rows_1.get_Rows();
-        _hide_Containers({
-            containers: get_Columns_1.get_Columns(),
-            emptyContainer_Indexes: get_emptyContainer_Indexes_1.get_EmptyColumn_Indexes(rows),
-        });
-    }
-}
-exports.default = default_1;
-function _hide_Containers({ containers, emptyContainer_Indexes }) {
-    containers.forEach(container => {
-        if (_is_Empty(container, emptyContainer_Indexes)) {
-            container.hide();
-        }
-    });
-}
-function _is_Empty(container, emptyContainer_Indexes) {
-    const { descendants } = container;
-    const has_Descendants = (descendants.length > 0);
-    const container_IsEmpty = emptyContainer_Indexes.includes(container.modelIndex);
-    const descendants_AreEmpty = (has_Descendants
-        && descendants.every(child => _is_Empty(child, emptyContainer_Indexes)));
-    return ((container_IsEmpty && (!has_Descendants))
-        || descendants_AreEmpty);
-}
-
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(1);
-function get_EmptyRow_Indexes(columns) {
-    const hiddenColumn_Indexes = columns
-        .filter(column => column.is_Collapsed)
-        .map(column => column.modelIndex);
-    return _get_EmptyRow_Indexes(hiddenColumn_Indexes);
-}
-exports.get_EmptyRow_Indexes = get_EmptyRow_Indexes;
-function get_EmptyColumn_Indexes(rows) {
-    const hiddenRow_Indexes = rows
-        .filter(row => row.is_Collapsed)
-        .map(row => row.modelIndex);
-    return _get_EmptyColumn_Indexes(hiddenRow_Indexes);
-}
-exports.get_EmptyColumn_Indexes = get_EmptyColumn_Indexes;
-function _get_EmptyCell_Map() {
-    const { rows, columns } = _get_Containers();
-    const cellMap = Array.from({ length: rows.length })
-        .map(x => []);
-    rows.forEach((row, rowIndex) => {
-        columns.forEach(column => {
-            const is_Empty = _get_Cell_IsEmpty(row, column);
-            cellMap[rowIndex].push(is_Empty);
-        });
-    });
-    return cellMap;
-}
-function _get_Containers() {
-    return {
-        rows: KanbanTool_1.activeBoard.swimlanes().toArray(),
-        columns: KanbanTool_1.activeBoard.workflowStages().toArray().splice(1),
-    };
-}
-function _get_Cell_IsEmpty(row, column) {
-    const tasks = _get_Tasks(row, column)
-        .filter(task => {
-        const element = $(`[data-task-id=${task.attributes.id}]`);
-        return !(element.hasClass("kt-board_search--filtered_out"));
-    });
-    return (tasks.length == 0);
-}
-function _get_Tasks(row, column) {
-    return (KanbanTool_1.activeBoard.tasks()
-        .filter(task => (task.swimlane() === row)
-        && (task.workflowStage() === column)));
-}
-function _get_EmptyRow_Indexes(hiddenColumn_Indexes) {
-    const emptyCell_Map = _get_EmptyCell_Map();
-    const rowCount = emptyCell_Map.length;
-    const emptyRows = [];
-    hiddenColumn_Indexes.forEach(columnIndex => {
-        emptyCell_Map.forEach(row => {
-            row[columnIndex] = true;
-        });
-    });
-    for (let rowIndex = 0; (rowIndex < rowCount); rowIndex++) {
-        const row_IsEmpty = emptyCell_Map[rowIndex].every(is_Empty => (is_Empty == true));
-        if (row_IsEmpty) {
-            emptyRows.push(rowIndex);
-        }
-    }
-    return emptyRows;
-}
-function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
-    const emptyCell_Map = _get_EmptyCell_Map();
-    const columnCount = emptyCell_Map[0].length;
-    const emptyColumns = [];
-    hiddenRow_Indexes.forEach(rowIndex => {
-        emptyCell_Map[rowIndex] =
-            emptyCell_Map[rowIndex].map(is_Empty => true);
-    });
-    for (let columnIndex = 0; (columnIndex < columnCount); columnIndex++) {
-        const cells = emptyCell_Map.map(row => row[columnIndex]);
-        const column_IsEmpty = cells.every(is_Empty => (is_Empty == true));
-        if (column_IsEmpty) {
-            emptyColumns.push(columnIndex);
-        }
-    }
-    return emptyColumns;
-}
-
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const CallbackManager_1 = __webpack_require__(30);
-const get_Rows_1 = __webpack_require__(31);
+const CallbackManager_1 = __webpack_require__(26);
+const get_Rows_1 = __webpack_require__(33);
 const __Main__1 = __webpack_require__(3);
 const Position_1 = __webpack_require__(6);
 CallbackManager_1.CallbackManager.set_Card_HoverCallback();
@@ -12588,15 +12336,14 @@ function _update_MergedOptions_CellWidth(options) {
 
 
 /***/ }),
-/* 30 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(11);
-const KanbanTool_1 = __webpack_require__(1);
-const __Main__2 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(2);
+const __Main__2 = __webpack_require__(0);
 var CallbackManager;
 (function (CallbackManager) {
     let _entryIndex = -1;
@@ -12613,7 +12360,7 @@ var CallbackManager;
     CallbackManager.set_Card_HoverCallback = set_Card_HoverCallback;
     function get_Callbacks() {
         _entryIndex += 1;
-        const cardType = KanbanTool_1.cardTypes[_entryIndex];
+        const cardType = __Main__2.cardTypes[_entryIndex];
         return _get_Callbacks(cardType);
     }
     CallbackManager.get_Callbacks = get_Callbacks;
@@ -12629,11 +12376,13 @@ var CallbackManager;
                 _update_CardType(cardType);
             },
             on_Click: function (event, cell) {
-                console.log(`ctrl:${__Main__2.KeyBinding.is_Pressed("ctrl")}, shift:${__Main__2.KeyBinding.is_Pressed("shift")}, alt:${__Main__2.KeyBinding.is_Pressed("alt")}, `);
-            },
-            on_DoubleClick: function (event, cell) {
-                __Main__1.CardType_Filter.disable_CardTypes();
-                __Main__1.CardType_Filter.enable_CardTypes(cardType.index);
+                if (__Main__1.KeyBinding.is_Pressed("ctrl")) {
+                    __Main__2.CardType_Filter.disable_CardTypes();
+                    __Main__2.CardType_Filter.enable_CardTypes(cardType.index);
+                }
+                else {
+                    __Main__2.CardType_Filter.toggle_CardTypes(cardType.index);
+                }
             },
         };
     }
@@ -12646,18 +12395,314 @@ var CallbackManager;
 
 
 /***/ }),
+/* 27 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class CardType {
+    constructor({ index, id, name, bgColor, fgColor }) {
+        this.index = index;
+        this.id = id;
+        this.name = name;
+        this.bgColor = bgColor;
+        this.fgColor = fgColor;
+    }
+}
+exports.CardType = CardType;
+
+
+/***/ }),
+/* 28 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Settings_1 = __webpack_require__(29);
+const __Main__1 = __webpack_require__(0);
+const $ = __webpack_require__(1);
+class CardType_Filter {
+    static get enabled() { return CardType_Filter._filterButton.hasClass("kt-board_search-filter--active"); }
+    static get disabled() { return !(this.enabled); }
+    static get _filterButton() { return $(`.kt-board_search-filter:nth-child(${Settings_1.cardType_Filter_Index})`); }
+    static get _cardType_Buttons() { return Array.from($(".kt-board_search-processors-card_types").children()); }
+    static get _enabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > .kt-board_search-processors-card_types--active")); }
+    static get _disabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)")); }
+    static enable() {
+        if (CardType_Filter.disabled) {
+            CardType_Filter._filterButton.click();
+        }
+    }
+    static disable() {
+        if (CardType_Filter.enabled) {
+            CardType_Filter._filterButton.click();
+        }
+    }
+    static enable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._disabled_CardType_Buttons); }
+    static disable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._enabled_CardType_Buttons); }
+    static toggle_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._cardType_Buttons); }
+}
+exports.CardType_Filter = CardType_Filter;
+CardType_Filter.enable();
+CardType_Filter.enable_CardTypes();
+function _set_CardType_States(ids, targetButtons) {
+    const allButtons = CardType_Filter._cardType_Buttons;
+    const apply_State_To_AllCardTypes = (ids.length == 0);
+    if (apply_State_To_AllCardTypes) {
+        ids = allButtons.map((value, index) => index);
+    }
+    ids = _process_RegExp_IDs(allButtons, targetButtons, ids);
+    console.log(">>>", ids);
+    for (const id of ids) {
+        const index = _get_CardType_Index(id);
+        if (index == undefined) {
+            return;
+        }
+        const button = allButtons[index];
+        if (targetButtons.includes(button)) {
+            button.click();
+        }
+    }
+}
+function _process_RegExp_IDs(allButtons, targetButtons, ids) {
+    const patterns = ids.filter(id => (id instanceof RegExp));
+    ids = ids.filter(id => !(id instanceof RegExp));
+    const matchingButton_Indexes = __Main__1.cardTypes
+        .filter(cardType => patterns.some(pattern => pattern.exec(cardType.name) ? true : false))
+        .map(cardType => ({ button: allButtons[cardType.index], index: cardType.index }))
+        .filter(({ button }) => targetButtons.includes(button))
+        .map(({ index }) => index);
+    ids.push(...matchingButton_Indexes);
+    ids = [...new Set(ids)];
+    return ids;
+}
+function _get_CardType_Index(id) {
+    let index;
+    if (typeof id == "string") {
+        const cardType = _get_CardType_FromName(id);
+        index = (cardType)
+            ? cardType.index
+            : undefined;
+    }
+    else {
+        index = id;
+    }
+    return index;
+}
+function _get_CardType_FromName(name) {
+    const matches = __Main__1.cardTypes.filter(cardType => (cardType.name == name));
+    if (matches.length > 0) {
+        return matches[0];
+    }
+    else {
+        return undefined;
+    }
+}
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.cardType_Filter_Index = 5;
+
+
+/***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+class Glob {
+    constructor(pattern) {
+        this._globPattern = pattern;
+        this._build_RegEx();
+    }
+    get pattern() { return this._globPattern; }
+    get regEx() { return this._regexPattern; }
+    match(path) {
+        return (path.match(this._regEx)
+            ? true
+            : false);
+    }
+    _build_RegEx() {
+        let pattern = _GLOB_TO_REGEX_MAP
+            .reduce((pattern, { regEx, replacement }) => (pattern.replace(regEx, replacement)), this._globPattern);
+        pattern = ("^" + pattern + "$");
+        this._regexPattern = pattern;
+        this._regEx = new RegExp(pattern);
+    }
+}
+exports.Glob = Glob;
+const _GLOB_TO_REGEX_MAP = [
+    { regEx: /\\/g, replacement: "\\\\" },
+    { regEx: /([^\\]+)\\\\\*\*\*$/g, replacement: "$1(\\\\.*$)?" },
+    { regEx: /^\*\*\\\\\*$/g, replacement: ".*" },
+    { regEx: /(?<!^)\\\\\*\*\\\\\*$/g, replacement: "\\\\.*" },
+    { regEx: /^\*\*$/g, replacement: "[^\\\\\\\\]+" },
+    { regEx: /^\*\*\\\\/g, replacement: ".*?\\\\" },
+    { regEx: /\\\\\*\*/g, replacement: "\\\\[^\\\\\\\\]+" },
+    { regEx: /^\*$/g, replacement: "[^\\\\]+" },
+    { regEx: /\\\\\*$/g, replacement: "\\\\[^\\\\]+" },
+];
+
+
+/***/ }),
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const KanbanTool_1 = __webpack_require__(1);
-const __Main__1 = __webpack_require__(2);
+const get_emptyContainer_Indexes_1 = __webpack_require__(32);
+const get_Rows_1 = __webpack_require__(9);
+const get_Columns_1 = __webpack_require__(10);
+const __Main__1 = __webpack_require__(8);
+class Hide {
+    static allRows() { __Main__1.Show.rows({ exclude: ["**\\*"] }); }
+    static allColumns() { __Main__1.Show.columns({ exclude: ["**\\*"] }); }
+    static emptyRows() {
+        const columns = get_Columns_1.get_Columns();
+        _hide_Containers({
+            containers: get_Rows_1.get_Rows(),
+            emptyContainer_Indexes: get_emptyContainer_Indexes_1.get_EmptyRow_Indexes(columns),
+        });
+    }
+    static emptyColumns() {
+        const rows = get_Rows_1.get_Rows();
+        _hide_Containers({
+            containers: get_Columns_1.get_Columns(),
+            emptyContainer_Indexes: get_emptyContainer_Indexes_1.get_EmptyColumn_Indexes(rows),
+        });
+    }
+}
+exports.Hide = Hide;
+function _hide_Containers({ containers, emptyContainer_Indexes }) {
+    containers.forEach(container => {
+        if (_is_Empty(container, emptyContainer_Indexes)) {
+            container.hide();
+        }
+    });
+}
+function _is_Empty(container, emptyContainer_Indexes) {
+    const { descendants } = container;
+    const has_Descendants = (descendants.length > 0);
+    const container_IsEmpty = emptyContainer_Indexes.includes(container.modelIndex);
+    const descendants_AreEmpty = (has_Descendants
+        && descendants.every(child => _is_Empty(child, emptyContainer_Indexes)));
+    return ((container_IsEmpty && (!has_Descendants))
+        || descendants_AreEmpty);
+}
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(0);
+function get_EmptyRow_Indexes(columns) {
+    const hiddenColumn_Indexes = columns
+        .filter(column => column.is_Collapsed)
+        .map(column => column.modelIndex);
+    return _get_EmptyRow_Indexes(hiddenColumn_Indexes);
+}
+exports.get_EmptyRow_Indexes = get_EmptyRow_Indexes;
+function get_EmptyColumn_Indexes(rows) {
+    const hiddenRow_Indexes = rows
+        .filter(row => row.is_Collapsed)
+        .map(row => row.modelIndex);
+    return _get_EmptyColumn_Indexes(hiddenRow_Indexes);
+}
+exports.get_EmptyColumn_Indexes = get_EmptyColumn_Indexes;
+function _get_EmptyCell_Map() {
+    const { rows, columns } = _get_Containers();
+    const cellMap = Array.from({ length: rows.length })
+        .map(x => []);
+    rows.forEach((row, rowIndex) => {
+        columns.forEach(column => {
+            const is_Empty = _get_Cell_IsEmpty(row, column);
+            cellMap[rowIndex].push(is_Empty);
+        });
+    });
+    return cellMap;
+}
+function _get_Containers() {
+    return {
+        rows: __Main__1.activeBoard.swimlanes().toArray(),
+        columns: __Main__1.activeBoard.workflowStages().toArray().splice(1),
+    };
+}
+function _get_Cell_IsEmpty(row, column) {
+    const tasks = _get_Tasks(row, column)
+        .filter(task => {
+        const element = $(`[data-task-id=${task.attributes.id}]`);
+        return !(element.hasClass("kt-board_search--filtered_out"));
+    });
+    return (tasks.length == 0);
+}
+function _get_Tasks(row, column) {
+    return (__Main__1.activeBoard.tasks()
+        .filter(task => (task.swimlane() === row)
+        && (task.workflowStage() === column)));
+}
+function _get_EmptyRow_Indexes(hiddenColumn_Indexes) {
+    const emptyCell_Map = _get_EmptyCell_Map();
+    const rowCount = emptyCell_Map.length;
+    const emptyRows = [];
+    hiddenColumn_Indexes.forEach(columnIndex => {
+        emptyCell_Map.forEach(row => {
+            row[columnIndex] = true;
+        });
+    });
+    for (let rowIndex = 0; (rowIndex < rowCount); rowIndex++) {
+        const row_IsEmpty = emptyCell_Map[rowIndex].every(is_Empty => (is_Empty == true));
+        if (row_IsEmpty) {
+            emptyRows.push(rowIndex);
+        }
+    }
+    return emptyRows;
+}
+function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
+    const emptyCell_Map = _get_EmptyCell_Map();
+    const columnCount = emptyCell_Map[0].length;
+    const emptyColumns = [];
+    hiddenRow_Indexes.forEach(rowIndex => {
+        emptyCell_Map[rowIndex] =
+            emptyCell_Map[rowIndex].map(is_Empty => true);
+    });
+    for (let columnIndex = 0; (columnIndex < columnCount); columnIndex++) {
+        const cells = emptyCell_Map.map(row => row[columnIndex]);
+        const column_IsEmpty = cells.every(is_Empty => (is_Empty == true));
+        if (column_IsEmpty) {
+            emptyColumns.push(columnIndex);
+        }
+    }
+    return emptyColumns;
+}
+
+
+/***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(0);
+const __Main__2 = __webpack_require__(2);
 function get_Auto_CardType_Rows() {
     let cardType_Rows = [];
     let cardIndex = 0;
-    for (const keyRow of __Main__1.KeyBinding.alphanumericKey_Rows) {
+    for (const keyRow of __Main__2.KeyBinding.alphanumericKey_Rows) {
         if (_cardTypes_Exhausted(cardIndex)) {
             break;
         }
@@ -12667,7 +12712,7 @@ function get_Auto_CardType_Rows() {
             if (_cardTypes_Exhausted(cardIndex)) {
                 break;
             }
-            const cardType = KanbanTool_1.cardTypes[cardIndex];
+            const cardType = __Main__1.cardTypes[cardIndex];
             cardType_Row.push(cardType);
             cardIndex += 1;
         }
@@ -12681,26 +12726,26 @@ function get_Manual_CardType_Rows(rowCounts) {
     for (let i = 0; (i < rowCounts.length); i++) {
         const count = rowCounts[i];
         const endIndex = (startIndex + count);
-        const row = KanbanTool_1.cardTypes.slice(startIndex, endIndex);
+        const row = __Main__1.cardTypes.slice(startIndex, endIndex);
         rows.push(row);
         startIndex += count;
     }
     return rows;
 }
 exports.get_Manual_CardType_Rows = get_Manual_CardType_Rows;
-function _cardTypes_Exhausted(cardIndex) { return (cardIndex == KanbanTool_1.cardTypes.length); }
+function _cardTypes_Exhausted(cardIndex) { return (cardIndex == __Main__1.cardTypes.length); }
 
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(3);
-const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
-const __Main__2 = __webpack_require__(11);
+const { Entry, Position } = __Main__1.FunctionBar;
+const __Main__2 = __webpack_require__(0);
 exports.default = new __Main__1.FunctionBar({
     position: Position.Left,
     entryGroups: [
@@ -12708,25 +12753,25 @@ exports.default = new __Main__1.FunctionBar({
             new Entry({
                 name: "Show: All Rows",
                 callback: () => {
-                    Show.allRows();
+                    __Main__2.Show.allRows();
                 },
             }),
             new Entry({
                 name: "Show: All Columns",
                 callback: () => {
-                    Show.allColumns();
+                    __Main__2.Show.allColumns();
                 },
             }),
             new Entry({
                 name: "Hide: Empty Rows",
                 callback: () => {
-                    Hide.emptyRows();
+                    __Main__2.Hide.emptyRows();
                 },
             }),
             new Entry({
                 name: "Hide: Empty Columns",
                 callback: () => {
-                    Hide.emptyColumns();
+                    __Main__2.Hide.emptyColumns();
                 },
             }),
         ],
@@ -12749,14 +12794,15 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 33 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(3);
-const { Entry, Position, Show, Hide } = __Main__1.FunctionBar;
+const { Entry, Position } = __Main__1.FunctionBar;
+const __Main__2 = __webpack_require__(0);
 exports.default = new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
@@ -12767,23 +12813,25 @@ exports.default = new __Main__1.FunctionBar({
             new Entry({
                 name: "Today",
                 callback: () => {
-                    Show.allColumns();
-                    Show.rows({ include: ["Routine", "Tasks.Active"] });
-                    Hide.emptyColumns();
+                    __Main__2.Show.allColumns();
+                    __Main__2.Show.rows({ include: ["Routine", "Tasks.Active"] });
+                    __Main__2.CardType_Filter.disable_CardTypes();
+                    __Main__2.CardType_Filter.enable_CardTypes(/Task.*/);
+                    __Main__2.Hide.emptyColumns();
                 },
             }),
             new Entry({
                 name: "Today.All",
                 callback: () => {
-                    Show.allColumns();
-                    Show.rows({ include: ["Routine", "Tasks.Active"] });
+                    __Main__2.Show.allColumns();
+                    __Main__2.Show.rows({ include: ["Routine", "Tasks.Active"] });
                 },
             }),
             new Entry({
                 name: "All",
                 callback: () => {
-                    Show.allColumns();
-                    Show.allRows();
+                    __Main__2.Show.allColumns();
+                    __Main__2.Show.allRows();
                 },
             }),
         ],
@@ -12791,25 +12839,25 @@ exports.default = new __Main__1.FunctionBar({
             new Entry({
                 name: "Routine",
                 callback: () => {
-                    Show.allColumns();
-                    Show.rows({ include: ["Routine"] });
-                    Hide.emptyColumns();
+                    __Main__2.Show.allColumns();
+                    __Main__2.Show.rows({ include: ["Routine"] });
+                    __Main__2.Hide.emptyColumns();
                 },
             }),
             new Entry({
                 name: "Tasks.Active",
                 callback: () => {
-                    Show.allColumns();
-                    Show.rows({ include: ["Tasks.Active"] });
-                    Hide.emptyColumns();
+                    __Main__2.Show.allColumns();
+                    __Main__2.Show.rows({ include: ["Tasks.Active"] });
+                    __Main__2.Hide.emptyColumns();
                 },
             }),
             new Entry({
                 name: "Routine.Short",
                 callback: () => {
-                    Show.allColumns();
-                    Show.rows({ include: ["Routine.Short"] });
-                    Hide.emptyColumns();
+                    __Main__2.Show.allColumns();
+                    __Main__2.Show.rows({ include: ["Routine.Short"] });
+                    __Main__2.Hide.emptyColumns();
                 },
             }),
         ],
@@ -12818,7 +12866,7 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12834,7 +12882,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(2);
-const $ = __webpack_require__(0);
+const $ = __webpack_require__(1);
 class FilterKeybindings {
     static focus_SearchField(event) {
         const searchField = $("#kt-board_search-q");
