@@ -10502,6 +10502,7 @@ class KeyBinding {
             return _get_Decorator(hotKeys_String, options);
         }
     }
+    static is_Pressed(...modifierKey) { return modifierKey.every(key => _isPressed_ModifierMap[key]); }
 }
 exports.KeyBinding = KeyBinding;
 (function (KeyBinding) {
@@ -10512,6 +10513,11 @@ exports.KeyBinding = KeyBinding;
 })(KeyBinding = exports.KeyBinding || (exports.KeyBinding = {}));
 window.KeyBinding = KeyBinding;
 const _BindOptions_Defaults = { preventDefault: false };
+const _isPressed_ModifierMap = {
+    ctrl: hotkeys_js_1.default.ctrl,
+    shift: hotkeys_js_1.default.shift,
+    alt: hotkeys_js_1.default.alt,
+};
 function _disable_DefaultFilters(event) { return true; }
 function _get_BindArguments(arg_2, arg_3) {
     let callback, options;
@@ -10672,10 +10678,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559954025755)
+		const elapsedTime = _get_ElapsedTime(1559955338967)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     8:33:45 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     8:55:38 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12620,7 +12626,8 @@ var CallbackManager;
                 _update_CardType(cardType);
             },
             on_Click: function (event, cell) {
-                __Main__1.CardType_Filter.toggle_CardTypes(cardType.index);
+                const KeyBinding = __webpack_require__(2);
+                console.log(`ctrl:${KeyBinding.is_Pressed("ctrl")}, shift:${KeyBinding.is_Pressed("shift")}, alt:${KeyBinding.is_Pressed("alt")}, `);
             },
             on_DoubleClick: function (event, cell) {
                 __Main__1.CardType_Filter.disable_CardTypes();
