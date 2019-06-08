@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560021733092)
+		const elapsedTime = _get_ElapsedTime(1560022091678)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:22:13 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:28:11 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12720,16 +12720,9 @@ var CallbackManager;
                 cell.css({
                     "box-shadow": `inset 0 7px 0 0 ${cardType.bgColor}, inset 0 8px 0 0 #AAA`,
                 });
-                __Main__2.CardType_Filter.on_Update(() => {
-                    if (__Main__2.CardType_Filter.cardType_IsEnabled(cardType)) {
-                        cell.addClass(cssVariables.activeFilter);
-                        cell.removeClass(cssVariables.inactiveFilter);
-                    }
-                    else {
-                        cell.removeClass(cssVariables.activeFilter);
-                        cell.addClass(cssVariables.inactiveFilter);
-                    }
-                });
+                const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
+                __Main__2.CardType_Filter.on_Update(update_CSS);
+                update_CSS();
             },
             on_KeyBinding: function (event, cell) {
                 _update_CardType(cardType);
@@ -12751,6 +12744,18 @@ var CallbackManager;
         }
     }
 })(CallbackManager = exports.CallbackManager || (exports.CallbackManager = {}));
+function _get_UpdateCSS_Callback(cell, cardType) {
+    return () => {
+        if (__Main__2.CardType_Filter.cardType_IsEnabled(cardType)) {
+            cell.addClass(cssVariables.activeFilter);
+            cell.removeClass(cssVariables.inactiveFilter);
+        }
+        else {
+            cell.removeClass(cssVariables.activeFilter);
+            cell.addClass(cssVariables.inactiveFilter);
+        }
+    };
+}
 
 
 /***/ }),
