@@ -3,6 +3,7 @@ const cssVariables = require("../../CSS_Variables.json")
 
 //###  Module  ###//
 import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
+import {CardType  } from "~/Utils/KanbanTool/_CardType"
 import {
 	CardType_Filter,
 	Show, Hide,
@@ -37,23 +38,16 @@ export namespace CallbackManager{
 		return _get_Callbacks(cardType)
 	}
 
-	function _get_Callbacks(cardType){
+	function _get_Callbacks(cardType:CardType){
 		return {
 			on_Layout: function(cell:JQuery){
 				cell.css({
 					"box-shadow": `inset 0 7px 0 0 ${cardType.bgColor}, inset 0 8px 0 0 #AAA`,
 				})
 
-				CardType_Filter.on_Update(() => {
-					if(CardType_Filter.cardType_IsEnabled(cardType)){
-						cell.addClass   (cssVariables.activeFilter  )
-						cell.removeClass(cssVariables.inactiveFilter)
-					}
-					else{
-						cell.removeClass(cssVariables.activeFilter  )
-						cell.addClass   (cssVariables.inactiveFilter)
-					}
-				})
+				const update_CSS = _get_UpdateCSS_Callback(cell, cardType)
+				CardType_Filter.on_Update(update_CSS)
+				update_CSS()
 			},
 
 			on_KeyBinding: function(event:KeyboardEvent, cell:JQuery){
@@ -71,10 +65,27 @@ export namespace CallbackManager{
 		}
 	}
 
-	function _update_CardType(cardType){
+	function _update_CardType(cardType:CardType){
 		if(_card)
 			{_card.props.task.save("card_type_id", cardType.id)}
 	}
 
 }
 
+
+//###############//
+//###  Utils  ###//
+//###############//
+
+function _get_UpdateCSS_Callback(cell:JQuery, cardType:CardType){
+	return () => {
+		if(CardType_Filter.cardType_IsEnabled(cardType)){
+			cell.addClass   (cssVariables.activeFilter  )
+			cell.removeClass(cssVariables.inactiveFilter)
+		}
+		else{
+			cell.removeClass(cssVariables.activeFilter  )
+			cell.addClass   (cssVariables.inactiveFilter)
+		}
+	}
+}
