@@ -41,7 +41,9 @@ export namespace CallbackManager{
 			},
 
 			on_Click: function(event:JQuery.ClickEvent, cell:JQuery){
-				CardType_Filter.toggle_CardTypes(cardType.index)
+				// CardType_Filter.toggle_CardTypes(cardType.index)
+				const KeyBinding = require("../../../../Utils/KeyBinding/__Main__")
+				console.log(`ctrl:${KeyBinding.is_Pressed("ctrl")}, shift:${KeyBinding.is_Pressed("shift")}, alt:${KeyBinding.is_Pressed("alt")}, `)
 			},
 
 			on_DoubleClick: function(event:JQuery.DoubleClickEvent, cell:JQuery){

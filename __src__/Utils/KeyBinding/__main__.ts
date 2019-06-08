@@ -42,6 +42,9 @@ export class KeyBinding{
 		else
 			{return _get_Decorator(hotKeys_String, options)}
 	}
+
+	static is_Pressed(...modifierKey:_ModifierKey[])
+		{return modifierKey.every(key => _isPressed_ModifierMap[key])}
 }
 
 export namespace KeyBinding{
@@ -69,6 +72,12 @@ interface _BindOptions
 
 const _BindOptions_Defaults =
 	{preventDefault: false}
+
+const _isPressed_ModifierMap = {
+	ctrl:  HotKeys.ctrl,
+	shift: HotKeys.shift,
+	alt:   HotKeys.alt,
+}
 
 function _disable_DefaultFilters(event)
 	{return true}
