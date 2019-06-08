@@ -41,12 +41,7 @@ export namespace CallbackManager{
 	function _get_Callbacks(cardType:CardType){
 		return {
 			on_Layout: function(cell:JQuery){
-				setTimeout(() => {
-					set_CSS_Variable(cell, cssVariables.filterColor, cardType.bgColor)
-					console.log("@@@ STYLE UPDATE", cell)
-				}, 1000)
-				// cell.attr("style", `--filterColor: ${cardType.bgColor}`)
-				// console.log(">>>", cell, cssVariables.filterColor, cardType.bgColor)
+				set_CSS_Variable(cell, cssVariables.filterColor, cardType.bgColor)
 
 				const update_CSS = _get_UpdateCSS_Callback(cell, cardType)
 				CardType_Filter.on_Update(update_CSS)
