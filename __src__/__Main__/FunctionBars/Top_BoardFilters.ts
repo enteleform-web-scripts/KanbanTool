@@ -44,7 +44,7 @@ const functionBar = new FunctionBar({
 			}),
 			new Entry({
 				name: "Tasks",
-				on_Layout: (cell:JQuery) => {this.on_KeyBinding(null, null)},
+				on_Layout: function(cell:JQuery){this.on_KeyBinding(null, null)},
 				...get_Callbacks(() => {
 					Show.allColumns()
 					Show.rows({include:activeTask_Columns})
