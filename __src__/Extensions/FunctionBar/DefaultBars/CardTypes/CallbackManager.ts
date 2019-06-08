@@ -83,7 +83,7 @@ function _get_UpdateCSS_Callback(cell:JQuery, cardType:CardType){
 		else{
 			cell.removeClass(cssVariables.activeFilter  )
 			cell.addClass   (cssVariables.inactiveFilter)
-			set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + "88"))
+			set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + "66"))
 		}
 	}
 }
