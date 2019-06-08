@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560022511231)
+		const elapsedTime = _get_ElapsedTime(1560023573002)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:35:11 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:52:53 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12275,10 +12275,29 @@ function _update_OriginalLayout() {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-function set_CSS_Variable(key, value) { document.documentElement.style.setProperty(`--${key}`, value); }
+function set_CSS_Variable(arg_1, arg_2, arg_3) {
+    const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
+    if (element) {
+        element.get(0).style.setProperty(key, value);
+    }
+    else {
+        document.documentElement.style.setProperty(key, value);
+    }
+}
 exports.set_CSS_Variable = set_CSS_Variable;
-function get_CSS_Variable(key) { return _get_CSS_Variable_Value(`--${key}`); }
+function get_CSS_Variable(arg_1, arg_2) {
+    const { element, key } = _get_Arguments(arg_1, arg_2, undefined);
+    if (element) {
+        return element.get(0).style.getPropertyValue(key);
+    }
+    else {
+        return _get_CSS_Variable_Value(key);
+    }
+}
 exports.get_CSS_Variable = get_CSS_Variable;
+;
+window.set_CSS_Variable = set_CSS_Variable;
+window.get_CSS_Variable = get_CSS_Variable;
 function get_CSS_Variables() {
     const variables = {};
     const styleSheets = [...document.styleSheets]
@@ -12289,6 +12308,16 @@ function get_CSS_Variables() {
     return variables;
 }
 exports.get_CSS_Variables = get_CSS_Variables;
+function _get_Arguments(arg_1, arg_2, arg_3) {
+    let [element, key, value] = (arg_1 instanceof jQuery)
+        ? [arg_1, arg_2, arg_3]
+        : [undefined, arg_1, arg_2];
+    return {
+        element,
+        value,
+        key: `--${key}`
+    };
+}
 function _get_CSS_Variable_Keys(styleSheet) {
     const cssRules = [...styleSheet.cssRules];
     const rootRules = cssRules.filter(rule => (rule.selectorText == ":root"));
