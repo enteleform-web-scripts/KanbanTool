@@ -85,6 +85,8 @@ function _process_RegExp_IDs(allButtons:JQuery[], targetButtons:JQuery[], ids:(n
 	const patterns = ids.filter(id => (id instanceof RegExp )) as RegExp[]
 	ids            = ids.filter(id => !(id instanceof RegExp)) as (number|string)[]
 
+	console.log("!!!", cardTypes)
+
 	const matchingButton_Indexes =
 		cardTypes
 			.filter(cardType   => patterns.some(pattern => pattern.exec(cardType.name) ? true : false))
