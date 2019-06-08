@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560019709194)
+		const elapsedTime = _get_ElapsedTime(1560019865971)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:48:29 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:51:05 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12861,7 +12861,7 @@ const functionBar = new __Main__1.FunctionBar({
             }),
             new Entry({
                 name: "Tasks",
-                on_Layout: (cell) => { this.on_KeyBinding(null, null); },
+                on_Layout: function (cell) { this.on_KeyBinding(null, null); },
                 ...get_Callbacks(() => {
                     __Main__3.Show.allColumns();
                     __Main__3.Show.rows({ include: activeTask_Columns });
