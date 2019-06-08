@@ -96,8 +96,20 @@ const _CardType_1 = __webpack_require__(25);
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
-function on_PageLoad(callback) { _on_PageLoad_Callbacks.push(callback); }
+function on_PageLoad(arg_1, arg_2) {
+    const [id, callback] = (arg_1 instanceof Symbol)
+        ? [arg_1, arg_2]
+        : [Symbol(), arg_1];
+    _on_PageLoad_Callbacks.push({ id, callback });
+}
 exports.on_PageLoad = on_PageLoad;
+function remove_PageLoad_Callback(id) {
+    const match = _on_PageLoad_Callbacks.filter(entry => (entry.id === id));
+    if (match.length > 0) {
+        match.forEach(entry => _on_PageLoad_Callbacks.splice(_on_PageLoad_Callbacks.indexOf(entry), 1));
+    }
+}
+exports.remove_PageLoad_Callback = remove_PageLoad_Callback;
 exports.cardTypes = exports.activeBoard.cardTypes().active().map(({ attributes }, index) => new _CardType_1.CardType({
     index: index,
     id: attributes.id,
@@ -115,7 +127,7 @@ var __Main__3 = __webpack_require__(28);
 exports.Hide = __Main__3.Hide;
 exports.KanbanTool.activeBoard = exports.activeBoard;
 setTimeout(() => {
-    _on_PageLoad_Callbacks.forEach(callback => callback());
+    _on_PageLoad_Callbacks.forEach(({ callback }) => callback());
 }, Settings_1.onPageLoad_Timeout_MS);
 
 
@@ -10678,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1559970831528)
+		const elapsedTime = _get_ElapsedTime(1560018723548)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:13:51 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:32:03 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12100,11 +12112,11 @@ class Entry {
     constructor({ name, callback, on_Click, on_DoubleClick, on_KeyBinding, on_Layout, keyBinding, color, }) {
         callback = (callback || emptyCallback);
         this.name = name;
-        this.callback = callback;
-        this.on_Layout = (on_Layout || emptyCallback);
-        this.on_KeyBinding = (on_KeyBinding || callback);
-        this.on_Click = (event, cell) => { event.stopPropagation(); (on_Click || callback)(event, cell); };
-        this.on_DoubleClick = (event, cell) => { event.stopPropagation(); (on_DoubleClick || callback)(event, cell); };
+        this.callback = callback.bind(this);
+        this.on_Layout = (on_Layout || emptyCallback).bind(this);
+        this.on_KeyBinding = (on_KeyBinding || callback).bind(this);
+        this.on_Click = (event, cell) => { event.stopPropagation(); (on_Click || callback).bind(this)(event, cell); };
+        this.on_DoubleClick = (event, cell) => { event.stopPropagation(); (on_DoubleClick || callback).bind(this)(event, cell); };
         this.keyBinding = keyBinding;
         this.color = color;
     }
@@ -12336,9 +12348,17 @@ class CardType_Filter {
     static enable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._disabled_CardType_Buttons); }
     static disable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._enabled_CardType_Buttons); }
     static toggle_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._cardType_Buttons); }
+    static on_Update() {
+        CardType_Filter._onUpdate_Callbacks.forEach(callback => callback());
+    }
 }
+CardType_Filter.show_AllCards_ID = Symbol();
+CardType_Filter._onUpdate_Callbacks = [];
 exports.CardType_Filter = CardType_Filter;
 __Main__2.on_PageLoad(() => {
+    CardType_Filter.enable();
+});
+__Main__2.on_PageLoad(CardType_Filter.show_AllCards_ID, () => {
     CardType_Filter.enable();
     CardType_Filter.enable_CardTypes();
 });
@@ -12841,6 +12861,7 @@ const functionBar = new __Main__1.FunctionBar({
             }),
             new Entry({
                 name: "Tasks",
+                on_Layout: (cell) => { this.on_KeyBinding(null, null); },
                 ...get_Callbacks(() => {
                     __Main__3.Show.allColumns();
                     __Main__3.Show.rows({ include: activeTask_Columns });
@@ -12859,9 +12880,7 @@ const functionBar = new __Main__1.FunctionBar({
     ],
 });
 exports.default = functionBar;
-__Main__3.on_PageLoad(() => {
-    functionBar.entryGroups[0][1].on_KeyBinding(null, null);
-});
+__Main__3.remove_PageLoad_Callback(__Main__3.CardType_Filter.show_AllCards_ID);
 const _secondaryCallback = () => { __Main__3.Hide.emptyColumns(); };
 function get_Callbacks(callback) {
     return {
