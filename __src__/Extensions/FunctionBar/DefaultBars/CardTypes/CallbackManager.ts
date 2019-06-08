@@ -41,8 +41,6 @@ export namespace CallbackManager{
 	function _get_Callbacks(cardType:CardType){
 		return {
 			on_Layout: function(cell:JQuery){
-				set_CSS_Variable(cell, cssVariables.filterColor, cardType.bgColor)
-
 				const update_CSS = _get_UpdateCSS_Callback(cell, cardType)
 				CardType_Filter.on_Update(update_CSS)
 				update_CSS()
@@ -80,10 +78,12 @@ function _get_UpdateCSS_Callback(cell:JQuery, cardType:CardType){
 		if(CardType_Filter.cardType_IsEnabled(cardType)){
 			cell.addClass   (cssVariables.activeFilter  )
 			cell.removeClass(cssVariables.inactiveFilter)
+			set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + "FF"))
 		}
 		else{
 			cell.removeClass(cssVariables.activeFilter  )
 			cell.addClass   (cssVariables.inactiveFilter)
+			set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + "88"))
 		}
 	}
 }
