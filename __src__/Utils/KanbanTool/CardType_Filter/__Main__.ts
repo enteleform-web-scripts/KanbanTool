@@ -1,5 +1,6 @@
 //###  Module  ###//
 import {cardType_Filter_Index} from "../Settings"
+import {CardType             } from "../_CardType"
 import {KeyBinding           } from "~/Utils/KeyBinding/__Main__"
 import {
 	cardTypes,
@@ -23,7 +24,6 @@ export class CardType_Filter{
 
 	static get enabled()
 		{return CardType_Filter._filterButton.hasClass("kt-board_search-filter--active")}
-
 	static get disabled()
 		{return !(this.enabled)}
 
@@ -38,20 +38,39 @@ export class CardType_Filter{
 	static get _disabled_CardType_Buttons(): JQuery[]
 		{return Array.from($.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)"))}
 
+	static cardType_IsEnabled(cardType:CardType){
+		const cardType_Buttons         = CardType_Filter._cardType_Buttons
+		const enabled_CardType_Buttons = CardType_Filter._enabled_CardType_Buttons
+
+		const enabledIndexes = cardType_Buttons
+			.map   ((button, index) => ({button, index})                        )
+			.filter(({button})      => enabled_CardType_Buttons.includes(button))
+			.map   (({index })      => index                                    )
+
+		return enabledIndexes.includes(cardType.index)
+	}
+	static cardType_IsDisabled(cardType:CardType)
+		{return !(CardType_Filter.cardType_IsEnabled(cardType))}
+
 	static enable(){
 		if(CardType_Filter.disabled)
 			{CardType_Filter._filterButton.click()}
+		CardType_Filter._on_Update()
 	}
 	static disable(){
 		if(CardType_Filter.enabled)
 			{CardType_Filter._filterButton.click()}
+		CardType_Filter._on_Update()
 	}
 
 	static enable_CardTypes (...ids:(number|string|RegExp)[]){_set_CardType_States(ids, CardType_Filter._disabled_CardType_Buttons)}
 	static disable_CardTypes(...ids:(number|string|RegExp)[]){_set_CardType_States(ids, CardType_Filter._enabled_CardType_Buttons )}
 	static toggle_CardTypes (...ids:(number|string|RegExp)[]){_set_CardType_States(ids, CardType_Filter._cardType_Buttons         )}
 
-	static on_Update(){
+	static on_Update(callback:(() => void))
+		{CardType_Filter._onUpdate_Callbacks.push(callback)}
+
+	static _on_Update(){
 		CardType_Filter._onUpdate_Callbacks.forEach(callback =>
 			callback()
 		)
@@ -110,6 +129,8 @@ function _set_CardType_States(
 		if(targetButtons.includes(button))
 			{button.click()}
 	}
+
+	CardType_Filter._on_Update()
 }
 
 function _process_RegExp_IDs(allButtons:JQuery[], targetButtons:JQuery[], ids:(number|string|RegExp)[]){

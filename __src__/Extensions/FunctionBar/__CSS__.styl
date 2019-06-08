@@ -1,9 +1,9 @@
 json("./CSS_Variables.json")
 
 
-//################//
-//###  Custom  ###//
-//################//
+//##############//
+//###  Core  ###//
+//##############//
 
 .{container}
 
@@ -82,6 +82,12 @@ json("./CSS_Variables.json")
 		background:   #D9D9DE
 		color:        #505052
 
+//##########################//
+//###  Collapse Toggles  ###//
+//##########################//
+
+.{container}
+
 	.left, .right, .top, .bottom
 		&.empty,
 		&.collapsed > :not(.expand-button),
@@ -104,6 +110,26 @@ json("./CSS_Variables.json")
 			line-height:  18px
 			font-size:    14pt
 			color:        var(--ExpandButton_Color)
+
+
+//###############################//
+//###  DefaultBars.CardTypes  ###//
+//###############################//
+
+.{container}
+
+	.cell.activeFilter,
+	.cell.inactiveFilter
+		padding-top: 14px;
+
+	.cell.activeFilter
+		// box-shadow: rgba(255, 235, 59, 0.5) 0px 7px 0px 0px inset, rgb(170, 170, 170) 0px 8px 0px 0px inset;
+
+	.cell.inactiveFilter
+		// box-shadow: rgba(255, 235, 59, 0.5) 0px 7px 0px 0px inset, rgb(170, 170, 170) 0px 8px 0px 0px inset;
+		background:  #777
+		color:       #000
+
 
 //#############################//
 //###  KanbanTool - Layout  ###//

@@ -1,3 +1,5 @@
+//###  Module: CSS  ###//
+const cssVariables = require("../../CSS_Variables.json")
 
 //###  Module  ###//
 import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
@@ -39,8 +41,18 @@ export namespace CallbackManager{
 		return {
 			on_Layout: function(cell:JQuery){
 				cell.css({
-					"box-shadow":  `inset 0 7px 0 0 ${cardType.bgColor}, inset 0 8px 0 0 #AAA`,
-					"padding-top": "14px",
+					"box-shadow": `inset 0 7px 0 0 ${cardType.bgColor}, inset 0 8px 0 0 #AAA`,
+				})
+
+				CardType_Filter.on_Update(() => {
+					if(CardType_Filter.cardType_IsEnabled(cardType)){
+						cell.addClass   (cssVariables.activeFilter  )
+						cell.removeClass(cssVariables.inactiveFilter)
+					}
+					else{
+						cell.removeClass(cssVariables.activeFilter  )
+						cell.addClass   (cssVariables.inactiveFilter)
+					}
 				})
 			},
 

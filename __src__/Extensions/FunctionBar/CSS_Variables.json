@@ -1,7 +1,9 @@
 {
 
-	"container": "CustomExtension__FunctionBar",
-	"collapsed": "collapsed",
-	"empty":     "empty",
+	"container":      "CustomExtension__FunctionBar",
+	"collapsed":      "collapsed",
+	"empty":          "empty",
+	"activeFilter":   "activeFilter",
+	"inactiveFilter": "inactiveFilter",
 
 "_":""}
