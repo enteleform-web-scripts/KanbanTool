@@ -10690,10 +10690,10 @@ exports.FunctionBar = FunctionBar;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560024921173)
+		const elapsedTime = _get_ElapsedTime(1560025238268)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     4:15:21 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     4:20:38 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10858,9 +10858,6 @@ function get_CSS_Variable(arg_1, arg_2) {
     }
 }
 exports.get_CSS_Variable = get_CSS_Variable;
-;
-window.set_CSS_Variable = set_CSS_Variable;
-window.get_CSS_Variable = get_CSS_Variable;
 function get_CSS_Variables() {
     const variables = {};
     const styleSheets = [...document.styleSheets]
@@ -12747,7 +12744,9 @@ var CallbackManager;
     function _get_Callbacks(cardType) {
         return {
             on_Layout: function (cell) {
-                __Main__2.set_CSS_Variable(cell, "filterColor", "#F00");
+                setTimeout(() => {
+                    __Main__2.set_CSS_Variable(cell, "filterColor", cardType.bgColor);
+                }, 100);
                 const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
                 __Main__3.CardType_Filter.on_Update(update_CSS);
                 update_CSS();
