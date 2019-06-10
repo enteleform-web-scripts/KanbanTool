@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560204384964)
+		const elapsedTime = _get_ElapsedTime(1560204881988)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:06:24 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:14:41 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12693,17 +12693,16 @@ var StyleManager;
         const callback = () => {
             let i = 0;
             var _TEMP_START = performance.now();
-            console.log("@ START");
             $.find("kt-task").forEach(element => {
                 _update_CardStyle(element);
                 i += 1;
             });
             var _TEMP_END = performance.now();
-            console.log(`COMPLETE @ ${(_TEMP_END - _TEMP_START)} ms, x:${i}`);
+            console.log(`StyleManager @ ${(_TEMP_END - _TEMP_START)} ms, x:${i}`);
         };
         __Main__2.on_PageLoad(() => {
             callback();
-            __Main__2.KanbanTool.boards.on("change", callback);
+            __Main__2.KanbanTool.tasks.on("change", callback);
         });
     }
     StyleManager.initialize = initialize;
