@@ -10628,10 +10628,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560196514587)
+		const elapsedTime = _get_ElapsedTime(1560196806312)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:55:14 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     4:00:06 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11175,11 +11175,40 @@ const taskSettings = {
     backgroundColor: "#CCCCCC",
     foregroundColor: "#505050",
 };
-__Main__1.CardType_Manager.initialize_Auto({
+__Main__1.CardType_Manager.initialize_Manual({
+    mode: __Main__1.CardType_Manager.Mode.MultipleRows,
     cellWidth: 125,
     functionBar_Options: {
         stretchCells: false,
     },
+    cardTypes: [
+        [
+            { name: "Today_Low", borderAccentColor: priorityColors.low, ...todaySettings },
+            { name: "Today_Medium", borderAccentColor: priorityColors.medium, ...todaySettings },
+            { name: "Today_High", borderAccentColor: priorityColors.high, ...todaySettings },
+            { name: "Today_Urgent", borderAccentColor: priorityColors.urgent, ...todaySettings },
+        ],
+        [
+            { name: "Task_Low", borderAccentColor: priorityColors.low, ...taskSettings },
+            { name: "Task_Medium", borderAccentColor: priorityColors.medium, ...taskSettings },
+            { name: "Task_High", borderAccentColor: priorityColors.high, ...taskSettings },
+            { name: "Task_Urgent", borderAccentColor: priorityColors.urgent, ...taskSettings },
+        ],
+        [
+            {
+                name: "Daily_Task",
+                borderColor: "#B1B1B1",
+                backgroundColor: "#CCCCCC",
+                foregroundColor: "#505050",
+            },
+            {
+                name: "Book",
+                borderColor: "#B1B1B1",
+                backgroundColor: "#CCCCCC",
+                foregroundColor: "#505050",
+            },
+        ],
+    ],
 });
 __Main__2.FunctionBar.load(__webpack_require__(36).default, __webpack_require__(37).default);
 __webpack_require__(38);
@@ -11224,7 +11253,7 @@ const _Default_FunctionBar_Options = {
     stretchCells: true,
     cellProperties: [],
 };
-function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, options) {
+function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, functionBar_Options) {
     let cardType_Rows;
     if (mode == CardType_Manager.Mode._AutoRows) {
         cardType_Rows = get_Rows_1.get_Auto_CardTypes_Rows();
@@ -11235,7 +11264,10 @@ function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, options) {
     else if (mode == CardType_Manager.Mode.MultipleRows) {
         cardType_Rows = get_Rows_1.get_Manual_CardTypes_MultipleRows(cardOptions);
     }
-    const functionBar_Options = { ..._Default_FunctionBar_Options, ...options };
+    functionBar_Options = { ..._Default_FunctionBar_Options, ...functionBar_Options };
+    if (cellWidth !== undefined) {
+        functionBar_Options.stretchCells = false;
+    }
     _update_FunctionBar_Options_CellWidth(functionBar_Options, cellWidth);
     return _build_FunctionBar(functionBar_Options, cardType_Rows);
 }
