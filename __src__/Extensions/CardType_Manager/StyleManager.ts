@@ -3,7 +3,7 @@ const cssVariables = require("./__CSS_Variables__.json")
 
 //###  Module  ###//
 import {_CardOptions       } from "./__Main__"
-import {set_CSS_Variable   } from "~/Utils/CSS_Variables/__Main__"
+import {$set_CSS_Variable  } from "~/Utils/CSS_Variables/__Main__"
 import {get_CardType_FromID} from "~/Utils/KanbanTool/CardType"
 import {
 	KanbanTool,
@@ -57,22 +57,22 @@ function _update_CardStyle(element:HTMLElement){
 
 function _update_CardStyle_From_CardTypes(element:JQuery){
 	const cardType = _get_CardType(element)
-	set_CSS_Variable(element, "title_BorderColor", cardType.bgColor)
+	$set_CSS_Variable(element, "title_BorderColor", cardType.bgColor)
 }
 
 function _update_CardStyle_From_CardOptions(element:JQuery){
 	const cardOptions = _get_CardOptions(element)
 
-	set_CSS_Variable(element, "title_BorderColor",     cardOptions.borderColor    )
-	set_CSS_Variable(element, "title_BackgroundColor", cardOptions.backgroundColor)
-	set_CSS_Variable(element, "title_ForegroundColor", cardOptions.foregroundColor)
+	$set_CSS_Variable(element, "title_BorderColor",     cardOptions.borderColor    )
+	$set_CSS_Variable(element, "title_BackgroundColor", cardOptions.backgroundColor)
+	$set_CSS_Variable(element, "title_ForegroundColor", cardOptions.foregroundColor)
 
 	if(cardOptions.borderAccentColor){
-		set_CSS_Variable(element, "title_BorderAccentColor", cardOptions.borderAccentColor)
+		$set_CSS_Variable(element, "title_BorderAccentColor", cardOptions.borderAccentColor)
 		element.addClass("borderAccent_Enabled")
 	}
 	else{
-		set_CSS_Variable(element, "title_BorderAccentColor", "#0000")
+		$set_CSS_Variable(element, "title_BorderAccentColor", "#0000")
 		element.removeClass("borderAccent_Enabled")
 	}
 }

@@ -17,6 +17,9 @@ export function set_CSS_Variable(arg_1?, arg_2?, arg_3?                         
 		{document.documentElement.style.setProperty(key, value)}
 }
 
+export function $set_CSS_Variable(element:JQuery, key:string, value:(string|number))
+	{element.get(0).style.setProperty(`--${key}`, value as string)}
+
 export function get_CSS_Variable(key:string,                )
 export function get_CSS_Variable(element:JQuery,  key:string)
 export function get_CSS_Variable(arg_1?, arg_2?             ){
