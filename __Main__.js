@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -92,7 +92,6 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(10);
-const _CardType_1 = __webpack_require__(25);
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
@@ -110,18 +109,11 @@ function remove_PageLoad_Callback(id) {
     }
 }
 exports.remove_PageLoad_Callback = remove_PageLoad_Callback;
-exports.cardTypes = exports.activeBoard.cardTypes().active().map(({ attributes }, index) => new _CardType_1.CardType({
-    index: index,
-    id: attributes.id,
-    name: attributes.name,
-    bgColor: attributes.color_attrs.rgb,
-    fgColor: (attributes.color_attrs.invert
-        ? "#FFF"
-        : "#000"),
-}));
+var CardType_1 = __webpack_require__(11);
+exports.cardTypes = CardType_1.cardTypes;
 var __Main__1 = __webpack_require__(26);
 exports.CardType_Filter = __Main__1.CardType_Filter;
-var __Main__2 = __webpack_require__(11);
+var __Main__2 = __webpack_require__(12);
 exports.Show = __Main__2.Show;
 var __Main__3 = __webpack_require__(28);
 exports.Hide = __Main__3.Hide;
@@ -141,8 +133,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(22);
-const hotkeys_js_1 = __importDefault(__webpack_require__(23));
+const KeyGroups_1 = __webpack_require__(23);
+const hotkeys_js_1 = __importDefault(__webpack_require__(24));
 hotkeys_js_1.default.filter = _disable_DefaultFilters;
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
@@ -10628,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560196806312)
+		const elapsedTime = _get_ElapsedTime(1560199383186)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     4:00:06 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     4:43:03 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10832,7 +10824,7 @@ exports.is_VerticalPosition = is_VerticalPosition;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(17);
+const Settings_1 = __webpack_require__(18);
 function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
     if (CSS) {
         _inject_CSS(modulePath);
@@ -10917,7 +10909,7 @@ function _strip_HTML_ExcessData(html) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const is_JQuery_1 = __webpack_require__(24);
+const is_JQuery_1 = __webpack_require__(25);
 function set_CSS_Variable(arg_1, arg_2, arg_3) {
     const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
     if (element) {
@@ -10985,9 +10977,51 @@ exports.onPageLoad_Timeout_MS = 500;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(0);
+exports.cardTypes = __Main__1.activeBoard.cardTypes().active().map(({ attributes }, index) => new _CardType({
+    index: index,
+    id: attributes.id,
+    name: attributes.name,
+    bgColor: attributes.color_attrs.rgb,
+    fgColor: (attributes.color_attrs.invert
+        ? "#FFF"
+        : "#000"),
+}));
+class _CardType {
+    constructor({ index, id, name, bgColor, fgColor }) {
+        this.index = index;
+        this.id = id;
+        this.name = name;
+        this.bgColor = bgColor;
+        this.fgColor = fgColor;
+    }
+}
+exports._CardType = _CardType;
+function _get_CardType_FromName(name) { return _get_CardType_FromProperty("name", name); }
+exports._get_CardType_FromName = _get_CardType_FromName;
+function _get_CardType_FromID(id) { return _get_CardType_FromProperty("id", id); }
+exports._get_CardType_FromID = _get_CardType_FromID;
+function _get_CardType_FromProperty(key, value) {
+    const matches = exports.cardTypes.filter(cardType => (cardType[key] == value));
+    if (matches.length > 0) {
+        return matches[0];
+    }
+    else {
+        return undefined;
+    }
+}
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(5);
-const get_Rows_1 = __webpack_require__(12);
-const get_Columns_1 = __webpack_require__(13);
+const get_Rows_1 = __webpack_require__(13);
+const get_Columns_1 = __webpack_require__(14);
 const Glob_1 = __webpack_require__(27);
 const $ = __webpack_require__(2);
 class Show {
@@ -11062,7 +11096,7 @@ function _match_Glob(container, target) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11087,7 +11121,7 @@ exports.get_Rows = get_Rows;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11142,21 +11176,21 @@ function _update_ColumnRelationships(columns) {
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(3);
-module.exports = __webpack_require__(15);
+module.exports = __webpack_require__(16);
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(16);
+const __Main__1 = __webpack_require__(17);
 const __Main__2 = __webpack_require__(4);
 __webpack_require__(35);
 const priorityColors = {
@@ -11183,26 +11217,24 @@ __Main__1.CardType_Manager.initialize_Manual({
     },
     cardTypes: [
         [
-            { name: "Today_Low", borderAccentColor: priorityColors.low, ...todaySettings },
-            { name: "Today_Medium", borderAccentColor: priorityColors.medium, ...todaySettings },
-            { name: "Today_High", borderAccentColor: priorityColors.high, ...todaySettings },
-            { name: "Today_Urgent", borderAccentColor: priorityColors.urgent, ...todaySettings },
+            { borderAccentColor: priorityColors.low, ...todaySettings },
+            { borderAccentColor: priorityColors.medium, ...todaySettings },
+            { borderAccentColor: priorityColors.high, ...todaySettings },
+            { borderAccentColor: priorityColors.urgent, ...todaySettings },
         ],
         [
-            { name: "Task_Low", borderAccentColor: priorityColors.low, ...taskSettings },
-            { name: "Task_Medium", borderAccentColor: priorityColors.medium, ...taskSettings },
-            { name: "Task_High", borderAccentColor: priorityColors.high, ...taskSettings },
-            { name: "Task_Urgent", borderAccentColor: priorityColors.urgent, ...taskSettings },
+            { borderAccentColor: priorityColors.low, ...taskSettings },
+            { borderAccentColor: priorityColors.medium, ...taskSettings },
+            { borderAccentColor: priorityColors.high, ...taskSettings },
+            { borderAccentColor: priorityColors.urgent, ...taskSettings },
         ],
         [
             {
-                name: "Daily_Task",
                 borderColor: "#B1B1B1",
                 backgroundColor: "#CCCCCC",
                 foregroundColor: "#505050",
             },
             {
-                name: "Book",
                 borderColor: "#B1B1B1",
                 backgroundColor: "#CCCCCC",
                 foregroundColor: "#505050",
@@ -11215,30 +11247,30 @@ __webpack_require__(38);
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(8).inject(__dirname, { CSS: true, HTML: false });
-const CallbackManager_1 = __webpack_require__(20);
+const CallbackManager_1 = __webpack_require__(21);
 const __Main__1 = __webpack_require__(4);
 const Position_1 = __webpack_require__(7);
 const get_Rows_1 = __webpack_require__(34);
 CallbackManager_1.CallbackManager.set_Card_HoverCallback();
-class CardType_Manager {
-    static initialize_Manual(options) {
+var CardType_Manager;
+(function (CardType_Manager) {
+    function initialize_Manual(options) {
         const functionBar = _get_CardType_FunctionBar(options.mode, options.cardTypes, options.cellWidth, options.functionBar_Options);
         __Main__1.FunctionBar.load(functionBar);
     }
-    static initialize_Auto(options) {
+    CardType_Manager.initialize_Manual = initialize_Manual;
+    function initialize_Auto(options) {
         const functionBar = _get_CardType_FunctionBar(CardType_Manager.Mode._AutoRows, [], options.cellWidth, options.functionBar_Options);
         __Main__1.FunctionBar.load(functionBar);
     }
-}
-exports.CardType_Manager = CardType_Manager;
-(function (CardType_Manager) {
+    CardType_Manager.initialize_Auto = initialize_Auto;
     let Mode;
     (function (Mode) {
         Mode[Mode["_AutoRows"] = 0] = "_AutoRows";
@@ -11298,7 +11330,7 @@ function _update_FunctionBar_Options_CellWidth(options, cellWidth) {
 /* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\CardType_Manager"))
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11307,7 +11339,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(__webpack_require__(18));
+const path_1 = __importDefault(__webpack_require__(19));
 class S {
 }
 S.baseURL = "https://enteleform-extensions.github.io/KanbanTool";
@@ -11336,7 +11368,7 @@ exports.Settings = S;
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -11564,10 +11596,10 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(19)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(20)))
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -11757,13 +11789,13 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const cssVariables = __webpack_require__(21);
+const cssVariables = __webpack_require__(22);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(9);
 const __Main__3 = __webpack_require__(0);
@@ -11833,13 +11865,13 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module) {
 
 module.exports = {"activeFilter":"activeFilter","inactiveFilter":"inactiveFilter","filterColor":"filterColor","_":""};
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11887,7 +11919,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12326,7 +12358,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12339,25 +12371,6 @@ exports.is_JQuery = is_JQuery;
 
 
 /***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-class CardType {
-    constructor({ index, id, name, bgColor, fgColor }) {
-        this.index = index;
-        this.id = id;
-        this.name = name;
-        this.bgColor = bgColor;
-        this.fgColor = fgColor;
-    }
-}
-exports.CardType = CardType;
-
-
-/***/ }),
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12366,6 +12379,7 @@ exports.CardType = CardType;
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(10);
 const __Main__1 = __webpack_require__(1);
+const CardType_1 = __webpack_require__(11);
 const __Main__2 = __webpack_require__(0);
 const $ = __webpack_require__(2);
 class CardType_Filter {
@@ -12458,7 +12472,7 @@ function _process_RegExp_IDs(allButtons, targetButtons, ids) {
 function _get_CardType_Index(id) {
     let index;
     if (typeof id == "string") {
-        const cardType = _get_CardType_FromName(id);
+        const cardType = CardType_1._get_CardType_FromName(id);
         index = (cardType)
             ? cardType.index
             : undefined;
@@ -12467,15 +12481,6 @@ function _get_CardType_Index(id) {
         index = id;
     }
     return index;
-}
-function _get_CardType_FromName(name) {
-    const matches = __Main__2.cardTypes.filter(cardType => (cardType.name == name));
-    if (matches.length > 0) {
-        return matches[0];
-    }
-    else {
-        return undefined;
-    }
 }
 
 
@@ -12528,9 +12533,9 @@ const _GLOB_TO_REGEX_MAP = [
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const get_emptyContainer_Indexes_1 = __webpack_require__(29);
-const get_Rows_1 = __webpack_require__(12);
-const get_Columns_1 = __webpack_require__(13);
-const __Main__1 = __webpack_require__(11);
+const get_Rows_1 = __webpack_require__(13);
+const get_Columns_1 = __webpack_require__(14);
+const __Main__1 = __webpack_require__(12);
 class Hide {
     static allRows() { __Main__1.Show.rows({ exclude: ["**\\*"] }); }
     static allColumns() { __Main__1.Show.columns({ exclude: ["**\\*"] }); }
