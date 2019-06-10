@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560208470730)
+		const elapsedTime = _get_ElapsedTime(1560209106402)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     7:14:30 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:25:06 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11215,7 +11215,7 @@ const taskSettings = {
     foregroundColor: "hsl(0, 0%, 30%)",
 };
 __Main__1.CardType_Manager.initialize_Manual({
-    mode: __Main__1.CardType_Manager.Mode.MultipleRows,
+    mode: __Main__1.CardType_Manager.Mode.SingleRow,
     cellWidth: 125,
     functionBar_Options: {
         stretchCells: false,
