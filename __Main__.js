@@ -10628,10 +10628,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560196303441)
+		const elapsedTime = _get_ElapsedTime(1560196514587)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:51:43 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:55:14 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11200,11 +11200,11 @@ const get_Rows_1 = __webpack_require__(34);
 CallbackManager_1.CallbackManager.set_Card_HoverCallback();
 class CardType_Manager {
     static initialize_Manual(options) {
-        const functionBar = _get_CardType_FunctionBar(options.mode, options.cardTypes, options.functionBar_Options);
+        const functionBar = _get_CardType_FunctionBar(options.mode, options.cardTypes, options.cellWidth, options.functionBar_Options);
         __Main__1.FunctionBar.load(functionBar);
     }
     static initialize_Auto(options) {
-        const functionBar = _get_CardType_FunctionBar(CardType_Manager.Mode._AutoRows, [], options.functionBar_Options);
+        const functionBar = _get_CardType_FunctionBar(CardType_Manager.Mode._AutoRows, [], options.cellWidth, options.functionBar_Options);
         __Main__1.FunctionBar.load(functionBar);
     }
 }
@@ -11224,7 +11224,7 @@ const _Default_FunctionBar_Options = {
     stretchCells: true,
     cellProperties: [],
 };
-function _get_CardType_FunctionBar(mode, cardOptions, options) {
+function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, options) {
     let cardType_Rows;
     if (mode == CardType_Manager.Mode._AutoRows) {
         cardType_Rows = get_Rows_1.get_Auto_CardTypes_Rows();
@@ -11236,7 +11236,7 @@ function _get_CardType_FunctionBar(mode, cardOptions, options) {
         cardType_Rows = get_Rows_1.get_Manual_CardTypes_MultipleRows(cardOptions);
     }
     const functionBar_Options = { ..._Default_FunctionBar_Options, ...options };
-    _update_FunctionBar_Options_CellWidth(functionBar_Options);
+    _update_FunctionBar_Options_CellWidth(functionBar_Options, cellWidth);
     return _build_FunctionBar(functionBar_Options, cardType_Rows);
 }
 function _build_FunctionBar(options, cardType_Rows) {
@@ -11249,14 +11249,14 @@ function _build_FunctionBar(options, cardType_Rows) {
         entryGroups,
     });
 }
-function _update_FunctionBar_Options_CellWidth(options) {
-    if (options.cellWidth) {
+function _update_FunctionBar_Options_CellWidth(options, cellWidth) {
+    if (cellWidth) {
         options.cellProperties.push({
             functionName: "css",
             args: [{
-                    "width": options.cellWidth,
-                    "min-width": options.cellWidth,
-                    "max-width": options.cellWidth,
+                    "width": cellWidth,
+                    "min-width": cellWidth,
+                    "max-width": cellWidth,
                 }]
         });
     }
