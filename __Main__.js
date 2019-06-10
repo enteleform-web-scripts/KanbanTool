@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560204881988)
+		const elapsedTime = _get_ElapsedTime(1560204963315)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:14:41 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:16:03 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12691,14 +12691,9 @@ var StyleManager;
                 : cardOptions.flatMap(option => option);
         StyleManager._CardType_ID_Map = _build_CardType_ID_Map();
         const callback = () => {
-            let i = 0;
-            var _TEMP_START = performance.now();
             $.find("kt-task").forEach(element => {
                 _update_CardStyle(element);
-                i += 1;
             });
-            var _TEMP_END = performance.now();
-            console.log(`StyleManager @ ${(_TEMP_END - _TEMP_START)} ms, x:${i}`);
         };
         __Main__2.on_PageLoad(() => {
             callback();
