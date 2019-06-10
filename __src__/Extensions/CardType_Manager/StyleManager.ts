@@ -23,7 +23,10 @@ export namespace StyleManager{
 	export let _CardType_Options:_CardOptions[] = []
 
 	export function initialize(cardOptions:_CardOptions[][]){
-		StyleManager._CardType_Options = cardOptions.flatMap(option => option)
+		StyleManager._CardType_Options =
+			(cardOptions === undefined)
+			? undefined
+			: cardOptions.flatMap(option => option)
 
 		const callback = ()=>{
 			$.find("kt-task").forEach(element=>{
@@ -44,26 +47,43 @@ export namespace StyleManager{
 //###############//
 
 function _update_CardStyle(element:HTMLElement){
-	const $element    = $(element)
-	const cardOptions = _get_CardOptions($element)
+	const $element = $(element)
 
-	set_CSS_Variable($element, "title_BorderColor",     cardOptions.borderColor    )
-	set_CSS_Variable($element, "title_BackgroundColor", cardOptions.backgroundColor)
-	set_CSS_Variable($element, "title_ForegroundColor", cardOptions.foregroundColor)
+	if(StyleManager._CardType_Options === undefined)
+		{_update_CardStyle_From_CardTypes($element)}
+	else
+		{_update_CardStyle_From_CardOptions($element)}
+}
+
+function _update_CardStyle_From_CardTypes(element:JQuery){
+	const cardType = _get_CardType(element)
+	set_CSS_Variable(element, "title_BorderColor", cardType.bgColor)
+}
+
+function _update_CardStyle_From_CardOptions(element:JQuery){
+	const cardOptions = _get_CardOptions(element)
+
+	set_CSS_Variable(element, "title_BorderColor",     cardOptions.borderColor    )
+	set_CSS_Variable(element, "title_BackgroundColor", cardOptions.backgroundColor)
+	set_CSS_Variable(element, "title_ForegroundColor", cardOptions.foregroundColor)
 
 	if(cardOptions.borderAccentColor){
-		set_CSS_Variable($element, "title_BorderAccentColor", cardOptions.borderAccentColor)
-		$element.addClass("borderAccent_Enabled")
+		set_CSS_Variable(element, "title_BorderAccentColor", cardOptions.borderAccentColor)
+		element.addClass("borderAccent_Enabled")
 	}
 	else{
-		set_CSS_Variable($element, "title_BorderAccentColor", "#0000")
-		$element.removeClass("borderAccent_Enabled")
+		set_CSS_Variable(element, "title_BorderAccentColor", "#0000")
+		element.removeClass("borderAccent_Enabled")
 	}
 }
 
-function _get_CardOptions(element:JQuery){
+function _get_CardType(element:JQuery){
 	const taskID   = element.data("task-id")
 	const model    = KanbanTool.tasks.load(taskID)
-	const cardType = get_CardType_FromID(model.cardType().id)
+	return get_CardType_FromID(model.cardType().id)
+}
+
+function _get_CardOptions(element:JQuery){
+	const cardType = _get_CardType(element)
 	return StyleManager._CardType_Options[cardType.index]
 }

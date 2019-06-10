@@ -3,6 +3,7 @@ require("~/Utils/HTML_Injector").inject(__dirname, {CSS:true, HTML:false})
 
 //###  Module  ###//
 import {CallbackManager           } from "./CallbackManager"
+import {StyleManager              } from "./StyleManager"
 import {FunctionBar               } from "~/Extensions/FunctionBar/__Main__"
 import {CellProperty              } from "~/Extensions/FunctionBar/CellProperty"
 import {Position, VerticalPosition} from "~/Extensions/FunctionBar/Position"
@@ -12,13 +13,6 @@ import {
 	get_Manual_CardTypes_SingleRow,
 	get_Manual_CardTypes_MultipleRows,
 } from "./get_Rows"
-
-
-//###############//
-//###  Setup  ###//
-//###############//
-
-CallbackManager.set_Card_HoverCallback()
 
 
 //#################//
@@ -45,7 +39,7 @@ export namespace CardType_Manager{
 			options.cellWidth,
 			options.functionBar_Options as _FunctionBar_Options,
 		)
-		FunctionBar.load(functionBar)
+		_initialize(functionBar, options.cardTypes)
 	}
 
 	export function initialize_Auto(options:{
@@ -64,7 +58,7 @@ export namespace CardType_Manager{
 			options.cellWidth,
 			options.functionBar_Options as _FunctionBar_Options,
 		)
-		FunctionBar.load(functionBar)
+		_initialize(functionBar, undefined)
 	}
 
 	export enum Mode{
@@ -101,6 +95,12 @@ const _Default_FunctionBar_Options = {
 	keyBinding_Modifiers: [],
 	stretchCells:         true,
 	cellProperties:       [],
+}
+
+function _initialize(functionBar:FunctionBar, cardOptions:_CardOptions[][]){
+	CallbackManager.set_Card_HoverCallback()
+	FunctionBar.load(functionBar)
+	StyleManager.initialize(cardOptions)
 }
 
 function _get_CardType_FunctionBar(
