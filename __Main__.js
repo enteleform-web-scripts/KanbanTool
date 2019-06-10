@@ -92,9 +92,11 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(10);
+const CardType_1 = __webpack_require__(11);
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
+exports.cardTypes = CardType_1.get_CardTypes(exports.activeBoard);
 function on_PageLoad(arg_1, arg_2) {
     const [id, callback] = (typeof arg_1 == "symbol")
         ? [arg_1, arg_2]
@@ -109,8 +111,6 @@ function remove_PageLoad_Callback(id) {
     }
 }
 exports.remove_PageLoad_Callback = remove_PageLoad_Callback;
-var CardType_1 = __webpack_require__(11);
-exports.cardTypes = CardType_1.cardTypes;
 var __Main__1 = __webpack_require__(26);
 exports.CardType_Filter = __Main__1.CardType_Filter;
 var __Main__2 = __webpack_require__(12);
@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560199383186)
+		const elapsedTime = _get_ElapsedTime(1560199946639)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     4:43:03 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     4:52:26 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10977,17 +10977,19 @@ exports.onPageLoad_Timeout_MS = 500;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(0);
-exports.cardTypes = __Main__1.activeBoard.cardTypes().active().map(({ attributes }, index) => new _CardType({
-    index: index,
-    id: attributes.id,
-    name: attributes.name,
-    bgColor: attributes.color_attrs.rgb,
-    fgColor: (attributes.color_attrs.invert
-        ? "#FFF"
-        : "#000"),
-}));
-class _CardType {
+function get_CardTypes(activeBoard) {
+    return activeBoard.cardTypes().active().map(({ attributes }, index) => new CardType({
+        index: index,
+        id: attributes.id,
+        name: attributes.name,
+        bgColor: attributes.color_attrs.rgb,
+        fgColor: (attributes.color_attrs.invert
+            ? "#FFF"
+            : "#000"),
+    }));
+}
+exports.get_CardTypes = get_CardTypes;
+class CardType {
     constructor({ index, id, name, bgColor, fgColor }) {
         this.index = index;
         this.id = id;
@@ -10996,13 +10998,14 @@ class _CardType {
         this.fgColor = fgColor;
     }
 }
-exports._CardType = _CardType;
-function _get_CardType_FromName(name) { return _get_CardType_FromProperty("name", name); }
-exports._get_CardType_FromName = _get_CardType_FromName;
-function _get_CardType_FromID(id) { return _get_CardType_FromProperty("id", id); }
-exports._get_CardType_FromID = _get_CardType_FromID;
+exports.CardType = CardType;
+function get_CardType_FromName(name) { return _get_CardType_FromProperty("name", name); }
+exports.get_CardType_FromName = get_CardType_FromName;
+function get_CardType_FromID(id) { return _get_CardType_FromProperty("id", id); }
+exports.get_CardType_FromID = get_CardType_FromID;
+const __Main__1 = __webpack_require__(0);
 function _get_CardType_FromProperty(key, value) {
-    const matches = exports.cardTypes.filter(cardType => (cardType[key] == value));
+    const matches = __Main__1.cardTypes.filter(cardType => (cardType[key] == value));
     if (matches.length > 0) {
         return matches[0];
     }
@@ -12472,7 +12475,7 @@ function _process_RegExp_IDs(allButtons, targetButtons, ids) {
 function _get_CardType_Index(id) {
     let index;
     if (typeof id == "string") {
-        const cardType = CardType_1._get_CardType_FromName(id);
+        const cardType = CardType_1.get_CardType_FromName(id);
         index = (cardType)
             ? cardType.index
             : undefined;
