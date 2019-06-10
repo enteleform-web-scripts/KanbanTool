@@ -109,17 +109,20 @@ const _Default_FunctionBar_Options = {
 }
 
 function _get_CardType_FunctionBar(
-	mode:        CardType_Manager.Mode,
-	cardOptions: _CardOptions[][],
-	cellWidth:    number,
-	options:     _FunctionBar_Options,
+	mode:                CardType_Manager.Mode,
+	cardOptions:         _CardOptions[][],
+	cellWidth:           number,
+	functionBar_Options: _FunctionBar_Options,
 ){
 	let cardType_Rows
 		if     (mode == CardType_Manager.Mode._AutoRows   ){cardType_Rows = get_Auto_CardTypes_Rows()                     }
 		else if(mode == CardType_Manager.Mode.SingleRow   ){cardType_Rows = get_Manual_CardTypes_SingleRow   (cardOptions)}
 		else if(mode == CardType_Manager.Mode.MultipleRows){cardType_Rows = get_Manual_CardTypes_MultipleRows(cardOptions)}
 
-	const functionBar_Options = {..._Default_FunctionBar_Options, ...options}
+
+	functionBar_Options = {..._Default_FunctionBar_Options, ...functionBar_Options}
+	if(cellWidth !== undefined)
+		{functionBar_Options.stretchCells = false}
 	_update_FunctionBar_Options_CellWidth(functionBar_Options, cellWidth)
 
 	return _build_FunctionBar(

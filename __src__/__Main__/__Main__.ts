@@ -28,52 +28,45 @@ const taskSettings = {
 	foregroundColor: "#505050",
 }
 
-// CardType_Manager.initialize_Manual({
-// 	mode:      CardType_Manager.Mode.SingleRow,
-// 	// mode:      CardType_Manager.Mode.MultipleRows,
-// 	cellWidth: 125,
-
-// 	functionBar_Options:{
-// 		stretchCells: false,
-// 	},
-
-// 	cardTypes: [
-// 		[
-// 			{name:"Today_Low",    borderAccentColor:priorityColors.low,    ...todaySettings},
-// 			{name:"Today_Medium", borderAccentColor:priorityColors.medium, ...todaySettings},
-// 			{name:"Today_High",   borderAccentColor:priorityColors.high,   ...todaySettings},
-// 			{name:"Today_Urgent", borderAccentColor:priorityColors.urgent, ...todaySettings},
-// 		],
-// 		[
-// 			{name:"Task_Low",    borderAccentColor:priorityColors.low,    ...taskSettings},
-// 			{name:"Task_Medium", borderAccentColor:priorityColors.medium, ...taskSettings},
-// 			{name:"Task_High",   borderAccentColor:priorityColors.high,   ...taskSettings},
-// 			{name:"Task_Urgent", borderAccentColor:priorityColors.urgent, ...taskSettings},
-// 		],
-// 		[
-// 			{
-// 				name:            "Daily_Task",
-// 				borderColor:     "#B1B1B1",
-// 				backgroundColor: "#CCCCCC",
-// 				foregroundColor: "#505050",
-// 			},
-// 			{
-// 				name:            "Book",
-// 				borderColor:     "#B1B1B1",
-// 				backgroundColor: "#CCCCCC",
-// 				foregroundColor: "#505050",
-// 			},
-// 		],
-// 	],
-// })
-
-CardType_Manager.initialize_Auto({
+CardType_Manager.initialize_Manual({
+	// mode:      CardType_Manager.Mode.SingleRow,
+	mode:      CardType_Manager.Mode.MultipleRows,
 	cellWidth: 125,
 
 	functionBar_Options:{
 		stretchCells: false,
 	},
+
+	cardTypes: [
+		[
+			{name:"Today_Low",    borderAccentColor:priorityColors.low,    ...todaySettings},
+			{name:"Today_Medium", borderAccentColor:priorityColors.medium, ...todaySettings},
+			{name:"Today_High",   borderAccentColor:priorityColors.high,   ...todaySettings},
+			{name:"Today_Urgent", borderAccentColor:priorityColors.urgent, ...todaySettings},
+		],
+		[
+			{name:"Task_Low",    borderAccentColor:priorityColors.low,    ...taskSettings},
+			{name:"Task_Medium", borderAccentColor:priorityColors.medium, ...taskSettings},
+			{name:"Task_High",   borderAccentColor:priorityColors.high,   ...taskSettings},
+			{name:"Task_Urgent", borderAccentColor:priorityColors.urgent, ...taskSettings},
+		],
+		[
+			{
+				name:            "Daily_Task",
+				borderColor:     "#B1B1B1",
+				backgroundColor: "#CCCCCC",
+				foregroundColor: "#505050",
+			},
+			{
+				name:            "Book",
+				borderColor:     "#B1B1B1",
+				backgroundColor: "#CCCCCC",
+				foregroundColor: "#505050",
+			},
+		],
+	],
 })
+
 
 //#################################//
 //###  Extension - FunctionBar  ###//
