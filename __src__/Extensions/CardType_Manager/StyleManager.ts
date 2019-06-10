@@ -30,13 +30,15 @@ export namespace StyleManager{
 		StyleManager._CardType_ID_Map = _build_CardType_ID_Map()
 
 		const callback = ()=>{
+			let i = 0
 			var _TEMP_START = performance.now()
 			console.log("@ START")
 			$.find("kt-task").forEach(element=>{
 				_update_CardStyle(element)
+				i += 1
 			})
 			var _TEMP_END = performance.now()
-			console.log(`COMPLETE @ ${(_TEMP_END - _TEMP_START)} ms`)
+			console.log(`COMPLETE @ ${(_TEMP_END - _TEMP_START)} ms, x:${i}`)
 		}
 
 		on_PageLoad(() => {
