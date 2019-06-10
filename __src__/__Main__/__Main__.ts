@@ -39,26 +39,24 @@ CardType_Manager.initialize_Manual({
 
 	cardTypes: [
 		[
-			{name:"Today_Low",    borderAccentColor:priorityColors.low,    ...todaySettings},
-			{name:"Today_Medium", borderAccentColor:priorityColors.medium, ...todaySettings},
-			{name:"Today_High",   borderAccentColor:priorityColors.high,   ...todaySettings},
-			{name:"Today_Urgent", borderAccentColor:priorityColors.urgent, ...todaySettings},
+			{/*###  "Today_Low"    ###*/ borderAccentColor:priorityColors.low,    ...todaySettings},
+			{/*###  "Today_Medium" ###*/ borderAccentColor:priorityColors.medium, ...todaySettings},
+			{/*###  "Today_High"   ###*/ borderAccentColor:priorityColors.high,   ...todaySettings},
+			{/*###  "Today_Urgent" ###*/ borderAccentColor:priorityColors.urgent, ...todaySettings},
 		],
 		[
-			{name:"Task_Low",    borderAccentColor:priorityColors.low,    ...taskSettings},
-			{name:"Task_Medium", borderAccentColor:priorityColors.medium, ...taskSettings},
-			{name:"Task_High",   borderAccentColor:priorityColors.high,   ...taskSettings},
-			{name:"Task_Urgent", borderAccentColor:priorityColors.urgent, ...taskSettings},
+			{/*###  "Task_Low"    ###*/ borderAccentColor:priorityColors.low,    ...taskSettings},
+			{/*###  "Task_Medium" ###*/ borderAccentColor:priorityColors.medium, ...taskSettings},
+			{/*###  "Task_High"   ###*/ borderAccentColor:priorityColors.high,   ...taskSettings},
+			{/*###  "Task_Urgent" ###*/ borderAccentColor:priorityColors.urgent, ...taskSettings},
 		],
 		[
-			{
-				name:            "Daily_Task",
+			{ //###  Daily_Task  ###//
 				borderColor:     "#B1B1B1",
 				backgroundColor: "#CCCCCC",
 				foregroundColor: "#505050",
 			},
-			{
-				name:            "Book",
+			{ //###  Book  ###//
 				borderColor:     "#B1B1B1",
 				backgroundColor: "#CCCCCC",
 				foregroundColor: "#505050",

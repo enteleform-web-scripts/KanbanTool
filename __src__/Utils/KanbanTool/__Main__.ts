@@ -1,6 +1,6 @@
 //###  Module  ###//
 import {onPageLoad_Timeout_MS} from "./Settings"
-import {CardType             } from "./_CardType"
+import {_CardType            } from "./CardType"
 
 
 //###############//
@@ -37,26 +37,12 @@ export function remove_PageLoad_Callback(id:Symbol){
 	}
 }
 
-export const cardTypes: CardType[] =
-	activeBoard.cardTypes().active().map(
-		({attributes}, index) => new CardType({
-			index:   index,
-			id:      attributes.id,
-			name:    attributes.name,
-			bgColor: attributes.color_attrs.rgb,
-			fgColor: (
-				attributes.color_attrs.invert
-				? "#FFF"
-				: "#000"
-			),
-		})
-	)
-
 
 //#########################//
 //###  Exports: Nested  ###//
 //#########################//
 
+export {cardTypes      } from "./CardType"
 export {CardType_Filter} from "./CardType_Filter/__Main__"
 export {Show           } from "./Show/__Main__"
 export {Hide           } from "./Hide/__Main__"

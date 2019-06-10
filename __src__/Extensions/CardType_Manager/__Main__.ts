@@ -25,9 +25,9 @@ CallbackManager.set_Card_HoverCallback()
 //###  Exports  ###//
 //#################//
 
-export class CardType_Manager{
+export namespace CardType_Manager{
 
-	static initialize_Manual(options:{
+	export function initialize_Manual(options:{
 		mode:       CardType_Manager.Mode,
 		cellWidth?: number,
 		cardTypes?: _CardOptions[][],
@@ -48,7 +48,7 @@ export class CardType_Manager{
 		FunctionBar.load(functionBar)
 	}
 
-	static initialize_Auto(options:{
+	export function initialize_Auto(options:{
 		cellWidth?: number,
 		functionBar_Options?:{
 			position?:             VerticalPosition,
@@ -67,10 +67,6 @@ export class CardType_Manager{
 		FunctionBar.load(functionBar)
 	}
 
-}
-
-export namespace CardType_Manager{
-
 	export enum Mode{
 		_AutoRows,
 		SingleRow,
@@ -85,7 +81,6 @@ export namespace CardType_Manager{
 //###############//
 
 export interface _CardOptions{
-	name:               string
 	borderColor:        string
 	backgroundColor:    string
 	foregroundColor:    string

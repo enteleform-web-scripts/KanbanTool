@@ -1,7 +1,8 @@
 //###  Module  ###//
-import {cardType_Filter_Index} from "../Settings"
-import {CardType             } from "../_CardType"
-import {KeyBinding           } from "~/Utils/KeyBinding/__Main__"
+import {cardType_Filter_Index } from "../Settings"
+import {_CardType             } from "../CardType"
+import {KeyBinding            } from "~/Utils/KeyBinding/__Main__"
+import {_get_CardType_FromName} from "~/Utils/KanbanTool/CardType"
 import {
 	cardTypes,
 	on_PageLoad,
@@ -38,7 +39,7 @@ export class CardType_Filter{
 	static get _disabled_CardType_Buttons(): JQuery[]
 		{return Array.from($.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)"))}
 
-	static cardType_IsEnabled(cardType:CardType){
+	static cardType_IsEnabled(cardType:_CardType){
 		const cardType_Buttons         = CardType_Filter._cardType_Buttons
 		const enabled_CardType_Buttons = CardType_Filter._enabled_CardType_Buttons
 
@@ -49,7 +50,7 @@ export class CardType_Filter{
 
 		return enabledIndexes.includes(cardType.index)
 	}
-	static cardType_IsDisabled(cardType:CardType)
+	static cardType_IsDisabled(cardType:_CardType)
 		{return !(CardType_Filter.cardType_IsEnabled(cardType))}
 
 	static enable(){
@@ -165,10 +166,3 @@ function _get_CardType_Index(id:number|string){
 	return index
 }
 
-function _get_CardType_FromName(name:string){
-	const matches = cardTypes.filter(cardType => (cardType.name == name))
-	if(matches.length > 0)
-		{return matches[0]}
-	else
-		{return undefined}
-}

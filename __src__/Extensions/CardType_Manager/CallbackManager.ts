@@ -3,7 +3,7 @@ const cssVariables = require("./__CSS_Variables__.json")
 
 //###  Module  ###//
 import {KeyBinding      } from "~/Utils/KeyBinding/__Main__"
-import {CardType        } from "~/Utils/KanbanTool/_CardType"
+import {_CardType       } from "~/Utils/KanbanTool/CardType"
 import {set_CSS_Variable} from "~/Utils/CSS_Variables/__Main__"
 import {
 	CardType_Filter,
@@ -38,7 +38,7 @@ export namespace CallbackManager{
 		return _get_Callbacks(cardType)
 	}
 
-	function _get_Callbacks(cardType:CardType){
+	function _get_Callbacks(cardType:_CardType){
 		return {
 			on_Layout: function(cell:JQuery){
 				const update_CSS = _get_UpdateCSS_Callback(cell, cardType)
@@ -61,7 +61,7 @@ export namespace CallbackManager{
 		}
 	}
 
-	function _update_CardType(cardType:CardType){
+	function _update_CardType(cardType:_CardType){
 		if(_card)
 			{_card.props.task.save("card_type_id", cardType.id)}
 	}
@@ -73,7 +73,7 @@ export namespace CallbackManager{
 //###  Utils  ###//
 //###############//
 
-function _get_UpdateCSS_Callback(cell:JQuery, cardType:CardType){
+function _get_UpdateCSS_Callback(cell:JQuery, cardType:_CardType){
 	return () => {
 		let alpha
 
