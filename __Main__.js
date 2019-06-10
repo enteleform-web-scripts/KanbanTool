@@ -141,8 +141,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(21);
-const hotkeys_js_1 = __importDefault(__webpack_require__(22));
+const KeyGroups_1 = __webpack_require__(20);
+const hotkeys_js_1 = __importDefault(__webpack_require__(21));
 hotkeys_js_1.default.filter = _disable_DefaultFilters;
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
@@ -10593,15 +10593,66 @@ return jQuery;
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+
+		function _get_ElapsedTime(startTime) {
+    const elapsed_MS = (new Date().getTime() - startTime);
+    const days = Math.floor(((elapsed_MS / 1000) / 86400));
+    const hours = Math.floor(((elapsed_MS / 1000) / 3600) % 24);
+    const minutes = Math.floor(((elapsed_MS / 1000) / 60) % 60);
+    const seconds = Math.floor((elapsed_MS / 1000) % 60);
+    const milliseconds = Math.floor(elapsed_MS % 1000);
+    const elapsedTime = (""
+        + _get_ElapsedTime_Segment("day", days, [], false)
+        + _get_ElapsedTime_Segment("hour", hours, [days], false)
+        + _get_ElapsedTime_Segment("minute", minutes, [days, hours], false)
+        + _get_ElapsedTime_Segment("second", seconds, [days, hours, minutes], true));
+    return elapsedTime;
+}
+		function _get_ElapsedTime_Segment(title, value, parents, mandatory) {
+    const parentValues_Exist = ((parents.length > 0)
+        && (Math.max(...parents) > 0));
+    if (mandatory || value || parentValues_Exist) {
+        const prefix = (parentValues_Exist)
+            ? ",  "
+            : "";
+        title =
+            (value == 1)
+                ? title
+                : `${title}s`;
+        return `${prefix}${value}:${title}`;
+    }
+    else {
+        return "";
+    }
+}
+
+		const elapsedTime = _get_ElapsedTime(1560192335349)
+
+		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
+		const line_2  = `│  At     2:45:35 PM`.padEnd((line_1.length - 1)) + "│"
+		const divider = "".padStart((line_1.length - 2), "─")
+
+		console.log(""
+			+ `\n┌${divider}┐\n`
+			+ `${line_1}\n`
+			+ `${line_2}\n`
+			+ `└${divider}┘\n`
+		)
+	
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(17).inject(__dirname, { CSS: true, HTML: true });
+__webpack_require__(8).inject(__dirname, { CSS: true, HTML: true });
 const Settings_1 = __webpack_require__(5);
-const Entry_1 = __webpack_require__(23);
-const Layout_1 = __webpack_require__(24);
+const Entry_1 = __webpack_require__(22);
+const Layout_1 = __webpack_require__(23);
 const Module_BaseClasses_1 = __webpack_require__(31);
 const Position_1 = __webpack_require__(6);
 class FunctionBar extends Module_BaseClasses_1.Module {
@@ -10652,57 +10703,6 @@ exports.FunctionBar = FunctionBar;
 })(FunctionBar = exports.FunctionBar || (exports.FunctionBar = {}));
 
 /* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\FunctionBar"))
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-
-		function _get_ElapsedTime(startTime) {
-    const elapsed_MS = (new Date().getTime() - startTime);
-    const days = Math.floor(((elapsed_MS / 1000) / 86400));
-    const hours = Math.floor(((elapsed_MS / 1000) / 3600) % 24);
-    const minutes = Math.floor(((elapsed_MS / 1000) / 60) % 60);
-    const seconds = Math.floor((elapsed_MS / 1000) % 60);
-    const milliseconds = Math.floor(elapsed_MS % 1000);
-    const elapsedTime = (""
-        + _get_ElapsedTime_Segment("day", days, [], false)
-        + _get_ElapsedTime_Segment("hour", hours, [days], false)
-        + _get_ElapsedTime_Segment("minute", minutes, [days, hours], false)
-        + _get_ElapsedTime_Segment("second", seconds, [days, hours, minutes], true));
-    return elapsedTime;
-}
-		function _get_ElapsedTime_Segment(title, value, parents, mandatory) {
-    const parentValues_Exist = ((parents.length > 0)
-        && (Math.max(...parents) > 0));
-    if (mandatory || value || parentValues_Exist) {
-        const prefix = (parentValues_Exist)
-            ? ",  "
-            : "";
-        title =
-            (value == 1)
-                ? title
-                : `${title}s`;
-        return `${prefix}${value}:${title}`;
-    }
-    else {
-        return "";
-    }
-}
-
-		const elapsedTime = _get_ElapsedTime(1560131156493)
-
-		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     9:45:56 PM`.padEnd((line_1.length - 1)) + "│"
-		const divider = "".padStart((line_1.length - 2), "─")
-
-		console.log(""
-			+ `\n┌${divider}┐\n`
-			+ `${line_1}\n`
-			+ `${line_2}\n`
-			+ `└${divider}┘\n`
-		)
-	
 
 /***/ }),
 /* 5 */
@@ -10827,9 +10827,88 @@ exports.TaskContainer = TaskContainer;
 
 /***/ }),
 /* 8 */
-/***/ (function(module) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = {"container":"CustomExtension__FunctionBar","collapsed":"collapsed","empty":"empty","activeFilter":"activeFilter","inactiveFilter":"inactiveFilter","filterColor":"filterColor","_":""};
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Settings_1 = __webpack_require__(17);
+function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
+    if (CSS) {
+        _inject_CSS(modulePath);
+    }
+    if (HTML) {
+        _inject_HTML(modulePath);
+    }
+}
+exports.inject = inject;
+function _inject_CSS(modulePath) {
+    const url = _get_FileURL(modulePath, { folder: Settings_1.Settings.cssFolder, extension: Settings_1.Settings.cssExtension });
+    _get_FileText(url)
+        .then(css => {
+        $("<style>")
+            .prop("type", "text/css")
+            .html(css)
+            .appendTo("head");
+    });
+}
+function _inject_HTML(modulePath) {
+    const url = _get_FileURL(modulePath, { folder: Settings_1.Settings.htmlFolder, extension: Settings_1.Settings.htmlExtension });
+    _get_FileText(url)
+        .then(html => {
+        html = _strip_HTML_ExcessData(html);
+        $("body").prepend(html);
+    });
+}
+async function _get_FileText(url) {
+    const result = { value: null };
+    await __get_FileText(url, result);
+    return result.value;
+}
+function _get_FileURL(modulePath, { folder, extension }) {
+    const relativePath = _remove_SourceDirectory(modulePath);
+    const filePath = `${folder}/${relativePath}.${extension}`;
+    const url = _add_BaseURL(filePath);
+    return url;
+}
+async function __get_FileText(url, result) {
+    var file = new XMLHttpRequest();
+    file.open("GET", url, false);
+    file.onreadystatechange = () => {
+        const fileAcquired = ((file.readyState === 4)
+            && ((file.status === 200) || (file.status == 0)));
+        if (fileAcquired) {
+            result.value = file.responseText;
+        }
+        else {
+            throw new Error(`
+				Unable to resolve URL:
+					'${url}'
+ 			`);
+        }
+    };
+    file.send(null);
+}
+function _remove_SourceDirectory(relativePath) {
+    return (relativePath
+        .split("\\")
+        .slice(1)
+        .join("/"));
+}
+function _add_BaseURL(relativePath) {
+    const baseURL = Settings_1.Settings.baseURL;
+    let url = relativePath.replace(/^\.?\/?/, `${baseURL}/`);
+    if (!url.startsWith(baseURL)) {
+        url = `${baseURL}/${relativePath}`;
+    }
+    return url;
+}
+function _strip_HTML_ExcessData(html) {
+    return (html
+        .replace(/<head>.*?<\/head>/, "")
+        .replace(/<script.*?<\/script>/g, ""));
+}
+
 
 /***/ }),
 /* 9 */
@@ -11066,7 +11145,7 @@ function _update_ColumnRelationships(columns) {
 /* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(4);
+__webpack_require__(3);
 module.exports = __webpack_require__(15);
 
 
@@ -11078,10 +11157,10 @@ module.exports = __webpack_require__(15);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(16);
-const __Main__1 = __webpack_require__(3);
+const __Main__1 = __webpack_require__(4);
 const __Main__2 = __webpack_require__(32);
-__Main__1.FunctionBar.load(__webpack_require__(35).default, __webpack_require__(36).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 4, 2], cellWidth: 125, stretchCells: false }));
-__webpack_require__(37);
+__Main__1.FunctionBar.load(__webpack_require__(36).default, __webpack_require__(37).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 4, 2], cellWidth: 125, stretchCells: false }));
+__webpack_require__(38);
 
 
 /***/ }),
@@ -11137,96 +11216,11 @@ function get_DivIndex(checkList_Item) {
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(18);
-function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
-    if (CSS) {
-        _inject_CSS(modulePath);
-    }
-    if (HTML) {
-        _inject_HTML(modulePath);
-    }
-}
-exports.inject = inject;
-function _inject_CSS(modulePath) {
-    const url = _get_FileURL(modulePath, { folder: Settings_1.Settings.cssFolder, extension: Settings_1.Settings.cssExtension });
-    _get_FileText(url)
-        .then(css => {
-        $("<style>")
-            .prop("type", "text/css")
-            .html(css)
-            .appendTo("head");
-    });
-}
-function _inject_HTML(modulePath) {
-    const url = _get_FileURL(modulePath, { folder: Settings_1.Settings.htmlFolder, extension: Settings_1.Settings.htmlExtension });
-    _get_FileText(url)
-        .then(html => {
-        html = _strip_HTML_ExcessData(html);
-        $("body").prepend(html);
-    });
-}
-async function _get_FileText(url) {
-    const result = { value: null };
-    await __get_FileText(url, result);
-    return result.value;
-}
-function _get_FileURL(modulePath, { folder, extension }) {
-    const relativePath = _remove_SourceDirectory(modulePath);
-    const filePath = `${folder}/${relativePath}.${extension}`;
-    const url = _add_BaseURL(filePath);
-    return url;
-}
-async function __get_FileText(url, result) {
-    var file = new XMLHttpRequest();
-    file.open("GET", url, false);
-    file.onreadystatechange = () => {
-        const fileAcquired = ((file.readyState === 4)
-            && ((file.status === 200) || (file.status == 0)));
-        if (fileAcquired) {
-            result.value = file.responseText;
-        }
-        else {
-            throw new Error(`
-				Unable to resolve URL:
-					'${url}'
- 			`);
-        }
-    };
-    file.send(null);
-}
-function _remove_SourceDirectory(relativePath) {
-    return (relativePath
-        .split("\\")
-        .slice(1)
-        .join("/"));
-}
-function _add_BaseURL(relativePath) {
-    const baseURL = Settings_1.Settings.baseURL;
-    let url = relativePath.replace(/^\.?\/?/, `${baseURL}/`);
-    if (!url.startsWith(baseURL)) {
-        url = `${baseURL}/${relativePath}`;
-    }
-    return url;
-}
-function _strip_HTML_ExcessData(html) {
-    return (html
-        .replace(/<head>.*?<\/head>/, "")
-        .replace(/<script.*?<\/script>/g, ""));
-}
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(__webpack_require__(19));
+const path_1 = __importDefault(__webpack_require__(18));
 class S {
 }
 S.baseURL = "https://enteleform-extensions.github.io/KanbanTool";
@@ -11255,7 +11249,7 @@ exports.Settings = S;
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -11483,10 +11477,10 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(19)))
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -11676,7 +11670,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11724,7 +11718,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12163,7 +12157,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12209,13 +12203,13 @@ const emptyCallback = ((...args) => { });
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const cssVariables = __webpack_require__(8);
+const cssVariables = __webpack_require__(24);
 const Settings_1 = __webpack_require__(5);
 const Position_1 = __webpack_require__(6);
 const __Main__1 = __webpack_require__(9);
@@ -12324,6 +12318,12 @@ function _update_OriginalLayout() {
     __Main__1.set_CSS_Variable("KanbanToolOffsets_TopOffset", `${top_Offset}px`);
 }
 
+
+/***/ }),
+/* 24 */
+/***/ (function(module) {
+
+module.exports = {"container":"CustomExtension__FunctionBar","collapsed":"collapsed","empty":"empty","_":""};
 
 /***/ }),
 /* 25 */
@@ -12675,11 +12675,12 @@ exports.Module = Module;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(8).inject(__dirname, { CSS: true, HTML: false });
 const CallbackManager_1 = __webpack_require__(33);
-const get_Rows_1 = __webpack_require__(34);
-const __Main__1 = __webpack_require__(3);
+const get_Rows_1 = __webpack_require__(35);
+const __Main__1 = __webpack_require__(4);
 const Position_1 = __webpack_require__(6);
 CallbackManager_1.CallbackManager.set_Card_HoverCallback();
 function get_CardType_FunctionBar(options) {
@@ -12723,6 +12724,7 @@ function _update_MergedOptions_CellWidth(options) {
     delete options.cellWidth;
 }
 
+/* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\CardType_Manager"))
 
 /***/ }),
 /* 33 */
@@ -12731,7 +12733,7 @@ function _update_MergedOptions_CellWidth(options) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const cssVariables = __webpack_require__(8);
+const cssVariables = __webpack_require__(34);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(9);
 const __Main__3 = __webpack_require__(0);
@@ -12802,6 +12804,12 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 
 /***/ }),
 /* 34 */
+/***/ (function(module) {
+
+module.exports = {"activeFilter":"activeFilter","inactiveFilter":"inactiveFilter","filterColor":"filterColor","_":""};
+
+/***/ }),
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12847,13 +12855,13 @@ function _cardTypes_Exhausted(cardIndex) { return (cardIndex == __Main__1.cardTy
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(3);
+const __Main__1 = __webpack_require__(4);
 const { Entry, Position } = __Main__1.FunctionBar;
 const __Main__2 = __webpack_require__(0);
 exports.default = new __Main__1.FunctionBar({
@@ -12902,13 +12910,13 @@ exports.default = new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(3);
+const __Main__1 = __webpack_require__(4);
 const { Entry, Position } = __Main__1.FunctionBar;
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
@@ -12969,7 +12977,7 @@ function get_Callbacks(callback) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
