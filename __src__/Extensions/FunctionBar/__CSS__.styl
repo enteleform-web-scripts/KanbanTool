@@ -82,9 +82,9 @@ json("./CSS_Variables.json")
 		background:   #D9D9DE
 		color:        #505052
 
-//##########################//
-//###  Collapse Toggles  ###//
-//##########################//
+//################################//
+//###  Core: Collapse Toggles  ###//
+//################################//
 
 .{container}
 
@@ -112,9 +112,9 @@ json("./CSS_Variables.json")
 			color:        var(--ExpandButton_Color)
 
 
-//###############################//
-//###  DefaultBars.CardTypes  ###//
-//###############################//
+//#####################################//
+//###  Extension: CardType_Manager  ###//
+//#####################################//
 
 .{container}
 
@@ -129,6 +129,62 @@ json("./CSS_Variables.json")
 		background:  #AAA
 		color:       #777
 		box-shadow:  inset 0 10px 15px -2px #00000033, inset 0 7px 0 0 var(--filterColor), inset 0 8px 0 0 #AAA
+
+
+//######################################//
+//###  Extension: CardStyle_Manager  ###//
+//######################################//
+
+kt-board
+
+	//###  CardFace  ###//
+	kt-task
+		--title_BorderWidth:                5px
+		--title_Default_BorderAccentWidth:  5px
+		--title_BorderAccentWidth:          var(--title_Default_BorderAccentWidth)
+		--title_BorderAccentColor:          #00000000
+		--title_BorderColor:                #00000000
+		--title_BackgroundColor:            #00000000
+		--title_ForegroundColor:            #444
+
+		background:     #DDD  !important
+		color:          #333  !important
+		border-radius:  4px   !important
+		box-shadow:
+			inset 0 0 0 1px #AAA,
+			1px 1px 3px 0 #00000022 !important
+
+		//###  Title  ###//
+		.kt-task-body
+			margin:            5px                                                     !important
+			padding:           7px 7px 4px calc(7px + var(--title_BorderAccentWidth))  !important
+			border-radius:     3px                                                     !important
+			background-color:  var(--title_BackgroundColor)                            !important
+			color:             var(--title_ForegroundColor)                            !important
+			box-shadow:
+				calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor),
+				inset var(--title_BorderAccentWidth) 0 0 0 var(--title_BorderAccentColor),
+				0 0 0 var(--title_BorderWidth) var(--title_BorderColor)                     !important
+
+		//###  Header  ###//
+		.kt-task-header
+			display:  none  !important
+
+
+//############################//
+//###  CardFace.CheckList  ###//
+//############################//
+
+kt-board
+
+	//###  Item  ###//
+	.kt-interactive_checklists-checklist li label
+		margin-right:  13px  !important
+
+	//###  Item.URL  ###//
+	kt-task > .kt-task-footer > ul > li > label > a
+		color:        #444  !important
+		font-weight:  bold  !important
 
 
 //#############################//
