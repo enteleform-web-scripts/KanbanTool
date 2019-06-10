@@ -10,7 +10,7 @@ import "~/Extensions/TODO_CheckList/TEMP"
 //######################################//
 
 const priorityColors = {
-	low:    "hsl(0,   0%,   50%)",
+	low:    "hsl(210, 80%,  65%)",
 	medium: "hsl(50,  100%, 70%)",
 	high:   "hsl(25,  100%, 65%)",
 	urgent: "hsl(350, 75%,  65%)",
