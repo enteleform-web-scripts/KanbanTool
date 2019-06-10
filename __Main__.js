@@ -92,7 +92,7 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(10);
-const _CardType_1 = __webpack_require__(26);
+const _CardType_1 = __webpack_require__(25);
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
@@ -119,11 +119,11 @@ exports.cardTypes = exports.activeBoard.cardTypes().active().map(({ attributes }
         ? "#FFF"
         : "#000"),
 }));
-var __Main__1 = __webpack_require__(27);
+var __Main__1 = __webpack_require__(26);
 exports.CardType_Filter = __Main__1.CardType_Filter;
 var __Main__2 = __webpack_require__(11);
 exports.Show = __Main__2.Show;
-var __Main__3 = __webpack_require__(29);
+var __Main__3 = __webpack_require__(28);
 exports.Hide = __Main__3.Hide;
 exports.KanbanTool.activeBoard = exports.activeBoard;
 setTimeout(() => {
@@ -141,8 +141,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(20);
-const hotkeys_js_1 = __importDefault(__webpack_require__(21));
+const KeyGroups_1 = __webpack_require__(22);
+const hotkeys_js_1 = __importDefault(__webpack_require__(23));
 hotkeys_js_1.default.filter = _disable_DefaultFilters;
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
@@ -10628,10 +10628,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560192335349)
+		const elapsedTime = _get_ElapsedTime(1560196303441)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:45:35 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:51:43 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10650,11 +10650,11 @@ return jQuery;
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(8).inject(__dirname, { CSS: true, HTML: true });
-const Settings_1 = __webpack_require__(5);
-const Entry_1 = __webpack_require__(22);
-const Layout_1 = __webpack_require__(23);
-const Module_BaseClasses_1 = __webpack_require__(31);
-const Position_1 = __webpack_require__(6);
+const Settings_1 = __webpack_require__(6);
+const Entry_1 = __webpack_require__(30);
+const Layout_1 = __webpack_require__(31);
+const Module_BaseClasses_1 = __webpack_require__(33);
+const Position_1 = __webpack_require__(7);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
         super();
@@ -10706,38 +10706,6 @@ exports.FunctionBar = FunctionBar;
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(1);
-exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
-exports.functionBar_ToggleModifiers = ["shift", "alt"];
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var Position;
-(function (Position) {
-    Position[Position["Left"] = 0] = "Left";
-    Position[Position["Right"] = 1] = "Right";
-    Position[Position["Top"] = 2] = "Top";
-    Position[Position["Bottom"] = 3] = "Bottom";
-})(Position = exports.Position || (exports.Position = {}));
-function is_HorizontalPosition(position) { return ((position == Position.Left) || (position == Position.Right)); }
-exports.is_HorizontalPosition = is_HorizontalPosition;
-function is_VerticalPosition(position) { return ((position == Position.Top) || (position == Position.Bottom)); }
-exports.is_VerticalPosition = is_VerticalPosition;
-
-
-/***/ }),
-/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10823,6 +10791,38 @@ exports.TaskContainer = TaskContainer;
         Type[Type["Column"] = 1] = "Column";
     })(Type = TaskContainer.Type || (TaskContainer.Type = {}));
 })(TaskContainer = exports.TaskContainer || (exports.TaskContainer = {}));
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(1);
+exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
+exports.functionBar_ToggleModifiers = ["shift", "alt"];
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var Position;
+(function (Position) {
+    Position[Position["Left"] = 0] = "Left";
+    Position[Position["Right"] = 1] = "Right";
+    Position[Position["Top"] = 2] = "Top";
+    Position[Position["Bottom"] = 3] = "Bottom";
+})(Position = exports.Position || (exports.Position = {}));
+function is_HorizontalPosition(position) { return ((position == Position.Left) || (position == Position.Right)); }
+exports.is_HorizontalPosition = is_HorizontalPosition;
+function is_VerticalPosition(position) { return ((position == Position.Top) || (position == Position.Bottom)); }
+exports.is_VerticalPosition = is_VerticalPosition;
 
 
 /***/ }),
@@ -10917,7 +10917,7 @@ function _strip_HTML_ExcessData(html) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const is_JQuery_1 = __webpack_require__(25);
+const is_JQuery_1 = __webpack_require__(24);
 function set_CSS_Variable(arg_1, arg_2, arg_3) {
     const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
     if (element) {
@@ -10985,10 +10985,10 @@ exports.onPageLoad_Timeout_MS = 500;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(7);
+const TaskContainer_1 = __webpack_require__(5);
 const get_Rows_1 = __webpack_require__(12);
 const get_Columns_1 = __webpack_require__(13);
-const Glob_1 = __webpack_require__(28);
+const Glob_1 = __webpack_require__(27);
 const $ = __webpack_require__(2);
 class Show {
     static rows({ include, exclude }) {
@@ -11068,7 +11068,7 @@ function _match_Glob(container, target) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(7);
+const TaskContainer_1 = __webpack_require__(5);
 const __Main__1 = __webpack_require__(0);
 const $ = __webpack_require__(2);
 function get_Rows() {
@@ -11093,7 +11093,7 @@ exports.get_Rows = get_Rows;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(7);
+const TaskContainer_1 = __webpack_require__(5);
 const __Main__1 = __webpack_require__(0);
 function get_Columns() {
     const models = __Main__1.activeBoard.workflowStages()
@@ -11156,10 +11156,32 @@ module.exports = __webpack_require__(15);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(16);
-const __Main__1 = __webpack_require__(4);
-const __Main__2 = __webpack_require__(32);
-__Main__1.FunctionBar.load(__webpack_require__(36).default, __webpack_require__(37).default, __Main__2.get_CardType_FunctionBar({ rowCounts: [4, 4, 2], cellWidth: 125, stretchCells: false }));
+const __Main__1 = __webpack_require__(16);
+const __Main__2 = __webpack_require__(4);
+__webpack_require__(35);
+const priorityColors = {
+    low: "#7268FD",
+    medium: "#FDE568",
+    high: "#FF974B",
+    urgent: "#E65868",
+};
+const todaySettings = {
+    borderColor: "#7CCE9B",
+    backgroundColor: "#CDEAD8",
+    foregroundColor: "#636B66",
+};
+const taskSettings = {
+    borderColor: "#B1B1B1",
+    backgroundColor: "#CCCCCC",
+    foregroundColor: "#505050",
+};
+__Main__1.CardType_Manager.initialize_Auto({
+    cellWidth: 125,
+    functionBar_Options: {
+        stretchCells: false,
+    },
+});
+__Main__2.FunctionBar.load(__webpack_require__(36).default, __webpack_require__(37).default);
 __webpack_require__(38);
 
 
@@ -11168,47 +11190,80 @@ __webpack_require__(38);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
-const $ = __webpack_require__(2);
-exports.lol = "wut";
-const DELETE_KEYCODE = 46;
-const selector__CheckList_Item = "kt-taskview > form > div.kt-taskview-content > kt-checklist > li > .kt-checklist_item_content";
-const selector__CheckList_Item_SiblingsPrefix = "#show > kt-cover > kt-taskview > form > div.kt-taskview-content > kt-checklist";
-let checkList_Item = null;
-$(document).on("mouseover", selector__CheckList_Item, (event) => {
-    checkList_Item = event.currentTarget;
-});
-$(document).on("mouseout", selector__CheckList_Item, (event) => {
-    checkList_Item = null;
-});
-$(document).on("keydown", (event) => {
-    if (checkList_Item && (event.keyCode == DELETE_KEYCODE)) {
-        const divIndex = get_DivIndex(checkList_Item);
-        const button__Delete = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > a.kt-remove > i.kt-icon-trash`);
-        button__Delete.click();
+__webpack_require__(8).inject(__dirname, { CSS: true, HTML: false });
+const CallbackManager_1 = __webpack_require__(20);
+const __Main__1 = __webpack_require__(4);
+const Position_1 = __webpack_require__(7);
+const get_Rows_1 = __webpack_require__(34);
+CallbackManager_1.CallbackManager.set_Card_HoverCallback();
+class CardType_Manager {
+    static initialize_Manual(options) {
+        const functionBar = _get_CardType_FunctionBar(options.mode, options.cardTypes, options.functionBar_Options);
+        __Main__1.FunctionBar.load(functionBar);
     }
-});
-$(document).on("click", selector__CheckList_Item, (event) => {
-    if (event.ctrlKey) {
-        return;
+    static initialize_Auto(options) {
+        const functionBar = _get_CardType_FunctionBar(CardType_Manager.Mode._AutoRows, [], options.functionBar_Options);
+        __Main__1.FunctionBar.load(functionBar);
     }
-    event.preventDefault();
-    const div__CheckList_Item = event.currentTarget;
-    const divIndex = get_DivIndex(div__CheckList_Item);
-    setTimeout(() => {
-        const checkBox = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > input[type='checkbox']`);
-        checkBox.click();
-    }, 200);
-    setTimeout(() => {
-        const button__Edit = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > a.kt-edit > i.kt-icon-pencil-1`);
-        button__Edit.click();
-    }, 700);
-});
-function get_DivIndex(checkList_Item) {
-    return ($(checkList_Item).parent().index() + 1);
+}
+exports.CardType_Manager = CardType_Manager;
+(function (CardType_Manager) {
+    let Mode;
+    (function (Mode) {
+        Mode[Mode["_AutoRows"] = 0] = "_AutoRows";
+        Mode[Mode["SingleRow"] = 1] = "SingleRow";
+        Mode[Mode["MultipleRows"] = 2] = "MultipleRows";
+    })(Mode = CardType_Manager.Mode || (CardType_Manager.Mode = {}));
+})(CardType_Manager = exports.CardType_Manager || (exports.CardType_Manager = {}));
+const _Default_FunctionBar_Options = {
+    position: Position_1.Position.Bottom,
+    autoMap_KeyBindings: true,
+    keyBinding_Modifiers: [],
+    stretchCells: true,
+    cellProperties: [],
+};
+function _get_CardType_FunctionBar(mode, cardOptions, options) {
+    let cardType_Rows;
+    if (mode == CardType_Manager.Mode._AutoRows) {
+        cardType_Rows = get_Rows_1.get_Auto_CardTypes_Rows();
+    }
+    else if (mode == CardType_Manager.Mode.SingleRow) {
+        cardType_Rows = get_Rows_1.get_Manual_CardTypes_SingleRow(cardOptions);
+    }
+    else if (mode == CardType_Manager.Mode.MultipleRows) {
+        cardType_Rows = get_Rows_1.get_Manual_CardTypes_MultipleRows(cardOptions);
+    }
+    const functionBar_Options = { ..._Default_FunctionBar_Options, ...options };
+    _update_FunctionBar_Options_CellWidth(functionBar_Options);
+    return _build_FunctionBar(functionBar_Options, cardType_Rows);
+}
+function _build_FunctionBar(options, cardType_Rows) {
+    const entryGroups = cardType_Rows.map(row => row.map(cardType => new __Main__1.FunctionBar.Entry({
+        name: cardType.name,
+        ...CallbackManager_1.CallbackManager.get_Callbacks(),
+    })));
+    return new __Main__1.FunctionBar({
+        ...options,
+        entryGroups,
+    });
+}
+function _update_FunctionBar_Options_CellWidth(options) {
+    if (options.cellWidth) {
+        options.cellProperties.push({
+            functionName: "css",
+            args: [{
+                    "width": options.cellWidth,
+                    "min-width": options.cellWidth,
+                    "max-width": options.cellWidth,
+                }]
+        });
+    }
+    delete options.cellWidth;
 }
 
+/* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\CardType_Manager"))
 
 /***/ }),
 /* 17 */
@@ -11676,6 +11731,88 @@ process.umask = function() { return 0; };
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const cssVariables = __webpack_require__(21);
+const __Main__1 = __webpack_require__(1);
+const __Main__2 = __webpack_require__(9);
+const __Main__3 = __webpack_require__(0);
+var CallbackManager;
+(function (CallbackManager) {
+    let _entryIndex = -1;
+    let _card = undefined;
+    function set_Card_HoverCallback() {
+        const $element = $("kt-board");
+        $element.on("mouseover", "kt-task", (event) => {
+            _card = event.currentTarget;
+        });
+        $element.on("mouseout", "kt-task", (event) => {
+            _card = null;
+        });
+    }
+    CallbackManager.set_Card_HoverCallback = set_Card_HoverCallback;
+    function get_Callbacks() {
+        _entryIndex += 1;
+        const cardType = __Main__3.cardTypes[_entryIndex];
+        return _get_Callbacks(cardType);
+    }
+    CallbackManager.get_Callbacks = get_Callbacks;
+    function _get_Callbacks(cardType) {
+        return {
+            on_Layout: function (cell) {
+                const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
+                __Main__3.CardType_Filter.on_Update(update_CSS);
+                update_CSS();
+            },
+            on_KeyBinding: function (event, cell) {
+                _update_CardType(cardType);
+            },
+            on_Click: function (event, cell) {
+                if (__Main__1.KeyBinding.is_Pressed("ctrl")) {
+                    __Main__3.CardType_Filter.disable_CardTypes();
+                    __Main__3.CardType_Filter.enable_CardTypes(cardType.index);
+                }
+                else {
+                    __Main__3.CardType_Filter.toggle_CardTypes(cardType.index);
+                }
+            },
+        };
+    }
+    function _update_CardType(cardType) {
+        if (_card) {
+            _card.props.task.save("card_type_id", cardType.id);
+        }
+    }
+})(CallbackManager = exports.CallbackManager || (exports.CallbackManager = {}));
+function _get_UpdateCSS_Callback(cell, cardType) {
+    return () => {
+        let alpha;
+        if (__Main__3.CardType_Filter.cardType_IsEnabled(cardType)) {
+            cell.addClass(cssVariables.activeFilter);
+            cell.removeClass(cssVariables.inactiveFilter);
+            alpha = "FF";
+        }
+        else {
+            cell.removeClass(cssVariables.activeFilter);
+            cell.addClass(cssVariables.inactiveFilter);
+            alpha = "AA";
+        }
+        __Main__2.set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + alpha));
+    };
+}
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module) {
+
+module.exports = {"activeFilter":"activeFilter","inactiveFilter":"inactiveFilter","filterColor":"filterColor","_":""};
+
+/***/ }),
+/* 22 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.ModifierKeys = [
     "ctrl", "shift", "alt"
 ];
@@ -11718,7 +11855,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12157,176 +12294,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(5);
-const __Main__1 = __webpack_require__(1);
-class Entry {
-    constructor({ name, callback, on_Click, on_DoubleClick, on_KeyBinding, on_Layout, keyBinding, color, }) {
-        callback = (callback || emptyCallback);
-        this.name = name;
-        this.callback = callback.bind(this);
-        this.on_Layout = (on_Layout || emptyCallback).bind(this);
-        this.on_KeyBinding = (on_KeyBinding || callback).bind(this);
-        this.on_Click = (event, cell) => { event.stopPropagation(); (on_Click || callback)(event, cell); };
-        this.on_DoubleClick = (event, cell) => { event.stopPropagation(); (on_DoubleClick || callback)(event, cell); };
-        this.keyBinding = keyBinding;
-        this.color = color;
-    }
-    initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex) {
-        const keyBinding = this._get_Entry_KeyBinding(autoMap_KeyBindings, groupIndex, entryIndex);
-        if (keyBinding) {
-            this._add_KeyBinding(keyBinding, keyBinding_Modifiers);
-        }
-        return keyBinding;
-    }
-    _get_Entry_KeyBinding(autoMap_KeyBindings, groupIndex, entryIndex) {
-        let keyBinding = null;
-        if (autoMap_KeyBindings) {
-            keyBinding = Settings_1.autoMapped_Key_Rows[groupIndex][entryIndex];
-        }
-        else if (this.keyBinding) {
-            keyBinding = this.keyBinding;
-        }
-        return keyBinding;
-    }
-    _add_KeyBinding(keyBinding, keyBinding_Modifiers) {
-        __Main__1.KeyBinding.add([...keyBinding_Modifiers, keyBinding], (event) => this.on_KeyBinding(event, this.cell), { preventDefault: true });
-    }
-}
-exports.Entry = Entry;
-const emptyCallback = ((...args) => { });
-
-
-/***/ }),
-/* 23 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const cssVariables = __webpack_require__(24);
-const Settings_1 = __webpack_require__(5);
-const Position_1 = __webpack_require__(6);
-const __Main__1 = __webpack_require__(9);
-const __Main__2 = __webpack_require__(1);
-const __Main__3 = __webpack_require__(0);
-const $ = __webpack_require__(2);
-class Layout {
-    constructor(functionBar) {
-        this._functionBar = functionBar;
-        __Main__3.on_PageLoad(() => {
-            this._build();
-            _update_OriginalLayout();
-        });
-    }
-    static initialize_ToggleBindings() {
-        __Main__3.on_PageLoad(() => {
-            const toggleMap = [
-                { position: Position_1.Position.Left, key: "left" },
-                { position: Position_1.Position.Right, key: "right" },
-                { position: Position_1.Position.Top, key: "up" },
-                { position: Position_1.Position.Bottom, key: "down" },
-            ];
-            toggleMap.forEach((entry) => {
-                const callback = _get_ContainerToggle_Callback(entry.position);
-                const { containerSelector, toggleButton_Selector } = _BarComponent_Map[entry.position];
-                const toggleButton = $(toggleButton_Selector);
-                toggleButton.on("click", callback);
-                const container = $(`${containerSelector}:not(.${cssVariables.collapsed})`);
-                container.on("dblclick", callback);
-                __Main__2.KeyBinding.add([entry.key, ...Settings_1.functionBar_ToggleModifiers], callback, { preventDefault: true });
-            });
-        });
-    }
-    add_Cell(entry, groupIndex, keyBinding) {
-        const cell = $("<div>", { class: "cell" });
-        entry.cell = cell;
-        let text = entry.name;
-        if (keyBinding) {
-            text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`;
-        }
-        this._initialize_Cell(entry, cell, text);
-        this.subContainers[groupIndex].append(cell);
-    }
-    _build() {
-        const { autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position, is_VerticalBar, stretchCells } = this._functionBar;
-        let { containerSelector, subContainer_Class } = _BarComponent_Map[position];
-        this.container = $(containerSelector);
-        this.container.removeClass(cssVariables.empty);
-        if (is_VerticalBar && stretchCells) {
-            subContainer_Class += " stretch";
-        }
-        this.subContainers = [];
-        entryGroups.forEach((group, groupIndex) => {
-            const subContainer = $("<div>", { class: subContainer_Class });
-            this.container.append(subContainer);
-            this.subContainers.push(subContainer);
-            group.forEach((entry, entryIndex) => {
-                const keyBinding = entry.initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex);
-                this.add_Cell(entry, groupIndex, keyBinding);
-            });
-        });
-    }
-    _initialize_Cell(entry, cell, cellText) {
-        cell.on("click", (event) => entry.on_Click(event, cell));
-        cell.on("dblclick", (event) => entry.on_DoubleClick(event, cell));
-        cell.html(cellText);
-        entry.on_Layout(cell);
-        this._apply_CellProperties(cell);
-    }
-    _apply_CellProperties(cell) {
-        for (const { functionName, args } of this._functionBar.cellProperties) {
-            cell[functionName](...args);
-        }
-    }
-}
-exports.Layout = Layout;
-const _BarComponent_Map = {
-    [Position_1.Position.Left]: { containerSelector: `.${cssVariables.container} > .center > .left`, subContainer_Class: "column", toggleButton_Selector: ".left   > .expand-button > .cell" },
-    [Position_1.Position.Right]: { containerSelector: `.${cssVariables.container} > .center > .right`, subContainer_Class: "column", toggleButton_Selector: ".right  > .expand-button > .cell" },
-    [Position_1.Position.Top]: { containerSelector: `.${cssVariables.container} > .top`, subContainer_Class: "row", toggleButton_Selector: ".top    > .expand-button > .cell" },
-    [Position_1.Position.Bottom]: { containerSelector: `.${cssVariables.container} > .bottom`, subContainer_Class: "row", toggleButton_Selector: ".bottom > .expand-button > .cell" },
-};
-function _get_ContainerToggle_Callback(position) {
-    const { containerSelector } = _BarComponent_Map[position];
-    const container = $(containerSelector);
-    return () => {
-        if (container.hasClass(cssVariables.collapsed)) {
-            container.removeClass(cssVariables.collapsed);
-        }
-        else {
-            container.addClass(cssVariables.collapsed);
-        }
-        _update_OriginalLayout();
-    };
-}
-function _update_OriginalLayout() {
-    const navbarHeight = $("nav.navbar").height();
-    __Main__1.set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`);
-    const topRow_Height = $(`.${cssVariables.container} > .top`).height();
-    __Main__1.set_CSS_Variable("KanbanToolOffsets_TopHeight", `${topRow_Height}px`);
-    const leftColumn_Width = $(`.${cssVariables.container} > .center > .left`).width();
-    __Main__1.set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${leftColumn_Width}px`);
-    const rightColumn_Width = $(`.${cssVariables.container} > .center > .right`).width();
-    __Main__1.set_CSS_Variable("KanbanToolOffsets_RightWidth", `${rightColumn_Width}px`);
-    const top_Offset = (navbarHeight + topRow_Height);
-    __Main__1.set_CSS_Variable("KanbanToolOffsets_TopOffset", `${top_Offset}px`);
-}
-
-
-/***/ }),
 /* 24 */
-/***/ (function(module) {
-
-module.exports = {"container":"CustomExtension__FunctionBar","collapsed":"collapsed","empty":"empty","_":""};
-
-/***/ }),
-/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12339,7 +12307,7 @@ exports.is_JQuery = is_JQuery;
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12358,7 +12326,7 @@ exports.CardType = CardType;
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12480,7 +12448,7 @@ function _get_CardType_FromName(name) {
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12521,13 +12489,13 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(30);
+const get_emptyContainer_Indexes_1 = __webpack_require__(29);
 const get_Rows_1 = __webpack_require__(12);
 const get_Columns_1 = __webpack_require__(13);
 const __Main__1 = __webpack_require__(11);
@@ -12569,7 +12537,7 @@ function _is_Empty(container, emptyContainer_Indexes) {
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12658,7 +12626,176 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 
 /***/ }),
+/* 30 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Settings_1 = __webpack_require__(6);
+const __Main__1 = __webpack_require__(1);
+class Entry {
+    constructor({ name, callback, on_Click, on_DoubleClick, on_KeyBinding, on_Layout, keyBinding, color, }) {
+        callback = (callback || emptyCallback);
+        this.name = name;
+        this.callback = callback.bind(this);
+        this.on_Layout = (on_Layout || emptyCallback).bind(this);
+        this.on_KeyBinding = (on_KeyBinding || callback).bind(this);
+        this.on_Click = (event, cell) => { event.stopPropagation(); (on_Click || callback)(event, cell); };
+        this.on_DoubleClick = (event, cell) => { event.stopPropagation(); (on_DoubleClick || callback)(event, cell); };
+        this.keyBinding = keyBinding;
+        this.color = color;
+    }
+    initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex) {
+        const keyBinding = this._get_Entry_KeyBinding(autoMap_KeyBindings, groupIndex, entryIndex);
+        if (keyBinding) {
+            this._add_KeyBinding(keyBinding, keyBinding_Modifiers);
+        }
+        return keyBinding;
+    }
+    _get_Entry_KeyBinding(autoMap_KeyBindings, groupIndex, entryIndex) {
+        let keyBinding = null;
+        if (autoMap_KeyBindings) {
+            keyBinding = Settings_1.autoMapped_Key_Rows[groupIndex][entryIndex];
+        }
+        else if (this.keyBinding) {
+            keyBinding = this.keyBinding;
+        }
+        return keyBinding;
+    }
+    _add_KeyBinding(keyBinding, keyBinding_Modifiers) {
+        __Main__1.KeyBinding.add([...keyBinding_Modifiers, keyBinding], (event) => this.on_KeyBinding(event, this.cell), { preventDefault: true });
+    }
+}
+exports.Entry = Entry;
+const emptyCallback = ((...args) => { });
+
+
+/***/ }),
 /* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const cssVariables = __webpack_require__(32);
+const Settings_1 = __webpack_require__(6);
+const Position_1 = __webpack_require__(7);
+const __Main__1 = __webpack_require__(9);
+const __Main__2 = __webpack_require__(1);
+const __Main__3 = __webpack_require__(0);
+const $ = __webpack_require__(2);
+class Layout {
+    constructor(functionBar) {
+        this._functionBar = functionBar;
+        __Main__3.on_PageLoad(() => {
+            this._build();
+            _update_OriginalLayout();
+        });
+    }
+    static initialize_ToggleBindings() {
+        __Main__3.on_PageLoad(() => {
+            const toggleMap = [
+                { position: Position_1.Position.Left, key: "left" },
+                { position: Position_1.Position.Right, key: "right" },
+                { position: Position_1.Position.Top, key: "up" },
+                { position: Position_1.Position.Bottom, key: "down" },
+            ];
+            toggleMap.forEach((entry) => {
+                const callback = _get_ContainerToggle_Callback(entry.position);
+                const { containerSelector, toggleButton_Selector } = _BarComponent_Map[entry.position];
+                const toggleButton = $(toggleButton_Selector);
+                toggleButton.on("click", callback);
+                const container = $(`${containerSelector}:not(.${cssVariables.collapsed})`);
+                container.on("dblclick", callback);
+                __Main__2.KeyBinding.add([entry.key, ...Settings_1.functionBar_ToggleModifiers], callback, { preventDefault: true });
+            });
+        });
+    }
+    add_Cell(entry, groupIndex, keyBinding) {
+        const cell = $("<div>", { class: "cell" });
+        entry.cell = cell;
+        let text = entry.name;
+        if (keyBinding) {
+            text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`;
+        }
+        this._initialize_Cell(entry, cell, text);
+        this.subContainers[groupIndex].append(cell);
+    }
+    _build() {
+        const { autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position, is_VerticalBar, stretchCells } = this._functionBar;
+        let { containerSelector, subContainer_Class } = _BarComponent_Map[position];
+        this.container = $(containerSelector);
+        this.container.removeClass(cssVariables.empty);
+        if (is_VerticalBar && stretchCells) {
+            subContainer_Class += " stretch";
+        }
+        this.subContainers = [];
+        entryGroups.forEach((group, groupIndex) => {
+            const subContainer = $("<div>", { class: subContainer_Class });
+            this.container.append(subContainer);
+            this.subContainers.push(subContainer);
+            group.forEach((entry, entryIndex) => {
+                const keyBinding = entry.initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex);
+                this.add_Cell(entry, groupIndex, keyBinding);
+            });
+        });
+    }
+    _initialize_Cell(entry, cell, cellText) {
+        cell.on("click", (event) => entry.on_Click(event, cell));
+        cell.on("dblclick", (event) => entry.on_DoubleClick(event, cell));
+        cell.html(cellText);
+        entry.on_Layout(cell);
+        this._apply_CellProperties(cell);
+    }
+    _apply_CellProperties(cell) {
+        for (const { functionName, args } of this._functionBar.cellProperties) {
+            cell[functionName](...args);
+        }
+    }
+}
+exports.Layout = Layout;
+const _BarComponent_Map = {
+    [Position_1.Position.Left]: { containerSelector: `.${cssVariables.container} > .center > .left`, subContainer_Class: "column", toggleButton_Selector: ".left   > .expand-button > .cell" },
+    [Position_1.Position.Right]: { containerSelector: `.${cssVariables.container} > .center > .right`, subContainer_Class: "column", toggleButton_Selector: ".right  > .expand-button > .cell" },
+    [Position_1.Position.Top]: { containerSelector: `.${cssVariables.container} > .top`, subContainer_Class: "row", toggleButton_Selector: ".top    > .expand-button > .cell" },
+    [Position_1.Position.Bottom]: { containerSelector: `.${cssVariables.container} > .bottom`, subContainer_Class: "row", toggleButton_Selector: ".bottom > .expand-button > .cell" },
+};
+function _get_ContainerToggle_Callback(position) {
+    const { containerSelector } = _BarComponent_Map[position];
+    const container = $(containerSelector);
+    return () => {
+        if (container.hasClass(cssVariables.collapsed)) {
+            container.removeClass(cssVariables.collapsed);
+        }
+        else {
+            container.addClass(cssVariables.collapsed);
+        }
+        _update_OriginalLayout();
+    };
+}
+function _update_OriginalLayout() {
+    const navbarHeight = $("nav.navbar").height();
+    __Main__1.set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`);
+    const topRow_Height = $(`.${cssVariables.container} > .top`).height();
+    __Main__1.set_CSS_Variable("KanbanToolOffsets_TopHeight", `${topRow_Height}px`);
+    const leftColumn_Width = $(`.${cssVariables.container} > .center > .left`).width();
+    __Main__1.set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${leftColumn_Width}px`);
+    const rightColumn_Width = $(`.${cssVariables.container} > .center > .right`).width();
+    __Main__1.set_CSS_Variable("KanbanToolOffsets_RightWidth", `${rightColumn_Width}px`);
+    const top_Offset = (navbarHeight + topRow_Height);
+    __Main__1.set_CSS_Variable("KanbanToolOffsets_TopOffset", `${top_Offset}px`);
+}
+
+
+/***/ }),
+/* 32 */
+/***/ (function(module) {
+
+module.exports = {"container":"CustomExtension__FunctionBar","collapsed":"collapsed","empty":"empty","_":""};
+
+/***/ }),
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12671,145 +12808,7 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(__dirname) {
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(8).inject(__dirname, { CSS: true, HTML: false });
-const CallbackManager_1 = __webpack_require__(33);
-const get_Rows_1 = __webpack_require__(35);
-const __Main__1 = __webpack_require__(4);
-const Position_1 = __webpack_require__(6);
-CallbackManager_1.CallbackManager.set_Card_HoverCallback();
-function get_CardType_FunctionBar(options) {
-    const cardType_Rows = (options.rowCounts)
-        ? get_Rows_1.get_Manual_CardType_Rows(options.rowCounts)
-        : get_Rows_1.get_Auto_CardType_Rows();
-    const mergedOptions = { ..._Default_RowBuilder_Options, ...options };
-    _update_MergedOptions_CellWidth(mergedOptions);
-    return _build_FunctionBar(mergedOptions, cardType_Rows);
-}
-exports.get_CardType_FunctionBar = get_CardType_FunctionBar;
-const _Default_RowBuilder_Options = {
-    position: Position_1.Position.Bottom,
-    autoMap_KeyBindings: true,
-    keyBinding_Modifiers: [],
-    stretchCells: true,
-    rowCounts: undefined,
-    cellProperties: [],
-};
-function _build_FunctionBar(options, cardType_Rows) {
-    const entryGroups = cardType_Rows.map(row => row.map(cardType => new __Main__1.FunctionBar.Entry({
-        name: cardType.name,
-        ...CallbackManager_1.CallbackManager.get_Callbacks(),
-    })));
-    return new __Main__1.FunctionBar({
-        ...options,
-        entryGroups,
-    });
-}
-function _update_MergedOptions_CellWidth(options) {
-    if (options.cellWidth) {
-        options.cellProperties.push({
-            functionName: "css",
-            args: [{
-                    "width": options.cellWidth,
-                    "min-width": options.cellWidth,
-                    "max-width": options.cellWidth,
-                }]
-        });
-    }
-    delete options.cellWidth;
-}
-
-/* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\CardType_Manager"))
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const cssVariables = __webpack_require__(34);
-const __Main__1 = __webpack_require__(1);
-const __Main__2 = __webpack_require__(9);
-const __Main__3 = __webpack_require__(0);
-var CallbackManager;
-(function (CallbackManager) {
-    let _entryIndex = -1;
-    let _card = undefined;
-    function set_Card_HoverCallback() {
-        const $element = $("kt-board");
-        $element.on("mouseover", "kt-task", (event) => {
-            _card = event.currentTarget;
-        });
-        $element.on("mouseout", "kt-task", (event) => {
-            _card = null;
-        });
-    }
-    CallbackManager.set_Card_HoverCallback = set_Card_HoverCallback;
-    function get_Callbacks() {
-        _entryIndex += 1;
-        const cardType = __Main__3.cardTypes[_entryIndex];
-        return _get_Callbacks(cardType);
-    }
-    CallbackManager.get_Callbacks = get_Callbacks;
-    function _get_Callbacks(cardType) {
-        return {
-            on_Layout: function (cell) {
-                const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
-                __Main__3.CardType_Filter.on_Update(update_CSS);
-                update_CSS();
-            },
-            on_KeyBinding: function (event, cell) {
-                _update_CardType(cardType);
-            },
-            on_Click: function (event, cell) {
-                if (__Main__1.KeyBinding.is_Pressed("ctrl")) {
-                    __Main__3.CardType_Filter.disable_CardTypes();
-                    __Main__3.CardType_Filter.enable_CardTypes(cardType.index);
-                }
-                else {
-                    __Main__3.CardType_Filter.toggle_CardTypes(cardType.index);
-                }
-            },
-        };
-    }
-    function _update_CardType(cardType) {
-        if (_card) {
-            _card.props.task.save("card_type_id", cardType.id);
-        }
-    }
-})(CallbackManager = exports.CallbackManager || (exports.CallbackManager = {}));
-function _get_UpdateCSS_Callback(cell, cardType) {
-    return () => {
-        let alpha;
-        if (__Main__3.CardType_Filter.cardType_IsEnabled(cardType)) {
-            cell.addClass(cssVariables.activeFilter);
-            cell.removeClass(cssVariables.inactiveFilter);
-            alpha = "FF";
-        }
-        else {
-            cell.removeClass(cssVariables.activeFilter);
-            cell.addClass(cssVariables.inactiveFilter);
-            alpha = "AA";
-        }
-        __Main__2.set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + alpha));
-    };
-}
-
-
-/***/ }),
 /* 34 */
-/***/ (function(module) {
-
-module.exports = {"activeFilter":"activeFilter","inactiveFilter":"inactiveFilter","filterColor":"filterColor","_":""};
-
-/***/ }),
-/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12817,7 +12816,7 @@ module.exports = {"activeFilter":"activeFilter","inactiveFilter":"inactiveFilter
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
 const __Main__2 = __webpack_require__(1);
-function get_Auto_CardType_Rows() {
+function get_Auto_CardTypes_Rows() {
     let cardType_Rows = [];
     let cardIndex = 0;
     for (const keyRow of __Main__2.KeyBinding.alphanumericKey_Rows) {
@@ -12837,21 +12836,81 @@ function get_Auto_CardType_Rows() {
     }
     return cardType_Rows;
 }
-exports.get_Auto_CardType_Rows = get_Auto_CardType_Rows;
-function get_Manual_CardType_Rows(rowCounts) {
-    const rows = [];
-    let startIndex = 0;
-    for (let i = 0; (i < rowCounts.length); i++) {
-        const count = rowCounts[i];
-        const endIndex = (startIndex + count);
-        const row = __Main__1.cardTypes.slice(startIndex, endIndex);
-        rows.push(row);
-        startIndex += count;
+exports.get_Auto_CardTypes_Rows = get_Auto_CardTypes_Rows;
+function get_Manual_CardTypes_MultipleRows(cardOptions) {
+    const cardType_Rows = [];
+    let index = 0;
+    for (const optionsRow of cardOptions) {
+        if (_cardTypes_Exhausted(index)) {
+            break;
+        }
+        const cardType_Row = [];
+        for (const options of optionsRow) {
+            if (_cardTypes_Exhausted(index)) {
+                break;
+            }
+            const cardType = __Main__1.cardTypes[index];
+            cardType_Row.push(cardType);
+            index += 1;
+        }
+        cardType_Rows.push(cardType_Row);
     }
-    return rows;
+    return cardType_Rows;
 }
-exports.get_Manual_CardType_Rows = get_Manual_CardType_Rows;
+exports.get_Manual_CardTypes_MultipleRows = get_Manual_CardTypes_MultipleRows;
+function get_Manual_CardTypes_SingleRow(cardOptions) {
+    const flattened = cardOptions.flatMap(options => options);
+    return get_Manual_CardTypes_MultipleRows([flattened]);
+}
+exports.get_Manual_CardTypes_SingleRow = get_Manual_CardTypes_SingleRow;
 function _cardTypes_Exhausted(cardIndex) { return (cardIndex == __Main__1.cardTypes.length); }
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const $ = __webpack_require__(2);
+exports.lol = "wut";
+const DELETE_KEYCODE = 46;
+const selector__CheckList_Item = "kt-taskview > form > div.kt-taskview-content > kt-checklist > li > .kt-checklist_item_content";
+const selector__CheckList_Item_SiblingsPrefix = "#show > kt-cover > kt-taskview > form > div.kt-taskview-content > kt-checklist";
+let checkList_Item = null;
+$(document).on("mouseover", selector__CheckList_Item, (event) => {
+    checkList_Item = event.currentTarget;
+});
+$(document).on("mouseout", selector__CheckList_Item, (event) => {
+    checkList_Item = null;
+});
+$(document).on("keydown", (event) => {
+    if (checkList_Item && (event.keyCode == DELETE_KEYCODE)) {
+        const divIndex = get_DivIndex(checkList_Item);
+        const button__Delete = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > a.kt-remove > i.kt-icon-trash`);
+        button__Delete.click();
+    }
+});
+$(document).on("click", selector__CheckList_Item, (event) => {
+    if (event.ctrlKey) {
+        return;
+    }
+    event.preventDefault();
+    const div__CheckList_Item = event.currentTarget;
+    const divIndex = get_DivIndex(div__CheckList_Item);
+    setTimeout(() => {
+        const checkBox = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > input[type='checkbox']`);
+        checkBox.click();
+    }, 200);
+    setTimeout(() => {
+        const button__Edit = document.querySelector(`${selector__CheckList_Item_SiblingsPrefix} > li:nth-child(${divIndex}) > a.kt-edit > i.kt-icon-pencil-1`);
+        button__Edit.click();
+    }, 700);
+});
+function get_DivIndex(checkList_Item) {
+    return ($(checkList_Item).parent().index() + 1);
+}
 
 
 /***/ }),
