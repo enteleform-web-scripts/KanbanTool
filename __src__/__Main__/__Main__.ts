@@ -6,7 +6,7 @@
 import "~/Extensions/TODO_CheckList/TEMP"
 
 import {FunctionBar             } from "~/Extensions/FunctionBar/__Main__"
-import {get_CardType_FunctionBar} from "~/Extensions/FunctionBar/DefaultBars/CardTypes/__Main__"
+import {get_CardType_FunctionBar} from "~/Extensions/CardType_Manager/__Main__"
 FunctionBar.load(
 	require("./FunctionBars/Left_Commands"   ).default,
 	require("./FunctionBars/Top_BoardFilters").default,

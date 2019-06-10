@@ -1,10 +1,12 @@
+//###  Module: HTML_Injector  ###//
+require("~/Utils/HTML_Injector").inject(__dirname, {CSS:true, HTML:false})
 
 //###  Module  ###//
 import {CallbackManager                                 } from "./CallbackManager"
 import {get_Manual_CardType_Rows, get_Auto_CardType_Rows} from "./get_Rows"
-import {FunctionBar                                     } from "../../__Main__"
-import {CellProperty                                    } from "../../CellProperty"
-import {Position, VerticalPosition                      } from "../../Position"
+import {FunctionBar                                     } from "~/Extensions/FunctionBar/__Main__"
+import {CellProperty                                    } from "~/Extensions/FunctionBar/CellProperty"
+import {Position, VerticalPosition                      } from "~/Extensions/FunctionBar/Position"
 import {KeyBinding                                      } from "~/Utils/KeyBinding/__Main__"
 
 

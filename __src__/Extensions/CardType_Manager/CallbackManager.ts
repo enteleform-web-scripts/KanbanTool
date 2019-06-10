@@ -1,5 +1,5 @@
 //###  Module: CSS  ###//
-const cssVariables = require("../../CSS_Variables.json")
+const cssVariables = require("./__CSS_Variables__.json")
 
 //###  Module  ###//
 import {KeyBinding      } from "~/Utils/KeyBinding/__Main__"

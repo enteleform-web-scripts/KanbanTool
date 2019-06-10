@@ -1,8 +1,5 @@
 {
 
-	"container":      "CustomExtension__FunctionBar",
-	"collapsed":      "collapsed",
-	"empty":          "empty",
 	"activeFilter":   "activeFilter",
 	"inactiveFilter": "inactiveFilter",
 	"filterColor":    "filterColor",

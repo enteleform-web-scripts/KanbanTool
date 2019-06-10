@@ -22,7 +22,7 @@ const $: webpack.Module = {
 			use: [
 				MiniCssExtractPlugin.loader,
 				"css-loader",
-				"stylus-loader",
+				{loader:"stylus-loader", options:{preferPathResolver:"webpack"}},
 			],
 		},
 
