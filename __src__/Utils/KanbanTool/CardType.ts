@@ -1,14 +1,11 @@
-//###  Module  ###//
-import {activeBoard} from "./__Main__"
-
 
 //#################//
 //###  Exports  ###//
 //#################//
 
-export const cardTypes: _CardType[] =
-	activeBoard.cardTypes().active().map(
-		({attributes}, index) => new _CardType({
+export function get_CardTypes(activeBoard): CardType[]{
+	return activeBoard.cardTypes().active().map(
+		({attributes}, index) => new CardType({
 			index:   index,
 			id:      attributes.id,
 			name:    attributes.name,
@@ -20,8 +17,9 @@ export const cardTypes: _CardType[] =
 			),
 		})
 	)
+}
 
-export class _CardType{
+export class CardType{
 	index:   number
 	id:      number
 	name:    string
@@ -40,16 +38,18 @@ export class _CardType{
 	}
 }
 
-export function _get_CardType_FromName(name:string)
+export function get_CardType_FromName(name:string)
 	{return _get_CardType_FromProperty("name", name)}
 
-export function _get_CardType_FromID(id:number)
+export function get_CardType_FromID(id:number)
 	{return _get_CardType_FromProperty("id", id)}
 
 
 //###############//
 //###  Utils  ###//
 //###############//
+
+import {cardTypes} from "./__Main__"
 
 function _get_CardType_FromProperty(key:string, value:any){
 	const matches = cardTypes.filter(cardType => (cardType[key] == value))

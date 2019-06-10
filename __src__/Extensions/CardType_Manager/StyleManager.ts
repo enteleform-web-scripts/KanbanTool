@@ -2,12 +2,9 @@
 const cssVariables = require("./__CSS_Variables__.json")
 
 //###  Module  ###//
-import {_CardOptions    } from "./__Main__"
-import {set_CSS_Variable} from "~/Utils/CSS_Variables/__Main__"
-import {
-	_CardType,
-	_get_CardType_FromID
-} from "~/Utils/KanbanTool/CardType"
+import {_CardOptions       } from "./__Main__"
+import {set_CSS_Variable   } from "~/Utils/CSS_Variables/__Main__"
+import {get_CardType_FromID} from "~/Utils/KanbanTool/CardType"
 import {
 	KanbanTool,
 	on_PageLoad,
@@ -48,8 +45,7 @@ export namespace StyleManager{
 
 function _update_CardStyle(element:HTMLElement){
 	const $element    = $(element)
-	const cardType    = _get_CardType($element)
-	const cardOptions = StyleManager._CardType_Options[cardType.index]
+	const cardOptions = _get_CardOptions($element)
 
 	set_CSS_Variable($element, "title_BorderColor",     cardOptions.borderColor    )
 	set_CSS_Variable($element, "title_BackgroundColor", cardOptions.backgroundColor)
@@ -65,8 +61,9 @@ function _update_CardStyle(element:HTMLElement){
 	}
 }
 
-function _get_CardType(element:JQuery){
-	const taskID = element.data("task-id")
-	const model  = KanbanTool.tasks.load(taskID)
-	return _get_CardType_FromID(model.cardType().id)
+function _get_CardOptions(element:JQuery){
+	const taskID   = element.data("task-id")
+	const model    = KanbanTool.tasks.load(taskID)
+	const cardType = get_CardType_FromID(model.cardType().id)
+	return StyleManager._CardType_Options[cardType.index]
 }
