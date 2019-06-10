@@ -1,11 +1,9 @@
-//###  Module: CSS  ###//
-const cssVariables = require("./__CSS_Variables__.json")
-
 //###  Module  ###//
-import {_CardOptions       } from "./__Main__"
-import {$set_CSS_Variable  } from "~/Utils/CSS_Variables/__Main__"
-import {get_CardType_FromID} from "~/Utils/KanbanTool/CardType"
+import {_CardOptions     } from "./__Main__"
+import {$set_CSS_Variable} from "~/Utils/CSS_Variables/__Main__"
+import {CardType         } from "~/Utils/KanbanTool/CardType"
 import {
+	cardTypes,
 	KanbanTool,
 	on_PageLoad,
 } from "~/Utils/KanbanTool/__Main__"
@@ -20,13 +18,16 @@ const $:any = require("jquery")
 
 export namespace StyleManager{
 
-	export let _CardType_Options:_CardOptions[] = []
+	export let _CardType_Options: _CardOptions[]
+	export let _CardType_ID_Map:  {[id:number]: CardType}
 
 	export function initialize(cardOptions:_CardOptions[][]){
 		StyleManager._CardType_Options =
 			(cardOptions === undefined)
 			? undefined
 			: cardOptions.flatMap(option => option)
+
+		StyleManager._CardType_ID_Map = _build_CardType_ID_Map()
 
 		const callback = ()=>{
 			$.find("kt-task").forEach(element=>{
@@ -45,6 +46,14 @@ export namespace StyleManager{
 //###############//
 //###  Utils  ###//
 //###############//
+
+function _build_CardType_ID_Map(){
+	const idMap: {[id:number]: CardType} = {}
+	cardTypes.forEach(cardType => {
+		idMap[cardType.id] = cardType
+	})
+	return idMap
+}
 
 function _update_CardStyle(element:HTMLElement){
 	const $element = $(element)
@@ -78,9 +87,10 @@ function _update_CardStyle_From_CardOptions(element:JQuery){
 }
 
 function _get_CardType(element:JQuery){
-	const taskID   = element.data("task-id")
-	const model    = KanbanTool.tasks.load(taskID)
-	return get_CardType_FromID(model.cardType().id)
+	const taskID      = element.data("task-id")
+	const model       = KanbanTool.tasks.stub(taskID)
+	const cardType_ID = model.cardType().id
+	return StyleManager._CardType_ID_Map[cardType_ID]
 }
 
 function _get_CardOptions(element:JQuery){
