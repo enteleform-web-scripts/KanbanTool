@@ -10,26 +10,25 @@ import "~/Extensions/TODO_CheckList/TEMP"
 //######################################//
 
 const priorityColors = {
-	low:    "#7268FD",
-	medium: "#FDE568",
-	high:   "#FF974B",
-	urgent: "#E65868",
+	low:    "hsl(0,   0%,   50%)",
+	medium: "hsl(50,  100%, 70%)",
+	high:   "hsl(25,  100%, 65%)",
+	urgent: "hsl(350, 75%,  65%)",
 }
 
 const todaySettings = {
-	borderColor:     "#7CCE9B",
-	backgroundColor: "#CDEAD8",
-	foregroundColor: "#636B66",
+	borderColor:     "hsl(143, 45%, 65%)",
+	backgroundColor: "hsl(143, 40%, 85%)",
+	foregroundColor: "hsl(143, 5%,  40%)",
 }
 
 const taskSettings = {
-	borderColor:     "#B1B1B1",
-	backgroundColor: "#CCCCCC",
-	foregroundColor: "#505050",
+	borderColor:     "hsl(0, 0%, 70%)",
+	backgroundColor: "hsl(0, 0%, 80%)",
+	foregroundColor: "hsl(0, 0%, 30%)",
 }
 
 CardType_Manager.initialize_Manual({
-	// mode:      CardType_Manager.Mode.SingleRow,
 	mode:      CardType_Manager.Mode.MultipleRows,
 	cellWidth: 125,
 
@@ -52,19 +51,18 @@ CardType_Manager.initialize_Manual({
 		],
 		[
 			{ //###  Daily_Task  ###//
-				borderColor:     "#B1B1B1",
-				backgroundColor: "#CCCCCC",
-				foregroundColor: "#505050",
+				borderColor:     "hsl(215, 40%, 65%)",
+				backgroundColor: "hsl(215, 80%, 85%)",
+				foregroundColor: "hsl(215, 20%, 45%)",
 			},
 			{ //###  Book  ###//
-				borderColor:     "#B1B1B1",
-				backgroundColor: "#CCCCCC",
-				foregroundColor: "#505050",
+				borderColor:     "hsl(255, 40%, 65%)",
+				backgroundColor: "hsl(255, 70%, 85%)",
+				foregroundColor: "hsl(255, 20%, 45%)",
 			},
 		],
 	],
 })
-
 
 //#################################//
 //###  Extension - FunctionBar  ###//
