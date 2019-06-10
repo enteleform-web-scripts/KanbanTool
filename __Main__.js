@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560208157344)
+		const elapsedTime = _get_ElapsedTime(1560208311996)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     7:09:17 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:11:51 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11199,7 +11199,7 @@ const __Main__1 = __webpack_require__(17);
 const __Main__2 = __webpack_require__(4);
 __webpack_require__(36);
 const priorityColors = {
-    low: "hsl(0,   0%,   50%)",
+    low: "hsl(210, 80%,  65%)",
     medium: "hsl(50,  100%, 70%)",
     high: "hsl(25,  100%, 65%)",
     urgent: "hsl(350, 75%,  65%)",
