@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560204963315)
+		const elapsedTime = _get_ElapsedTime(1560208157344)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:16:03 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:09:17 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11199,20 +11199,20 @@ const __Main__1 = __webpack_require__(17);
 const __Main__2 = __webpack_require__(4);
 __webpack_require__(36);
 const priorityColors = {
-    low: "#7268FD",
-    medium: "#FDE568",
-    high: "#FF974B",
-    urgent: "#E65868",
+    low: "hsl(0,   0%,   50%)",
+    medium: "hsl(50,  100%, 70%)",
+    high: "hsl(25,  100%, 65%)",
+    urgent: "hsl(350, 75%,  65%)",
 };
 const todaySettings = {
-    borderColor: "#7CCE9B",
-    backgroundColor: "#CDEAD8",
-    foregroundColor: "#636B66",
+    borderColor: "hsl(143, 45%, 65%)",
+    backgroundColor: "hsl(143, 40%, 85%)",
+    foregroundColor: "hsl(143, 5%,  40%)",
 };
 const taskSettings = {
-    borderColor: "#B1B1B1",
-    backgroundColor: "#CCCCCC",
-    foregroundColor: "#505050",
+    borderColor: "hsl(0, 0%, 70%)",
+    backgroundColor: "hsl(0, 0%, 80%)",
+    foregroundColor: "hsl(0, 0%, 30%)",
 };
 __Main__1.CardType_Manager.initialize_Manual({
     mode: __Main__1.CardType_Manager.Mode.MultipleRows,
@@ -11235,14 +11235,14 @@ __Main__1.CardType_Manager.initialize_Manual({
         ],
         [
             {
-                borderColor: "#B1B1B1",
-                backgroundColor: "#CCCCCC",
-                foregroundColor: "#505050",
+                borderColor: "hsl(215, 40%, 65%)",
+                backgroundColor: "hsl(215, 80%, 85%)",
+                foregroundColor: "hsl(215, 20%, 45%)",
             },
             {
-                borderColor: "#B1B1B1",
-                backgroundColor: "#CCCCCC",
-                foregroundColor: "#505050",
+                borderColor: "hsl(255, 40%, 65%)",
+                backgroundColor: "hsl(255, 70%, 85%)",
+                foregroundColor: "hsl(255, 20%, 45%)",
             },
         ],
     ],
