@@ -1,14 +1,15 @@
 
 //###  Module  ###//
-import {cardTypes } from "~/Utils/KanbanTool/__Main__"
-import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
+import {_CardOptions} from "./__Main__"
+import {cardTypes   } from "~/Utils/KanbanTool/__Main__"
+import {KeyBinding  } from "~/Utils/KeyBinding/__Main__"
 
 
 //#################//
 //###  Exports  ###//
 //#################//
 
-export function get_Auto_CardType_Rows(){
+export function get_Auto_CardTypes_Rows(){
 	let cardType_Rows = []
 	let cardIndex     = 0
 
@@ -32,19 +33,34 @@ export function get_Auto_CardType_Rows(){
 	return cardType_Rows
 }
 
-export function get_Manual_CardType_Rows(rowCounts:number[]){
-	const rows = []
-	let   startIndex = 0
+export function get_Manual_CardTypes_MultipleRows(cardOptions:_CardOptions[][]){
+	const cardType_Rows = []
+	let   index         = 0
 
-	for(let i = 0; (i < rowCounts.length); i++){
-		const count    = rowCounts[i]
-		const endIndex = (startIndex + count)
-		const row      = cardTypes.slice(startIndex, endIndex)
-		rows.push(row)
-		startIndex += count
+	for(const optionsRow of cardOptions){
+		if(_cardTypes_Exhausted(index))
+			{break}
+
+		const cardType_Row = []
+
+		for(const options of optionsRow){
+			if(_cardTypes_Exhausted(index))
+				{break}
+
+			const cardType = cardTypes[index]
+			cardType_Row.push(cardType)
+			index += 1
+		}
+
+		cardType_Rows.push(cardType_Row)
 	}
 
-	return rows
+	return cardType_Rows
+}
+
+export function get_Manual_CardTypes_SingleRow(cardOptions:_CardOptions[][]){
+	const flattened = cardOptions.flatMap(options => options)
+	return get_Manual_CardTypes_MultipleRows([flattened])
 }
 
 
