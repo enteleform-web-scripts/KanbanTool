@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 15);
+/******/ 	return __webpack_require__(__webpack_require__.s = 16);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -91,8 +91,8 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(10);
-const CardType_1 = __webpack_require__(11);
+const Settings_1 = __webpack_require__(11);
+const CardType_1 = __webpack_require__(12);
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
@@ -111,11 +111,11 @@ function remove_PageLoad_Callback(id) {
     }
 }
 exports.remove_PageLoad_Callback = remove_PageLoad_Callback;
-var __Main__1 = __webpack_require__(26);
+var __Main__1 = __webpack_require__(25);
 exports.CardType_Filter = __Main__1.CardType_Filter;
-var __Main__2 = __webpack_require__(12);
+var __Main__2 = __webpack_require__(13);
 exports.Show = __Main__2.Show;
-var __Main__3 = __webpack_require__(28);
+var __Main__3 = __webpack_require__(29);
 exports.Hide = __Main__3.Hide;
 exports.KanbanTool.activeBoard = exports.activeBoard;
 setTimeout(() => {
@@ -133,8 +133,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(23);
-const hotkeys_js_1 = __importDefault(__webpack_require__(24));
+const KeyGroups_1 = __webpack_require__(26);
+const hotkeys_js_1 = __importDefault(__webpack_require__(27));
 hotkeys_js_1.default.filter = _disable_DefaultFilters;
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560267257658)
+		const elapsedTime = _get_ElapsedTime(1560292802732)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:34:17 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:40:02 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10703,7 +10703,7 @@ exports.FunctionBar = FunctionBar;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const is_JQuery_1 = __webpack_require__(25);
+const is_JQuery_1 = __webpack_require__(24);
 function set_CSS_Variable(arg_1, arg_2, arg_3) {
     const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
     if (element) {
@@ -10883,7 +10883,7 @@ exports.is_VerticalPosition = is_VerticalPosition;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(18);
+const Settings_1 = __webpack_require__(19);
 function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
     if (CSS) {
         _inject_CSS(modulePath);
@@ -10968,12 +10968,89 @@ function _strip_HTML_ExcessData(html) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(5);
+const __Main__2 = __webpack_require__(0);
+const $ = __webpack_require__(2);
+var StyleManager;
+(function (StyleManager) {
+    function initialize(cardOptions) {
+        StyleManager._CardType_Options =
+            (cardOptions === undefined)
+                ? undefined
+                : cardOptions.flatMap(option => option);
+        StyleManager._CardType_ID_Map = _build_CardType_ID_Map();
+        const callback = () => {
+            $.find("kt-task").forEach(element => {
+                update_CardStyle(element);
+            });
+        };
+        __Main__2.on_PageLoad(() => {
+            callback();
+            __Main__2.KanbanTool.tasks.on("change", callback);
+        });
+    }
+    StyleManager.initialize = initialize;
+    function update_CardStyle(element) {
+        const $element = $(element);
+        if (StyleManager._CardType_Options === undefined) {
+            _update_CardStyle_From_CardTypes($element);
+        }
+        else {
+            _update_CardStyle_From_CardOptions($element);
+        }
+    }
+    StyleManager.update_CardStyle = update_CardStyle;
+})(StyleManager = exports.StyleManager || (exports.StyleManager = {}));
+function _build_CardType_ID_Map() {
+    const idMap = {};
+    __Main__2.cardTypes.forEach(cardType => {
+        idMap[cardType.id] = cardType;
+    });
+    return idMap;
+}
+function _update_CardStyle_From_CardTypes(element) {
+    const cardType = _get_CardType(element);
+    __Main__1.$set_CSS_Variable(element, "title_BorderColor", cardType.bgColor);
+}
+function _update_CardStyle_From_CardOptions(element) {
+    const cardOptions = _get_CardOptions(element);
+    __Main__1.$set_CSS_Variable(element, "title_BorderColor", cardOptions.borderColor);
+    __Main__1.$set_CSS_Variable(element, "title_BackgroundColor", cardOptions.backgroundColor);
+    __Main__1.$set_CSS_Variable(element, "title_ForegroundColor", cardOptions.foregroundColor);
+    if (cardOptions.borderAccentColor) {
+        __Main__1.$set_CSS_Variable(element, "title_BorderAccentColor", cardOptions.borderAccentColor);
+        element.addClass("borderAccent_Enabled");
+    }
+    else {
+        __Main__1.$set_CSS_Variable(element, "title_BorderAccentColor", "#0000");
+        element.removeClass("borderAccent_Enabled");
+    }
+}
+function _get_CardType(element) {
+    const taskID = element.data("task-id");
+    const model = __Main__2.KanbanTool.tasks.stub(taskID);
+    const cardType_ID = model.cardType().id;
+    return StyleManager._CardType_ID_Map[cardType_ID];
+}
+function _get_CardOptions(element) {
+    const cardType = _get_CardType(element);
+    return StyleManager._CardType_Options[cardType.index];
+}
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.cardType_Filter_Index = 5;
 exports.onPageLoad_Timeout_MS = 500;
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11018,16 +11095,16 @@ function _get_CardType_FromProperty(key, value) {
 
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(6);
-const get_Rows_1 = __webpack_require__(13);
-const get_Columns_1 = __webpack_require__(14);
-const Glob_1 = __webpack_require__(27);
+const get_Rows_1 = __webpack_require__(14);
+const get_Columns_1 = __webpack_require__(15);
+const Glob_1 = __webpack_require__(28);
 const $ = __webpack_require__(2);
 class Show {
     static rows({ include, exclude }) {
@@ -11101,7 +11178,7 @@ function _match_Glob(container, target) {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11126,7 +11203,7 @@ exports.get_Rows = get_Rows;
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11181,21 +11258,21 @@ function _update_ColumnRelationships(columns) {
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(3);
-module.exports = __webpack_require__(16);
+module.exports = __webpack_require__(17);
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(17);
+const __Main__1 = __webpack_require__(18);
 const __Main__2 = __webpack_require__(4);
 __webpack_require__(36);
 const priorityColors = {
@@ -11252,15 +11329,15 @@ __webpack_require__(39);
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(9).inject(__dirname, { CSS: true, HTML: false });
-const CallbackManager_1 = __webpack_require__(21);
-const StyleManager_1 = __webpack_require__(30);
+const CallbackManager_1 = __webpack_require__(22);
+const StyleManager_1 = __webpack_require__(10);
 const __Main__1 = __webpack_require__(4);
 const Position_1 = __webpack_require__(8);
 const get_Rows_1 = __webpack_require__(35);
@@ -11340,7 +11417,7 @@ function _update_FunctionBar_Options_CellWidth(options, cellWidth) {
 /* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\CardType_Manager"))
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11349,7 +11426,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(__webpack_require__(19));
+const path_1 = __importDefault(__webpack_require__(20));
 class S {
 }
 S.baseURL = "https://enteleform-extensions.github.io/KanbanTool";
@@ -11378,7 +11455,7 @@ exports.Settings = S;
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -11606,10 +11683,10 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(20)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(21)))
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -11799,13 +11876,14 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(22).CardType_Manager;
+const CSS = __webpack_require__(23).CardType_Manager;
+const StyleManager_1 = __webpack_require__(10);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(5);
 const __Main__3 = __webpack_require__(0);
@@ -11833,6 +11911,7 @@ var CallbackManager;
         return {
             on_Layout: function (cell) {
                 cell.addClass(CSS.filter);
+                StyleManager_1.StyleManager.update_CardStyle(cell.get(0));
                 const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
                 __Main__3.CardType_Filter.on_Update(update_CSS);
                 update_CSS();
@@ -11876,13 +11955,140 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module) {
 
 module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterColor","activeFilter":"active","inactiveFilter":"inactive","_":""}};
 
 /***/ }),
-/* 23 */
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function is_JQuery(obj) {
+    return (obj && (obj instanceof jQuery || obj.constructor.prototype.jquery));
+}
+exports.is_JQuery = is_JQuery;
+
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Settings_1 = __webpack_require__(11);
+const __Main__1 = __webpack_require__(1);
+const CardType_1 = __webpack_require__(12);
+const __Main__2 = __webpack_require__(0);
+const $ = __webpack_require__(2);
+class CardType_Filter {
+    static get enabled() { return CardType_Filter._filterButton.hasClass("kt-board_search-filter--active"); }
+    static get disabled() { return !(this.enabled); }
+    static get _filterButton() { return $(`.kt-board_search-filter:nth-child(${Settings_1.cardType_Filter_Index})`); }
+    static get _cardType_Buttons() { return Array.from($(".kt-board_search-processors-card_types").children()); }
+    static get _enabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > .kt-board_search-processors-card_types--active")); }
+    static get _disabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)")); }
+    static cardType_IsEnabled(cardType) {
+        const cardType_Buttons = CardType_Filter._cardType_Buttons;
+        const enabled_CardType_Buttons = CardType_Filter._enabled_CardType_Buttons;
+        const enabledIndexes = cardType_Buttons
+            .map((button, index) => ({ button, index }))
+            .filter(({ button }) => enabled_CardType_Buttons.includes(button))
+            .map(({ index }) => index);
+        return enabledIndexes.includes(cardType.index);
+    }
+    static cardType_IsDisabled(cardType) { return !(CardType_Filter.cardType_IsEnabled(cardType)); }
+    static enable() {
+        if (CardType_Filter.disabled) {
+            CardType_Filter._filterButton.click();
+        }
+        CardType_Filter._on_Update();
+    }
+    static disable() {
+        if (CardType_Filter.enabled) {
+            CardType_Filter._filterButton.click();
+        }
+        CardType_Filter._on_Update();
+    }
+    static enable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._disabled_CardType_Buttons); }
+    static disable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._enabled_CardType_Buttons); }
+    static toggle_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._cardType_Buttons); }
+    static on_Update(callback) { CardType_Filter._onUpdate_Callbacks.push(callback); }
+    static _on_Update() {
+        CardType_Filter._onUpdate_Callbacks.forEach(callback => callback());
+    }
+}
+CardType_Filter.show_AllCards_ID = Symbol();
+CardType_Filter._onUpdate_Callbacks = [];
+exports.CardType_Filter = CardType_Filter;
+__Main__2.on_PageLoad(() => {
+    CardType_Filter.enable();
+});
+__Main__2.on_PageLoad(CardType_Filter.show_AllCards_ID, () => {
+    CardType_Filter.enable();
+    CardType_Filter.enable_CardTypes();
+});
+__Main__1.KeyBinding.add(["ctrl", "`"], () => {
+    __Main__2.Hide.emptyColumns();
+    __Main__2.Hide.emptyRows();
+});
+__Main__1.KeyBinding.add(["ctrl", "shift", "`"], () => {
+    __Main__2.Show.allColumns();
+    __Main__2.Show.allRows();
+    CardType_Filter.enable_CardTypes();
+});
+function _set_CardType_States(ids, targetButtons) {
+    const allButtons = CardType_Filter._cardType_Buttons;
+    const apply_State_To_AllCardTypes = (ids.length == 0);
+    if (apply_State_To_AllCardTypes) {
+        ids = allButtons.map((value, index) => index);
+    }
+    ids = _process_RegExp_IDs(allButtons, targetButtons, ids);
+    for (const id of ids) {
+        const index = _get_CardType_Index(id);
+        if (index == undefined) {
+            return;
+        }
+        const button = allButtons[index];
+        if (targetButtons.includes(button)) {
+            button.click();
+        }
+    }
+    CardType_Filter._on_Update();
+}
+function _process_RegExp_IDs(allButtons, targetButtons, ids) {
+    const patterns = ids.filter(id => (id instanceof RegExp));
+    ids = ids.filter(id => !(id instanceof RegExp));
+    const matchingButton_Indexes = __Main__2.cardTypes
+        .filter(cardType => patterns.some(pattern => pattern.exec(cardType.name) ? true : false))
+        .map(cardType => ({ button: allButtons[cardType.index], index: cardType.index }))
+        .filter(({ button }) => targetButtons.includes(button))
+        .map(({ index }) => index);
+    ids.push(...matchingButton_Indexes);
+    ids = [...new Set(ids)];
+    return ids;
+}
+function _get_CardType_Index(id) {
+    let index;
+    if (typeof id == "string") {
+        const cardType = CardType_1.get_CardType_FromName(id);
+        index = (cardType)
+            ? cardType.index
+            : undefined;
+    }
+    else {
+        index = id;
+    }
+    return index;
+}
+
+
+/***/ }),
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11930,7 +12136,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 24 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12369,134 +12575,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-function is_JQuery(obj) {
-    return (obj && (obj instanceof jQuery || obj.constructor.prototype.jquery));
-}
-exports.is_JQuery = is_JQuery;
-
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(10);
-const __Main__1 = __webpack_require__(1);
-const CardType_1 = __webpack_require__(11);
-const __Main__2 = __webpack_require__(0);
-const $ = __webpack_require__(2);
-class CardType_Filter {
-    static get enabled() { return CardType_Filter._filterButton.hasClass("kt-board_search-filter--active"); }
-    static get disabled() { return !(this.enabled); }
-    static get _filterButton() { return $(`.kt-board_search-filter:nth-child(${Settings_1.cardType_Filter_Index})`); }
-    static get _cardType_Buttons() { return Array.from($(".kt-board_search-processors-card_types").children()); }
-    static get _enabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > .kt-board_search-processors-card_types--active")); }
-    static get _disabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)")); }
-    static cardType_IsEnabled(cardType) {
-        const cardType_Buttons = CardType_Filter._cardType_Buttons;
-        const enabled_CardType_Buttons = CardType_Filter._enabled_CardType_Buttons;
-        const enabledIndexes = cardType_Buttons
-            .map((button, index) => ({ button, index }))
-            .filter(({ button }) => enabled_CardType_Buttons.includes(button))
-            .map(({ index }) => index);
-        return enabledIndexes.includes(cardType.index);
-    }
-    static cardType_IsDisabled(cardType) { return !(CardType_Filter.cardType_IsEnabled(cardType)); }
-    static enable() {
-        if (CardType_Filter.disabled) {
-            CardType_Filter._filterButton.click();
-        }
-        CardType_Filter._on_Update();
-    }
-    static disable() {
-        if (CardType_Filter.enabled) {
-            CardType_Filter._filterButton.click();
-        }
-        CardType_Filter._on_Update();
-    }
-    static enable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._disabled_CardType_Buttons); }
-    static disable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._enabled_CardType_Buttons); }
-    static toggle_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._cardType_Buttons); }
-    static on_Update(callback) { CardType_Filter._onUpdate_Callbacks.push(callback); }
-    static _on_Update() {
-        CardType_Filter._onUpdate_Callbacks.forEach(callback => callback());
-    }
-}
-CardType_Filter.show_AllCards_ID = Symbol();
-CardType_Filter._onUpdate_Callbacks = [];
-exports.CardType_Filter = CardType_Filter;
-__Main__2.on_PageLoad(() => {
-    CardType_Filter.enable();
-});
-__Main__2.on_PageLoad(CardType_Filter.show_AllCards_ID, () => {
-    CardType_Filter.enable();
-    CardType_Filter.enable_CardTypes();
-});
-__Main__1.KeyBinding.add(["ctrl", "`"], () => {
-    __Main__2.Hide.emptyColumns();
-    __Main__2.Hide.emptyRows();
-});
-__Main__1.KeyBinding.add(["ctrl", "shift", "`"], () => {
-    __Main__2.Show.allColumns();
-    __Main__2.Show.allRows();
-    CardType_Filter.enable_CardTypes();
-});
-function _set_CardType_States(ids, targetButtons) {
-    const allButtons = CardType_Filter._cardType_Buttons;
-    const apply_State_To_AllCardTypes = (ids.length == 0);
-    if (apply_State_To_AllCardTypes) {
-        ids = allButtons.map((value, index) => index);
-    }
-    ids = _process_RegExp_IDs(allButtons, targetButtons, ids);
-    for (const id of ids) {
-        const index = _get_CardType_Index(id);
-        if (index == undefined) {
-            return;
-        }
-        const button = allButtons[index];
-        if (targetButtons.includes(button)) {
-            button.click();
-        }
-    }
-    CardType_Filter._on_Update();
-}
-function _process_RegExp_IDs(allButtons, targetButtons, ids) {
-    const patterns = ids.filter(id => (id instanceof RegExp));
-    ids = ids.filter(id => !(id instanceof RegExp));
-    const matchingButton_Indexes = __Main__2.cardTypes
-        .filter(cardType => patterns.some(pattern => pattern.exec(cardType.name) ? true : false))
-        .map(cardType => ({ button: allButtons[cardType.index], index: cardType.index }))
-        .filter(({ button }) => targetButtons.includes(button))
-        .map(({ index }) => index);
-    ids.push(...matchingButton_Indexes);
-    ids = [...new Set(ids)];
-    return ids;
-}
-function _get_CardType_Index(id) {
-    let index;
-    if (typeof id == "string") {
-        const cardType = CardType_1.get_CardType_FromName(id);
-        index = (cardType)
-            ? cardType.index
-            : undefined;
-    }
-    else {
-        index = id;
-    }
-    return index;
-}
-
-
-/***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12537,16 +12616,16 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(29);
-const get_Rows_1 = __webpack_require__(13);
-const get_Columns_1 = __webpack_require__(14);
-const __Main__1 = __webpack_require__(12);
+const get_emptyContainer_Indexes_1 = __webpack_require__(30);
+const get_Rows_1 = __webpack_require__(14);
+const get_Columns_1 = __webpack_require__(15);
+const __Main__1 = __webpack_require__(13);
 class Hide {
     static allRows() { __Main__1.Show.rows({ exclude: ["**\\*"] }); }
     static allColumns() { __Main__1.Show.columns({ exclude: ["**\\*"] }); }
@@ -12585,7 +12664,7 @@ function _is_Empty(container, emptyContainer_Indexes) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12670,82 +12749,6 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
         }
     }
     return emptyColumns;
-}
-
-
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(5);
-const __Main__2 = __webpack_require__(0);
-const $ = __webpack_require__(2);
-var StyleManager;
-(function (StyleManager) {
-    function initialize(cardOptions) {
-        StyleManager._CardType_Options =
-            (cardOptions === undefined)
-                ? undefined
-                : cardOptions.flatMap(option => option);
-        StyleManager._CardType_ID_Map = _build_CardType_ID_Map();
-        const callback = () => {
-            $.find("kt-task").forEach(element => {
-                _update_CardStyle(element);
-            });
-        };
-        __Main__2.on_PageLoad(() => {
-            callback();
-            __Main__2.KanbanTool.tasks.on("change", callback);
-        });
-    }
-    StyleManager.initialize = initialize;
-})(StyleManager = exports.StyleManager || (exports.StyleManager = {}));
-function _build_CardType_ID_Map() {
-    const idMap = {};
-    __Main__2.cardTypes.forEach(cardType => {
-        idMap[cardType.id] = cardType;
-    });
-    return idMap;
-}
-function _update_CardStyle(element) {
-    const $element = $(element);
-    if (StyleManager._CardType_Options === undefined) {
-        _update_CardStyle_From_CardTypes($element);
-    }
-    else {
-        _update_CardStyle_From_CardOptions($element);
-    }
-}
-function _update_CardStyle_From_CardTypes(element) {
-    const cardType = _get_CardType(element);
-    __Main__1.$set_CSS_Variable(element, "title_BorderColor", cardType.bgColor);
-}
-function _update_CardStyle_From_CardOptions(element) {
-    const cardOptions = _get_CardOptions(element);
-    __Main__1.$set_CSS_Variable(element, "title_BorderColor", cardOptions.borderColor);
-    __Main__1.$set_CSS_Variable(element, "title_BackgroundColor", cardOptions.backgroundColor);
-    __Main__1.$set_CSS_Variable(element, "title_ForegroundColor", cardOptions.foregroundColor);
-    if (cardOptions.borderAccentColor) {
-        __Main__1.$set_CSS_Variable(element, "title_BorderAccentColor", cardOptions.borderAccentColor);
-        element.addClass("borderAccent_Enabled");
-    }
-    else {
-        __Main__1.$set_CSS_Variable(element, "title_BorderAccentColor", "#0000");
-        element.removeClass("borderAccent_Enabled");
-    }
-}
-function _get_CardType(element) {
-    const taskID = element.data("task-id");
-    const model = __Main__2.KanbanTool.tasks.stub(taskID);
-    const cardType_ID = model.cardType().id;
-    return StyleManager._CardType_ID_Map[cardType_ID];
-}
-function _get_CardOptions(element) {
-    const cardType = _get_CardType(element);
-    return StyleManager._CardType_Options[cardType.index];
 }
 
 
