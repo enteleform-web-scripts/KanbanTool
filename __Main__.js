@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560293411299)
+		const elapsedTime = _get_ElapsedTime(1560294010132)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:50:11 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:00:10 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10990,13 +10990,14 @@ var StyleManager;
         });
     }
     StyleManager.initialize = initialize;
-    function update_CardStyle(element) {
-        const $element = $(element);
+    function update_CardStyle(element, cardType) {
+        element = $(element);
+        cardType = (cardType || _get_CardType(element));
         if (StyleManager._CardType_Options === undefined) {
-            _update_CardStyle_From_CardTypes($element);
+            _update_CardStyle_From_CardTypes(element, cardType);
         }
         else {
-            _update_CardStyle_From_CardOptions($element);
+            _update_CardStyle_From_CardOptions(element, cardType);
         }
     }
     StyleManager.update_CardStyle = update_CardStyle;
@@ -11008,12 +11009,11 @@ function _build_CardType_ID_Map() {
     });
     return idMap;
 }
-function _update_CardStyle_From_CardTypes(element) {
-    const cardType = _get_CardType(element);
+function _update_CardStyle_From_CardTypes(element, cardType) {
     __Main__1.$set_CSS_Variable(element, "title_BorderColor", cardType.bgColor);
 }
-function _update_CardStyle_From_CardOptions(element) {
-    const cardOptions = _get_CardOptions(element);
+function _update_CardStyle_From_CardOptions(element, cardType) {
+    const cardOptions = _get_CardOptions(element, cardType);
     __Main__1.$set_CSS_Variable(element, "title_BorderColor", cardOptions.borderColor);
     __Main__1.$set_CSS_Variable(element, "title_BackgroundColor", cardOptions.backgroundColor);
     __Main__1.$set_CSS_Variable(element, "title_ForegroundColor", cardOptions.foregroundColor);
@@ -11032,10 +11032,7 @@ function _get_CardType(element) {
     const cardType_ID = model.cardType().id;
     return StyleManager._CardType_ID_Map[cardType_ID];
 }
-function _get_CardOptions(element) {
-    const cardType = _get_CardType(element);
-    return StyleManager._CardType_Options[cardType.index];
-}
+function _get_CardOptions(element, cardType) { return StyleManager._CardType_Options[cardType.index]; }
 
 
 /***/ }),
@@ -11911,7 +11908,7 @@ var CallbackManager;
         return {
             on_Layout: function (cell) {
                 cell.addClass(CSS.filter);
-                StyleManager_1.StyleManager.update_CardStyle(cell.get(0));
+                StyleManager_1.StyleManager.update_CardStyle(cell);
                 const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
                 __Main__3.CardType_Filter.on_Update(update_CSS);
                 update_CSS();
