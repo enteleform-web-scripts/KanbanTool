@@ -98,9 +98,9 @@ const _Default_FunctionBar_Options = {
 }
 
 function _initialize(functionBar:FunctionBar, cardOptions:_CardOptions[][]){
-	CallbackManager.set_Card_HoverCallback()
-	FunctionBar.load(functionBar)
-	StyleManager.initialize(cardOptions)
+	StyleManager.initialize(cardOptions)     // 1
+	CallbackManager.set_Card_HoverCallback() // 2
+	FunctionBar.load(functionBar)            // 3
 }
 
 function _get_CardType_FunctionBar(
