@@ -1,5 +1,5 @@
 kt-board kt-task,
-FunctionBars .cell.filter {
+.FunctionBars .cell.filter {
   --title_BorderWidth: 5px;
   --title_Default_BorderAccentWidth: 5px;
   --title_BorderAccentWidth: 0px;
@@ -9,11 +9,11 @@ FunctionBars .cell.filter {
   --title_ForegroundColor: #444;
 }
 kt-board kt-task.borderAccent_Enabled,
-FunctionBars .cell.filter.borderAccent_Enabled {
+.FunctionBars .cell.filter.borderAccent_Enabled {
   --title_BorderAccentWidth: var(--title_Default_BorderAccentWidth);
 }
 kt-board kt-task .kt-task-body,
-FunctionBars .cell.filter {
+.FunctionBars .cell.filter {
   margin: 5px !important;
   padding: 7px 7px 4px calc(7px + var(--title_BorderAccentWidth)) !important;
   border-radius: 3px !important;
