@@ -1,5 +1,5 @@
 //###  Module: CSS  ###//
-const cssVariables = require("./__CSS_Variables__.json")
+const CSS = require("./__CSS_Variables__.json").FunctionBar
 
 //###  Module  ###//
 import {functionBar_ToggleModifiers} from "./Settings"
@@ -47,7 +47,7 @@ export class Layout{
 				const toggleButton = $(toggleButton_Selector)
 				toggleButton.on("click", callback)
 
-				const container = $(`${containerSelector}:not(.${cssVariables.collapsed})`)
+				const container = $(`${containerSelector}:not(.${CSS.collapsed})`)
 				container.on("dblclick", callback)
 
 				KeyBinding.add(
@@ -75,7 +75,7 @@ export class Layout{
 		const {autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position, is_VerticalBar, stretchCells} = this._functionBar
 		let {containerSelector, subContainer_Class} = _BarComponent_Map[position]
 		this.container = $(containerSelector)
-		this.container.removeClass(cssVariables.empty)
+		this.container.removeClass(CSS.empty)
 
 		if(is_VerticalBar && stretchCells)
 			{subContainer_Class += " stretch"}
@@ -115,10 +115,10 @@ export class Layout{
 //###############//
 
 const _BarComponent_Map = {
-	[Position.Left  ]: {containerSelector:`.${cssVariables.container} > .center > .left`,  subContainer_Class:"column", toggleButton_Selector:".left   > .expand-button > .cell"},
-	[Position.Right ]: {containerSelector:`.${cssVariables.container} > .center > .right`, subContainer_Class:"column", toggleButton_Selector:".right  > .expand-button > .cell"},
-	[Position.Top   ]: {containerSelector:`.${cssVariables.container} > .top`,             subContainer_Class:"row",    toggleButton_Selector:".top    > .expand-button > .cell"},
-	[Position.Bottom]: {containerSelector:`.${cssVariables.container} > .bottom`,          subContainer_Class:"row",    toggleButton_Selector:".bottom > .expand-button > .cell"},
+	[Position.Left  ]: {containerSelector:`.${CSS.container} > .center > .left`,  subContainer_Class:"column", toggleButton_Selector:".left   > .expand-button > .cell"},
+	[Position.Right ]: {containerSelector:`.${CSS.container} > .center > .right`, subContainer_Class:"column", toggleButton_Selector:".right  > .expand-button > .cell"},
+	[Position.Top   ]: {containerSelector:`.${CSS.container} > .top`,             subContainer_Class:"row",    toggleButton_Selector:".top    > .expand-button > .cell"},
+	[Position.Bottom]: {containerSelector:`.${CSS.container} > .bottom`,          subContainer_Class:"row",    toggleButton_Selector:".bottom > .expand-button > .cell"},
 }
 
 function _get_ContainerToggle_Callback(position:Position){
@@ -126,10 +126,10 @@ function _get_ContainerToggle_Callback(position:Position){
 	const container = $(containerSelector)
 
 	return () => {
-		if(container.hasClass(cssVariables.collapsed))
-			{container.removeClass(cssVariables.collapsed)}
+		if(container.hasClass(CSS.collapsed))
+			{container.removeClass(CSS.collapsed)}
 		else
-			{container.addClass(cssVariables.collapsed)}
+			{container.addClass(CSS.collapsed)}
 
 		_update_OriginalLayout()
 	}
@@ -139,13 +139,13 @@ function _update_OriginalLayout(){
 	const navbarHeight = $("nav.navbar").height()
 	set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`)
 
-	const topRow_Height = $(`.${cssVariables.container} > .top`).height()
+	const topRow_Height = $(`.${CSS.container} > .top`).height()
 	set_CSS_Variable("KanbanToolOffsets_TopHeight", `${topRow_Height}px`)
 
-	const leftColumn_Width = $(`.${cssVariables.container} > .center > .left`).width()
+	const leftColumn_Width = $(`.${CSS.container} > .center > .left`).width()
 	set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${leftColumn_Width}px`)
 
-	const rightColumn_Width = $(`.${cssVariables.container} > .center > .right`).width()
+	const rightColumn_Width = $(`.${CSS.container} > .center > .right`).width()
 	set_CSS_Variable("KanbanToolOffsets_RightWidth", `${rightColumn_Width}px`)
 
 	const top_Offset = (navbarHeight + topRow_Height)

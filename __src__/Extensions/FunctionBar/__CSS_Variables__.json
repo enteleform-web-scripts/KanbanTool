@@ -1,7 +1,8 @@
-{
+{"FunctionBar":{
 
-	"container": "CustomExtension__FunctionBar",
+	"container": "FunctionBar",
+
 	"collapsed": "collapsed",
 	"empty":     "empty",
 
-"_":""}
+"_":""}}

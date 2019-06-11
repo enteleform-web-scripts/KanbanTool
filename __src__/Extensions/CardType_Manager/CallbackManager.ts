@@ -1,5 +1,5 @@
 //###  Module: CSS  ###//
-const cssVariables = require("./__CSS_Variables__.json")
+const CSS = require("./__CSS_Variables__.json").CardType_Manager
 
 //###  Module  ###//
 import {KeyBinding      } from "~/Utils/KeyBinding/__Main__"
@@ -41,6 +41,7 @@ export namespace CallbackManager{
 	function _get_Callbacks(cardType:CardType){
 		return {
 			on_Layout: function(cell:JQuery){
+				cell.addClass(CSS.filter)
 				const update_CSS = _get_UpdateCSS_Callback(cell, cardType)
 				CardType_Filter.on_Update(update_CSS)
 				update_CSS()
@@ -78,16 +79,16 @@ function _get_UpdateCSS_Callback(cell:JQuery, cardType:CardType){
 		let alpha
 
 		if(CardType_Filter.cardType_IsEnabled(cardType)){
-			cell.addClass   (cssVariables.activeFilter  )
-			cell.removeClass(cssVariables.inactiveFilter)
+			cell.addClass   (CSS.activeFilter  )
+			cell.removeClass(CSS.inactiveFilter)
 			alpha = "FF"
 		}
 		else{
-			cell.removeClass(cssVariables.activeFilter  )
-			cell.addClass   (cssVariables.inactiveFilter)
+			cell.removeClass(CSS.activeFilter  )
+			cell.addClass   (CSS.inactiveFilter)
 			alpha = "AA"
 		}
 
-		set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + alpha))
+		set_CSS_Variable(cell, CSS.filterColor, (cardType.bgColor + alpha))
 	}
 }

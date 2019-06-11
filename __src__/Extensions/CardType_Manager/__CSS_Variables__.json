@@ -1,7 +1,9 @@
-{
+{"CardType_Manager":{
 
-	"activeFilter":   "activeFilter",
-	"inactiveFilter": "inactiveFilter",
-	"filterColor":    "filterColor",
+	"filter":      "filter",
+	"filterColor": "filterColor",
 
-"_":""}
+	"activeFilter":   "active",
+	"inactiveFilter": "inactive",
+
+"_":""}}
