@@ -6,14 +6,14 @@ json("../FunctionBar/__CSS_Variables__.json") // FunctionBar
 ///###  Utils  ###//
 ///###############//
 
-get_CardTitle_BoxShadow()
-	return _get_CardType_BoxShadow(0px, #0009, #0007)
+CardTitle_BoxShadow()
+	_CardType_BoxShadow(0px, #0009, #0007)
 
-get_FilterButton_BoxShadow()
-	return _get_CardType_BoxShadow(5px, #0000, #0000)
+FilterButton_BoxShadow()
+	_CardType_BoxShadow(5px, #0000, #0000)
 
-_get_CardType_BoxShadow(borderAccent_Offset=0px, shadowColor_1=#0009, shadowColor_2=#0007)
-	values = \
+_CardType_BoxShadow(borderAccent_Offset=0px, shadowColor_1=#0009, shadowColor_2=#0007)
+	box-shadow:
 		/* BorderAccent.Outside */  calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor),
 		/* BorderAccent.Inside  */  inset calc(var(--title_BorderAccentWidth) + borderAccent_Offset) 0 0 0 var(--title_BorderAccentColor),
 		/* Border               */  0 0 0 var(--title_BorderWidth) var(--title_BorderColor),
@@ -22,9 +22,8 @@ _get_CardType_BoxShadow(borderAccent_Offset=0px, shadowColor_1=#0009, shadowColo
 		/* Border.OutsideBorder */  0 0 0 calc(var(--title_BorderWidth) + 1px) #888,
 		/* Border.InsideBorder  */  inset 0 0 0 1px #0004,
 		/* Shadow               */  5px 5px  8px 0px  shadowColor_1,
-		/* Shadow               */  5px 11px 8px -7px shadowColor_2
-
-	return values
+		/* Shadow               */  5px 11px 8px -7px shadowColor_2 \
+		!important
 
 
 //###################################//
@@ -59,27 +58,27 @@ kt-board kt-task .kt-task-body, // CardFace.Title
 .{FunctionBar-container}
 
 	.cell.filter
-		margin:      12px 20px 12px 15px  !important
-		box-shadow:  get_FilterButton_BoxShadow(5px, #0000, #0000)
+		FilterButton_BoxShadow(5px, #0000, #0000)
+		margin:  12px 20px 12px 15px  !important
 
-	// .cell.filter.active,
-	// .cell.filter.inactive
-	// 	--filterColor:  #000
-	// 	padding-top:    14px
-	// 	color:          #666
-	// 	box-shadow:
-	// 		inset 0 7px 0 0 var(--filterColor),
-	// 		inset 0 8px 0 0 #AAA \
-	// 		!important
+	.cell.filter.active,
+	.cell.filter.inactive
+		--filterColor:  #000
+		padding-top:    14px
+		color:          #666
+		box-shadow:
+			inset 0 7px 0 0 var(--filterColor),
+			inset 0 8px 0 0 #AAA \
+			!important
 
-	// .cell.filter.inactive
-	// 	background:  #AAA
-	// 	color:       #777
-	// 	box-shadow:
-	// 		inset 0 10px 15px -2px #0003,
-	// 		inset 0 7px 0 0 var(--filterColor),
-	// 		inset 0 8px 0 0 #AAA \
-	// 		!important
+	.cell.filter.inactive
+		background:  #AAA
+		color:       #777
+		box-shadow:
+			inset 0 10px 15px -2px #0003,
+			inset 0 7px 0 0 var(--filterColor),
+			inset 0 8px 0 0 #AAA \
+			!important
 
 
 //#####################//
@@ -104,8 +103,8 @@ kt-board
 
 		//###  Title  ###//
 		.kt-task-body
-			margin:      5px  !important
-			box-shadow:  get_CardTitle_BoxShadow()
+			CardTitle_BoxShadow()
+			margin:  5px  !important
 
 
 //############################//
