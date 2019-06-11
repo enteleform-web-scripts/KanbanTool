@@ -14,13 +14,15 @@ kt-board kt-task.borderAccent_Enabled,
 }
 kt-board kt-task .kt-task-body,
 .FunctionBars .cell.filter {
-  margin: 5px !important;
   padding: 7px 7px 4px calc(7px + var(--title_BorderAccentWidth)) !important;
   border-radius: 3px !important;
   background-color: var(--title_BackgroundColor) !important;
   color: var(--title_ForegroundColor) !important;
   border: none !important;
-  box-shadow: /* BorderAccent.Outside */ calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor), /* BorderAccent.Inside  */ inset var(--title_BorderAccentWidth) 0 0 0 var(--title_BorderAccentColor), /* Border               */ 0 0 0 var(--title_BorderWidth) var(--title_BorderColor), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 rgba(0,0,0,0.267), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 rgba(0,0,0,0.133), /* Border.OutsideBorder */ 0 0 0 calc(var(--title_BorderWidth) + 1px) #888, /* Border.InsideBoder   */ inset 0 0 0 1px rgba(0,0,0,0.267), /* Shadow               */ 5px 5px 8px 0 rgba(0,0,0,0.6), /* Shadow               */ 5px 11px 8px -7px rgba(0,0,0,0.467) !important;
+}
+.FunctionBars .cell.filter {
+  margin: 12px 20px 12px 15px !important;
+  _box-shadow: get_FilterButton_BoxShadow(5px, rgba(0,0,0,0), rgba(0,0,0,0));
 }
 .FunctionBars .cell.filter.active,
 .FunctionBars .cell.filter.inactive {
@@ -42,6 +44,10 @@ kt-board kt-task {
 }
 kt-board kt-task .kt-task-header {
   display: none !important;
+}
+kt-board kt-task .kt-task-body {
+  margin: 5px !important;
+  _box-shadow: get_CardTitle_BoxShadow();
 }
 kt-board .kt-interactive_checklists-checklist li label {
   margin-right: 13px !important;
