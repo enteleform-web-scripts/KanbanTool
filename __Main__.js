@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560294010132)
+		const elapsedTime = _get_ElapsedTime(1560294305614)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     7:00:10 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:05:05 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11908,7 +11908,7 @@ var CallbackManager;
         return {
             on_Layout: function (cell) {
                 cell.addClass(CSS.filter);
-                StyleManager_1.StyleManager.update_CardStyle(cell);
+                StyleManager_1.StyleManager.update_CardStyle(cell, cardType);
                 const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
                 __Main__3.CardType_Filter.on_Update(update_CSS);
                 update_CSS();
