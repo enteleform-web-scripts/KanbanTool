@@ -1,4 +1,4 @@
-.FunctionBar {
+.FunctionBars {
   --BorderColor: #ababb1;
   --ExpandButton_Color: #6a6a6a;
   display: flex;
@@ -11,72 +11,72 @@
   z-index: 1000;
   pointer-events: none;
 }
-.FunctionBar .left,
-.FunctionBar .right,
-.FunctionBar .top,
-.FunctionBar .bottom {
+.FunctionBars .left,
+.FunctionBars .right,
+.FunctionBars .top,
+.FunctionBars .bottom {
   display: flex;
   pointer-events: auto;
   background: #c6c6cc;
 }
-.FunctionBar .left {
+.FunctionBars .left {
   border-right: 1px solid var(--BorderColor);
 }
-.FunctionBar .right {
+.FunctionBars .right {
   border-left: 1px solid var(--BorderColor);
 }
-.FunctionBar .top {
+.FunctionBars .top {
   border-bottom: 1px solid var(--BorderColor);
 }
-.FunctionBar .bottom {
+.FunctionBars .bottom {
   border-top: 1px solid var(--BorderColor);
 }
-.FunctionBar .center {
+.FunctionBars .center {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   flex-grow: 1;
 }
-.FunctionBar .center .left,
-.FunctionBar .center .right {
+.FunctionBars .center .left,
+.FunctionBars .center .right {
   display: flex;
   flex-direction: row;
 }
-.FunctionBar .center .left .column,
-.FunctionBar .center .right .column {
+.FunctionBars .center .left .column,
+.FunctionBars .center .right .column {
   display: flex;
   flex-direction: column;
 }
-.FunctionBar .center .left .column .cell,
-.FunctionBar .center .right .column .cell {
+.FunctionBars .center .left .column .cell,
+.FunctionBars .center .right .column .cell {
   text-align: left;
 }
-.FunctionBar .top,
-.FunctionBar .bottom {
+.FunctionBars .top,
+.FunctionBars .bottom {
   display: flex;
   flex-direction: column;
 }
-.FunctionBar .top .row,
-.FunctionBar .bottom .row {
+.FunctionBars .top .row,
+.FunctionBars .bottom .row {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: auto;
 }
-.FunctionBar .top .row .cell,
-.FunctionBar .bottom .row .cell {
+.FunctionBars .top .row .cell,
+.FunctionBars .bottom .row .cell {
   text-align: center;
   white-space: nowrap;
 }
-.FunctionBar .top .row.stretch,
-.FunctionBar .bottom .row.stretch {
+.FunctionBars .top .row.stretch,
+.FunctionBars .bottom .row.stretch {
   margin: 0;
 }
-.FunctionBar .top .row.stretch .cell,
-.FunctionBar .bottom .row.stretch .cell {
+.FunctionBars .top .row.stretch .cell,
+.FunctionBars .bottom .row.stretch .cell {
   flex: 1;
 }
-.FunctionBar .cell {
+.FunctionBars .cell {
   flex: 0;
   min-width: fit-content;
   min-height: fit-content;
@@ -88,22 +88,22 @@
   background: #d9d9de;
   color: #505052;
 }
-.FunctionBar .left.empty,
-.FunctionBar .right.empty,
-.FunctionBar .top.empty,
-.FunctionBar .bottom.empty,
-.FunctionBar .left.collapsed > :not(.expand-button),
-.FunctionBar .right.collapsed > :not(.expand-button),
-.FunctionBar .top.collapsed > :not(.expand-button),
-.FunctionBar .bottom.collapsed > :not(.expand-button),
-.FunctionBar .left:not(.collapsed) > .expand-button,
-.FunctionBar .right:not(.collapsed) > .expand-button,
-.FunctionBar .top:not(.collapsed) > .expand-button,
-.FunctionBar .bottom:not(.collapsed) > .expand-button {
+.FunctionBars .left.empty,
+.FunctionBars .right.empty,
+.FunctionBars .top.empty,
+.FunctionBars .bottom.empty,
+.FunctionBars .left.collapsed > :not(.expand-button),
+.FunctionBars .right.collapsed > :not(.expand-button),
+.FunctionBars .top.collapsed > :not(.expand-button),
+.FunctionBars .bottom.collapsed > :not(.expand-button),
+.FunctionBars .left:not(.collapsed) > .expand-button,
+.FunctionBars .right:not(.collapsed) > .expand-button,
+.FunctionBars .top:not(.collapsed) > .expand-button,
+.FunctionBars .bottom:not(.collapsed) > .expand-button {
   display: none;
 }
-.FunctionBar .left .column.expand-button > .cell,
-.FunctionBar .right .column.expand-button > .cell {
+.FunctionBars .left .column.expand-button > .cell,
+.FunctionBars .right .column.expand-button > .cell {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -112,8 +112,8 @@
   font-size: 15pt;
   color: var(--ExpandButton_Color);
 }
-.FunctionBar .top .row.expand-button > .cell,
-.FunctionBar .bottom .row.expand-button > .cell {
+.FunctionBars .top .row.expand-button > .cell,
+.FunctionBars .bottom .row.expand-button > .cell {
   padding: 0 0 2px 0;
   line-height: 18px;
   font-size: 14pt;
