@@ -43,7 +43,7 @@ export namespace CallbackManager{
 		return {
 			on_Layout: function(cell:JQuery){
 				cell.addClass(CSS.filter)
-				StyleManager.update_CardStyle(cell.get(0))
+				StyleManager.update_CardStyle(cell)
 				const update_CSS = _get_UpdateCSS_Callback(cell, cardType)
 				CardType_Filter.on_Update(update_CSS)
 				update_CSS()

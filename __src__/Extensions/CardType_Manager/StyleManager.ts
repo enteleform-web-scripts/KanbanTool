@@ -41,13 +41,14 @@ export namespace StyleManager{
 		})
 	}
 
-	export function update_CardStyle(element:HTMLElement){
-		const $element = $(element)
+	export function update_CardStyle(element:(HTMLElement|JQuery), cardType?:CardType){
+		element  = $(element) as JQuery
+		cardType = (cardType || _get_CardType(element))
 
 		if(StyleManager._CardType_Options === undefined)
-			{_update_CardStyle_From_CardTypes($element)}
+			{_update_CardStyle_From_CardTypes(element, cardType)}
 		else
-			{_update_CardStyle_From_CardOptions($element)}
+			{_update_CardStyle_From_CardOptions(element, cardType)}
 	}
 
 }
@@ -64,13 +65,12 @@ function _build_CardType_ID_Map(){
 	return idMap
 }
 
-function _update_CardStyle_From_CardTypes(element:JQuery){
-	const cardType = _get_CardType(element)
+function _update_CardStyle_From_CardTypes(element:JQuery, cardType:CardType){
 	$set_CSS_Variable(element, "title_BorderColor", cardType.bgColor)
 }
 
-function _update_CardStyle_From_CardOptions(element:JQuery){
-	const cardOptions = _get_CardOptions(element)
+function _update_CardStyle_From_CardOptions(element:JQuery, cardType:CardType){
+	const cardOptions = _get_CardOptions(element, cardType)
 
 	$set_CSS_Variable(element, "title_BorderColor",     cardOptions.borderColor    )
 	$set_CSS_Variable(element, "title_BackgroundColor", cardOptions.backgroundColor)
@@ -93,7 +93,5 @@ function _get_CardType(element:JQuery){
 	return StyleManager._CardType_ID_Map[cardType_ID]
 }
 
-function _get_CardOptions(element:JQuery){
-	const cardType = _get_CardType(element)
-	return StyleManager._CardType_Options[cardType.index]
-}
+function _get_CardOptions(element:JQuery, cardType:CardType)
+	{return StyleManager._CardType_Options[cardType.index]}

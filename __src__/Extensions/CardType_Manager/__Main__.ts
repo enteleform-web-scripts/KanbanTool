@@ -98,6 +98,7 @@ const _Default_FunctionBar_Options = {
 }
 
 function _initialize(functionBar:FunctionBar, cardOptions:_CardOptions[][]){
+	// keep order to ensure on_Layout callbacks are prepared
 	StyleManager.initialize(cardOptions)     // 1
 	CallbackManager.set_Card_HoverCallback() // 2
 	FunctionBar.load(functionBar)            // 3
