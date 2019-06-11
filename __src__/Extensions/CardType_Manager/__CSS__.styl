@@ -2,6 +2,31 @@ json("./__CSS_Variables__.json"             ) // CardType_Manager
 json("../FunctionBar/__CSS_Variables__.json") // FunctionBar
 
 
+///###############//
+///###  Utils  ###//
+///###############//
+
+get_CardTitle_BoxShadow()
+	return _get_CardType_BoxShadow(0px, #0009, #0007)
+
+get_FilterButton_BoxShadow()
+	return _get_CardType_BoxShadow(5px, #0000, #0000)
+
+_get_CardType_BoxShadow(borderAccent_Offset=0px, shadowColor_1=#0009, shadowColor_2=#0007)
+	values = \
+		/* BorderAccent.Outside */  calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor),
+		/* BorderAccent.Inside  */  inset calc(var(--title_BorderAccentWidth) + borderAccent_Offset) 0 0 0 var(--title_BorderAccentColor),
+		/* Border               */  0 0 0 var(--title_BorderWidth) var(--title_BorderColor),
+		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 #0004,
+		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 #0002,
+		/* Border.OutsideBorder */  0 0 0 calc(var(--title_BorderWidth) + 1px) #888,
+		/* Border.InsideBorder  */  inset 0 0 0 1px #0004,
+		/* Shadow               */  5px 5px  8px 0px  shadowColor_1,
+		/* Shadow               */  5px 11px 8px -7px shadowColor_2
+
+	return values
+
+
 //###################################//
 //###  FunctionBar & Board.Cards  ###//
 //###################################//
@@ -97,28 +122,3 @@ kt-board
 	kt-task > .kt-task-footer > ul > li > label > a
 		color:        #444  !important
 		font-weight:  bold  !important
-
-
-///###############//
-///###  Utils  ###//
-///###############//
-
-get_CardTitle_BoxShadow()
-	return _get_CardType_BoxShadow(0px, #0009, #0007)
-
-get_FilterButton_BoxShadow()
-	return _get_CardType_BoxShadow(5px, #0000, #0000)
-
-_get_CardType_BoxShadow(borderAccent_Offset=0px, shadowColor_1=#0009, shadowColor_2=#0007)
-	values = \
-		/* BorderAccent.Outside */  calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor),
-		/* BorderAccent.Inside  */  inset calc(var(--title_BorderAccentWidth) + borderAccent_Offset) 0 0 0 var(--title_BorderAccentColor),
-		/* Border               */  0 0 0 var(--title_BorderWidth) var(--title_BorderColor),
-		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 #0004,
-		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 #0002,
-		/* Border.OutsideBorder */  0 0 0 calc(var(--title_BorderWidth) + 1px) #888,
-		/* Border.InsideBorder  */  inset 0 0 0 1px #0004,
-		/* Shadow               */  5px 5px  8px 0px  shadowColor_1,
-		/* Shadow               */  5px 11px 8px -7px shadowColor_2
-
-	return values
