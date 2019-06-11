@@ -2,6 +2,7 @@
 const CSS = require("./__CSS_Variables__.json").CardType_Manager
 
 //###  Module  ###//
+import {StyleManager    } from "./StyleManager"
 import {KeyBinding      } from "~/Utils/KeyBinding/__Main__"
 import {CardType        } from "~/Utils/KanbanTool/CardType"
 import {set_CSS_Variable} from "~/Utils/CSS_Variables/__Main__"
@@ -42,6 +43,7 @@ export namespace CallbackManager{
 		return {
 			on_Layout: function(cell:JQuery){
 				cell.addClass(CSS.filter)
+				StyleManager.update_CardStyle(cell.get(0))
 				const update_CSS = _get_UpdateCSS_Callback(cell, cardType)
 				CardType_Filter.on_Update(update_CSS)
 				update_CSS()

@@ -1,6 +1,7 @@
 
 //###  Module  ###//
 import {_CardOptions} from "./__Main__"
+import {CardType    } from "~/Utils/KanbanTool/CardType"
 import {cardTypes   } from "~/Utils/KanbanTool/__Main__"
 import {KeyBinding  } from "~/Utils/KeyBinding/__Main__"
 
@@ -10,8 +11,8 @@ import {KeyBinding  } from "~/Utils/KeyBinding/__Main__"
 //#################//
 
 export function get_Auto_CardTypes_Rows(){
-	let cardType_Rows = []
-	let cardIndex     = 0
+	let cardType_Rows: CardType[][] = []
+	let cardIndex = 0
 
 	for(const keyRow of KeyBinding.alphanumericKey_Rows){
 		if(_cardTypes_Exhausted(cardIndex))
@@ -34,8 +35,8 @@ export function get_Auto_CardTypes_Rows(){
 }
 
 export function get_Manual_CardTypes_MultipleRows(cardOptions:_CardOptions[][]){
-	const cardType_Rows = []
-	let   index         = 0
+	const cardType_Rows: CardType[][] = []
+	let index = 0
 
 	for(const optionsRow of cardOptions){
 		if(_cardTypes_Exhausted(index))

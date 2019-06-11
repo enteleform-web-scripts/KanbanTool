@@ -31,7 +31,7 @@ export namespace StyleManager{
 
 		const callback = ()=>{
 			$.find("kt-task").forEach(element=>{
-				_update_CardStyle(element)
+				update_CardStyle(element)
 			})
 		}
 
@@ -39,6 +39,15 @@ export namespace StyleManager{
 			callback()
 			KanbanTool.tasks.on("change", callback)
 		})
+	}
+
+	export function update_CardStyle(element:HTMLElement){
+		const $element = $(element)
+
+		if(StyleManager._CardType_Options === undefined)
+			{_update_CardStyle_From_CardTypes($element)}
+		else
+			{_update_CardStyle_From_CardOptions($element)}
 	}
 
 }
@@ -53,15 +62,6 @@ function _build_CardType_ID_Map(){
 		idMap[cardType.id] = cardType
 	})
 	return idMap
-}
-
-function _update_CardStyle(element:HTMLElement){
-	const $element = $(element)
-
-	if(StyleManager._CardType_Options === undefined)
-		{_update_CardStyle_From_CardTypes($element)}
-	else
-		{_update_CardStyle_From_CardOptions($element)}
 }
 
 function _update_CardStyle_From_CardTypes(element:JQuery){
