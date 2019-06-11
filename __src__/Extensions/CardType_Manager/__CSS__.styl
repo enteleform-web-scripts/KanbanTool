@@ -28,15 +28,15 @@ kt-board kt-task .kt-task-body, // CardFace.Title
 		color:             var(--title_ForegroundColor)                            !important
 		border:            none                                                    !important
 		box-shadow:
-			calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor),  // BorderAccent.Outside
-			inset var(--title_BorderAccentWidth) 0 0 0 var(--title_BorderAccentColor),  // BorderAccent.Inside
-			0 0 0 var(--title_BorderWidth) var(--title_BorderColor),                    // Border
-			inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 #0004,               // BorderAccent.Shadow
-			inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 #0002,               // BorderAccent.Shadow
-			0 0 0 calc(var(--title_BorderWidth) + 1px) #888,                            // Border.OutsideBorder
-			inset 0 0 0 1px #0004,                                                      // Border.InsideBoder
-			5px 5px 8px 0 #0009,                                                        // Shadow
-			5px 11px 8px -7px #0007 \                                                   // Shadow
+			/* BorderAccent.Outside */  calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor),
+			/* BorderAccent.Inside  */  inset var(--title_BorderAccentWidth) 0 0 0 var(--title_BorderAccentColor),
+			/* Border               */  0 0 0 var(--title_BorderWidth) var(--title_BorderColor),
+			/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 #0004,
+			/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 #0002,
+			/* Border.OutsideBorder */  0 0 0 calc(var(--title_BorderWidth) + 1px) #888,
+			/* Border.InsideBoder   */  inset 0 0 0 1px #0004,
+			/* Shadow               */  5px 5px 8px 0 #0009,
+			/* Shadow               */  5px 11px 8px -7px #0007 \
 			!important
 
 //#####################//
@@ -77,8 +77,8 @@ kt-board
 		background:     #EAEAEA  !important
 		color:          #333     !important
 		box-shadow:
-			inset 0 0 0 1px #C3C3C3, // Border
-			1px 1px 3px 0 #0002 \    // Shadow
+			/* Border */  inset 0 0 0 1px #C3C3C3,
+			/* Shadow */  1px 1px 3px 0 #0002 \
 			!important
 
 		//###  Header  ###//
