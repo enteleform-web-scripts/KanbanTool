@@ -21,20 +21,7 @@ kt-board kt-task .kt-task-body,
   border: none !important;
 }
 .FunctionBars .cell.filter {
-  box-shadow: /* BorderAccent.Outside */ calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor), /* BorderAccent.Inside  */ inset calc(var(--title_BorderAccentWidth) + 5px) 0 0 0 var(--title_BorderAccentColor), /* Border               */ 0 0 0 var(--title_BorderWidth) var(--title_BorderColor), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 rgba(0,0,0,0.267), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 rgba(0,0,0,0.133), /* Border.OutsideBorder */ 0 0 0 calc(var(--title_BorderWidth) + 1px) #888, /* Border.InsideBorder  */ inset 0 0 0 1px rgba(0,0,0,0.267), /* Shadow               */ 5px 5px 8px 0px rgba(0,0,0,0), /* Shadow               */ 5px 11px 8px -7px rgba(0,0,0,0) !important;
   margin: 12px 20px 12px 15px !important;
-}
-.FunctionBars .cell.filter.active,
-.FunctionBars .cell.filter.inactive {
-  --filterColor: #000;
-  padding-top: 14px;
-  color: #666;
-  box-shadow: inset 0 7px 0 0 var(--filterColor), inset 0 8px 0 0 #aaa !important;
-}
-.FunctionBars .cell.filter.inactive {
-  background: #aaa;
-  color: #777;
-  box-shadow: inset 0 10px 15px -2px rgba(0,0,0,0.2), inset 0 7px 0 0 var(--filterColor), inset 0 8px 0 0 #aaa !important;
 }
 kt-board kt-task {
   border-radius: 4px !important;
@@ -46,7 +33,6 @@ kt-board kt-task .kt-task-header {
   display: none !important;
 }
 kt-board kt-task .kt-task-body {
-  box-shadow: /* BorderAccent.Outside */ calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor), /* BorderAccent.Inside  */ inset calc(var(--title_BorderAccentWidth) + 0px) 0 0 0 var(--title_BorderAccentColor), /* Border               */ 0 0 0 var(--title_BorderWidth) var(--title_BorderColor), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 rgba(0,0,0,0.267), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 rgba(0,0,0,0.133), /* Border.OutsideBorder */ 0 0 0 calc(var(--title_BorderWidth) + 1px) #888, /* Border.InsideBorder  */ inset 0 0 0 1px rgba(0,0,0,0.267), /* Shadow               */ 5px 5px 8px 0px rgba(0,0,0,0.6), /* Shadow               */ 5px 11px 8px -7px rgba(0,0,0,0.467) !important;
   margin: 5px !important;
 }
 kt-board .kt-interactive_checklists-checklist li label {
