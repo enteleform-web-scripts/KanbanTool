@@ -21,29 +21,21 @@ kt-board kt-task, // CardFace
 
 kt-board kt-task .kt-task-body, // CardFace.Title
 .{FunctionBar-container} .cell.filter
-		margin:            5px                                                     !important
 		padding:           7px 7px 4px calc(7px + var(--title_BorderAccentWidth))  !important
 		border-radius:     3px                                                     !important
 		background-color:  var(--title_BackgroundColor)                            !important
 		color:             var(--title_ForegroundColor)                            !important
 		border:            none                                                    !important
-		box-shadow:
-			/* BorderAccent.Outside */  calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor),
-			/* BorderAccent.Inside  */  inset var(--title_BorderAccentWidth) 0 0 0 var(--title_BorderAccentColor),
-			/* Border               */  0 0 0 var(--title_BorderWidth) var(--title_BorderColor),
-			/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 #0004,
-			/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 #0002,
-			/* Border.OutsideBorder */  0 0 0 calc(var(--title_BorderWidth) + 1px) #888,
-			/* Border.InsideBoder   */  inset 0 0 0 1px #0004,
-			/* Shadow               */  5px 5px 8px 0 #0009,
-			/* Shadow               */  5px 11px 8px -7px #0007 \
-			!important
 
 //#####################//
 //###  FunctionBar  ###//
 //#####################//
 
 .{FunctionBar-container}
+
+	.cell.filter
+		margin:       12px 20px 12px 15px  !important
+		_box-shadow:  get_FilterButton_BoxShadow(5px, #0000, #0000)
 
 	.cell.filter.active,
 	.cell.filter.inactive
@@ -85,6 +77,11 @@ kt-board
 		.kt-task-header
 			display:  none  !important
 
+		//###  Title  ###//
+		.kt-task-body
+			margin:       5px  !important
+			_box-shadow:  get_CardTitle_BoxShadow()
+
 
 //############################//
 //###  CardFace.CheckList  ###//
@@ -100,3 +97,29 @@ kt-board
 	kt-task > .kt-task-footer > ul > li > label > a
 		color:        #444  !important
 		font-weight:  bold  !important
+
+
+///###############//
+///###  Utils  ###//
+///###############//
+
+get_CardTitle_BoxShadow()
+	return _get_CardType_BoxShadow(0px, #0009, #0007)
+
+get_FilterButton_BoxShadow()
+	return _get_CardType_BoxShadow(5px, #0000, #0000)
+
+_get_CardType_BoxShadow(borderAccent_Offset=0px, shadowColor_1=#0009, shadowColor_2=#0007)
+	values = \
+		/* BorderAccent.Outside */  calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor),
+		/* BorderAccent.Inside  */  inset calc(var(--title_BorderAccentWidth) + borderAccent_Offset) 0 0 0 var(--title_BorderAccentColor),
+		/* Border               */  0 0 0 var(--title_BorderWidth) var(--title_BorderColor),
+		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 #0004,
+		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 #0002,
+		/* Border.OutsideBorder */  0 0 0 calc(var(--title_BorderWidth) + 1px) #888,
+		/* Border.InsideBorder  */  inset 0 0 0 1px #0004,
+		/* Shadow               */  5px 5px  8px 0px  shadowColor_1,
+		/* Shadow               */  5px 11px 8px -7px shadowColor_2 \
+		!important
+
+	return values
