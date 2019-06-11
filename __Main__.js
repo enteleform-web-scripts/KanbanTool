@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560292802732)
+		const elapsedTime = _get_ElapsedTime(1560293411299)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:40:02 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:50:11 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11368,9 +11368,9 @@ const _Default_FunctionBar_Options = {
     cellProperties: [],
 };
 function _initialize(functionBar, cardOptions) {
+    StyleManager_1.StyleManager.initialize(cardOptions);
     CallbackManager_1.CallbackManager.set_Card_HoverCallback();
     __Main__1.FunctionBar.load(functionBar);
-    StyleManager_1.StyleManager.initialize(cardOptions);
 }
 function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, functionBar_Options) {
     let cardType_Rows;
