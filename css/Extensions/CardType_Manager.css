@@ -22,7 +22,7 @@ kt-board kt-task .kt-task-body,
 }
 .FunctionBars .cell.filter {
   margin: 12px 20px 12px 15px !important;
-  box-shadow: get_FilterButton_BoxShadow(5px, rgba(0,0,0,0), rgba(0,0,0,0));
+  box-shadow: /* BorderAccent.Outside */ calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor), /* BorderAccent.Inside  */ inset calc(var(--title_BorderAccentWidth) + borderAccent_Offset) 0 0 0 var(--title_BorderAccentColor), /* Border               */ 0 0 0 var(--title_BorderWidth) var(--title_BorderColor), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 rgba(0,0,0,0.267), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 rgba(0,0,0,0.133), /* Border.OutsideBorder */ 0 0 0 calc(var(--title_BorderWidth) + 1px) #888, /* Border.InsideBorder  */ inset 0 0 0 1px rgba(0,0,0,0.267), /* Shadow               */ 5px 5px 8px 0px rgba(0,0,0,0), /* Shadow               */ 5px 11px 8px -7px rgba(0,0,0,0);
 }
 .FunctionBars .cell.filter.active,
 .FunctionBars .cell.filter.inactive {
@@ -47,7 +47,7 @@ kt-board kt-task .kt-task-header {
 }
 kt-board kt-task .kt-task-body {
   margin: 5px !important;
-  box-shadow: get_CardTitle_BoxShadow();
+  box-shadow: /* BorderAccent.Outside */ calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor), /* BorderAccent.Inside  */ inset calc(var(--title_BorderAccentWidth) + borderAccent_Offset) 0 0 0 var(--title_BorderAccentColor), /* Border               */ 0 0 0 var(--title_BorderWidth) var(--title_BorderColor), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 rgba(0,0,0,0.267), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 rgba(0,0,0,0.133), /* Border.OutsideBorder */ 0 0 0 calc(var(--title_BorderWidth) + 1px) #888, /* Border.InsideBorder  */ inset 0 0 0 1px rgba(0,0,0,0.267), /* Shadow               */ 5px 5px 8px 0px rgba(0,0,0,0.6), /* Shadow               */ 5px 11px 8px -7px rgba(0,0,0,0.467);
 }
 kt-board .kt-interactive_checklists-checklist li label {
   margin-right: 13px !important;
