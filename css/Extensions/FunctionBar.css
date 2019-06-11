@@ -1,4 +1,4 @@
-.CustomExtension__FunctionBar {
+.FunctionBar {
   --BorderColor: #ababb1;
   --ExpandButton_Color: #6a6a6a;
   display: flex;
@@ -11,72 +11,72 @@
   z-index: 1000;
   pointer-events: none;
 }
-.CustomExtension__FunctionBar .left,
-.CustomExtension__FunctionBar .right,
-.CustomExtension__FunctionBar .top,
-.CustomExtension__FunctionBar .bottom {
+.FunctionBar .left,
+.FunctionBar .right,
+.FunctionBar .top,
+.FunctionBar .bottom {
   display: flex;
   pointer-events: auto;
   background: #c6c6cc;
 }
-.CustomExtension__FunctionBar .left {
+.FunctionBar .left {
   border-right: 1px solid var(--BorderColor);
 }
-.CustomExtension__FunctionBar .right {
+.FunctionBar .right {
   border-left: 1px solid var(--BorderColor);
 }
-.CustomExtension__FunctionBar .top {
+.FunctionBar .top {
   border-bottom: 1px solid var(--BorderColor);
 }
-.CustomExtension__FunctionBar .bottom {
+.FunctionBar .bottom {
   border-top: 1px solid var(--BorderColor);
 }
-.CustomExtension__FunctionBar .center {
+.FunctionBar .center {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   flex-grow: 1;
 }
-.CustomExtension__FunctionBar .center .left,
-.CustomExtension__FunctionBar .center .right {
+.FunctionBar .center .left,
+.FunctionBar .center .right {
   display: flex;
   flex-direction: row;
 }
-.CustomExtension__FunctionBar .center .left .column,
-.CustomExtension__FunctionBar .center .right .column {
+.FunctionBar .center .left .column,
+.FunctionBar .center .right .column {
   display: flex;
   flex-direction: column;
 }
-.CustomExtension__FunctionBar .center .left .column .cell,
-.CustomExtension__FunctionBar .center .right .column .cell {
+.FunctionBar .center .left .column .cell,
+.FunctionBar .center .right .column .cell {
   text-align: left;
 }
-.CustomExtension__FunctionBar .top,
-.CustomExtension__FunctionBar .bottom {
+.FunctionBar .top,
+.FunctionBar .bottom {
   display: flex;
   flex-direction: column;
 }
-.CustomExtension__FunctionBar .top .row,
-.CustomExtension__FunctionBar .bottom .row {
+.FunctionBar .top .row,
+.FunctionBar .bottom .row {
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: auto;
 }
-.CustomExtension__FunctionBar .top .row .cell,
-.CustomExtension__FunctionBar .bottom .row .cell {
+.FunctionBar .top .row .cell,
+.FunctionBar .bottom .row .cell {
   text-align: center;
   white-space: nowrap;
 }
-.CustomExtension__FunctionBar .top .row.stretch,
-.CustomExtension__FunctionBar .bottom .row.stretch {
+.FunctionBar .top .row.stretch,
+.FunctionBar .bottom .row.stretch {
   margin: 0;
 }
-.CustomExtension__FunctionBar .top .row.stretch .cell,
-.CustomExtension__FunctionBar .bottom .row.stretch .cell {
+.FunctionBar .top .row.stretch .cell,
+.FunctionBar .bottom .row.stretch .cell {
   flex: 1;
 }
-.CustomExtension__FunctionBar .cell {
+.FunctionBar .cell {
   flex: 0;
   min-width: fit-content;
   min-height: fit-content;
@@ -88,22 +88,22 @@
   background: #d9d9de;
   color: #505052;
 }
-.CustomExtension__FunctionBar .left.empty,
-.CustomExtension__FunctionBar .right.empty,
-.CustomExtension__FunctionBar .top.empty,
-.CustomExtension__FunctionBar .bottom.empty,
-.CustomExtension__FunctionBar .left.collapsed > :not(.expand-button),
-.CustomExtension__FunctionBar .right.collapsed > :not(.expand-button),
-.CustomExtension__FunctionBar .top.collapsed > :not(.expand-button),
-.CustomExtension__FunctionBar .bottom.collapsed > :not(.expand-button),
-.CustomExtension__FunctionBar .left:not(.collapsed) > .expand-button,
-.CustomExtension__FunctionBar .right:not(.collapsed) > .expand-button,
-.CustomExtension__FunctionBar .top:not(.collapsed) > .expand-button,
-.CustomExtension__FunctionBar .bottom:not(.collapsed) > .expand-button {
+.FunctionBar .left.empty,
+.FunctionBar .right.empty,
+.FunctionBar .top.empty,
+.FunctionBar .bottom.empty,
+.FunctionBar .left.collapsed > :not(.expand-button),
+.FunctionBar .right.collapsed > :not(.expand-button),
+.FunctionBar .top.collapsed > :not(.expand-button),
+.FunctionBar .bottom.collapsed > :not(.expand-button),
+.FunctionBar .left:not(.collapsed) > .expand-button,
+.FunctionBar .right:not(.collapsed) > .expand-button,
+.FunctionBar .top:not(.collapsed) > .expand-button,
+.FunctionBar .bottom:not(.collapsed) > .expand-button {
   display: none;
 }
-.CustomExtension__FunctionBar .left .column.expand-button > .cell,
-.CustomExtension__FunctionBar .right .column.expand-button > .cell {
+.FunctionBar .left .column.expand-button > .cell,
+.FunctionBar .right .column.expand-button > .cell {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -112,8 +112,8 @@
   font-size: 15pt;
   color: var(--ExpandButton_Color);
 }
-.CustomExtension__FunctionBar .top .row.expand-button > .cell,
-.CustomExtension__FunctionBar .bottom .row.expand-button > .cell {
+.FunctionBar .top .row.expand-button > .cell,
+.FunctionBar .bottom .row.expand-button > .cell {
   padding: 0 0 2px 0;
   line-height: 18px;
   font-size: 14pt;

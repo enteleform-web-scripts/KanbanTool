@@ -1,16 +1,17 @@
-.CustomExtension__FunctionBar .cell.activeFilter,
-.CustomExtension__FunctionBar .cell.inactiveFilter {
+.FunctionBar .cell.filter.active,
+.FunctionBar .cell.filter.inactive {
   --filterColor: #000;
   padding-top: 14px;
   color: #666;
-  box-shadow: inset 0 7px 0 0 var(--filterColor), inset 0 8px 0 0 #aaa;
+  box-shadow: inset 0 7px 0 0 var(--filterColor), inset 0 8px 0 0 #aaa !important;
 }
-.CustomExtension__FunctionBar .cell.inactiveFilter {
+.FunctionBar .cell.filter.inactive {
   background: #aaa;
   color: #777;
-  box-shadow: inset 0 10px 15px -2px rgba(0,0,0,0.2), inset 0 7px 0 0 var(--filterColor), inset 0 8px 0 0 #aaa;
+  box-shadow: inset 0 10px 15px -2px rgba(0,0,0,0.2), inset 0 7px 0 0 var(--filterColor), inset 0 8px 0 0 #aaa !important;
 }
-kt-board kt-task {
+kt-board kt-task,
+FunctionBar .cell.filter {
   --title_BorderWidth: 5px;
   --title_Default_BorderAccentWidth: 5px;
   --title_BorderAccentWidth: 0px;
@@ -18,13 +19,26 @@ kt-board kt-task {
   --title_BorderColor: rgba(0,0,0,0);
   --title_BackgroundColor: rgba(0,0,0,0);
   --title_ForegroundColor: #444;
+}
+kt-board kt-task.borderAccent_Enabled,
+FunctionBar .cell.filter.borderAccent_Enabled {
+  --title_BorderAccentWidth: var(--title_Default_BorderAccentWidth);
+}
+kt-board kt-task .kt-task-body,
+FunctionBar .cell.filter {
+  margin: 5px !important;
+  padding: 7px 7px 4px calc(7px + var(--title_BorderAccentWidth)) !important;
+  border-radius: 3px !important;
+  background-color: var(--title_BackgroundColor) !important;
+  color: var(--title_ForegroundColor) !important;
+  border: none !important;
+  box-shadow: calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor), inset var(--title_BorderAccentWidth) 0 0 0 var(--title_BorderAccentColor), 0 0 0 var(--title_BorderWidth) var(--title_BorderColor), inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 rgba(0,0,0,0.267), inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 rgba(0,0,0,0.133), 0 0 0 calc(var(--title_BorderWidth) + 1px) #888, inset 0 0 0 1px rgba(0,0,0,0.267) !important;
+}
+kt-board kt-task {
+  border-radius: 4px !important;
   background: #eaeaea !important;
   color: #333 !important;
-  border-radius: 4px !important;
   box-shadow: inset 0 0 0 1px #c3c3c3, 1px 1px 3px 0 rgba(0,0,0,0.133) !important;
-}
-kt-board kt-task.borderAccent_Enabled {
-  --title_BorderAccentWidth: var(--title_Default_BorderAccentWidth);
 }
 kt-board kt-task .kt-task-body {
   margin: 5px !important;

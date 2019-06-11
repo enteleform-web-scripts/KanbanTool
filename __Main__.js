@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560209106402)
+		const elapsedTime = _get_ElapsedTime(1560258680462)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     7:25:06 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     9:11:20 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11805,7 +11805,7 @@ process.umask = function() { return 0; };
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const cssVariables = __webpack_require__(22);
+const CSS = __webpack_require__(22).CardType_Manager;
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(5);
 const __Main__3 = __webpack_require__(0);
@@ -11832,6 +11832,7 @@ var CallbackManager;
     function _get_Callbacks(cardType) {
         return {
             on_Layout: function (cell) {
+                cell.addClass(CSS.filter);
                 const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
                 __Main__3.CardType_Filter.on_Update(update_CSS);
                 update_CSS();
@@ -11860,16 +11861,16 @@ function _get_UpdateCSS_Callback(cell, cardType) {
     return () => {
         let alpha;
         if (__Main__3.CardType_Filter.cardType_IsEnabled(cardType)) {
-            cell.addClass(cssVariables.activeFilter);
-            cell.removeClass(cssVariables.inactiveFilter);
+            cell.addClass(CSS.activeFilter);
+            cell.removeClass(CSS.inactiveFilter);
             alpha = "FF";
         }
         else {
-            cell.removeClass(cssVariables.activeFilter);
-            cell.addClass(cssVariables.inactiveFilter);
+            cell.removeClass(CSS.activeFilter);
+            cell.addClass(CSS.inactiveFilter);
             alpha = "AA";
         }
-        __Main__2.set_CSS_Variable(cell, cssVariables.filterColor, (cardType.bgColor + alpha));
+        __Main__2.set_CSS_Variable(cell, CSS.filterColor, (cardType.bgColor + alpha));
     };
 }
 
@@ -11878,7 +11879,7 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 /* 22 */
 /***/ (function(module) {
 
-module.exports = {"activeFilter":"activeFilter","inactiveFilter":"inactiveFilter","filterColor":"filterColor","_":""};
+module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterColor","activeFilter":"active","inactiveFilter":"inactive","_":""}};
 
 /***/ }),
 /* 23 */
@@ -12801,7 +12802,7 @@ const emptyCallback = ((...args) => { });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const cssVariables = __webpack_require__(33);
+const CSS = __webpack_require__(33).FunctionBar;
 const Settings_1 = __webpack_require__(7);
 const Position_1 = __webpack_require__(8);
 const __Main__1 = __webpack_require__(5);
@@ -12829,7 +12830,7 @@ class Layout {
                 const { containerSelector, toggleButton_Selector } = _BarComponent_Map[entry.position];
                 const toggleButton = $(toggleButton_Selector);
                 toggleButton.on("click", callback);
-                const container = $(`${containerSelector}:not(.${cssVariables.collapsed})`);
+                const container = $(`${containerSelector}:not(.${CSS.collapsed})`);
                 container.on("dblclick", callback);
                 __Main__2.KeyBinding.add([entry.key, ...Settings_1.functionBar_ToggleModifiers], callback, { preventDefault: true });
             });
@@ -12849,7 +12850,7 @@ class Layout {
         const { autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position, is_VerticalBar, stretchCells } = this._functionBar;
         let { containerSelector, subContainer_Class } = _BarComponent_Map[position];
         this.container = $(containerSelector);
-        this.container.removeClass(cssVariables.empty);
+        this.container.removeClass(CSS.empty);
         if (is_VerticalBar && stretchCells) {
             subContainer_Class += " stretch";
         }
@@ -12879,20 +12880,20 @@ class Layout {
 }
 exports.Layout = Layout;
 const _BarComponent_Map = {
-    [Position_1.Position.Left]: { containerSelector: `.${cssVariables.container} > .center > .left`, subContainer_Class: "column", toggleButton_Selector: ".left   > .expand-button > .cell" },
-    [Position_1.Position.Right]: { containerSelector: `.${cssVariables.container} > .center > .right`, subContainer_Class: "column", toggleButton_Selector: ".right  > .expand-button > .cell" },
-    [Position_1.Position.Top]: { containerSelector: `.${cssVariables.container} > .top`, subContainer_Class: "row", toggleButton_Selector: ".top    > .expand-button > .cell" },
-    [Position_1.Position.Bottom]: { containerSelector: `.${cssVariables.container} > .bottom`, subContainer_Class: "row", toggleButton_Selector: ".bottom > .expand-button > .cell" },
+    [Position_1.Position.Left]: { containerSelector: `.${CSS.container} > .center > .left`, subContainer_Class: "column", toggleButton_Selector: ".left   > .expand-button > .cell" },
+    [Position_1.Position.Right]: { containerSelector: `.${CSS.container} > .center > .right`, subContainer_Class: "column", toggleButton_Selector: ".right  > .expand-button > .cell" },
+    [Position_1.Position.Top]: { containerSelector: `.${CSS.container} > .top`, subContainer_Class: "row", toggleButton_Selector: ".top    > .expand-button > .cell" },
+    [Position_1.Position.Bottom]: { containerSelector: `.${CSS.container} > .bottom`, subContainer_Class: "row", toggleButton_Selector: ".bottom > .expand-button > .cell" },
 };
 function _get_ContainerToggle_Callback(position) {
     const { containerSelector } = _BarComponent_Map[position];
     const container = $(containerSelector);
     return () => {
-        if (container.hasClass(cssVariables.collapsed)) {
-            container.removeClass(cssVariables.collapsed);
+        if (container.hasClass(CSS.collapsed)) {
+            container.removeClass(CSS.collapsed);
         }
         else {
-            container.addClass(cssVariables.collapsed);
+            container.addClass(CSS.collapsed);
         }
         _update_OriginalLayout();
     };
@@ -12900,11 +12901,11 @@ function _get_ContainerToggle_Callback(position) {
 function _update_OriginalLayout() {
     const navbarHeight = $("nav.navbar").height();
     __Main__1.set_CSS_Variable("KanbanToolOffsets_NavHeight", `${navbarHeight}px`);
-    const topRow_Height = $(`.${cssVariables.container} > .top`).height();
+    const topRow_Height = $(`.${CSS.container} > .top`).height();
     __Main__1.set_CSS_Variable("KanbanToolOffsets_TopHeight", `${topRow_Height}px`);
-    const leftColumn_Width = $(`.${cssVariables.container} > .center > .left`).width();
+    const leftColumn_Width = $(`.${CSS.container} > .center > .left`).width();
     __Main__1.set_CSS_Variable("KanbanToolOffsets_LeftWidth", `${leftColumn_Width}px`);
-    const rightColumn_Width = $(`.${cssVariables.container} > .center > .right`).width();
+    const rightColumn_Width = $(`.${CSS.container} > .center > .right`).width();
     __Main__1.set_CSS_Variable("KanbanToolOffsets_RightWidth", `${rightColumn_Width}px`);
     const top_Offset = (navbarHeight + topRow_Height);
     __Main__1.set_CSS_Variable("KanbanToolOffsets_TopOffset", `${top_Offset}px`);
@@ -12915,7 +12916,7 @@ function _update_OriginalLayout() {
 /* 33 */
 /***/ (function(module) {
 
-module.exports = {"container":"CustomExtension__FunctionBar","collapsed":"collapsed","empty":"empty","_":""};
+module.exports = {"FunctionBar":{"container":"FunctionBar","collapsed":"collapsed","empty":"empty","_":""}};
 
 /***/ }),
 /* 34 */
