@@ -37,24 +37,24 @@ kt-board kt-task .kt-task-body, // CardFace.Title
 		FilterButton_BoxShadow()
 		margin:  12px 20px 12px 15px  !important
 
-	.cell.filter.active,
-	.cell.filter.inactive
-		--filterColor:  #000
-		padding-top:    14px
-		color:          #666
-		box-shadow:
-			inset 0 7px 0 0 var(--filterColor),
-			inset 0 8px 0 0 #AAA \
-			!important
+	// .cell.filter.active,
+	// .cell.filter.inactive
+	// 	--filterColor:  #000
+	// 	padding-top:    14px
+	// 	color:          #666
+	// 	box-shadow:
+	// 		inset 0 7px 0 0 var(--filterColor),
+	// 		inset 0 8px 0 0 #AAA \
+	// 		!important
 
-	.cell.filter.inactive
-		background:  #AAA
-		color:       #777
-		box-shadow:
-			inset 0 10px 15px -2px #0003,
-			inset 0 7px 0 0 var(--filterColor),
-			inset 0 8px 0 0 #AAA \
-			!important
+	// .cell.filter.inactive
+	// 	background:  #AAA
+	// 	color:       #777
+	// 	box-shadow:
+	// 		inset 0 10px 15px -2px #0003,
+	// 		inset 0 7px 0 0 var(--filterColor),
+	// 		inset 0 8px 0 0 #AAA \
+	// 		!important
 
 
 //#####################//
@@ -110,11 +110,9 @@ FilterButton_BoxShadow()
 	_CardType_BoxShadow(5px, #0000, #0000)
 
 _CardType_BoxShad + borderAccent_Offset) shadowColor_1, shadowColor_2)
-	borderAccent_Inside_Width = "calc(var(--title_BorderAccentWidth) + %offset)" % borderAccent_Offset
-
 	box-shadow:
 		/* BorderAccent.Outside */  calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor),
-		/* BorderAccent.Inside  */  inset borderAccent_Inside_Width 0 0 0 var(--title_BorderAccentColor),
+		/* BorderAccent.Inside  */  inset ("calc(var(--title_BorderAccentWidth) + %arg_1)" % borderAccent_Offset) 0 0 0 var(--title_BorderAccentColor),
 		/* Border               */  0 0 0 var(--title_BorderWidth) var(--title_BorderColor),
 		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 #0004,
 		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 #0002,
