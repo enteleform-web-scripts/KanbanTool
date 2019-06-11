@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560260170510)
+		const elapsedTime = _get_ElapsedTime(1560261379884)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     9:36:10 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     9:56:19 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
