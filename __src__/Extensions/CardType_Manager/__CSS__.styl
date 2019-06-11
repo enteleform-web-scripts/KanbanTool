@@ -112,7 +112,7 @@ FilterButton_BoxShadow()
 _CardType_BoxShadow(shadowColor_1, shadowColor_2)
 	box-shadow:
 		/* BorderAccent.Outside */  calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor),
-		/* BorderAccent.Inside  */  inset ("calc(var(--title_BorderAccentWidth) + %s)" % borderAccent_Offset) 0 0 0 var(--title_BorderAccentColor),
+		/* BorderAccent.Inside  */  inset var(--title_BorderAccentWidth) 0 0 0 var(--title_BorderAccentColor),
 		/* Border               */  0 0 0 var(--title_BorderWidth) var(--title_BorderColor),
 		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 #0004,
 		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 #0002,
