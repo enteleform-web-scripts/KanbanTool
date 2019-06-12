@@ -36,7 +36,7 @@ export namespace StyleManager{
 
 		on_PageLoad(() => {
 			callback()
-			KanbanTool.tasks.on("add", callback)
+			KanbanTool.tasks.on("change", callback)
 		})
 	}
 
