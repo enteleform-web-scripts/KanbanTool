@@ -3,23 +3,10 @@
 //###  Exports  ###//
 //#################//
 
-export function get_CardTypes(activeBoard): CardType[]{
-	return activeBoard.cardTypes().active().map(
-		({attributes}, index) => new CardType({
-			index:   index,
-			id:      attributes.id,
-			name:    attributes.name,
-			bgColor: attributes.color_attrs.rgb,
-			fgColor: (
-				attributes.color_attrs.invert
-				? "#FFF"
-				: "#000"
-			),
-		})
-	)
-}
-
 export class CardType{
+
+	static _cardTypes: CardType[]
+
 	index:   number
 	id:      number
 	name:    string
@@ -36,26 +23,41 @@ export class CardType{
 		this.bgColor = bgColor
 		this.fgColor = fgColor
 	}
+
+	static get cardTypes(){
+		return CardType._cardTypes
+	}
+
+	static initialize(activeBoard){
+		CardType._cardTypes =
+			activeBoard.cardTypes().active().map(
+				({attributes}, index) => new CardType({
+					index:   index,
+					id:      attributes.id,
+					name:    attributes.name,
+					bgColor: attributes.color_attrs.rgb,
+					fgColor: (
+						attributes.color_attrs.invert
+						? "#FFF"
+						: "#000"
+					),
+				})
+			)
+	}
+
+	static get_FromName(name:string)
+		{return _get_CardType_FromProperty("name", name)}
+
+	static get_FromID(id:number)
+		{return _get_CardType_FromProperty("id", id)}
+
+	static get_FromRegEx(pattern:RegExp){
+		return CardType.cardTypes.filter(cardType =>
+			pattern.exec(cardType.name)
+		)
+	}
+
 }
-
-export function get_CardType_FromName(name:string)
-	{return _get_CardType_FromProperty("name", name)}
-
-export function get_CardType_FromID(id:number)
-	{return _get_CardType_FromProperty("id", id)}
-
-export function get_CardTypes_FromRegEx(pattern:RegExp){
-	return cardTypes.filter(cardType =>
-		pattern.exec(cardType.name)
-	)
-}
-
-
-//##############//
-//###  Init  ###//
-//##############//
-
-import {cardTypes} from "./__Main__"
 
 
 //###############//
@@ -63,7 +65,11 @@ import {cardTypes} from "./__Main__"
 //###############//
 
 function _get_CardType_FromProperty(key:string, value:any){
-	const matches = cardTypes.filter(cardType => (cardType[key] == value))
+	const matches =
+		CardType.cardTypes.filter(cardType =>
+			(cardType[key] == value)
+		)
+
 	if(matches.length > 0)
 		{return matches[0]}
 	else

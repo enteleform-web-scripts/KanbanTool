@@ -1,8 +1,8 @@
 //###  Module  ###//
-import {CardType_Manager       } from "~/Extensions/CardType_Manager/__Main__"
-import {KeyBinding             } from "~/Utils/KeyBinding/__Main__"
-import {get_CardTypes_FromRegEx} from "~/Utils/KanbanTool/CardType"
-import {HoverManager           } from "~/Extensions/CardType_Manager/HoverManager"
+import {CardType_Manager} from "~/Extensions/CardType_Manager/__Main__"
+import {KeyBinding      } from "~/Utils/KeyBinding/__Main__"
+import {CardType        } from "~/Utils/KanbanTool/CardType"
+import {HoverManager    } from "~/Extensions/CardType_Manager/HoverManager"
 
 
 const priorityColors = {
@@ -73,8 +73,8 @@ CardType_Manager.initialize_Manual({
 KeyBinding.add(["ctrl", "space"],
 	(event:KeyboardEvent) => {
 		const cardType        = CardType_Manager.HoverManager.get_CardType()
-		const task_CardTypes  = get_CardTypes_FromRegEx(/^Task_.*$/ )
-		const today_CardTypes = get_CardTypes_FromRegEx(/^Today_.*$/)
+		const task_CardTypes  = CardType.get_FromRegEx(/^Task_.*$/ )
+		const today_CardTypes = CardType.get_FromRegEx(/^Today_.*$/)
 
 		let new_CardType, new_CardType_Index
 

@@ -2,7 +2,6 @@
 import {cardType_Filter_Index} from "../Settings"
 import {CardType             } from "../CardType"
 import {KeyBinding           } from "~/Utils/KeyBinding/__Main__"
-import {get_CardType_FromName} from "~/Utils/KanbanTool/CardType"
 import {
 	cardTypes,
 	on_PageLoad,
@@ -155,7 +154,7 @@ function _get_CardType_Index(id:number|string){
 	let index
 
 	if(typeof id == "string"){
-		const cardType = get_CardType_FromName(id)
+		const cardType = CardType.get_FromName(id)
 		index = (cardType)
 		? cardType.index
 		: undefined

@@ -1,9 +1,5 @@
-//###  Module: CSS  ###//
-const CSS = require("./__CSS_Variables__.json").CardType_Manager
-
 //###  Module  ###//
-import {KeyBinding                   } from "~/Utils/KeyBinding/__Main__"
-import {CardType, get_CardType_FromID} from "~/Utils/KanbanTool/CardType"
+import {CardType} from "~/Utils/KanbanTool/CardType"
 
 
 //#################//
@@ -23,7 +19,7 @@ export namespace HoverManager{
 	export function get_CardType(){
 		if(_card){
 			const cardType_ID = _card.props.task.cardType().attributes.id
-			return get_CardType_FromID(cardType_ID)
+			return CardType.get_FromID(cardType_ID)
 		}
 		else
 			{return undefined}

@@ -1,6 +1,6 @@
 //###  Module  ###//
 import {onPageLoad_Timeout_MS} from "./Settings"
-import {get_CardTypes        } from "./CardType"
+import {CardType             } from "./CardType"
 
 
 //###############//
@@ -16,7 +16,9 @@ const _on_PageLoad_Callbacks:({id:Symbol, callback:(() => void)}[]) = []
 
 export const KanbanTool  = (window as any).KT
 export const activeBoard = KanbanTool.boards.models[0]
-export const cardTypes   = get_CardTypes(activeBoard)
+
+CardType.initialize(activeBoard)
+export const cardTypes = CardType.cardTypes
 
 export function on_PageLoad(callback:(() => void)                            )
 export function on_PageLoad(id:Symbol, callback:(() => void)                 )
