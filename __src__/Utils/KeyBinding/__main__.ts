@@ -31,9 +31,9 @@ export class KeyBinding{
 	static get alphanumericKey_Rows(){return [...alphanumericKey_Rows]}
 	static get characterKey_Rows   (){return [...characterKey_Rows   ]}
 
-	static add(hotKeys:KeyBinding.Key|KeyBinding.Key[],                                           options?:{preventDefault:boolean}) // Decorator
-	static add(hotKeys:KeyBinding.Key|KeyBinding.Key[], callback:((event:KeyboardEvent) => void), options?:{preventDefault:boolean}) // Function Call
-	static add(hotKeys:KeyBinding.Key|KeyBinding.Key[], arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_BindOptions){
+	static add(hotKeys:(KeyBinding.Key|KeyBinding.Key[]),                                             options?:{preventDefault:boolean}) // Decorator
+	static add(hotKeys:(KeyBinding.Key|KeyBinding.Key[]), callback:((event:KeyboardEvent) => void),   options?:{preventDefault:boolean}) // Function Call
+	static add(hotKeys:(KeyBinding.Key|KeyBinding.Key[]), arg_2?:(_KeyBinding_Callback|_BindOptions), arg_3?:_BindOptions              ){
 		const hotKeys_String = _convert_HotKeys_ToString(hotKeys)
 		const {callback, options} = _get_BindArguments(arg_2, arg_3)
 
@@ -85,7 +85,7 @@ const _isPressed_CallbackMap = {
 function _disable_DefaultFilters(event)
 	{return true}
 
-function _get_BindArguments(arg_2?:_KeyBinding_Callback|_BindOptions, arg_3?:_BindOptions){
+function _get_BindArguments(arg_2?:(_KeyBinding_Callback|_BindOptions), arg_3?:_BindOptions){
 	let callback, options
 
 	if (arg_2 instanceof Function)
@@ -117,7 +117,7 @@ function _get_Decorator(hotKeys:string, options:_BindOptions){
 	}
 }
 
-function _convert_HotKeys_ToString(keys:KeyBinding.Key|KeyBinding.Key[]){
+function _convert_HotKeys_ToString(keys:(KeyBinding.Key|KeyBinding.Key[])){
 	return (
 			(keys instanceof Array)
 			? _get_HotKey_Array_AsString(keys)

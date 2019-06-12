@@ -44,12 +44,23 @@ export function get_CardType_FromName(name:string)
 export function get_CardType_FromID(id:number)
 	{return _get_CardType_FromProperty("id", id)}
 
+export function get_CardTypes_FromRegEx(pattern:RegExp){
+	return cardTypes.filter(cardType =>
+		pattern.exec(cardType.name)
+	)
+}
+
+
+//##############//
+//###  Init  ###//
+//##############//
+
+import {cardTypes} from "./__Main__"
+
 
 //###############//
 //###  Utils  ###//
 //###############//
-
-import {cardTypes} from "./__Main__"
 
 function _get_CardType_FromProperty(key:string, value:any){
 	const matches = cardTypes.filter(cardType => (cardType[key] == value))

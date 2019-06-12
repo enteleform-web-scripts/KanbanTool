@@ -2,10 +2,10 @@
 const CSS = require("./__CSS_Variables__.json").CardType_Manager
 
 //###  Module  ###//
-import {StyleManager    } from "./StyleManager"
-import {KeyBinding      } from "~/Utils/KeyBinding/__Main__"
-import {CardType        } from "~/Utils/KanbanTool/CardType"
-import {set_CSS_Variable} from "~/Utils/CSS_Variables/__Main__"
+import {HoverManager} from "./HoverManager"
+import {StyleManager} from "./StyleManager"
+import {KeyBinding  } from "~/Utils/KeyBinding/__Main__"
+import {CardType    } from "~/Utils/KanbanTool/CardType"
 import {
 	CardType_Filter,
 	cardTypes,
@@ -17,20 +17,8 @@ import {
 //#################//
 
 export namespace CallbackManager{
+
 	let _entryIndex = -1
-	let _card       = undefined
-
-	export function set_Card_HoverCallback(){
-		const $element = $("kt-board")
-
-		$element.on("mouseover", "kt-task", (event) => {
-			_card = event.currentTarget
-		})
-
-		$element.on("mouseout", "kt-task", (event) => {
-			_card = null
-		})
-	}
 
 	export function get_Callbacks(){
 		_entryIndex += 1
@@ -50,7 +38,7 @@ export namespace CallbackManager{
 			},
 
 			on_KeyBinding: function(event:KeyboardEvent, cell:JQuery){
-				_update_CardType(cardType)
+				HoverManager.set_CardType(cardType)
 			},
 
 			on_Click: function(event:JQuery.ClickEvent, cell:JQuery){
@@ -62,11 +50,6 @@ export namespace CallbackManager{
 					{CardType_Filter.toggle_CardTypes(cardType.index)}
 			},
 		}
-	}
-
-	function _update_CardType(cardType:CardType){
-		if(_card)
-			{_card.props.task.save("card_type_id", cardType.id)}
 	}
 
 }

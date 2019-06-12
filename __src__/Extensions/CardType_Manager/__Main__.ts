@@ -2,12 +2,13 @@
 require("~/Utils/HTML_Injector").inject(__dirname, {CSS:true, HTML:false})
 
 //###  Module  ###//
-import {CallbackManager           } from "./CallbackManager"
-import {StyleManager              } from "./StyleManager"
-import {FunctionBar               } from "~/Extensions/FunctionBar/__Main__"
-import {CellProperty              } from "~/Extensions/FunctionBar/CellProperty"
-import {Position, VerticalPosition} from "~/Extensions/FunctionBar/Position"
-import {KeyBinding                } from "~/Utils/KeyBinding/__Main__"
+import {CallbackManager              } from "./CallbackManager"
+import {HoverManager as _HoverManager} from "./HoverManager"
+import {StyleManager                 } from "./StyleManager"
+import {FunctionBar                  } from "~/Extensions/FunctionBar/__Main__"
+import {CellProperty                 } from "~/Extensions/FunctionBar/CellProperty"
+import {Position, VerticalPosition   } from "~/Extensions/FunctionBar/Position"
+import {KeyBinding                   } from "~/Utils/KeyBinding/__Main__"
 import {
 	get_Auto_CardTypes_Rows,
 	get_Manual_CardTypes_SingleRow,
@@ -20,6 +21,8 @@ import {
 //#################//
 
 export namespace CardType_Manager{
+
+	export const HoverManager = _HoverManager
 
 	export function initialize_Manual(options:{
 		mode:       CardType_Manager.Mode,
@@ -101,9 +104,9 @@ const _Default_FunctionBar_Options = {
 
 function _initialize(functionBar:FunctionBar, cardOptions:_CardOptions[][]){
 	// keep order to ensure on_Layout callbacks are prepared
-	StyleManager.initialize(cardOptions)     // 1
-	CallbackManager.set_Card_HoverCallback() // 2
-	FunctionBar.load(functionBar)            // 3
+	StyleManager.initialize(cardOptions) // 1
+	_HoverManager.initialize()           // 2
+	FunctionBar.load(functionBar)        // 3
 }
 
 function _get_CardType_FunctionBar(
@@ -116,7 +119,6 @@ function _get_CardType_FunctionBar(
 		if     (mode == CardType_Manager.Mode._AutoRows   ){cardType_Rows = get_Auto_CardTypes_Rows()                     }
 		else if(mode == CardType_Manager.Mode.SingleRow   ){cardType_Rows = get_Manual_CardTypes_SingleRow   (cardOptions)}
 		else if(mode == CardType_Manager.Mode.MultipleRows){cardType_Rows = get_Manual_CardTypes_MultipleRows(cardOptions)}
-
 
 	functionBar_Options = {..._Default_FunctionBar_Options, ...functionBar_Options}
 	if(cellWidth !== undefined)

@@ -1,5 +1,8 @@
 //###  Module  ###//
-import {CardType_Manager} from "~/Extensions/CardType_Manager/__Main__"
+import {CardType_Manager       } from "~/Extensions/CardType_Manager/__Main__"
+import {KeyBinding             } from "~/Utils/KeyBinding/__Main__"
+import {get_CardTypes_FromRegEx} from "~/Utils/KanbanTool/CardType"
+import {HoverManager           } from "~/Extensions/CardType_Manager/HoverManager"
 
 
 const priorityColors = {
@@ -65,3 +68,26 @@ CardType_Manager.initialize_Manual({
 		],
 	],
 })
+
+//###  Toggle (Task_* <-> Today_*)  ###//
+KeyBinding.add(["ctrl", "space"],
+	(event:KeyboardEvent) => {
+		const cardType        = CardType_Manager.HoverManager.get_CardType()
+		const task_CardTypes  = get_CardTypes_FromRegEx(/^$/)
+		const today_CardTypes = get_CardTypes_FromRegEx(/^$/)
+
+		let new_CardType, new_CardType_Index
+
+		if(task_CardTypes.includes(cardType)){
+			new_CardType_Index = task_CardTypes.indexOf(cardType)
+			new_CardType       = today_CardTypes[new_CardType_Index]
+		}
+		else if(today_CardTypes.includes(cardType)){
+			new_CardType_Index = today_CardTypes.indexOf(cardType)
+			new_CardType       = task_CardTypes[new_CardType_Index]
+		}
+
+		if(new_CardType)
+			{HoverManager.set_CardType(new_CardType)}
+	}
+)
