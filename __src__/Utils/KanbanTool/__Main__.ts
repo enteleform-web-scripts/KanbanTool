@@ -1,6 +1,5 @@
 //###  Module  ###//
 import {onPageLoad_Timeout_MS} from "./Settings"
-import {CardType as _CardType} from "./CardType/__Main__"
 
 
 //###############//
@@ -39,6 +38,7 @@ export function remove_PageLoad_Callback(id:Symbol){
 
 // keep @ end of 'Exports: Local' declarations
 // to avoid issues with circular dependencies
+import {CardType as _CardType} from "./CardType/__Main__"
 _CardType.initialize(activeBoard)
 export const cardTypes = _CardType.cardTypes
 export const CardType  = _CardType
