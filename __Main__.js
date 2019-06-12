@@ -92,7 +92,6 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(12);
-const __Main__1 = __webpack_require__(13);
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
@@ -110,6 +109,7 @@ function remove_PageLoad_Callback(id) {
     }
 }
 exports.remove_PageLoad_Callback = remove_PageLoad_Callback;
+const __Main__1 = __webpack_require__(13);
 __Main__1.CardType.initialize(exports.activeBoard);
 exports.cardTypes = __Main__1.CardType.cardTypes;
 exports.CardType = __Main__1.CardType;
@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560373131033)
+		const elapsedTime = _get_ElapsedTime(1560373227330)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     4:58:51 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:00:27 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
