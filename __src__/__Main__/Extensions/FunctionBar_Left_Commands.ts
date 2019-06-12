@@ -12,7 +12,7 @@ import {
 //###  Export  ###//
 //################//
 
-export default new FunctionBar({
+FunctionBar.load( new FunctionBar({
 
 	position: Position.Left,
 
@@ -59,4 +59,4 @@ export default new FunctionBar({
 
 	],
 
-})
+}))

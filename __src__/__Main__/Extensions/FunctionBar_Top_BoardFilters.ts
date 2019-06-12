@@ -5,7 +5,6 @@ const {Entry, Position} = FunctionBar
 import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
 import {
 	CardType_Filter,
-	on_PageLoad,
 	Show, Hide,
 	remove_PageLoad_Callback,
 } from "~/Utils/KanbanTool/__Main__"
@@ -22,7 +21,7 @@ const activeTask_Columns = ["Routine", "Tasks.Active"]
 //###  Export  ###//
 //################//
 
-export default new FunctionBar({
+FunctionBar.load( new FunctionBar({
 
 	position:             Position.Top,
 	autoMap_KeyBindings:  true,
@@ -63,7 +62,7 @@ export default new FunctionBar({
 
 	],
 
-})
+}))
 
 
 //##############//
