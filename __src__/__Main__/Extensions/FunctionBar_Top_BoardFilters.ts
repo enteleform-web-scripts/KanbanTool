@@ -38,7 +38,7 @@ FunctionBar.load( new FunctionBar({
 					Show.allColumns()
 					Show.rows({include:activeTask_Columns})
 					CardType_Filter.disable_CardTypes()
-					CardType_Filter.enable_CardTypes(/^(Today.*)|(DailyTask)/)
+					CardType_Filter.enable_CardTypes(/^(Today.*)|(Task_Daily)/)
 				})
 			}),
 			new Entry({

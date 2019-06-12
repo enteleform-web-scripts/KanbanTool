@@ -47,7 +47,7 @@ CardType_Manager.initialize_Manual({
 			{/*###  "Task_Urgent" ###*/ borderAccent_Color:priorityColors.urgent, ...taskSettings},
 		],
 		[
-			{ //###  Daily_Task  ###//
+			{ //###  Task_Daily  ###//
 				background_Color:    "hsl(215, 80%, 85%)",
 				foreground_Color:    "hsl(215, 20%, 40%)",
 				borderColor_Inside:  "hsl(215, 40%, 50%)",
