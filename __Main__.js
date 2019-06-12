@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 19);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -91,8 +91,8 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(11);
-const CardType_1 = __webpack_require__(12);
+const Settings_1 = __webpack_require__(12);
+const CardType_1 = __webpack_require__(4);
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560309616534)
+		const elapsedTime = _get_ElapsedTime(1560368902609)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:20:16 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:48:22 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10636,6 +10636,92 @@ return jQuery;
 
 /***/ }),
 /* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function get_CardTypes(activeBoard) {
+    return activeBoard.cardTypes().active().map(({ attributes }, index) => new CardType({
+        index: index,
+        id: attributes.id,
+        name: attributes.name,
+        bgColor: attributes.color_attrs.rgb,
+        fgColor: (attributes.color_attrs.invert
+            ? "#FFF"
+            : "#000"),
+    }));
+}
+exports.get_CardTypes = get_CardTypes;
+class CardType {
+    constructor({ index, id, name, bgColor, fgColor }) {
+        this.index = index;
+        this.id = id;
+        this.name = name;
+        this.bgColor = bgColor;
+        this.fgColor = fgColor;
+    }
+}
+exports.CardType = CardType;
+function get_CardType_FromName(name) { return _get_CardType_FromProperty("name", name); }
+exports.get_CardType_FromName = get_CardType_FromName;
+function get_CardType_FromID(id) { return _get_CardType_FromProperty("id", id); }
+exports.get_CardType_FromID = get_CardType_FromID;
+function get_CardTypes_FromRegEx(pattern) {
+    return __Main__1.cardTypes.filter(cardType => pattern.exec(cardType.name));
+}
+exports.get_CardTypes_FromRegEx = get_CardTypes_FromRegEx;
+const __Main__1 = __webpack_require__(0);
+function _get_CardType_FromProperty(key, value) {
+    const matches = __Main__1.cardTypes.filter(cardType => (cardType[key] == value));
+    if (matches.length > 0) {
+        return matches[0];
+    }
+    else {
+        return undefined;
+    }
+}
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const CSS = __webpack_require__(11).CardType_Manager;
+const CardType_1 = __webpack_require__(4);
+var HoverManager;
+(function (HoverManager) {
+    let _card = undefined;
+    function initialize() {
+        const $element = $("kt-board");
+        $element.on("mouseover", "kt-task", (event) => { _card = event.currentTarget; });
+        $element.on("mouseout", "kt-task", (event) => { _card = null; });
+    }
+    HoverManager.initialize = initialize;
+    function get_CardType() {
+        if (_card) {
+            const cardType_ID = _card.props.task.cardType().attributes.id;
+            return CardType_1.get_CardType_FromID(cardType_ID);
+        }
+        else {
+            return undefined;
+        }
+    }
+    HoverManager.get_CardType = get_CardType;
+    function set_CardType(cardType) {
+        if (_card) {
+            _card.props.task.save("card_type_id", cardType.id);
+        }
+    }
+    HoverManager.set_CardType = set_CardType;
+})(HoverManager = exports.HoverManager || (exports.HoverManager = {}));
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10724,19 +10810,19 @@ exports.TaskContainer = TaskContainer;
 
 
 /***/ }),
-/* 5 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(8).inject(__dirname, { CSS: true, HTML: true });
-const Settings_1 = __webpack_require__(6);
-const Entry_1 = __webpack_require__(33);
-const Divider_1 = __webpack_require__(34);
-const Layout_1 = __webpack_require__(35);
-const Module_BaseClasses_1 = __webpack_require__(36);
-const Position_1 = __webpack_require__(7);
+__webpack_require__(10).inject(__dirname, { CSS: true, HTML: true });
+const Settings_1 = __webpack_require__(8);
+const Entry_1 = __webpack_require__(34);
+const Divider_1 = __webpack_require__(35);
+const Layout_1 = __webpack_require__(36);
+const Module_BaseClasses_1 = __webpack_require__(37);
+const Position_1 = __webpack_require__(9);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
         super();
@@ -10792,7 +10878,7 @@ exports.FunctionBar = FunctionBar;
 /* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\FunctionBar"))
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10804,7 +10890,7 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
 
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10824,13 +10910,13 @@ exports.is_VerticalPosition = is_VerticalPosition;
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(21);
+const Settings_1 = __webpack_require__(23);
 function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
     if (CSS) {
         _inject_CSS(modulePath);
@@ -10909,148 +10995,13 @@ function _strip_HTML_ExcessData(html) {
 
 
 /***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(10);
-const __Main__2 = __webpack_require__(0);
-const $ = __webpack_require__(2);
-var StyleManager;
-(function (StyleManager) {
-    function initialize(cardOptions) {
-        StyleManager._CardType_Options =
-            (cardOptions === undefined)
-                ? undefined
-                : cardOptions.flatMap(option => option);
-        StyleManager._CardType_ID_Map = _build_CardType_ID_Map();
-        const callback = () => {
-            $.find("kt-task").forEach(element => {
-                update_CardStyle(element);
-            });
-        };
-        __Main__2.on_PageLoad(() => {
-            callback();
-            __Main__2.KanbanTool.tasks.on("change", callback);
-        });
-    }
-    StyleManager.initialize = initialize;
-    function update_CardStyle(element, cardType) {
-        element = $(element);
-        cardType = (cardType || _get_CardType(element));
-        if (StyleManager._CardType_Options === undefined) {
-            _update_CardStyle_From_CardTypes(element, cardType);
-        }
-        else {
-            _update_CardStyle_From_CardOptions(element, cardType);
-        }
-    }
-    StyleManager.update_CardStyle = update_CardStyle;
-})(StyleManager = exports.StyleManager || (exports.StyleManager = {}));
-function _build_CardType_ID_Map() {
-    const idMap = {};
-    __Main__2.cardTypes.forEach(cardType => {
-        idMap[cardType.id] = cardType;
-    });
-    return idMap;
-}
-function _update_CardStyle_From_CardTypes(element, cardType) {
-    __Main__1.$set_CSS_Variable(element, "title_BorderColor_Main", cardType.bgColor);
-}
-function _update_CardStyle_From_CardOptions(element, cardType) {
-    const cardOptions = _get_CardOptions(element, cardType);
-    Array.from([
-        ["title_Background_Color", cardOptions.background_Color],
-        ["title_Foreground_Color", cardOptions.foreground_Color],
-        ["title_BorderColor_Main", cardOptions.borderColor_Main],
-        ["title_BorderColor_Inside", cardOptions.borderColor_Inside],
-        ["title_BorderColor_Outside", cardOptions.borderColor_Outside],
-    ]).forEach(([key, value]) => {
-        if (value) {
-            __Main__1.$set_CSS_Variable(element, key, value);
-        }
-    });
-    if (cardOptions.borderAccent_Color) {
-        __Main__1.$set_CSS_Variable(element, "title_BorderAccent_Color", cardOptions.borderAccent_Color);
-        element.addClass("borderAccent_Enabled");
-    }
-    else {
-        __Main__1.$set_CSS_Variable(element, "title_BorderAccent_Color", "#0000");
-        element.removeClass("borderAccent_Enabled");
-    }
-}
-function _get_CardType(element) {
-    const taskID = element.data("task-id");
-    const model = __Main__2.KanbanTool.tasks.stub(taskID);
-    const cardType_ID = model.cardType().id;
-    return StyleManager._CardType_ID_Map[cardType_ID];
-}
-function _get_CardOptions(element, cardType) { return StyleManager._CardType_Options[cardType.index]; }
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const is_JQuery_1 = __webpack_require__(26);
-function set_CSS_Variable(arg_1, arg_2, arg_3) {
-    const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
-    if (element) {
-        element.get(0).style.setProperty(key, value);
-    }
-    else {
-        document.documentElement.style.setProperty(key, value);
-    }
-}
-exports.set_CSS_Variable = set_CSS_Variable;
-function $set_CSS_Variable(element, key, value) { element.get(0).style.setProperty(`--${key}`, value); }
-exports.$set_CSS_Variable = $set_CSS_Variable;
-function get_CSS_Variable(arg_1, arg_2) {
-    const { element, key } = _get_Arguments(arg_1, arg_2, undefined);
-    if (element) {
-        return element.get(0).style.getPropertyValue(key);
-    }
-    else {
-        return _get_CSS_Variable_Value(key);
-    }
-}
-exports.get_CSS_Variable = get_CSS_Variable;
-function get_CSS_Variables() {
-    const variables = {};
-    const styleSheets = [...document.styleSheets]
-        .flatMap(sheet => _get_CSS_Variable_Keys(sheet));
-    styleSheets.forEach(key => {
-        variables[key] = _get_CSS_Variable_Value(key);
-    });
-    return variables;
-}
-exports.get_CSS_Variables = get_CSS_Variables;
-function _get_Arguments(arg_1, arg_2, arg_3) {
-    let [element, key, value] = is_JQuery_1.is_JQuery(arg_1)
-        ? [arg_1, arg_2, arg_3]
-        : [undefined, arg_1, arg_2];
-    return {
-        element,
-        value,
-        key: `--${key}`
-    };
-}
-function _get_CSS_Variable_Keys(styleSheet) {
-    const cssRules = [...styleSheet.cssRules];
-    const rootRules = cssRules.filter(rule => (rule.selectorText == ":root"));
-    const keys = rootRules.flatMap(rule => [...rule.style]);
-    return keys;
-}
-function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documentElement).getPropertyValue(key); }
-
-
-/***/ }),
 /* 11 */
+/***/ (function(module) {
+
+module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterColor","activeFilter":"active","inactiveFilter":"inactive","_":""}};
+
+/***/ }),
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11061,58 +11012,13 @@ exports.onPageLoad_Timeout_MS = 500;
 
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-function get_CardTypes(activeBoard) {
-    return activeBoard.cardTypes().active().map(({ attributes }, index) => new CardType({
-        index: index,
-        id: attributes.id,
-        name: attributes.name,
-        bgColor: attributes.color_attrs.rgb,
-        fgColor: (attributes.color_attrs.invert
-            ? "#FFF"
-            : "#000"),
-    }));
-}
-exports.get_CardTypes = get_CardTypes;
-class CardType {
-    constructor({ index, id, name, bgColor, fgColor }) {
-        this.index = index;
-        this.id = id;
-        this.name = name;
-        this.bgColor = bgColor;
-        this.fgColor = fgColor;
-    }
-}
-exports.CardType = CardType;
-function get_CardType_FromName(name) { return _get_CardType_FromProperty("name", name); }
-exports.get_CardType_FromName = get_CardType_FromName;
-function get_CardType_FromID(id) { return _get_CardType_FromProperty("id", id); }
-exports.get_CardType_FromID = get_CardType_FromID;
-const __Main__1 = __webpack_require__(0);
-function _get_CardType_FromProperty(key, value) {
-    const matches = __Main__1.cardTypes.filter(cardType => (cardType[key] == value));
-    if (matches.length > 0) {
-        return matches[0];
-    }
-    else {
-        return undefined;
-    }
-}
-
-
-/***/ }),
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(4);
+const TaskContainer_1 = __webpack_require__(6);
 const get_Rows_1 = __webpack_require__(14);
 const get_Columns_1 = __webpack_require__(15);
 const Glob_1 = __webpack_require__(30);
@@ -11195,7 +11101,7 @@ function _match_Glob(container, target) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(4);
+const TaskContainer_1 = __webpack_require__(6);
 const __Main__1 = __webpack_require__(0);
 const $ = __webpack_require__(2);
 function get_Rows() {
@@ -11220,7 +11126,7 @@ exports.get_Rows = get_Rows;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(4);
+const TaskContainer_1 = __webpack_require__(6);
 const __Main__1 = __webpack_require__(0);
 function get_Columns() {
     const models = __Main__1.activeBoard.workflowStages()
@@ -11270,40 +11176,184 @@ function _update_ColumnRelationships(columns) {
 
 /***/ }),
 /* 16 */
-/***/ (function(module) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collapsed","empty":"empty","divider":"divider","textDivider":"textDivider","_":""}};
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(17);
+const __Main__2 = __webpack_require__(0);
+const $ = __webpack_require__(2);
+var StyleManager;
+(function (StyleManager) {
+    function initialize(cardOptions) {
+        StyleManager._CardType_Options =
+            (cardOptions === undefined)
+                ? undefined
+                : cardOptions.flatMap(option => option);
+        StyleManager._CardType_ID_Map = _build_CardType_ID_Map();
+        const callback = () => {
+            $.find("kt-task").forEach(element => {
+                update_CardStyle(element);
+            });
+        };
+        __Main__2.on_PageLoad(() => {
+            callback();
+            __Main__2.KanbanTool.tasks.on("change", callback);
+        });
+    }
+    StyleManager.initialize = initialize;
+    function update_CardStyle(element, cardType) {
+        element = $(element);
+        cardType = (cardType || _get_CardType(element));
+        if (StyleManager._CardType_Options === undefined) {
+            _update_CardStyle_From_CardTypes(element, cardType);
+        }
+        else {
+            _update_CardStyle_From_CardOptions(element, cardType);
+        }
+    }
+    StyleManager.update_CardStyle = update_CardStyle;
+})(StyleManager = exports.StyleManager || (exports.StyleManager = {}));
+function _build_CardType_ID_Map() {
+    const idMap = {};
+    __Main__2.cardTypes.forEach(cardType => {
+        idMap[cardType.id] = cardType;
+    });
+    return idMap;
+}
+function _update_CardStyle_From_CardTypes(element, cardType) {
+    __Main__1.$set_CSS_Variable(element, "title_BorderColor_Main", cardType.bgColor);
+}
+function _update_CardStyle_From_CardOptions(element, cardType) {
+    const cardOptions = _get_CardOptions(element, cardType);
+    Array.from([
+        ["title_Background_Color", cardOptions.background_Color],
+        ["title_Foreground_Color", cardOptions.foreground_Color],
+        ["title_BorderColor_Main", cardOptions.borderColor_Main],
+        ["title_BorderColor_Inside", cardOptions.borderColor_Inside],
+        ["title_BorderColor_Outside", cardOptions.borderColor_Outside],
+    ]).forEach(([key, value]) => {
+        if (value) {
+            __Main__1.$set_CSS_Variable(element, key, value);
+        }
+    });
+    if (cardOptions.borderAccent_Color) {
+        __Main__1.$set_CSS_Variable(element, "title_BorderAccent_Color", cardOptions.borderAccent_Color);
+        element.addClass("borderAccent_Enabled");
+    }
+    else {
+        __Main__1.$set_CSS_Variable(element, "title_BorderAccent_Color", "#0000");
+        element.removeClass("borderAccent_Enabled");
+    }
+}
+function _get_CardType(element) {
+    const taskID = element.data("task-id");
+    const model = __Main__2.KanbanTool.tasks.stub(taskID);
+    const cardType_ID = model.cardType().id;
+    return StyleManager._CardType_ID_Map[cardType_ID];
+}
+function _get_CardOptions(element, cardType) { return StyleManager._CardType_Options[cardType.index]; }
+
 
 /***/ }),
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(3);
-module.exports = __webpack_require__(18);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const is_JQuery_1 = __webpack_require__(33);
+function set_CSS_Variable(arg_1, arg_2, arg_3) {
+    const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
+    if (element) {
+        element.get(0).style.setProperty(key, value);
+    }
+    else {
+        document.documentElement.style.setProperty(key, value);
+    }
+}
+exports.set_CSS_Variable = set_CSS_Variable;
+function $set_CSS_Variable(element, key, value) { element.get(0).style.setProperty(`--${key}`, value); }
+exports.$set_CSS_Variable = $set_CSS_Variable;
+function get_CSS_Variable(arg_1, arg_2) {
+    const { element, key } = _get_Arguments(arg_1, arg_2, undefined);
+    if (element) {
+        return element.get(0).style.getPropertyValue(key);
+    }
+    else {
+        return _get_CSS_Variable_Value(key);
+    }
+}
+exports.get_CSS_Variable = get_CSS_Variable;
+function get_CSS_Variables() {
+    const variables = {};
+    const styleSheets = [...document.styleSheets]
+        .flatMap(sheet => _get_CSS_Variable_Keys(sheet));
+    styleSheets.forEach(key => {
+        variables[key] = _get_CSS_Variable_Value(key);
+    });
+    return variables;
+}
+exports.get_CSS_Variables = get_CSS_Variables;
+function _get_Arguments(arg_1, arg_2, arg_3) {
+    let [element, key, value] = is_JQuery_1.is_JQuery(arg_1)
+        ? [arg_1, arg_2, arg_3]
+        : [undefined, arg_1, arg_2];
+    return {
+        element,
+        value,
+        key: `--${key}`
+    };
+}
+function _get_CSS_Variable_Keys(styleSheet) {
+    const cssRules = [...styleSheet.cssRules];
+    const rootRules = cssRules.filter(rule => (rule.selectorText == ":root"));
+    const keys = rootRules.flatMap(rule => [...rule.style]);
+    return keys;
+}
+function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documentElement).getPropertyValue(key); }
 
 
 /***/ }),
 /* 18 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module) {
 
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(19);
-__webpack_require__(38);
-__webpack_require__(39);
-__webpack_require__(40);
-__webpack_require__(41);
-
+module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collapsed","empty":"empty","divider":"divider","textDivider":"textDivider","_":""}};
 
 /***/ }),
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(3);
+module.exports = __webpack_require__(20);
+
+
+/***/ }),
+/* 20 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(20);
+__webpack_require__(21);
+__webpack_require__(39);
+__webpack_require__(40);
+__webpack_require__(41);
+__webpack_require__(42);
+
+
+/***/ }),
+/* 21 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(22);
+const __Main__2 = __webpack_require__(1);
+const CardType_1 = __webpack_require__(4);
+const HoverManager_1 = __webpack_require__(5);
 const priorityColors = {
     low: "hsl(220, 40%,  60%)",
     medium: "hsl(50,  100%, 70%)",
@@ -11361,23 +11411,42 @@ __Main__1.CardType_Manager.initialize_Manual({
         ],
     ],
 });
+__Main__2.KeyBinding.add(["ctrl", "space"], (event) => {
+    const cardType = __Main__1.CardType_Manager.HoverManager.get_CardType();
+    const task_CardTypes = CardType_1.get_CardTypes_FromRegEx(/^$/);
+    const today_CardTypes = CardType_1.get_CardTypes_FromRegEx(/^$/);
+    let new_CardType, new_CardType_Index;
+    if (task_CardTypes.includes(cardType)) {
+        new_CardType_Index = task_CardTypes.indexOf(cardType);
+        new_CardType = today_CardTypes[new_CardType_Index];
+    }
+    else if (today_CardTypes.includes(cardType)) {
+        new_CardType_Index = today_CardTypes.indexOf(cardType);
+        new_CardType = task_CardTypes[new_CardType_Index];
+    }
+    if (new_CardType) {
+        HoverManager_1.HoverManager.set_CardType(new_CardType);
+    }
+});
 
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(8).inject(__dirname, { CSS: true, HTML: false });
-const CallbackManager_1 = __webpack_require__(24);
-const StyleManager_1 = __webpack_require__(9);
-const __Main__1 = __webpack_require__(5);
-const Position_1 = __webpack_require__(7);
-const get_Rows_1 = __webpack_require__(37);
+__webpack_require__(10).inject(__dirname, { CSS: true, HTML: false });
+const CallbackManager_1 = __webpack_require__(26);
+const HoverManager_1 = __webpack_require__(5);
+const StyleManager_1 = __webpack_require__(16);
+const __Main__1 = __webpack_require__(7);
+const Position_1 = __webpack_require__(9);
+const get_Rows_1 = __webpack_require__(38);
 var CardType_Manager;
 (function (CardType_Manager) {
+    CardType_Manager.HoverManager = HoverManager_1.HoverManager;
     function initialize_Manual(options) {
         const functionBar = _get_CardType_FunctionBar(options.mode, options.cardTypes, options.cellWidth, options.functionBar_Options);
         _initialize(functionBar, options.cardTypes);
@@ -11404,7 +11473,7 @@ const _Default_FunctionBar_Options = {
 };
 function _initialize(functionBar, cardOptions) {
     StyleManager_1.StyleManager.initialize(cardOptions);
-    CallbackManager_1.CallbackManager.set_Card_HoverCallback();
+    HoverManager_1.HoverManager.initialize();
     __Main__1.FunctionBar.load(functionBar);
 }
 function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, functionBar_Options) {
@@ -11452,7 +11521,7 @@ function _update_FunctionBar_Options_CellWidth(options, cellWidth) {
 /* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\CardType_Manager"))
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11461,7 +11530,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(__webpack_require__(22));
+const path_1 = __importDefault(__webpack_require__(24));
 class S {
 }
 S.baseURL = "https://enteleform-extensions.github.io/KanbanTool";
@@ -11490,7 +11559,7 @@ exports.Settings = S;
 
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -11718,10 +11787,10 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(23)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(25)))
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -11911,30 +11980,20 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(25).CardType_Manager;
-const StyleManager_1 = __webpack_require__(9);
+const CSS = __webpack_require__(11).CardType_Manager;
+const HoverManager_1 = __webpack_require__(5);
+const StyleManager_1 = __webpack_require__(16);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(0);
 var CallbackManager;
 (function (CallbackManager) {
     let _entryIndex = -1;
-    let _card = undefined;
-    function set_Card_HoverCallback() {
-        const $element = $("kt-board");
-        $element.on("mouseover", "kt-task", (event) => {
-            _card = event.currentTarget;
-        });
-        $element.on("mouseout", "kt-task", (event) => {
-            _card = null;
-        });
-    }
-    CallbackManager.set_Card_HoverCallback = set_Card_HoverCallback;
     function get_Callbacks() {
         _entryIndex += 1;
         const cardType = __Main__2.cardTypes[_entryIndex];
@@ -11951,7 +12010,7 @@ var CallbackManager;
                 update_CSS();
             },
             on_KeyBinding: function (event, cell) {
-                _update_CardType(cardType);
+                HoverManager_1.HoverManager.set_CardType(cardType);
             },
             on_Click: function (event, cell) {
                 if (__Main__1.KeyBinding.is_Pressed("ctrl")) {
@@ -11963,11 +12022,6 @@ var CallbackManager;
                 }
             },
         };
-    }
-    function _update_CardType(cardType) {
-        if (_card) {
-            _card.props.task.save("card_type_id", cardType.id);
-        }
     }
 })(CallbackManager = exports.CallbackManager || (exports.CallbackManager = {}));
 function _get_UpdateCSS_Callback(cell, cardType) {
@@ -11985,34 +12039,15 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 
 
 /***/ }),
-/* 25 */
-/***/ (function(module) {
-
-module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterColor","activeFilter":"active","inactiveFilter":"inactive","_":""}};
-
-/***/ }),
-/* 26 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-function is_JQuery(obj) {
-    return (obj && (obj instanceof jQuery || obj.constructor.prototype.jquery));
-}
-exports.is_JQuery = is_JQuery;
-
-
-/***/ }),
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(11);
+const Settings_1 = __webpack_require__(12);
 const __Main__1 = __webpack_require__(1);
-const CardType_1 = __webpack_require__(12);
+const CardType_1 = __webpack_require__(4);
 const __Main__2 = __webpack_require__(0);
 const $ = __webpack_require__(2);
 class CardType_Filter {
@@ -12789,7 +12824,20 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(6);
+function is_JQuery(obj) {
+    return (obj && (obj instanceof jQuery || obj.constructor.prototype.jquery));
+}
+exports.is_JQuery = is_JQuery;
+
+
+/***/ }),
+/* 34 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Settings_1 = __webpack_require__(8);
 const __Main__1 = __webpack_require__(1);
 class Entry {
     constructor({ name, callback, on_Click, on_DoubleClick, on_KeyBinding, on_Layout, keyBinding, color, }) {
@@ -12829,13 +12877,13 @@ const emptyCallback = ((...args) => { });
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(16).FunctionBar;
+const CSS = __webpack_require__(18).FunctionBar;
 class Divider {
     constructor(text) {
         this.text = text;
@@ -12853,16 +12901,16 @@ exports.Divider = Divider;
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(16).FunctionBar;
-const Settings_1 = __webpack_require__(6);
-const Position_1 = __webpack_require__(7);
-const __Main__1 = __webpack_require__(10);
+const CSS = __webpack_require__(18).FunctionBar;
+const Settings_1 = __webpack_require__(8);
+const Position_1 = __webpack_require__(9);
+const __Main__1 = __webpack_require__(17);
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
 const $ = __webpack_require__(2);
@@ -12970,7 +13018,7 @@ function _update_OriginalLayout() {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12983,7 +13031,7 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13042,13 +13090,13 @@ function _cardTypes_Exhausted(cardIndex) { return (cardIndex == __Main__1.cardTy
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(5);
+const __Main__1 = __webpack_require__(7);
 const { Entry, Position } = __Main__1.FunctionBar;
 const __Main__2 = __webpack_require__(0);
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
@@ -13097,13 +13145,13 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(5);
+const __Main__1 = __webpack_require__(7);
 const { Entry, Position } = __Main__1.FunctionBar;
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
@@ -13164,7 +13212,7 @@ function get_Callbacks(callback) {
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13211,7 +13259,7 @@ function get_DivIndex(checkList_Item) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
