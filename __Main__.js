@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560307870778)
+		const elapsedTime = _get_ElapsedTime(1560309616534)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:51:10 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:20:16 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13122,7 +13122,7 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
                     __Main__3.Show.allColumns();
                     __Main__3.Show.rows({ include: activeTask_Columns });
                     __Main__3.CardType_Filter.disable_CardTypes();
-                    __Main__3.CardType_Filter.enable_CardTypes(/^(Today.*)|(DailyTask)/);
+                    __Main__3.CardType_Filter.enable_CardTypes(/^(Today.*)|(Task_Daily)/);
                 })
             }),
             new Entry({
