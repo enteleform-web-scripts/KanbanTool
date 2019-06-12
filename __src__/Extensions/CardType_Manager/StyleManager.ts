@@ -1,9 +1,8 @@
 //###  Module  ###//
 import {_CardOptions     } from "./__Main__"
 import {$set_CSS_Variable} from "~/Utils/CSS_Variables/__Main__"
-import {CardType         } from "~/Utils/KanbanTool/CardType"
 import {
-	cardTypes,
+	CardType, cardTypes,
 	KanbanTool,
 	on_PageLoad,
 } from "~/Utils/KanbanTool/__Main__"

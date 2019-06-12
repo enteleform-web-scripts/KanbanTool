@@ -1,9 +1,8 @@
 
 //###  Module  ###//
-import {_CardOptions} from "./__Main__"
-import {CardType    } from "~/Utils/KanbanTool/CardType"
-import {cardTypes   } from "~/Utils/KanbanTool/__Main__"
-import {KeyBinding  } from "~/Utils/KeyBinding/__Main__"
+import {_CardOptions       } from "./__Main__"
+import {CardType, cardTypes} from "~/Utils/KanbanTool/__Main__"
+import {KeyBinding         } from "~/Utils/KeyBinding/__Main__"
 
 
 //#################//

@@ -4,7 +4,7 @@ import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
 const {Entry, Position} = FunctionBar
 import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
 import {
-	CardType_Filter,
+	CardType,
 	Show, Hide,
 	remove_PageLoad_Callback,
 } from "~/Utils/KanbanTool/__Main__"
@@ -37,8 +37,8 @@ FunctionBar.load( new FunctionBar({
 				...get_Callbacks(() => {
 					Show.allColumns()
 					Show.rows({include:activeTask_Columns})
-					CardType_Filter.disable_CardTypes()
-					CardType_Filter.enable_CardTypes(/^(Today.*)|(Task_Daily)/)
+					CardType.Filter.disable_CardTypes()
+					CardType.Filter.enable_CardTypes(/^(Today.*)|(Task_Daily)/)
 				})
 			}),
 			new Entry({
@@ -47,7 +47,7 @@ FunctionBar.load( new FunctionBar({
 				...get_Callbacks(() => {
 					Show.allColumns()
 					Show.rows({include:activeTask_Columns})
-					CardType_Filter.enable_CardTypes()
+					CardType.Filter.enable_CardTypes()
 				}),
 			}),
 			new Entry({
@@ -55,7 +55,7 @@ FunctionBar.load( new FunctionBar({
 				...get_Callbacks(() => {
 					Show.allColumns()
 					Show.allRows()
-					CardType_Filter.enable_CardTypes()
+					CardType.Filter.enable_CardTypes()
 				}),
 			}),
 		],
@@ -69,7 +69,7 @@ FunctionBar.load( new FunctionBar({
 //###  Init  ###//
 //##############//
 
-remove_PageLoad_Callback(CardType_Filter.show_AllCards_ID)
+remove_PageLoad_Callback(CardType.Filter.show_AllCards_ID)
 
 
 //###############//

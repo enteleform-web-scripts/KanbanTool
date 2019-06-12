@@ -1,3 +1,10 @@
+//###  Module  ###//
+import {Filter as _Filter} from "./Filter"
+import {is_JQuery        } from "~/Utils/is_JQuery"
+
+//###  NPM  ###//
+const $:any = require("jquery")
+
 
 //#################//
 //###  Exports  ###//
@@ -5,6 +12,7 @@
 
 export class CardType{
 
+	static Filter = _Filter
 	static _cardTypes: CardType[]
 
 	index:   number
@@ -24,9 +32,8 @@ export class CardType{
 		this.fgColor = fgColor
 	}
 
-	static get cardTypes(){
-		return CardType._cardTypes
-	}
+	static get cardTypes()
+		{return CardType._cardTypes}
 
 	static initialize(activeBoard){
 		CardType._cardTypes =
@@ -55,6 +62,21 @@ export class CardType{
 		return CardType.cardTypes.filter(cardType =>
 			pattern.exec(cardType.name)
 		)
+	}
+
+	static get_Cards(...cardTypes:CardType[]): ({cardType:CardType, element:JQuery, model:any}[]){
+		const cardElements = $.find("kt-task")
+		return cardTypes.flatMap(cardType =>
+			cardElements
+				.map   (element   => ({cardType, element:$(element), model:element.props.task}))
+				.filter(({model}) => (model.cardType().id == cardType.id)                      )
+		)
+	}
+
+	static set(element:(JQuery|HTMLElement), cardType:CardType){
+		if(is_JQuery(element))
+			{element = (element as any).get(0)}
+		(element as any).props.task.save("card_type_id", cardType.id)
 	}
 
 }

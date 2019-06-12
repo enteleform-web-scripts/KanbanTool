@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {CardType} from "~/Utils/KanbanTool/CardType"
+import {CardType} from "~/Utils/KanbanTool/__Main__"
 
 
 //#################//
@@ -27,7 +27,7 @@ export namespace HoverManager{
 
 	export function set_CardType(cardType:CardType){
 		if(_card)
-			{_card.props.task.save("card_type_id", cardType.id)}
+			{CardType.set(_card, cardType)}
 	}
 
 }

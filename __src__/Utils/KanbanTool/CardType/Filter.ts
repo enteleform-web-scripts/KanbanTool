@@ -1,9 +1,8 @@
 //###  Module  ###//
 import {cardType_Filter_Index} from "../Settings"
-import {CardType             } from "../CardType"
+import {CardType             } from "./__Main__"
 import {KeyBinding           } from "~/Utils/KeyBinding/__Main__"
 import {
-	cardTypes,
 	on_PageLoad,
 	Show, Hide,
 } from "~/Utils/KanbanTool/__Main__"
@@ -16,14 +15,14 @@ const $:any = require("jquery")
 //###  Export  ###//
 //################//
 
-export class CardType_Filter{
+export class Filter{
 
 	static show_AllCards_ID = Symbol()
 
 	static _onUpdate_Callbacks:(() => void)[] = []
 
 	static get enabled()
-		{return CardType_Filter._filterButton.hasClass("kt-board_search-filter--active")}
+		{return Filter._filterButton.hasClass("kt-board_search-filter--active")}
 	static get disabled()
 		{return !(this.enabled)}
 
@@ -39,8 +38,8 @@ export class CardType_Filter{
 		{return Array.from($.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)"))}
 
 	static cardType_IsEnabled(cardType:CardType){
-		const cardType_Buttons         = CardType_Filter._cardType_Buttons
-		const enabled_CardType_Buttons = CardType_Filter._enabled_CardType_Buttons
+		const cardType_Buttons         = Filter._cardType_Buttons
+		const enabled_CardType_Buttons = Filter._enabled_CardType_Buttons
 
 		const enabledIndexes = cardType_Buttons
 			.map   ((button, index) => ({button, index})                        )
@@ -50,28 +49,28 @@ export class CardType_Filter{
 		return enabledIndexes.includes(cardType.index)
 	}
 	static cardType_IsDisabled(cardType:CardType)
-		{return !(CardType_Filter.cardType_IsEnabled(cardType))}
+		{return !(Filter.cardType_IsEnabled(cardType))}
 
 	static enable(){
-		if(CardType_Filter.disabled)
-			{CardType_Filter._filterButton.click()}
-		CardType_Filter._on_Update()
+		if(Filter.disabled)
+			{Filter._filterButton.click()}
+		Filter._on_Update()
 	}
 	static disable(){
-		if(CardType_Filter.enabled)
-			{CardType_Filter._filterButton.click()}
-		CardType_Filter._on_Update()
+		if(Filter.enabled)
+			{Filter._filterButton.click()}
+		Filter._on_Update()
 	}
 
-	static enable_CardTypes (...ids:(number|string|RegExp)[]){_set_CardType_States(ids, CardType_Filter._disabled_CardType_Buttons)}
-	static disable_CardTypes(...ids:(number|string|RegExp)[]){_set_CardType_States(ids, CardType_Filter._enabled_CardType_Buttons )}
-	static toggle_CardTypes (...ids:(number|string|RegExp)[]){_set_CardType_States(ids, CardType_Filter._cardType_Buttons         )}
+	static enable_CardTypes (...ids:(number|string|RegExp)[]){_set_CardType_States(ids, Filter._disabled_CardType_Buttons)}
+	static disable_CardTypes(...ids:(number|string|RegExp)[]){_set_CardType_States(ids, Filter._enabled_CardType_Buttons )}
+	static toggle_CardTypes (...ids:(number|string|RegExp)[]){_set_CardType_States(ids, Filter._cardType_Buttons         )}
 
 	static on_Update(callback:(() => void))
-		{CardType_Filter._onUpdate_Callbacks.push(callback)}
+		{Filter._onUpdate_Callbacks.push(callback)}
 
 	static _on_Update(){
-		CardType_Filter._onUpdate_Callbacks.forEach(callback =>
+		Filter._onUpdate_Callbacks.forEach(callback =>
 			callback()
 		)
 	}
@@ -84,12 +83,12 @@ export class CardType_Filter{
 //##############//
 
 on_PageLoad(() => {
-	CardType_Filter.enable()
+	Filter.enable()
 })
 
-on_PageLoad(CardType_Filter.show_AllCards_ID, ()=>{
-	CardType_Filter.enable()
-	CardType_Filter.enable_CardTypes()
+on_PageLoad(Filter.show_AllCards_ID, ()=>{
+	Filter.enable()
+	Filter.enable_CardTypes()
 })
 
 KeyBinding.add(["ctrl", "`"], ()=>{
@@ -100,7 +99,7 @@ KeyBinding.add(["ctrl", "`"], ()=>{
 KeyBinding.add(["ctrl", "shift", "`"], ()=>{
 	Show.allColumns()
 	Show.allRows()
-	CardType_Filter.enable_CardTypes()
+	Filter.enable_CardTypes()
 })
 
 
@@ -112,7 +111,7 @@ function _set_CardType_States(
 	ids:           (number|string|RegExp)[],
 	targetButtons: JQuery[],
 ){
-	const allButtons = CardType_Filter._cardType_Buttons
+	const allButtons = Filter._cardType_Buttons
 
 	const apply_State_To_AllCardTypes = (ids.length == 0)
 	if(apply_State_To_AllCardTypes)
@@ -130,7 +129,7 @@ function _set_CardType_States(
 			{button.click()}
 	}
 
-	CardType_Filter._on_Update()
+	Filter._on_Update()
 }
 
 function _process_RegExp_IDs(allButtons:JQuery[], targetButtons:JQuery[], ids:(number|string|RegExp)[]){
@@ -138,7 +137,7 @@ function _process_RegExp_IDs(allButtons:JQuery[], targetButtons:JQuery[], ids:(n
 	ids            = ids.filter(id => !(id instanceof RegExp)) as (number|string)[]
 
 	const matchingButton_Indexes =
-		cardTypes
+		CardType.cardTypes
 			.filter(cardType   => patterns.some(pattern => pattern.exec(cardType.name) ? true : false))
 			.map   (cardType   => ({button:allButtons[cardType.index], index:cardType.index})         )
 			.filter(({button}) => targetButtons.includes(button)                                      )

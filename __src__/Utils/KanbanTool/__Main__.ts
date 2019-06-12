@@ -1,6 +1,6 @@
 //###  Module  ###//
 import {onPageLoad_Timeout_MS} from "./Settings"
-import {CardType             } from "./CardType"
+import {CardType as _CardType} from "./CardType/__Main__"
 
 
 //###############//
@@ -17,8 +17,10 @@ const _on_PageLoad_Callbacks:({id:Symbol, callback:(() => void)}[]) = []
 export const KanbanTool  = (window as any).KT
 export const activeBoard = KanbanTool.boards.models[0]
 
-CardType.initialize(activeBoard)
-export const cardTypes = CardType.cardTypes
+_CardType.initialize(activeBoard)
+export const cardTypes = _CardType.cardTypes
+export const CardType  = _CardType
+export type  CardType  = _CardType
 
 export function on_PageLoad(callback:(() => void)                            )
 export function on_PageLoad(id:Symbol, callback:(() => void)                 )
@@ -45,9 +47,8 @@ export function remove_PageLoad_Callback(id:Symbol){
 //###  Exports: Nested  ###//
 //#########################//
 
-export {CardType_Filter} from "./CardType_Filter/__Main__"
-export {Show           } from "./Show/__Main__"
-export {Hide           } from "./Hide/__Main__"
+export {Show} from "./Show/__Main__"
+export {Hide} from "./Hide/__Main__"
 
 
 //##############//
