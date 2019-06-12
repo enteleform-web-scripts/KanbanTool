@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560368902609)
+		const elapsedTime = _get_ElapsedTime(1560369006535)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:48:22 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:50:06 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13281,13 +13281,6 @@ class FilterKeybindings {
         const searchField = $("#kt-board_search-q");
         searchField.focus();
     }
-    static show_FilterMenu(event) {
-        const filterMenu = $(".kt-board_search-filters_popover");
-        const displayValue = (filterMenu.css("display") == "none")
-            ? "block"
-            : "none";
-        filterMenu.css("display", displayValue);
-    }
 }
 __decorate([
     __Main__1.KeyBinding.add(["ctrl", "f"], { preventDefault: true }),
@@ -13295,12 +13288,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], FilterKeybindings, "focus_SearchField", null);
-__decorate([
-    __Main__1.KeyBinding.add(["ctrl", "space"], { preventDefault: true }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], FilterKeybindings, "show_FilterMenu", null);
 
 
 /***/ })
