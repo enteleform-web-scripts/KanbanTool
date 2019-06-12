@@ -1,16 +1,18 @@
 kt-board kt-task,
 .FunctionBars .cell.filter {
-  --title_BorderWidth: 5px;
+  --title_Border_Width: 5px;
   --title_Default_BorderAccentWidth: 5px;
-  --title_BorderAccentWidth: 0px;
-  --title_BorderAccentColor: rgba(0,0,0,0);
-  --title_BorderColor: rgba(0,0,0,0);
-  --title_BackgroundColor: rgba(0,0,0,0);
-  --title_ForegroundColor: #444;
+  --title_Background_Color: rgba(0,0,0,0);
+  --title_Foreground_Color: #444;
+  --title_BorderColor_Main: rgba(0,0,0,0);
+  --title_BorderColor_Inside: rgba(0,0,0,0.267);
+  --title_BorderColor_Outside: #888;
+  --title_BorderAccent_Color: rgba(0,0,0,0);
+  --title_BorderAccent_Width: 0px;
 }
 kt-board kt-task.borderAccent_Enabled,
 .FunctionBars .cell.filter.borderAccent_Enabled {
-  --title_BorderAccentWidth: var(--title_Default_BorderAccentWidth);
+  --title_BorderAccent_Width: var(--title_Default_BorderAccentWidth);
 }
 kt-board kt-task .kt-task-body,
 .FunctionBars .cell.filter {
@@ -20,9 +22,9 @@ kt-board kt-task .kt-task-body,
   border: none !important;
 }
 .FunctionBars .cell.filter {
-  box-shadow: /* BorderAccent.Outside */ calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor), /* BorderAccent.Inside  */ inset var(--title_BorderAccentWidth) 0 0 0 var(--title_BorderAccentColor), /* Border               */ 0 0 0 var(--title_BorderWidth) var(--title_BorderColor), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 rgba(0,0,0,0.267), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 rgba(0,0,0,0.133), /* Border.OutsideBorder */ 0 0 0 calc(var(--title_BorderWidth) + 1px) #888, /* Border.InsideBorder  */ inset 0 0 0 1px rgba(0,0,0,0.267), /* Shadow               */ 5px 5px 8px 0px rgba(0,0,0,0), /* Shadow               */ 5px 11px 8px -7px rgba(0,0,0,0) !important;
+  box-shadow: /* BorderAccent.Outside */ calc(0px - var(--title_Border_Width)) 0 0 0 var(--title_BorderAccent_Color), /* BorderAccent.Inside  */ inset var(--title_BorderAccent_Width) 0 0 0 var(--title_BorderAccent_Color), /* Border               */ 0 0 0 var(--title_Border_Width) var(--title_BorderColor_Main), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccent_Width) + 1px) 0 0 0 rgba(0,0,0,0.267), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccent_Width) + 3px) 0 0 0 rgba(0,0,0,0.133), /* Border.OutsideBorder */ 0 0 0 calc(var(--title_Border_Width) + 1px) var(--title_BorderColor_Outside), /* Border.InsideBorder  */ inset 0 0 0 1px var(--title_BorderColor_Inside), /* Shadow               */ 5px 5px 8px 0px rgba(0,0,0,0), /* Shadow               */ 5px 11px 8px -7px rgba(0,0,0,0) !important;
   margin: 12px 0 12px 24px !important;
-  padding: 3px 10px 3px calc(10px + var(--title_BorderAccentWidth)) !important;
+  padding: 3px 10px 3px calc(10px + var(--title_BorderAccent_Width)) !important;
 }
 .FunctionBars .cell.filter:nth-child(1) {
   margin-left: 0 !important;
@@ -43,9 +45,9 @@ kt-board kt-task .kt-task-header {
   display: none !important;
 }
 kt-board kt-task .kt-task-body {
-  box-shadow: /* BorderAccent.Outside */ calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor), /* BorderAccent.Inside  */ inset var(--title_BorderAccentWidth) 0 0 0 var(--title_BorderAccentColor), /* Border               */ 0 0 0 var(--title_BorderWidth) var(--title_BorderColor), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 rgba(0,0,0,0.267), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 rgba(0,0,0,0.133), /* Border.OutsideBorder */ 0 0 0 calc(var(--title_BorderWidth) + 1px) #888, /* Border.InsideBorder  */ inset 0 0 0 1px rgba(0,0,0,0.267), /* Shadow               */ 5px 5px 8px 0px rgba(0,0,0,0.6), /* Shadow               */ 5px 11px 8px -7px rgba(0,0,0,0.467) !important;
+  box-shadow: /* BorderAccent.Outside */ calc(0px - var(--title_Border_Width)) 0 0 0 var(--title_BorderAccent_Color), /* BorderAccent.Inside  */ inset var(--title_BorderAccent_Width) 0 0 0 var(--title_BorderAccent_Color), /* Border               */ 0 0 0 var(--title_Border_Width) var(--title_BorderColor_Main), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccent_Width) + 1px) 0 0 0 rgba(0,0,0,0.267), /* BorderAccent.Shadow  */ inset calc(var(--title_BorderAccent_Width) + 3px) 0 0 0 rgba(0,0,0,0.133), /* Border.OutsideBorder */ 0 0 0 calc(var(--title_Border_Width) + 1px) var(--title_BorderColor_Outside), /* Border.InsideBorder  */ inset 0 0 0 1px var(--title_BorderColor_Inside), /* Shadow               */ 5px 5px 8px 0px rgba(0,0,0,0.6), /* Shadow               */ 5px 11px 8px -7px rgba(0,0,0,0.467) !important;
   margin: 5px !important;
-  padding: 7px 7px 4px calc(7px + var(--title_BorderAccentWidth)) !important;
+  padding: 7px 7px 4px calc(7px + var(--title_BorderAccent_Width)) !important;
 }
 kt-board .kt-interactive_checklists-checklist li label {
   margin-right: 13px !important;

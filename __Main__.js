@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560303606241)
+		const elapsedTime = _get_ElapsedTime(1560306782210)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     9:40:06 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     10:33:02 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10957,19 +10957,27 @@ function _build_CardType_ID_Map() {
     return idMap;
 }
 function _update_CardStyle_From_CardTypes(element, cardType) {
-    __Main__1.$set_CSS_Variable(element, "title_BorderColor", cardType.bgColor);
+    __Main__1.$set_CSS_Variable(element, "title_BorderColor_Main", cardType.bgColor);
 }
 function _update_CardStyle_From_CardOptions(element, cardType) {
     const cardOptions = _get_CardOptions(element, cardType);
-    __Main__1.$set_CSS_Variable(element, "title_BorderColor", cardOptions.borderColor);
-    __Main__1.$set_CSS_Variable(element, "title_BackgroundColor", cardOptions.backgroundColor);
-    __Main__1.$set_CSS_Variable(element, "title_ForegroundColor", cardOptions.foregroundColor);
-    if (cardOptions.borderAccentColor) {
-        __Main__1.$set_CSS_Variable(element, "title_BorderAccentColor", cardOptions.borderAccentColor);
+    Array.from([
+        ["title_Background_Color", cardOptions.background_Color],
+        ["title_Foreground_Color", cardOptions.foreground_Color],
+        ["title_BorderColor_Main", cardOptions.borderColor_Main],
+        ["title_BorderColor_Inside", cardOptions.borderColor_Inside],
+        ["title_BorderColor_Outside", cardOptions.borderColor_Outside],
+    ]).forEach(([key, value]) => {
+        if (value) {
+            __Main__1.$set_CSS_Variable(element, key, value);
+        }
+    });
+    if (cardOptions.borderAccent_Color) {
+        __Main__1.$set_CSS_Variable(element, "title_BorderAccent_Color", cardOptions.borderAccent_Color);
         element.addClass("borderAccent_Enabled");
     }
     else {
-        __Main__1.$set_CSS_Variable(element, "title_BorderAccentColor", "#0000");
+        __Main__1.$set_CSS_Variable(element, "title_BorderAccent_Color", "#0000");
         element.removeClass("borderAccent_Enabled");
     }
 }
@@ -11303,14 +11311,18 @@ const priorityColors = {
     urgent: "hsl(350, 75%,  65%)",
 };
 const todaySettings = {
-    borderColor: "hsl(143, 45%, 65%)",
-    backgroundColor: "hsl(143, 40%, 85%)",
-    foregroundColor: "hsl(143, 5%,  40%)",
+    background_Color: "hsl(143, 40%, 85%)",
+    foreground_Color: "hsl(143, 5%,  40%)",
+    borderColor_Inside: "hsl(143, 40%, 50%)",
+    borderColor_Main: "hsl(143, 45%, 65%)",
+    borderColor_Outside: "hsl(143, 50%, 40%)",
 };
 const taskSettings = {
-    borderColor: "hsl(0, 0%, 70%)",
-    backgroundColor: "hsl(0, 0%, 80%)",
-    foregroundColor: "hsl(0, 0%, 30%)",
+    background_Color: "hsl(0, 0%, 80%)",
+    foreground_Color: "hsl(0, 0%, 30%)",
+    borderColor_Inside: "hsl(0, 0%, 60%)",
+    borderColor_Main: "hsl(0, 0%, 70%)",
+    borderColor_Outside: "hsl(0, 0%, 60%)",
 };
 __Main__1.CardType_Manager.initialize_Manual({
     mode: __Main__1.CardType_Manager.Mode.SingleRow,
@@ -11320,27 +11332,27 @@ __Main__1.CardType_Manager.initialize_Manual({
     },
     cardTypes: [
         [
-            { borderAccentColor: priorityColors.low, ...todaySettings },
-            { borderAccentColor: priorityColors.medium, ...todaySettings },
-            { borderAccentColor: priorityColors.high, ...todaySettings },
-            { borderAccentColor: priorityColors.urgent, ...todaySettings },
+            { borderAccent_Color: priorityColors.low, ...todaySettings },
+            { borderAccent_Color: priorityColors.medium, ...todaySettings },
+            { borderAccent_Color: priorityColors.high, ...todaySettings },
+            { borderAccent_Color: priorityColors.urgent, ...todaySettings },
         ],
         [
-            { borderAccentColor: priorityColors.low, ...taskSettings },
-            { borderAccentColor: priorityColors.medium, ...taskSettings },
-            { borderAccentColor: priorityColors.high, ...taskSettings },
-            { borderAccentColor: priorityColors.urgent, ...taskSettings },
+            { borderAccent_Color: priorityColors.low, ...taskSettings },
+            { borderAccent_Color: priorityColors.medium, ...taskSettings },
+            { borderAccent_Color: priorityColors.high, ...taskSettings },
+            { borderAccent_Color: priorityColors.urgent, ...taskSettings },
         ],
         [
             {
-                borderColor: "hsl(215, 40%, 65%)",
-                backgroundColor: "hsl(215, 80%, 85%)",
-                foregroundColor: "hsl(215, 20%, 45%)",
+                background_Color: "hsl(215, 80%, 85%)",
+                foreground_Color: "hsl(215, 20%, 45%)",
+                borderColor_Main: "hsl(215, 40%, 65%)",
             },
             {
-                borderColor: "hsl(255, 40%, 65%)",
-                backgroundColor: "hsl(255, 70%, 85%)",
-                foregroundColor: "hsl(255, 20%, 45%)",
+                background_Color: "hsl(255, 70%, 85%)",
+                foreground_Color: "hsl(255, 20%, 45%)",
+                borderColor_Main: "hsl(255, 40%, 65%)",
             },
         ],
     ],
