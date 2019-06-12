@@ -96,9 +96,6 @@ const __Main__1 = __webpack_require__(13);
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
-__Main__1.CardType.initialize(exports.activeBoard);
-exports.cardTypes = __Main__1.CardType.cardTypes;
-exports.CardType = __Main__1.CardType;
 function on_PageLoad(arg_1, arg_2) {
     const [id, callback] = (typeof arg_1 == "symbol")
         ? [arg_1, arg_2]
@@ -113,6 +110,9 @@ function remove_PageLoad_Callback(id) {
     }
 }
 exports.remove_PageLoad_Callback = remove_PageLoad_Callback;
+__Main__1.CardType.initialize(exports.activeBoard);
+exports.cardTypes = __Main__1.CardType.cardTypes;
+exports.CardType = __Main__1.CardType;
 var __Main__2 = __webpack_require__(15);
 exports.Show = __Main__2.Show;
 var __Main__3 = __webpack_require__(33);
@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560372964989)
+		const elapsedTime = _get_ElapsedTime(1560373131033)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     4:56:04 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     4:58:51 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
