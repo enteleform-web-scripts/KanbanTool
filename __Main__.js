@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 18);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -91,13 +91,14 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(13);
-const CardType_1 = __webpack_require__(4);
+const Settings_1 = __webpack_require__(12);
+const __Main__1 = __webpack_require__(13);
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
-CardType_1.CardType.initialize(exports.activeBoard);
-exports.cardTypes = CardType_1.CardType.cardTypes;
+__Main__1.CardType.initialize(exports.activeBoard);
+exports.cardTypes = __Main__1.CardType.cardTypes;
+exports.CardType = __Main__1.CardType;
 function on_PageLoad(arg_1, arg_2) {
     const [id, callback] = (typeof arg_1 == "symbol")
         ? [arg_1, arg_2]
@@ -112,11 +113,9 @@ function remove_PageLoad_Callback(id) {
     }
 }
 exports.remove_PageLoad_Callback = remove_PageLoad_Callback;
-var __Main__1 = __webpack_require__(28);
-exports.CardType_Filter = __Main__1.CardType_Filter;
-var __Main__2 = __webpack_require__(14);
+var __Main__2 = __webpack_require__(15);
 exports.Show = __Main__2.Show;
-var __Main__3 = __webpack_require__(32);
+var __Main__3 = __webpack_require__(33);
 exports.Hide = __Main__3.Hide;
 exports.KanbanTool.activeBoard = exports.activeBoard;
 setTimeout(() => {
@@ -134,8 +133,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(29);
-const hotkeys_js_1 = __importDefault(__webpack_require__(30));
+const KeyGroups_1 = __webpack_require__(30);
+const hotkeys_js_1 = __importDefault(__webpack_require__(31));
 hotkeys_js_1.default.filter = _disable_DefaultFilters;
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
@@ -10621,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560370527996)
+		const elapsedTime = _get_ElapsedTime(1560372964989)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     4:15:27 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     4:56:04 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10642,55 +10641,7 @@ return jQuery;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-class CardType {
-    constructor({ index, id, name, bgColor, fgColor }) {
-        this.index = index;
-        this.id = id;
-        this.name = name;
-        this.bgColor = bgColor;
-        this.fgColor = fgColor;
-    }
-    static get cardTypes() {
-        return CardType._cardTypes;
-    }
-    static initialize(activeBoard) {
-        CardType._cardTypes =
-            activeBoard.cardTypes().active().map(({ attributes }, index) => new CardType({
-                index: index,
-                id: attributes.id,
-                name: attributes.name,
-                bgColor: attributes.color_attrs.rgb,
-                fgColor: (attributes.color_attrs.invert
-                    ? "#FFF"
-                    : "#000"),
-            }));
-    }
-    static get_FromName(name) { return _get_CardType_FromProperty("name", name); }
-    static get_FromID(id) { return _get_CardType_FromProperty("id", id); }
-    static get_FromRegEx(pattern) {
-        return CardType.cardTypes.filter(cardType => pattern.exec(cardType.name));
-    }
-}
-exports.CardType = CardType;
-function _get_CardType_FromProperty(key, value) {
-    const matches = CardType.cardTypes.filter(cardType => (cardType[key] == value));
-    if (matches.length > 0) {
-        return matches[0];
-    }
-    else {
-        return undefined;
-    }
-}
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const CardType_1 = __webpack_require__(4);
+const __Main__1 = __webpack_require__(0);
 var HoverManager;
 (function (HoverManager) {
     let _card = undefined;
@@ -10703,7 +10654,7 @@ var HoverManager;
     function get_CardType() {
         if (_card) {
             const cardType_ID = _card.props.task.cardType().attributes.id;
-            return CardType_1.CardType.get_FromID(cardType_ID);
+            return __Main__1.CardType.get_FromID(cardType_ID);
         }
         else {
             return undefined;
@@ -10712,7 +10663,7 @@ var HoverManager;
     HoverManager.get_CardType = get_CardType;
     function set_CardType(cardType) {
         if (_card) {
-            _card.props.task.save("card_type_id", cardType.id);
+            __Main__1.CardType.set(_card, cardType);
         }
     }
     HoverManager.set_CardType = set_CardType;
@@ -10720,7 +10671,7 @@ var HoverManager;
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10809,19 +10760,19 @@ exports.TaskContainer = TaskContainer;
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(10).inject(__dirname, { CSS: true, HTML: true });
-const Settings_1 = __webpack_require__(8);
-const Entry_1 = __webpack_require__(34);
-const Divider_1 = __webpack_require__(35);
-const Layout_1 = __webpack_require__(36);
-const Module_BaseClasses_1 = __webpack_require__(37);
-const Position_1 = __webpack_require__(9);
+__webpack_require__(11).inject(__dirname, { CSS: true, HTML: true });
+const Settings_1 = __webpack_require__(7);
+const Entry_1 = __webpack_require__(35);
+const Divider_1 = __webpack_require__(36);
+const Layout_1 = __webpack_require__(37);
+const Module_BaseClasses_1 = __webpack_require__(38);
+const Position_1 = __webpack_require__(8);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
         super();
@@ -10877,7 +10828,7 @@ exports.FunctionBar = FunctionBar;
 /* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\FunctionBar"))
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10889,7 +10840,7 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
 
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10909,13 +10860,148 @@ exports.is_VerticalPosition = is_VerticalPosition;
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(22);
+const __Main__1 = __webpack_require__(10);
+const HoverManager_1 = __webpack_require__(4);
+const __Main__2 = __webpack_require__(0);
+class TaskToggle {
+    static get today_CardTypes() { return __Main__2.CardType.get_FromRegEx(/^Today_.*$/); }
+    static get task_CardTypes() { return __Main__2.CardType.get_FromRegEx(/^Task_.*$/); }
+    static get today_Cards() { return __Main__2.CardType.get_Cards(...TaskToggle.today_CardTypes); }
+    static toggle_Hovered_Task() {
+        const cardType = __Main__1.CardType_Manager.HoverManager.get_CardType();
+        const new_CardType = _get_Inverted_CardType(cardType);
+        if (new_CardType) {
+            HoverManager_1.HoverManager.set_CardType(new_CardType);
+        }
+    }
+    static convert_TodayCards_To_TaskCards() {
+        TaskToggle.today_Cards.forEach(({ element, cardType }) => {
+            const inverted_CardType = _get_Inverted_CardType(cardType);
+            __Main__2.CardType.set(element, inverted_CardType);
+        });
+    }
+}
+exports.TaskToggle = TaskToggle;
+function _get_Inverted_CardType(cardType) {
+    const task_CardTypes = TaskToggle.task_CardTypes;
+    const today_CardTypes = TaskToggle.today_CardTypes;
+    let new_CardType, new_CardType_Index;
+    if (task_CardTypes.includes(cardType)) {
+        new_CardType_Index = task_CardTypes.indexOf(cardType);
+        new_CardType = today_CardTypes[new_CardType_Index];
+    }
+    else if (today_CardTypes.includes(cardType)) {
+        new_CardType_Index = today_CardTypes.indexOf(cardType);
+        new_CardType = task_CardTypes[new_CardType_Index];
+    }
+    return new_CardType;
+}
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(__dirname) {
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(11).inject(__dirname, { CSS: true, HTML: false });
+const CallbackManager_1 = __webpack_require__(27);
+const HoverManager_1 = __webpack_require__(4);
+const StyleManager_1 = __webpack_require__(18);
+const __Main__1 = __webpack_require__(6);
+const Position_1 = __webpack_require__(8);
+const get_Rows_1 = __webpack_require__(39);
+var CardType_Manager;
+(function (CardType_Manager) {
+    CardType_Manager.HoverManager = HoverManager_1.HoverManager;
+    function initialize_Manual(options) {
+        const functionBar = _get_CardType_FunctionBar(options.mode, options.cardTypes, options.cellWidth, options.functionBar_Options);
+        _initialize(functionBar, options.cardTypes);
+    }
+    CardType_Manager.initialize_Manual = initialize_Manual;
+    function initialize_Auto(options) {
+        const functionBar = _get_CardType_FunctionBar(CardType_Manager.Mode._AutoRows, [], options.cellWidth, options.functionBar_Options);
+        _initialize(functionBar, undefined);
+    }
+    CardType_Manager.initialize_Auto = initialize_Auto;
+    let Mode;
+    (function (Mode) {
+        Mode[Mode["_AutoRows"] = 0] = "_AutoRows";
+        Mode[Mode["SingleRow"] = 1] = "SingleRow";
+        Mode[Mode["MultipleRows"] = 2] = "MultipleRows";
+    })(Mode = CardType_Manager.Mode || (CardType_Manager.Mode = {}));
+})(CardType_Manager = exports.CardType_Manager || (exports.CardType_Manager = {}));
+const _Default_FunctionBar_Options = {
+    position: Position_1.Position.Bottom,
+    autoMap_KeyBindings: true,
+    keyBinding_Modifiers: [],
+    stretchCells: true,
+    cellProperties: [],
+};
+function _initialize(functionBar, cardOptions) {
+    StyleManager_1.StyleManager.initialize(cardOptions);
+    HoverManager_1.HoverManager.initialize();
+    __Main__1.FunctionBar.load(functionBar);
+}
+function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, functionBar_Options) {
+    let cardType_Rows;
+    if (mode == CardType_Manager.Mode._AutoRows) {
+        cardType_Rows = get_Rows_1.get_Auto_CardTypes_Rows();
+    }
+    else if (mode == CardType_Manager.Mode.SingleRow) {
+        cardType_Rows = get_Rows_1.get_Manual_CardTypes_SingleRow(cardOptions);
+    }
+    else if (mode == CardType_Manager.Mode.MultipleRows) {
+        cardType_Rows = get_Rows_1.get_Manual_CardTypes_MultipleRows(cardOptions);
+    }
+    functionBar_Options = { ..._Default_FunctionBar_Options, ...functionBar_Options };
+    if (cellWidth !== undefined) {
+        functionBar_Options.stretchCells = false;
+    }
+    _update_FunctionBar_Options_CellWidth(functionBar_Options, cellWidth);
+    return _build_FunctionBar(functionBar_Options, cardType_Rows);
+}
+function _build_FunctionBar(options, cardType_Rows) {
+    const entryGroups = cardType_Rows.map(row => row.map(cardType => new __Main__1.FunctionBar.Entry({
+        name: cardType.name,
+        ...CallbackManager_1.CallbackManager.get_Callbacks(),
+    })));
+    return new __Main__1.FunctionBar({
+        ...options,
+        entryGroups,
+    });
+}
+function _update_FunctionBar_Options_CellWidth(options, cellWidth) {
+    if (cellWidth) {
+        options.cellProperties.push({
+            functionName: "css",
+            args: [{
+                    "width": cellWidth,
+                    "min-width": cellWidth,
+                    "max-width": cellWidth,
+                }]
+        });
+    }
+    delete options.cellWidth;
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\CardType_Manager"))
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Settings_1 = __webpack_require__(24);
 function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
     if (CSS) {
         _inject_CSS(modulePath);
@@ -10994,13 +11080,262 @@ function _strip_HTML_ExcessData(html) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(12);
+exports.cardType_Filter_Index = 5;
+exports.onPageLoad_Timeout_MS = 500;
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Filter_1 = __webpack_require__(29);
+const is_JQuery_1 = __webpack_require__(14);
+const $ = __webpack_require__(2);
+class CardType {
+    constructor({ index, id, name, bgColor, fgColor }) {
+        this.index = index;
+        this.id = id;
+        this.name = name;
+        this.bgColor = bgColor;
+        this.fgColor = fgColor;
+    }
+    static get cardTypes() { return CardType._cardTypes; }
+    static initialize(activeBoard) {
+        CardType._cardTypes =
+            activeBoard.cardTypes().active().map(({ attributes }, index) => new CardType({
+                index: index,
+                id: attributes.id,
+                name: attributes.name,
+                bgColor: attributes.color_attrs.rgb,
+                fgColor: (attributes.color_attrs.invert
+                    ? "#FFF"
+                    : "#000"),
+            }));
+    }
+    static get_FromName(name) { return _get_CardType_FromProperty("name", name); }
+    static get_FromID(id) { return _get_CardType_FromProperty("id", id); }
+    static get_FromRegEx(pattern) {
+        return CardType.cardTypes.filter(cardType => pattern.exec(cardType.name));
+    }
+    static get_Cards(...cardTypes) {
+        const cardElements = $.find("kt-task");
+        return cardTypes.flatMap(cardType => cardElements
+            .map(element => ({ cardType, element: $(element), model: element.props.task }))
+            .filter(({ model }) => (model.cardType().id == cardType.id)));
+    }
+    static set(element, cardType) {
+        if (is_JQuery_1.is_JQuery(element)) {
+            element = element.get(0);
+        }
+        element.props.task.save("card_type_id", cardType.id);
+    }
+}
+CardType.Filter = Filter_1.Filter;
+exports.CardType = CardType;
+function _get_CardType_FromProperty(key, value) {
+    const matches = CardType.cardTypes.filter(cardType => (cardType[key] == value));
+    if (matches.length > 0) {
+        return matches[0];
+    }
+    else {
+        return undefined;
+    }
+}
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+function is_JQuery(obj) {
+    return (obj && (obj instanceof jQuery || obj.constructor.prototype.jquery));
+}
+exports.is_JQuery = is_JQuery;
+
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const TaskContainer_1 = __webpack_require__(5);
+const get_Rows_1 = __webpack_require__(16);
+const get_Columns_1 = __webpack_require__(17);
+const Glob_1 = __webpack_require__(32);
+const $ = __webpack_require__(2);
+class Show {
+    static rows({ include, exclude }) {
+        _show({
+            type: _Type.Row,
+            targets: (include) ? include : exclude,
+            exclude: (exclude) ? true : false,
+        });
+    }
+    static columns({ include, exclude }) {
+        _show({
+            type: _Type.Column,
+            targets: (include) ? include : exclude,
+            exclude: (exclude) ? true : false,
+        });
+    }
+    static allRows() { _show({ type: _Type.Row, targets: ["**\\*"], exclude: false }); }
+    static allColumns() { _show({ type: _Type.Column, targets: ["**\\*"], exclude: false }); }
+}
+exports.Show = Show;
+const _Type = TaskContainer_1.TaskContainer.Type;
+function _show({ type, targets, exclude, }) {
+    const containers = (type == _Type.Row)
+        ? get_Rows_1.get_Rows()
+        : get_Columns_1.get_Columns();
+    _set_Visibility(containers, targets, exclude);
+}
+function _set_Visibility(containers, targets, exclude) {
+    const visibilityMap = _build_VisibilityMap(containers, targets, exclude);
+    visibilityMap.forEach(({ container, show_Element }) => {
+        if (show_Element) {
+            container.show();
+        }
+        else {
+            container.hide();
+        }
+    });
+}
+function _build_VisibilityMap(containers, targets, exclude) {
+    const visibilityMap = containers.map(container => ({ container, show_Element: false }));
+    containers.forEach((container, i) => {
+        const oneBased_Index = (container.domIndex + 1);
+        const is_Target = (targets.includes(oneBased_Index)
+            || targets.some(target => _match_Glob(container, target)));
+        if (is_Target) {
+            const containerTree = (exclude)
+                ? [container, ...container.children]
+                : [container, ...container.parents];
+            visibilityMap.forEach(entry => {
+                if (containerTree.includes(entry.container)) {
+                    entry.show_Element = true;
+                }
+            });
+        }
+    });
+    if (exclude) {
+        visibilityMap.forEach(entry => {
+            entry.show_Element = !(entry.show_Element);
+        });
+    }
+    return visibilityMap;
+}
+function _match_Glob(container, target) {
+    if (Number(target)) {
+        return false;
+    }
+    else {
+        return new Glob_1.Glob(target.toString()).match(container.path);
+    }
+}
+
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const TaskContainer_1 = __webpack_require__(5);
+const __Main__1 = __webpack_require__(0);
+const $ = __webpack_require__(2);
+function get_Rows() {
+    const headerElements = $.find("kt-board > tbody > tr > th");
+    const models = __Main__1.activeBoard.swimlanes().toArray();
+    const rows = headerElements.map((element, i) => new TaskContainer_1.TaskContainer({
+        type: TaskContainer_1.TaskContainer.Type.Row,
+        modelIndex: i,
+        domIndex: i,
+        model: models[i],
+        element: element,
+    }));
+    return rows;
+}
+exports.get_Rows = get_Rows;
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const TaskContainer_1 = __webpack_require__(5);
+const __Main__1 = __webpack_require__(0);
+function get_Columns() {
+    const models = __Main__1.activeBoard.workflowStages()
+        .slice(1);
+    const sortedModels = _get_SortedModels();
+    const headerElements = _get_HeaderElements();
+    const columns = sortedModels.map((model, i) => (new TaskContainer_1.TaskContainer({
+        type: TaskContainer_1.TaskContainer.Type.Column,
+        domIndex: i,
+        modelIndex: models.indexOf(model),
+        model: model,
+        element: headerElements[i],
+    })));
+    _update_ColumnRelationships(columns);
+    return columns;
+}
+exports.get_Columns = get_Columns;
+function _get_HeaderElements() {
+    const rows = $("kt-board > thead").children().toArray();
+    const swimLane_Count = __Main__1.activeBoard.swimlanes().length;
+    const elements = rows.flatMap(row => $(row).children().toArray());
+    if (swimLane_Count > 1) {
+        elements.splice(0, 1);
+    }
+    return elements;
+}
+function _get_SortedModels() {
+    const rootModel = __Main__1.activeBoard.workflowStages().toArray()[0];
+    const sortedModels = [];
+    let row = rootModel.children();
+    while (row.length > 0) {
+        sortedModels.push(...row);
+        row = row.flatMap(model => model.children());
+    }
+    return sortedModels;
+}
+function _update_ColumnRelationships(columns) {
+    columns.forEach(parent => {
+        columns.forEach(child => {
+            if (child.model.parent() == parent.model) {
+                parent.add_Child(child);
+            }
+        });
+    });
+}
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(19);
 const __Main__2 = __webpack_require__(0);
 const $ = __webpack_require__(2);
 var StyleManager;
@@ -11076,13 +11411,13 @@ function _get_CardOptions(element, cardType) { return StyleManager._CardType_Opt
 
 
 /***/ }),
-/* 12 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const is_JQuery_1 = __webpack_require__(27);
+const is_JQuery_1 = __webpack_require__(14);
 function set_CSS_Variable(arg_1, arg_2, arg_3) {
     const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
     if (element) {
@@ -11135,218 +11470,43 @@ function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documen
 
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.cardType_Filter_Index = 5;
-exports.onPageLoad_Timeout_MS = 500;
-
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(6);
-const get_Rows_1 = __webpack_require__(15);
-const get_Columns_1 = __webpack_require__(16);
-const Glob_1 = __webpack_require__(31);
-const $ = __webpack_require__(2);
-class Show {
-    static rows({ include, exclude }) {
-        _show({
-            type: _Type.Row,
-            targets: (include) ? include : exclude,
-            exclude: (exclude) ? true : false,
-        });
-    }
-    static columns({ include, exclude }) {
-        _show({
-            type: _Type.Column,
-            targets: (include) ? include : exclude,
-            exclude: (exclude) ? true : false,
-        });
-    }
-    static allRows() { _show({ type: _Type.Row, targets: ["**\\*"], exclude: false }); }
-    static allColumns() { _show({ type: _Type.Column, targets: ["**\\*"], exclude: false }); }
-}
-exports.Show = Show;
-const _Type = TaskContainer_1.TaskContainer.Type;
-function _show({ type, targets, exclude, }) {
-    const containers = (type == _Type.Row)
-        ? get_Rows_1.get_Rows()
-        : get_Columns_1.get_Columns();
-    _set_Visibility(containers, targets, exclude);
-}
-function _set_Visibility(containers, targets, exclude) {
-    const visibilityMap = _build_VisibilityMap(containers, targets, exclude);
-    visibilityMap.forEach(({ container, show_Element }) => {
-        if (show_Element) {
-            container.show();
-        }
-        else {
-            container.hide();
-        }
-    });
-}
-function _build_VisibilityMap(containers, targets, exclude) {
-    const visibilityMap = containers.map(container => ({ container, show_Element: false }));
-    containers.forEach((container, i) => {
-        const oneBased_Index = (container.domIndex + 1);
-        const is_Target = (targets.includes(oneBased_Index)
-            || targets.some(target => _match_Glob(container, target)));
-        if (is_Target) {
-            const containerTree = (exclude)
-                ? [container, ...container.children]
-                : [container, ...container.parents];
-            visibilityMap.forEach(entry => {
-                if (containerTree.includes(entry.container)) {
-                    entry.show_Element = true;
-                }
-            });
-        }
-    });
-    if (exclude) {
-        visibilityMap.forEach(entry => {
-            entry.show_Element = !(entry.show_Element);
-        });
-    }
-    return visibilityMap;
-}
-function _match_Glob(container, target) {
-    if (Number(target)) {
-        return false;
-    }
-    else {
-        return new Glob_1.Glob(target.toString()).match(container.path);
-    }
-}
-
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(6);
-const __Main__1 = __webpack_require__(0);
-const $ = __webpack_require__(2);
-function get_Rows() {
-    const headerElements = $.find("kt-board > tbody > tr > th");
-    const models = __Main__1.activeBoard.swimlanes().toArray();
-    const rows = headerElements.map((element, i) => new TaskContainer_1.TaskContainer({
-        type: TaskContainer_1.TaskContainer.Type.Row,
-        modelIndex: i,
-        domIndex: i,
-        model: models[i],
-        element: element,
-    }));
-    return rows;
-}
-exports.get_Rows = get_Rows;
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(6);
-const __Main__1 = __webpack_require__(0);
-function get_Columns() {
-    const models = __Main__1.activeBoard.workflowStages()
-        .slice(1);
-    const sortedModels = _get_SortedModels();
-    const headerElements = _get_HeaderElements();
-    const columns = sortedModels.map((model, i) => (new TaskContainer_1.TaskContainer({
-        type: TaskContainer_1.TaskContainer.Type.Column,
-        domIndex: i,
-        modelIndex: models.indexOf(model),
-        model: model,
-        element: headerElements[i],
-    })));
-    _update_ColumnRelationships(columns);
-    return columns;
-}
-exports.get_Columns = get_Columns;
-function _get_HeaderElements() {
-    const rows = $("kt-board > thead").children().toArray();
-    const swimLane_Count = __Main__1.activeBoard.swimlanes().length;
-    const elements = rows.flatMap(row => $(row).children().toArray());
-    if (swimLane_Count > 1) {
-        elements.splice(0, 1);
-    }
-    return elements;
-}
-function _get_SortedModels() {
-    const rootModel = __Main__1.activeBoard.workflowStages().toArray()[0];
-    const sortedModels = [];
-    let row = rootModel.children();
-    while (row.length > 0) {
-        sortedModels.push(...row);
-        row = row.flatMap(model => model.children());
-    }
-    return sortedModels;
-}
-function _update_ColumnRelationships(columns) {
-    columns.forEach(parent => {
-        columns.forEach(child => {
-            if (child.model.parent() == parent.model) {
-                parent.add_Child(child);
-            }
-        });
-    });
-}
-
-
-/***/ }),
-/* 17 */
+/* 20 */
 /***/ (function(module) {
 
 module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collapsed","empty":"empty","divider":"divider","textDivider":"textDivider","_":""}};
 
 /***/ }),
-/* 18 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(3);
-module.exports = __webpack_require__(19);
+module.exports = __webpack_require__(22);
 
 
 /***/ }),
-/* 19 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(20);
-__webpack_require__(39);
+__webpack_require__(23);
 __webpack_require__(40);
 __webpack_require__(41);
 __webpack_require__(42);
+__webpack_require__(43);
 
 
 /***/ }),
-/* 20 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(21);
+const TaskToggle_1 = __webpack_require__(9);
+const __Main__1 = __webpack_require__(10);
 const __Main__2 = __webpack_require__(1);
-const CardType_1 = __webpack_require__(4);
-const HoverManager_1 = __webpack_require__(5);
 const priorityColors = {
     low: "hsl(220, 40%,  60%)",
     medium: "hsl(50,  100%, 70%)",
@@ -11405,116 +11565,12 @@ __Main__1.CardType_Manager.initialize_Manual({
     ],
 });
 __Main__2.KeyBinding.add(["ctrl", "space"], (event) => {
-    const cardType = __Main__1.CardType_Manager.HoverManager.get_CardType();
-    const task_CardTypes = CardType_1.CardType.get_FromRegEx(/^Task_.*$/);
-    const today_CardTypes = CardType_1.CardType.get_FromRegEx(/^Today_.*$/);
-    let new_CardType, new_CardType_Index;
-    if (task_CardTypes.includes(cardType)) {
-        new_CardType_Index = task_CardTypes.indexOf(cardType);
-        new_CardType = today_CardTypes[new_CardType_Index];
-    }
-    else if (today_CardTypes.includes(cardType)) {
-        new_CardType_Index = today_CardTypes.indexOf(cardType);
-        new_CardType = task_CardTypes[new_CardType_Index];
-    }
-    if (new_CardType) {
-        HoverManager_1.HoverManager.set_CardType(new_CardType);
-    }
+    TaskToggle_1.TaskToggle.toggle_Hovered_Task();
 });
 
 
 /***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(__dirname) {
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(10).inject(__dirname, { CSS: true, HTML: false });
-const CallbackManager_1 = __webpack_require__(25);
-const HoverManager_1 = __webpack_require__(5);
-const StyleManager_1 = __webpack_require__(11);
-const __Main__1 = __webpack_require__(7);
-const Position_1 = __webpack_require__(9);
-const get_Rows_1 = __webpack_require__(38);
-var CardType_Manager;
-(function (CardType_Manager) {
-    CardType_Manager.HoverManager = HoverManager_1.HoverManager;
-    function initialize_Manual(options) {
-        const functionBar = _get_CardType_FunctionBar(options.mode, options.cardTypes, options.cellWidth, options.functionBar_Options);
-        _initialize(functionBar, options.cardTypes);
-    }
-    CardType_Manager.initialize_Manual = initialize_Manual;
-    function initialize_Auto(options) {
-        const functionBar = _get_CardType_FunctionBar(CardType_Manager.Mode._AutoRows, [], options.cellWidth, options.functionBar_Options);
-        _initialize(functionBar, undefined);
-    }
-    CardType_Manager.initialize_Auto = initialize_Auto;
-    let Mode;
-    (function (Mode) {
-        Mode[Mode["_AutoRows"] = 0] = "_AutoRows";
-        Mode[Mode["SingleRow"] = 1] = "SingleRow";
-        Mode[Mode["MultipleRows"] = 2] = "MultipleRows";
-    })(Mode = CardType_Manager.Mode || (CardType_Manager.Mode = {}));
-})(CardType_Manager = exports.CardType_Manager || (exports.CardType_Manager = {}));
-const _Default_FunctionBar_Options = {
-    position: Position_1.Position.Bottom,
-    autoMap_KeyBindings: true,
-    keyBinding_Modifiers: [],
-    stretchCells: true,
-    cellProperties: [],
-};
-function _initialize(functionBar, cardOptions) {
-    StyleManager_1.StyleManager.initialize(cardOptions);
-    HoverManager_1.HoverManager.initialize();
-    __Main__1.FunctionBar.load(functionBar);
-}
-function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, functionBar_Options) {
-    let cardType_Rows;
-    if (mode == CardType_Manager.Mode._AutoRows) {
-        cardType_Rows = get_Rows_1.get_Auto_CardTypes_Rows();
-    }
-    else if (mode == CardType_Manager.Mode.SingleRow) {
-        cardType_Rows = get_Rows_1.get_Manual_CardTypes_SingleRow(cardOptions);
-    }
-    else if (mode == CardType_Manager.Mode.MultipleRows) {
-        cardType_Rows = get_Rows_1.get_Manual_CardTypes_MultipleRows(cardOptions);
-    }
-    functionBar_Options = { ..._Default_FunctionBar_Options, ...functionBar_Options };
-    if (cellWidth !== undefined) {
-        functionBar_Options.stretchCells = false;
-    }
-    _update_FunctionBar_Options_CellWidth(functionBar_Options, cellWidth);
-    return _build_FunctionBar(functionBar_Options, cardType_Rows);
-}
-function _build_FunctionBar(options, cardType_Rows) {
-    const entryGroups = cardType_Rows.map(row => row.map(cardType => new __Main__1.FunctionBar.Entry({
-        name: cardType.name,
-        ...CallbackManager_1.CallbackManager.get_Callbacks(),
-    })));
-    return new __Main__1.FunctionBar({
-        ...options,
-        entryGroups,
-    });
-}
-function _update_FunctionBar_Options_CellWidth(options, cellWidth) {
-    if (cellWidth) {
-        options.cellProperties.push({
-            functionName: "css",
-            args: [{
-                    "width": cellWidth,
-                    "min-width": cellWidth,
-                    "max-width": cellWidth,
-                }]
-        });
-    }
-    delete options.cellWidth;
-}
-
-/* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\CardType_Manager"))
-
-/***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11523,7 +11579,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(__webpack_require__(23));
+const path_1 = __importDefault(__webpack_require__(25));
 class S {
 }
 S.baseURL = "https://enteleform-extensions.github.io/KanbanTool";
@@ -11552,7 +11608,7 @@ exports.Settings = S;
 
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -11780,10 +11836,10 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(24)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(26)))
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -11973,15 +12029,15 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(26).CardType_Manager;
-const HoverManager_1 = __webpack_require__(5);
-const StyleManager_1 = __webpack_require__(11);
+const CSS = __webpack_require__(28).CardType_Manager;
+const HoverManager_1 = __webpack_require__(4);
+const StyleManager_1 = __webpack_require__(18);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(0);
 var CallbackManager;
@@ -11999,7 +12055,7 @@ var CallbackManager;
                 cell.addClass(CSS.filter);
                 StyleManager_1.StyleManager.update_CardStyle(cell, cardType);
                 const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
-                __Main__2.CardType_Filter.on_Update(update_CSS);
+                __Main__2.CardType.Filter.on_Update(update_CSS);
                 update_CSS();
             },
             on_KeyBinding: function (event, cell) {
@@ -12007,11 +12063,11 @@ var CallbackManager;
             },
             on_Click: function (event, cell) {
                 if (__Main__1.KeyBinding.is_Pressed("ctrl")) {
-                    __Main__2.CardType_Filter.disable_CardTypes();
-                    __Main__2.CardType_Filter.enable_CardTypes(cardType.index);
+                    __Main__2.CardType.Filter.disable_CardTypes();
+                    __Main__2.CardType.Filter.enable_CardTypes(cardType.index);
                 }
                 else {
-                    __Main__2.CardType_Filter.toggle_CardTypes(cardType.index);
+                    __Main__2.CardType.Filter.toggle_CardTypes(cardType.index);
                 }
             },
         };
@@ -12019,7 +12075,7 @@ var CallbackManager;
 })(CallbackManager = exports.CallbackManager || (exports.CallbackManager = {}));
 function _get_UpdateCSS_Callback(cell, cardType) {
     return () => {
-        if (__Main__2.CardType_Filter.cardType_IsEnabled(cardType)) {
+        if (__Main__2.CardType.Filter.cardType_IsEnabled(cardType)) {
             cell.addClass(CSS.activeFilter);
             cell.removeClass(CSS.inactiveFilter);
         }
@@ -12032,94 +12088,81 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module) {
 
 module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterColor","activeFilter":"active","inactiveFilter":"inactive","_":""}};
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-function is_JQuery(obj) {
-    return (obj && (obj instanceof jQuery || obj.constructor.prototype.jquery));
-}
-exports.is_JQuery = is_JQuery;
-
-
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(13);
-const CardType_1 = __webpack_require__(4);
-const __Main__1 = __webpack_require__(1);
-const __Main__2 = __webpack_require__(0);
+const Settings_1 = __webpack_require__(12);
+const __Main__1 = __webpack_require__(13);
+const __Main__2 = __webpack_require__(1);
+const __Main__3 = __webpack_require__(0);
 const $ = __webpack_require__(2);
-class CardType_Filter {
-    static get enabled() { return CardType_Filter._filterButton.hasClass("kt-board_search-filter--active"); }
+class Filter {
+    static get enabled() { return Filter._filterButton.hasClass("kt-board_search-filter--active"); }
     static get disabled() { return !(this.enabled); }
     static get _filterButton() { return $(`.kt-board_search-filter:nth-child(${Settings_1.cardType_Filter_Index})`); }
     static get _cardType_Buttons() { return Array.from($(".kt-board_search-processors-card_types").children()); }
     static get _enabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > .kt-board_search-processors-card_types--active")); }
     static get _disabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)")); }
     static cardType_IsEnabled(cardType) {
-        const cardType_Buttons = CardType_Filter._cardType_Buttons;
-        const enabled_CardType_Buttons = CardType_Filter._enabled_CardType_Buttons;
+        const cardType_Buttons = Filter._cardType_Buttons;
+        const enabled_CardType_Buttons = Filter._enabled_CardType_Buttons;
         const enabledIndexes = cardType_Buttons
             .map((button, index) => ({ button, index }))
             .filter(({ button }) => enabled_CardType_Buttons.includes(button))
             .map(({ index }) => index);
         return enabledIndexes.includes(cardType.index);
     }
-    static cardType_IsDisabled(cardType) { return !(CardType_Filter.cardType_IsEnabled(cardType)); }
+    static cardType_IsDisabled(cardType) { return !(Filter.cardType_IsEnabled(cardType)); }
     static enable() {
-        if (CardType_Filter.disabled) {
-            CardType_Filter._filterButton.click();
+        if (Filter.disabled) {
+            Filter._filterButton.click();
         }
-        CardType_Filter._on_Update();
+        Filter._on_Update();
     }
     static disable() {
-        if (CardType_Filter.enabled) {
-            CardType_Filter._filterButton.click();
+        if (Filter.enabled) {
+            Filter._filterButton.click();
         }
-        CardType_Filter._on_Update();
+        Filter._on_Update();
     }
-    static enable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._disabled_CardType_Buttons); }
-    static disable_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._enabled_CardType_Buttons); }
-    static toggle_CardTypes(...ids) { _set_CardType_States(ids, CardType_Filter._cardType_Buttons); }
-    static on_Update(callback) { CardType_Filter._onUpdate_Callbacks.push(callback); }
+    static enable_CardTypes(...ids) { _set_CardType_States(ids, Filter._disabled_CardType_Buttons); }
+    static disable_CardTypes(...ids) { _set_CardType_States(ids, Filter._enabled_CardType_Buttons); }
+    static toggle_CardTypes(...ids) { _set_CardType_States(ids, Filter._cardType_Buttons); }
+    static on_Update(callback) { Filter._onUpdate_Callbacks.push(callback); }
     static _on_Update() {
-        CardType_Filter._onUpdate_Callbacks.forEach(callback => callback());
+        Filter._onUpdate_Callbacks.forEach(callback => callback());
     }
 }
-CardType_Filter.show_AllCards_ID = Symbol();
-CardType_Filter._onUpdate_Callbacks = [];
-exports.CardType_Filter = CardType_Filter;
-__Main__2.on_PageLoad(() => {
-    CardType_Filter.enable();
+Filter.show_AllCards_ID = Symbol();
+Filter._onUpdate_Callbacks = [];
+exports.Filter = Filter;
+__Main__3.on_PageLoad(() => {
+    Filter.enable();
 });
-__Main__2.on_PageLoad(CardType_Filter.show_AllCards_ID, () => {
-    CardType_Filter.enable();
-    CardType_Filter.enable_CardTypes();
+__Main__3.on_PageLoad(Filter.show_AllCards_ID, () => {
+    Filter.enable();
+    Filter.enable_CardTypes();
 });
-__Main__1.KeyBinding.add(["ctrl", "`"], () => {
-    __Main__2.Hide.emptyColumns();
-    __Main__2.Hide.emptyRows();
+__Main__2.KeyBinding.add(["ctrl", "`"], () => {
+    __Main__3.Hide.emptyColumns();
+    __Main__3.Hide.emptyRows();
 });
-__Main__1.KeyBinding.add(["ctrl", "shift", "`"], () => {
-    __Main__2.Show.allColumns();
-    __Main__2.Show.allRows();
-    CardType_Filter.enable_CardTypes();
+__Main__2.KeyBinding.add(["ctrl", "shift", "`"], () => {
+    __Main__3.Show.allColumns();
+    __Main__3.Show.allRows();
+    Filter.enable_CardTypes();
 });
 function _set_CardType_States(ids, targetButtons) {
-    const allButtons = CardType_Filter._cardType_Buttons;
+    const allButtons = Filter._cardType_Buttons;
     const apply_State_To_AllCardTypes = (ids.length == 0);
     if (apply_State_To_AllCardTypes) {
         ids = allButtons.map((value, index) => index);
@@ -12135,12 +12178,12 @@ function _set_CardType_States(ids, targetButtons) {
             button.click();
         }
     }
-    CardType_Filter._on_Update();
+    Filter._on_Update();
 }
 function _process_RegExp_IDs(allButtons, targetButtons, ids) {
     const patterns = ids.filter(id => (id instanceof RegExp));
     ids = ids.filter(id => !(id instanceof RegExp));
-    const matchingButton_Indexes = __Main__2.cardTypes
+    const matchingButton_Indexes = __Main__1.CardType.cardTypes
         .filter(cardType => patterns.some(pattern => pattern.exec(cardType.name) ? true : false))
         .map(cardType => ({ button: allButtons[cardType.index], index: cardType.index }))
         .filter(({ button }) => targetButtons.includes(button))
@@ -12152,7 +12195,7 @@ function _process_RegExp_IDs(allButtons, targetButtons, ids) {
 function _get_CardType_Index(id) {
     let index;
     if (typeof id == "string") {
-        const cardType = CardType_1.CardType.get_FromName(id);
+        const cardType = __Main__1.CardType.get_FromName(id);
         index = (cardType)
             ? cardType.index
             : undefined;
@@ -12165,7 +12208,7 @@ function _get_CardType_Index(id) {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12213,7 +12256,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12652,7 +12695,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12693,16 +12736,16 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(33);
-const get_Rows_1 = __webpack_require__(15);
-const get_Columns_1 = __webpack_require__(16);
-const __Main__1 = __webpack_require__(14);
+const get_emptyContainer_Indexes_1 = __webpack_require__(34);
+const get_Rows_1 = __webpack_require__(16);
+const get_Columns_1 = __webpack_require__(17);
+const __Main__1 = __webpack_require__(15);
 class Hide {
     static allRows() { __Main__1.Show.rows({ exclude: ["**\\*"] }); }
     static allColumns() { __Main__1.Show.columns({ exclude: ["**\\*"] }); }
@@ -12741,7 +12784,7 @@ function _is_Empty(container, emptyContainer_Indexes) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12830,13 +12873,13 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(8);
+const Settings_1 = __webpack_require__(7);
 const __Main__1 = __webpack_require__(1);
 class Entry {
     constructor({ name, callback, on_Click, on_DoubleClick, on_KeyBinding, on_Layout, keyBinding, color, }) {
@@ -12876,13 +12919,13 @@ const emptyCallback = ((...args) => { });
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(17).FunctionBar;
+const CSS = __webpack_require__(20).FunctionBar;
 class Divider {
     constructor(text) {
         this.text = text;
@@ -12900,16 +12943,16 @@ exports.Divider = Divider;
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(17).FunctionBar;
-const Settings_1 = __webpack_require__(8);
-const Position_1 = __webpack_require__(9);
-const __Main__1 = __webpack_require__(12);
+const CSS = __webpack_require__(20).FunctionBar;
+const Settings_1 = __webpack_require__(7);
+const Position_1 = __webpack_require__(8);
+const __Main__1 = __webpack_require__(19);
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
 const $ = __webpack_require__(2);
@@ -13017,7 +13060,7 @@ function _update_OriginalLayout() {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13030,7 +13073,7 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13089,13 +13132,14 @@ function _cardTypes_Exhausted(cardIndex) { return (cardIndex == __Main__1.cardTy
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(7);
+const TaskToggle_1 = __webpack_require__(9);
+const __Main__1 = __webpack_require__(6);
 const { Entry, Position } = __Main__1.FunctionBar;
 const __Main__2 = __webpack_require__(0);
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
@@ -13129,13 +13173,19 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
             new Entry({
                 name: "Filter_All",
                 callback: () => {
-                    __Main__2.CardType_Filter.enable_CardTypes();
+                    __Main__2.CardType.Filter.enable_CardTypes();
                 },
             }),
             new Entry({
                 name: "Filter_None",
                 callback: () => {
-                    __Main__2.CardType_Filter.disable_CardTypes();
+                    __Main__2.CardType.Filter.disable_CardTypes();
+                },
+            }),
+            new Entry({
+                name: "Clear_Today",
+                callback: () => {
+                    TaskToggle_1.TaskToggle.convert_TodayCards_To_TaskCards();
                 },
             }),
         ],
@@ -13144,13 +13194,13 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(7);
+const __Main__1 = __webpack_require__(6);
 const { Entry, Position } = __Main__1.FunctionBar;
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
@@ -13168,8 +13218,8 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
                 ...get_Callbacks(() => {
                     __Main__3.Show.allColumns();
                     __Main__3.Show.rows({ include: activeTask_Columns });
-                    __Main__3.CardType_Filter.disable_CardTypes();
-                    __Main__3.CardType_Filter.enable_CardTypes(/^(Today.*)|(Task_Daily)/);
+                    __Main__3.CardType.Filter.disable_CardTypes();
+                    __Main__3.CardType.Filter.enable_CardTypes(/^(Today.*)|(Task_Daily)/);
                 })
             }),
             new Entry({
@@ -13178,7 +13228,7 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
                 ...get_Callbacks(() => {
                     __Main__3.Show.allColumns();
                     __Main__3.Show.rows({ include: activeTask_Columns });
-                    __Main__3.CardType_Filter.enable_CardTypes();
+                    __Main__3.CardType.Filter.enable_CardTypes();
                 }),
             }),
             new Entry({
@@ -13186,13 +13236,13 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
                 ...get_Callbacks(() => {
                     __Main__3.Show.allColumns();
                     __Main__3.Show.allRows();
-                    __Main__3.CardType_Filter.enable_CardTypes();
+                    __Main__3.CardType.Filter.enable_CardTypes();
                 }),
             }),
         ],
     ],
 }));
-__Main__3.remove_PageLoad_Callback(__Main__3.CardType_Filter.show_AllCards_ID);
+__Main__3.remove_PageLoad_Callback(__Main__3.CardType.Filter.show_AllCards_ID);
 const _secondaryCallback = () => { __Main__3.Hide.emptyColumns(); };
 function get_Callbacks(callback) {
     return {
@@ -13211,7 +13261,7 @@ function get_Callbacks(callback) {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13258,7 +13308,7 @@ function get_DivIndex(checkList_Item) {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
