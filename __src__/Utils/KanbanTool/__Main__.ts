@@ -17,11 +17,6 @@ const _on_PageLoad_Callbacks:({id:Symbol, callback:(() => void)}[]) = []
 export const KanbanTool  = (window as any).KT
 export const activeBoard = KanbanTool.boards.models[0]
 
-_CardType.initialize(activeBoard)
-export const cardTypes = _CardType.cardTypes
-export const CardType  = _CardType
-export type  CardType  = _CardType
-
 export function on_PageLoad(callback:(() => void)                            )
 export function on_PageLoad(id:Symbol, callback:(() => void)                 )
 export function on_PageLoad(arg_1?:(Symbol|(() => void)), arg_2?:(() => void)){
@@ -41,6 +36,13 @@ export function remove_PageLoad_Callback(id:Symbol){
 		)
 	}
 }
+
+// keep @ end of 'Exports: Local' declarations
+// to avoid issues with circular dependencies
+_CardType.initialize(activeBoard)
+export const cardTypes = _CardType.cardTypes
+export const CardType  = _CardType
+export type  CardType  = _CardType
 
 
 //#########################//

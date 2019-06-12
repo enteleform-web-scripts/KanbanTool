@@ -5,7 +5,7 @@ import {KeyBinding           } from "~/Utils/KeyBinding/__Main__"
 import {
 	on_PageLoad,
 	Show, Hide,
-} from "~/Utils/KanbanTool/__Main__"
+} from "../__Main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
