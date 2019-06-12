@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560369006535)
+		const elapsedTime = _get_ElapsedTime(1560369086184)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:50:06 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:51:26 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11413,8 +11413,8 @@ __Main__1.CardType_Manager.initialize_Manual({
 });
 __Main__2.KeyBinding.add(["ctrl", "space"], (event) => {
     const cardType = __Main__1.CardType_Manager.HoverManager.get_CardType();
-    const task_CardTypes = CardType_1.get_CardTypes_FromRegEx(/^$/);
-    const today_CardTypes = CardType_1.get_CardTypes_FromRegEx(/^$/);
+    const task_CardTypes = CardType_1.get_CardTypes_FromRegEx(/^Task_.*$/);
+    const today_CardTypes = CardType_1.get_CardTypes_FromRegEx(/^Today_.*$/);
     let new_CardType, new_CardType_Index;
     if (task_CardTypes.includes(cardType)) {
         new_CardType_Index = task_CardTypes.indexOf(cardType);
