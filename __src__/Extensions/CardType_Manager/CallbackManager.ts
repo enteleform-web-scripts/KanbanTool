@@ -78,19 +78,13 @@ export namespace CallbackManager{
 
 function _get_UpdateCSS_Callback(cell:JQuery, cardType:CardType){
 	return () => {
-		let alpha
-
 		if(CardType_Filter.cardType_IsEnabled(cardType)){
 			cell.addClass   (CSS.activeFilter  )
 			cell.removeClass(CSS.inactiveFilter)
-			alpha = "FF"
 		}
 		else{
 			cell.removeClass(CSS.activeFilter  )
 			cell.addClass   (CSS.inactiveFilter)
-			alpha = "AA"
 		}
-
-		set_CSS_Variable(cell, CSS.filterColor, (cardType.bgColor + alpha))
 	}
 }

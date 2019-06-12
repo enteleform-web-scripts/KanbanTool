@@ -60,26 +60,13 @@ kt-board kt-task .kt-task-body, // CardFace.Title
 
 	.cell.filter
 		FilterButton_BoxShadow()
-		margin:  12px 20px 12px 15px  !important
+		margin:  12px 20px 12px 15px
 
-	.cell.filter.active,
-	.cell.filter.inactive
-		--filterColor:  #000
-		padding-top:    14px
-		color:          #666
-		box-shadow:
-			inset 0 7px 0 0 var(--filterColor),
-			inset 0 8px 0 0 #AAA \
-			!important
+	.cell.filter.active
+		opacity:  1
 
 	.cell.filter.inactive
-		background:  #AAA
-		color:       #777
-		box-shadow:
-			inset 0 10px 15px -2px #0003,
-			inset 0 7px 0 0 var(--filterColor),
-			inset 0 8px 0 0 #AAA \
-			!important
+		opacity:  0.5
 
 
 //#####################//
