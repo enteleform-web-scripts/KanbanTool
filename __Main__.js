@@ -127,95 +127,6 @@ setTimeout(() => {
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(30);
-const hotkeys_js_1 = __importDefault(__webpack_require__(31));
-hotkeys_js_1.default.filter = _disable_DefaultFilters;
-class KeyBinding {
-    static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
-    static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
-    static add(hotKeys, arg_2, arg_3) {
-        const hotKeys_String = _convert_HotKeys_ToString(hotKeys);
-        const { callback, options } = _get_BindArguments(arg_2, arg_3);
-        if (callback) {
-            _add_KeyBinding(hotKeys_String, callback, options);
-        }
-        else {
-            return _get_Decorator(hotKeys_String, options);
-        }
-    }
-    static is_Pressed(...modifierKey) {
-        return modifierKey.every(key => _isPressed_CallbackMap[key]());
-    }
-}
-exports.KeyBinding = KeyBinding;
-(function (KeyBinding) {
-    KeyBinding.ModifierKeys = KeyGroups_1.ModifierKeys;
-    KeyBinding.AlphanumericKeys = KeyGroups_1.AlphanumericKeys;
-    KeyBinding.CharacterKeys = KeyGroups_1.CharacterKeys;
-    KeyBinding.Keys = KeyGroups_1.Keys;
-})(KeyBinding = exports.KeyBinding || (exports.KeyBinding = {}));
-window.KeyBinding = KeyBinding;
-const _BindOptions_Defaults = { preventDefault: false };
-const _isPressed_CallbackMap = {
-    ctrl: () => hotkeys_js_1.default.ctrl,
-    shift: () => hotkeys_js_1.default.shift,
-    alt: () => hotkeys_js_1.default.alt,
-};
-function _disable_DefaultFilters(event) { return true; }
-function _get_BindArguments(arg_2, arg_3) {
-    let callback, options;
-    if (arg_2 instanceof Function)
-        callback = arg_2;
-    if (arg_3)
-        options = arg_3;
-    else if (arg_2)
-        options = arg_2;
-    options = { ..._BindOptions_Defaults, ...options };
-    return { callback, options };
-}
-function _add_KeyBinding(hotKeys, callback, options) {
-    hotkeys_js_1.default(hotKeys, (event) => {
-        if (options.preventDefault) {
-            event.preventDefault;
-        }
-        console.log(`[KeyBinding] '${hotKeys}'`);
-        callback(event);
-    });
-}
-function _get_Decorator(hotKeys, options) {
-    return (target, propertyKey, descriptor) => {
-        _add_KeyBinding(hotKeys, descriptor.value, options);
-        return descriptor;
-    };
-}
-function _convert_HotKeys_ToString(keys) {
-    return ((keys instanceof Array)
-        ? _get_HotKey_Array_AsString(keys)
-        : keys);
-}
-function _get_HotKey_Array_AsString(keys) {
-    const sortedKeys = [...keys].sort((a, b) => {
-        if (KeyGroups_1.ModifierKeys.includes(a)) {
-            return -1;
-        }
-        else {
-            return 0;
-        }
-    });
-    return sortedKeys.join(" + ");
-}
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * jQuery JavaScript Library v3.3.1
  * https://jquery.com/
@@ -10584,6 +10495,95 @@ return jQuery;
 
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const KeyGroups_1 = __webpack_require__(30);
+const hotkeys_js_1 = __importDefault(__webpack_require__(31));
+hotkeys_js_1.default.filter = _disable_DefaultFilters;
+class KeyBinding {
+    static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
+    static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
+    static add(hotKeys, arg_2, arg_3) {
+        const hotKeys_String = _convert_HotKeys_ToString(hotKeys);
+        const { callback, options } = _get_BindArguments(arg_2, arg_3);
+        if (callback) {
+            _add_KeyBinding(hotKeys_String, callback, options);
+        }
+        else {
+            return _get_Decorator(hotKeys_String, options);
+        }
+    }
+    static is_Pressed(...modifierKey) {
+        return modifierKey.every(key => _isPressed_CallbackMap[key]());
+    }
+}
+exports.KeyBinding = KeyBinding;
+(function (KeyBinding) {
+    KeyBinding.ModifierKeys = KeyGroups_1.ModifierKeys;
+    KeyBinding.AlphanumericKeys = KeyGroups_1.AlphanumericKeys;
+    KeyBinding.CharacterKeys = KeyGroups_1.CharacterKeys;
+    KeyBinding.Keys = KeyGroups_1.Keys;
+})(KeyBinding = exports.KeyBinding || (exports.KeyBinding = {}));
+window.KeyBinding = KeyBinding;
+const _BindOptions_Defaults = { preventDefault: false };
+const _isPressed_CallbackMap = {
+    ctrl: () => hotkeys_js_1.default.ctrl,
+    shift: () => hotkeys_js_1.default.shift,
+    alt: () => hotkeys_js_1.default.alt,
+};
+function _disable_DefaultFilters(event) { return true; }
+function _get_BindArguments(arg_2, arg_3) {
+    let callback, options;
+    if (arg_2 instanceof Function)
+        callback = arg_2;
+    if (arg_3)
+        options = arg_3;
+    else if (arg_2)
+        options = arg_2;
+    options = { ..._BindOptions_Defaults, ...options };
+    return { callback, options };
+}
+function _add_KeyBinding(hotKeys, callback, options) {
+    hotkeys_js_1.default(hotKeys, (event) => {
+        if (options.preventDefault) {
+            event.preventDefault;
+        }
+        console.log(`[KeyBinding] '${hotKeys}'`);
+        callback(event);
+    });
+}
+function _get_Decorator(hotKeys, options) {
+    return (target, propertyKey, descriptor) => {
+        _add_KeyBinding(hotKeys, descriptor.value, options);
+        return descriptor;
+    };
+}
+function _convert_HotKeys_ToString(keys) {
+    return ((keys instanceof Array)
+        ? _get_HotKey_Array_AsString(keys)
+        : keys);
+}
+function _get_HotKey_Array_AsString(keys) {
+    const sortedKeys = [...keys].sort((a, b) => {
+        if (KeyGroups_1.ModifierKeys.includes(a)) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
+    });
+    return sortedKeys.join(" + ");
+}
+
+
+/***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560374131749)
+		const elapsedTime = _get_ElapsedTime(1560375529604)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:15:31 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:38:49 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10678,7 +10678,7 @@ var HoverManager;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
-const $ = __webpack_require__(2);
+const $ = __webpack_require__(1);
 class TaskContainer {
     constructor({ type, domIndex, modelIndex, model, element }) {
         this.children = [];
@@ -10834,7 +10834,7 @@ exports.FunctionBar = FunctionBar;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(1);
+const __Main__1 = __webpack_require__(2);
 exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
 exports.functionBar_ToggleModifiers = ["shift", "alt"];
 
@@ -11099,7 +11099,7 @@ exports.onPageLoad_Timeout_MS = 500;
 Object.defineProperty(exports, "__esModule", { value: true });
 const Filter_1 = __webpack_require__(29);
 const is_JQuery_1 = __webpack_require__(14);
-const $ = __webpack_require__(2);
+const $ = __webpack_require__(1);
 class CardType {
     constructor({ index, id, name, bgColor, fgColor }) {
         this.index = index;
@@ -11176,7 +11176,7 @@ const TaskContainer_1 = __webpack_require__(5);
 const get_Rows_1 = __webpack_require__(16);
 const get_Columns_1 = __webpack_require__(17);
 const Glob_1 = __webpack_require__(32);
-const $ = __webpack_require__(2);
+const $ = __webpack_require__(1);
 class Show {
     static rows({ include, exclude }) {
         _show({
@@ -11257,7 +11257,7 @@ function _match_Glob(container, target) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(5);
 const __Main__1 = __webpack_require__(0);
-const $ = __webpack_require__(2);
+const $ = __webpack_require__(1);
 function get_Rows() {
     const headerElements = $.find("kt-board > tbody > tr > th");
     const models = __Main__1.activeBoard.swimlanes().toArray();
@@ -11337,7 +11337,7 @@ function _update_ColumnRelationships(columns) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(19);
 const __Main__2 = __webpack_require__(0);
-const $ = __webpack_require__(2);
+const $ = __webpack_require__(1);
 var StyleManager;
 (function (StyleManager) {
     function initialize(cardOptions) {
@@ -11495,6 +11495,7 @@ __webpack_require__(40);
 __webpack_require__(41);
 __webpack_require__(42);
 __webpack_require__(43);
+__webpack_require__(44);
 
 
 /***/ }),
@@ -11506,7 +11507,7 @@ __webpack_require__(43);
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskToggle_1 = __webpack_require__(9);
 const __Main__1 = __webpack_require__(10);
-const __Main__2 = __webpack_require__(1);
+const __Main__2 = __webpack_require__(2);
 const priorityColors = {
     low: "hsl(220, 40%,  60%)",
     medium: "hsl(50,  100%, 70%)",
@@ -12038,7 +12039,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const CSS = __webpack_require__(28).CardType_Manager;
 const HoverManager_1 = __webpack_require__(4);
 const StyleManager_1 = __webpack_require__(18);
-const __Main__1 = __webpack_require__(1);
+const __Main__1 = __webpack_require__(2);
 const __Main__2 = __webpack_require__(0);
 var CallbackManager;
 (function (CallbackManager) {
@@ -12102,9 +12103,9 @@ module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterCol
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(12);
 const __Main__1 = __webpack_require__(13);
-const __Main__2 = __webpack_require__(1);
+const __Main__2 = __webpack_require__(2);
 const __Main__3 = __webpack_require__(0);
-const $ = __webpack_require__(2);
+const $ = __webpack_require__(1);
 class Filter {
     static get enabled() { return Filter._filterButton.hasClass("kt-board_search-filter--active"); }
     static get disabled() { return !(this.enabled); }
@@ -12880,7 +12881,7 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(7);
-const __Main__1 = __webpack_require__(1);
+const __Main__1 = __webpack_require__(2);
 class Entry {
     constructor({ name, callback, on_Click, on_DoubleClick, on_KeyBinding, on_Layout, keyBinding, color, }) {
         callback = (callback || emptyCallback);
@@ -12953,9 +12954,9 @@ const CSS = __webpack_require__(20).FunctionBar;
 const Settings_1 = __webpack_require__(7);
 const Position_1 = __webpack_require__(8);
 const __Main__1 = __webpack_require__(19);
-const __Main__2 = __webpack_require__(1);
+const __Main__2 = __webpack_require__(2);
 const __Main__3 = __webpack_require__(0);
-const $ = __webpack_require__(2);
+const $ = __webpack_require__(1);
 class Layout {
     constructor(functionBar) {
         this._functionBar = functionBar;
@@ -13080,7 +13081,7 @@ exports.Module = Module;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
-const __Main__2 = __webpack_require__(1);
+const __Main__2 = __webpack_require__(2);
 function get_Auto_CardTypes_Rows() {
     let cardType_Rows = [];
     let cardIndex = 0;
@@ -13202,7 +13203,7 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(6);
 const { Entry, Position } = __Main__1.FunctionBar;
-const __Main__2 = __webpack_require__(1);
+const __Main__2 = __webpack_require__(2);
 const __Main__3 = __webpack_require__(0);
 const activeTask_Columns = ["Routine", "Tasks.Active"];
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
@@ -13267,7 +13268,7 @@ function get_Callbacks(callback) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const $ = __webpack_require__(2);
+const $ = __webpack_require__(1);
 exports.lol = "wut";
 const DELETE_KEYCODE = 46;
 const selector__CheckList_Item = "kt-taskview > form > div.kt-taskview-content > kt-checklist > li > .kt-checklist_item_content";
@@ -13323,8 +13324,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(1);
-const $ = __webpack_require__(2);
+const __Main__1 = __webpack_require__(2);
+const $ = __webpack_require__(1);
 class FilterKeybindings {
     static focus_SearchField(event) {
         const searchField = $("#kt-board_search-q");
@@ -13337,6 +13338,136 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], FilterKeybindings, "focus_SearchField", null);
+
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const jquery_1 = __importDefault(__webpack_require__(1));
+const $ = jquery_1.default(function ($, undefined) {
+    $.fn.watch = function (options) {
+        var opt = $.extend({
+            properties: null,
+            interval: 100,
+            id: "_watcher_" + new Date().getTime(),
+            watchChildren: false,
+            callback: null
+        }, options);
+        return this.each(function () {
+            var el = this;
+            var el$ = $(this);
+            var fnc = function (mRec, mObs) {
+                __watcher.call(el, opt.id, mRec, mObs);
+            };
+            var data = {
+                id: opt.id,
+                props: opt.properties.split(','),
+                vals: [opt.properties.split(',').length],
+                func: opt.callback,
+                fnc: fnc,
+                origProps: opt.properties,
+                interval: opt.interval,
+                intervalId: null
+            };
+            $.each(data.props, function (i) {
+                var propName = data.props[i];
+                if (data.props[i].startsWith('attr_'))
+                    data.vals[i] = el$.attr(propName.replace('attr_', ''));
+                else if (propName.startsWith('prop_'))
+                    data.vals[i] = el$.prop(propName.replace('props_', ''));
+                else
+                    data.vals[i] = el$.css(propName);
+            });
+            el$.data(opt.id, data);
+            hookChange(el$, opt.id, data);
+        });
+        function hookChange(element$, id, data) {
+            element$.each(function () {
+                var el$ = $(this);
+                if (window.MutationObserver) {
+                    var observer = el$.data('__watcherObserver' + opt.id);
+                    if (observer == null) {
+                        observer = new MutationObserver(data.fnc);
+                        el$.data('__watcherObserver' + opt.id, observer);
+                    }
+                    observer.observe(this, {
+                        attributes: true,
+                        subtree: opt.watchChildren,
+                        childList: opt.watchChildren,
+                        characterData: true
+                    });
+                }
+                else
+                    data.intervalId = setInterval(data.fnc, opt.interval);
+            });
+        }
+        function __watcher(id, mRec, mObs) {
+            var el$ = $(this);
+            var w = el$.data(id);
+            if (!w)
+                return;
+            var el = this;
+            if (!w.func)
+                return;
+            var changed = false;
+            var i = 0;
+            for (i; i < w.props.length; i++) {
+                var key = w.props[i];
+                var newVal = "";
+                if (key.startsWith('attr_'))
+                    newVal = el$.attr(key.replace('attr_', ''));
+                else if (key.startsWith('prop_'))
+                    newVal = el$.prop(key.replace('prop_', ''));
+                else
+                    newVal = el$.css(key);
+                if (newVal == undefined)
+                    continue;
+                if (w.vals[i] != newVal) {
+                    w.vals[i] = newVal;
+                    changed = true;
+                    break;
+                }
+            }
+            if (changed) {
+                el$.unwatch(id);
+                w.func.call(el, w, i, mRec, mObs);
+                hookChange(el$, id, w);
+            }
+        }
+    };
+    $.fn.unwatch = function (id) {
+        this.each(function () {
+            var el = $(this);
+            var data = el.data(id);
+            try {
+                if (window.MutationObserver) {
+                    var observer = el.data("__watcherObserver" + id);
+                    if (observer) {
+                        observer.disconnect();
+                        el.removeData("__watcherObserver" + id);
+                    }
+                }
+                else
+                    clearInterval(data.intervalId);
+            }
+            catch (e) {
+            }
+        });
+        return this;
+    };
+    String.prototype.startsWith = function (sub) {
+        if (sub === null || sub === undefined)
+            return false;
+        return sub == this.substr(0, sub.length);
+    };
+})(jQuery, undefined);
 
 
 /***/ })
