@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560307311763)
+		const elapsedTime = _get_ElapsedTime(1560307870778)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:41:51 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     10:51:10 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11346,13 +11346,17 @@ __Main__1.CardType_Manager.initialize_Manual({
         [
             {
                 background_Color: "hsl(215, 80%, 85%)",
-                foreground_Color: "hsl(215, 20%, 45%)",
+                foreground_Color: "hsl(215, 20%, 40%)",
+                borderColor_Inside: "hsl(215, 40%, 50%)",
                 borderColor_Main: "hsl(215, 40%, 65%)",
+                borderColor_Outside: "hsl(215, 50%, 50%)",
             },
             {
                 background_Color: "hsl(255, 70%, 85%)",
-                foreground_Color: "hsl(255, 20%, 45%)",
+                foreground_Color: "hsl(255, 20%, 40%)",
+                borderColor_Inside: "hsl(255, 40%, 50%)",
                 borderColor_Main: "hsl(255, 40%, 65%)",
+                borderColor_Outside: "hsl(255, 50%, 55%)",
             },
         ],
     ],
