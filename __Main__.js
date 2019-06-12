@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560373227330)
+		const elapsedTime = _get_ElapsedTime(1560373921793)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:00:27 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:12:01 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11353,7 +11353,7 @@ var StyleManager;
         };
         __Main__2.on_PageLoad(() => {
             callback();
-            __Main__2.KanbanTool.tasks.on("change", callback);
+            __Main__2.KanbanTool.tasks.on("add", callback);
         });
     }
     StyleManager.initialize = initialize;
