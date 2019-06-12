@@ -14,13 +14,13 @@ FilterButton_BoxShadow()
 
 _CardType_BoxShadow(shadowColor_1, shadowColor_2)
 	box-shadow:
-		/* BorderAccent.Outside */  calc(0px - var(--title_BorderWidth)) 0 0 0 var(--title_BorderAccentColor),
-		/* BorderAccent.Inside  */  inset var(--title_BorderAccentWidth) 0 0 0 var(--title_BorderAccentColor),
-		/* Border               */  0 0 0 var(--title_BorderWidth) var(--title_BorderColor),
-		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 1px) 0 0 0 #0004,
-		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccentWidth) + 3px) 0 0 0 #0002,
-		/* Border.OutsideBorder */  0 0 0 calc(var(--title_BorderWidth) + 1px) #888,
-		/* Border.InsideBorder  */  inset 0 0 0 1px #0004,
+		/* BorderAccent.Outside */  calc(0px - var(--title_Border_Width)) 0 0 0 var(--title_BorderAccent_Color),
+		/* BorderAccent.Inside  */  inset var(--title_BorderAccent_Width) 0 0 0 var(--title_BorderAccent_Color),
+		/* Border               */  0 0 0 var(--title_Border_Width) var(--title_BorderColor_Main),
+		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccent_Width) + 1px) 0 0 0 #0004,
+		/* BorderAccent.Shadow  */  inset calc(var(--title_BorderAccent_Width) + 3px) 0 0 0 #0002,
+		/* Border.OutsideBorder */  0 0 0 calc(var(--title_Border_Width) + 1px) var(--title_BorderColor_Outside),
+		/* Border.InsideBorder  */  inset 0 0 0 1px var(--title_BorderColor_Inside),
 		/* Shadow               */  5px 5px  8px 0px  shadowColor_1,
 		/* Shadow               */  5px 11px 8px -7px shadowColor_2 \
 		!important
@@ -33,16 +33,23 @@ _CardType_BoxShadow(shadowColor_1, shadowColor_2)
 kt-board kt-task, // CardFace
 .{FunctionBar-container} .cell.filter
 
-		--title_BorderWidth:                5px
+		//###  Static  ###//
+		--title_Border_Width:                5px
 		--title_Default_BorderAccentWidth:  5px
-		--title_BorderAccentWidth:          0px
-		--title_BorderAccentColor:          #0000
-		--title_BorderColor:                #0000
-		--title_BackgroundColor:            #0000
-		--title_ForegroundColor:            #444
+
+		//###  Dynamic: JS  ###//
+		--title_Background_Color:     #0000
+		--title_Foreground_Color:     #444
+		--title_BorderColor_Main:     #0000
+		--title_BorderColor_Inside:   #0004
+		--title_BorderColor_Outside:  #888
+		--title_BorderAccent_Color:   #0000
+
+		//###  Dynamic: CSS  ###//
+		--title_BorderAccent_Width:  0px
 
 		&.borderAccent_Enabled
-			--title_BorderAccentWidth:  var(--title_Default_BorderAccentWidth)
+			--title_BorderAccent_Width:  var(--title_Default_BorderAccentWidth)
 
 kt-board kt-task .kt-task-body, // CardFace.Title
 .{FunctionBar-container} .cell.filter
@@ -62,7 +69,7 @@ kt-board kt-task .kt-task-body, // CardFace.Title
 
 		FilterButton_BoxShadow()
 		margin:   12px 0 12px 24px                                          !important
-		padding:  3px 10px 3px calc(10px + var(--title_BorderAccentWidth))  !important
+		padding:  3px 10px 3px calc(10px + var(--title_BorderAccent_Width))  !important
 
 		&:nth-child(1)
 			margin-left:  0  !important
@@ -98,7 +105,7 @@ kt-board
 		.kt-task-body
 			CardTitle_BoxShadow()
 			margin:   5px                                                     !important
-			padding:  7px 7px 4px calc(7px + var(--title_BorderAccentWidth))  !important
+			padding:  7px 7px 4px calc(7px + var(--title_BorderAccent_Width))  !important
 
 
 //############################//

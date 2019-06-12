@@ -10,15 +10,19 @@ const priorityColors = {
 }
 
 const todaySettings = {
-	borderColor:     "hsl(143, 45%, 65%)",
-	backgroundColor: "hsl(143, 40%, 85%)",
-	foregroundColor: "hsl(143, 5%,  40%)",
+	background_Color:    "hsl(143, 40%, 85%)",
+	foreground_Color:    "hsl(143, 5%,  40%)",
+	borderColor_Inside:  "hsl(143, 40%, 50%)",
+	borderColor_Main:    "hsl(143, 45%, 65%)",
+	borderColor_Outside: "hsl(143, 50%, 40%)",
 }
 
 const taskSettings = {
-	borderColor:     "hsl(0, 0%, 70%)",
-	backgroundColor: "hsl(0, 0%, 80%)",
-	foregroundColor: "hsl(0, 0%, 30%)",
+	background_Color:    "hsl(0, 0%, 80%)",
+	foreground_Color:    "hsl(0, 0%, 30%)",
+	borderColor_Inside:  "hsl(0, 0%, 60%)",
+	borderColor_Main:    "hsl(0, 0%, 70%)",
+	borderColor_Outside: "hsl(0, 0%, 60%)",
 }
 
 CardType_Manager.initialize_Manual({
@@ -31,27 +35,31 @@ CardType_Manager.initialize_Manual({
 
 	cardTypes: [
 		[
-			{/*###  "Today_Low"    ###*/ borderAccentColor:priorityColors.low,    ...todaySettings},
-			{/*###  "Today_Medium" ###*/ borderAccentColor:priorityColors.medium, ...todaySettings},
-			{/*###  "Today_High"   ###*/ borderAccentColor:priorityColors.high,   ...todaySettings},
-			{/*###  "Today_Urgent" ###*/ borderAccentColor:priorityColors.urgent, ...todaySettings},
+			{/*###  "Today_Low"    ###*/ borderAccent_Color:priorityColors.low,    ...todaySettings},
+			{/*###  "Today_Medium" ###*/ borderAccent_Color:priorityColors.medium, ...todaySettings},
+			{/*###  "Today_High"   ###*/ borderAccent_Color:priorityColors.high,   ...todaySettings},
+			{/*###  "Today_Urgent" ###*/ borderAccent_Color:priorityColors.urgent, ...todaySettings},
 		],
 		[
-			{/*###  "Task_Low"    ###*/ borderAccentColor:priorityColors.low,    ...taskSettings},
-			{/*###  "Task_Medium" ###*/ borderAccentColor:priorityColors.medium, ...taskSettings},
-			{/*###  "Task_High"   ###*/ borderAccentColor:priorityColors.high,   ...taskSettings},
-			{/*###  "Task_Urgent" ###*/ borderAccentColor:priorityColors.urgent, ...taskSettings},
+			{/*###  "Task_Low"    ###*/ borderAccent_Color:priorityColors.low,    ...taskSettings},
+			{/*###  "Task_Medium" ###*/ borderAccent_Color:priorityColors.medium, ...taskSettings},
+			{/*###  "Task_High"   ###*/ borderAccent_Color:priorityColors.high,   ...taskSettings},
+			{/*###  "Task_Urgent" ###*/ borderAccent_Color:priorityColors.urgent, ...taskSettings},
 		],
 		[
 			{ //###  Daily_Task  ###//
-				borderColor:     "hsl(215, 40%, 65%)",
-				backgroundColor: "hsl(215, 80%, 85%)",
-				foregroundColor: "hsl(215, 20%, 45%)",
+				background_Color:    "hsl(215, 80%, 85%)",
+				foreground_Color:    "hsl(215, 20%, 45%)",
+				// borderColor_Inside:  "hsl(0, 0%, 60%)",
+				borderColor_Main:    "hsl(215, 40%, 65%)",
+				// borderColor_Outside: "hsl(0, 0%, 60%)",
 			},
 			{ //###  Book  ###//
-				borderColor:     "hsl(255, 40%, 65%)",
-				backgroundColor: "hsl(255, 70%, 85%)",
-				foregroundColor: "hsl(255, 20%, 45%)",
+				background_Color:    "hsl(255, 70%, 85%)",
+				foreground_Color:    "hsl(255, 20%, 45%)",
+				// borderColor_Inside:  "hsl(0, 0%, 60%)",
+				borderColor_Main:    "hsl(255, 40%, 65%)",
+				// borderColor_Outside: "hsl(0, 0%, 60%)",
 			},
 		],
 	],

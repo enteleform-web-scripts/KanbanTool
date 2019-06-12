@@ -66,22 +66,29 @@ function _build_CardType_ID_Map(){
 }
 
 function _update_CardStyle_From_CardTypes(element:JQuery, cardType:CardType){
-	$set_CSS_Variable(element, "title_BorderColor", cardType.bgColor)
+	$set_CSS_Variable(element, "title_BorderColor_Main", cardType.bgColor)
 }
 
 function _update_CardStyle_From_CardOptions(element:JQuery, cardType:CardType){
 	const cardOptions = _get_CardOptions(element, cardType)
 
-	$set_CSS_Variable(element, "title_BorderColor",     cardOptions.borderColor    )
-	$set_CSS_Variable(element, "title_BackgroundColor", cardOptions.backgroundColor)
-	$set_CSS_Variable(element, "title_ForegroundColor", cardOptions.foregroundColor)
+	Array.from([
+		["title_Background_Color",    cardOptions.background_Color   ],
+		["title_Foreground_Color",    cardOptions.foreground_Color   ],
+		["title_BorderColor_Main",    cardOptions.borderColor_Main   ],
+		["title_BorderColor_Inside",  cardOptions.borderColor_Inside ],
+		["title_BorderColor_Outside", cardOptions.borderColor_Outside],
+	]).forEach( ([key, value]) => {
+		if(value)
+			{$set_CSS_Variable(element, key, value)}
+	})
 
-	if(cardOptions.borderAccentColor){
-		$set_CSS_Variable(element, "title_BorderAccentColor", cardOptions.borderAccentColor)
+	if(cardOptions.borderAccent_Color){
+		$set_CSS_Variable(element, "title_BorderAccent_Color", cardOptions.borderAccent_Color)
 		element.addClass("borderAccent_Enabled")
 	}
 	else{
-		$set_CSS_Variable(element, "title_BorderAccentColor", "#0000")
+		$set_CSS_Variable(element, "title_BorderAccent_Color", "#0000")
 		element.removeClass("borderAccent_Enabled")
 	}
 }

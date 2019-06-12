@@ -75,10 +75,12 @@ export namespace CardType_Manager{
 //###############//
 
 export interface _CardOptions{
-	borderColor:        string
-	backgroundColor:    string
-	foregroundColor:    string
-	borderAccentColor?: string
+	background_Color:     string
+	foreground_Color:     string
+	borderColor_Main:     string
+	borderColor_Inside?:  string
+	borderColor_Outside?: string
+	borderAccent_Color?:  string
 }
 
 interface _FunctionBar_Options{
