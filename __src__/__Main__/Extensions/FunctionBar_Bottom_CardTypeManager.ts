@@ -73,8 +73,8 @@ CardType_Manager.initialize_Manual({
 KeyBinding.add(["ctrl", "space"],
 	(event:KeyboardEvent) => {
 		const cardType        = CardType_Manager.HoverManager.get_CardType()
-		const task_CardTypes  = get_CardTypes_FromRegEx(/^$/)
-		const today_CardTypes = get_CardTypes_FromRegEx(/^$/)
+		const task_CardTypes  = get_CardTypes_FromRegEx(/^Task_.*$/ )
+		const today_CardTypes = get_CardTypes_FromRegEx(/^Today_.*$/)
 
 		let new_CardType, new_CardType_Index
 
