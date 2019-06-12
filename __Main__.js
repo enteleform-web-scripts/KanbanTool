@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560299162323)
+		const elapsedTime = _get_ElapsedTime(1560299545567)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     8:26:02 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     8:32:25 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10641,12 +10641,12 @@ return jQuery;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(9).inject(__dirname, { CSS: true, HTML: true });
-const Settings_1 = __webpack_require__(7);
+__webpack_require__(8).inject(__dirname, { CSS: true, HTML: true });
+const Settings_1 = __webpack_require__(6);
 const Entry_1 = __webpack_require__(31);
 const Layout_1 = __webpack_require__(32);
 const Module_BaseClasses_1 = __webpack_require__(34);
-const Position_1 = __webpack_require__(8);
+const Position_1 = __webpack_require__(7);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
         super();
@@ -10698,65 +10698,6 @@ exports.FunctionBar = FunctionBar;
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const is_JQuery_1 = __webpack_require__(24);
-function set_CSS_Variable(arg_1, arg_2, arg_3) {
-    const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
-    if (element) {
-        element.get(0).style.setProperty(key, value);
-    }
-    else {
-        document.documentElement.style.setProperty(key, value);
-    }
-}
-exports.set_CSS_Variable = set_CSS_Variable;
-function $set_CSS_Variable(element, key, value) { element.get(0).style.setProperty(`--${key}`, value); }
-exports.$set_CSS_Variable = $set_CSS_Variable;
-function get_CSS_Variable(arg_1, arg_2) {
-    const { element, key } = _get_Arguments(arg_1, arg_2, undefined);
-    if (element) {
-        return element.get(0).style.getPropertyValue(key);
-    }
-    else {
-        return _get_CSS_Variable_Value(key);
-    }
-}
-exports.get_CSS_Variable = get_CSS_Variable;
-function get_CSS_Variables() {
-    const variables = {};
-    const styleSheets = [...document.styleSheets]
-        .flatMap(sheet => _get_CSS_Variable_Keys(sheet));
-    styleSheets.forEach(key => {
-        variables[key] = _get_CSS_Variable_Value(key);
-    });
-    return variables;
-}
-exports.get_CSS_Variables = get_CSS_Variables;
-function _get_Arguments(arg_1, arg_2, arg_3) {
-    let [element, key, value] = is_JQuery_1.is_JQuery(arg_1)
-        ? [arg_1, arg_2, arg_3]
-        : [undefined, arg_1, arg_2];
-    return {
-        element,
-        value,
-        key: `--${key}`
-    };
-}
-function _get_CSS_Variable_Keys(styleSheet) {
-    const cssRules = [...styleSheet.cssRules];
-    const rootRules = cssRules.filter(rule => (rule.selectorText == ":root"));
-    const keys = rootRules.flatMap(rule => [...rule.style]);
-    return keys;
-}
-function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documentElement).getPropertyValue(key); }
-
-
-/***/ }),
-/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10845,7 +10786,7 @@ exports.TaskContainer = TaskContainer;
 
 
 /***/ }),
-/* 7 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10857,7 +10798,7 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
 
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10877,7 +10818,7 @@ exports.is_VerticalPosition = is_VerticalPosition;
 
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10962,13 +10903,13 @@ function _strip_HTML_ExcessData(html) {
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(5);
+const __Main__1 = __webpack_require__(10);
 const __Main__2 = __webpack_require__(0);
 const $ = __webpack_require__(2);
 var StyleManager;
@@ -11036,6 +10977,65 @@ function _get_CardOptions(element, cardType) { return StyleManager._CardType_Opt
 
 
 /***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const is_JQuery_1 = __webpack_require__(24);
+function set_CSS_Variable(arg_1, arg_2, arg_3) {
+    const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
+    if (element) {
+        element.get(0).style.setProperty(key, value);
+    }
+    else {
+        document.documentElement.style.setProperty(key, value);
+    }
+}
+exports.set_CSS_Variable = set_CSS_Variable;
+function $set_CSS_Variable(element, key, value) { element.get(0).style.setProperty(`--${key}`, value); }
+exports.$set_CSS_Variable = $set_CSS_Variable;
+function get_CSS_Variable(arg_1, arg_2) {
+    const { element, key } = _get_Arguments(arg_1, arg_2, undefined);
+    if (element) {
+        return element.get(0).style.getPropertyValue(key);
+    }
+    else {
+        return _get_CSS_Variable_Value(key);
+    }
+}
+exports.get_CSS_Variable = get_CSS_Variable;
+function get_CSS_Variables() {
+    const variables = {};
+    const styleSheets = [...document.styleSheets]
+        .flatMap(sheet => _get_CSS_Variable_Keys(sheet));
+    styleSheets.forEach(key => {
+        variables[key] = _get_CSS_Variable_Value(key);
+    });
+    return variables;
+}
+exports.get_CSS_Variables = get_CSS_Variables;
+function _get_Arguments(arg_1, arg_2, arg_3) {
+    let [element, key, value] = is_JQuery_1.is_JQuery(arg_1)
+        ? [arg_1, arg_2, arg_3]
+        : [undefined, arg_1, arg_2];
+    return {
+        element,
+        value,
+        key: `--${key}`
+    };
+}
+function _get_CSS_Variable_Keys(styleSheet) {
+    const cssRules = [...styleSheet.cssRules];
+    const rootRules = cssRules.filter(rule => (rule.selectorText == ":root"));
+    const keys = rootRules.flatMap(rule => [...rule.style]);
+    return keys;
+}
+function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documentElement).getPropertyValue(key); }
+
+
+/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11098,7 +11098,7 @@ function _get_CardType_FromProperty(key, value) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(6);
+const TaskContainer_1 = __webpack_require__(5);
 const get_Rows_1 = __webpack_require__(14);
 const get_Columns_1 = __webpack_require__(15);
 const Glob_1 = __webpack_require__(28);
@@ -11181,7 +11181,7 @@ function _match_Glob(container, target) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(6);
+const TaskContainer_1 = __webpack_require__(5);
 const __Main__1 = __webpack_require__(0);
 const $ = __webpack_require__(2);
 function get_Rows() {
@@ -11206,7 +11206,7 @@ exports.get_Rows = get_Rows;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(6);
+const TaskContainer_1 = __webpack_require__(5);
 const __Main__1 = __webpack_require__(0);
 function get_Columns() {
     const models = __Main__1.activeBoard.workflowStages()
@@ -11332,11 +11332,11 @@ __webpack_require__(39);
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(9).inject(__dirname, { CSS: true, HTML: false });
+__webpack_require__(8).inject(__dirname, { CSS: true, HTML: false });
 const CallbackManager_1 = __webpack_require__(22);
-const StyleManager_1 = __webpack_require__(10);
+const StyleManager_1 = __webpack_require__(9);
 const __Main__1 = __webpack_require__(4);
-const Position_1 = __webpack_require__(8);
+const Position_1 = __webpack_require__(7);
 const get_Rows_1 = __webpack_require__(35);
 var CardType_Manager;
 (function (CardType_Manager) {
@@ -11880,10 +11880,9 @@ process.umask = function() { return 0; };
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const CSS = __webpack_require__(23).CardType_Manager;
-const StyleManager_1 = __webpack_require__(10);
+const StyleManager_1 = __webpack_require__(9);
 const __Main__1 = __webpack_require__(1);
-const __Main__2 = __webpack_require__(5);
-const __Main__3 = __webpack_require__(0);
+const __Main__2 = __webpack_require__(0);
 var CallbackManager;
 (function (CallbackManager) {
     let _entryIndex = -1;
@@ -11900,7 +11899,7 @@ var CallbackManager;
     CallbackManager.set_Card_HoverCallback = set_Card_HoverCallback;
     function get_Callbacks() {
         _entryIndex += 1;
-        const cardType = __Main__3.cardTypes[_entryIndex];
+        const cardType = __Main__2.cardTypes[_entryIndex];
         return _get_Callbacks(cardType);
     }
     CallbackManager.get_Callbacks = get_Callbacks;
@@ -11910,7 +11909,7 @@ var CallbackManager;
                 cell.addClass(CSS.filter);
                 StyleManager_1.StyleManager.update_CardStyle(cell, cardType);
                 const update_CSS = _get_UpdateCSS_Callback(cell, cardType);
-                __Main__3.CardType_Filter.on_Update(update_CSS);
+                __Main__2.CardType_Filter.on_Update(update_CSS);
                 update_CSS();
             },
             on_KeyBinding: function (event, cell) {
@@ -11918,11 +11917,11 @@ var CallbackManager;
             },
             on_Click: function (event, cell) {
                 if (__Main__1.KeyBinding.is_Pressed("ctrl")) {
-                    __Main__3.CardType_Filter.disable_CardTypes();
-                    __Main__3.CardType_Filter.enable_CardTypes(cardType.index);
+                    __Main__2.CardType_Filter.disable_CardTypes();
+                    __Main__2.CardType_Filter.enable_CardTypes(cardType.index);
                 }
                 else {
-                    __Main__3.CardType_Filter.toggle_CardTypes(cardType.index);
+                    __Main__2.CardType_Filter.toggle_CardTypes(cardType.index);
                 }
             },
         };
@@ -11935,18 +11934,14 @@ var CallbackManager;
 })(CallbackManager = exports.CallbackManager || (exports.CallbackManager = {}));
 function _get_UpdateCSS_Callback(cell, cardType) {
     return () => {
-        let alpha;
-        if (__Main__3.CardType_Filter.cardType_IsEnabled(cardType)) {
+        if (__Main__2.CardType_Filter.cardType_IsEnabled(cardType)) {
             cell.addClass(CSS.activeFilter);
             cell.removeClass(CSS.inactiveFilter);
-            alpha = "FF";
         }
         else {
             cell.removeClass(CSS.activeFilter);
             cell.addClass(CSS.inactiveFilter);
-            alpha = "AA";
         }
-        __Main__2.set_CSS_Variable(cell, CSS.filterColor, (cardType.bgColor + alpha));
     };
 }
 
@@ -12756,7 +12751,7 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(7);
+const Settings_1 = __webpack_require__(6);
 const __Main__1 = __webpack_require__(1);
 class Entry {
     constructor({ name, callback, on_Click, on_DoubleClick, on_KeyBinding, on_Layout, keyBinding, color, }) {
@@ -12803,9 +12798,9 @@ const emptyCallback = ((...args) => { });
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const CSS = __webpack_require__(33).FunctionBar;
-const Settings_1 = __webpack_require__(7);
-const Position_1 = __webpack_require__(8);
-const __Main__1 = __webpack_require__(5);
+const Settings_1 = __webpack_require__(6);
+const Position_1 = __webpack_require__(7);
+const __Main__1 = __webpack_require__(10);
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
 const $ = __webpack_require__(2);
