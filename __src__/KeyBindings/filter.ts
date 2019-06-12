@@ -13,14 +13,14 @@ class FilterKeybindings{
 		searchField.focus()
 	}
 
-	@KeyBinding.add(["ctrl", "space"], {preventDefault:true})
-	static show_FilterMenu(event){
-		const filterMenu = $(".kt-board_search-filters_popover")
-		const displayValue =
-			(filterMenu.css("display") == "none")
-			? "block"
-			: "none"
-		filterMenu.css("display", displayValue)
-	}
+	// @KeyBinding.add(["ctrl", "space"], {preventDefault:true})
+	// static show_FilterMenu(event){
+	// 	const filterMenu = $(".kt-board_search-filters_popover")
+	// 	const displayValue =
+	// 		(filterMenu.css("display") == "none")
+	// 		? "block"
+	// 		: "none"
+	// 	filterMenu.css("display", displayValue)
+	// }
 
 }
