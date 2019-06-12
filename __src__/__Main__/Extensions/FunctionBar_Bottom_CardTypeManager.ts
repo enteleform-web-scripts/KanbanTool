@@ -49,18 +49,19 @@ CardType_Manager.initialize_Manual({
 		[
 			{ //###  Daily_Task  ###//
 				background_Color:    "hsl(215, 80%, 85%)",
-				foreground_Color:    "hsl(215, 20%, 45%)",
-				// borderColor_Inside:  "hsl(0, 0%, 60%)",
+				foreground_Color:    "hsl(215, 20%, 40%)",
+				borderColor_Inside:  "hsl(215, 40%, 50%)",
 				borderColor_Main:    "hsl(215, 40%, 65%)",
-				// borderColor_Outside: "hsl(0, 0%, 60%)",
+				borderColor_Outside: "hsl(215, 50%, 50%)",
 			},
 			{ //###  Book  ###//
 				background_Color:    "hsl(255, 70%, 85%)",
-				foreground_Color:    "hsl(255, 20%, 45%)",
-				// borderColor_Inside:  "hsl(0, 0%, 60%)",
+				foreground_Color:    "hsl(255, 20%, 40%)",
+				borderColor_Inside:  "hsl(255, 40%, 50%)",
 				borderColor_Main:    "hsl(255, 40%, 65%)",
-				// borderColor_Outside: "hsl(0, 0%, 60%)",
+				borderColor_Outside: "hsl(255, 50%, 55%)",
 			},
+
 		],
 	],
 })
