@@ -51,6 +51,10 @@
 .FunctionBars .center .right .column .cell {
   text-align: left;
 }
+.FunctionBars .center .left .column .divider,
+.FunctionBars .center .right .column .divider {
+  height: 24px;
+}
 .FunctionBars .top,
 .FunctionBars .bottom {
   display: flex;
@@ -67,6 +71,10 @@
 .FunctionBars .bottom .row .cell {
   text-align: center;
   white-space: nowrap;
+}
+.FunctionBars .top .row .divider,
+.FunctionBars .bottom .row .divider {
+  width: 35px;
 }
 .FunctionBars .top .row.stretch,
 .FunctionBars .bottom .row.stretch {

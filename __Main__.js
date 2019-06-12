@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 16);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -111,11 +111,11 @@ function remove_PageLoad_Callback(id) {
     }
 }
 exports.remove_PageLoad_Callback = remove_PageLoad_Callback;
-var __Main__1 = __webpack_require__(25);
+var __Main__1 = __webpack_require__(27);
 exports.CardType_Filter = __Main__1.CardType_Filter;
 var __Main__2 = __webpack_require__(13);
 exports.Show = __Main__2.Show;
-var __Main__3 = __webpack_require__(29);
+var __Main__3 = __webpack_require__(31);
 exports.Hide = __Main__3.Hide;
 exports.KanbanTool.activeBoard = exports.activeBoard;
 setTimeout(() => {
@@ -133,8 +133,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(26);
-const hotkeys_js_1 = __importDefault(__webpack_require__(27));
+const KeyGroups_1 = __webpack_require__(28);
+const hotkeys_js_1 = __importDefault(__webpack_require__(29));
 hotkeys_js_1.default.filter = _disable_DefaultFilters;
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
@@ -10620,10 +10620,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560300462150)
+		const elapsedTime = _get_ElapsedTime(1560303606241)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     8:47:42 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     9:40:06 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10636,68 +10636,6 @@ return jQuery;
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(__dirname) {
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(8).inject(__dirname, { CSS: true, HTML: true });
-const Settings_1 = __webpack_require__(6);
-const Entry_1 = __webpack_require__(31);
-const Layout_1 = __webpack_require__(32);
-const Module_BaseClasses_1 = __webpack_require__(34);
-const Position_1 = __webpack_require__(7);
-class FunctionBar extends Module_BaseClasses_1.Module {
-    constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
-        super();
-        this.position = position;
-        this.entryGroups = entryGroups;
-        this.autoMap_KeyBindings = (autoMap_KeyBindings || false);
-        this.keyBinding_Modifiers = (keyBinding_Modifiers || []);
-        this.stretchCells = (stretchCells || false);
-        this.cellProperties = (cellProperties || []);
-    }
-    static load(...functionBars) {
-        functionBars.forEach(functionBar => {
-            functionBar.initialize();
-        });
-        Layout_1.Layout.initialize_ToggleBindings();
-    }
-    initialize() {
-        this._validate_AutoMapped_Rows();
-        this.layout = new Layout_1.Layout(this);
-    }
-    get is_HorizontalBar() { return Position_1.is_HorizontalPosition(this.position); }
-    get is_VerticalBar() { return Position_1.is_VerticalPosition(this.position); }
-    _validate_AutoMapped_Rows() {
-        if (!this.autoMap_KeyBindings) {
-            return;
-        }
-        const valid_GroupCount = (this.entryGroups.length <= Settings_1.autoMapped_Key_Rows.length);
-        const valid_KeyCounts = this.entryGroups.every((group, i) => (group.length <= Settings_1.autoMapped_Key_Rows[i].length));
-        if (!(valid_GroupCount && valid_KeyCounts)) {
-            const position = this.position.valueOf();
-            throw new Error(`
-				Invalid FunctionBar Group/Entry Count @ ${position} Bar
-			`);
-        }
-    }
-}
-FunctionBar.Entry = Entry_1.Entry;
-FunctionBar.Position = Position_1.Position;
-exports.FunctionBar = FunctionBar;
-(function (FunctionBar) {
-    let KeyBinding_Mode;
-    (function (KeyBinding_Mode) {
-        KeyBinding_Mode[KeyBinding_Mode["Automatic"] = 0] = "Automatic";
-        KeyBinding_Mode[KeyBinding_Mode["Manual"] = 1] = "Manual";
-    })(KeyBinding_Mode = FunctionBar.KeyBinding_Mode || (FunctionBar.KeyBinding_Mode = {}));
-})(FunctionBar = exports.FunctionBar || (exports.FunctionBar = {}));
-
-/* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\FunctionBar"))
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10786,6 +10724,74 @@ exports.TaskContainer = TaskContainer;
 
 
 /***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(__dirname) {
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(8).inject(__dirname, { CSS: true, HTML: true });
+const Settings_1 = __webpack_require__(6);
+const Entry_1 = __webpack_require__(33);
+const Divider_1 = __webpack_require__(34);
+const Layout_1 = __webpack_require__(35);
+const Module_BaseClasses_1 = __webpack_require__(36);
+const Position_1 = __webpack_require__(7);
+class FunctionBar extends Module_BaseClasses_1.Module {
+    constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
+        super();
+        this.position = position;
+        this.entryGroups = entryGroups;
+        this.autoMap_KeyBindings = (autoMap_KeyBindings || false);
+        this.keyBinding_Modifiers = (keyBinding_Modifiers || []);
+        this.stretchCells = (stretchCells || false);
+        this.cellProperties = (cellProperties || []);
+    }
+    static load(...functionBars) {
+        functionBars.forEach(functionBar => {
+            functionBar.initialize();
+        });
+        Layout_1.Layout.initialize_ToggleBindings();
+    }
+    initialize() {
+        this._validate_AutoMapped_Rows();
+        this.layout = new Layout_1.Layout(this);
+    }
+    get is_HorizontalBar() { return Position_1.is_HorizontalPosition(this.position); }
+    get is_VerticalBar() { return Position_1.is_VerticalPosition(this.position); }
+    get entryGroups_WithoutDividers() {
+        return (this.entryGroups.map(group => group.filter(item => (item instanceof Entry_1.Entry))));
+    }
+    _validate_AutoMapped_Rows() {
+        if (!this.autoMap_KeyBindings) {
+            return;
+        }
+        const entryGroups_WithoutDividers = this.entryGroups_WithoutDividers;
+        const valid_GroupCount = (entryGroups_WithoutDividers.length <= Settings_1.autoMapped_Key_Rows.length);
+        const valid_KeyCounts = entryGroups_WithoutDividers.every((group, i) => (group.length <= Settings_1.autoMapped_Key_Rows[i].length));
+        if (!(valid_GroupCount && valid_KeyCounts)) {
+            const position = this.position.valueOf();
+            throw new Error(`
+				Invalid FunctionBar Group/Entry Count @ ${position} Bar
+			`);
+        }
+    }
+}
+FunctionBar.Entry = Entry_1.Entry;
+FunctionBar.Divider = Divider_1.Divider;
+FunctionBar.Position = Position_1.Position;
+exports.FunctionBar = FunctionBar;
+(function (FunctionBar) {
+    let KeyBinding_Mode;
+    (function (KeyBinding_Mode) {
+        KeyBinding_Mode[KeyBinding_Mode["Automatic"] = 0] = "Automatic";
+        KeyBinding_Mode[KeyBinding_Mode["Manual"] = 1] = "Manual";
+    })(KeyBinding_Mode = FunctionBar.KeyBinding_Mode || (FunctionBar.KeyBinding_Mode = {}));
+})(FunctionBar = exports.FunctionBar || (exports.FunctionBar = {}));
+
+/* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\FunctionBar"))
+
+/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10824,7 +10830,7 @@ exports.is_VerticalPosition = is_VerticalPosition;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(19);
+const Settings_1 = __webpack_require__(21);
 function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
     if (CSS) {
         _inject_CSS(modulePath);
@@ -10983,7 +10989,7 @@ function _get_CardOptions(element, cardType) { return StyleManager._CardType_Opt
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const is_JQuery_1 = __webpack_require__(24);
+const is_JQuery_1 = __webpack_require__(26);
 function set_CSS_Variable(arg_1, arg_2, arg_3) {
     const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
     if (element) {
@@ -11098,10 +11104,10 @@ function _get_CardType_FromProperty(key, value) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
+const TaskContainer_1 = __webpack_require__(4);
 const get_Rows_1 = __webpack_require__(14);
 const get_Columns_1 = __webpack_require__(15);
-const Glob_1 = __webpack_require__(28);
+const Glob_1 = __webpack_require__(30);
 const $ = __webpack_require__(2);
 class Show {
     static rows({ include, exclude }) {
@@ -11181,7 +11187,7 @@ function _match_Glob(container, target) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
+const TaskContainer_1 = __webpack_require__(4);
 const __Main__1 = __webpack_require__(0);
 const $ = __webpack_require__(2);
 function get_Rows() {
@@ -11206,7 +11212,7 @@ exports.get_Rows = get_Rows;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
+const TaskContainer_1 = __webpack_require__(4);
 const __Main__1 = __webpack_require__(0);
 function get_Columns() {
     const models = __Main__1.activeBoard.workflowStages()
@@ -11256,22 +11262,40 @@ function _update_ColumnRelationships(columns) {
 
 /***/ }),
 /* 16 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module) {
 
-__webpack_require__(3);
-module.exports = __webpack_require__(17);
-
+module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collapsed","empty":"empty","divider":"divider","textDivider":"textDivider","_":""}};
 
 /***/ }),
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
+__webpack_require__(3);
+module.exports = __webpack_require__(18);
+
+
+/***/ }),
+/* 18 */
+/***/ (function(module, exports, __webpack_require__) {
+
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(18);
-const __Main__2 = __webpack_require__(4);
-__webpack_require__(36);
+__webpack_require__(19);
+__webpack_require__(38);
+__webpack_require__(39);
+__webpack_require__(40);
+__webpack_require__(41);
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(20);
 const priorityColors = {
     low: "hsl(220, 40%,  60%)",
     medium: "hsl(50,  100%, 70%)",
@@ -11321,23 +11345,21 @@ __Main__1.CardType_Manager.initialize_Manual({
         ],
     ],
 });
-__Main__2.FunctionBar.load(__webpack_require__(37).default, __webpack_require__(38).default);
-__webpack_require__(39);
 
 
 /***/ }),
-/* 18 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(8).inject(__dirname, { CSS: true, HTML: false });
-const CallbackManager_1 = __webpack_require__(22);
+const CallbackManager_1 = __webpack_require__(24);
 const StyleManager_1 = __webpack_require__(9);
-const __Main__1 = __webpack_require__(4);
+const __Main__1 = __webpack_require__(5);
 const Position_1 = __webpack_require__(7);
-const get_Rows_1 = __webpack_require__(35);
+const get_Rows_1 = __webpack_require__(37);
 var CardType_Manager;
 (function (CardType_Manager) {
     function initialize_Manual(options) {
@@ -11414,7 +11436,7 @@ function _update_FunctionBar_Options_CellWidth(options, cellWidth) {
 /* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\CardType_Manager"))
 
 /***/ }),
-/* 19 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11423,7 +11445,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(__webpack_require__(20));
+const path_1 = __importDefault(__webpack_require__(22));
 class S {
 }
 S.baseURL = "https://enteleform-extensions.github.io/KanbanTool";
@@ -11452,7 +11474,7 @@ exports.Settings = S;
 
 
 /***/ }),
-/* 20 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -11680,10 +11702,10 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(21)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(23)))
 
 /***/ }),
-/* 21 */
+/* 23 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -11873,13 +11895,13 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 22 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(23).CardType_Manager;
+const CSS = __webpack_require__(25).CardType_Manager;
 const StyleManager_1 = __webpack_require__(9);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(0);
@@ -11947,13 +11969,13 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 
 
 /***/ }),
-/* 23 */
+/* 25 */
 /***/ (function(module) {
 
 module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterColor","activeFilter":"active","inactiveFilter":"inactive","_":""}};
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11966,7 +11988,7 @@ exports.is_JQuery = is_JQuery;
 
 
 /***/ }),
-/* 25 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12080,7 +12102,7 @@ function _get_CardType_Index(id) {
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12128,7 +12150,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12567,7 +12589,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12608,13 +12630,13 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(30);
+const get_emptyContainer_Indexes_1 = __webpack_require__(32);
 const get_Rows_1 = __webpack_require__(14);
 const get_Columns_1 = __webpack_require__(15);
 const __Main__1 = __webpack_require__(13);
@@ -12656,7 +12678,7 @@ function _is_Empty(container, emptyContainer_Indexes) {
 
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12745,7 +12767,7 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12791,13 +12813,37 @@ const emptyCallback = ((...args) => { });
 
 
 /***/ }),
-/* 32 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(33).FunctionBar;
+const CSS = __webpack_require__(16).FunctionBar;
+class Divider {
+    constructor(text) {
+        this.text = text;
+    }
+    get cssClass() {
+        if (this.text) {
+            return CSS.textDivider;
+        }
+        else {
+            return CSS.divider;
+        }
+    }
+}
+exports.Divider = Divider;
+
+
+/***/ }),
+/* 35 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const CSS = __webpack_require__(16).FunctionBar;
 const Settings_1 = __webpack_require__(6);
 const Position_1 = __webpack_require__(7);
 const __Main__1 = __webpack_require__(10);
@@ -12908,13 +12954,7 @@ function _update_OriginalLayout() {
 
 
 /***/ }),
-/* 33 */
-/***/ (function(module) {
-
-module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collapsed","empty":"empty","_":""}};
-
-/***/ }),
-/* 34 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12927,7 +12967,7 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 35 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12986,7 +13026,129 @@ function _cardTypes_Exhausted(cardIndex) { return (cardIndex == __Main__1.cardTy
 
 
 /***/ }),
-/* 36 */
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(5);
+const { Entry, Position } = __Main__1.FunctionBar;
+const __Main__2 = __webpack_require__(0);
+__Main__1.FunctionBar.load(new __Main__1.FunctionBar({
+    position: Position.Left,
+    entryGroups: [
+        [
+            new Entry({
+                name: "Show_Rows",
+                callback: () => {
+                    __Main__2.Show.allRows();
+                },
+            }),
+            new Entry({
+                name: "Show_Columns",
+                callback: () => {
+                    __Main__2.Show.allColumns();
+                },
+            }),
+            new Entry({
+                name: "Hide_Rows",
+                callback: () => {
+                    __Main__2.Hide.emptyRows();
+                },
+            }),
+            new Entry({
+                name: "Hide_Columns",
+                callback: () => {
+                    __Main__2.Hide.emptyColumns();
+                },
+            }),
+            new Entry({
+                name: "Filter_All",
+                callback: () => {
+                    __Main__2.CardType_Filter.enable_CardTypes();
+                },
+            }),
+            new Entry({
+                name: "Filter_None",
+                callback: () => {
+                    __Main__2.CardType_Filter.disable_CardTypes();
+                },
+            }),
+        ],
+    ],
+}));
+
+
+/***/ }),
+/* 39 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(5);
+const { Entry, Position } = __Main__1.FunctionBar;
+const __Main__2 = __webpack_require__(1);
+const __Main__3 = __webpack_require__(0);
+const activeTask_Columns = ["Routine", "Tasks.Active"];
+__Main__1.FunctionBar.load(new __Main__1.FunctionBar({
+    position: Position.Top,
+    autoMap_KeyBindings: true,
+    keyBinding_Modifiers: ["shift", "alt"],
+    stretchCells: false,
+    cellProperties: [{ functionName: "css", args: ["min-width", "90px"] }],
+    entryGroups: [
+        [
+            new Entry({
+                name: "Today",
+                ...get_Callbacks(() => {
+                    __Main__3.Show.allColumns();
+                    __Main__3.Show.rows({ include: activeTask_Columns });
+                    __Main__3.CardType_Filter.disable_CardTypes();
+                    __Main__3.CardType_Filter.enable_CardTypes(/^(Today.*)|(DailyTask)/);
+                })
+            }),
+            new Entry({
+                on_Layout: function (cell) { this.on_KeyBinding(null, null); },
+                name: "Tasks",
+                ...get_Callbacks(() => {
+                    __Main__3.Show.allColumns();
+                    __Main__3.Show.rows({ include: activeTask_Columns });
+                    __Main__3.CardType_Filter.enable_CardTypes();
+                }),
+            }),
+            new Entry({
+                name: "Planning",
+                ...get_Callbacks(() => {
+                    __Main__3.Show.allColumns();
+                    __Main__3.Show.allRows();
+                    __Main__3.CardType_Filter.enable_CardTypes();
+                }),
+            }),
+        ],
+    ],
+}));
+__Main__3.remove_PageLoad_Callback(__Main__3.CardType_Filter.show_AllCards_ID);
+const _secondaryCallback = () => { __Main__3.Hide.emptyColumns(); };
+function get_Callbacks(callback) {
+    return {
+        on_KeyBinding: (event, cell) => {
+            callback();
+            _secondaryCallback();
+        },
+        on_Click: (event, cell) => {
+            callback();
+            if (!__Main__2.KeyBinding.is_Pressed("ctrl")) {
+                _secondaryCallback();
+            }
+        }
+    };
+}
+
+
+/***/ }),
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13033,129 +13195,7 @@ function get_DivIndex(checkList_Item) {
 
 
 /***/ }),
-/* 37 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(4);
-const { Entry, Position } = __Main__1.FunctionBar;
-const __Main__2 = __webpack_require__(0);
-exports.default = new __Main__1.FunctionBar({
-    position: Position.Left,
-    entryGroups: [
-        [
-            new Entry({
-                name: "Show_Rows",
-                callback: () => {
-                    __Main__2.Show.allRows();
-                },
-            }),
-            new Entry({
-                name: "Show_Columns",
-                callback: () => {
-                    __Main__2.Show.allColumns();
-                },
-            }),
-            new Entry({
-                name: "Hide_Rows",
-                callback: () => {
-                    __Main__2.Hide.emptyRows();
-                },
-            }),
-            new Entry({
-                name: "Hide_Columns",
-                callback: () => {
-                    __Main__2.Hide.emptyColumns();
-                },
-            }),
-            new Entry({
-                name: "Filter_All",
-                callback: () => {
-                    __Main__2.CardType_Filter.enable_CardTypes();
-                },
-            }),
-            new Entry({
-                name: "Filter_None",
-                callback: () => {
-                    __Main__2.CardType_Filter.disable_CardTypes();
-                },
-            }),
-        ],
-    ],
-});
-
-
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(4);
-const { Entry, Position } = __Main__1.FunctionBar;
-const __Main__2 = __webpack_require__(1);
-const __Main__3 = __webpack_require__(0);
-const activeTask_Columns = ["Routine", "Tasks.Active"];
-exports.default = new __Main__1.FunctionBar({
-    position: Position.Top,
-    autoMap_KeyBindings: true,
-    keyBinding_Modifiers: ["shift", "alt"],
-    stretchCells: false,
-    cellProperties: [{ functionName: "css", args: ["min-width", "90px"] }],
-    entryGroups: [
-        [
-            new Entry({
-                name: "Today",
-                ...get_Callbacks(() => {
-                    __Main__3.Show.allColumns();
-                    __Main__3.Show.rows({ include: activeTask_Columns });
-                    __Main__3.CardType_Filter.disable_CardTypes();
-                    __Main__3.CardType_Filter.enable_CardTypes(/^(Today.*)|(DailyTask)/);
-                })
-            }),
-            new Entry({
-                on_Layout: function (cell) { this.on_KeyBinding(null, null); },
-                name: "Tasks",
-                ...get_Callbacks(() => {
-                    __Main__3.Show.allColumns();
-                    __Main__3.Show.rows({ include: activeTask_Columns });
-                    __Main__3.CardType_Filter.enable_CardTypes();
-                }),
-            }),
-            new Entry({
-                name: "Planning",
-                ...get_Callbacks(() => {
-                    __Main__3.Show.allColumns();
-                    __Main__3.Show.allRows();
-                    __Main__3.CardType_Filter.enable_CardTypes();
-                }),
-            }),
-        ],
-    ],
-});
-__Main__3.remove_PageLoad_Callback(__Main__3.CardType_Filter.show_AllCards_ID);
-const _secondaryCallback = () => { __Main__3.Hide.emptyColumns(); };
-function get_Callbacks(callback) {
-    return {
-        on_KeyBinding: (event, cell) => {
-            callback();
-            _secondaryCallback();
-        },
-        on_Click: (event, cell) => {
-            callback();
-            if (!__Main__2.KeyBinding.is_Pressed("ctrl")) {
-                _secondaryCallback();
-            }
-        }
-    };
-}
-
-
-/***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
