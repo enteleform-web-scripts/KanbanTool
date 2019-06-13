@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -121,7 +121,7 @@ exports.cardTypes = __Main__1.CardType.cardTypes;
 exports.CardType = __Main__1.CardType;
 var __Main__2 = __webpack_require__(15);
 exports.Show = __Main__2.Show;
-var __Main__3 = __webpack_require__(33);
+var __Main__3 = __webpack_require__(34);
 exports.Hide = __Main__3.Hide;
 exports.KanbanTool.activeBoard = exports.activeBoard;
 exports.KanbanTool.onInit(() => {
@@ -141,8 +141,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(30);
-const hotkeys_js_1 = __importDefault(__webpack_require__(31));
+const KeyGroups_1 = __webpack_require__(31);
+const hotkeys_js_1 = __importDefault(__webpack_require__(32));
 hotkeys_js_1.default.filter = _disable_DefaultFilters;
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
@@ -10642,10 +10642,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560431682871)
+		const elapsedTime = _get_ElapsedTime(1560431991298)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     9:14:42 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     9:19:51 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10665,7 +10665,7 @@ return jQuery;
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
 const __Main__2 = __webpack_require__(1);
-const __Main__3 = __webpack_require__(6);
+const __Main__3 = __webpack_require__(5);
 var HoverManager;
 (function (HoverManager) {
     let _card = undefined;
@@ -10710,6 +10710,28 @@ var HoverManager;
 
 /***/ }),
 /* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(0);
+const __Main__2 = __webpack_require__(1);
+const Card_DetailView_IsActive_1 = __webpack_require__(36);
+Card_DetailView_IsActive_1.Card_DetailView_IsActive.initialize();
+exports.KeyBinding_Scopes = {
+    Card_IsHovered: "Card_IsHovered",
+    Card_DetailView_IsActive: "Card_DetailView_IsActive",
+};
+__Main__1.on_PageLoad(() => {
+    if (__Main__1.taskView_IsVisible()) {
+        __Main__2.KeyBinding.set_Scope(exports.KeyBinding_Scopes.Card_DetailView_IsActive);
+    }
+});
+
+
+/***/ }),
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10798,28 +10820,6 @@ exports.TaskContainer = TaskContainer;
 
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(0);
-const __Main__2 = __webpack_require__(1);
-const Card_DetailView_IsActive_1 = __webpack_require__(35);
-Card_DetailView_IsActive_1.Card_DetailView_IsActive.initialize();
-exports.KeyBinding_Scopes = {
-    Card_IsHovered: "Card_IsHovered",
-    Card_DetailView_IsActive: "Card_DetailView_IsActive",
-};
-__Main__1.on_PageLoad(() => {
-    if (__Main__1.taskView_IsVisible()) {
-        __Main__2.KeyBinding.set_Scope(exports.KeyBinding_Scopes.Card_DetailView_IsActive);
-    }
-});
-
-
-/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10828,10 +10828,10 @@ __Main__1.on_PageLoad(() => {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(11).inject(__dirname, { CSS: true, HTML: true });
 const Settings_1 = __webpack_require__(8);
-const Entry_1 = __webpack_require__(36);
-const Divider_1 = __webpack_require__(37);
-const Layout_1 = __webpack_require__(38);
-const Module_BaseClasses_1 = __webpack_require__(39);
+const Entry_1 = __webpack_require__(37);
+const Divider_1 = __webpack_require__(38);
+const Layout_1 = __webpack_require__(39);
+const Module_BaseClasses_1 = __webpack_require__(40);
 const Position_1 = __webpack_require__(9);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
@@ -10927,13 +10927,13 @@ exports.is_VerticalPosition = is_VerticalPosition;
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(11).inject(__dirname, { CSS: true, HTML: false });
-const CallbackManager_1 = __webpack_require__(27);
+const CallbackManager_1 = __webpack_require__(28);
 const HoverManager_1 = __webpack_require__(4);
 const StyleManager_1 = __webpack_require__(18);
 const __Main__1 = __webpack_require__(7);
 const Position_1 = __webpack_require__(9);
-const __Main__2 = __webpack_require__(6);
-const get_Rows_1 = __webpack_require__(40);
+const __Main__2 = __webpack_require__(5);
+const get_Rows_1 = __webpack_require__(41);
 var CardType_Manager;
 (function (CardType_Manager) {
     CardType_Manager.HoverManager = HoverManager_1.HoverManager;
@@ -11018,7 +11018,7 @@ function _update_FunctionBar_Options_CellWidth(options, cellWidth) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(24);
+const Settings_1 = __webpack_require__(25);
 function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
     if (CSS) {
         _inject_CSS(modulePath);
@@ -11114,7 +11114,7 @@ exports.onPageLoad_Timeout_MS = 250;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Filter_1 = __webpack_require__(29);
+const Filter_1 = __webpack_require__(30);
 const is_JQuery_1 = __webpack_require__(14);
 const $ = __webpack_require__(2);
 class CardType {
@@ -11189,10 +11189,10 @@ exports.is_JQuery = is_JQuery;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
+const TaskContainer_1 = __webpack_require__(6);
 const get_Rows_1 = __webpack_require__(16);
 const get_Columns_1 = __webpack_require__(17);
-const Glob_1 = __webpack_require__(32);
+const Glob_1 = __webpack_require__(33);
 const $ = __webpack_require__(2);
 class Show {
     static rows({ include, exclude }) {
@@ -11272,7 +11272,7 @@ function _match_Glob(container, target) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
+const TaskContainer_1 = __webpack_require__(6);
 const __Main__1 = __webpack_require__(0);
 const $ = __webpack_require__(2);
 function get_Rows() {
@@ -11297,7 +11297,7 @@ exports.get_Rows = get_Rows;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskContainer_1 = __webpack_require__(5);
+const TaskContainer_1 = __webpack_require__(6);
 const __Main__1 = __webpack_require__(0);
 function get_Columns() {
     const models = __Main__1.activeBoard.workflowStages()
@@ -11496,26 +11496,72 @@ module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collaps
 /* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(3);
-module.exports = __webpack_require__(22);
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(10);
+const HoverManager_1 = __webpack_require__(4);
+const __Main__2 = __webpack_require__(0);
+class TaskToggle {
+    static get today_CardTypes() { return __Main__2.CardType.get_FromRegEx(/^Today_.*$/); }
+    static get task_CardTypes() { return __Main__2.CardType.get_FromRegEx(/^Task_.*$/); }
+    static get today_Cards() { return __Main__2.CardType.get_Cards(...TaskToggle.today_CardTypes); }
+    static toggle_Hovered_Task() {
+        const cardType = __Main__1.CardType_Manager.HoverManager.get_CardType();
+        const new_CardType = _get_Inverted_CardType(cardType);
+        if (new_CardType) {
+            HoverManager_1.HoverManager.set_CardType(new_CardType);
+        }
+    }
+    static convert_TodayCards_To_TaskCards() {
+        TaskToggle.today_Cards.forEach(({ element, cardType }) => {
+            const inverted_CardType = _get_Inverted_CardType(cardType);
+            __Main__2.CardType.set(element, inverted_CardType);
+        });
+    }
+}
+exports.TaskToggle = TaskToggle;
+function _get_Inverted_CardType(cardType) {
+    const task_CardTypes = TaskToggle.task_CardTypes;
+    const today_CardTypes = TaskToggle.today_CardTypes;
+    let new_CardType, new_CardType_Index;
+    if (task_CardTypes.includes(cardType)) {
+        new_CardType_Index = task_CardTypes.indexOf(cardType);
+        new_CardType = today_CardTypes[new_CardType_Index];
+    }
+    else if (today_CardTypes.includes(cardType)) {
+        new_CardType_Index = today_CardTypes.indexOf(cardType);
+        new_CardType = task_CardTypes[new_CardType_Index];
+    }
+    return new_CardType;
+}
 
 
 /***/ }),
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(23);
-__webpack_require__(41);
-__webpack_require__(43);
-__webpack_require__(44);
-__webpack_require__(45);
+__webpack_require__(3);
+module.exports = __webpack_require__(23);
 
 
 /***/ }),
 /* 23 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(24);
+__webpack_require__(42);
+__webpack_require__(43);
+__webpack_require__(44);
+__webpack_require__(45);
+__webpack_require__(46);
+
+
+/***/ }),
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11582,7 +11628,7 @@ __Main__1.CardType_Manager.initialize_Manual({
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11591,7 +11637,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(__webpack_require__(25));
+const path_1 = __importDefault(__webpack_require__(26));
 class S {
 }
 S.baseURL = "https://enteleform-extensions.github.io/KanbanTool";
@@ -11620,7 +11666,7 @@ exports.Settings = S;
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -11848,10 +11894,10 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(26)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(27)))
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -12041,13 +12087,13 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(28).CardType_Manager;
+const CSS = __webpack_require__(29).CardType_Manager;
 const HoverManager_1 = __webpack_require__(4);
 const StyleManager_1 = __webpack_require__(18);
 const __Main__1 = __webpack_require__(1);
@@ -12100,13 +12146,13 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module) {
 
 module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterColor","activeFilter":"active","inactiveFilter":"inactive","_":""}};
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12220,7 +12266,7 @@ function _get_CardType_Index(id) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12268,7 +12314,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12707,7 +12753,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12748,13 +12794,13 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(34);
+const get_emptyContainer_Indexes_1 = __webpack_require__(35);
 const get_Rows_1 = __webpack_require__(16);
 const get_Columns_1 = __webpack_require__(17);
 const __Main__1 = __webpack_require__(15);
@@ -12796,7 +12842,7 @@ function _is_Empty(container, emptyContainer_Indexes) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12885,7 +12931,7 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12894,7 +12940,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(6);
+const __Main__1 = __webpack_require__(5);
 const __Main__2 = __webpack_require__(1);
 const jquery_1 = __importDefault(__webpack_require__(2));
 const $ = jquery_1.default;
@@ -12960,7 +13006,7 @@ var Card_DetailView_IsActive;
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13012,7 +13058,7 @@ const emptyCallback = ((...args) => { });
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13036,7 +13082,7 @@ exports.Divider = Divider;
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13153,7 +13199,7 @@ function _update_OriginalLayout() {
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13166,7 +13212,7 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13225,13 +13271,13 @@ function _cardTypes_Exhausted(cardIndex) { return (cardIndex == __Main__1.cardTy
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskToggle_1 = __webpack_require__(42);
+const TaskToggle_1 = __webpack_require__(21);
 const __Main__1 = __webpack_require__(7);
 const { Entry, Position } = __Main__1.FunctionBar;
 const __Main__2 = __webpack_require__(0);
@@ -13284,51 +13330,6 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
         ],
     ],
 }));
-
-
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(10);
-const HoverManager_1 = __webpack_require__(4);
-const __Main__2 = __webpack_require__(0);
-class TaskToggle {
-    static get today_CardTypes() { return __Main__2.CardType.get_FromRegEx(/^Today_.*$/); }
-    static get task_CardTypes() { return __Main__2.CardType.get_FromRegEx(/^Task_.*$/); }
-    static get today_Cards() { return __Main__2.CardType.get_Cards(...TaskToggle.today_CardTypes); }
-    static toggle_Hovered_Task() {
-        const cardType = __Main__1.CardType_Manager.HoverManager.get_CardType();
-        const new_CardType = _get_Inverted_CardType(cardType);
-        if (new_CardType) {
-            HoverManager_1.HoverManager.set_CardType(new_CardType);
-        }
-    }
-    static convert_TodayCards_To_TaskCards() {
-        TaskToggle.today_Cards.forEach(({ element, cardType }) => {
-            const inverted_CardType = _get_Inverted_CardType(cardType);
-            __Main__2.CardType.set(element, inverted_CardType);
-        });
-    }
-}
-exports.TaskToggle = TaskToggle;
-function _get_Inverted_CardType(cardType) {
-    const task_CardTypes = TaskToggle.task_CardTypes;
-    const today_CardTypes = TaskToggle.today_CardTypes;
-    let new_CardType, new_CardType_Index;
-    if (task_CardTypes.includes(cardType)) {
-        new_CardType_Index = task_CardTypes.indexOf(cardType);
-        new_CardType = today_CardTypes[new_CardType_Index];
-    }
-    else if (today_CardTypes.includes(cardType)) {
-        new_CardType_Index = today_CardTypes.indexOf(cardType);
-        new_CardType = task_CardTypes[new_CardType_Index];
-    }
-    return new_CardType;
-}
 
 
 /***/ }),
@@ -13404,6 +13405,61 @@ function get_Callbacks(callback) {
 
 "use strict";
 
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const TaskToggle_1 = __webpack_require__(21);
+const HoverManager_1 = __webpack_require__(4);
+const __Main__1 = __webpack_require__(1);
+const __Main__2 = __webpack_require__(5);
+class _ {
+    static toggle_Between_TaskCards_And_TodayCards(event) {
+        TaskToggle_1.TaskToggle.toggle_Hovered_Task();
+    }
+    static wut_even(event) {
+        HoverManager_1.HoverManager.apply_Callback((card) => {
+            console.log("---------------------");
+            console.log(card.element);
+            console.log(card.model);
+        });
+    }
+    static convert_TodayCards_To_TaskCards(event) {
+        TaskToggle_1.TaskToggle.convert_TodayCards_To_TaskCards();
+    }
+}
+__decorate([
+    __Main__1.KeyBinding.add(["ctrl", "space"], { preventDefault: true, scope: __Main__2.KeyBinding_Scopes.Card_IsHovered }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [KeyboardEvent]),
+    __metadata("design:returntype", void 0)
+], _, "toggle_Between_TaskCards_And_TodayCards", null);
+__decorate([
+    __Main__1.KeyBinding.add(["ctrl", "shift", "space"], { preventDefault: true, scope: __Main__2.KeyBinding_Scopes.Card_IsHovered }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [KeyboardEvent]),
+    __metadata("design:returntype", void 0)
+], _, "wut_even", null);
+__decorate([
+    __Main__1.KeyBinding.add(["ctrl", "shift", "alt", "space"], { preventDefault: true }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [KeyboardEvent]),
+    __metadata("design:returntype", void 0)
+], _, "convert_TodayCards_To_TaskCards", null);
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 Object.defineProperty(exports, "__esModule", { value: true });
 const $ = __webpack_require__(2);
 exports.lol = "wut";
@@ -13446,7 +13502,7 @@ function get_DivIndex(checkList_Item) {
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
