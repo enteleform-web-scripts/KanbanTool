@@ -96,8 +96,8 @@ class KanbanTool {
     static initialize() {
         KanbanTool.API = window.KT;
         KanbanTool.API.activeBoard = KanbanTool.activeBoard;
-        __Main__4.CardMover.initialize(KanbanTool.activeBoard);
-        __Main__5.CardType.initialize(KanbanTool.activeBoard);
+        __Main__5.CardMover.initialize(KanbanTool.activeBoard);
+        __Main__4.CardType.initialize(KanbanTool.activeBoard);
         KanbanTool.API.onInit(() => {
             setTimeout(() => {
                 _on_PageLoad_Callbacks.forEach(({ callback }) => {
@@ -136,14 +136,14 @@ const __Main__1 = __webpack_require__(26);
 const __Main__2 = __webpack_require__(6);
 const __Main__3 = __webpack_require__(14);
 const __Main__4 = __webpack_require__(15);
-const __Main__5 = __webpack_require__(16);
+const __Main__5 = __webpack_require__(17);
 (function (KanbanTool) {
     KanbanTool.Show = __Main__2.Show;
     KanbanTool.Hide = __Main__3.Hide;
     KanbanTool.KeyBinding = __Main__1.KeyBinding_Decorator;
-    KanbanTool.CardType = __Main__5.CardType;
-    KanbanTool.cardTypes = __Main__5.CardType.cardTypes;
-    KanbanTool.CardMover = __Main__4.CardMover;
+    KanbanTool.CardType = __Main__4.CardType;
+    KanbanTool.cardTypes = __Main__4.CardType.cardTypes;
+    KanbanTool.CardMover = __Main__5.CardMover;
 })(KanbanTool = exports.KanbanTool || (exports.KanbanTool = {}));
 
 
@@ -10658,10 +10658,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560443668388)
+		const elapsedTime = _get_ElapsedTime(1560444850295)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:34:28 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:54:10 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11165,65 +11165,8 @@ function _is_Empty(container, emptyContainer_Indexes) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var CardMover;
-(function (CardMover) {
-    let _board;
-    let _columns;
-    let _rows;
-    CardMover.Directions = ["up", "down", "left", "right"];
-    function initialize(activeBoard) {
-        _board = activeBoard;
-        _columns = activeBoard.workflowStages().leafs();
-        _rows = activeBoard.swimlanes().models;
-    }
-    CardMover.initialize = initialize;
-    function move(cardModel, direction) {
-        if (direction == "up") {
-            _move_Card(cardModel, "vertical", -1);
-        }
-        if (direction == "down") {
-            _move_Card(cardModel, "vertical", 1);
-        }
-        if (direction == "left") {
-            _move_Card(cardModel, "horizontal", -1);
-        }
-        if (direction == "right") {
-            _move_Card(cardModel, "horizontal", 1);
-        }
-    }
-    CardMover.move = move;
-    function _move_Card(cardModel, direction, indexOffset) {
-        let containers, container, propertyName;
-        if (direction == "vertical") {
-            containers = _rows;
-            container = cardModel.swimlane();
-            propertyName = "swimlane_id";
-        }
-        else {
-            containers = _columns;
-            container = cardModel.workflowStage();
-            propertyName = "workflow_stage_id";
-        }
-        const index = containers.indexOf(container);
-        const nextIndex = (index + indexOffset);
-        if ((nextIndex < containers.length)
-            && (nextIndex >= 0)) {
-            const nextColumnID = containers[nextIndex].id;
-            _board.tasks.groupUpdate([cardModel.id], { [propertyName]: nextColumnID });
-        }
-    }
-})(CardMover = exports.CardMover || (exports.CardMover = {}));
-
-
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
 const Filter_1 = __webpack_require__(31);
-const is_JQuery_1 = __webpack_require__(17);
+const is_JQuery_1 = __webpack_require__(16);
 const $ = __webpack_require__(2);
 class CardType {
     constructor({ index, id, name, bgColor, fgColor }) {
@@ -11278,7 +11221,7 @@ function _get_CardType_FromProperty(key, value) {
 
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11288,6 +11231,63 @@ function is_JQuery(obj) {
     return (obj && (obj instanceof jQuery || obj.constructor.prototype.jquery));
 }
 exports.is_JQuery = is_JQuery;
+
+
+/***/ }),
+/* 17 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var CardMover;
+(function (CardMover) {
+    let _board;
+    let _columns;
+    let _rows;
+    CardMover.Directions = ["up", "down", "left", "right"];
+    function initialize(activeBoard) {
+        _board = activeBoard;
+        _columns = activeBoard.workflowStages().leafs();
+        _rows = activeBoard.swimlanes().models;
+    }
+    CardMover.initialize = initialize;
+    function move(cardModel, direction) {
+        if (direction == "up") {
+            _move_Card(cardModel, "vertical", -1);
+        }
+        if (direction == "down") {
+            _move_Card(cardModel, "vertical", 1);
+        }
+        if (direction == "left") {
+            _move_Card(cardModel, "horizontal", -1);
+        }
+        if (direction == "right") {
+            _move_Card(cardModel, "horizontal", 1);
+        }
+    }
+    CardMover.move = move;
+    function _move_Card(cardModel, direction, indexOffset) {
+        let containers, container, propertyName;
+        if (direction == "vertical") {
+            containers = _rows;
+            container = cardModel.swimlane();
+            propertyName = "swimlane_id";
+        }
+        else {
+            containers = _columns;
+            container = cardModel.workflowStage();
+            propertyName = "workflow_stage_id";
+        }
+        const index = containers.indexOf(container);
+        const nextIndex = (index + indexOffset);
+        if ((nextIndex < containers.length)
+            && (nextIndex >= 0)) {
+            const nextColumnID = containers[nextIndex].id;
+            _board.tasks.groupUpdate([cardModel.id], { [propertyName]: nextColumnID });
+        }
+    }
+})(CardMover = exports.CardMover || (exports.CardMover = {}));
 
 
 /***/ }),
@@ -11557,7 +11557,7 @@ function _get_CardOptions(element, cardType) { return StyleManager._CardType_Opt
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const is_JQuery_1 = __webpack_require__(17);
+const is_JQuery_1 = __webpack_require__(16);
 function set_CSS_Variable(arg_1, arg_2, arg_3) {
     const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
     if (element) {
@@ -12334,7 +12334,7 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(16);
+const __Main__1 = __webpack_require__(15);
 const Settings_1 = __webpack_require__(11);
 const __Main__2 = __webpack_require__(0);
 const __Main__3 = __webpack_require__(6);
@@ -13528,7 +13528,7 @@ const HoverManager_1 = __webpack_require__(4);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(0);
 const __Main__3 = __webpack_require__(5);
-const __Main__4 = __webpack_require__(15);
+const __Main__4 = __webpack_require__(17);
 class _ {
     static toggle_Between_TaskCards_And_TodayCards(event) {
         TaskToggle_1.TaskToggle.toggle_Hovered_Task();
