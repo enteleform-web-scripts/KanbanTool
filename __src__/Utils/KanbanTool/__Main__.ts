@@ -1,4 +1,13 @@
 
+//################################//
+//###  Imports - Non-Circular  ###//
+//################################//
+
+//###  Module  ###//
+import {onPageLoad_Timeout_MS} from "./Settings"
+import {get_ActiveBoard      } from "./get/activeBoard";
+
+
 //#########################//
 //###  Exports - Class  ###//
 //#########################//
@@ -74,15 +83,13 @@ KanbanTool.API.onInit( ()=>{
 })
 
 
-//#################//
-//###  Imports  ###//
-//#################//
+//############################//
+//###  Imports - Circular  ###//
+//############################//
 
-//!!!  keep @ end to avoid circular dependencies  !!!//
+//!!!  keep @ end to avoid circular dependency conficts  !!!//
 
 //###  Module  ###//
-import {onPageLoad_Timeout_MS  } from "./Settings"
-import {get_ActiveBoard        } from "./get/activeBoard";
 import {KeyBinding_Decorator   } from "./KeyBinding_Decorator/__Main__"
 import {Show      as _Show     } from "./Show/__Main__"
 import {Hide      as _Hide     } from "./Hide/__Main__"
