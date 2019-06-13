@@ -44,8 +44,12 @@ export function taskView_IsVisible(){
 	)
 }
 
-// keep @ end of 'Exports: Local' declarations
+//###################################//
+//###  Exports: Local (Circular)  ###//
+//###################################//
+// keep after 'Exports: Local' declarations
 // to avoid issues with circular dependencies
+
 import {CardType as _CardType} from "./CardType/__Main__"
 _CardType.initialize(activeBoard)
 export const cardTypes = _CardType.cardTypes
@@ -64,6 +68,9 @@ export {Hide} from "./Hide/__Main__"
 //##############//
 //###  Init  ###//
 //##############//
+
+import {CardMover} from "./CardMover/__Main__"
+CardMover.initialize(activeBoard)
 
 KanbanTool.activeBoard = activeBoard
 
