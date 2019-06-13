@@ -10640,10 +10640,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560394401099)
+		const elapsedTime = _get_ElapsedTime(1560395018498)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:53:21 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:03:38 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11555,11 +11555,31 @@ __webpack_require__(45);
 
 "use strict";
 
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskToggle_1 = __webpack_require__(10);
 const __Main__1 = __webpack_require__(11);
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(4);
+class KeyBindings {
+    static toggle_Between_TaskCards_And_TodayCards(event) {
+        TaskToggle_1.TaskToggle.toggle_Hovered_Task();
+    }
+}
+__decorate([
+    __Main__2.KeyBinding.add(["ctrl", "space"], { preventDefault: true, scope: __Main__3.KeyBinding_Scopes.Card_IsHovered }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], KeyBindings, "toggle_Between_TaskCards_And_TodayCards", null);
 const priorityColors = {
     low: "hsl(220, 40%,  60%)",
     medium: "hsl(50,  100%, 70%)",
@@ -11616,12 +11636,6 @@ __Main__1.CardType_Manager.initialize_Manual({
             },
         ],
     ],
-});
-__Main__2.KeyBinding.add(["ctrl", "space"], (event) => {
-    TaskToggle_1.TaskToggle.toggle_Hovered_Task();
-}, {
-    preventDefault: true,
-    scope: __Main__3.KeyBinding_Scopes.Card_IsHovered,
 });
 
 
@@ -13274,11 +13288,33 @@ function _cardTypes_Exhausted(cardIndex) { return (cardIndex == __Main__1.cardTy
 
 "use strict";
 
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskToggle_1 = __webpack_require__(10);
 const __Main__1 = __webpack_require__(7);
 const { Entry, Position } = __Main__1.FunctionBar;
-const __Main__2 = __webpack_require__(0);
+const __Main__2 = __webpack_require__(1);
+const __Main__3 = __webpack_require__(4);
+const __Main__4 = __webpack_require__(0);
+class KeyBindings {
+    static convert_TodayCards_To_TaskCards(event) {
+        TaskToggle_1.TaskToggle.convert_TodayCards_To_TaskCards();
+    }
+}
+__decorate([
+    __Main__2.KeyBinding.add(["ctrl", "shift", "alt", "space"], { preventDefault: true, scope: __Main__3.KeyBinding_Scopes.Card_IsHovered }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], KeyBindings, "convert_TodayCards_To_TaskCards", null);
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     position: Position.Left,
     entryGroups: [
@@ -13286,37 +13322,37 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
             new Entry({
                 name: "Show_Rows",
                 callback: () => {
-                    __Main__2.Show.allRows();
+                    __Main__4.Show.allRows();
                 },
             }),
             new Entry({
                 name: "Show_Columns",
                 callback: () => {
-                    __Main__2.Show.allColumns();
+                    __Main__4.Show.allColumns();
                 },
             }),
             new Entry({
                 name: "Hide_Rows",
                 callback: () => {
-                    __Main__2.Hide.emptyRows();
+                    __Main__4.Hide.emptyRows();
                 },
             }),
             new Entry({
                 name: "Hide_Columns",
                 callback: () => {
-                    __Main__2.Hide.emptyColumns();
+                    __Main__4.Hide.emptyColumns();
                 },
             }),
             new Entry({
                 name: "Filter_All",
                 callback: () => {
-                    __Main__2.CardType.Filter.enable_CardTypes();
+                    __Main__4.CardType.Filter.enable_CardTypes();
                 },
             }),
             new Entry({
                 name: "Filter_None",
                 callback: () => {
-                    __Main__2.CardType.Filter.disable_CardTypes();
+                    __Main__4.CardType.Filter.disable_CardTypes();
                 },
             }),
             new Entry({
@@ -13341,6 +13377,7 @@ const __Main__1 = __webpack_require__(7);
 const { Entry, Position } = __Main__1.FunctionBar;
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
+__Main__3.remove_PageLoad_Callback(__Main__3.CardType.Filter.show_AllCards_ID);
 const activeTask_Columns = ["Routine", "Tasks.Active"];
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     position: Position.Top,
@@ -13379,7 +13416,6 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
         ],
     ],
 }));
-__Main__3.remove_PageLoad_Callback(__Main__3.CardType.Filter.show_AllCards_ID);
 const _secondaryCallback = () => { __Main__3.Hide.emptyColumns(); };
 function get_Callbacks(callback) {
     return {
