@@ -1,11 +1,3 @@
-//###  Module  ###//
-import {onPageLoad_Timeout_MS  } from "./Settings"
-import {KeyBinding_Decorator   } from "./KeyBinding_Decorator/__Main__"
-import {Show      as _Show     } from "./Show/__Main__"
-import {Hide      as _Hide     } from "./Hide/__Main__"
-import {CardMover as _CardMover} from "./CardMover/__Main__"
-import {CardType  as _CardType } from "./CardType/__Main__"
-
 
 //###############//
 //###  Setup  ###//
@@ -93,3 +85,18 @@ export namespace KanbanTool{
 
 	export const CardMover = _CardMover
 }
+
+
+//#################//
+//###  Imports  ###//
+//#################//
+
+//!!!  keep @ end to avoid circular dependencies  !!!//
+
+//###  Module  ###//
+import {onPageLoad_Timeout_MS  } from "./Settings"
+import {KeyBinding_Decorator   } from "./KeyBinding_Decorator/__Main__"
+import {Show      as _Show     } from "./Show/__Main__"
+import {Hide      as _Hide     } from "./Hide/__Main__"
+import {CardMover as _CardMover} from "./CardMover/__Main__"
+import {CardType  as _CardType } from "./CardType/__Main__"
