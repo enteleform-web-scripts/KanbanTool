@@ -4,9 +4,10 @@ import {TaskToggle} from "../Utils/TaskToggle"
 //###  Module  ###//
 import {HoverManager     } from "~/Extensions/CardType_Manager/HoverManager"
 import {KeyBinding       } from "~/Utils/KeyBinding/__Main__"
+import {KanbanTool       } from "~/Utils/KanbanTool/__Main__"
 import {KeyBinding_Scopes} from "~/Utils/KanbanTool/KeyBinding_Scopes/__Main__"
 
-
+KanbanTool
 class _{
 
 	@KeyBinding.add(
@@ -18,14 +19,12 @@ class _{
 	}
 
 	@KeyBinding.add(
-		["ctrl", "shift", "space"],
+		["ctrl", "delete"],
 		{preventDefault:true, scope:KeyBinding_Scopes.Card_IsHovered}
 	)
-	static wut_even(event:KeyboardEvent){
+	static archive_Card(event:KeyboardEvent){
 		HoverManager.apply_Callback( (card:{element:JQuery, model:any}) => {
-			console.log("---------------------")
-			console.log(card.element)
-			console.log(card.model)
+			KanbanTool.tasks.groupUpdate([card.model.id], {_action:"archive"})
 		})
 	}
 
