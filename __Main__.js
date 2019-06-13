@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -109,13 +109,19 @@ function remove_PageLoad_Callback(id) {
     }
 }
 exports.remove_PageLoad_Callback = remove_PageLoad_Callback;
+function taskView_IsVisible() {
+    const taskView = document.querySelector("kt-taskview");
+    return ((taskView != null)
+        && ($(taskView).css("display") != "none"));
+}
+exports.taskView_IsVisible = taskView_IsVisible;
 const __Main__1 = __webpack_require__(13);
 __Main__1.CardType.initialize(exports.activeBoard);
 exports.cardTypes = __Main__1.CardType.cardTypes;
 exports.CardType = __Main__1.CardType;
 var __Main__2 = __webpack_require__(15);
 exports.Show = __Main__2.Show;
-var __Main__3 = __webpack_require__(33);
+var __Main__3 = __webpack_require__(34);
 exports.Hide = __Main__3.Hide;
 exports.KanbanTool.activeBoard = exports.activeBoard;
 setTimeout(() => {
@@ -125,6 +131,112 @@ setTimeout(() => {
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const KeyGroups_1 = __webpack_require__(31);
+const hotkeys_js_1 = __importDefault(__webpack_require__(32));
+hotkeys_js_1.default.filter = _disable_DefaultFilters;
+class KeyBinding {
+    static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
+    static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
+    static add(hotKeys, arg_2, arg_3) {
+        const hotKeys_String = _convert_HotKeys_ToString(hotKeys);
+        const { callback, options } = _get_BindArguments(arg_2, arg_3);
+        if (callback) {
+            _add_KeyBinding(hotKeys_String, callback, options);
+        }
+        else {
+            return _get_Decorator(hotKeys_String, options);
+        }
+    }
+    static get defaultScope() { return "all"; }
+    static set_Scope(scope = KeyBinding.defaultScope) {
+        console.log("KeyBinding_Scope:", scope);
+        hotkeys_js_1.default.setScope(scope);
+    }
+    static is_Pressed(...modifierKey) {
+        return modifierKey.every(key => _isPressed_CallbackMap[key]());
+    }
+}
+exports.KeyBinding = KeyBinding;
+(function (KeyBinding) {
+    KeyBinding.ModifierKeys = KeyGroups_1.ModifierKeys;
+    KeyBinding.AlphanumericKeys = KeyGroups_1.AlphanumericKeys;
+    KeyBinding.CharacterKeys = KeyGroups_1.CharacterKeys;
+    KeyBinding.Keys = KeyGroups_1.Keys;
+})(KeyBinding = exports.KeyBinding || (exports.KeyBinding = {}));
+window.KeyBinding = KeyBinding;
+const _Options_Defaults = {
+    scope: undefined,
+    preventDefault: false,
+};
+const _isPressed_CallbackMap = {
+    ctrl: () => hotkeys_js_1.default.ctrl,
+    shift: () => hotkeys_js_1.default.shift,
+    alt: () => hotkeys_js_1.default.alt,
+};
+function _disable_DefaultFilters(event) { return true; }
+function _get_BindArguments(arg_2, arg_3) {
+    let callback, options;
+    if (arg_2 instanceof Function)
+        callback = arg_2;
+    if (arg_3)
+        options = arg_3;
+    else if (arg_2)
+        options = arg_2;
+    options = { ..._Options_Defaults, ...options };
+    return { callback, options };
+}
+function _add_KeyBinding(hotKeys, callback, options) {
+    const scopeString = (options.scope)
+        ? options.scope
+        : "Global";
+    const wrappedCallback = (event) => {
+        if (options.preventDefault) {
+            event.preventDefault;
+        }
+        console.log(`[KeyBinding][${scopeString}] '${hotKeys}'`);
+        callback(event);
+    };
+    if (options.scope) {
+        hotkeys_js_1.default(hotKeys, options.scope, wrappedCallback);
+    }
+    else {
+        hotkeys_js_1.default(hotKeys, wrappedCallback);
+    }
+}
+function _get_Decorator(hotKeys, options) {
+    return (target, propertyKey, descriptor) => {
+        _add_KeyBinding(hotKeys, descriptor.value, options);
+        return descriptor;
+    };
+}
+function _convert_HotKeys_ToString(keys) {
+    return ((keys instanceof Array)
+        ? _get_HotKey_Array_AsString(keys)
+        : keys);
+}
+function _get_HotKey_Array_AsString(keys) {
+    const sortedKeys = [...keys].sort((a, b) => {
+        if (KeyGroups_1.ModifierKeys.includes(a)) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
+    });
+    return sortedKeys.join(" + ");
+}
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10495,95 +10607,6 @@ return jQuery;
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(30);
-const hotkeys_js_1 = __importDefault(__webpack_require__(31));
-hotkeys_js_1.default.filter = _disable_DefaultFilters;
-class KeyBinding {
-    static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
-    static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
-    static add(hotKeys, arg_2, arg_3) {
-        const hotKeys_String = _convert_HotKeys_ToString(hotKeys);
-        const { callback, options } = _get_BindArguments(arg_2, arg_3);
-        if (callback) {
-            _add_KeyBinding(hotKeys_String, callback, options);
-        }
-        else {
-            return _get_Decorator(hotKeys_String, options);
-        }
-    }
-    static is_Pressed(...modifierKey) {
-        return modifierKey.every(key => _isPressed_CallbackMap[key]());
-    }
-}
-exports.KeyBinding = KeyBinding;
-(function (KeyBinding) {
-    KeyBinding.ModifierKeys = KeyGroups_1.ModifierKeys;
-    KeyBinding.AlphanumericKeys = KeyGroups_1.AlphanumericKeys;
-    KeyBinding.CharacterKeys = KeyGroups_1.CharacterKeys;
-    KeyBinding.Keys = KeyGroups_1.Keys;
-})(KeyBinding = exports.KeyBinding || (exports.KeyBinding = {}));
-window.KeyBinding = KeyBinding;
-const _BindOptions_Defaults = { preventDefault: false };
-const _isPressed_CallbackMap = {
-    ctrl: () => hotkeys_js_1.default.ctrl,
-    shift: () => hotkeys_js_1.default.shift,
-    alt: () => hotkeys_js_1.default.alt,
-};
-function _disable_DefaultFilters(event) { return true; }
-function _get_BindArguments(arg_2, arg_3) {
-    let callback, options;
-    if (arg_2 instanceof Function)
-        callback = arg_2;
-    if (arg_3)
-        options = arg_3;
-    else if (arg_2)
-        options = arg_2;
-    options = { ..._BindOptions_Defaults, ...options };
-    return { callback, options };
-}
-function _add_KeyBinding(hotKeys, callback, options) {
-    hotkeys_js_1.default(hotKeys, (event) => {
-        if (options.preventDefault) {
-            event.preventDefault;
-        }
-        console.log(`[KeyBinding] '${hotKeys}'`);
-        callback(event);
-    });
-}
-function _get_Decorator(hotKeys, options) {
-    return (target, propertyKey, descriptor) => {
-        _add_KeyBinding(hotKeys, descriptor.value, options);
-        return descriptor;
-    };
-}
-function _convert_HotKeys_ToString(keys) {
-    return ((keys instanceof Array)
-        ? _get_HotKey_Array_AsString(keys)
-        : keys);
-}
-function _get_HotKey_Array_AsString(keys) {
-    const sortedKeys = [...keys].sort((a, b) => {
-        if (KeyGroups_1.ModifierKeys.includes(a)) {
-            return -1;
-        }
-        else {
-            return 0;
-        }
-    });
-    return sortedKeys.join(" + ");
-}
-
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports) {
 
@@ -10620,10 +10643,10 @@ function _get_HotKey_Array_AsString(keys) {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560375529604)
+		const elapsedTime = _get_ElapsedTime(1560391216670)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:38:49 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     10:00:16 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10642,13 +10665,21 @@ function _get_HotKey_Array_AsString(keys) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
+const __Main__2 = __webpack_require__(1);
+const __Main__3 = __webpack_require__(18);
 var HoverManager;
 (function (HoverManager) {
     let _card = undefined;
     function initialize() {
         const $element = $("kt-board");
-        $element.on("mouseover", "kt-task", (event) => { _card = event.currentTarget; });
-        $element.on("mouseout", "kt-task", (event) => { _card = null; });
+        $element.on("mouseover", "kt-task", (event) => {
+            _card = event.currentTarget;
+            __Main__2.KeyBinding.set_Scope(__Main__3.KeyBinding_Scopes.Card_IsHovered);
+        });
+        $element.on("mouseout", "kt-task", (event) => {
+            _card = null;
+            __Main__2.KeyBinding.set_Scope();
+        });
     }
     HoverManager.initialize = initialize;
     function get_CardType() {
@@ -10678,7 +10709,7 @@ var HoverManager;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 class TaskContainer {
     constructor({ type, domIndex, modelIndex, model, element }) {
         this.children = [];
@@ -10768,10 +10799,10 @@ exports.TaskContainer = TaskContainer;
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(11).inject(__dirname, { CSS: true, HTML: true });
 const Settings_1 = __webpack_require__(7);
-const Entry_1 = __webpack_require__(35);
-const Divider_1 = __webpack_require__(36);
-const Layout_1 = __webpack_require__(37);
-const Module_BaseClasses_1 = __webpack_require__(38);
+const Entry_1 = __webpack_require__(37);
+const Divider_1 = __webpack_require__(38);
+const Layout_1 = __webpack_require__(39);
+const Module_BaseClasses_1 = __webpack_require__(40);
 const Position_1 = __webpack_require__(8);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
@@ -10834,7 +10865,7 @@ exports.FunctionBar = FunctionBar;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(1);
 exports.autoMapped_Key_Rows = __Main__1.KeyBinding.alphanumericKey_Rows;
 exports.functionBar_ToggleModifiers = ["shift", "alt"];
 
@@ -10912,12 +10943,12 @@ function _get_Inverted_CardType(cardType) {
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(11).inject(__dirname, { CSS: true, HTML: false });
-const CallbackManager_1 = __webpack_require__(27);
+const CallbackManager_1 = __webpack_require__(28);
 const HoverManager_1 = __webpack_require__(4);
-const StyleManager_1 = __webpack_require__(18);
+const StyleManager_1 = __webpack_require__(19);
 const __Main__1 = __webpack_require__(6);
 const Position_1 = __webpack_require__(8);
-const get_Rows_1 = __webpack_require__(39);
+const get_Rows_1 = __webpack_require__(41);
 var CardType_Manager;
 (function (CardType_Manager) {
     CardType_Manager.HoverManager = HoverManager_1.HoverManager;
@@ -11001,7 +11032,7 @@ function _update_FunctionBar_Options_CellWidth(options, cellWidth) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(24);
+const Settings_1 = __webpack_require__(25);
 function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
     if (CSS) {
         _inject_CSS(modulePath);
@@ -11097,9 +11128,9 @@ exports.onPageLoad_Timeout_MS = 500;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Filter_1 = __webpack_require__(29);
+const Filter_1 = __webpack_require__(30);
 const is_JQuery_1 = __webpack_require__(14);
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 class CardType {
     constructor({ index, id, name, bgColor, fgColor }) {
         this.index = index;
@@ -11175,8 +11206,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(5);
 const get_Rows_1 = __webpack_require__(16);
 const get_Columns_1 = __webpack_require__(17);
-const Glob_1 = __webpack_require__(32);
-const $ = __webpack_require__(1);
+const Glob_1 = __webpack_require__(33);
+const $ = __webpack_require__(2);
 class Show {
     static rows({ include, exclude }) {
         _show({
@@ -11257,7 +11288,7 @@ function _match_Glob(container, target) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(5);
 const __Main__1 = __webpack_require__(0);
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 function get_Rows() {
     const headerElements = $.find("kt-board > tbody > tr > th");
     const models = __Main__1.activeBoard.swimlanes().toArray();
@@ -11335,9 +11366,31 @@ function _update_ColumnRelationships(columns) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(19);
+const __Main__1 = __webpack_require__(0);
+const __Main__2 = __webpack_require__(1);
+const Card_DetailView_IsActive_1 = __webpack_require__(36);
+Card_DetailView_IsActive_1.Card_DetailView_IsActive.initialize();
+exports.KeyBinding_Scopes = {
+    Card_IsHovered: "Card_IsHovered",
+    Card_DetailView_IsActive: "Card_DetailView_IsActive",
+};
+__Main__1.on_PageLoad(() => {
+    if (__Main__1.taskView_IsVisible()) {
+        __Main__2.KeyBinding.set_Scope(exports.KeyBinding_Scopes.Card_DetailView_IsActive);
+    }
+});
+
+
+/***/ }),
+/* 19 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(20);
 const __Main__2 = __webpack_require__(0);
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 var StyleManager;
 (function (StyleManager) {
     function initialize(cardOptions) {
@@ -11411,7 +11464,7 @@ function _get_CardOptions(element, cardType) { return StyleManager._CardType_Opt
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11470,32 +11523,17 @@ function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documen
 
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module) {
 
 module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collapsed","empty":"empty","divider":"divider","textDivider":"textDivider","_":""}};
 
 /***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(3);
-module.exports = __webpack_require__(22);
-
-
-/***/ }),
 /* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(23);
-__webpack_require__(40);
-__webpack_require__(41);
-__webpack_require__(42);
-__webpack_require__(43);
-__webpack_require__(44);
+__webpack_require__(3);
+module.exports = __webpack_require__(23);
 
 
 /***/ }),
@@ -11505,9 +11543,23 @@ __webpack_require__(44);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__(24);
+__webpack_require__(42);
+__webpack_require__(43);
+__webpack_require__(44);
+__webpack_require__(45);
+
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
 const TaskToggle_1 = __webpack_require__(9);
 const __Main__1 = __webpack_require__(10);
-const __Main__2 = __webpack_require__(2);
+const __Main__2 = __webpack_require__(1);
 const priorityColors = {
     low: "hsl(220, 40%,  60%)",
     medium: "hsl(50,  100%, 70%)",
@@ -11571,7 +11623,7 @@ __Main__2.KeyBinding.add(["ctrl", "space"], (event) => {
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11580,7 +11632,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(__webpack_require__(25));
+const path_1 = __importDefault(__webpack_require__(26));
 class S {
 }
 S.baseURL = "https://enteleform-extensions.github.io/KanbanTool";
@@ -11609,7 +11661,7 @@ exports.Settings = S;
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -11837,10 +11889,10 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(26)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(27)))
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -12030,16 +12082,16 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(28).CardType_Manager;
+const CSS = __webpack_require__(29).CardType_Manager;
 const HoverManager_1 = __webpack_require__(4);
-const StyleManager_1 = __webpack_require__(18);
-const __Main__1 = __webpack_require__(2);
+const StyleManager_1 = __webpack_require__(19);
+const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(0);
 var CallbackManager;
 (function (CallbackManager) {
@@ -12089,13 +12141,13 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module) {
 
 module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterColor","activeFilter":"active","inactiveFilter":"inactive","_":""}};
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12103,9 +12155,9 @@ module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterCol
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(12);
 const __Main__1 = __webpack_require__(13);
-const __Main__2 = __webpack_require__(2);
+const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 class Filter {
     static get enabled() { return Filter._filterButton.hasClass("kt-board_search-filter--active"); }
     static get disabled() { return !(this.enabled); }
@@ -12209,7 +12261,7 @@ function _get_CardType_Index(id) {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12257,7 +12309,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12696,7 +12748,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12737,13 +12789,13 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(34);
+const get_emptyContainer_Indexes_1 = __webpack_require__(35);
 const get_Rows_1 = __webpack_require__(16);
 const get_Columns_1 = __webpack_require__(17);
 const __Main__1 = __webpack_require__(15);
@@ -12785,7 +12837,7 @@ function _is_Empty(container, emptyContainer_Indexes) {
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12874,14 +12926,87 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(18);
+const __Main__2 = __webpack_require__(1);
+const jquery_1 = __importDefault(__webpack_require__(2));
+const $ = jquery_1.default;
+var Card_DetailView_IsActive;
+(function (Card_DetailView_IsActive) {
+    const _taskView_Selector = "kt-taskview";
+    function initialize() {
+        const taskView = document.querySelector(_taskView_Selector);
+        if (taskView) {
+            _on_TaskView_Visible(taskView);
+        }
+        else {
+            _start_Observer_On_TaskView_Creation(_on_TaskView_Visible);
+        }
+    }
+    Card_DetailView_IsActive.initialize = initialize;
+    function _set_TaskView_KeyBinding_Context(enable) {
+        if (enable) {
+            __Main__2.KeyBinding.set_Scope(__Main__1.KeyBinding_Scopes.Card_DetailView_IsActive);
+        }
+        else {
+            __Main__2.KeyBinding.set_Scope();
+        }
+    }
+    function _on_TaskView_Visible(taskView) {
+        const $taskView = $(taskView);
+        const callback = (mutationsList, observer) => {
+            for (const mutation of mutationsList) {
+                if ((mutation.type == "attributes")
+                    && (mutation.attributeName == "style")) {
+                    _set_TaskView_KeyBinding_Context(($taskView.css("display") == "none")
+                        ? false
+                        : true);
+                }
+            }
+        };
+        const observer = new MutationObserver(callback);
+        observer.observe(taskView, { attributes: true });
+    }
+    function _start_Observer_On_TaskView_Creation(start_Observer) {
+        const parentElement = document.querySelector("#show");
+        let observer;
+        const callback = function (mutationsList, observer) {
+            for (const mutation of mutationsList) {
+                if (mutation.type == "childList") {
+                    const elements = Array.from(mutation.addedNodes);
+                    if (elements.some(node => node.localName == _taskView_Selector)) {
+                        const taskView = elements.filter(element => element.localName == _taskView_Selector)[0];
+                        start_Observer(taskView);
+                        console.log("@@@ start_Observer");
+                        observer.disconnect();
+                        break;
+                    }
+                }
+            }
+        };
+        observer = new MutationObserver(callback);
+        observer.observe(parentElement, { childList: true, subtree: true });
+    }
+})(Card_DetailView_IsActive = exports.Card_DetailView_IsActive || (exports.Card_DetailView_IsActive = {}));
+
+
+/***/ }),
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(7);
-const __Main__1 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(1);
 class Entry {
     constructor({ name, callback, on_Click, on_DoubleClick, on_KeyBinding, on_Layout, keyBinding, color, }) {
         callback = (callback || emptyCallback);
@@ -12920,13 +13045,13 @@ const emptyCallback = ((...args) => { });
 
 
 /***/ }),
-/* 36 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(20).FunctionBar;
+const CSS = __webpack_require__(21).FunctionBar;
 class Divider {
     constructor(text) {
         this.text = text;
@@ -12944,19 +13069,19 @@ exports.Divider = Divider;
 
 
 /***/ }),
-/* 37 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(20).FunctionBar;
+const CSS = __webpack_require__(21).FunctionBar;
 const Settings_1 = __webpack_require__(7);
 const Position_1 = __webpack_require__(8);
-const __Main__1 = __webpack_require__(19);
-const __Main__2 = __webpack_require__(2);
+const __Main__1 = __webpack_require__(20);
+const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 class Layout {
     constructor(functionBar) {
         this._functionBar = functionBar;
@@ -13061,7 +13186,7 @@ function _update_OriginalLayout() {
 
 
 /***/ }),
-/* 38 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13074,14 +13199,14 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 39 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
-const __Main__2 = __webpack_require__(2);
+const __Main__2 = __webpack_require__(1);
 function get_Auto_CardTypes_Rows() {
     let cardType_Rows = [];
     let cardIndex = 0;
@@ -13133,7 +13258,7 @@ function _cardTypes_Exhausted(cardIndex) { return (cardIndex == __Main__1.cardTy
 
 
 /***/ }),
-/* 40 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13195,7 +13320,7 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 41 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13203,7 +13328,7 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(6);
 const { Entry, Position } = __Main__1.FunctionBar;
-const __Main__2 = __webpack_require__(2);
+const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
 const activeTask_Columns = ["Routine", "Tasks.Active"];
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
@@ -13262,13 +13387,13 @@ function get_Callbacks(callback) {
 
 
 /***/ }),
-/* 42 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const $ = __webpack_require__(1);
+const $ = __webpack_require__(2);
 exports.lol = "wut";
 const DELETE_KEYCODE = 46;
 const selector__CheckList_Item = "kt-taskview > form > div.kt-taskview-content > kt-checklist > li > .kt-checklist_item_content";
@@ -13309,7 +13434,7 @@ function get_DivIndex(checkList_Item) {
 
 
 /***/ }),
-/* 43 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13324,8 +13449,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(2);
-const $ = __webpack_require__(1);
+const __Main__1 = __webpack_require__(1);
+const $ = __webpack_require__(2);
 class FilterKeybindings {
     static focus_SearchField(event) {
         const searchField = $("#kt-board_search-q");
@@ -13338,136 +13463,6 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], FilterKeybindings, "focus_SearchField", null);
-
-
-/***/ }),
-/* 44 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const jquery_1 = __importDefault(__webpack_require__(1));
-const $ = jquery_1.default(function ($, undefined) {
-    $.fn.watch = function (options) {
-        var opt = $.extend({
-            properties: null,
-            interval: 100,
-            id: "_watcher_" + new Date().getTime(),
-            watchChildren: false,
-            callback: null
-        }, options);
-        return this.each(function () {
-            var el = this;
-            var el$ = $(this);
-            var fnc = function (mRec, mObs) {
-                __watcher.call(el, opt.id, mRec, mObs);
-            };
-            var data = {
-                id: opt.id,
-                props: opt.properties.split(','),
-                vals: [opt.properties.split(',').length],
-                func: opt.callback,
-                fnc: fnc,
-                origProps: opt.properties,
-                interval: opt.interval,
-                intervalId: null
-            };
-            $.each(data.props, function (i) {
-                var propName = data.props[i];
-                if (data.props[i].startsWith('attr_'))
-                    data.vals[i] = el$.attr(propName.replace('attr_', ''));
-                else if (propName.startsWith('prop_'))
-                    data.vals[i] = el$.prop(propName.replace('props_', ''));
-                else
-                    data.vals[i] = el$.css(propName);
-            });
-            el$.data(opt.id, data);
-            hookChange(el$, opt.id, data);
-        });
-        function hookChange(element$, id, data) {
-            element$.each(function () {
-                var el$ = $(this);
-                if (window.MutationObserver) {
-                    var observer = el$.data('__watcherObserver' + opt.id);
-                    if (observer == null) {
-                        observer = new MutationObserver(data.fnc);
-                        el$.data('__watcherObserver' + opt.id, observer);
-                    }
-                    observer.observe(this, {
-                        attributes: true,
-                        subtree: opt.watchChildren,
-                        childList: opt.watchChildren,
-                        characterData: true
-                    });
-                }
-                else
-                    data.intervalId = setInterval(data.fnc, opt.interval);
-            });
-        }
-        function __watcher(id, mRec, mObs) {
-            var el$ = $(this);
-            var w = el$.data(id);
-            if (!w)
-                return;
-            var el = this;
-            if (!w.func)
-                return;
-            var changed = false;
-            var i = 0;
-            for (i; i < w.props.length; i++) {
-                var key = w.props[i];
-                var newVal = "";
-                if (key.startsWith('attr_'))
-                    newVal = el$.attr(key.replace('attr_', ''));
-                else if (key.startsWith('prop_'))
-                    newVal = el$.prop(key.replace('prop_', ''));
-                else
-                    newVal = el$.css(key);
-                if (newVal == undefined)
-                    continue;
-                if (w.vals[i] != newVal) {
-                    w.vals[i] = newVal;
-                    changed = true;
-                    break;
-                }
-            }
-            if (changed) {
-                el$.unwatch(id);
-                w.func.call(el, w, i, mRec, mObs);
-                hookChange(el$, id, w);
-            }
-        }
-    };
-    $.fn.unwatch = function (id) {
-        this.each(function () {
-            var el = $(this);
-            var data = el.data(id);
-            try {
-                if (window.MutationObserver) {
-                    var observer = el.data("__watcherObserver" + id);
-                    if (observer) {
-                        observer.disconnect();
-                        el.removeData("__watcherObserver" + id);
-                    }
-                }
-                else
-                    clearInterval(data.intervalId);
-            }
-            catch (e) {
-            }
-        });
-        return this;
-    };
-    String.prototype.startsWith = function (sub) {
-        if (sub === null || sub === undefined)
-            return false;
-        return sub == this.substr(0, sub.length);
-    };
-})(jQuery, undefined);
 
 
 /***/ })
