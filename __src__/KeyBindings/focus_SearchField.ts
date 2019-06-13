@@ -11,9 +11,8 @@ export class focus_SearchField{
 	})
 	static initialize(keys?:KeyBinding.Key[]){
 		return (event:KeyboardEvent) => {
-			console.log(">>> focus_SearchField >>>", keys)
-			// const searchField = $("#kt-board_search-q")
-			// searchField.focus()
+			const searchField = $("#kt-board_search-q")
+			searchField.focus()
 		}
 	}
 

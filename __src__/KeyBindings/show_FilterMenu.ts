@@ -11,13 +11,12 @@ export class show_FilterMenu{
 	})
 	static initialize(keys?:KeyBinding.Key[]){
 		return (event:KeyboardEvent) => {
-			console.log(">>> show_FilterMenu >>>", keys)
-			// const filterMenu = $(".kt-board_search-filters_popover")
-			// const displayValue =
-			// 	(filterMenu.css("display") == "none")
-			// 	? "block"
-			// 	: "none"
-			// filterMenu.css("display", displayValue)
+			const filterMenu = $(".kt-board_search-filters_popover")
+			const displayValue =
+				(filterMenu.css("display") == "none")
+				? "block"
+				: "none"
+			filterMenu.css("display", displayValue)
 		}
 	}
 
