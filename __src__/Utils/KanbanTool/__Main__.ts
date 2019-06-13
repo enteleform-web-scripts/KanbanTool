@@ -21,11 +21,10 @@ const _on_PageLoad_Callbacks:({id:Symbol, callback:(() => void)}[]) = []
 export class KanbanTool{
 
 	static API:         any
-	static activeBoard: any
+	static _activeBoard: any
 
 	static initialize(){
-		KanbanTool.API         = (window as any).KT
-		KanbanTool.activeBoard = KanbanTool.API.boards.models[0]
+		KanbanTool.API = (window as any).KT
 
 		KanbanTool.API.activeBoard = KanbanTool.activeBoard
 
@@ -34,9 +33,9 @@ export class KanbanTool{
 
 		KanbanTool.API.onInit( ()=>{
 			setTimeout(() => {
-				_on_PageLoad_Callbacks.forEach( ({callback}) =>
+				_on_PageLoad_Callbacks.forEach( ({callback}) => {
 					callback()
-				)
+				})
 			}, onPageLoad_Timeout_MS)
 		})
 	}
@@ -59,6 +58,13 @@ export class KanbanTool{
 				_on_PageLoad_Callbacks.splice(_on_PageLoad_Callbacks.indexOf(entry), 1)
 			)
 		}
+	}
+
+	static get activeBoard(){
+		if(! KanbanTool._activeBoard)
+			{KanbanTool._activeBoard = KanbanTool.API.boards.models[0]}
+
+		return KanbanTool._activeBoard
 	}
 
 	static get taskView_IsVisible(){
