@@ -60,7 +60,7 @@ export namespace Card_DetailView_IsActive{
 					const elements = Array.from(mutation.addedNodes)
 					if(elements.some(node => (node as any).localName == _taskView_Selector)){
 						const taskView = elements.filter(element => (element as any).localName == _taskView_Selector)[0]
-						KeyBinding.set_Scope(KeyBinding_Scopes.Card_DetailView_IsActive)
+						_set_TaskView_KeyBinding_Context(true)
 						start_Observer(taskView)
 						observer.disconnect()
 						break
