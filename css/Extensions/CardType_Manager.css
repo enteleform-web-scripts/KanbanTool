@@ -59,7 +59,7 @@ kt-board kt-task > .kt-task-footer > ul > li > label > a {
   color: #444 !important;
   font-weight: bold !important;
 }
-kt-board kt-taskview {
+kt-taskview {
   background: #e0e0e0 !important;
 }
 
