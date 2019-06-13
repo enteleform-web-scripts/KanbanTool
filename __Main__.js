@@ -10640,10 +10640,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560395018498)
+		const elapsedTime = _get_ElapsedTime(1560395175456)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:03:38 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:06:15 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13302,15 +13302,14 @@ const TaskToggle_1 = __webpack_require__(10);
 const __Main__1 = __webpack_require__(7);
 const { Entry, Position } = __Main__1.FunctionBar;
 const __Main__2 = __webpack_require__(1);
-const __Main__3 = __webpack_require__(4);
-const __Main__4 = __webpack_require__(0);
+const __Main__3 = __webpack_require__(0);
 class KeyBindings {
     static convert_TodayCards_To_TaskCards(event) {
         TaskToggle_1.TaskToggle.convert_TodayCards_To_TaskCards();
     }
 }
 __decorate([
-    __Main__2.KeyBinding.add(["ctrl", "shift", "alt", "space"], { preventDefault: true, scope: __Main__3.KeyBinding_Scopes.Card_IsHovered }),
+    __Main__2.KeyBinding.add(["ctrl", "shift", "alt", "space"], { preventDefault: true }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
@@ -13322,37 +13321,37 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
             new Entry({
                 name: "Show_Rows",
                 callback: () => {
-                    __Main__4.Show.allRows();
+                    __Main__3.Show.allRows();
                 },
             }),
             new Entry({
                 name: "Show_Columns",
                 callback: () => {
-                    __Main__4.Show.allColumns();
+                    __Main__3.Show.allColumns();
                 },
             }),
             new Entry({
                 name: "Hide_Rows",
                 callback: () => {
-                    __Main__4.Hide.emptyRows();
+                    __Main__3.Hide.emptyRows();
                 },
             }),
             new Entry({
                 name: "Hide_Columns",
                 callback: () => {
-                    __Main__4.Hide.emptyColumns();
+                    __Main__3.Hide.emptyColumns();
                 },
             }),
             new Entry({
                 name: "Filter_All",
                 callback: () => {
-                    __Main__4.CardType.Filter.enable_CardTypes();
+                    __Main__3.CardType.Filter.enable_CardTypes();
                 },
             }),
             new Entry({
                 name: "Filter_None",
                 callback: () => {
-                    __Main__4.CardType.Filter.disable_CardTypes();
+                    __Main__3.CardType.Filter.disable_CardTypes();
                 },
             }),
             new Entry({
