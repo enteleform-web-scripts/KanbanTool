@@ -101,13 +101,14 @@ const _on_PageLoad_Callbacks = [];
 class KanbanTool {
     static initialize() {
         KanbanTool.API = window.KT;
-        KanbanTool.activeBoard = KanbanTool.API.boards.models[0];
         KanbanTool.API.activeBoard = KanbanTool.activeBoard;
         __Main__4.CardMover.initialize(KanbanTool.activeBoard);
         __Main__5.CardType.initialize(KanbanTool.activeBoard);
         KanbanTool.API.onInit(() => {
             setTimeout(() => {
-                _on_PageLoad_Callbacks.forEach(({ callback }) => callback());
+                _on_PageLoad_Callbacks.forEach(({ callback }) => {
+                    callback();
+                });
             }, Settings_1.onPageLoad_Timeout_MS);
         });
     }
@@ -122,6 +123,12 @@ class KanbanTool {
         if (match.length > 0) {
             match.forEach(entry => _on_PageLoad_Callbacks.splice(_on_PageLoad_Callbacks.indexOf(entry), 1));
         }
+    }
+    static get activeBoard() {
+        if (!KanbanTool._activeBoard) {
+            KanbanTool._activeBoard = KanbanTool.API.boards.models[0];
+        }
+        return KanbanTool._activeBoard;
     }
     static get taskView_IsVisible() {
         const taskView = document.querySelector("kt-taskview");
@@ -10651,10 +10658,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560442792787)
+		const elapsedTime = _get_ElapsedTime(1560443166771)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:19:52 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:26:06 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11057,9 +11064,8 @@ exports.get_Rows = get_Rows;
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(7);
 const __Main__1 = __webpack_require__(0);
-const { activeBoard } = __Main__1.KanbanTool;
 function get_Columns() {
-    const models = activeBoard.workflowStages()
+    const models = __Main__1.KanbanTool.activeBoard.workflowStages()
         .slice(1);
     const sortedModels = _get_SortedModels();
     const headerElements = _get_HeaderElements();
@@ -11076,7 +11082,7 @@ function get_Columns() {
 exports.get_Columns = get_Columns;
 function _get_HeaderElements() {
     const rows = $("kt-board > thead").children().toArray();
-    const swimLane_Count = activeBoard.swimlanes().length;
+    const swimLane_Count = __Main__1.KanbanTool.activeBoard.swimlanes().length;
     const elements = rows.flatMap(row => $(row).children().toArray());
     if (swimLane_Count > 1) {
         elements.splice(0, 1);
@@ -11084,7 +11090,7 @@ function _get_HeaderElements() {
     return elements;
 }
 function _get_SortedModels() {
-    const rootModel = activeBoard.workflowStages().toArray()[0];
+    const rootModel = __Main__1.KanbanTool.activeBoard.workflowStages().toArray()[0];
     const sortedModels = [];
     let row = rootModel.children();
     while (row.length > 0) {
@@ -12240,7 +12246,6 @@ const _GLOB_TO_REGEX_MAP = [
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
-const { activeBoard } = __Main__1.KanbanTool;
 function get_EmptyRow_Indexes(columns) {
     const hiddenColumn_Indexes = columns
         .filter(column => column.is_Collapsed)
@@ -12269,8 +12274,8 @@ function _get_EmptyCell_Map() {
 }
 function _get_Containers() {
     return {
-        rows: activeBoard.swimlanes().toArray(),
-        columns: activeBoard.workflowStages().toArray().splice(1),
+        rows: __Main__1.KanbanTool.activeBoard.swimlanes().toArray(),
+        columns: __Main__1.KanbanTool.activeBoard.workflowStages().toArray().splice(1),
     };
 }
 function _get_Cell_IsEmpty(row, column) {
@@ -12282,7 +12287,7 @@ function _get_Cell_IsEmpty(row, column) {
     return (tasks.length == 0);
 }
 function _get_Tasks(row, column) {
-    return (activeBoard.tasks()
+    return (__Main__1.KanbanTool.activeBoard.tasks()
         .filter(task => (task.swimlane() === row)
         && (task.workflowStage() === column)));
 }
