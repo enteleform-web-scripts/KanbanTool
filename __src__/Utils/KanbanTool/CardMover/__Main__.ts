@@ -1,12 +1,5 @@
 //###  Modules  ###//
-import {get_ActiveBoard} from "../get/activeBoard"
-
-
-//###############//
-//###  Setup  ###//
-//###############//
-
-const _activeBoard = get_ActiveBoard()
+import {KanbanTool} from "../__Main__"
 
 
 //#################//
@@ -15,9 +8,8 @@ const _activeBoard = get_ActiveBoard()
 
 export namespace CardMover{
 
-	let _board   = _activeBoard
-	let _columns = _activeBoard.workflowStages().leafs()
-	let _rows    = _activeBoard.swimlanes().models
+	let _columns = KanbanTool.activeBoard.workflowStages().leafs()
+	let _rows    = KanbanTool.activeBoard.swimlanes().models
 
 	export type  Direction              = ("up"|"down"|"left"|"right")
 	export const Directions:Direction[] = ["up","down","left","right"]
@@ -50,8 +42,8 @@ export namespace CardMover{
 			(nextIndex < containers.length)
 			&& (nextIndex >= 0)
 		){
-			const nextColumnID = containers[nextIndex].id
-			_board.tasks.groupUpdate([cardModel.id], {[propertyName]:nextColumnID})
+			const nextContainer_ID = containers[nextIndex].id
+			KanbanTool.API.tasks.groupUpdate([cardModel.id], {[propertyName]:nextContainer_ID})
 		}
 	}
 
