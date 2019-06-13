@@ -10,7 +10,7 @@ import {KeyBinding_Scopes} from "~/Utils/KanbanTool/KeyBinding_Scopes/__Main__"
 
 export namespace HoverManager{
 
-	let _card = undefined // :JQuery
+	let _card:HTMLElement = undefined
 
 	export function initialize(){
 		const $element = $("kt-board")
@@ -28,7 +28,7 @@ export namespace HoverManager{
 
 	export function get_CardType(){
 		if(_card){
-			const cardType_ID = _card.props.task.cardType().attributes.id
+			const cardType_ID = (_card as any).props.task.cardType().attributes.id
 			return CardType.get_FromID(cardType_ID)
 		}
 		else
@@ -48,6 +48,6 @@ export namespace HoverManager{
 	}
 
 	function _get_CardData()
-		{return {element:(_card as JQuery), model:_card.get(0).props.task}}
+		{return {element:$(_card), model:(_card as any).props.task}}
 
 }
