@@ -57,10 +57,8 @@ export class KeyBinding{
 	static get defaultScope()
 		{return "all"}
 
-	static set_Scope(scope:string = KeyBinding.defaultScope){
-		console.log("KeyBinding_Scope:", scope)
-		HotKeys.setScope(scope)
-	}
+	static set_Scope(scope:string = KeyBinding.defaultScope)
+		{HotKeys.setScope(scope)}
 
 	static is_Pressed(...modifierKey:_ModifierKey[]){
 		return modifierKey.every(key =>
