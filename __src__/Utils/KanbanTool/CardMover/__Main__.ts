@@ -1,3 +1,11 @@
+//###  Modules  ###//
+import {get_ActiveBoard} from "../get/activeBoard"
+
+//###############//
+//###  Setup  ###//
+//###############//
+
+const _activeBoard = get_ActiveBoard()
 
 
 //#################//
@@ -6,18 +14,12 @@
 
 export namespace CardMover{
 
-	let _board
-	let _columns
-	let _rows
+	let _board   = _activeBoard
+	let _columns = _activeBoard.workflowStages().leafs()
+	let _rows    = _activeBoard.swimlanes().models
 
 	export type  Direction              = ("up"|"down"|"left"|"right")
 	export const Directions:Direction[] = ["up","down","left","right"]
-
-	export function initialize(activeBoard:any){
-		_board   = activeBoard
-		_columns = activeBoard.workflowStages().leafs()
-		_rows    = activeBoard.swimlanes().models
-	}
 
 	export function move(cardModel:any, direction:Direction){
 		if(direction == "up"   ){_move_Card(cardModel, "vertical",   -1)}
@@ -53,3 +55,4 @@ export namespace CardMover{
 	}
 
 }
+

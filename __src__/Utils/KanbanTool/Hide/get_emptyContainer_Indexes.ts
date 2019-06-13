@@ -1,7 +1,7 @@
 
 //###  Module  ###//
-import {TaskContainer} from "../Show/TaskContainer"
-import {KanbanTool   } from "~/Utils/KanbanTool/__Main__"
+import {TaskContainer  } from "../Show/TaskContainer"
+import {get_ActiveBoard} from "../get/activeBoard"
 
 
 //#################//
@@ -31,6 +31,8 @@ export function get_EmptyColumn_Indexes(rows:TaskContainer[]){
 //###  Utils  ###//
 //###############//
 
+const _activeBoard = get_ActiveBoard()
+
 function _get_EmptyCell_Map(){
 	const {rows, columns} = _get_Containers()
 
@@ -50,8 +52,8 @@ function _get_EmptyCell_Map(){
 
 function _get_Containers(){
 	return {
-		rows:    KanbanTool.activeBoard.swimlanes     ().toArray(),
-		columns: KanbanTool.activeBoard.workflowStages().toArray().splice(1),
+		rows:    _activeBoard.swimlanes     ().toArray(),
+		columns: _activeBoard.workflowStages().toArray().splice(1),
 	}
 }
 
@@ -68,7 +70,7 @@ function _get_Cell_IsEmpty(row:any, column:any){
 
 function _get_Tasks(row:any, column:any){
 	return (
-		KanbanTool.activeBoard.tasks()
+		_activeBoard.tasks()
 			.filter(task =>
 				(task.swimlane()         === row   )
 				&& (task.workflowStage() === column)

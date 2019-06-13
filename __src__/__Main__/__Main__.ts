@@ -1,7 +1,3 @@
-//###  Init  ###//
-import {KanbanTool} from "~/Utils/KanbanTool/__Main__"
-KanbanTool.initialize()
-
 //###  Extensions  ###//
 import "./Extensions/FunctionBar_Bottom_CardTypeManager"
 import "./Extensions/FunctionBar_Left_Commands"
