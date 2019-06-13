@@ -6,6 +6,13 @@ import {get_ActiveBoard} from "../get/activeBoard"
 const $:any = require("jquery")
 
 
+//###############//
+//###  Setup  ###//
+//###############//
+
+const _activeBoard = get_ActiveBoard()
+
+
 //#################//
 //###  Exports  ###//
 //#################//
@@ -27,10 +34,3 @@ export function get_Rows(){
 
 	return rows
 }
-
-
-//###############//
-//###  Utils  ###//
-//###############//
-
-const _activeBoard = get_ActiveBoard()

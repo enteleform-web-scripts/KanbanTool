@@ -4,6 +4,13 @@ import {TaskContainer  } from "../Show/TaskContainer"
 import {get_ActiveBoard} from "../get/activeBoard"
 
 
+//###############//
+//###  Setup  ###//
+//###############//
+
+const _activeBoard = get_ActiveBoard()
+
+
 //#################//
 //###  Exports  ###//
 //#################//
@@ -30,8 +37,6 @@ export function get_EmptyColumn_Indexes(rows:TaskContainer[]){
 //###############//
 //###  Utils  ###//
 //###############//
-
-const _activeBoard = get_ActiveBoard()
 
 function _get_EmptyCell_Map(){
 	const {rows, columns} = _get_Containers()

@@ -1,9 +1,15 @@
-
 //###  Modules  ###//
 import {get_ActiveBoard} from "../get/activeBoard"
 
 //###  NPM  ###//
 const $:any = require("jquery")
+
+
+//###############//
+//###  Setup  ###//
+//###############//
+
+const _activeBoard = get_ActiveBoard()
 
 
 //########################//
@@ -136,10 +142,3 @@ export namespace TaskContainer{
 	}
 
 }
-
-
-//###############//
-//###  Utils  ###//
-//###############//
-
-const _activeBoard = get_ActiveBoard()

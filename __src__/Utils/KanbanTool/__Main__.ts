@@ -46,8 +46,6 @@ export class KanbanTool{
 }
 
 
-
-
 //##############//
 //###  Init  ###//
 //##############//
@@ -76,6 +74,7 @@ import {CardType  as _CardType } from "./CardType/__Main__"
 import {CardMover as _CardMover} from "./CardMover/__Main__"
 
 export namespace KanbanTool{
+
 	export const KeyBinding = KeyBinding_Decorator
 
 	export const Show = _Show
@@ -86,4 +85,5 @@ export namespace KanbanTool{
 	export const cardTypes = _CardType.cardTypes
 
 	export const CardMover = _CardMover
+
 }

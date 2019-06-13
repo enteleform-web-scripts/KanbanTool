@@ -3,6 +3,13 @@ import {TaskContainer  } from "./TaskContainer"
 import {get_ActiveBoard} from "../get/activeBoard"
 
 
+//###############//
+//###  Setup  ###//
+//###############//
+
+const _activeBoard = get_ActiveBoard()
+
+
 //#################//
 //###  Exports  ###//
 //#################//
@@ -35,8 +42,6 @@ export function get_Columns(){
 //###############//
 //###  Utils  ###//
 //###############//
-
-const _activeBoard = get_ActiveBoard()
 
 function _get_HeaderElements(){
 	const rows           = $("kt-board > thead").children().toArray()

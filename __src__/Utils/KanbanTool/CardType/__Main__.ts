@@ -7,6 +7,13 @@ import {is_JQuery        } from "~/Utils/is_JQuery"
 const $:any = require("jquery")
 
 
+//###############//
+//###  Setup  ###//
+//###############//
+
+const _activeBoard = get_ActiveBoard()
+
+
 //#################//
 //###  Exports  ###//
 //#################//
@@ -86,8 +93,6 @@ export class CardType{
 //###############//
 //###  Utils  ###//
 //###############//
-
-const _activeBoard = get_ActiveBoard()
 
 function _get_CardTypes(){
 	return _activeBoard.cardTypes().active().map(
