@@ -10673,10 +10673,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560448019627)
+		const elapsedTime = _get_ElapsedTime(1560448085253)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:46:59 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:48:05 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13572,84 +13572,16 @@ __decorate([
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const focus_SearchField_1 = __webpack_require__(49);
-focus_SearchField_1.focus_SearchField.initialize();
-const move_Cards_1 = __webpack_require__(50);
-move_Cards_1.move_Cards.initialize();
-const archive_Cards_1 = __webpack_require__(51);
+const archive_Cards_1 = __webpack_require__(49);
 archive_Cards_1.archive_Cards.initialize();
+const focus_SearchField_1 = __webpack_require__(50);
+focus_SearchField_1.focus_SearchField.initialize();
+const move_Cards_1 = __webpack_require__(51);
+move_Cards_1.move_Cards.initialize();
 
 
 /***/ }),
 /* 49 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(0);
-class focus_SearchField {
-    static initialize(keys) {
-        return (event) => {
-            const searchField = $("#kt-board_search-q");
-            searchField.focus();
-        };
-    }
-}
-__decorate([
-    __Main__1.KanbanTool.KeyBinding({
-        defaultKeys: ["shift", "alt", "f"],
-        options: { preventDefault: true },
-    }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Array]),
-    __metadata("design:returntype", void 0)
-], focus_SearchField, "initialize", null);
-exports.focus_SearchField = focus_SearchField;
-
-
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const HoverManager_1 = __webpack_require__(5);
-const __Main__1 = __webpack_require__(1);
-const __Main__2 = __webpack_require__(3);
-const __Main__3 = __webpack_require__(19);
-class move_Cards {
-    static initialize() {
-        __Main__3.CardMover.Directions.forEach(direction => {
-            _add_KeyBinding(direction);
-        });
-    }
-}
-exports.move_Cards = move_Cards;
-function _add_KeyBinding(direction) {
-    __Main__1.KeyBinding.add(["ctrl", direction], () => {
-        HoverManager_1.HoverManager.apply_Callback((card) => {
-            __Main__3.CardMover.move(card.model, direction);
-        });
-    }, {
-        preventDefault: true,
-        scope: __Main__2.KeyBinding_Scopes.Card_IsHovered
-    });
-}
-
-
-/***/ }),
-/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13686,6 +13618,74 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], archive_Cards, "initialize", null);
 exports.archive_Cards = archive_Cards;
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(0);
+class focus_SearchField {
+    static initialize(keys) {
+        return (event) => {
+            const searchField = $("#kt-board_search-q");
+            searchField.focus();
+        };
+    }
+}
+__decorate([
+    __Main__1.KanbanTool.KeyBinding({
+        defaultKeys: ["shift", "alt", "f"],
+        options: { preventDefault: true },
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array]),
+    __metadata("design:returntype", void 0)
+], focus_SearchField, "initialize", null);
+exports.focus_SearchField = focus_SearchField;
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const HoverManager_1 = __webpack_require__(5);
+const __Main__1 = __webpack_require__(1);
+const __Main__2 = __webpack_require__(3);
+const __Main__3 = __webpack_require__(19);
+class move_Cards {
+    static initialize() {
+        __Main__3.CardMover.Directions.forEach(direction => {
+            _add_KeyBinding(direction);
+        });
+    }
+}
+exports.move_Cards = move_Cards;
+function _add_KeyBinding(direction) {
+    __Main__1.KeyBinding.add(["ctrl", direction], () => {
+        HoverManager_1.HoverManager.apply_Callback((card) => {
+            __Main__3.CardMover.move(card.model, direction);
+        });
+    }, {
+        preventDefault: true,
+        scope: __Main__2.KeyBinding_Scopes.Card_IsHovered
+    });
+}
 
 
 /***/ }),
