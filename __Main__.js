@@ -10642,10 +10642,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560432098637)
+		const elapsedTime = _get_ElapsedTime(1560432381443)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     9:21:38 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     9:26:21 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13418,16 +13418,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TaskToggle_1 = __webpack_require__(21);
 const HoverManager_1 = __webpack_require__(4);
 const __Main__1 = __webpack_require__(1);
-const __Main__2 = __webpack_require__(5);
+const __Main__2 = __webpack_require__(0);
+const __Main__3 = __webpack_require__(5);
+__Main__2.KanbanTool;
 class _ {
     static toggle_Between_TaskCards_And_TodayCards(event) {
         TaskToggle_1.TaskToggle.toggle_Hovered_Task();
     }
-    static wut_even(event) {
+    static archive_Card(event) {
         HoverManager_1.HoverManager.apply_Callback((card) => {
-            console.log("---------------------");
-            console.log(card.element);
-            console.log(card.model);
+            __Main__2.KanbanTool.tasks.groupUpdate([card.model.id], { _action: "archive" });
         });
     }
     static convert_TodayCards_To_TaskCards(event) {
@@ -13435,17 +13435,17 @@ class _ {
     }
 }
 __decorate([
-    __Main__1.KeyBinding.add(["ctrl", "space"], { preventDefault: true, scope: __Main__2.KeyBinding_Scopes.Card_IsHovered }),
+    __Main__1.KeyBinding.add(["ctrl", "space"], { preventDefault: true, scope: __Main__3.KeyBinding_Scopes.Card_IsHovered }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [KeyboardEvent]),
     __metadata("design:returntype", void 0)
 ], _, "toggle_Between_TaskCards_And_TodayCards", null);
 __decorate([
-    __Main__1.KeyBinding.add(["ctrl", "shift", "space"], { preventDefault: true, scope: __Main__2.KeyBinding_Scopes.Card_IsHovered }),
+    __Main__1.KeyBinding.add(["ctrl", "delete"], { preventDefault: true, scope: __Main__3.KeyBinding_Scopes.Card_IsHovered }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [KeyboardEvent]),
     __metadata("design:returntype", void 0)
-], _, "wut_even", null);
+], _, "archive_Card", null);
 __decorate([
     __Main__1.KeyBinding.add(["ctrl", "shift", "alt", "space"], { preventDefault: true }),
     __metadata("design:type", Function),
