@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -91,6 +91,7 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+const Settings_1 = __webpack_require__(12);
 const _on_PageLoad_Callbacks = [];
 exports.KanbanTool = window.KT;
 exports.activeBoard = exports.KanbanTool.boards.models[0];
@@ -114,17 +115,19 @@ function taskView_IsVisible() {
         && ($(taskView).css("display") != "none"));
 }
 exports.taskView_IsVisible = taskView_IsVisible;
-const __Main__1 = __webpack_require__(12);
+const __Main__1 = __webpack_require__(13);
 __Main__1.CardType.initialize(exports.activeBoard);
 exports.cardTypes = __Main__1.CardType.cardTypes;
 exports.CardType = __Main__1.CardType;
-var __Main__2 = __webpack_require__(14);
+var __Main__2 = __webpack_require__(15);
 exports.Show = __Main__2.Show;
 var __Main__3 = __webpack_require__(33);
 exports.Hide = __Main__3.Hide;
 exports.KanbanTool.activeBoard = exports.activeBoard;
 exports.KanbanTool.onInit(() => {
-    _on_PageLoad_Callbacks.forEach(({ callback }) => callback());
+    setTimeout(() => {
+        _on_PageLoad_Callbacks.forEach(({ callback }) => callback());
+    }, Settings_1.onPageLoad_Timeout_MS);
 });
 
 
@@ -10639,10 +10642,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560431560869)
+		const elapsedTime = _get_ElapsedTime(1560431682871)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     9:12:40 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     9:14:42 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10924,9 +10927,9 @@ exports.is_VerticalPosition = is_VerticalPosition;
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(11).inject(__dirname, { CSS: true, HTML: false });
-const CallbackManager_1 = __webpack_require__(26);
+const CallbackManager_1 = __webpack_require__(27);
 const HoverManager_1 = __webpack_require__(4);
-const StyleManager_1 = __webpack_require__(17);
+const StyleManager_1 = __webpack_require__(18);
 const __Main__1 = __webpack_require__(7);
 const Position_1 = __webpack_require__(9);
 const __Main__2 = __webpack_require__(6);
@@ -11015,7 +11018,7 @@ function _update_FunctionBar_Options_CellWidth(options, cellWidth) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(23);
+const Settings_1 = __webpack_require__(24);
 function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
     if (CSS) {
         _inject_CSS(modulePath);
@@ -11100,8 +11103,19 @@ function _strip_HTML_ExcessData(html) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Filter_1 = __webpack_require__(28);
-const is_JQuery_1 = __webpack_require__(13);
+exports.cardType_Filter_Index = 5;
+exports.onPageLoad_Timeout_MS = 250;
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Filter_1 = __webpack_require__(29);
+const is_JQuery_1 = __webpack_require__(14);
 const $ = __webpack_require__(2);
 class CardType {
     constructor({ index, id, name, bgColor, fgColor }) {
@@ -11156,7 +11170,7 @@ function _get_CardType_FromProperty(key, value) {
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11169,15 +11183,15 @@ exports.is_JQuery = is_JQuery;
 
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(5);
-const get_Rows_1 = __webpack_require__(15);
-const get_Columns_1 = __webpack_require__(16);
+const get_Rows_1 = __webpack_require__(16);
+const get_Columns_1 = __webpack_require__(17);
 const Glob_1 = __webpack_require__(32);
 const $ = __webpack_require__(2);
 class Show {
@@ -11252,7 +11266,7 @@ function _match_Glob(container, target) {
 
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11277,7 +11291,7 @@ exports.get_Rows = get_Rows;
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11332,13 +11346,13 @@ function _update_ColumnRelationships(columns) {
 
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(18);
+const __Main__1 = __webpack_require__(19);
 const __Main__2 = __webpack_require__(0);
 const $ = __webpack_require__(2);
 var StyleManager;
@@ -11414,13 +11428,13 @@ function _get_CardOptions(element, cardType) { return StyleManager._CardType_Opt
 
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const is_JQuery_1 = __webpack_require__(13);
+const is_JQuery_1 = __webpack_require__(14);
 function set_CSS_Variable(arg_1, arg_2, arg_3) {
     const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
     if (element) {
@@ -11473,27 +11487,27 @@ function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documen
 
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module) {
 
 module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collapsed","empty":"empty","divider":"divider","textDivider":"textDivider","_":""}};
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(3);
-module.exports = __webpack_require__(21);
+module.exports = __webpack_require__(22);
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(22);
+__webpack_require__(23);
 __webpack_require__(41);
 __webpack_require__(43);
 __webpack_require__(44);
@@ -11501,7 +11515,7 @@ __webpack_require__(45);
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11568,7 +11582,7 @@ __Main__1.CardType_Manager.initialize_Manual({
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11577,7 +11591,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(__webpack_require__(24));
+const path_1 = __importDefault(__webpack_require__(25));
 class S {
 }
 S.baseURL = "https://enteleform-extensions.github.io/KanbanTool";
@@ -11606,7 +11620,7 @@ exports.Settings = S;
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -11834,10 +11848,10 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(25)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(26)))
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -12027,15 +12041,15 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(27).CardType_Manager;
+const CSS = __webpack_require__(28).CardType_Manager;
 const HoverManager_1 = __webpack_require__(4);
-const StyleManager_1 = __webpack_require__(17);
+const StyleManager_1 = __webpack_require__(18);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(0);
 var CallbackManager;
@@ -12086,20 +12100,20 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module) {
 
 module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterColor","activeFilter":"active","inactiveFilter":"inactive","_":""}};
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(29);
-const __Main__1 = __webpack_require__(12);
+const Settings_1 = __webpack_require__(12);
+const __Main__1 = __webpack_require__(13);
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
 const $ = __webpack_require__(2);
@@ -12203,16 +12217,6 @@ function _get_CardType_Index(id) {
     }
     return index;
 }
-
-
-/***/ }),
-/* 29 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.cardType_Filter_Index = 5;
 
 
 /***/ }),
@@ -12751,9 +12755,9 @@ const _GLOB_TO_REGEX_MAP = [
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const get_emptyContainer_Indexes_1 = __webpack_require__(34);
-const get_Rows_1 = __webpack_require__(15);
-const get_Columns_1 = __webpack_require__(16);
-const __Main__1 = __webpack_require__(14);
+const get_Rows_1 = __webpack_require__(16);
+const get_Columns_1 = __webpack_require__(17);
+const __Main__1 = __webpack_require__(15);
 class Hide {
     static allRows() { __Main__1.Show.rows({ exclude: ["**\\*"] }); }
     static allColumns() { __Main__1.Show.columns({ exclude: ["**\\*"] }); }
@@ -13014,7 +13018,7 @@ const emptyCallback = ((...args) => { });
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(19).FunctionBar;
+const CSS = __webpack_require__(20).FunctionBar;
 class Divider {
     constructor(text) {
         this.text = text;
@@ -13038,10 +13042,10 @@ exports.Divider = Divider;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(19).FunctionBar;
+const CSS = __webpack_require__(20).FunctionBar;
 const Settings_1 = __webpack_require__(8);
 const Position_1 = __webpack_require__(9);
-const __Main__1 = __webpack_require__(18);
+const __Main__1 = __webpack_require__(19);
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
 const $ = __webpack_require__(2);
