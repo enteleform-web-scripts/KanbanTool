@@ -128,7 +128,7 @@ function _add_KeyBinding(hotKeys:string, callback:_KeyBinding_Callback, options:
 		? options.scope
 		: "Global"
 
-	const wrappedCallback = (event) => {
+	const wrappedCallback = (event:KeyboardEvent) => {
 		if(options.preventDefault)
 			{event.preventDefault}
 		console.log(`[KeyBinding][${scopeString}] '${hotKeys}'`)

@@ -8,7 +8,7 @@ const $:any = require("jquery")
 class FilterKeybindings{
 
 	@KeyBinding.add(["ctrl", "f"], {preventDefault:true})
-	static focus_SearchField(event){
+	static focus_SearchField(event:KeyboardEvent){
 		const searchField = $("#kt-board_search-q")
 		searchField.focus()
 	}

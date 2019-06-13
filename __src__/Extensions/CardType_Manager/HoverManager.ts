@@ -40,4 +40,14 @@ export namespace HoverManager{
 			{CardType.set(_card, cardType)}
 	}
 
+	export function apply_Callback(callback:((card:{element:JQuery, model:any}) => void)){
+		if(_card){
+			const cardData = _get_CardData()
+			callback(cardData)
+		}
+	}
+
+	function _get_CardData()
+		{return {element:(_card as JQuery), model:_card.get(0).props.task}}
+
 }

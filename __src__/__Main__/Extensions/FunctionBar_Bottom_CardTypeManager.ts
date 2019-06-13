@@ -1,27 +1,5 @@
-//###  Utils  ###//
-import {TaskToggle} from "../Utils/TaskToggle"
-
 //###  Module  ###//
-import {CardType_Manager } from "~/Extensions/CardType_Manager/__Main__"
-import {KeyBinding       } from "~/Utils/KeyBinding/__Main__"
-import {KeyBinding_Scopes} from "../../Utils/KanbanTool/KeyBinding_Scopes/__Main__"
-
-
-//##############//
-//###  Init  ###//
-//##############//
-
-class KeyBindings{
-
-	@KeyBinding.add(
-		["ctrl", "space"],
-		{preventDefault:true, scope:KeyBinding_Scopes.Card_IsHovered}
-	)
-	static toggle_Between_TaskCards_And_TodayCards(event){
-		TaskToggle.toggle_Hovered_Task()
-	}
-
-}
+import {CardType_Manager} from "~/Extensions/CardType_Manager/__Main__"
 
 
 //###############//
