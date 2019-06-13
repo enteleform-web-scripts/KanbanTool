@@ -10642,10 +10642,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560431991298)
+		const elapsedTime = _get_ElapsedTime(1560432098637)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     9:19:51 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     9:21:38 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10704,7 +10704,7 @@ var HoverManager;
         }
     }
     HoverManager.apply_Callback = apply_Callback;
-    function _get_CardData() { return { element: _card, model: _card.get(0).props.task }; }
+    function _get_CardData() { return { element: $(_card), model: _card.props.task }; }
 })(HoverManager = exports.HoverManager || (exports.HoverManager = {}));
 
 
