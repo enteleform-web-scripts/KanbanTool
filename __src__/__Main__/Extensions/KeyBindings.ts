@@ -41,6 +41,7 @@ class _{
 
 
 CardMover.Directions.forEach(direction => {
+	KeyBinding
 	KeyBinding.add(
 		[direction as KeyBinding.Key],
 		() => {
