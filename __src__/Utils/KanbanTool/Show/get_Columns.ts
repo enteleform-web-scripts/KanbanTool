@@ -1,13 +1,9 @@
 //###  Module  ###//
-import {TaskContainer  } from "./TaskContainer"
-import {get_ActiveBoard} from "../get/activeBoard"
+import {TaskContainer} from "./TaskContainer"
+import {KanbanTool   } from "../__Main__"
 
-
-//###############//
-//###  Setup  ###//
-//###############//
-
-const _activeBoard = get_ActiveBoard()
+//###  Aliases  ###//
+const {activeBoard} = KanbanTool
 
 
 //#################//
@@ -16,7 +12,7 @@ const _activeBoard = get_ActiveBoard()
 
 export function get_Columns(){
 	const models =
-		_activeBoard.workflowStages()
+		activeBoard.workflowStages()
 			.slice(1) // remove root model
 
 	const sortedModels   = _get_SortedModels()
@@ -45,7 +41,7 @@ export function get_Columns(){
 
 function _get_HeaderElements(){
 	const rows           = $("kt-board > thead").children().toArray()
-	const swimLane_Count = _activeBoard.swimlanes().length
+	const swimLane_Count = activeBoard.swimlanes().length
 
 	const elements =
 		rows.flatMap(row =>
@@ -61,7 +57,7 @@ function _get_HeaderElements(){
 function _get_SortedModels(){
 	// sorts column models to match DOM table structure (thead > tr > th)
 
-	const rootModel    = _activeBoard.workflowStages().toArray()[0]
+	const rootModel    = activeBoard.workflowStages().toArray()[0]
 	const sortedModels = []
 
 	let row = rootModel.children()

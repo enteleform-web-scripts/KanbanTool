@@ -1,14 +1,10 @@
 
 //###  Module  ###//
-import {TaskContainer  } from "../Show/TaskContainer"
-import {get_ActiveBoard} from "../get/activeBoard"
+import {KanbanTool   } from "../__Main__"
+import {TaskContainer} from "../Show/TaskContainer"
 
-
-//###############//
-//###  Setup  ###//
-//###############//
-
-const _activeBoard = get_ActiveBoard()
+//###  Aliases  ###//
+const {activeBoard} = KanbanTool
 
 
 //#################//
@@ -57,8 +53,8 @@ function _get_EmptyCell_Map(){
 
 function _get_Containers(){
 	return {
-		rows:    _activeBoard.swimlanes     ().toArray(),
-		columns: _activeBoard.workflowStages().toArray().splice(1),
+		rows:    activeBoard.swimlanes     ().toArray(),
+		columns: activeBoard.workflowStages().toArray().splice(1),
 	}
 }
 
@@ -75,7 +71,7 @@ function _get_Cell_IsEmpty(row:any, column:any){
 
 function _get_Tasks(row:any, column:any){
 	return (
-		_activeBoard.tasks()
+		activeBoard.tasks()
 			.filter(task =>
 				(task.swimlane()         === row   )
 				&& (task.workflowStage() === column)

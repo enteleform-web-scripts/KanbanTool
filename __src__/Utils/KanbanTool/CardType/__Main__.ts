@@ -1,17 +1,10 @@
 //###  Module  ###//
 import {Filter as _Filter} from "./Filter"
-import {get_ActiveBoard  } from "../get/activeBoard"
+import {KanbanTool       } from "../__Main__"
 import {is_JQuery        } from "~/Utils/is_JQuery"
 
 //###  NPM  ###//
 const $:any = require("jquery")
-
-
-//###############//
-//###  Setup  ###//
-//###############//
-
-const _activeBoard = get_ActiveBoard()
 
 
 //#################//
@@ -95,7 +88,7 @@ export class CardType{
 //###############//
 
 function _get_CardTypes(){
-	return _activeBoard.cardTypes().active().map(
+	return KanbanTool.activeBoard.cardTypes().active().map(
 		({attributes}, index) => new CardType({
 			index:   index,
 			id:      attributes.id,
