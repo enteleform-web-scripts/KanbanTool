@@ -1,8 +1,10 @@
 //###  Module  ###//
-import {onPageLoad_Timeout_MS} from "./Settings"
-import {Show as _Show        } from "./Show/__Main__"
-import {Hide as _Hide        } from "./Hide/__Main__"
-import {KeyBinding_Decorator } from "./KeyBinding_Decorator/__Main__"
+import {onPageLoad_Timeout_MS  } from "./Settings"
+import {KeyBinding_Decorator   } from "./KeyBinding_Decorator/__Main__"
+import {Show      as _Show     } from "./Show/__Main__"
+import {Hide      as _Hide     } from "./Hide/__Main__"
+import {CardMover as _CardMover} from "./CardMover/__Main__"
+import {CardType  as _CardType } from "./CardType/__Main__"
 
 
 //###############//
@@ -17,6 +19,27 @@ const _on_PageLoad_Callbacks:({id:Symbol, callback:(() => void)}[]) = []
 //#########################//
 
 export class KanbanTool{
+
+	static API:         any
+	static activeBoard: any
+
+	static initialize(){
+		KanbanTool.API         = (window as any).KT
+		KanbanTool.activeBoard = KanbanTool.API.boards.models[0]
+
+		KanbanTool.API.activeBoard = KanbanTool.activeBoard
+
+		_CardMover.initialize(KanbanTool.activeBoard)
+		_CardType .initialize(KanbanTool.activeBoard)
+
+		KanbanTool.API.onInit( ()=>{
+			setTimeout(() => {
+				_on_PageLoad_Callbacks.forEach( ({callback}) =>
+					callback()
+				)
+			}, onPageLoad_Timeout_MS)
+		})
+	}
 
 	static on_PageLoad(callback:(() => void)                            )
 	static on_PageLoad(id:Symbol, callback:(() => void)                 )
@@ -48,6 +71,7 @@ export class KanbanTool{
 
 }
 
+
 //#############################//
 //###  Exports - NameSpace  ###//
 //#############################//
@@ -62,29 +86,4 @@ export namespace KanbanTool{
 	export const cardTypes = _CardType.cardTypes
 
 	export const CardMover = _CardMover
-
-	export const API         = (window as any).KT
-	export const activeBoard = KanbanTool.API.boards.models[0]
 }
-
-
-//##############//
-//###  Init  ###//
-//##############//
-
-// keep @ top of 'Init' to avoid issues with circular dependencies
-KanbanTool.API.activeBoard = KanbanTool.activeBoard
-
-import {CardMover as _CardMover} from "./CardMover/__Main__"
-_CardMover.initialize(KanbanTool.activeBoard)
-
-import {CardType as _CardType} from "./CardType/__Main__"
-_CardType.initialize(KanbanTool.activeBoard)
-
-KanbanTool.API.onInit( ()=>{
-	setTimeout(() => {
-		_on_PageLoad_Callbacks.forEach( ({callback}) =>
-			callback()
-		)
-	}, onPageLoad_Timeout_MS)
-})
