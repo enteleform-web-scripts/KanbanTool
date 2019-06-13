@@ -42,16 +42,16 @@ CardType_Manager.initialize_Manual({
 
 	cardTypes: [
 		[
-			{/*###  "Today_Low"    ###*/ borderAccent_Color:priorityColors.low,    ...todaySettings},
-			{/*###  "Today_Medium" ###*/ borderAccent_Color:priorityColors.medium, ...todaySettings},
-			{/*###  "Today_High"   ###*/ borderAccent_Color:priorityColors.high,   ...todaySettings},
-			{/*###  "Today_Urgent" ###*/ borderAccent_Color:priorityColors.urgent, ...todaySettings},
-		],
-		[
 			{/*###  "Task_Low"    ###*/ borderAccent_Color:priorityColors.low,    ...taskSettings},
 			{/*###  "Task_Medium" ###*/ borderAccent_Color:priorityColors.medium, ...taskSettings},
 			{/*###  "Task_High"   ###*/ borderAccent_Color:priorityColors.high,   ...taskSettings},
 			{/*###  "Task_Urgent" ###*/ borderAccent_Color:priorityColors.urgent, ...taskSettings},
+		],
+		[
+			{/*###  "Today_Low"    ###*/ borderAccent_Color:priorityColors.low,    ...todaySettings},
+			{/*###  "Today_Medium" ###*/ borderAccent_Color:priorityColors.medium, ...todaySettings},
+			{/*###  "Today_High"   ###*/ borderAccent_Color:priorityColors.high,   ...todaySettings},
+			{/*###  "Today_Urgent" ###*/ borderAccent_Color:priorityColors.urgent, ...todaySettings},
 		],
 		[
 			{ //###  Task_Daily  ###//
