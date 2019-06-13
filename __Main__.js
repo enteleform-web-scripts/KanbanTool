@@ -10651,10 +10651,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560447314087)
+		const elapsedTime = _get_ElapsedTime(1560447459087)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:35:14 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:37:39 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13597,7 +13597,7 @@ __Main__4.CardMover.Directions.forEach(direction => {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const focus_SearchField_1 = __webpack_require__(49);
-focus_SearchField_1.focus_SearchField.initialize();
+focus_SearchField_1.focus_SearchField.initialize(["ctrl", "shift", "alt", "t"]);
 const show_FilterMenu_1 = __webpack_require__(50);
 show_FilterMenu_1.show_FilterMenu.initialize();
 
