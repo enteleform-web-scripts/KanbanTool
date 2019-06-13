@@ -10,6 +10,13 @@ import {
 } from "~/Utils/KanbanTool/__Main__"
 
 
+//##############//
+//###  Init  ###//
+//##############//
+
+remove_PageLoad_Callback(CardType.Filter.show_AllCards_ID)
+
+
 //###############//
 //###  Setup  ###//
 //###############//
@@ -17,9 +24,9 @@ import {
 const activeTask_Columns = ["Routine", "Tasks.Active"]
 
 
-//################//
-//###  Export  ###//
-//################//
+//#####################//
+//###  FunctionBar  ###//
+//#####################//
 
 FunctionBar.load( new FunctionBar({
 
@@ -63,13 +70,6 @@ FunctionBar.load( new FunctionBar({
 	],
 
 }))
-
-
-//##############//
-//###  Init  ###//
-//##############//
-
-remove_PageLoad_Callback(CardType.Filter.show_AllCards_ID)
 
 
 //###############//

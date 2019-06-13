@@ -7,6 +7,27 @@ import {KeyBinding       } from "~/Utils/KeyBinding/__Main__"
 import {KeyBinding_Scopes} from "../../Utils/KanbanTool/KeyBinding_Scopes/__Main__"
 
 
+//##############//
+//###  Init  ###//
+//##############//
+
+class KeyBindings{
+
+	@KeyBinding.add(
+		["ctrl", "space"],
+		{preventDefault:true, scope:KeyBinding_Scopes.Card_IsHovered}
+	)
+	static toggle_Between_TaskCards_And_TodayCards(event){
+		TaskToggle.toggle_Hovered_Task()
+	}
+
+}
+
+
+//###############//
+//###  Setup  ###//
+//###############//
+
 const priorityColors = {
 	low:    "hsl(220, 40%,  60%)",
 	medium: "hsl(50,  100%, 70%)",
@@ -29,6 +50,11 @@ const taskSettings = {
 	borderColor_Main:    "hsl(0, 0%, 70%)",
 	borderColor_Outside: "hsl(0, 0%, 60%)",
 }
+
+
+//#####################//
+//###  FunctionBar  ###//
+//#####################//
 
 CardType_Manager.initialize_Manual({
 	mode:      CardType_Manager.Mode.SingleRow,
@@ -71,13 +97,3 @@ CardType_Manager.initialize_Manual({
 	],
 })
 
-//###  Toggle (Task_* <-> Today_*)  ###//
-KeyBinding.add(["ctrl", "space"],
-	(event:KeyboardEvent) => {
-		TaskToggle.toggle_Hovered_Task()
-	},
-	{
-		preventDefault: true,
-		scope:          KeyBinding_Scopes.Card_IsHovered,
-	},
-)
