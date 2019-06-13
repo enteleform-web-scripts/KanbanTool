@@ -36,6 +36,14 @@ export function remove_PageLoad_Callback(id:Symbol){
 	}
 }
 
+export function taskView_IsVisible(){
+	const taskView = document.querySelector("kt-taskview")
+	return (
+		(taskView != null)
+		&& ($(taskView).css("display") != "none")
+	)
+}
+
 // keep @ end of 'Exports: Local' declarations
 // to avoid issues with circular dependencies
 import {CardType as _CardType} from "./CardType/__Main__"

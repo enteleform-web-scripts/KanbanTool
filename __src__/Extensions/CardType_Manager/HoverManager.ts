@@ -1,5 +1,7 @@
 //###  Module  ###//
-import {CardType} from "~/Utils/KanbanTool/__Main__"
+import {CardType         } from "~/Utils/KanbanTool/__Main__"
+import {KeyBinding       } from "~/Utils/KeyBinding/__Main__"
+import {KeyBinding_Scopes} from "~/Utils/KanbanTool/KeyBinding_Scopes/__Main__"
 
 
 //#################//
@@ -12,8 +14,16 @@ export namespace HoverManager{
 
 	export function initialize(){
 		const $element = $("kt-board")
-		$element.on("mouseover", "kt-task", (event) => {_card = event.currentTarget})
-		$element.on("mouseout", "kt-task",  (event) => {_card = null               })
+
+		$element.on("mouseover", "kt-task", (event) => {
+			_card = event.currentTarget
+			KeyBinding.set_Scope(KeyBinding_Scopes.Card_IsHovered)
+		})
+
+		$element.on("mouseout", "kt-task",  (event) => {
+			_card = null
+			KeyBinding.set_Scope()
+		})
 	}
 
 	export function get_CardType(){
