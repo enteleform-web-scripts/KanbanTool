@@ -1,3 +1,6 @@
+//###  Module  ###//
+import {onPageLoad_Timeout_MS} from "./Settings"
+
 
 //###############//
 //###  Setup  ###//
@@ -65,7 +68,9 @@ export {Hide} from "./Hide/__Main__"
 KanbanTool.activeBoard = activeBoard
 
 KanbanTool.onInit( ()=>{
-	_on_PageLoad_Callbacks.forEach( ({callback}) =>
-		callback()
-	)
+	setTimeout(() => {
+		_on_PageLoad_Callbacks.forEach( ({callback}) =>
+			callback()
+		)
+	}, onPageLoad_Timeout_MS)
 })

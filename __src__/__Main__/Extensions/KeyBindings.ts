@@ -18,16 +18,8 @@ class _{
 	}
 
 	@KeyBinding.add(
-		["ctrl", "shift", "alt", "space"],
-		{preventDefault:true}
-	)
-	static convert_TodayCards_To_TaskCards(event:KeyboardEvent){
-		TaskToggle.convert_TodayCards_To_TaskCards()
-	}
-
-	@KeyBinding.add(
 		["ctrl", "shift", "space"],
-		{preventDefault:true}
+		{preventDefault:true, scope:KeyBinding_Scopes.Card_IsHovered}
 	)
 	static wut_even(event:KeyboardEvent){
 		HoverManager.apply_Callback( (card:{element:JQuery, model:any}) => {
@@ -36,5 +28,14 @@ class _{
 			console.log(card.model)
 		})
 	}
+
+	@KeyBinding.add(
+		["ctrl", "shift", "alt", "space"],
+		{preventDefault:true}
+	)
+	static convert_TodayCards_To_TaskCards(event:KeyboardEvent){
+		TaskToggle.convert_TodayCards_To_TaskCards()
+	}
+
 
 }
