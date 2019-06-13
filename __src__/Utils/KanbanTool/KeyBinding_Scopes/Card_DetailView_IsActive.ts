@@ -20,10 +20,13 @@ export namespace Card_DetailView_IsActive{
 	}
 
 	function _set_TaskView_KeyBinding_Context(enable:boolean){
-		if(enable)
-			{KeyBinding.set_Scope(KeyBinding_Scopes.Card_DetailView_IsActive)}
-		else
-			{KeyBinding.set_Scope()}
+		// setTimeout ensures firing after mouseout events of other scopes
+		setTimeout(() => {
+			if(enable)
+				{KeyBinding.set_Scope(KeyBinding_Scopes.Card_DetailView_IsActive)}
+			else
+				{KeyBinding.set_Scope()}
+		}, 100)
 	}
 
 	function _on_TaskView_Visible(taskView:Element){
@@ -57,8 +60,8 @@ export namespace Card_DetailView_IsActive{
 					const elements = Array.from(mutation.addedNodes)
 					if(elements.some(node => (node as any).localName == _taskView_Selector)){
 						const taskView = elements.filter(element => (element as any).localName == _taskView_Selector)[0]
+						KeyBinding.set_Scope(KeyBinding_Scopes.Card_DetailView_IsActive)
 						start_Observer(taskView)
-						console.log("@@@ start_Observer")
 						observer.disconnect()
 						break
 					}
