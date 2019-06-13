@@ -131,6 +131,12 @@ class KanbanTool {
     }
 }
 exports.KanbanTool = KanbanTool;
+const Settings_1 = __webpack_require__(11);
+const __Main__1 = __webpack_require__(26);
+const __Main__2 = __webpack_require__(6);
+const __Main__3 = __webpack_require__(14);
+const __Main__4 = __webpack_require__(15);
+const __Main__5 = __webpack_require__(16);
 (function (KanbanTool) {
     KanbanTool.Show = __Main__2.Show;
     KanbanTool.Hide = __Main__3.Hide;
@@ -139,12 +145,6 @@ exports.KanbanTool = KanbanTool;
     KanbanTool.cardTypes = __Main__5.CardType.cardTypes;
     KanbanTool.CardMover = __Main__4.CardMover;
 })(KanbanTool = exports.KanbanTool || (exports.KanbanTool = {}));
-const Settings_1 = __webpack_require__(11);
-const __Main__1 = __webpack_require__(26);
-const __Main__2 = __webpack_require__(6);
-const __Main__3 = __webpack_require__(14);
-const __Main__4 = __webpack_require__(15);
-const __Main__5 = __webpack_require__(16);
 
 
 /***/ }),
@@ -10658,10 +10658,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560443456690)
+		const elapsedTime = _get_ElapsedTime(1560443668388)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:30:56 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:34:28 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
