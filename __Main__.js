@@ -10616,6 +10616,28 @@ return jQuery;
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(0);
+const __Main__2 = __webpack_require__(1);
+const Card_DetailView_IsActive_1 = __webpack_require__(39);
+Card_DetailView_IsActive_1.Card_DetailView_IsActive.initialize();
+exports.KeyBinding_Scopes = {
+    Card_IsHovered: "Card_IsHovered",
+    Card_DetailView_IsActive: "Card_DetailView_IsActive",
+};
+__Main__1.KanbanTool.on_PageLoad(() => {
+    if (__Main__1.KanbanTool.taskView_IsVisible) {
+        __Main__2.KeyBinding.set_Scope(exports.KeyBinding_Scopes.Card_DetailView_IsActive);
+    }
+});
+
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 
@@ -10651,10 +10673,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560447459087)
+		const elapsedTime = _get_ElapsedTime(1560448019627)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:37:39 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:46:59 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10666,14 +10688,14 @@ return jQuery;
 	
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(1);
-const __Main__2 = __webpack_require__(5);
+const __Main__2 = __webpack_require__(3);
 const __Main__3 = __webpack_require__(0);
 const { CardType } = __Main__3.KanbanTool;
 var HoverManager;
@@ -10716,28 +10738,6 @@ var HoverManager;
     HoverManager.apply_Callback = apply_Callback;
     function _get_CardData() { return { element: $(_card), model: _card.props.task }; }
 })(HoverManager = exports.HoverManager || (exports.HoverManager = {}));
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(0);
-const __Main__2 = __webpack_require__(1);
-const Card_DetailView_IsActive_1 = __webpack_require__(39);
-Card_DetailView_IsActive_1.Card_DetailView_IsActive.initialize();
-exports.KeyBinding_Scopes = {
-    Card_IsHovered: "Card_IsHovered",
-    Card_DetailView_IsActive: "Card_DetailView_IsActive",
-};
-__Main__1.KanbanTool.on_PageLoad(() => {
-    if (__Main__1.KanbanTool.taskView_IsVisible) {
-        __Main__2.KeyBinding.set_Scope(exports.KeyBinding_Scopes.Card_DetailView_IsActive);
-    }
-});
 
 
 /***/ }),
@@ -11021,11 +11021,11 @@ exports.is_VerticalPosition = is_VerticalPosition;
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(12).inject(__dirname, { CSS: true, HTML: false });
 const CallbackManager_1 = __webpack_require__(30);
-const HoverManager_1 = __webpack_require__(4);
+const HoverManager_1 = __webpack_require__(5);
 const StyleManager_1 = __webpack_require__(20);
 const __Main__1 = __webpack_require__(8);
 const Position_1 = __webpack_require__(10);
-const __Main__2 = __webpack_require__(5);
+const __Main__2 = __webpack_require__(3);
 const get_Rows_1 = __webpack_require__(44);
 var CardType_Manager;
 (function (CardType_Manager) {
@@ -11624,7 +11624,7 @@ module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collaps
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(11);
-const HoverManager_1 = __webpack_require__(4);
+const HoverManager_1 = __webpack_require__(5);
 const __Main__2 = __webpack_require__(0);
 const { CardType } = __Main__2.KanbanTool;
 class TaskToggle {
@@ -11666,7 +11666,7 @@ function _get_Inverted_CardType(cardType) {
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(3);
+__webpack_require__(4);
 module.exports = __webpack_require__(25);
 
 
@@ -11682,7 +11682,7 @@ __webpack_require__(45);
 __webpack_require__(46);
 __webpack_require__(47);
 __webpack_require__(48);
-__webpack_require__(51);
+__webpack_require__(52);
 
 
 /***/ }),
@@ -12219,7 +12219,7 @@ process.umask = function() { return 0; };
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const CSS = __webpack_require__(31).CardType_Manager;
-const HoverManager_1 = __webpack_require__(4);
+const HoverManager_1 = __webpack_require__(5);
 const StyleManager_1 = __webpack_require__(20);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(0);
@@ -13062,7 +13062,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(5);
+const __Main__1 = __webpack_require__(3);
 const __Main__2 = __webpack_require__(1);
 const jquery_1 = __importDefault(__webpack_require__(2));
 const $ = jquery_1.default;
@@ -13541,52 +13541,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskToggle_1 = __webpack_require__(23);
-const HoverManager_1 = __webpack_require__(4);
 const __Main__1 = __webpack_require__(1);
-const __Main__2 = __webpack_require__(0);
-const __Main__3 = __webpack_require__(5);
-const __Main__4 = __webpack_require__(19);
+const __Main__2 = __webpack_require__(3);
 class _ {
     static toggle_Between_TaskCards_And_TodayCards(event) {
         TaskToggle_1.TaskToggle.toggle_Hovered_Task();
-    }
-    static archive_Card(event) {
-        HoverManager_1.HoverManager.apply_Callback((card) => {
-            __Main__2.KanbanTool.API.tasks.groupUpdate([card.model.id], { _action: "archive" });
-        });
     }
     static convert_TodayCards_To_TaskCards(event) {
         TaskToggle_1.TaskToggle.convert_TodayCards_To_TaskCards();
     }
 }
 __decorate([
-    __Main__1.KeyBinding.add(["space"], { preventDefault: true, scope: __Main__3.KeyBinding_Scopes.Card_IsHovered }),
+    __Main__1.KeyBinding.add(["ctrl", "space"], { preventDefault: true, scope: __Main__2.KeyBinding_Scopes.Card_IsHovered }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [KeyboardEvent]),
     __metadata("design:returntype", void 0)
 ], _, "toggle_Between_TaskCards_And_TodayCards", null);
-__decorate([
-    __Main__1.KeyBinding.add(["delete"], { preventDefault: true, scope: __Main__3.KeyBinding_Scopes.Card_IsHovered }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [KeyboardEvent]),
-    __metadata("design:returntype", void 0)
-], _, "archive_Card", null);
 __decorate([
     __Main__1.KeyBinding.add(["ctrl", "shift", "alt", "space"], { preventDefault: true }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [KeyboardEvent]),
     __metadata("design:returntype", void 0)
 ], _, "convert_TodayCards_To_TaskCards", null);
-__Main__4.CardMover.Directions.forEach(direction => {
-    __Main__1.KeyBinding.add([direction], () => {
-        HoverManager_1.HoverManager.apply_Callback((card) => {
-            __Main__4.CardMover.move(card.model, direction);
-        });
-    }, {
-        preventDefault: true,
-        scope: __Main__3.KeyBinding_Scopes.Card_IsHovered
-    });
-});
 
 
 /***/ }),
@@ -13597,9 +13573,11 @@ __Main__4.CardMover.Directions.forEach(direction => {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const focus_SearchField_1 = __webpack_require__(49);
-focus_SearchField_1.focus_SearchField.initialize(["ctrl", "shift", "alt", "t"]);
-const show_FilterMenu_1 = __webpack_require__(50);
-show_FilterMenu_1.show_FilterMenu.initialize();
+focus_SearchField_1.focus_SearchField.initialize();
+const move_Cards_1 = __webpack_require__(50);
+move_Cards_1.move_Cards.initialize();
+const archive_Cards_1 = __webpack_require__(51);
+archive_Cards_1.archive_Cards.initialize();
 
 
 /***/ }),
@@ -13622,7 +13600,8 @@ const __Main__1 = __webpack_require__(0);
 class focus_SearchField {
     static initialize(keys) {
         return (event) => {
-            console.log(">>> focus_SearchField >>>", keys);
+            const searchField = $("#kt-board_search-q");
+            searchField.focus();
         };
     }
 }
@@ -13644,6 +13623,37 @@ exports.focus_SearchField = focus_SearchField;
 
 "use strict";
 
+Object.defineProperty(exports, "__esModule", { value: true });
+const HoverManager_1 = __webpack_require__(5);
+const __Main__1 = __webpack_require__(1);
+const __Main__2 = __webpack_require__(3);
+const __Main__3 = __webpack_require__(19);
+class move_Cards {
+    static initialize() {
+        __Main__3.CardMover.Directions.forEach(direction => {
+            _add_KeyBinding(direction);
+        });
+    }
+}
+exports.move_Cards = move_Cards;
+function _add_KeyBinding(direction) {
+    __Main__1.KeyBinding.add(["ctrl", direction], () => {
+        HoverManager_1.HoverManager.apply_Callback((card) => {
+            __Main__3.CardMover.move(card.model, direction);
+        });
+    }, {
+        preventDefault: true,
+        scope: __Main__2.KeyBinding_Scopes.Card_IsHovered
+    });
+}
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -13654,28 +13664,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const HoverManager_1 = __webpack_require__(5);
 const __Main__1 = __webpack_require__(0);
-class show_FilterMenu {
+const __Main__2 = __webpack_require__(3);
+class archive_Cards {
     static initialize(keys) {
         return (event) => {
-            console.log(">>> show_FilterMenu >>>", keys);
+            HoverManager_1.HoverManager.apply_Callback((card) => {
+                __Main__1.KanbanTool.API.tasks.groupUpdate([card.model.id], { _action: "archive" });
+            });
         };
     }
 }
 __decorate([
     __Main__1.KanbanTool.KeyBinding({
-        defaultKeys: ["ctrl", "space"],
-        options: { preventDefault: true },
+        defaultKeys: ["delete"],
+        options: { preventDefault: true, scope: __Main__2.KeyBinding_Scopes.Card_IsHovered },
     }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Array]),
     __metadata("design:returntype", void 0)
-], show_FilterMenu, "initialize", null);
-exports.show_FilterMenu = show_FilterMenu;
+], archive_Cards, "initialize", null);
+exports.archive_Cards = archive_Cards;
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
