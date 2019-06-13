@@ -1,6 +1,6 @@
 
 //###  Module  ###//
-import {activeBoard} from "~/Utils/KanbanTool/__Main__"
+import {KanbanTool} from "~/Utils/KanbanTool/__Main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -78,7 +78,7 @@ export class TaskContainer{
 
 	get tasks(){
 		return (
-			activeBoard.tasks().filter(task => {
+			KanbanTool.activeBoard.tasks().filter(task => {
 				const taskContainer =
 					(this.type == TaskContainer.Type.Row)
 					? task.swimlane()

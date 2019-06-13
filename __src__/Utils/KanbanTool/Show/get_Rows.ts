@@ -1,6 +1,6 @@
 //###  Module  ###//
 import {TaskContainer} from "./TaskContainer"
-import {activeBoard  } from "~/Utils/KanbanTool/__Main__"
+import {KanbanTool   } from "~/Utils/KanbanTool/__Main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -12,7 +12,7 @@ const $:any = require("jquery")
 
 export function get_Rows(){
 	const headerElements = $.find("kt-board > tbody > tr > th")
-	const models         = activeBoard.swimlanes().toArray()
+	const models         = KanbanTool.activeBoard.swimlanes().toArray()
 
 	const rows =
 		headerElements.map( (element, i) =>

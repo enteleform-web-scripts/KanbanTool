@@ -1,7 +1,11 @@
 //###  Module  ###//
 import {CardType_Manager} from "~/Extensions/CardType_Manager/__Main__"
 import {HoverManager    } from "~/Extensions/CardType_Manager/HoverManager"
-import {CardType        } from "~/Utils/KanbanTool/__Main__"
+import {KanbanTool      } from "~/Utils/KanbanTool/__Main__"
+
+//###  Aliases  ###//
+type  CardType = KanbanTool.CardType
+const {CardType} = KanbanTool
 
 
 //#################//
@@ -14,7 +18,7 @@ export class TaskToggle{
 		{return CardType.get_FromRegEx(/^Today_.*$/)}
 
 	static get task_CardTypes()
-		{return CardType.get_FromRegEx(/^Task_.*$/ )}
+		{return CardType.get_FromRegEx(/^Task_.*$/)}
 
 	static get today_Cards()
 		{return CardType.get_Cards(...TaskToggle.today_CardTypes)}

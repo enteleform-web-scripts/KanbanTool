@@ -1,7 +1,11 @@
 //###  Module  ###//
-import {CardType         } from "~/Utils/KanbanTool/__Main__"
 import {KeyBinding       } from "~/Utils/KeyBinding/__Main__"
 import {KeyBinding_Scopes} from "~/Utils/KanbanTool/KeyBinding_Scopes/__Main__"
+import {KanbanTool  } from "~/Utils/KanbanTool/__Main__"
+
+//###  Aliases  ###//
+type  CardType = KanbanTool.CardType
+const {CardType} = KanbanTool
 
 
 //#################//

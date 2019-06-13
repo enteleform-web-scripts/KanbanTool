@@ -3,11 +3,11 @@ import {TaskToggle} from "../Utils/TaskToggle";
 
 //###  Module  ###//
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
-const {Entry, Position} = FunctionBar
-import {
-	CardType,
-	Show, Hide,
-} from "~/Utils/KanbanTool/__Main__"
+import {KanbanTool } from "~/Utils/KanbanTool/__Main__"
+
+//###  Aliases  ###//
+const {Entry, Position     } = FunctionBar
+const {CardType, Show, Hide} = KanbanTool
 
 
 //#####################//

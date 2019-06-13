@@ -7,7 +7,7 @@ import {Entry                      } from "./Entry"
 import {Position                   } from "./Position"
 import {set_CSS_Variable           } from "~/Utils/CSS_Variables/__Main__"
 import {KeyBinding                 } from "~/Utils/KeyBinding/__Main__"
-import {on_PageLoad                } from "~/Utils/KanbanTool/__Main__"
+import {KanbanTool                 } from "~/Utils/KanbanTool/__Main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -25,14 +25,14 @@ export class Layout{
 
 	constructor(functionBar){
 		this._functionBar = functionBar
-		on_PageLoad(() => {
+		KanbanTool.on_PageLoad(() => {
 			this._build()
 			_update_OriginalLayout()
 		})
 	}
 
 	static initialize_ToggleBindings(){
-		on_PageLoad(() => {
+		KanbanTool.on_PageLoad(() => {
 			const toggleMap = [
 				{position:Position.Left,   key:"left" },
 				{position:Position.Right,  key:"right"},

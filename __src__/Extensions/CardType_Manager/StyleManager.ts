@@ -1,14 +1,14 @@
 //###  Module  ###//
 import {_CardOptions     } from "./__Main__"
 import {$set_CSS_Variable} from "~/Utils/CSS_Variables/__Main__"
-import {
-	CardType, cardTypes,
-	KanbanTool,
-	on_PageLoad,
-} from "~/Utils/KanbanTool/__Main__"
+import {KanbanTool       } from "~/Utils/KanbanTool/__Main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
+
+//###  Aliases  ###//
+type  CardType = KanbanTool.CardType
+const {CardType, cardTypes} = KanbanTool
 
 
 //#################//
@@ -34,9 +34,9 @@ export namespace StyleManager{
 			})
 		}
 
-		on_PageLoad(() => {
+		KanbanTool.on_PageLoad(() => {
 			callback()
-			KanbanTool.tasks.on("change", callback)
+			KanbanTool.API.tasks.on("change", callback)
 		})
 	}
 
@@ -94,7 +94,7 @@ function _update_CardStyle_From_CardOptions(element:JQuery, cardType:CardType){
 
 function _get_CardType(element:JQuery){
 	const taskID      = element.data("task-id")
-	const model       = KanbanTool.tasks.stub(taskID)
+	const model       = KanbanTool.API.tasks.stub(taskID)
 	const cardType_ID = model.cardType().id
 	return StyleManager._CardType_ID_Map[cardType_ID]
 }

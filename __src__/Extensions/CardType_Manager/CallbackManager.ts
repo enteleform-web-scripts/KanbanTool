@@ -5,9 +5,11 @@ const CSS = require("./__CSS_Variables__.json").CardType_Manager
 import {HoverManager} from "./HoverManager"
 import {StyleManager} from "./StyleManager"
 import {KeyBinding  } from "~/Utils/KeyBinding/__Main__"
-import {
-	CardType, cardTypes,
-} from "~/Utils/KanbanTool/__Main__"
+import {KanbanTool  } from "~/Utils/KanbanTool/__Main__"
+
+//###  Aliases  ###//
+type  CardType = KanbanTool.CardType
+const {CardType} = KanbanTool
 
 
 //#################//
@@ -20,7 +22,7 @@ export namespace CallbackManager{
 
 	export function get_Callbacks(){
 		_entryIndex += 1
-		const cardType = cardTypes[_entryIndex]
+		const cardType = KanbanTool.cardTypes[_entryIndex]
 
 		return _get_Callbacks(cardType)
 	}

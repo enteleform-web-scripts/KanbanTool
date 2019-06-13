@@ -1,6 +1,6 @@
 //###  Modules  ###//
-import {on_PageLoad, taskView_IsVisible} from "../__Main__"
-import {KeyBinding                     } from "~/Utils/KeyBinding/__Main__"
+import {KanbanTool} from "../__Main__"
+import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
 
 
 //###########################//
@@ -24,7 +24,7 @@ export const KeyBinding_Scopes = {
 //##############//
 //###  Init  ###//
 //##############//
-on_PageLoad( ()=>{
-	if(taskView_IsVisible())
+KanbanTool.on_PageLoad( ()=>{
+	if(KanbanTool.taskView_IsVisible)
 		{KeyBinding.set_Scope(KeyBinding_Scopes.Card_DetailView_IsActive)}
 })

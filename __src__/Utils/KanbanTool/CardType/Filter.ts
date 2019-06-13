@@ -1,11 +1,10 @@
 //###  Module  ###//
-import {cardType_Filter_Index} from "../Settings"
 import {CardType             } from "./__Main__"
+import {cardType_Filter_Index} from "../Settings"
+import {KanbanTool           } from "../__Main__"
+import {Show                 } from "../Show/__Main__"
+import {Hide                 } from "../Hide/__Main__"
 import {KeyBinding           } from "~/Utils/KeyBinding/__Main__"
-import {
-	on_PageLoad,
-	Show, Hide,
-} from "../__Main__"
 
 //###  NPM  ###//
 const $:any = require("jquery")
@@ -82,11 +81,11 @@ export class Filter{
 //###  Init  ###//
 //##############//
 
-on_PageLoad(() => {
+KanbanTool.on_PageLoad(() => {
 	Filter.enable()
 })
 
-on_PageLoad(Filter.show_AllCards_ID, ()=>{
+KanbanTool.on_PageLoad(Filter.show_AllCards_ID, ()=>{
 	Filter.enable()
 	Filter.enable_CardTypes()
 })

@@ -25,7 +25,7 @@ class _{
 	)
 	static archive_Card(event:KeyboardEvent){
 		HoverManager.apply_Callback( (card:{element:JQuery, model:any}) => {
-			KanbanTool.tasks.groupUpdate([card.model.id], {_action:"archive"})
+			KanbanTool.API.tasks.groupUpdate([card.model.id], {_action:"archive"})
 		})
 	}
 
