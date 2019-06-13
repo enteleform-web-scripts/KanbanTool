@@ -10640,10 +10640,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560393402244)
+		const elapsedTime = _get_ElapsedTime(1560393706997)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:36:42 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     10:41:46 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11588,16 +11588,16 @@ __Main__1.CardType_Manager.initialize_Manual({
     },
     cardTypes: [
         [
-            { borderAccent_Color: priorityColors.low, ...todaySettings },
-            { borderAccent_Color: priorityColors.medium, ...todaySettings },
-            { borderAccent_Color: priorityColors.high, ...todaySettings },
-            { borderAccent_Color: priorityColors.urgent, ...todaySettings },
-        ],
-        [
             { borderAccent_Color: priorityColors.low, ...taskSettings },
             { borderAccent_Color: priorityColors.medium, ...taskSettings },
             { borderAccent_Color: priorityColors.high, ...taskSettings },
             { borderAccent_Color: priorityColors.urgent, ...taskSettings },
+        ],
+        [
+            { borderAccent_Color: priorityColors.low, ...todaySettings },
+            { borderAccent_Color: priorityColors.medium, ...todaySettings },
+            { borderAccent_Color: priorityColors.high, ...todaySettings },
+            { borderAccent_Color: priorityColors.urgent, ...todaySettings },
         ],
         [
             {
