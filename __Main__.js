@@ -10643,10 +10643,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560391216670)
+		const elapsedTime = _get_ElapsedTime(1560391418970)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:00:16 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     10:03:38 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12953,12 +12953,14 @@ var Card_DetailView_IsActive;
     }
     Card_DetailView_IsActive.initialize = initialize;
     function _set_TaskView_KeyBinding_Context(enable) {
-        if (enable) {
-            __Main__2.KeyBinding.set_Scope(__Main__1.KeyBinding_Scopes.Card_DetailView_IsActive);
-        }
-        else {
-            __Main__2.KeyBinding.set_Scope();
-        }
+        setTimeout(() => {
+            if (enable) {
+                __Main__2.KeyBinding.set_Scope(__Main__1.KeyBinding_Scopes.Card_DetailView_IsActive);
+            }
+            else {
+                __Main__2.KeyBinding.set_Scope();
+            }
+        }, 100);
     }
     function _on_TaskView_Visible(taskView) {
         const $taskView = $(taskView);
@@ -12984,8 +12986,8 @@ var Card_DetailView_IsActive;
                     const elements = Array.from(mutation.addedNodes);
                     if (elements.some(node => node.localName == _taskView_Selector)) {
                         const taskView = elements.filter(element => element.localName == _taskView_Selector)[0];
+                        __Main__2.KeyBinding.set_Scope(__Main__1.KeyBinding_Scopes.Card_DetailView_IsActive);
                         start_Observer(taskView);
-                        console.log("@@@ start_Observer");
                         observer.disconnect();
                         break;
                     }
