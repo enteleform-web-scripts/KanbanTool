@@ -10644,10 +10644,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560436911781)
+		const elapsedTime = _get_ElapsedTime(1560437158514)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:41:51 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     10:45:58 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13512,6 +13512,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], _, "convert_TodayCards_To_TaskCards", null);
 __Main__4.CardMover.Directions.forEach(direction => {
+    __Main__1.KeyBinding;
     __Main__1.KeyBinding.add([direction], () => {
         HoverManager_1.HoverManager.apply_Callback((card) => {
             __Main__4.CardMover.move(card.model, direction);
