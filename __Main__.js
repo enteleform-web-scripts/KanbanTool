@@ -123,8 +123,10 @@ var __Main__2 = __webpack_require__(15);
 exports.Show = __Main__2.Show;
 var __Main__3 = __webpack_require__(35);
 exports.Hide = __Main__3.Hide;
-const __Main__4 = __webpack_require__(18);
-__Main__4.CardMover.initialize(exports.activeBoard);
+var __Main__4 = __webpack_require__(37);
+exports.KeyBinding = __Main__4.KeyBinding_Decorator;
+const __Main__5 = __webpack_require__(18);
+__Main__5.CardMover.initialize(exports.activeBoard);
 exports.KanbanTool.activeBoard = exports.activeBoard;
 exports.KanbanTool.onInit(() => {
     setTimeout(() => {
@@ -10644,10 +10646,10 @@ return jQuery;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560437158514)
+		const elapsedTime = _get_ElapsedTime(1560439803414)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     10:45:58 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:30:03 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10719,7 +10721,7 @@ var HoverManager;
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
 const __Main__2 = __webpack_require__(1);
-const Card_DetailView_IsActive_1 = __webpack_require__(37);
+const Card_DetailView_IsActive_1 = __webpack_require__(38);
 Card_DetailView_IsActive_1.Card_DetailView_IsActive.initialize();
 exports.KeyBinding_Scopes = {
     Card_IsHovered: "Card_IsHovered",
@@ -10830,10 +10832,10 @@ exports.TaskContainer = TaskContainer;
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(11).inject(__dirname, { CSS: true, HTML: true });
 const Settings_1 = __webpack_require__(8);
-const Entry_1 = __webpack_require__(38);
-const Divider_1 = __webpack_require__(39);
-const Layout_1 = __webpack_require__(40);
-const Module_BaseClasses_1 = __webpack_require__(41);
+const Entry_1 = __webpack_require__(39);
+const Divider_1 = __webpack_require__(40);
+const Layout_1 = __webpack_require__(41);
+const Module_BaseClasses_1 = __webpack_require__(42);
 const Position_1 = __webpack_require__(9);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
@@ -10935,7 +10937,7 @@ const StyleManager_1 = __webpack_require__(19);
 const __Main__1 = __webpack_require__(7);
 const Position_1 = __webpack_require__(9);
 const __Main__2 = __webpack_require__(5);
-const get_Rows_1 = __webpack_require__(42);
+const get_Rows_1 = __webpack_require__(43);
 var CardType_Manager;
 (function (CardType_Manager) {
     CardType_Manager.HoverManager = HoverManager_1.HoverManager;
@@ -11612,11 +11614,11 @@ module.exports = __webpack_require__(24);
 
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(25);
-__webpack_require__(43);
 __webpack_require__(44);
 __webpack_require__(45);
 __webpack_require__(46);
 __webpack_require__(47);
+__webpack_require__(50);
 
 
 /***/ }),
@@ -12995,6 +12997,30 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 "use strict";
 
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(1);
+function KeyBinding_Decorator({ defaultKeys, options }) {
+    return (target, propertyKey, descriptor) => {
+        const callback = descriptor.value;
+        descriptor.value = (keys) => {
+            keys = (keys || defaultKeys);
+            if (keys.length > 0) {
+                const innerCallback = callback(keys);
+                __Main__1.KeyBinding.add(keys, innerCallback, options);
+            }
+        };
+        return descriptor;
+    };
+}
+exports.KeyBinding_Decorator = KeyBinding_Decorator;
+
+
+/***/ }),
+/* 38 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -13065,7 +13091,7 @@ var Card_DetailView_IsActive;
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13117,7 +13143,7 @@ const emptyCallback = ((...args) => { });
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13141,7 +13167,7 @@ exports.Divider = Divider;
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13258,7 +13284,7 @@ function _update_OriginalLayout() {
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13271,7 +13297,7 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13330,7 +13356,7 @@ function _cardTypes_Exhausted(cardIndex) { return (cardIndex == __Main__1.cardTy
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13392,7 +13418,7 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13459,7 +13485,7 @@ function get_Callbacks(callback) {
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13512,7 +13538,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], _, "convert_TodayCards_To_TaskCards", null);
 __Main__4.CardMover.Directions.forEach(direction => {
-    __Main__1.KeyBinding;
     __Main__1.KeyBinding.add([direction], () => {
         HoverManager_1.HoverManager.apply_Callback((card) => {
             __Main__4.CardMover.move(card.model, direction);
@@ -13525,7 +13550,92 @@ __Main__4.CardMover.Directions.forEach(direction => {
 
 
 /***/ }),
-/* 46 */
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const focus_SearchField_1 = __webpack_require__(48);
+focus_SearchField_1.focus_SearchField.initialize();
+const show_FilterMenu_1 = __webpack_require__(49);
+show_FilterMenu_1.show_FilterMenu.initialize();
+
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(0);
+class focus_SearchField {
+    static initialize(keys) {
+        return (event) => {
+            console.log(">>> focus_SearchField >>>", keys);
+        };
+    }
+}
+__decorate([
+    __Main__1.KanbanTool.KeyBinding({
+        defaultKeys: ["shift", "alt", "f"],
+        options: { preventDefault: true },
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array]),
+    __metadata("design:returntype", void 0)
+], focus_SearchField, "initialize", null);
+exports.focus_SearchField = focus_SearchField;
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(0);
+class show_FilterMenu {
+    static initialize(keys) {
+        return (event) => {
+            console.log(">>> show_FilterMenu >>>", keys);
+        };
+    }
+}
+__decorate([
+    __Main__1.KanbanTool.KeyBinding({
+        defaultKeys: ["ctrl", "space"],
+        options: { preventDefault: true },
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array]),
+    __metadata("design:returntype", void 0)
+], show_FilterMenu, "initialize", null);
+exports.show_FilterMenu = show_FilterMenu;
+
+
+/***/ }),
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13569,38 +13679,6 @@ $(document).on("click", selector__CheckList_Item, (event) => {
 function get_DivIndex(checkList_Item) {
     return ($(checkList_Item).parent().index() + 1);
 }
-
-
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(1);
-const $ = __webpack_require__(2);
-class FilterKeybindings {
-    static focus_SearchField(event) {
-        const searchField = $("#kt-board_search-q");
-        searchField.focus();
-    }
-}
-__decorate([
-    __Main__1.KeyBinding.add(["ctrl", "f"], { preventDefault: true }),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [KeyboardEvent]),
-    __metadata("design:returntype", void 0)
-], FilterKeybindings, "focus_SearchField", null);
 
 
 /***/ })
