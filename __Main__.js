@@ -91,13 +91,6 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(14);
-const activeBoard_1 = __webpack_require__(3);
-const __Main__1 = __webpack_require__(35);
-const __Main__2 = __webpack_require__(7);
-const __Main__3 = __webpack_require__(17);
-const __Main__4 = __webpack_require__(18);
-const __Main__5 = __webpack_require__(20);
 class KanbanTool {
     static on_PageLoad(arg_1, arg_2) {
         const [id, callback] = (typeof arg_1 == "symbol")
@@ -138,6 +131,13 @@ KanbanTool.API.onInit(() => {
         });
     }, Settings_1.onPageLoad_Timeout_MS);
 });
+const Settings_1 = __webpack_require__(14);
+const activeBoard_1 = __webpack_require__(3);
+const __Main__1 = __webpack_require__(35);
+const __Main__2 = __webpack_require__(7);
+const __Main__3 = __webpack_require__(17);
+const __Main__4 = __webpack_require__(18);
+const __Main__5 = __webpack_require__(20);
 
 
 /***/ }),
@@ -10668,10 +10668,10 @@ exports.get_ActiveBoard = get_ActiveBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560446194092)
+		const elapsedTime = _get_ElapsedTime(1560446320146)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:16:34 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:18:40 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
