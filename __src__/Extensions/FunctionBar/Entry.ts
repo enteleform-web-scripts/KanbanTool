@@ -8,14 +8,14 @@ import {KeyBinding         } from "~/Utils/KeyBinding/__Main__"
 //#################//
 
 export class Entry{
-	name:           string
-	on_Layout:      ((cell:JQuery                               ) => void)
-	callback:       ((event:any,                     cell:JQuery) => void)
-	on_KeyBinding:  ((event:KeyboardEvent,           cell:JQuery) => void)
-	on_Click:       ((event:JQuery.ClickEvent,       cell:JQuery) => void)
-	on_DoubleClick: ((event:JQuery.DoubleClickEvent, cell:JQuery) => void)
-	keyBinding:     KeyBinding.CharacterKey
-	color:          string
+	name:             string
+	on_Layout:        ((cell:JQuery                               ) => void)
+	callback:         ((event:any,                     cell:JQuery) => void)
+	on_KeyBinding:    ((event:KeyboardEvent,           cell:JQuery) => void)
+	on_Click:         ((event:JQuery.ClickEvent,       cell:JQuery) => void)
+	on_DoubleClick:   ((event:JQuery.DoubleClickEvent, cell:JQuery) => void)
+	keyBinding:       KeyBinding.AlphanumericKey
+	keyBinding_Scope: string
 
 	cell: JQuery
 
@@ -27,16 +27,16 @@ export class Entry{
 		on_KeyBinding,
 		on_Layout,
 		keyBinding,
-		color,
+		keyBinding_Scope,
 	}:{
-		name:            string,
-		on_Layout?:      ((cell:JQuery                               ) => void),
-		callback?:       ((event:any,                     cell:JQuery) => void),
-		on_KeyBinding?:  ((event:KeyboardEvent,           cell:JQuery) => void),
-		on_Click?:       ((event:JQuery.ClickEvent,       cell:JQuery) => void),
-		on_DoubleClick?: ((event:JQuery.DoubleClickEvent, cell:JQuery) => void),
-		keyBinding?:     KeyBinding.AlphanumericKey,
-		color?:          string,
+		name:              string,
+		on_Layout?:        ((cell:JQuery                               ) => void),
+		callback?:         ((event:any,                     cell:JQuery) => void),
+		on_KeyBinding?:    ((event:KeyboardEvent,           cell:JQuery) => void),
+		on_Click?:         ((event:JQuery.ClickEvent,       cell:JQuery) => void),
+		on_DoubleClick?:   ((event:JQuery.DoubleClickEvent, cell:JQuery) => void),
+		keyBinding?:       KeyBinding.AlphanumericKey
+		keyBinding_Scope?: string
 	}
 	){
 		callback = (callback || emptyCallback)
@@ -48,7 +48,11 @@ export class Entry{
 		this.on_Click       = (event:JQuery.ClickEvent,       cell:JQuery) => {event.stopPropagation(); (on_Click       || callback)(event, cell)}
 		this.on_DoubleClick = (event:JQuery.DoubleClickEvent, cell:JQuery) => {event.stopPropagation(); (on_DoubleClick || callback)(event, cell)}
 		this.keyBinding     = keyBinding
-		this.color          = color
+
+		this.keyBinding_Scope =
+			(keyBinding_Scope)
+			? keyBinding_Scope
+			: KeyBinding.defaultScope
 	}
 
 	initialize_KeyBinding(
@@ -87,7 +91,10 @@ export class Entry{
 		KeyBinding.add(
 			[...keyBinding_Modifiers, keyBinding],
 			(event:KeyboardEvent) => this.on_KeyBinding(event, this.cell),
-			{preventDefault: true}
+			{
+				preventDefault: true,
+				scope:          this.keyBinding_Scope,
+			},
 		)
 	}
 

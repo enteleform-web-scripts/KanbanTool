@@ -9,6 +9,7 @@ import {FunctionBar                  } from "~/Extensions/FunctionBar/__Main__"
 import {CellProperty                 } from "~/Extensions/FunctionBar/CellProperty"
 import {Position, VerticalPosition   } from "~/Extensions/FunctionBar/Position"
 import {KeyBinding                   } from "~/Utils/KeyBinding/__Main__"
+import {KeyBinding_Scopes            } from "~/Utils/KanbanTool/KeyBinding_Scopes/__Main__"
 import {
 	get_Auto_CardTypes_Rows,
 	get_Manual_CardTypes_SingleRow,
@@ -135,7 +136,8 @@ function _build_FunctionBar(options:_FunctionBar_Options, cardType_Rows:any[][])
 	const entryGroups = cardType_Rows.map(row =>
 		row.map(cardType =>
 			new FunctionBar.Entry({
-				name: cardType.name,
+				name:             cardType.name,
+				keyBinding_Scope: KeyBinding_Scopes.Card_IsHovered,
 				...CallbackManager.get_Callbacks(),
 			}),
 		)

@@ -53,7 +53,7 @@ export class Layout{
 				KeyBinding.add(
 					[(entry.key as KeyBinding.Key), ...functionBar_ToggleModifiers],
 					callback,
-					{preventDefault: true}
+					{preventDefault: true},
 				)
 			})
 		})

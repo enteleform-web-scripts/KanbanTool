@@ -6,6 +6,7 @@ import {CardType_Manager} from "~/Extensions/CardType_Manager/__Main__"
 import {HoverManager    } from "~/Extensions/CardType_Manager/HoverManager"
 import {CardType        } from "~/Utils/KanbanTool/__Main__"
 import {KeyBinding      } from "~/Utils/KeyBinding/__Main__"
+import {KeyBinding_Scopes} from "../../Utils/KanbanTool/KeyBinding_Scopes/__Main__";
 
 
 const priorityColors = {
@@ -76,5 +77,9 @@ CardType_Manager.initialize_Manual({
 KeyBinding.add(["ctrl", "space"],
 	(event:KeyboardEvent) => {
 		TaskToggle.toggle_Hovered_Task()
-	}
+	},
+	{
+		preventDefault: true,
+		scope:          KeyBinding_Scopes.Card_IsHovered,
+	},
 )
