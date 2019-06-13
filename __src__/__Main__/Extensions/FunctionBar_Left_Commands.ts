@@ -4,8 +4,7 @@ import {TaskToggle} from "../Utils/TaskToggle";
 //###  Module  ###//
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
 const {Entry, Position} = FunctionBar
-import {KeyBinding       } from "~/Utils/KeyBinding/__Main__"
-import {KeyBinding_Scopes} from "../../Utils/KanbanTool/KeyBinding_Scopes/__Main__"
+import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
 import {
 	CardType,
 	Show, Hide,
@@ -20,7 +19,7 @@ class KeyBindings{
 
 	@KeyBinding.add(
 		["ctrl", "shift", "alt", "space"],
-		{preventDefault:true, scope:KeyBinding_Scopes.Card_IsHovered}
+		{preventDefault:true}
 	)
 	static convert_TodayCards_To_TaskCards(event){
 		TaskToggle.convert_TodayCards_To_TaskCards()
