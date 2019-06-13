@@ -1,11 +1,6 @@
-
-//################################//
-//###  Imports - Non-Circular  ###//
-//################################//
-
 //###  Module  ###//
 import {onPageLoad_Timeout_MS} from "./Settings"
-import {get_ActiveBoard      } from "./get/activeBoard";
+import {get_ActiveBoard      } from "./get/activeBoard"
 
 
 //#########################//
@@ -51,21 +46,6 @@ export class KanbanTool{
 }
 
 
-//#############################//
-//###  Exports - NameSpace  ###//
-//#############################//
-
-export namespace KanbanTool{
-	export const Show       = _Show
-	export const Hide       = _Hide
-	export const KeyBinding = KeyBinding_Decorator
-
-	export type  CardType  = _CardType
-	export const CardType  = _CardType
-	export const cardTypes = _CardType.cardTypes
-
-	export const CardMover = _CardMover
-}
 
 
 //##############//
@@ -83,15 +63,27 @@ KanbanTool.API.onInit( ()=>{
 })
 
 
-//############################//
-//###  Imports - Circular  ###//
-//############################//
+//#############################//
+//###  Exports - NameSpace  ###//
+//#############################//
 
 //!!!  keep @ end to avoid circular dependency conficts  !!!//
 
-//###  Module  ###//
 import {KeyBinding_Decorator   } from "./KeyBinding_Decorator/__Main__"
 import {Show      as _Show     } from "./Show/__Main__"
 import {Hide      as _Hide     } from "./Hide/__Main__"
 import {CardType  as _CardType } from "./CardType/__Main__"
 import {CardMover as _CardMover} from "./CardMover/__Main__"
+
+export namespace KanbanTool{
+	export const KeyBinding = KeyBinding_Decorator
+
+	export const Show = _Show
+	export const Hide = _Hide
+
+	export type  CardType  = _CardType
+	export const CardType  = _CardType
+	export const cardTypes = _CardType.cardTypes
+
+	export const CardMover = _CardMover
+}
