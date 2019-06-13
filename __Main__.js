@@ -10668,10 +10668,10 @@ exports.get_ActiveBoard = get_ActiveBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560446733142)
+		const elapsedTime = _get_ElapsedTime(1560447034415)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:25:33 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:30:34 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11444,13 +11444,11 @@ exports.is_JQuery = is_JQuery;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const activeBoard_1 = __webpack_require__(3);
-const _activeBoard = activeBoard_1.get_ActiveBoard();
+const __Main__1 = __webpack_require__(0);
 var CardMover;
 (function (CardMover) {
-    let _board = _activeBoard;
-    let _columns = _activeBoard.workflowStages().leafs();
-    let _rows = _activeBoard.swimlanes().models;
+    let _columns = __Main__1.KanbanTool.activeBoard.workflowStages().leafs();
+    let _rows = __Main__1.KanbanTool.activeBoard.swimlanes().models;
     CardMover.Directions = ["up", "down", "left", "right"];
     function move(cardModel, direction) {
         if (direction == "up") {
@@ -11483,8 +11481,8 @@ var CardMover;
         const nextIndex = (index + indexOffset);
         if ((nextIndex < containers.length)
             && (nextIndex >= 0)) {
-            const nextColumnID = containers[nextIndex].id;
-            _board.tasks.groupUpdate([cardModel.id], { [propertyName]: nextColumnID });
+            const nextContainer_ID = containers[nextIndex].id;
+            __Main__1.KanbanTool.API.tasks.groupUpdate([cardModel.id], { [propertyName]: nextContainer_ID });
         }
     }
 })(CardMover = exports.CardMover || (exports.CardMover = {}));
