@@ -2,11 +2,9 @@
 import {TaskToggle} from "../Utils/TaskToggle"
 
 //###  Module  ###//
-import {CardType_Manager} from "~/Extensions/CardType_Manager/__Main__"
-import {HoverManager    } from "~/Extensions/CardType_Manager/HoverManager"
-import {CardType        } from "~/Utils/KanbanTool/__Main__"
-import {KeyBinding      } from "~/Utils/KeyBinding/__Main__"
-import {KeyBinding_Scopes} from "../../Utils/KanbanTool/KeyBinding_Scopes/__Main__";
+import {CardType_Manager } from "~/Extensions/CardType_Manager/__Main__"
+import {KeyBinding       } from "~/Utils/KeyBinding/__Main__"
+import {KeyBinding_Scopes} from "../../Utils/KanbanTool/KeyBinding_Scopes/__Main__"
 
 
 const priorityColors = {
