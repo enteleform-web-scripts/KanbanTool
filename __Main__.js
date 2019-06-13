@@ -117,14 +117,6 @@ KanbanTool.API = window.KT;
 KanbanTool.activeBoard = activeBoard_1.get_ActiveBoard();
 KanbanTool._on_PageLoad_Callbacks = [];
 exports.KanbanTool = KanbanTool;
-(function (KanbanTool) {
-    KanbanTool.Show = __Main__2.Show;
-    KanbanTool.Hide = __Main__3.Hide;
-    KanbanTool.KeyBinding = __Main__1.KeyBinding_Decorator;
-    KanbanTool.CardType = __Main__4.CardType;
-    KanbanTool.cardTypes = __Main__4.CardType.cardTypes;
-    KanbanTool.CardMover = __Main__5.CardMover;
-})(KanbanTool = exports.KanbanTool || (exports.KanbanTool = {}));
 KanbanTool.API.activeBoard = KanbanTool.activeBoard;
 KanbanTool.API.onInit(() => {
     setTimeout(() => {
@@ -138,6 +130,14 @@ const __Main__2 = __webpack_require__(7);
 const __Main__3 = __webpack_require__(17);
 const __Main__4 = __webpack_require__(18);
 const __Main__5 = __webpack_require__(20);
+(function (KanbanTool) {
+    KanbanTool.KeyBinding = __Main__1.KeyBinding_Decorator;
+    KanbanTool.Show = __Main__2.Show;
+    KanbanTool.Hide = __Main__3.Hide;
+    KanbanTool.CardType = __Main__4.CardType;
+    KanbanTool.cardTypes = __Main__4.CardType.cardTypes;
+    KanbanTool.CardMover = __Main__5.CardMover;
+})(KanbanTool = exports.KanbanTool || (exports.KanbanTool = {}));
 
 
 /***/ }),
@@ -10668,10 +10668,10 @@ exports.get_ActiveBoard = get_ActiveBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560446486010)
+		const elapsedTime = _get_ElapsedTime(1560446587056)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:21:26 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:23:07 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
