@@ -10668,10 +10668,10 @@ exports.get_ActiveBoard = get_ActiveBoard;
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560446587056)
+		const elapsedTime = _get_ElapsedTime(1560446733142)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:23:07 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:25:33 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10849,6 +10849,7 @@ function _match_Glob(container, target) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const activeBoard_1 = __webpack_require__(3);
 const $ = __webpack_require__(2);
+const _activeBoard = activeBoard_1.get_ActiveBoard();
 class TaskContainer {
     constructor({ type, domIndex, modelIndex, model, element }) {
         this.children = [];
@@ -10927,7 +10928,6 @@ exports.TaskContainer = TaskContainer;
         Type[Type["Column"] = 1] = "Column";
     })(Type = TaskContainer.Type || (TaskContainer.Type = {}));
 })(TaskContainer = exports.TaskContainer || (exports.TaskContainer = {}));
-const _activeBoard = activeBoard_1.get_ActiveBoard();
 
 
 /***/ }),
@@ -11228,6 +11228,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(8);
 const activeBoard_1 = __webpack_require__(3);
 const $ = __webpack_require__(2);
+const _activeBoard = activeBoard_1.get_ActiveBoard();
 function get_Rows() {
     const headerElements = $.find("kt-board > tbody > tr > th");
     const models = _activeBoard.swimlanes().toArray();
@@ -11241,7 +11242,6 @@ function get_Rows() {
     return rows;
 }
 exports.get_Rows = get_Rows;
-const _activeBoard = activeBoard_1.get_ActiveBoard();
 
 
 /***/ }),
@@ -11253,6 +11253,7 @@ const _activeBoard = activeBoard_1.get_ActiveBoard();
 Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(8);
 const activeBoard_1 = __webpack_require__(3);
+const _activeBoard = activeBoard_1.get_ActiveBoard();
 function get_Columns() {
     const models = _activeBoard.workflowStages()
         .slice(1);
@@ -11269,7 +11270,6 @@ function get_Columns() {
     return columns;
 }
 exports.get_Columns = get_Columns;
-const _activeBoard = activeBoard_1.get_ActiveBoard();
 function _get_HeaderElements() {
     const rows = $("kt-board > thead").children().toArray();
     const swimLane_Count = _activeBoard.swimlanes().length;
@@ -11359,6 +11359,7 @@ const Filter_1 = __webpack_require__(38);
 const activeBoard_1 = __webpack_require__(3);
 const is_JQuery_1 = __webpack_require__(19);
 const $ = __webpack_require__(2);
+const _activeBoard = activeBoard_1.get_ActiveBoard();
 class CardType {
     constructor({ index, id, name, bgColor, fgColor }) {
         this.index = index;
@@ -11401,7 +11402,6 @@ class CardType {
 CardType.Filter = Filter_1.Filter;
 CardType._cardTypes = _get_CardTypes();
 exports.CardType = CardType;
-const _activeBoard = activeBoard_1.get_ActiveBoard();
 function _get_CardTypes() {
     return _activeBoard.cardTypes().active().map(({ attributes }, index) => new CardType({
         index: index,
@@ -12859,6 +12859,7 @@ const _GLOB_TO_REGEX_MAP = [
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const activeBoard_1 = __webpack_require__(3);
+const _activeBoard = activeBoard_1.get_ActiveBoard();
 function get_EmptyRow_Indexes(columns) {
     const hiddenColumn_Indexes = columns
         .filter(column => column.is_Collapsed)
@@ -12873,7 +12874,6 @@ function get_EmptyColumn_Indexes(rows) {
     return _get_EmptyColumn_Indexes(hiddenRow_Indexes);
 }
 exports.get_EmptyColumn_Indexes = get_EmptyColumn_Indexes;
-const _activeBoard = activeBoard_1.get_ActiveBoard();
 function _get_EmptyCell_Map() {
     const { rows, columns } = _get_Containers();
     const cellMap = Array.from({ length: rows.length })
