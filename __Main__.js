@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560620256725)
+		const elapsedTime = _get_ElapsedTime(1560620405031)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:37:36 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:40:05 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11558,6 +11558,7 @@ const _Default_FunctionBar_Options = {
     position: Position_1.Position.Bottom,
     autoMap_KeyBindings: true,
     keyBinding_Modifiers: [],
+    singleRow: false,
     stretchCells: true,
     cellProperties: [],
 };
@@ -12770,9 +12771,10 @@ const taskSettings = {
     borderColor_Outside: "hsl(0, 0%, 60%)",
 };
 __Main__1.CardType_Manager.initialize_Manual({
-    mode: __Main__1.CardType_Manager.Mode.SingleRow,
+    mode: __Main__1.CardType_Manager.Mode.MultipleRows,
     cellWidth: 125,
     functionBar_Options: {
+        singleRow: true,
         stretchCells: false,
     },
     cardTypes: [
