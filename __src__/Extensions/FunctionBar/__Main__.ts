@@ -5,7 +5,6 @@ require("~/Utils/HTML_Injector").inject(__dirname, {CSS:true, HTML:true})
 import {autoMapped_Key_Rows} from "./Settings"
 import {CellProperty       } from "./CellProperty"
 import {Entry              } from "./Entry"
-import {Divider            } from "./Divider"
 import {Layout             } from "./Layout"
 import {KeyBinding         } from "~/Utils/KeyBinding/__Main__"
 import {Module             } from "~/Utils/Module_BaseClasses"
@@ -23,14 +22,13 @@ import {
 export class FunctionBar extends Module{
 
 	static Entry    = Entry
-	static Divider  = Divider
 	static Position = Position
 
 	layout:               Layout
 	position:             Position
 	autoMap_KeyBindings:  boolean
 	keyBinding_Modifiers: KeyBinding.ModifierKey[]
-	entryGroups:          FunctionBar_Entry[][]
+	entryGroups:          Entry[][]
 	singleRow:            boolean
 	stretchCells:         boolean
 	cellProperties:       CellProperty[]
@@ -42,7 +40,7 @@ export class FunctionBar extends Module{
 		cellProperties,
 	}:{
 		position:        HorizontalPosition,
-		entryGroups:     FunctionBar_Entry[][],
+		entryGroups:     Entry[][],
 		singleRow?:      boolean,
 		cellProperties?: CellProperty[],
 	})
@@ -56,7 +54,7 @@ export class FunctionBar extends Module{
 		cellProperties,
 	}:{
 		position:             VerticalPosition,
-		entryGroups:          FunctionBar_Entry[][],
+		entryGroups:          Entry[][],
 		autoMap_KeyBindings:  boolean,
 		keyBinding_Modifiers: KeyBinding.ModifierKey[],
 		singleRow?:           boolean,
@@ -73,7 +71,7 @@ export class FunctionBar extends Module{
 		cellProperties,
 	}:{
 		position:              Position,
-		entryGroups:           FunctionBar_Entry[][],
+		entryGroups:           Entry[][],
 		autoMap_KeyBindings?:  boolean,
 		keyBinding_Modifiers?: KeyBinding.ModifierKey[],
 		singleRow?:            boolean,
@@ -112,25 +110,15 @@ export class FunctionBar extends Module{
 	get is_VerticalBar()
 		{return is_VerticalPosition(this.position)}
 
-	get entryGroups_WithoutDividers(){
-		return (
-			this.entryGroups.map(group =>
-				group.filter(item => (item instanceof Entry))
-			)
-		)
-	}
-
 	_validate_AutoMapped_Rows(){
 		if(! this.autoMap_KeyBindings)
 			{return}
 
-		const entryGroups_WithoutDividers = this.entryGroups_WithoutDividers
-
 		const valid_GroupCount =
-			(entryGroups_WithoutDividers.length <= autoMapped_Key_Rows.length)
+			(this.entryGroups.length <= autoMapped_Key_Rows.length)
 
 		const valid_KeyCounts =
-			entryGroups_WithoutDividers.every((group, i) =>
+			this.entryGroups.every((group, i) =>
 				(group.length <= autoMapped_Key_Rows[i].length)
 			)
 
@@ -157,10 +145,3 @@ export namespace FunctionBar{
 	}
 
 }
-
-
-//###############//
-//###  Utils  ###//
-//###############//
-
-type FunctionBar_Entry = (Entry | Divider)

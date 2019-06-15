@@ -2,6 +2,7 @@
 const CSS = require("./__CSS_Variables__.json").FunctionBar
 
 //###  Module  ###//
+import {FunctionBar                } from "./__Main__"
 import {functionBar_ToggleModifiers} from "./Settings"
 import {Entry                      } from "./Entry"
 import {Position                   } from "./Position"
@@ -19,9 +20,8 @@ const $:any = require("jquery")
 
 export class Layout{
 
-	_functionBar:  any // FunctionBar
-	container:     JQuery
-	subContainers: JQuery[]
+	_functionBar: FunctionBar
+	container:    JQuery
 
 	constructor(functionBar){
 		this._functionBar = functionBar
@@ -59,18 +59,6 @@ export class Layout{
 		})
 	}
 
-	add_Cell(entry:Entry, groupIndex:number, keyBinding:string){
-		const cell = $("<div>", {class:"cell"})
-		entry.cell = cell
-
-		let text = entry.name
-		if(keyBinding)
-			{text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`}
-
-		this._initialize_Cell(entry, cell, text)
-		this.subContainers[groupIndex].append(cell)
-	}
-
 	_build(){
 		const {autoMap_KeyBindings, entryGroups, keyBinding_Modifiers, position, is_VerticalBar, stretchCells} = this._functionBar
 		let {containerSelector, subContainer_Class} = _BarComponent_Map[position]
@@ -80,8 +68,6 @@ export class Layout{
 		if(is_VerticalBar && stretchCells)
 			{subContainer_Class += " stretch"}
 
-		this.subContainers = []
-
 		let subContainer
 		entryGroups.forEach((group, groupIndex) => {
 			if(
@@ -90,14 +76,25 @@ export class Layout{
 			){
 				subContainer = $("<div>", {class:subContainer_Class})
 				this.container.append(subContainer)
-				this.subContainers.push(subContainer)
 			}
 
 			group.forEach((entry, entryIndex) => {
 				const keyBinding = entry.initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex)
-				this.add_Cell(entry, groupIndex, keyBinding)
+				this._add_Cell(entry, subContainer, keyBinding)
 			})
 		})
+	}
+
+	_add_Cell(entry:Entry, subContainer:JQuery, keyBinding:string){
+		const cell = $("<div>", {class:"cell"})
+		entry.cell = cell
+
+		let text = entry.name
+		if(keyBinding)
+			{text = `[${keyBinding.toUpperCase()}] &nbsp;${text}`}
+
+		this._initialize_Cell(entry, cell, text)
+		subContainer.append(cell)
 	}
 
 	_initialize_Cell(entry:Entry, cell:JQuery, cellText:string,){
