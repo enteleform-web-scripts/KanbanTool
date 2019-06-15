@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560618143667)
+		const elapsedTime = _get_ElapsedTime(1560618836245)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:02:23 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:13:56 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13768,8 +13768,10 @@ const Modes = [
     [
         { name: "Today_All", rows: ["Active"], cardTypes: /Today_(Low|Medium|High|Urgent)/ },
         { name: "Today_Priority", rows: ["Active"], cardTypes: /Today_(Medium|High|Urgent)/ },
-        { name: "Today + Routine", rows: ["Daily", "Active"], cardTypes: /(Task_Daily)|(Today_(Low|Medium|High|Urgent))/ },
+    ],
+    [
         { name: "Routine", rows: ["Daily"], cardTypes: /Task_Daily/ },
+        { name: "Routine + Today", rows: ["Daily", "Active"], cardTypes: /(Task_Daily)|(Today_(Low|Medium|High|Urgent))/ },
     ],
     [
         { name: "Plan_Tasks", rows: ["Active", "Next", "Queue"], cardTypes: undefined },
@@ -13781,9 +13783,9 @@ const Modes = [
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
-    keyBinding_Modifiers: ["shift", "alt"],
+    keyBinding_Modifiers: ["alt"],
     stretchCells: false,
-    cellProperties: [{ functionName: "css", args: ["min-width", "90px"] }],
+    cellProperties: [{ functionName: "css", args: ["min-width", "130px"] }],
     entryGroups: _get_EntryGroups()
 }));
 function _get_EntryGroups() {
@@ -13799,6 +13801,9 @@ function _get_Callback(rows, cardTypes) {
             Show.allColumns();
             if (rows) {
                 Show.rows({ include: rows });
+            }
+            else {
+                Show.allRows();
             }
             disable_CardTypes();
             enable_CardTypes(..._cardTypes);
