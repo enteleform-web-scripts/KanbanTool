@@ -20,50 +20,59 @@ FunctionBar.load( new FunctionBar({
 
 	entryGroups:[
 
-		[
+		{"Show":[
 			new Entry({
-				name: "Show_Rows",
+				name: "Rows",
 				callback: () => {
 					Show.allRows()
 				},
 			}),
 			new Entry({
-				name: "Show_Columns",
+				name: "Columns",
 				callback: () => {
 					Show.allColumns()
 				},
 			}),
+		]},
+
+		{"Hide":[
 			new Entry({
-				name: "Hide_Rows",
+				name: "Rows",
 				callback: () => {
 					Hide.emptyRows()
 				},
 			}),
 			new Entry({
-				name: "Hide_Columns",
+				name: "Columns",
 				callback: () => {
 					Hide.emptyColumns()
 				},
 			}),
+		]},
+
+		{"Filter":[
 			new Entry({
-				name: "Filter_All",
+				name: "Clear",
 				callback: () => {
 					CardType.Filter.enable_CardTypes()
 				},
 			}),
 			new Entry({
-				name: "Filter_None",
+				name: "All",
 				callback: () => {
 					CardType.Filter.disable_CardTypes()
 				},
 			}),
+		]},
+
+		{"Today":[
 			new Entry({
-				name: "Clear_Today",
+				name: "Clear",
 				callback: () => {
 					TaskToggle.convert_TodayCards_To_TaskCards()
 				},
 			}),
-		],
+		]},
 
 	],
 

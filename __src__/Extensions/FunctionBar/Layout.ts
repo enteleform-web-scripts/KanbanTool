@@ -70,6 +70,8 @@ export class Layout{
 
 		let subContainer
 		entryGroups.forEach((group, groupIndex) => {
+			const {entries, groupName} = _get_GroupData(group)
+
 			if(
 				(groupIndex == 0)
 				|| (! this._functionBar.singleRow)
@@ -82,7 +84,13 @@ export class Layout{
 				subContainer.append(divider)
 			}
 
-			group.forEach((entry, entryIndex) => {
+			if(groupName){
+				const textDivider = $("<div>", {class:CSS.textDivider})
+				textDivider.text(groupName)
+				subContainer.append(textDivider)
+			}
+
+			entries.forEach((entry, entryIndex) => {
 				const keyBinding = entry.initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex)
 				this._add_Cell(entry, subContainer, keyBinding)
 			})
@@ -126,6 +134,13 @@ const _BarComponent_Map = {
 	[Position.Right ]: {containerSelector:`.${CSS.container} > .center > .right`, subContainer_Class:"column", toggleButton_Selector:".right  > .expand-button > .cell"},
 	[Position.Top   ]: {containerSelector:`.${CSS.container} > .top`,             subContainer_Class:"row",    toggleButton_Selector:".top    > .expand-button > .cell"},
 	[Position.Bottom]: {containerSelector:`.${CSS.container} > .bottom`,          subContainer_Class:"row",    toggleButton_Selector:".bottom > .expand-button > .cell"},
+}
+
+function _get_GroupData(group:FunctionBar._EntryGroup){
+	if(group instanceof Array)
+		{return {entries:group, groupName:undefined}}
+	else
+		{return {entries:Object.values(group)[0], groupName:Object.keys(group)[0]}}
 }
 
 function _get_ContainerToggle_Callback(position:Position){

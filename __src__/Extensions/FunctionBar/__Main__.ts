@@ -28,7 +28,7 @@ export class FunctionBar extends Module{
 	position:             Position
 	autoMap_KeyBindings:  boolean
 	keyBinding_Modifiers: KeyBinding.ModifierKey[]
-	entryGroups:          Entry[][]
+	entryGroups:          FunctionBar._EntryGroup[]
 	singleRow:            boolean
 	stretchCells:         boolean
 	cellProperties:       CellProperty[]
@@ -40,7 +40,7 @@ export class FunctionBar extends Module{
 		cellProperties,
 	}:{
 		position:        HorizontalPosition,
-		entryGroups:     Entry[][],
+		entryGroups:     FunctionBar._EntryGroup[],
 		singleRow?:      boolean,
 		cellProperties?: CellProperty[],
 	})
@@ -54,7 +54,7 @@ export class FunctionBar extends Module{
 		cellProperties,
 	}:{
 		position:             VerticalPosition,
-		entryGroups:          Entry[][],
+		entryGroups:          FunctionBar._EntryGroup[],
 		autoMap_KeyBindings:  boolean,
 		keyBinding_Modifiers: KeyBinding.ModifierKey[],
 		singleRow?:           boolean,
@@ -71,7 +71,7 @@ export class FunctionBar extends Module{
 		cellProperties,
 	}:{
 		position:              Position,
-		entryGroups:           Entry[][],
+		entryGroups:           FunctionBar._EntryGroup[],
 		autoMap_KeyBindings?:  boolean,
 		keyBinding_Modifiers?: KeyBinding.ModifierKey[],
 		singleRow?:            boolean,
@@ -144,4 +144,7 @@ export namespace FunctionBar{
 		Manual,
 	}
 
+	export type _EntryGroup = (Entry[] | {[name:string]: Entry[]})
+
 }
+
