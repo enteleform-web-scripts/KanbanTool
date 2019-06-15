@@ -87,7 +87,7 @@ export class CardType{
 //###  Utils  ###//
 //###############//
 
-function _get_CardTypes(){
+function _get_CardTypes(): CardType[]{
 	return KanbanTool.activeBoard.cardTypes().active().map(
 		({attributes}, index) => new CardType({
 			index:   index,

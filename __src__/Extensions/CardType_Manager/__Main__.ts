@@ -70,6 +70,7 @@ export namespace CardType_Manager{
 export type _CardOptions_Group = (_CardOptions[] | {[name:string]: _CardOptions[]})
 
 export interface _CardOptions{
+	name?:                string
 	background_Color:     string
 	foreground_Color:     string
 	borderColor_Main:     string
@@ -126,8 +127,6 @@ function _get_CardType_FunctionBar(
 		? get_Auto_CardTypes_Rows()
 		: get_Manual_CardTypes_Rows(cardOptions)
 
-	console.log("cardType_Rows:", cardType_Rows)
-
 	functionBar_Options = {..._Default_FunctionBar_Options, ...functionBar_Options}
 	if(cellWidth !== undefined)
 		{functionBar_Options.stretchCells = false}
@@ -161,8 +160,6 @@ function _build_FunctionBar(options:_FunctionBar_Options, cardType_Rows:CardType
 			)
 		}
 	})
-
-	console.log("entryGroups:", entryGroups)
 
 	return new FunctionBar({
 		...options,

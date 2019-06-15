@@ -21,8 +21,8 @@ export function get_Auto_CardTypes_Rows(): CardType_Group[]{
 		if(_cardTypes_Exhausted(cardIndex))
 			{break}
 
-		const cardType_Array = []
-		const cardType_Row   = {"":cardType_Array}
+		const cardType_Array: _CardType_Data[] = []
+		const cardType_Row = {"":cardType_Array}
 		cardType_Rows.push(cardType_Row)
 
 		for(const key of keyRow){
@@ -30,7 +30,7 @@ export function get_Auto_CardTypes_Rows(): CardType_Group[]{
 				{break}
 
 			const cardType = cardTypes[cardIndex]
-			cardType_Array.push(cardType)
+			cardType_Array.push({name:cardType.name, cardType})
 			cardIndex += 1
 		}
 	}
@@ -51,15 +51,15 @@ export function get_Manual_CardTypes_Rows(cardOptions:_CardOptions_Group[]): Car
 			? ["", optionsRow]
 			: Object.entries(optionsRow)[0]
 
-		const cardType_Array = []
-		const cardType_Row   = {[groupName]: cardType_Array}
+		const cardType_Array: _CardType_Data[] = []
+		const cardType_Row = {[groupName]: cardType_Array}
 
 		for(const options of group){
 			if(_cardTypes_Exhausted(index))
 				{break}
-
 			const cardType = cardTypes[index]
-			cardType_Array.push(cardType)
+			const name = (options.name) ? options.name : cardType.name
+			cardType_Array.push({name, cardType})
 			index += 1
 		}
 
@@ -69,11 +69,14 @@ export function get_Manual_CardTypes_Rows(cardOptions:_CardOptions_Group[]): Car
 	return cardType_Rows
 }
 
-export type CardType_Group = {[name:string]: CardType[]}
+export type CardType_Group = {[name:string]: _CardType_Data[]}
+
 
 //###############//
 //###  Utils  ###//
 //###############//
+
+export type _CardType_Data = {name:string, cardType:CardType}
 
 function _cardTypes_Exhausted(cardIndex:number)
 	{return (cardIndex == cardTypes.length)}
