@@ -29,27 +29,27 @@ export class FunctionBar extends Module{
 	autoMap_KeyBindings:  boolean
 	keyBinding_Modifiers: KeyBinding.ModifierKey[]
 	entryGroups:          FunctionBar._EntryGroup[]
-	singleRow:            boolean
+	singleContainer:      boolean
 	stretchCells:         boolean
 	cellProperties:       CellProperty[]
 
 	constructor({  //  Left || Right
 		position,
 		entryGroups,
-		singleRow,
+		singleContainer,
 		cellProperties,
 	}:{
-		position:        HorizontalPosition,
-		entryGroups:     FunctionBar._EntryGroup[],
-		singleRow?:      boolean,
-		cellProperties?: CellProperty[],
+		position:         HorizontalPosition,
+		entryGroups:      FunctionBar._EntryGroup[],
+		singleContainer?: boolean,
+		cellProperties?:  CellProperty[],
 	})
 	constructor({  //  Top || Bottom
 		position,
 		entryGroups,
 		autoMap_KeyBindings,
 		keyBinding_Modifiers,
-		singleRow,
+		singleContainer,
 		stretchCells,
 		cellProperties,
 	}:{
@@ -57,7 +57,7 @@ export class FunctionBar extends Module{
 		entryGroups:          FunctionBar._EntryGroup[],
 		autoMap_KeyBindings:  boolean,
 		keyBinding_Modifiers: KeyBinding.ModifierKey[],
-		singleRow?:           boolean,
+		singleContainer?:     boolean,
 		stretchCells:         boolean,
 		cellProperties?:      CellProperty[],
 	})
@@ -66,7 +66,7 @@ export class FunctionBar extends Module{
 		entryGroups,
 		autoMap_KeyBindings,
 		keyBinding_Modifiers,
-		singleRow,
+		singleContainer,
 		stretchCells,
 		cellProperties,
 	}:{
@@ -74,7 +74,7 @@ export class FunctionBar extends Module{
 		entryGroups:           FunctionBar._EntryGroup[],
 		autoMap_KeyBindings?:  boolean,
 		keyBinding_Modifiers?: KeyBinding.ModifierKey[],
-		singleRow?:            boolean,
+		singleContainer?:      boolean,
 		stretchCells?:         boolean,
 		cellProperties?:       CellProperty[],
 	}){
@@ -83,7 +83,7 @@ export class FunctionBar extends Module{
 		this.entryGroups          = entryGroups
 		this.autoMap_KeyBindings  = (autoMap_KeyBindings  || false)
 		this.keyBinding_Modifiers = (keyBinding_Modifiers || []   )
-		this.singleRow            = (singleRow            || false)
+		this.singleContainer      = (singleContainer      || false)
 		this.stretchCells         = (stretchCells         || false)
 		this.cellProperties       = (cellProperties       || []   )
 	}

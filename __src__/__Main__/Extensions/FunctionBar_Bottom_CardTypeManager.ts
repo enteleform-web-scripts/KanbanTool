@@ -39,8 +39,8 @@ CardType_Manager.initialize_Manual({
 	cellWidth: 125,
 
 	functionBar_Options:{
-		singleRow:    true,
-		stretchCells: false,
+		singleContainer: true,
+		stretchCells:    false,
 	},
 
 	cardTypes: [

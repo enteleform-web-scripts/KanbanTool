@@ -74,7 +74,7 @@ export class Layout{
 
 			if(
 				(groupIndex == 0)
-				|| (! this._functionBar.singleRow)
+				|| (! this._functionBar.singleContainer)
 			){
 				subContainer = $("<div>", {class:subContainer_Class})
 				this.container.append(subContainer)

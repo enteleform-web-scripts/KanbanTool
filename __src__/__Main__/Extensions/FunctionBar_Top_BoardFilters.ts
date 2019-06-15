@@ -43,7 +43,7 @@ FunctionBar.load( new FunctionBar({
 	position:             Position.Top,
 	autoMap_KeyBindings:  true,
 	keyBinding_Modifiers: ["shift", "alt"],
-	singleRow:            true,
+	singleContainer:      true,
 	stretchCells:         false,
 	cellProperties:       [{functionName:"css", args:["min-width", "130px"]}],
 	entryGroups:          _get_EntryGroups(),

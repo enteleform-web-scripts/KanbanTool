@@ -16,7 +16,8 @@ const {CardType, Show, Hide} = KanbanTool
 
 FunctionBar.load( new FunctionBar({
 
-	position: Position.Left,
+	position:        Position.Left,
+	singleContainer: true,
 
 	entryGroups:[
 

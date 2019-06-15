@@ -33,7 +33,7 @@ export namespace CardType_Manager{
 			position?:             VerticalPosition,
 			autoMap_KeyBindings?:  boolean,
 			keyBinding_Modifiers?: KeyBinding.ModifierKey[],
-			singleRow?:            boolean,
+			singleContainer?:      boolean,
 			stretchCells?:         boolean,
 			cellProperties?:       CellProperty[]
 		},
@@ -92,7 +92,7 @@ interface _FunctionBar_Options{
 	position:             VerticalPosition,
 	autoMap_KeyBindings:  boolean,
 	keyBinding_Modifiers: KeyBinding.ModifierKey[],
-	singleRow:            boolean,
+	singleContainer:      boolean,
 	stretchCells:         boolean,
 	cellProperties:       CellProperty[],
 }
@@ -101,7 +101,7 @@ const _Default_FunctionBar_Options = {
 	position:             Position.Bottom,
 	autoMap_KeyBindings:  true,
 	keyBinding_Modifiers: [],
-	singleRow:            false,
+	singleContainer:      false,
 	stretchCells:         true,
 	cellProperties:       [],
 }
