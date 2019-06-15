@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560621920353)
+		const elapsedTime = _get_ElapsedTime(1560622115845)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:05:20 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:08:35 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11159,13 +11159,13 @@ const Layout_1 = __webpack_require__(41);
 const Module_BaseClasses_1 = __webpack_require__(43);
 const Position_1 = __webpack_require__(10);
 class FunctionBar extends Module_BaseClasses_1.Module {
-    constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, singleRow, stretchCells, cellProperties, }) {
+    constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, singleContainer, stretchCells, cellProperties, }) {
         super();
         this.position = position;
         this.entryGroups = entryGroups;
         this.autoMap_KeyBindings = (autoMap_KeyBindings || false);
         this.keyBinding_Modifiers = (keyBinding_Modifiers || []);
-        this.singleRow = (singleRow || false);
+        this.singleContainer = (singleContainer || false);
         this.stretchCells = (stretchCells || false);
         this.cellProperties = (cellProperties || []);
     }
@@ -11558,7 +11558,7 @@ const _Default_FunctionBar_Options = {
     position: Position_1.Position.Bottom,
     autoMap_KeyBindings: true,
     keyBinding_Modifiers: [],
-    singleRow: false,
+    singleContainer: false,
     stretchCells: true,
     cellProperties: [],
 };
@@ -12774,7 +12774,7 @@ __Main__1.CardType_Manager.initialize_Manual({
     mode: __Main__1.CardType_Manager.Mode.MultipleRows,
     cellWidth: 125,
     functionBar_Options: {
-        singleRow: true,
+        singleContainer: true,
         stretchCells: false,
     },
     cardTypes: [
@@ -13515,7 +13515,7 @@ class Layout {
         entryGroups.forEach((group, groupIndex) => {
             const { entries, groupName } = _get_GroupData(group);
             if ((groupIndex == 0)
-                || (!this._functionBar.singleRow)) {
+                || (!this._functionBar.singleContainer)) {
                 subContainer = $("<div>", { class: subContainer_Class });
                 this.container.append(subContainer);
             }
@@ -13692,6 +13692,7 @@ const { Entry, Position } = __Main__1.FunctionBar;
 const { CardType, Show, Hide } = __Main__2.KanbanTool;
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     position: Position.Left,
+    singleContainer: true,
     entryGroups: [
         { "Show": [
                 new Entry({
@@ -13783,7 +13784,7 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
     keyBinding_Modifiers: ["shift", "alt"],
-    singleRow: true,
+    singleContainer: true,
     stretchCells: false,
     cellProperties: [{ functionName: "css", args: ["min-width", "130px"] }],
     entryGroups: _get_EntryGroups(),
