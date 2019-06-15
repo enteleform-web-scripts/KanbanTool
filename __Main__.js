@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560614591417)
+		const elapsedTime = _get_ElapsedTime(1560618143667)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     12:03:11 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:02:23 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13756,62 +13756,59 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(8);
-const __Main__2 = __webpack_require__(1);
-const __Main__3 = __webpack_require__(0);
+const __Main__2 = __webpack_require__(0);
 const { Entry, Position } = __Main__1.FunctionBar;
-const { CardType, Show, Hide } = __Main__3.KanbanTool;
-const activeTask_Columns = ["Routine", "Tasks.Active"];
+const { CardType, Show, Hide } = __Main__2.KanbanTool;
+const { enable_CardTypes, disable_CardTypes } = CardType.Filter;
+const Modes = [
+    [
+        { name: "Tasks_All", rows: ["Active"], cardTypes: /(Task|Today)_(Low|Medium|High|Urgent)/, is_Default: true },
+        { name: "Tasks_Priority", rows: ["Active"], cardTypes: /(Task|Today)_(Medium|High|Urgent)/ },
+    ],
+    [
+        { name: "Today_All", rows: ["Active"], cardTypes: /Today_(Low|Medium|High|Urgent)/ },
+        { name: "Today_Priority", rows: ["Active"], cardTypes: /Today_(Medium|High|Urgent)/ },
+        { name: "Today + Routine", rows: ["Daily", "Active"], cardTypes: /(Task_Daily)|(Today_(Low|Medium|High|Urgent))/ },
+        { name: "Routine", rows: ["Daily"], cardTypes: /Task_Daily/ },
+    ],
+    [
+        { name: "Plan_Tasks", rows: ["Active", "Next", "Queue"], cardTypes: undefined },
+        { name: "Plan_Next", rows: ["Active", "Next"], cardTypes: undefined },
+        { name: "Plan_Queue", rows: ["Next", "Queue"], cardTypes: undefined },
+        { name: "Plan_All", rows: undefined, cardTypes: undefined },
+    ],
+];
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
     keyBinding_Modifiers: ["shift", "alt"],
     stretchCells: false,
     cellProperties: [{ functionName: "css", args: ["min-width", "90px"] }],
-    entryGroups: [
-        [
-            new Entry({
-                name: "Today",
-                ...get_Callbacks(() => {
-                    Show.allColumns();
-                    Show.rows({ include: activeTask_Columns });
-                    CardType.Filter.disable_CardTypes();
-                    CardType.Filter.enable_CardTypes(/^(Today.*)|(Task_Daily)/);
-                })
-            }),
-            new Entry({
-                on_Layout: function (cell) { this.on_KeyBinding(null, null); },
-                name: "Tasks",
-                ...get_Callbacks(() => {
-                    Show.allColumns();
-                    Show.rows({ include: activeTask_Columns });
-                    CardType.Filter.enable_CardTypes();
-                }),
-            }),
-            new Entry({
-                name: "Planning",
-                ...get_Callbacks(() => {
-                    Show.allColumns();
-                    Show.allRows();
-                    CardType.Filter.enable_CardTypes();
-                }),
-            }),
-        ],
-    ],
+    entryGroups: _get_EntryGroups()
 }));
-const _secondaryCallback = () => { Hide.emptyColumns(); };
-function get_Callbacks(callback) {
-    return {
-        on_KeyBinding: (event, cell) => {
-            callback();
-            _secondaryCallback();
-        },
-        on_Click: (event, cell) => {
-            callback();
-            if (!__Main__2.KeyBinding.is_Pressed("ctrl")) {
-                _secondaryCallback();
+function _get_EntryGroups() {
+    return Modes.map(row => row.map(({ name, rows, cardTypes, is_Default }) => new Entry({
+        name,
+        ..._get_OnLayout(is_Default),
+        ..._get_Callback(rows, cardTypes),
+    })));
+}
+function _get_Callback(rows, cardTypes) {
+    return { callback: (event) => {
+            const _cardTypes = (cardTypes) ? [cardTypes] : [];
+            Show.allColumns();
+            if (rows) {
+                Show.rows({ include: rows });
             }
-        }
-    };
+            disable_CardTypes();
+            enable_CardTypes(..._cardTypes);
+            Hide.emptyColumns();
+        } };
+}
+function _get_OnLayout(is_Default) {
+    return (is_Default
+        ? { on_Layout: function (cell) { this.callback(null, null); } }
+        : {});
 }
 
 
