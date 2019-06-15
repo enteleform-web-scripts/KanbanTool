@@ -13,8 +13,14 @@ const {Show, Hide} = KanbanTool
 
 class _{
 
+
+	@KeyBinding.add(["space"], {preventDefault:true})
+	static disable_Space_ScrollDown(event:KeyboardEvent){
+		// do nothing
+	}
+
 	@KeyBinding.add(
-		["ctrl", "space"],
+		["space"],
 		{preventDefault:true, scope:KeyBinding_Scopes.Card_IsHovered}
 	)
 	static toggle_Between_TaskCards_And_TodayCards(event:KeyboardEvent){
