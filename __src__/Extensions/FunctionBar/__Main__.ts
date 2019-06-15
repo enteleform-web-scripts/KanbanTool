@@ -118,9 +118,10 @@ export class FunctionBar extends Module{
 			(this.entryGroups.length <= autoMapped_Key_Rows.length)
 
 		const valid_KeyCounts =
-			this.entryGroups.every((group, i) =>
-				(group.length <= autoMapped_Key_Rows[i].length)
-			)
+			this.entryGroups.every((group, i) => {
+				group = (group instanceof Array) ? group : Object.values(group)[0]
+				return (group.length <= autoMapped_Key_Rows[i].length)
+			})
 
 		if(! (valid_GroupCount && valid_KeyCounts)){
 			throw new Error(`
