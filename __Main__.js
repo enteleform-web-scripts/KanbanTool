@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560625998438)
+		const elapsedTime = _get_ElapsedTime(1560626269012)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:13:18 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:17:49 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11188,9 +11188,8 @@ class FunctionBar extends Module_BaseClasses_1.Module {
         const valid_GroupCount = (this.entryGroups.length <= Settings_1.autoMapped_Key_Rows.length);
         const valid_KeyCounts = this.entryGroups.every((group, i) => (group.length <= Settings_1.autoMapped_Key_Rows[i].length));
         if (!(valid_GroupCount && valid_KeyCounts)) {
-            const position = this.position.valueOf();
             throw new Error(`
-				Invalid FunctionBar Group/Entry Count @ ${position} Bar
+				Invalid FunctionBar Group/Entry Count @ ${this.position} Bar
 			`);
         }
     }
@@ -11229,10 +11228,10 @@ exports.functionBar_ToggleModifiers = ["shift", "alt"];
 Object.defineProperty(exports, "__esModule", { value: true });
 var Position;
 (function (Position) {
-    Position[Position["Left"] = 0] = "Left";
-    Position[Position["Right"] = 1] = "Right";
-    Position[Position["Top"] = 2] = "Top";
-    Position[Position["Bottom"] = 3] = "Bottom";
+    Position["Left"] = "Left";
+    Position["Right"] = "Right";
+    Position["Top"] = "Top";
+    Position["Bottom"] = "Bottom";
 })(Position = exports.Position || (exports.Position = {}));
 function is_HorizontalPosition(position) { return ((position == Position.Left) || (position == Position.Right)); }
 exports.is_HorizontalPosition = is_HorizontalPosition;
@@ -11571,6 +11570,7 @@ function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, functionBar_Opt
     const cardType_Rows = (mode == _Mode.Auto)
         ? get_Rows_1.get_Auto_CardTypes_Rows()
         : get_Rows_1.get_Manual_CardTypes_Rows(cardOptions);
+    console.log("cardType_Rows:", cardType_Rows);
     functionBar_Options = { ..._Default_FunctionBar_Options, ...functionBar_Options };
     if (cellWidth !== undefined) {
         functionBar_Options.stretchCells = false;
