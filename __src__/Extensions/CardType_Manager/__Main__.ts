@@ -2,15 +2,14 @@
 require("~/Utils/HTML_Injector").inject(__dirname, {CSS:true, HTML:false})
 
 //###  Module  ###//
-import {CallbackManager                                   } from "./CallbackManager"
-import {HoverManager as _HoverManager                     } from "./HoverManager"
-import {StyleManager                                      } from "./StyleManager"
-import {FunctionBar                                       } from "~/Extensions/FunctionBar/__Main__"
-import {CellProperty                                      } from "~/Extensions/FunctionBar/CellProperty"
-import {Position, VerticalPosition                        } from "~/Extensions/FunctionBar/Position"
-import {KeyBinding                                        } from "~/Utils/KeyBinding/__Main__"
-import {CardType                                          } from "~/Utils/KanbanTool/CardType/__Main__"
-import {KeyBinding_Scopes                                 } from "~/Utils/KanbanTool/KeyBinding_Scopes/__Main__"
+import {CallbackManager              } from "./CallbackManager"
+import {HoverManager as _HoverManager} from "./HoverManager"
+import {StyleManager                 } from "./StyleManager"
+import {FunctionBar                  } from "~/Extensions/FunctionBar/__Main__"
+import {CellProperty                 } from "~/Extensions/FunctionBar/CellProperty"
+import {Position, VerticalPosition   } from "~/Extensions/FunctionBar/Position"
+import {KeyBinding                   } from "~/Utils/KeyBinding/__Main__"
+import {KeyBinding_Scopes            } from "~/Utils/KanbanTool/KeyBinding_Scopes/__Main__"
 import {
 	get_Auto_CardTypes_Rows,
 	get_Manual_CardTypes_Rows,
@@ -122,12 +121,10 @@ function _get_CardType_FunctionBar(
 	cellWidth:           number,
 	functionBar_Options: _FunctionBar_Options,
 ){
-	const cardOptions_Array = _get_CardOptions_Array(cardOptions)
-
 	const cardType_Rows =
 		(mode == _Mode.Auto)
 		? get_Auto_CardTypes_Rows()
-		: get_Manual_CardTypes_Rows(cardOptions_Array)
+		: get_Manual_CardTypes_Rows(cardOptions)
 
 	functionBar_Options = {..._Default_FunctionBar_Options, ...functionBar_Options}
 	if(cellWidth !== undefined)

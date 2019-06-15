@@ -46,10 +46,10 @@ export function get_Manual_CardTypes_Rows(cardOptions:_CardOptions_Group[]): Car
 		if(_cardTypes_Exhausted(index))
 			{break}
 
-		const [group, groupName] =
+		const [groupName, group] =
 			(optionsRow instanceof Array)
-			? [optionsRow, ""]
-			: [Object.values(optionsRow)[0], Object.keys(optionsRow)[0]]
+			? ["", optionsRow]
+			: Object.entries(optionsRow)[0]
 
 		const cardType_Array = []
 		const cardType_Row   = {[groupName]: cardType_Array}
