@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560625728975)
+		const elapsedTime = _get_ElapsedTime(1560625998438)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:08:48 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:13:18 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11568,10 +11568,9 @@ function _initialize(functionBar, cardOptions) {
     __Main__1.FunctionBar.load(functionBar);
 }
 function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, functionBar_Options) {
-    const cardOptions_Array = _get_CardOptions_Array(cardOptions);
     const cardType_Rows = (mode == _Mode.Auto)
         ? get_Rows_1.get_Auto_CardTypes_Rows()
-        : get_Rows_1.get_Manual_CardTypes_Rows(cardOptions_Array);
+        : get_Rows_1.get_Manual_CardTypes_Rows(cardOptions);
     functionBar_Options = { ..._Default_FunctionBar_Options, ...functionBar_Options };
     if (cellWidth !== undefined) {
         functionBar_Options.stretchCells = false;
@@ -13659,9 +13658,9 @@ function get_Manual_CardTypes_Rows(cardOptions) {
         if (_cardTypes_Exhausted(index)) {
             break;
         }
-        const [group, groupName] = (optionsRow instanceof Array)
-            ? [optionsRow, ""]
-            : [Object.values(optionsRow)[0], Object.keys(optionsRow)[0]];
+        const [groupName, group] = (optionsRow instanceof Array)
+            ? ["", optionsRow]
+            : Object.entries(optionsRow)[0];
         const cardType_Array = [];
         const cardType_Row = { [groupName]: cardType_Array };
         for (const options of group) {
