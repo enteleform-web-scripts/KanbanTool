@@ -16,7 +16,8 @@ const $:any = require("jquery")
 
 export class Filter{
 
-	static show_AllCards_ID = Symbol()
+	static show_AllCards_ID   = Symbol()
+	static add_KeyBindings_ID = Symbol()
 
 	static _onUpdate_Callbacks:(() => void)[] = []
 
@@ -90,15 +91,17 @@ KanbanTool.on_PageLoad(Filter.show_AllCards_ID, ()=>{
 	Filter.enable_CardTypes()
 })
 
-KeyBinding.add(["ctrl", "`"], ()=>{
-	Hide.emptyColumns()
-	Hide.emptyRows()
-})
+KanbanTool.on_PageLoad(Filter.add_KeyBindings_ID, ()=>{
+	KeyBinding.add(["ctrl", "`"], ()=>{
+		Hide.emptyColumns()
+		Hide.emptyRows()
+	})
 
-KeyBinding.add(["ctrl", "shift", "`"], ()=>{
-	Show.allColumns()
-	Show.allRows()
-	Filter.enable_CardTypes()
+	KeyBinding.add(["ctrl", "shift", "`"], ()=>{
+		Show.allColumns()
+		Show.allRows()
+		Filter.enable_CardTypes()
+	})
 })
 
 

@@ -1,4 +1,5 @@
 //###  Extensions  ###//
+import "./Extensions/__Setup__"
 import "./Extensions/FunctionBar_Bottom_CardTypeManager"
 import "./Extensions/FunctionBar_Left_Commands"
 import "./Extensions/FunctionBar_Top_BoardFilters"

@@ -2,8 +2,13 @@
 import {TaskToggle} from "../Utils/TaskToggle"
 
 //###  Module  ###//
-import {KeyBinding       } from "~/Utils/KeyBinding/__Main__"
+import {KanbanTool       } from "~/Utils/KanbanTool/__Main__"
 import {KeyBinding_Scopes} from "~/Utils/KanbanTool/KeyBinding_Scopes/__Main__"
+import {KeyBinding       } from "~/Utils/KeyBinding/__Main__"
+
+
+//###  Aliases  ###//
+const {Show, Hide} = KanbanTool
 
 
 class _{
@@ -22,6 +27,22 @@ class _{
 	)
 	static convert_TodayCards_To_TaskCards(event:KeyboardEvent){
 		TaskToggle.convert_TodayCards_To_TaskCards()
+	}
+
+	@KeyBinding.add(
+		["ctrl", "`"],
+		{preventDefault:true}
+	)
+	static hide_EmptyColumns(event:KeyboardEvent){
+		Hide.emptyColumns()
+	}
+
+	@KeyBinding.add(
+		["ctrl", "shift", "`"],
+		{preventDefault:true}
+	)
+	static show_AllColumns(event:KeyboardEvent){
+		Show.allColumns()
 	}
 
 }

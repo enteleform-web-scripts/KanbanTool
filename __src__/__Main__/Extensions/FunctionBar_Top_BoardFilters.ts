@@ -1,4 +1,3 @@
-
 //###  Module  ###//
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
 import {KeyBinding } from "~/Utils/KeyBinding/__Main__"
@@ -7,13 +6,6 @@ import {KanbanTool } from "~/Utils/KanbanTool/__Main__"
 //###  Aliases  ###//
 const {Entry, Position     } = FunctionBar
 const {CardType, Show, Hide} = KanbanTool
-
-
-//##############//
-//###  Init  ###//
-//##############//
-
-KanbanTool.remove_PageLoad_Callback(CardType.Filter.show_AllCards_ID)
 
 
 //###############//
