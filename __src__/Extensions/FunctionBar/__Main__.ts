@@ -31,26 +31,61 @@ export class FunctionBar extends Module{
 	autoMap_KeyBindings:  boolean
 	keyBinding_Modifiers: KeyBinding.ModifierKey[]
 	entryGroups:          FunctionBar_Entry[][]
+	singleRow:            boolean
 	stretchCells:         boolean
 	cellProperties:       CellProperty[]
 
-	constructor(  //  Left || Right
-		{position,                    entryGroups,                       cellProperties                }:
-		{position:HorizontalPosition, entryGroups:FunctionBar_Entry[][], cellProperties?:CellProperty[]}
-	)
-	constructor(  //  Top || Bottom
-		{position,                  entryGroups,                       autoMap_KeyBindings,         keyBinding_Modifiers,                          stretchCells,         cellProperties                }:
-		{position:VerticalPosition, entryGroups:FunctionBar_Entry[][], autoMap_KeyBindings:boolean, keyBinding_Modifiers:KeyBinding.ModifierKey[], stretchCells:boolean, cellProperties?:CellProperty[]}
-	)
-	constructor(
-		{position,          entryGroups,                       autoMap_KeyBindings,          keyBinding_Modifiers,                           stretchCells,          cellProperties                }:
-		{position:Position, entryGroups:FunctionBar_Entry[][], autoMap_KeyBindings?:boolean, keyBinding_Modifiers?:KeyBinding.ModifierKey[], stretchCells?:boolean, cellProperties?:CellProperty[]}
-	){
+	constructor({  //  Left || Right
+		position,
+		entryGroups,
+		singleRow,
+		cellProperties,
+	}:{
+		position:        HorizontalPosition,
+		entryGroups:     FunctionBar_Entry[][],
+		singleRow?:      boolean,
+		cellProperties?: CellProperty[],
+	})
+	constructor({  //  Top || Bottom
+		position,
+		entryGroups,
+		autoMap_KeyBindings,
+		keyBinding_Modifiers,
+		singleRow,
+		stretchCells,
+		cellProperties,
+	}:{
+		position:             VerticalPosition,
+		entryGroups:          FunctionBar_Entry[][],
+		autoMap_KeyBindings:  boolean,
+		keyBinding_Modifiers: KeyBinding.ModifierKey[],
+		singleRow?:           boolean,
+		stretchCells:         boolean,
+		cellProperties?:      CellProperty[],
+	})
+	constructor({
+		position,
+		entryGroups,
+		autoMap_KeyBindings,
+		keyBinding_Modifiers,
+		singleRow,
+		stretchCells,
+		cellProperties,
+	}:{
+		position:              Position,
+		entryGroups:           FunctionBar_Entry[][],
+		autoMap_KeyBindings?:  boolean,
+		keyBinding_Modifiers?: KeyBinding.ModifierKey[],
+		singleRow?:            boolean,
+		stretchCells?:         boolean,
+		cellProperties?:       CellProperty[],
+	}){
 		super()
 		this.position             = position
 		this.entryGroups          = entryGroups
 		this.autoMap_KeyBindings  = (autoMap_KeyBindings  || false)
 		this.keyBinding_Modifiers = (keyBinding_Modifiers || []   )
+		this.singleRow            = (singleRow            || false)
 		this.stretchCells         = (stretchCells         || false)
 		this.cellProperties       = (cellProperties       || []   )
 	}

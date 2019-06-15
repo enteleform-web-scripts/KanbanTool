@@ -82,10 +82,16 @@ export class Layout{
 
 		this.subContainers = []
 
+		let subContainer
 		entryGroups.forEach((group, groupIndex) => {
-			const subContainer = $("<div>", {class:subContainer_Class})
-			this.container.append(subContainer)
-			this.subContainers.push(subContainer)
+			if(
+				(groupIndex == 0)
+				|| (! this._functionBar.singleRow)
+			){
+				subContainer = $("<div>", {class:subContainer_Class})
+				this.container.append(subContainer)
+				this.subContainers.push(subContainer)
+			}
 
 			group.forEach((entry, entryIndex) => {
 				const keyBinding = entry.initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex)
