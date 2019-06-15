@@ -152,7 +152,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const KeyGroups_1 = __webpack_require__(32);
 const hotkeys_js_1 = __importDefault(__webpack_require__(33));
-hotkeys_js_1.default.filter = _disable_DefaultFilters;
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
     static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
@@ -248,7 +247,7 @@ function _get_HotKey_Array_AsString(keys) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.3.1
+ * jQuery JavaScript Library v3.4.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -258,7 +257,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2018-01-20T17:24Z
+ * Date: 2019-05-01T21:04Z
  */
 ( function( global, factory ) {
 
@@ -340,20 +339,33 @@ var isWindow = function isWindow( obj ) {
 	var preservedScriptAttributes = {
 		type: true,
 		src: true,
+		nonce: true,
 		noModule: true
 	};
 
-	function DOMEval( code, doc, node ) {
+	function DOMEval( code, node, doc ) {
 		doc = doc || document;
 
-		var i,
+		var i, val,
 			script = doc.createElement( "script" );
 
 		script.text = code;
 		if ( node ) {
 			for ( i in preservedScriptAttributes ) {
-				if ( node[ i ] ) {
-					script[ i ] = node[ i ];
+
+				// Support: Firefox 64+, Edge 18+
+				// Some browsers don't support the "nonce" property on scripts.
+				// On the other hand, just using `getAttribute` is not enough as
+				// the `nonce` attribute is reset to an empty string whenever it
+				// becomes browsing-context connected.
+				// See https://github.com/whatwg/html/issues/2369
+				// See https://html.spec.whatwg.org/#nonce-attributes
+				// The `node.getAttribute` check was added for the sake of
+				// `jQuery.globalEval` so that it can fake a nonce-containing node
+				// via an object.
+				val = node[ i ] || node.getAttribute && node.getAttribute( i );
+				if ( val ) {
+					script.setAttribute( i, val );
 				}
 			}
 		}
@@ -378,7 +390,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.3.1",
+	version = "3.4.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -507,25 +519,28 @@ jQuery.extend = jQuery.fn.extend = function() {
 
 			// Extend the base object
 			for ( name in options ) {
-				src = target[ name ];
 				copy = options[ name ];
 
+				// Prevent Object.prototype pollution
 				// Prevent never-ending loop
-				if ( target === copy ) {
+				if ( name === "__proto__" || target === copy ) {
 					continue;
 				}
 
 				// Recurse if we're merging plain objects or arrays
 				if ( deep && copy && ( jQuery.isPlainObject( copy ) ||
 					( copyIsArray = Array.isArray( copy ) ) ) ) {
+					src = target[ name ];
 
-					if ( copyIsArray ) {
-						copyIsArray = false;
-						clone = src && Array.isArray( src ) ? src : [];
-
+					// Ensure proper type for the source value
+					if ( copyIsArray && !Array.isArray( src ) ) {
+						clone = [];
+					} else if ( !copyIsArray && !jQuery.isPlainObject( src ) ) {
+						clone = {};
 					} else {
-						clone = src && jQuery.isPlainObject( src ) ? src : {};
+						clone = src;
 					}
+					copyIsArray = false;
 
 					// Never move original objects, clone them
 					target[ name ] = jQuery.extend( deep, clone, copy );
@@ -578,9 +593,6 @@ jQuery.extend( {
 	},
 
 	isEmptyObject: function( obj ) {
-
-		/* eslint-disable no-unused-vars */
-		// See https://github.com/eslint/eslint/issues/6125
 		var name;
 
 		for ( name in obj ) {
@@ -590,8 +602,8 @@ jQuery.extend( {
 	},
 
 	// Evaluates a script in a global context
-	globalEval: function( code ) {
-		DOMEval( code );
+	globalEval: function( code, options ) {
+		DOMEval( code, { nonce: options && options.nonce } );
 	},
 
 	each: function( obj, callback ) {
@@ -747,14 +759,14 @@ function isArrayLike( obj ) {
 }
 var Sizzle =
 /*!
- * Sizzle CSS Selector Engine v2.3.3
+ * Sizzle CSS Selector Engine v2.3.4
  * https://sizzlejs.com/
  *
- * Copyright jQuery Foundation and other contributors
+ * Copyright JS Foundation and other contributors
  * Released under the MIT license
- * http://jquery.org/license
+ * https://js.foundation/
  *
- * Date: 2016-08-08
+ * Date: 2019-04-08
  */
 (function( window ) {
 
@@ -788,6 +800,7 @@ var i,
 	classCache = createCache(),
 	tokenCache = createCache(),
 	compilerCache = createCache(),
+	nonnativeSelectorCache = createCache(),
 	sortOrder = function( a, b ) {
 		if ( a === b ) {
 			hasDuplicate = true;
@@ -849,8 +862,7 @@ var i,
 
 	rcomma = new RegExp( "^" + whitespace + "*," + whitespace + "*" ),
 	rcombinators = new RegExp( "^" + whitespace + "*([>+~]|" + whitespace + ")" + whitespace + "*" ),
-
-	rattributeQuotes = new RegExp( "=" + whitespace + "*([^\\]'\"]*?)" + whitespace + "*\\]", "g" ),
+	rdescend = new RegExp( whitespace + "|>" ),
 
 	rpseudo = new RegExp( pseudos ),
 	ridentifier = new RegExp( "^" + identifier + "$" ),
@@ -871,6 +883,7 @@ var i,
 			whitespace + "*((?:-\\d)?\\d*)" + whitespace + "*\\)|)(?=[^-]|$)", "i" )
 	},
 
+	rhtml = /HTML$/i,
 	rinputs = /^(?:input|select|textarea|button)$/i,
 	rheader = /^h\d$/i,
 
@@ -925,9 +938,9 @@ var i,
 		setDocument();
 	},
 
-	disabledAncestor = addCombinator(
+	inDisabledFieldset = addCombinator(
 		function( elem ) {
-			return elem.disabled === true && ("form" in elem || "label" in elem);
+			return elem.disabled === true && elem.nodeName.toLowerCase() === "fieldset";
 		},
 		{ dir: "parentNode", next: "legend" }
 	);
@@ -1040,18 +1053,22 @@ function Sizzle( selector, context, results, seed ) {
 
 			// Take advantage of querySelectorAll
 			if ( support.qsa &&
-				!compilerCache[ selector + " " ] &&
-				(!rbuggyQSA || !rbuggyQSA.test( selector )) ) {
+				!nonnativeSelectorCache[ selector + " " ] &&
+				(!rbuggyQSA || !rbuggyQSA.test( selector )) &&
 
-				if ( nodeType !== 1 ) {
-					newContext = context;
-					newSelector = selector;
-
-				// qSA looks outside Element context, which is not what we want
-				// Thanks to Andrew Dupont for this workaround technique
-				// Support: IE <=8
+				// Support: IE 8 only
 				// Exclude object elements
-				} else if ( context.nodeName.toLowerCase() !== "object" ) {
+				(nodeType !== 1 || context.nodeName.toLowerCase() !== "object") ) {
+
+				newSelector = selector;
+				newContext = context;
+
+				// qSA considers elements outside a scoping root when evaluating child or
+				// descendant combinators, which is not what we want.
+				// In such cases, we work around the behavior by prefixing every selector in the
+				// list with an ID selector referencing the scope context.
+				// Thanks to Andrew Dupont for this technique.
+				if ( nodeType === 1 && rdescend.test( selector ) ) {
 
 					// Capture the context ID, setting it first if necessary
 					if ( (nid = context.getAttribute( "id" )) ) {
@@ -1073,17 +1090,16 @@ function Sizzle( selector, context, results, seed ) {
 						context;
 				}
 
-				if ( newSelector ) {
-					try {
-						push.apply( results,
-							newContext.querySelectorAll( newSelector )
-						);
-						return results;
-					} catch ( qsaError ) {
-					} finally {
-						if ( nid === expando ) {
-							context.removeAttribute( "id" );
-						}
+				try {
+					push.apply( results,
+						newContext.querySelectorAll( newSelector )
+					);
+					return results;
+				} catch ( qsaError ) {
+					nonnativeSelectorCache( selector, true );
+				} finally {
+					if ( nid === expando ) {
+						context.removeAttribute( "id" );
 					}
 				}
 			}
@@ -1247,7 +1263,7 @@ function createDisabledPseudo( disabled ) {
 					// Where there is no isDisabled, check manually
 					/* jshint -W018 */
 					elem.isDisabled !== !disabled &&
-						disabledAncestor( elem ) === disabled;
+						inDisabledFieldset( elem ) === disabled;
 			}
 
 			return elem.disabled === disabled;
@@ -1304,10 +1320,13 @@ support = Sizzle.support = {};
  * @returns {Boolean} True iff elem is a non-HTML XML node
  */
 isXML = Sizzle.isXML = function( elem ) {
-	// documentElement is verified for cases where it doesn't yet exist
-	// (such as loading iframes in IE - #4833)
-	var documentElement = elem && (elem.ownerDocument || elem).documentElement;
-	return documentElement ? documentElement.nodeName !== "HTML" : false;
+	var namespace = elem.namespaceURI,
+		docElem = (elem.ownerDocument || elem).documentElement;
+
+	// Support: IE <=8
+	// Assume HTML when documentElement doesn't yet exist, such as inside loading iframes
+	// https://bugs.jquery.com/ticket/4833
+	return !rhtml.test( namespace || docElem && docElem.nodeName || "HTML" );
 };
 
 /**
@@ -1729,11 +1748,8 @@ Sizzle.matchesSelector = function( elem, expr ) {
 		setDocument( elem );
 	}
 
-	// Make sure that attribute selectors are quoted
-	expr = expr.replace( rattributeQuotes, "='$1']" );
-
 	if ( support.matchesSelector && documentIsHTML &&
-		!compilerCache[ expr + " " ] &&
+		!nonnativeSelectorCache[ expr + " " ] &&
 		( !rbuggyMatches || !rbuggyMatches.test( expr ) ) &&
 		( !rbuggyQSA     || !rbuggyQSA.test( expr ) ) ) {
 
@@ -1747,7 +1763,9 @@ Sizzle.matchesSelector = function( elem, expr ) {
 					elem.document && elem.document.nodeType !== 11 ) {
 				return ret;
 			}
-		} catch (e) {}
+		} catch (e) {
+			nonnativeSelectorCache( expr, true );
+		}
 	}
 
 	return Sizzle( expr, document, null, [ elem ] ).length > 0;
@@ -2206,7 +2224,7 @@ Expr = Sizzle.selectors = {
 		"contains": markFunction(function( text ) {
 			text = text.replace( runescape, funescape );
 			return function( elem ) {
-				return ( elem.textContent || elem.innerText || getText( elem ) ).indexOf( text ) > -1;
+				return ( elem.textContent || getText( elem ) ).indexOf( text ) > -1;
 			};
 		}),
 
@@ -2345,7 +2363,11 @@ Expr = Sizzle.selectors = {
 		}),
 
 		"lt": createPositionalPseudo(function( matchIndexes, length, argument ) {
-			var i = argument < 0 ? argument + length : argument;
+			var i = argument < 0 ?
+				argument + length :
+				argument > length ?
+					length :
+					argument;
 			for ( ; --i >= 0; ) {
 				matchIndexes.push( i );
 			}
@@ -3395,18 +3417,18 @@ jQuery.each( {
 		return siblings( elem.firstChild );
 	},
 	contents: function( elem ) {
-        if ( nodeName( elem, "iframe" ) ) {
-            return elem.contentDocument;
-        }
+		if ( typeof elem.contentDocument !== "undefined" ) {
+			return elem.contentDocument;
+		}
 
-        // Support: IE 9 - 11 only, iOS 7 only, Android Browser <=4.3 only
-        // Treat the template element as a regular one in browsers that
-        // don't support it.
-        if ( nodeName( elem, "template" ) ) {
-            elem = elem.content || elem;
-        }
+		// Support: IE 9 - 11 only, iOS 7 only, Android Browser <=4.3 only
+		// Treat the template element as a regular one in browsers that
+		// don't support it.
+		if ( nodeName( elem, "template" ) ) {
+			elem = elem.content || elem;
+		}
 
-        return jQuery.merge( [], elem.childNodes );
+		return jQuery.merge( [], elem.childNodes );
 	}
 }, function( name, fn ) {
 	jQuery.fn[ name ] = function( until, selector ) {
@@ -4715,6 +4737,26 @@ var rcssNum = new RegExp( "^(?:([+-])=|)(" + pnum + ")([a-z%]*)$", "i" );
 
 var cssExpand = [ "Top", "Right", "Bottom", "Left" ];
 
+var documentElement = document.documentElement;
+
+
+
+	var isAttached = function( elem ) {
+			return jQuery.contains( elem.ownerDocument, elem );
+		},
+		composed = { composed: true };
+
+	// Support: IE 9 - 11+, Edge 12 - 18+, iOS 10.0 - 10.2 only
+	// Check attachment across shadow DOM boundaries when possible (gh-3504)
+	// Support: iOS 10.0-10.2 only
+	// Early iOS 10 versions support `attachShadow` but not `getRootNode`,
+	// leading to errors. We need to check for `getRootNode`.
+	if ( documentElement.getRootNode ) {
+		isAttached = function( elem ) {
+			return jQuery.contains( elem.ownerDocument, elem ) ||
+				elem.getRootNode( composed ) === elem.ownerDocument;
+		};
+	}
 var isHiddenWithinTree = function( elem, el ) {
 
 		// isHiddenWithinTree might be called from jQuery#filter function;
@@ -4729,7 +4771,7 @@ var isHiddenWithinTree = function( elem, el ) {
 			// Support: Firefox <=43 - 45
 			// Disconnected elements can have computed display: none, so first confirm that elem is
 			// in the document.
-			jQuery.contains( elem.ownerDocument, elem ) &&
+			isAttached( elem ) &&
 
 			jQuery.css( elem, "display" ) === "none";
 	};
@@ -4771,7 +4813,8 @@ function adjustCSS( elem, prop, valueParts, tween ) {
 		unit = valueParts && valueParts[ 3 ] || ( jQuery.cssNumber[ prop ] ? "" : "px" ),
 
 		// Starting value computation is required for potential unit mismatches
-		initialInUnit = ( jQuery.cssNumber[ prop ] || unit !== "px" && +initial ) &&
+		initialInUnit = elem.nodeType &&
+			( jQuery.cssNumber[ prop ] || unit !== "px" && +initial ) &&
 			rcssNum.exec( jQuery.css( elem, prop ) );
 
 	if ( initialInUnit && initialInUnit[ 3 ] !== unit ) {
@@ -4918,7 +4961,7 @@ jQuery.fn.extend( {
 } );
 var rcheckableType = ( /^(?:checkbox|radio)$/i );
 
-var rtagName = ( /<([a-z][^\/\0>\x20\t\r\n\f]+)/i );
+var rtagName = ( /<([a-z][^\/\0>\x20\t\r\n\f]*)/i );
 
 var rscriptType = ( /^$|^module$|\/(?:java|ecma)script/i );
 
@@ -4990,7 +5033,7 @@ function setGlobalEval( elems, refElements ) {
 var rhtml = /<|&#?\w+;/;
 
 function buildFragment( elems, context, scripts, selection, ignored ) {
-	var elem, tmp, tag, wrap, contains, j,
+	var elem, tmp, tag, wrap, attached, j,
 		fragment = context.createDocumentFragment(),
 		nodes = [],
 		i = 0,
@@ -5054,13 +5097,13 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 			continue;
 		}
 
-		contains = jQuery.contains( elem.ownerDocument, elem );
+		attached = isAttached( elem );
 
 		// Append to fragment
 		tmp = getAll( fragment.appendChild( elem ), "script" );
 
 		// Preserve script evaluation history
-		if ( contains ) {
+		if ( attached ) {
 			setGlobalEval( tmp );
 		}
 
@@ -5103,8 +5146,6 @@ function buildFragment( elems, context, scripts, selection, ignored ) {
 	div.innerHTML = "<textarea>x</textarea>";
 	support.noCloneChecked = !!div.cloneNode( true ).lastChild.defaultValue;
 } )();
-var documentElement = document.documentElement;
-
 
 
 var
@@ -5120,8 +5161,19 @@ function returnFalse() {
 	return false;
 }
 
+// Support: IE <=9 - 11+
+// focus() and blur() are asynchronous, except when they are no-op.
+// So expect focus to be synchronous when the element is already active,
+// and blur to be synchronous when the element is not already active.
+// (focus and blur are always synchronous in other supported browsers,
+// this just defines when we can count on it).
+function expectSync( elem, type ) {
+	return ( elem === safeActiveElement() ) === ( type === "focus" );
+}
+
 // Support: IE <=9 only
-// See #13393 for more info
+// Accessing document.activeElement can throw unexpectedly
+// https://bugs.jquery.com/ticket/13393
 function safeActiveElement() {
 	try {
 		return document.activeElement;
@@ -5421,9 +5473,10 @@ jQuery.event = {
 			while ( ( handleObj = matched.handlers[ j++ ] ) &&
 				!event.isImmediatePropagationStopped() ) {
 
-				// Triggered event must either 1) have no namespace, or 2) have namespace(s)
-				// a subset or equal to those in the bound event (both can have no namespace).
-				if ( !event.rnamespace || event.rnamespace.test( handleObj.namespace ) ) {
+				// If the event is namespaced, then each handler is only invoked if it is
+				// specially universal or its namespaces are a superset of the event's.
+				if ( !event.rnamespace || handleObj.namespace === false ||
+					event.rnamespace.test( handleObj.namespace ) ) {
 
 					event.handleObj = handleObj;
 					event.data = handleObj.data;
@@ -5547,39 +5600,51 @@ jQuery.event = {
 			// Prevent triggered image.load events from bubbling to window.load
 			noBubble: true
 		},
-		focus: {
-
-			// Fire native event if possible so blur/focus sequence is correct
-			trigger: function() {
-				if ( this !== safeActiveElement() && this.focus ) {
-					this.focus();
-					return false;
-				}
-			},
-			delegateType: "focusin"
-		},
-		blur: {
-			trigger: function() {
-				if ( this === safeActiveElement() && this.blur ) {
-					this.blur();
-					return false;
-				}
-			},
-			delegateType: "focusout"
-		},
 		click: {
 
-			// For checkbox, fire native event so checked state will be right
-			trigger: function() {
-				if ( this.type === "checkbox" && this.click && nodeName( this, "input" ) ) {
-					this.click();
-					return false;
+			// Utilize native event to ensure correct state for checkable inputs
+			setup: function( data ) {
+
+				// For mutual compressibility with _default, replace `this` access with a local var.
+				// `|| data` is dead code meant only to preserve the variable through minification.
+				var el = this || data;
+
+				// Claim the first handler
+				if ( rcheckableType.test( el.type ) &&
+					el.click && nodeName( el, "input" ) ) {
+
+					// dataPriv.set( el, "click", ... )
+					leverageNative( el, "click", returnTrue );
 				}
+
+				// Return false to allow normal processing in the caller
+				return false;
+			},
+			trigger: function( data ) {
+
+				// For mutual compressibility with _default, replace `this` access with a local var.
+				// `|| data` is dead code meant only to preserve the variable through minification.
+				var el = this || data;
+
+				// Force setup before triggering a click
+				if ( rcheckableType.test( el.type ) &&
+					el.click && nodeName( el, "input" ) ) {
+
+					leverageNative( el, "click" );
+				}
+
+				// Return non-false to allow normal event-path propagation
+				return true;
 			},
 
-			// For cross-browser consistency, don't fire native .click() on links
+			// For cross-browser consistency, suppress native .click() on links
+			// Also prevent it if we're currently inside a leveraged native-event stack
 			_default: function( event ) {
-				return nodeName( event.target, "a" );
+				var target = event.target;
+				return rcheckableType.test( target.type ) &&
+					target.click && nodeName( target, "input" ) &&
+					dataPriv.get( target, "click" ) ||
+					nodeName( target, "a" );
 			}
 		},
 
@@ -5595,6 +5660,93 @@ jQuery.event = {
 		}
 	}
 };
+
+// Ensure the presence of an event listener that handles manually-triggered
+// synthetic events by interrupting progress until reinvoked in response to
+// *native* events that it fires directly, ensuring that state changes have
+// already occurred before other listeners are invoked.
+function leverageNative( el, type, expectSync ) {
+
+	// Missing expectSync indicates a trigger call, which must force setup through jQuery.event.add
+	if ( !expectSync ) {
+		if ( dataPriv.get( el, type ) === undefined ) {
+			jQuery.event.add( el, type, returnTrue );
+		}
+		return;
+	}
+
+	// Register the controller as a special universal handler for all event namespaces
+	dataPriv.set( el, type, false );
+	jQuery.event.add( el, type, {
+		namespace: false,
+		handler: function( event ) {
+			var notAsync, result,
+				saved = dataPriv.get( this, type );
+
+			if ( ( event.isTrigger & 1 ) && this[ type ] ) {
+
+				// Interrupt processing of the outer synthetic .trigger()ed event
+				// Saved data should be false in such cases, but might be a leftover capture object
+				// from an async native handler (gh-4350)
+				if ( !saved.length ) {
+
+					// Store arguments for use when handling the inner native event
+					// There will always be at least one argument (an event object), so this array
+					// will not be confused with a leftover capture object.
+					saved = slice.call( arguments );
+					dataPriv.set( this, type, saved );
+
+					// Trigger the native event and capture its result
+					// Support: IE <=9 - 11+
+					// focus() and blur() are asynchronous
+					notAsync = expectSync( this, type );
+					this[ type ]();
+					result = dataPriv.get( this, type );
+					if ( saved !== result || notAsync ) {
+						dataPriv.set( this, type, false );
+					} else {
+						result = {};
+					}
+					if ( saved !== result ) {
+
+						// Cancel the outer synthetic event
+						event.stopImmediatePropagation();
+						event.preventDefault();
+						return result.value;
+					}
+
+				// If this is an inner synthetic event for an event with a bubbling surrogate
+				// (focus or blur), assume that the surrogate already propagated from triggering the
+				// native event and prevent that from happening again here.
+				// This technically gets the ordering wrong w.r.t. to `.trigger()` (in which the
+				// bubbling surrogate propagates *after* the non-bubbling base), but that seems
+				// less bad than duplication.
+				} else if ( ( jQuery.event.special[ type ] || {} ).delegateType ) {
+					event.stopPropagation();
+				}
+
+			// If this is a native event triggered above, everything is now in order
+			// Fire an inner synthetic event with the original arguments
+			} else if ( saved.length ) {
+
+				// ...and capture the result
+				dataPriv.set( this, type, {
+					value: jQuery.event.trigger(
+
+						// Support: IE <=9 - 11+
+						// Extend with the prototype to reset the above stopImmediatePropagation()
+						jQuery.extend( saved[ 0 ], jQuery.Event.prototype ),
+						saved.slice( 1 ),
+						this
+					)
+				} );
+
+				// Abort handling of the native event
+				event.stopImmediatePropagation();
+			}
+		}
+	} );
+}
 
 jQuery.removeEvent = function( elem, type, handle ) {
 
@@ -5708,6 +5860,7 @@ jQuery.each( {
 	shiftKey: true,
 	view: true,
 	"char": true,
+	code: true,
 	charCode: true,
 	key: true,
 	keyCode: true,
@@ -5753,6 +5906,33 @@ jQuery.each( {
 		return event.which;
 	}
 }, jQuery.event.addProp );
+
+jQuery.each( { focus: "focusin", blur: "focusout" }, function( type, delegateType ) {
+	jQuery.event.special[ type ] = {
+
+		// Utilize native event if possible so blur/focus sequence is correct
+		setup: function() {
+
+			// Claim the first handler
+			// dataPriv.set( this, "focus", ... )
+			// dataPriv.set( this, "blur", ... )
+			leverageNative( this, type, expectSync );
+
+			// Return false to allow normal processing in the caller
+			return false;
+		},
+		trigger: function() {
+
+			// Force setup before trigger
+			leverageNative( this, type );
+
+			// Return non-false to allow normal event-path propagation
+			return true;
+		},
+
+		delegateType: delegateType
+	};
+} );
 
 // Create mouseenter/leave events using mouseover/out and event-time checks
 // so that event delegation works in jQuery.
@@ -6004,11 +6184,13 @@ function domManip( collection, args, callback, ignored ) {
 						if ( node.src && ( node.type || "" ).toLowerCase()  !== "module" ) {
 
 							// Optional AJAX dependency, but won't run scripts if not present
-							if ( jQuery._evalUrl ) {
-								jQuery._evalUrl( node.src );
+							if ( jQuery._evalUrl && !node.noModule ) {
+								jQuery._evalUrl( node.src, {
+									nonce: node.nonce || node.getAttribute( "nonce" )
+								} );
 							}
 						} else {
-							DOMEval( node.textContent.replace( rcleanScript, "" ), doc, node );
+							DOMEval( node.textContent.replace( rcleanScript, "" ), node, doc );
 						}
 					}
 				}
@@ -6030,7 +6212,7 @@ function remove( elem, selector, keepData ) {
 		}
 
 		if ( node.parentNode ) {
-			if ( keepData && jQuery.contains( node.ownerDocument, node ) ) {
+			if ( keepData && isAttached( node ) ) {
 				setGlobalEval( getAll( node, "script" ) );
 			}
 			node.parentNode.removeChild( node );
@@ -6048,7 +6230,7 @@ jQuery.extend( {
 	clone: function( elem, dataAndEvents, deepDataAndEvents ) {
 		var i, l, srcElements, destElements,
 			clone = elem.cloneNode( true ),
-			inPage = jQuery.contains( elem.ownerDocument, elem );
+			inPage = isAttached( elem );
 
 		// Fix IE cloning issues
 		if ( !support.noCloneChecked && ( elem.nodeType === 1 || elem.nodeType === 11 ) &&
@@ -6344,8 +6526,10 @@ var rboxStyle = new RegExp( cssExpand.join( "|" ), "i" );
 
 		// Support: IE 9 only
 		// Detect overflow:scroll screwiness (gh-3699)
+		// Support: Chrome <=64
+		// Don't get tricked when zoom affects offsetWidth (gh-4029)
 		div.style.position = "absolute";
-		scrollboxSizeVal = div.offsetWidth === 36 || "absolute";
+		scrollboxSizeVal = roundPixelMeasures( div.offsetWidth / 3 ) === 12;
 
 		documentElement.removeChild( container );
 
@@ -6416,7 +6600,7 @@ function curCSS( elem, name, computed ) {
 	if ( computed ) {
 		ret = computed.getPropertyValue( name ) || computed[ name ];
 
-		if ( ret === "" && !jQuery.contains( elem.ownerDocument, elem ) ) {
+		if ( ret === "" && !isAttached( elem ) ) {
 			ret = jQuery.style( elem, name );
 		}
 
@@ -6472,29 +6656,12 @@ function addGetHookIf( conditionFn, hookFn ) {
 }
 
 
-var
+var cssPrefixes = [ "Webkit", "Moz", "ms" ],
+	emptyStyle = document.createElement( "div" ).style,
+	vendorProps = {};
 
-	// Swappable if display is none or starts with table
-	// except "table", "table-cell", or "table-caption"
-	// See here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
-	rdisplayswap = /^(none|table(?!-c[ea]).+)/,
-	rcustomProp = /^--/,
-	cssShow = { position: "absolute", visibility: "hidden", display: "block" },
-	cssNormalTransform = {
-		letterSpacing: "0",
-		fontWeight: "400"
-	},
-
-	cssPrefixes = [ "Webkit", "Moz", "ms" ],
-	emptyStyle = document.createElement( "div" ).style;
-
-// Return a css property mapped to a potentially vendor prefixed property
+// Return a vendor-prefixed property or undefined
 function vendorPropName( name ) {
-
-	// Shortcut for names that are not vendor prefixed
-	if ( name in emptyStyle ) {
-		return name;
-	}
 
 	// Check for vendor prefixed names
 	var capName = name[ 0 ].toUpperCase() + name.slice( 1 ),
@@ -6508,15 +6675,32 @@ function vendorPropName( name ) {
 	}
 }
 
-// Return a property mapped along what jQuery.cssProps suggests or to
-// a vendor prefixed property.
+// Return a potentially-mapped jQuery.cssProps or vendor prefixed property
 function finalPropName( name ) {
-	var ret = jQuery.cssProps[ name ];
-	if ( !ret ) {
-		ret = jQuery.cssProps[ name ] = vendorPropName( name ) || name;
+	var final = jQuery.cssProps[ name ] || vendorProps[ name ];
+
+	if ( final ) {
+		return final;
 	}
-	return ret;
+	if ( name in emptyStyle ) {
+		return name;
+	}
+	return vendorProps[ name ] = vendorPropName( name ) || name;
 }
+
+
+var
+
+	// Swappable if display is none or starts with table
+	// except "table", "table-cell", or "table-caption"
+	// See here for display values: https://developer.mozilla.org/en-US/docs/CSS/display
+	rdisplayswap = /^(none|table(?!-c[ea]).+)/,
+	rcustomProp = /^--/,
+	cssShow = { position: "absolute", visibility: "hidden", display: "block" },
+	cssNormalTransform = {
+		letterSpacing: "0",
+		fontWeight: "400"
+	};
 
 function setPositiveNumber( elem, value, subtract ) {
 
@@ -6589,7 +6773,10 @@ function boxModelAdjustment( elem, dimension, box, isBorderBox, styles, computed
 			delta -
 			extra -
 			0.5
-		) );
+
+		// If offsetWidth/offsetHeight is unknown, then we can't determine content-box scroll gutter
+		// Use an explicit zero to avoid NaN (gh-3964)
+		) ) || 0;
 	}
 
 	return delta;
@@ -6599,9 +6786,16 @@ function getWidthOrHeight( elem, dimension, extra ) {
 
 	// Start with computed style
 	var styles = getStyles( elem ),
+
+		// To avoid forcing a reflow, only fetch boxSizing if we need it (gh-4322).
+		// Fake content-box until we know it's needed to know the true value.
+		boxSizingNeeded = !support.boxSizingReliable() || extra,
+		isBorderBox = boxSizingNeeded &&
+			jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
+		valueIsBorderBox = isBorderBox,
+
 		val = curCSS( elem, dimension, styles ),
-		isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
-		valueIsBorderBox = isBorderBox;
+		offsetProp = "offset" + dimension[ 0 ].toUpperCase() + dimension.slice( 1 );
 
 	// Support: Firefox <=54
 	// Return a confounding non-pixel value or feign ignorance, as appropriate.
@@ -6612,22 +6806,29 @@ function getWidthOrHeight( elem, dimension, extra ) {
 		val = "auto";
 	}
 
-	// Check for style in case a browser which returns unreliable values
-	// for getComputedStyle silently falls back to the reliable elem.style
-	valueIsBorderBox = valueIsBorderBox &&
-		( support.boxSizingReliable() || val === elem.style[ dimension ] );
 
 	// Fall back to offsetWidth/offsetHeight when value is "auto"
 	// This happens for inline elements with no explicit setting (gh-3571)
 	// Support: Android <=4.1 - 4.3 only
 	// Also use offsetWidth/offsetHeight for misreported inline dimensions (gh-3602)
-	if ( val === "auto" ||
-		!parseFloat( val ) && jQuery.css( elem, "display", false, styles ) === "inline" ) {
+	// Support: IE 9-11 only
+	// Also use offsetWidth/offsetHeight for when box sizing is unreliable
+	// We use getClientRects() to check for hidden/disconnected.
+	// In those cases, the computed value can be trusted to be border-box
+	if ( ( !support.boxSizingReliable() && isBorderBox ||
+		val === "auto" ||
+		!parseFloat( val ) && jQuery.css( elem, "display", false, styles ) === "inline" ) &&
+		elem.getClientRects().length ) {
 
-		val = elem[ "offset" + dimension[ 0 ].toUpperCase() + dimension.slice( 1 ) ];
+		isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box";
 
-		// offsetWidth/offsetHeight provide border-box values
-		valueIsBorderBox = true;
+		// Where available, offsetWidth/offsetHeight approximate border box dimensions.
+		// Where not available (e.g., SVG), assume unreliable box-sizing and interpret the
+		// retrieved value as a content box dimension.
+		valueIsBorderBox = offsetProp in elem;
+		if ( valueIsBorderBox ) {
+			val = elem[ offsetProp ];
+		}
 	}
 
 	// Normalize "" and auto
@@ -6673,6 +6874,13 @@ jQuery.extend( {
 		"flexGrow": true,
 		"flexShrink": true,
 		"fontWeight": true,
+		"gridArea": true,
+		"gridColumn": true,
+		"gridColumnEnd": true,
+		"gridColumnStart": true,
+		"gridRow": true,
+		"gridRowEnd": true,
+		"gridRowStart": true,
 		"lineHeight": true,
 		"opacity": true,
 		"order": true,
@@ -6728,7 +6936,9 @@ jQuery.extend( {
 			}
 
 			// If a number was passed in, add the unit (except for certain CSS properties)
-			if ( type === "number" ) {
+			// The isCustomProp check can be removed in jQuery 4.0 when we only auto-append
+			// "px" to a few hardcoded values.
+			if ( type === "number" && !isCustomProp ) {
 				value += ret && ret[ 3 ] || ( jQuery.cssNumber[ origName ] ? "" : "px" );
 			}
 
@@ -6828,18 +7038,29 @@ jQuery.each( [ "height", "width" ], function( i, dimension ) {
 		set: function( elem, value, extra ) {
 			var matches,
 				styles = getStyles( elem ),
-				isBorderBox = jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
-				subtract = extra && boxModelAdjustment(
-					elem,
-					dimension,
-					extra,
-					isBorderBox,
-					styles
-				);
+
+				// Only read styles.position if the test has a chance to fail
+				// to avoid forcing a reflow.
+				scrollboxSizeBuggy = !support.scrollboxSize() &&
+					styles.position === "absolute",
+
+				// To avoid forcing a reflow, only fetch boxSizing if we need it (gh-3991)
+				boxSizingNeeded = scrollboxSizeBuggy || extra,
+				isBorderBox = boxSizingNeeded &&
+					jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
+				subtract = extra ?
+					boxModelAdjustment(
+						elem,
+						dimension,
+						extra,
+						isBorderBox,
+						styles
+					) :
+					0;
 
 			// Account for unreliable border-box dimensions by comparing offset* to computed and
 			// faking a content-box to get border and padding (gh-3699)
-			if ( isBorderBox && support.scrollboxSize() === styles.position ) {
+			if ( isBorderBox && scrollboxSizeBuggy ) {
 				subtract -= Math.ceil(
 					elem[ "offset" + dimension[ 0 ].toUpperCase() + dimension.slice( 1 ) ] -
 					parseFloat( styles[ dimension ] ) -
@@ -7007,9 +7228,9 @@ Tween.propHooks = {
 			// Use .style if available and use plain properties where available.
 			if ( jQuery.fx.step[ tween.prop ] ) {
 				jQuery.fx.step[ tween.prop ]( tween );
-			} else if ( tween.elem.nodeType === 1 &&
-				( tween.elem.style[ jQuery.cssProps[ tween.prop ] ] != null ||
-					jQuery.cssHooks[ tween.prop ] ) ) {
+			} else if ( tween.elem.nodeType === 1 && (
+					jQuery.cssHooks[ tween.prop ] ||
+					tween.elem.style[ finalPropName( tween.prop ) ] != null ) ) {
 				jQuery.style( tween.elem, tween.prop, tween.now + tween.unit );
 			} else {
 				tween.elem[ tween.prop ] = tween.now;
@@ -8716,6 +8937,10 @@ jQuery.param = function( a, traditional ) {
 				encodeURIComponent( value == null ? "" : value );
 		};
 
+	if ( a == null ) {
+		return "";
+	}
+
 	// If an array was passed in, assume that it is an array of form elements.
 	if ( Array.isArray( a ) || ( a.jquery && !jQuery.isPlainObject( a ) ) ) {
 
@@ -9218,12 +9443,14 @@ jQuery.extend( {
 						if ( !responseHeaders ) {
 							responseHeaders = {};
 							while ( ( match = rheaders.exec( responseHeadersString ) ) ) {
-								responseHeaders[ match[ 1 ].toLowerCase() ] = match[ 2 ];
+								responseHeaders[ match[ 1 ].toLowerCase() + " " ] =
+									( responseHeaders[ match[ 1 ].toLowerCase() + " " ] || [] )
+										.concat( match[ 2 ] );
 							}
 						}
-						match = responseHeaders[ key.toLowerCase() ];
+						match = responseHeaders[ key.toLowerCase() + " " ];
 					}
-					return match == null ? null : match;
+					return match == null ? null : match.join( ", " );
 				},
 
 				// Raw string
@@ -9612,7 +9839,7 @@ jQuery.each( [ "get", "post" ], function( i, method ) {
 } );
 
 
-jQuery._evalUrl = function( url ) {
+jQuery._evalUrl = function( url, options ) {
 	return jQuery.ajax( {
 		url: url,
 
@@ -9622,7 +9849,16 @@ jQuery._evalUrl = function( url ) {
 		cache: true,
 		async: false,
 		global: false,
-		"throws": true
+
+		// Only evaluate the response if it is successful (gh-4126)
+		// dataFilter is not invoked for failure responses, so using it instead
+		// of the default converter is kludgy but it works.
+		converters: {
+			"text script": function() {}
+		},
+		dataFilter: function( response ) {
+			jQuery.globalEval( response, options );
+		}
 	} );
 };
 
@@ -9905,24 +10141,21 @@ jQuery.ajaxPrefilter( "script", function( s ) {
 // Bind script tag hack transport
 jQuery.ajaxTransport( "script", function( s ) {
 
-	// This transport only deals with cross domain requests
-	if ( s.crossDomain ) {
+	// This transport only deals with cross domain or forced-by-attrs requests
+	if ( s.crossDomain || s.scriptAttrs ) {
 		var script, callback;
 		return {
 			send: function( _, complete ) {
-				script = jQuery( "<script>" ).prop( {
-					charset: s.scriptCharset,
-					src: s.url
-				} ).on(
-					"load error",
-					callback = function( evt ) {
+				script = jQuery( "<script>" )
+					.attr( s.scriptAttrs || {} )
+					.prop( { charset: s.scriptCharset, src: s.url } )
+					.on( "load error", callback = function( evt ) {
 						script.remove();
 						callback = null;
 						if ( evt ) {
 							complete( evt.type === "error" ? 404 : 200, evt.type );
 						}
-					}
-				);
+					} );
 
 				// Use native DOM manipulation to avoid our domManip AJAX trickery
 				document.head.appendChild( script[ 0 ] );
@@ -10673,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560448085253)
+		const elapsedTime = _get_ElapsedTime(1560612968310)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:48:05 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     11:36:08 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11682,7 +11915,7 @@ __webpack_require__(45);
 __webpack_require__(46);
 __webpack_require__(47);
 __webpack_require__(48);
-__webpack_require__(52);
+__webpack_require__(53);
 
 
 /***/ }),
@@ -12332,7 +12565,7 @@ exports.characterKey_Rows = [
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /*!
- * hotkeys-js v3.6.2
+ * hotkeys-js v3.6.10
  * A simple micro-library for defining and dispatching keyboard shortcuts. It has no dependencies.
  * 
  * Copyright (c) 2019 kenny wong <wowohoo@qq.com>
@@ -12341,36 +12574,38 @@ __webpack_require__.r(__webpack_exports__);
  * Licensed under the MIT license.
  */
 
-var isff = typeof navigator !== 'undefined' ? navigator.userAgent.toLowerCase().indexOf('firefox') > 0 : false;
+var isff = typeof navigator !== 'undefined' ? navigator.userAgent.toLowerCase().indexOf('firefox') > 0 : false; // 绑定事件
 
-// 绑定事件
 function addEvent(object, event, method) {
   if (object.addEventListener) {
     object.addEventListener(event, method, false);
   } else if (object.attachEvent) {
-    object.attachEvent('on' + event, function () {
+    object.attachEvent("on".concat(event), function () {
       method(window.event);
     });
   }
-}
+} // 修饰键转换成对应的键码
 
-// 修饰键转换成对应的键码
+
 function getMods(modifier, key) {
   var mods = key.slice(0, key.length - 1);
+
   for (var i = 0; i < mods.length; i++) {
     mods[i] = modifier[mods[i].toLowerCase()];
-  }return mods;
-}
+  }
 
-// 处理传的key字符串转换成数组
+  return mods;
+} // 处理传的key字符串转换成数组
+
+
 function getKeys(key) {
   if (!key) key = '';
-
   key = key.replace(/\s/g, ''); // 匹配任何空白字符,包括空格、制表符、换页符等等
-  var keys = key.split(','); // 同时设置多个快捷键，以','分割
-  var index = keys.lastIndexOf('');
 
-  // 快捷键可能包含','，需特殊处理
+  var keys = key.split(','); // 同时设置多个快捷键，以','分割
+
+  var index = keys.lastIndexOf(''); // 快捷键可能包含','，需特殊处理
+
   for (; index >= 0;) {
     keys[index - 1] += ',';
     keys.splice(index, 1);
@@ -12378,9 +12613,9 @@ function getKeys(key) {
   }
 
   return keys;
-}
+} // 比较修饰键的数组
 
-// 比较修饰键的数组
+
 function compareArray(a1, a2) {
   var arr1 = a1.length >= a2.length ? a1 : a2;
   var arr2 = a1.length >= a2.length ? a2 : a1;
@@ -12389,15 +12624,17 @@ function compareArray(a1, a2) {
   for (var i = 0; i < arr1.length; i++) {
     if (arr2.indexOf(arr1[i]) === -1) isIndex = false;
   }
+
   return isIndex;
 }
 
-var _keyMap = { // 特殊键
+var _keyMap = {
+  // 特殊键
   backspace: 8,
   tab: 9,
   clear: 12,
   enter: 13,
-  return: 13,
+  "return": 13,
   esc: 27,
   escape: 27,
   space: 32,
@@ -12406,7 +12643,7 @@ var _keyMap = { // 特殊键
   right: 39,
   down: 40,
   del: 46,
-  delete: 46,
+  "delete": 46,
   ins: 45,
   insert: 45,
   home: 36,
@@ -12427,8 +12664,8 @@ var _keyMap = { // 特殊键
   ']': 221,
   '\\': 220
 };
-
-var _modifier = { // 修饰键
+var _modifier = {
+  // 修饰键
   '⇧': 16,
   shift: 16,
   '⌥': 18,
@@ -12441,117 +12678,132 @@ var _modifier = { // 修饰键
   cmd: isff ? 224 : 91,
   command: isff ? 224 : 91
 };
-var _downKeys = []; // 记录摁下的绑定键
 var modifierMap = {
   16: 'shiftKey',
   18: 'altKey',
   17: 'ctrlKey'
 };
-var _mods = { 16: false, 18: false, 17: false };
-var _handlers = {};
+var _mods = {
+  16: false,
+  18: false,
+  17: false
+};
+var _handlers = {}; // F1~F12 特殊键
 
-// F1~F12 特殊键
 for (var k = 1; k < 20; k++) {
-  _keyMap['f' + k] = 111 + k;
-}
+  _keyMap["f".concat(k)] = 111 + k;
+} // 兼容Firefox处理
 
-// 兼容Firefox处理
+
 modifierMap[isff ? 224 : 91] = 'metaKey';
 _mods[isff ? 224 : 91] = false;
 
-var _scope = 'all'; // 默认热键范围
-var isBindElement = false; // 是否绑定节点
+var _downKeys = []; // 记录摁下的绑定键
 
+var _scope = 'all'; // 默认热键范围
+
+var elementHasBindEvent = []; // 已绑定事件的节点记录
 // 返回键码
+
 var code = function code(x) {
   return _keyMap[x.toLowerCase()] || _modifier[x.toLowerCase()] || x.toUpperCase().charCodeAt(0);
-};
+}; // 设置获取当前范围（默认为'所有'）
 
-// 设置获取当前范围（默认为'所有'）
+
 function setScope(scope) {
   _scope = scope || 'all';
-}
-// 获取当前范围
+} // 获取当前范围
+
+
 function getScope() {
   return _scope || 'all';
-}
-// 获取摁下绑定键的键值
+} // 获取摁下绑定键的键值
+
+
 function getPressedKeyCodes() {
   return _downKeys.slice(0);
-}
+} // 表单控件控件判断 返回 Boolean
+// hotkey is effective only when filter return true
 
-// 表单控件控件判断 返回 Boolean
+
 function filter(event) {
   var target = event.target || event.srcElement;
   var tagName = target.tagName;
-  // 忽略这些情况下快捷键无效
+  var flag = true; // ignore: isContentEditable === 'true', <input> and <textarea> when readOnly state is false, <select>
 
-  return !(tagName === 'INPUT' || tagName === 'SELECT' || tagName === 'TEXTAREA' || target.isContentEditable);
-}
+  if (target.isContentEditable || tagName === 'TEXTAREA' || (tagName === 'INPUT' || tagName === 'TEXTAREA') && !target.readOnly) {
+    flag = false;
+  }
 
-// 判断摁下的键是否为某个键，返回true或者false
+  return flag;
+} // 判断摁下的键是否为某个键，返回true或者false
+
+
 function isPressed(keyCode) {
   if (typeof keyCode === 'string') {
     keyCode = code(keyCode); // 转换成键码
   }
+
   return _downKeys.indexOf(keyCode) !== -1;
-}
+} // 循环删除handlers中的所有 scope(范围)
 
-// 循环删除handlers中的所有 scope(范围)
+
 function deleteScope(scope, newScope) {
-  var handlers = void 0;
-  var i = void 0;
+  var handlers;
+  var i; // 没有指定scope，获取scope
 
-  // 没有指定scope，获取scope
   if (!scope) scope = getScope();
 
   for (var key in _handlers) {
     if (Object.prototype.hasOwnProperty.call(_handlers, key)) {
       handlers = _handlers[key];
+
       for (i = 0; i < handlers.length;) {
         if (handlers[i].scope === scope) handlers.splice(i, 1);else i++;
       }
     }
-  }
+  } // 如果scope被删除，将scope重置为all
 
-  // 如果scope被删除，将scope重置为all
+
   if (getScope() === scope) setScope(newScope || 'all');
-}
+} // 清除修饰键
 
-// 清除修饰键
+
 function clearModifier(event) {
   var key = event.keyCode || event.which || event.charCode;
-  var i = _downKeys.indexOf(key);
 
-  // 从列表中清除按压过的键
+  var i = _downKeys.indexOf(key); // 从列表中清除按压过的键
+
+
   if (i >= 0) {
     _downKeys.splice(i, 1);
-  }
-  // 特殊处理 cmmand 键，在 cmmand 组合快捷键 keyup 只执行一次的问题
+  } // 特殊处理 cmmand 键，在 cmmand 组合快捷键 keyup 只执行一次的问题
+
+
   if (event.key && event.key.toLowerCase() === 'meta') {
     _downKeys.splice(0, _downKeys.length);
-  }
+  } // 修饰键 shiftKey altKey ctrlKey (command||metaKey) 清除
 
-  // 修饰键 shiftKey altKey ctrlKey (command||metaKey) 清除
+
   if (key === 93 || key === 224) key = 91;
-  if (key in _mods) {
-    _mods[key] = false;
 
-    // 将修饰键重置为false
+  if (key in _mods) {
+    _mods[key] = false; // 将修饰键重置为false
+
     for (var k in _modifier) {
       if (_modifier[k] === key) hotkeys[k] = false;
     }
   }
-}
+} // 解除绑定某个范围的快捷键
 
-// 解除绑定某个范围的快捷键
+
 function unbind(key, scope, method) {
   var multipleKeys = getKeys(key);
-  var keys = void 0;
+  var keys;
   var mods = [];
-  var obj = void 0;
-  // 通过函数判断，是否解除绑定
+  var obj; // 通过函数判断，是否解除绑定
   // https://github.com/jaywcjlove/hotkeys/issues/44
+
   if (typeof scope === 'function') {
     method = scope;
     scope = 'all';
@@ -12559,41 +12811,39 @@ function unbind(key, scope, method) {
 
   for (var i = 0; i < multipleKeys.length; i++) {
     // 将组合快捷键拆分为数组
-    keys = multipleKeys[i].split('+');
+    keys = multipleKeys[i].split('+'); // 记录每个组合键中的修饰键的键码 返回数组
 
-    // 记录每个组合键中的修饰键的键码 返回数组
-    if (keys.length > 1) mods = getMods(_modifier, keys);
+    if (keys.length > 1) {
+      mods = getMods(_modifier, keys);
+    } else {
+      mods = [];
+    } // 获取除修饰键外的键值key
 
-    // 获取除修饰键外的键值key
+
     key = keys[keys.length - 1];
-    key = key === '*' ? '*' : code(key);
+    key = key === '*' ? '*' : code(key); // 判断是否传入范围，没有就获取范围
 
-    // 判断是否传入范围，没有就获取范围
-    if (!scope) scope = getScope();
+    if (!scope) scope = getScope(); // 如何key不在 _handlers 中返回不做处理
 
-    // 如何key不在 _handlers 中返回不做处理
-    if (!_handlers[key]) return;
-
-    // 清空 handlers 中数据，
+    if (!_handlers[key]) return; // 清空 handlers 中数据，
     // 让触发快捷键键之后没有事件执行到达解除快捷键绑定的目的
-    for (var r = 0; r < _handlers[key].length; r++) {
-      obj = _handlers[key][r];
-      // 通过函数判断，是否解除绑定，函数相等直接返回
-      var isMatchingMethod = method ? obj.method === method : true;
 
-      // 判断是否在范围内并且键值相同
+    for (var r = 0; r < _handlers[key].length; r++) {
+      obj = _handlers[key][r]; // 通过函数判断，是否解除绑定，函数相等直接返回
+
+      var isMatchingMethod = method ? obj.method === method : true; // 判断是否在范围内并且键值相同
+
       if (isMatchingMethod && obj.scope === scope && compareArray(obj.mods, mods)) {
         _handlers[key][r] = {};
       }
     }
   }
-}
+} // 对监听对应快捷键的回调函数进行处理
 
-// 对监听对应快捷键的回调函数进行处理
+
 function eventHandler(event, handler, scope) {
-  var modifiersMatch = void 0;
+  var modifiersMatch; // 看它是否在当前范围
 
-  // 看它是否在当前范围
   if (handler.scope === scope || handler.scope === 'all') {
     // 检查是否匹配修饰符（如果有返回true）
     modifiersMatch = handler.mods.length > 0;
@@ -12602,9 +12852,9 @@ function eventHandler(event, handler, scope) {
       if (Object.prototype.hasOwnProperty.call(_mods, y)) {
         if (!_mods[y] && handler.mods.indexOf(+y) > -1 || _mods[y] && handler.mods.indexOf(+y) === -1) modifiersMatch = false;
       }
-    }
+    } // 调用处理程序，如果是修饰键不做处理
 
-    // 调用处理程序，如果是修饰键不做处理
+
     if (handler.mods.length === 0 && !_mods[16] && !_mods[18] && !_mods[17] && !_mods[91] || modifiersMatch || handler.shortcut === '*') {
       if (handler.method(event, handler) === false) {
         if (event.preventDefault) event.preventDefault();else event.returnValue = false;
@@ -12613,64 +12863,67 @@ function eventHandler(event, handler, scope) {
       }
     }
   }
-}
+} // 处理keydown事件
 
-// 处理keydown事件
+
 function dispatch(event) {
   var asterisk = _handlers['*'];
-  var key = event.keyCode || event.which || event.charCode;
+  var key = event.keyCode || event.which || event.charCode; // 表单控件过滤 默认表单控件不触发快捷键
 
-  // 搜集绑定的键
-  if (_downKeys.indexOf(key) === -1) _downKeys.push(key);
+  if (!hotkeys.filter.call(this, event)) return; // Collect bound keys
+  // If an Input Method Editor is processing key input and the event is keydown, return 229.
+  // https://stackoverflow.com/questions/25043934/is-it-ok-to-ignore-keydown-events-with-keycode-229
+  // http://lists.w3.org/Archives/Public/www-dom/2010JulSep/att-0182/keyCode-spec.html
 
-  // Gecko(Firefox)的command键值224，在Webkit(Chrome)中保持一致
+  if (_downKeys.indexOf(key) === -1 && key !== 229) _downKeys.push(key); // Gecko(Firefox)的command键值224，在Webkit(Chrome)中保持一致
   // Webkit左右command键值不一样
+
   if (key === 93 || key === 224) key = 91;
 
   if (key in _mods) {
-    _mods[key] = true;
+    _mods[key] = true; // 将特殊字符的key注册到 hotkeys 上
 
-    // 将特殊字符的key注册到 hotkeys 上
     for (var k in _modifier) {
       if (_modifier[k] === key) hotkeys[k] = true;
     }
 
     if (!asterisk) return;
-  }
+  } // 将modifierMap里面的修饰键绑定到event中
 
-  // 将modifierMap里面的修饰键绑定到event中
+
   for (var e in _mods) {
     if (Object.prototype.hasOwnProperty.call(_mods, e)) {
       _mods[e] = event[modifierMap[e]];
     }
-  }
+  } // 获取范围 默认为all
 
-  // 表单控件过滤 默认表单控件不触发快捷键
-  if (!hotkeys.filter.call(this, event)) return;
 
-  // 获取范围 默认为all
-  var scope = getScope();
+  var scope = getScope(); // 对任何快捷键都需要做的处理
 
-  // 对任何快捷键都需要做的处理
   if (asterisk) {
     for (var i = 0; i < asterisk.length; i++) {
-      if (asterisk[i].scope === scope && (event.type === 'keydown' && !asterisk[i].keyup || event.type === 'keyup' && asterisk[i].keyup)) {
+      if (asterisk[i].scope === scope && (event.type === 'keydown' && asterisk[i].keydown || event.type === 'keyup' && asterisk[i].keyup)) {
         eventHandler(event, asterisk[i], scope);
       }
     }
-  }
-  // key 不在_handlers中返回
+  } // key 不在_handlers中返回
+
+
   if (!(key in _handlers)) return;
 
   for (var _i = 0; _i < _handlers[key].length; _i++) {
-    if (event.type === 'keydown' && !_handlers[key][_i].keyup || event.type === 'keyup' && _handlers[key][_i].keyup) {
+    if (event.type === 'keydown' && _handlers[key][_i].keydown || event.type === 'keyup' && _handlers[key][_i].keyup) {
       if (_handlers[key][_i].key) {
         var keyShortcut = _handlers[key][_i].key.split('+');
+
         var _downKeysCurrent = []; // 记录当前按键键值
+
         for (var a = 0; a < keyShortcut.length; a++) {
           _downKeysCurrent.push(code(keyShortcut[a]));
         }
+
         _downKeysCurrent = _downKeysCurrent.sort();
+
         if (_downKeysCurrent.join('') === _downKeys.sort().join('')) {
           // 找到处理内容
           eventHandler(event, _handlers[key][_i], scope);
@@ -12678,55 +12931,73 @@ function dispatch(event) {
       }
     }
   }
+} // 判断 element 是否已经绑定事件
+
+
+function isElementBind(element) {
+  return elementHasBindEvent.indexOf(element) > -1;
 }
 
 function hotkeys(key, option, method) {
   var keys = getKeys(key); // 需要处理的快捷键列表
+
   var mods = [];
   var scope = 'all'; // scope默认为all，所有范围都有效
-  var element = document; // 快捷键事件绑定节点
-  var i = 0;
 
-  // 对为设定范围的判断
+  var element = document; // 快捷键事件绑定节点
+
+  var i = 0;
+  var keyup = false;
+  var keydown = true; // 对为设定范围的判断
+
   if (method === undefined && typeof option === 'function') {
     method = option;
   }
 
   if (Object.prototype.toString.call(option) === '[object Object]') {
     if (option.scope) scope = option.scope; // eslint-disable-line
+
     if (option.element) element = option.element; // eslint-disable-line
+
+    if (option.keyup) keyup = option.keyup; // eslint-disable-line
+
+    if (option.keydown) keydown = option.keydown; // eslint-disable-line
   }
 
-  if (typeof option === 'string') scope = option;
+  if (typeof option === 'string') scope = option; // 对于每个快捷键进行处理
 
-  // 对于每个快捷键进行处理
   for (; i < keys.length; i++) {
     key = keys[i].split('+'); // 按键列表
-    mods = [];
 
-    // 如果是组合快捷键取得组合快捷键
-    if (key.length > 1) mods = getMods(_modifier, key);
+    mods = []; // 如果是组合快捷键取得组合快捷键
 
-    // 将非修饰键转化为键码
+    if (key.length > 1) mods = getMods(_modifier, key); // 将非修饰键转化为键码
+
     key = key[key.length - 1];
     key = key === '*' ? '*' : code(key); // *表示匹配所有快捷键
-
     // 判断key是否在_handlers中，不在就赋一个空数组
+
     if (!(key in _handlers)) _handlers[key] = [];
+
     _handlers[key].push({
-      keyup: option.keyup,
+      keyup: keyup,
+      keydown: keydown,
       scope: scope,
       mods: mods,
       shortcut: keys[i],
       method: method,
       key: keys[i]
     });
-  }
-  // 在全局document上设置快捷键
-  if (typeof element !== 'undefined' && !isBindElement) {
-    isBindElement = true;
+  } // 在全局document上设置快捷键
+
+
+  if (typeof element !== 'undefined' && !isElementBind(element) && window) {
+    elementHasBindEvent.push(element);
     addEvent(element, 'keydown', function (e) {
       dispatch(e);
+    });
+    addEvent(window, 'focus', function () {
+      _downKeys = [];
     });
     addEvent(element, 'keyup', function (e) {
       dispatch(e);
@@ -12744,6 +13015,7 @@ var _api = {
   filter: filter,
   unbind: unbind
 };
+
 for (var a in _api) {
   if (Object.prototype.hasOwnProperty.call(_api, a)) {
     hotkeys[a] = _api[a];
@@ -12752,12 +13024,15 @@ for (var a in _api) {
 
 if (typeof window !== 'undefined') {
   var _hotkeys = window.hotkeys;
+
   hotkeys.noConflict = function (deep) {
     if (deep && window.hotkeys === hotkeys) {
       window.hotkeys = _hotkeys;
     }
+
     return hotkeys;
   };
+
   window.hotkeys = hotkeys;
 }
 
@@ -13574,9 +13849,11 @@ __decorate([
 Object.defineProperty(exports, "__esModule", { value: true });
 const archive_Cards_1 = __webpack_require__(49);
 archive_Cards_1.archive_Cards.initialize();
-const focus_SearchField_1 = __webpack_require__(50);
+const clear_SearchField_1 = __webpack_require__(50);
+clear_SearchField_1.clear_SearchField.initialize();
+const focus_SearchField_1 = __webpack_require__(51);
 focus_SearchField_1.focus_SearchField.initialize();
-const move_Cards_1 = __webpack_require__(51);
+const move_Cards_1 = __webpack_require__(52);
 move_Cards_1.move_Cards.initialize();
 
 
@@ -13637,6 +13914,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
+class clear_SearchField {
+    static initialize(keys) {
+        return (event) => {
+            $(".kt-board_search-container > [class=icon-et-erase]").click();
+        };
+    }
+}
+__decorate([
+    __Main__1.KanbanTool.KeyBinding({
+        defaultKeys: ["ctrl", "shift", "alt", "f"],
+        options: { preventDefault: true },
+    }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Array]),
+    __metadata("design:returntype", void 0)
+], clear_SearchField, "initialize", null);
+exports.clear_SearchField = clear_SearchField;
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const __Main__1 = __webpack_require__(0);
 class focus_SearchField {
     static initialize(keys) {
         return (event) => {
@@ -13658,7 +13971,7 @@ exports.focus_SearchField = focus_SearchField;
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13689,7 +14002,7 @@ function _add_KeyBinding(direction) {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
