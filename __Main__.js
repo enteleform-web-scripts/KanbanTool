@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560626364498)
+		const elapsedTime = _get_ElapsedTime(1560626514527)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:19:24 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:21:54 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11186,7 +11186,10 @@ class FunctionBar extends Module_BaseClasses_1.Module {
             return;
         }
         const valid_GroupCount = (this.entryGroups.length <= Settings_1.autoMapped_Key_Rows.length);
-        const valid_KeyCounts = this.entryGroups.every((group, i) => (group.length <= Settings_1.autoMapped_Key_Rows[i].length));
+        const valid_KeyCounts = this.entryGroups.every((group, i) => {
+            group = (group instanceof Array) ? group : Object.values(group)[0];
+            return (group.length <= Settings_1.autoMapped_Key_Rows[i].length);
+        });
         if (!(valid_GroupCount && valid_KeyCounts)) {
             throw new Error(`
 				Invalid FunctionBar Group/Entry Count @ ${this.position} Bar
