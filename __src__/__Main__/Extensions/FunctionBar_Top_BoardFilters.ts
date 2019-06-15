@@ -21,8 +21,10 @@ const Modes: Mode[][] = [
 	[
 		{name:"Today_All",       rows:["Active"         ], cardTypes:/Today_(Low|Medium|High|Urgent)/               },
 		{name:"Today_Priority",  rows:["Active"         ], cardTypes:/Today_(Medium|High|Urgent)/                   },
-		{name:"Today + Routine", rows:["Daily", "Active"], cardTypes:/(Task_Daily)|(Today_(Low|Medium|High|Urgent))/},
+	],
+	[
 		{name:"Routine",         rows:["Daily"          ], cardTypes:/Task_Daily/                                   },
+		{name:"Routine + Today", rows:["Daily", "Active"], cardTypes:/(Task_Daily)|(Today_(Low|Medium|High|Urgent))/},
 	],
 	[
 		{name:"Plan_Tasks", rows:["Active", "Next", "Queue"], cardTypes:undefined},
@@ -41,9 +43,9 @@ FunctionBar.load( new FunctionBar({
 
 	position:             Position.Top,
 	autoMap_KeyBindings:  true,
-	keyBinding_Modifiers: ["shift", "alt"],
+	keyBinding_Modifiers: ["alt"],
 	stretchCells:         false,
-	cellProperties:       [{functionName:"css", args:["min-width", "90px"]}],
+	cellProperties:       [{functionName:"css", args:["min-width", "130px"]}],
 	entryGroups:          _get_EntryGroups()
 
 }))
@@ -82,6 +84,8 @@ function _get_Callback(rows:string[], cardTypes:RegExp){
 
 		if(rows)
 			{Show.rows({include:rows})}
+		else
+			{Show.allRows()}
 
 		disable_CardTypes()
 		enable_CardTypes(..._cardTypes)
