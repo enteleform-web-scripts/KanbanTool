@@ -1,9 +1,9 @@
 
 export enum Position{
-	Left,
-	Right,
-	Top,
-	Bottom,
+	Left   = "Left",
+	Right  = "Right",
+	Top    = "Top",
+	Bottom = "Bottom",
 }
 
 export type HorizontalPosition = (Position.Left | Position.Right )

@@ -123,9 +123,8 @@ export class FunctionBar extends Module{
 			)
 
 		if(! (valid_GroupCount && valid_KeyCounts)){
-			const position = this.position.valueOf()
 			throw new Error(`
-				Invalid FunctionBar Group/Entry Count @ ${position} Bar
+				Invalid FunctionBar Group/Entry Count @ ${this.position} Bar
 			`)
 		}
 	}
