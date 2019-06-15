@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560626514527)
+		const elapsedTime = _get_ElapsedTime(1560627071574)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:21:54 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:31:11 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11573,7 +11573,6 @@ function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, functionBar_Opt
     const cardType_Rows = (mode == _Mode.Auto)
         ? get_Rows_1.get_Auto_CardTypes_Rows()
         : get_Rows_1.get_Manual_CardTypes_Rows(cardOptions);
-    console.log("cardType_Rows:", cardType_Rows);
     functionBar_Options = { ..._Default_FunctionBar_Options, ...functionBar_Options };
     if (cellWidth !== undefined) {
         functionBar_Options.stretchCells = false;
@@ -11596,7 +11595,6 @@ function _build_FunctionBar(options, cardType_Rows) {
             }))
         };
     });
-    console.log("entryGroups:", entryGroups);
     return new __Main__1.FunctionBar({
         ...options,
         entryGroups,
@@ -12784,19 +12782,20 @@ __Main__1.CardType_Manager.initialize_Manual({
     },
     cardTypes: [
         { "Task": [
-                { borderAccent_Color: priorityColors.low, ...taskSettings },
-                { borderAccent_Color: priorityColors.medium, ...taskSettings },
-                { borderAccent_Color: priorityColors.high, ...taskSettings },
-                { borderAccent_Color: priorityColors.urgent, ...taskSettings },
+                { name: "Low", borderAccent_Color: priorityColors.low, ...taskSettings },
+                { name: "Medium", borderAccent_Color: priorityColors.medium, ...taskSettings },
+                { name: "High", borderAccent_Color: priorityColors.high, ...taskSettings },
+                { name: "Urgent", borderAccent_Color: priorityColors.urgent, ...taskSettings },
             ] },
         { "Today": [
-                { borderAccent_Color: priorityColors.low, ...todaySettings },
-                { borderAccent_Color: priorityColors.medium, ...todaySettings },
-                { borderAccent_Color: priorityColors.high, ...todaySettings },
-                { borderAccent_Color: priorityColors.urgent, ...todaySettings },
+                { name: "Low", borderAccent_Color: priorityColors.low, ...todaySettings },
+                { name: "Medium", borderAccent_Color: priorityColors.medium, ...todaySettings },
+                { name: "High", borderAccent_Color: priorityColors.high, ...todaySettings },
+                { name: "Urgent", borderAccent_Color: priorityColors.urgent, ...todaySettings },
             ] },
         { "Misc": [
                 {
+                    name: "Daily",
                     background_Color: "hsl(215, 80%, 85%)",
                     foreground_Color: "hsl(215, 20%, 40%)",
                     borderColor_Inside: "hsl(215, 40%, 50%)",
@@ -12804,6 +12803,7 @@ __Main__1.CardType_Manager.initialize_Manual({
                     borderColor_Outside: "hsl(215, 50%, 50%)",
                 },
                 {
+                    name: "Book",
                     background_Color: "hsl(255, 70%, 85%)",
                     foreground_Color: "hsl(255, 20%, 40%)",
                     borderColor_Inside: "hsl(255, 40%, 50%)",
@@ -13648,7 +13648,7 @@ function get_Auto_CardTypes_Rows() {
                 break;
             }
             const cardType = cardTypes[cardIndex];
-            cardType_Array.push(cardType);
+            cardType_Array.push({ name: cardType.name, cardType });
             cardIndex += 1;
         }
     }
@@ -13672,7 +13672,8 @@ function get_Manual_CardTypes_Rows(cardOptions) {
                 break;
             }
             const cardType = cardTypes[index];
-            cardType_Array.push(cardType);
+            const name = (options.name) ? options.name : cardType.name;
+            cardType_Array.push({ name, cardType });
             index += 1;
         }
         cardType_Rows.push(cardType_Row);
