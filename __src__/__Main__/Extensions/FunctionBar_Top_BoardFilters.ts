@@ -4,15 +4,33 @@ import {KeyBinding } from "~/Utils/KeyBinding/__Main__"
 import {KanbanTool } from "~/Utils/KanbanTool/__Main__"
 
 //###  Aliases  ###//
-const {Entry, Position     } = FunctionBar
-const {CardType, Show, Hide} = KanbanTool
+const {Entry, Position                    } = FunctionBar
+const {CardType, Show, Hide               } = KanbanTool
+const {enable_CardTypes, disable_CardTypes} = CardType.Filter
 
 
 //###############//
 //###  Setup  ###//
 //###############//
 
-const activeTask_Columns = ["Routine", "Tasks.Active"]
+const Modes: Mode[][] = [
+	[
+		{name:"Tasks_All",      rows:["Active"], cardTypes:/(Task|Today)_(Low|Medium|High|Urgent)/, is_Default:true},
+		{name:"Tasks_Priority", rows:["Active"], cardTypes:/(Task|Today)_(Medium|High|Urgent)/                     },
+	],
+	[
+		{name:"Today_All",       rows:["Active"         ], cardTypes:/Today_(Low|Medium|High|Urgent)/               },
+		{name:"Today_Priority",  rows:["Active"         ], cardTypes:/Today_(Medium|High|Urgent)/                   },
+		{name:"Today + Routine", rows:["Daily", "Active"], cardTypes:/(Task_Daily)|(Today_(Low|Medium|High|Urgent))/},
+		{name:"Routine",         rows:["Daily"          ], cardTypes:/Task_Daily/                                   },
+	],
+	[
+		{name:"Plan_Tasks", rows:["Active", "Next", "Queue"], cardTypes:undefined},
+		{name:"Plan_Next",  rows:["Active", "Next"         ], cardTypes:undefined},
+		{name:"Plan_Queue", rows:["Next",   "Queue"        ], cardTypes:undefined},
+		{name:"Plan_All",   rows:undefined,                   cardTypes:undefined},
+	],
+]
 
 
 //#####################//
@@ -26,39 +44,7 @@ FunctionBar.load( new FunctionBar({
 	keyBinding_Modifiers: ["shift", "alt"],
 	stretchCells:         false,
 	cellProperties:       [{functionName:"css", args:["min-width", "90px"]}],
-
-	entryGroups:[
-
-		[
-			new Entry({
-				name: "Today",
-				...get_Callbacks(() => {
-					Show.allColumns()
-					Show.rows({include:activeTask_Columns})
-					CardType.Filter.disable_CardTypes()
-					CardType.Filter.enable_CardTypes(/^(Today.*)|(Task_Daily)/)
-				})
-			}),
-			new Entry({
-				on_Layout: function(cell:JQuery){this.on_KeyBinding(null, null)},
-				name: "Tasks",
-				...get_Callbacks(() => {
-					Show.allColumns()
-					Show.rows({include:activeTask_Columns})
-					CardType.Filter.enable_CardTypes()
-				}),
-			}),
-			new Entry({
-				name: "Planning",
-				...get_Callbacks(() => {
-					Show.allColumns()
-					Show.allRows()
-					CardType.Filter.enable_CardTypes()
-				}),
-			}),
-		],
-
-	],
+	entryGroups:          _get_EntryGroups()
 
 }))
 
@@ -67,19 +53,46 @@ FunctionBar.load( new FunctionBar({
 //###  Utils  ###//
 //###############//
 
-const _secondaryCallback =
-	() => {Hide.emptyColumns()}
+interface Mode{
+	name:        string,
+	rows:        string[],
+	cardTypes:   RegExp,
+	is_Default?: boolean
+}
 
-function get_Callbacks(callback:(() => void)){
-	return {
-		on_KeyBinding: (event:KeyboardEvent, cell:JQuery) => {
-			callback()
-			_secondaryCallback()
-		},
-		on_Click: (event:JQuery.ClickEvent, cell:JQuery) => {
-			callback()
-			if(! KeyBinding.is_Pressed("ctrl"))
-				{_secondaryCallback()}
-		}
-	}
+function _get_EntryGroups(){
+	return Modes.map(row =>
+		row.map( ({name, rows, cardTypes, is_Default}) =>
+
+			new Entry({
+				name,
+				..._get_OnLayout(is_Default),
+				..._get_Callback(rows, cardTypes),
+			})
+
+		)
+	)
+}
+
+function _get_Callback(rows:string[], cardTypes:RegExp){
+	return {callback: (event:any) => {
+		const _cardTypes = (cardTypes) ? [cardTypes] : []
+
+		Show.allColumns()
+
+		if(rows)
+			{Show.rows({include:rows})}
+
+		disable_CardTypes()
+		enable_CardTypes(..._cardTypes)
+		Hide.emptyColumns()
+	}}
+}
+
+function _get_OnLayout(is_Default:boolean){
+	return (
+		is_Default
+		? {on_Layout: function(cell:JQuery){this.callback(null, null)}}
+		: {}
+	)
 }
