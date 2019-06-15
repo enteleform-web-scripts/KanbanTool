@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560622115845)
+		const elapsedTime = _get_ElapsedTime(1560625728975)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     2:08:35 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:08:48 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11538,22 +11538,21 @@ var CardType_Manager;
 (function (CardType_Manager) {
     CardType_Manager.HoverManager = HoverManager_1.HoverManager;
     function initialize_Manual(options) {
-        const functionBar = _get_CardType_FunctionBar(options.mode, options.cardTypes, options.cellWidth, options.functionBar_Options);
+        const functionBar = _get_CardType_FunctionBar(_Mode.Manual, options.cardTypes, options.cellWidth, options.functionBar_Options);
         _initialize(functionBar, options.cardTypes);
     }
     CardType_Manager.initialize_Manual = initialize_Manual;
     function initialize_Auto(options) {
-        const functionBar = _get_CardType_FunctionBar(CardType_Manager.Mode._AutoRows, [], options.cellWidth, options.functionBar_Options);
+        const functionBar = _get_CardType_FunctionBar(_Mode.Auto, [], options.cellWidth, options.functionBar_Options);
         _initialize(functionBar, undefined);
     }
     CardType_Manager.initialize_Auto = initialize_Auto;
-    let Mode;
-    (function (Mode) {
-        Mode[Mode["_AutoRows"] = 0] = "_AutoRows";
-        Mode[Mode["SingleRow"] = 1] = "SingleRow";
-        Mode[Mode["MultipleRows"] = 2] = "MultipleRows";
-    })(Mode = CardType_Manager.Mode || (CardType_Manager.Mode = {}));
 })(CardType_Manager = exports.CardType_Manager || (exports.CardType_Manager = {}));
+var _Mode;
+(function (_Mode) {
+    _Mode[_Mode["Auto"] = 0] = "Auto";
+    _Mode[_Mode["Manual"] = 1] = "Manual";
+})(_Mode || (_Mode = {}));
 const _Default_FunctionBar_Options = {
     position: Position_1.Position.Bottom,
     autoMap_KeyBindings: true,
@@ -11563,21 +11562,16 @@ const _Default_FunctionBar_Options = {
     cellProperties: [],
 };
 function _initialize(functionBar, cardOptions) {
-    StyleManager_1.StyleManager.initialize(cardOptions);
+    const cardOptions_Array = _get_CardOptions_Array(cardOptions);
+    StyleManager_1.StyleManager.initialize(cardOptions_Array);
     HoverManager_1.HoverManager.initialize();
     __Main__1.FunctionBar.load(functionBar);
 }
 function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, functionBar_Options) {
-    let cardType_Rows;
-    if (mode == CardType_Manager.Mode._AutoRows) {
-        cardType_Rows = get_Rows_1.get_Auto_CardTypes_Rows();
-    }
-    else if (mode == CardType_Manager.Mode.SingleRow) {
-        cardType_Rows = get_Rows_1.get_Manual_CardTypes_SingleRow(cardOptions);
-    }
-    else if (mode == CardType_Manager.Mode.MultipleRows) {
-        cardType_Rows = get_Rows_1.get_Manual_CardTypes_MultipleRows(cardOptions);
-    }
+    const cardOptions_Array = _get_CardOptions_Array(cardOptions);
+    const cardType_Rows = (mode == _Mode.Auto)
+        ? get_Rows_1.get_Auto_CardTypes_Rows()
+        : get_Rows_1.get_Manual_CardTypes_Rows(cardOptions_Array);
     functionBar_Options = { ..._Default_FunctionBar_Options, ...functionBar_Options };
     if (cellWidth !== undefined) {
         functionBar_Options.stretchCells = false;
@@ -11585,12 +11579,21 @@ function _get_CardType_FunctionBar(mode, cardOptions, cellWidth, functionBar_Opt
     _update_FunctionBar_Options_CellWidth(functionBar_Options, cellWidth);
     return _build_FunctionBar(functionBar_Options, cardType_Rows);
 }
+function _get_CardOptions_Array(cardOptions) {
+    return cardOptions.map(row => (row instanceof Array)
+        ? row
+        : Object.values(row)[0]);
+}
 function _build_FunctionBar(options, cardType_Rows) {
-    const entryGroups = cardType_Rows.map(row => row.map(cardType => new __Main__1.FunctionBar.Entry({
-        name: cardType.name,
-        keyBinding_Scope: __Main__2.KeyBinding_Scopes.Card_IsHovered,
-        ...CallbackManager_1.CallbackManager.get_Callbacks(),
-    })));
+    const entryGroups = cardType_Rows.map(row => {
+        const [groupName, group] = Object.entries(row)[0];
+        return { [groupName]: group.map(cardType => new __Main__1.FunctionBar.Entry({
+                name: cardType.name,
+                keyBinding_Scope: __Main__2.KeyBinding_Scopes.Card_IsHovered,
+                ...CallbackManager_1.CallbackManager.get_Callbacks(),
+            }))
+        };
+    });
     return new __Main__1.FunctionBar({
         ...options,
         entryGroups,
@@ -12771,41 +12774,40 @@ const taskSettings = {
     borderColor_Outside: "hsl(0, 0%, 60%)",
 };
 __Main__1.CardType_Manager.initialize_Manual({
-    mode: __Main__1.CardType_Manager.Mode.MultipleRows,
-    cellWidth: 125,
+    cellWidth: 75,
     functionBar_Options: {
         singleContainer: true,
         stretchCells: false,
     },
     cardTypes: [
-        [
-            { borderAccent_Color: priorityColors.low, ...taskSettings },
-            { borderAccent_Color: priorityColors.medium, ...taskSettings },
-            { borderAccent_Color: priorityColors.high, ...taskSettings },
-            { borderAccent_Color: priorityColors.urgent, ...taskSettings },
-        ],
-        [
-            { borderAccent_Color: priorityColors.low, ...todaySettings },
-            { borderAccent_Color: priorityColors.medium, ...todaySettings },
-            { borderAccent_Color: priorityColors.high, ...todaySettings },
-            { borderAccent_Color: priorityColors.urgent, ...todaySettings },
-        ],
-        [
-            {
-                background_Color: "hsl(215, 80%, 85%)",
-                foreground_Color: "hsl(215, 20%, 40%)",
-                borderColor_Inside: "hsl(215, 40%, 50%)",
-                borderColor_Main: "hsl(215, 40%, 65%)",
-                borderColor_Outside: "hsl(215, 50%, 50%)",
-            },
-            {
-                background_Color: "hsl(255, 70%, 85%)",
-                foreground_Color: "hsl(255, 20%, 40%)",
-                borderColor_Inside: "hsl(255, 40%, 50%)",
-                borderColor_Main: "hsl(255, 40%, 65%)",
-                borderColor_Outside: "hsl(255, 50%, 55%)",
-            },
-        ],
+        { "Task": [
+                { borderAccent_Color: priorityColors.low, ...taskSettings },
+                { borderAccent_Color: priorityColors.medium, ...taskSettings },
+                { borderAccent_Color: priorityColors.high, ...taskSettings },
+                { borderAccent_Color: priorityColors.urgent, ...taskSettings },
+            ] },
+        { "Today": [
+                { borderAccent_Color: priorityColors.low, ...todaySettings },
+                { borderAccent_Color: priorityColors.medium, ...todaySettings },
+                { borderAccent_Color: priorityColors.high, ...todaySettings },
+                { borderAccent_Color: priorityColors.urgent, ...todaySettings },
+            ] },
+        { "Misc": [
+                {
+                    background_Color: "hsl(215, 80%, 85%)",
+                    foreground_Color: "hsl(215, 20%, 40%)",
+                    borderColor_Inside: "hsl(215, 40%, 50%)",
+                    borderColor_Main: "hsl(215, 40%, 65%)",
+                    borderColor_Outside: "hsl(215, 50%, 50%)",
+                },
+                {
+                    background_Color: "hsl(255, 70%, 85%)",
+                    foreground_Color: "hsl(255, 20%, 40%)",
+                    borderColor_Inside: "hsl(255, 40%, 50%)",
+                    borderColor_Main: "hsl(255, 40%, 65%)",
+                    borderColor_Outside: "hsl(255, 50%, 55%)",
+                },
+            ] },
     ],
 });
 
@@ -13524,9 +13526,9 @@ class Layout {
                 subContainer.append(divider);
             }
             if (groupName) {
-                const textDivider = $("<div>", { class: CSS.textDivider });
-                textDivider.text(groupName);
-                subContainer.append(textDivider);
+                const groupLabel = $("<div>", { class: CSS.groupLabel });
+                groupLabel.text(groupName);
+                subContainer.append(groupLabel);
             }
             entries.forEach((entry, entryIndex) => {
                 const keyBinding = entry.initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex);
@@ -13603,7 +13605,7 @@ function _update_OriginalLayout() {
 /* 42 */
 /***/ (function(module) {
 
-module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collapsed","empty":"empty","divider":"divider","textDivider":"textDivider","_":""}};
+module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collapsed","empty":"empty","divider":"divider","groupLabel":"groupLabel","_":""}};
 
 /***/ }),
 /* 43 */
@@ -13629,52 +13631,52 @@ const __Main__1 = __webpack_require__(0);
 const __Main__2 = __webpack_require__(1);
 const { CardType, cardTypes } = __Main__1.KanbanTool;
 function get_Auto_CardTypes_Rows() {
-    let cardType_Rows = [];
+    const cardType_Rows = [];
     let cardIndex = 0;
     for (const keyRow of __Main__2.KeyBinding.alphanumericKey_Rows) {
         if (_cardTypes_Exhausted(cardIndex)) {
             break;
         }
-        const cardType_Row = [];
+        const cardType_Array = [];
+        const cardType_Row = { "": cardType_Array };
         cardType_Rows.push(cardType_Row);
         for (const key of keyRow) {
             if (_cardTypes_Exhausted(cardIndex)) {
                 break;
             }
             const cardType = cardTypes[cardIndex];
-            cardType_Row.push(cardType);
+            cardType_Array.push(cardType);
             cardIndex += 1;
         }
     }
     return cardType_Rows;
 }
 exports.get_Auto_CardTypes_Rows = get_Auto_CardTypes_Rows;
-function get_Manual_CardTypes_MultipleRows(cardOptions) {
+function get_Manual_CardTypes_Rows(cardOptions) {
     const cardType_Rows = [];
     let index = 0;
     for (const optionsRow of cardOptions) {
         if (_cardTypes_Exhausted(index)) {
             break;
         }
-        const cardType_Row = [];
-        for (const options of optionsRow) {
+        const [group, groupName] = (optionsRow instanceof Array)
+            ? [optionsRow, ""]
+            : [Object.values(optionsRow)[0], Object.keys(optionsRow)[0]];
+        const cardType_Array = [];
+        const cardType_Row = { [groupName]: cardType_Array };
+        for (const options of group) {
             if (_cardTypes_Exhausted(index)) {
                 break;
             }
             const cardType = cardTypes[index];
-            cardType_Row.push(cardType);
+            cardType_Array.push(cardType);
             index += 1;
         }
         cardType_Rows.push(cardType_Row);
     }
     return cardType_Rows;
 }
-exports.get_Manual_CardTypes_MultipleRows = get_Manual_CardTypes_MultipleRows;
-function get_Manual_CardTypes_SingleRow(cardOptions) {
-    const flattened = cardOptions.flatMap(options => options);
-    return get_Manual_CardTypes_MultipleRows([flattened]);
-}
-exports.get_Manual_CardTypes_SingleRow = get_Manual_CardTypes_SingleRow;
+exports.get_Manual_CardTypes_Rows = get_Manual_CardTypes_Rows;
 function _cardTypes_Exhausted(cardIndex) { return (cardIndex == cardTypes.length); }
 
 

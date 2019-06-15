@@ -1,6 +1,8 @@
 .FunctionBars {
   --BorderColor: #ababb1;
   --ExpandButton_Color: #6a6a6a;
+  --RowDivider_Height: 35px;
+  --ColumnDivider_Height: 24px;
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -53,7 +55,15 @@
 }
 .FunctionBars .center .left .column .divider,
 .FunctionBars .center .right .column .divider {
-  height: 24px;
+  height: var(--ColumnDivider_Height);
+}
+.FunctionBars .center .left .column .groupLabel,
+.FunctionBars .center .right .column .groupLabel {
+  padding-left: 5px;
+}
+.FunctionBars .center .left .column .groupLabel:nth-child(1),
+.FunctionBars .center .right .column .groupLabel:nth-child(1) {
+  margin-top: var(--ColumnDivider_Height);
 }
 .FunctionBars .top,
 .FunctionBars .bottom {
@@ -74,7 +84,11 @@
 }
 .FunctionBars .top .row .divider,
 .FunctionBars .bottom .row .divider {
-  width: 35px;
+  width: var(--RowDivider_Height);
+}
+.FunctionBars .top .row .groupLabel,
+.FunctionBars .bottom .row .groupLabel {
+  align-self: center;
 }
 .FunctionBars .top .row.stretch,
 .FunctionBars .bottom .row.stretch {
@@ -95,6 +109,11 @@
   border: 1px solid var(--BorderColor);
   background: #d9d9de;
   color: #505052;
+}
+.FunctionBars .groupLabel {
+  color: #505050;
+  font-size: 14px;
+  font-weight: bold;
 }
 .FunctionBars .left.empty,
 .FunctionBars .right.empty,
