@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560634917563)
+		const elapsedTime = _get_ElapsedTime(1560634968952)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:41:57 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:42:48 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13884,13 +13884,13 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], _, "convert_TodayCards_To_TaskCards", null);
 __decorate([
-    __Main__3.KeyBinding.add(["ctrl", "`"], { preventDefault: true }),
+    __Main__3.KeyBinding.add(["`"], { preventDefault: true }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [KeyboardEvent]),
     __metadata("design:returntype", void 0)
 ], _, "hide_EmptyColumns", null);
 __decorate([
-    __Main__3.KeyBinding.add(["ctrl", "shift", "`"], { preventDefault: true }),
+    __Main__3.KeyBinding.add(["ctrl", "`"], { preventDefault: true }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [KeyboardEvent]),
     __metadata("design:returntype", void 0)
