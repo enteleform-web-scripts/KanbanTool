@@ -35,10 +35,11 @@ const taskSettings = {
 //#####################//
 
 CardType_Manager.initialize_Manual({
-	mode:      CardType_Manager.Mode.SingleRow,
+	mode:      CardType_Manager.Mode.MultipleRows,
 	cellWidth: 125,
 
 	functionBar_Options:{
+		singleRow:    true,
 		stretchCells: false,
 	},
 
