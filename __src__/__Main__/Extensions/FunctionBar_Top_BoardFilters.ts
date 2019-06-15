@@ -19,18 +19,18 @@ const Modes: Mode[][] = [
 		{name:"Tasks_Priority", rows:["Active"], cardTypes:/(Task|Today)_(Medium|High|Urgent)/                     },
 	],
 	[
-		{name:"Today_All",       rows:["Active"         ], cardTypes:/Today_(Low|Medium|High|Urgent)/               },
-		{name:"Today_Priority",  rows:["Active"         ], cardTypes:/Today_(Medium|High|Urgent)/                   },
+		{name:"Today_All",       rows:["Active"], cardTypes:/Today_(Low|Medium|High|Urgent)/},
+		{name:"Today_Priority",  rows:["Active"], cardTypes:/Today_(Medium|High|Urgent)/    },
 	],
 	[
 		{name:"Routine",         rows:["Daily"          ], cardTypes:/Task_Daily/                                   },
 		{name:"Routine + Today", rows:["Daily", "Active"], cardTypes:/(Task_Daily)|(Today_(Low|Medium|High|Urgent))/},
 	],
 	[
-		{name:"Plan_Tasks", rows:["Active", "Next", "Queue"], cardTypes:undefined},
-		{name:"Plan_Next",  rows:["Active", "Next"         ], cardTypes:undefined},
-		{name:"Plan_Queue", rows:["Next",   "Queue"        ], cardTypes:undefined},
-		{name:"Plan_All",   rows:undefined,                   cardTypes:undefined},
+		{name:"Plan_Active", rows:["Active", "Next"         ], cardTypes:undefined},
+		{name:"Plan_Next",   rows:["Next",   "Queue"        ], cardTypes:undefined},
+		{name:"Plan_Tasks",  rows:["Active", "Next", "Queue"], cardTypes:undefined},
+		{name:"Plan_All",    rows:undefined,                   cardTypes:undefined},
 	],
 ]
 
