@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560613603553)
+		const elapsedTime = _get_ElapsedTime(1560614498373)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     11:46:43 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:01:38 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13949,8 +13949,8 @@ const __Main__1 = __webpack_require__(0);
 class focus_SearchField {
     static initialize(keys) {
         return (event) => {
-            const searchField = $("#kt-board_search-q");
-            searchField.focus();
+            _searchField.focus();
+            _searchField.select();
         };
     }
 }
@@ -13964,6 +13964,17 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], focus_SearchField, "initialize", null);
 exports.focus_SearchField = focus_SearchField;
+_unfocus_SearchField_OnEnter();
+const _searchField = $("#kt-board_search-q");
+const _enter_KeyCode = 13;
+function _unfocus_SearchField_OnEnter() {
+    _searchField.keypress((event) => {
+        var keycode = (event.keyCode) ? event.keyCode : event.which;
+        if (keycode == _enter_KeyCode) {
+            _searchField.blur();
+        }
+    });
+}
 
 
 /***/ }),
