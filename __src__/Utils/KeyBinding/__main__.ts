@@ -16,11 +16,11 @@ import {
 import HotKeys from "hotkeys-js"
 
 
-//###############//
-//###  Setup  ###//
-//###############//
+//##############//
+//###  Init  ###//
+//##############//
 
-HotKeys.filter = _disable_DefaultFilters
+// HotKeys.filter = _disable_DefaultFilters
 
 
 //#################//

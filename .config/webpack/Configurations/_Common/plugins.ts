@@ -3,12 +3,9 @@ import {Settings                       } from "../../../../__src__/Settings"
 import {get_log_TimeSinceBuild_Callback} from "../../Utils/log_TimeSinceBuild"
 import {pug_Splitter                   } from "./__Shared__"
 
-//###  Node  ###//
-import path from "path"
-
 //###  NPM  ###//
 import webpack                      from "webpack"
-import CleanWebpackPlugin           from "clean-webpack-plugin"
+import {CleanWebpackPlugin}         from "clean-webpack-plugin"
 import CopyPlugin                   from "copy-webpack-plugin"
 import HtmlWebpackPlugin            from "html-webpack-plugin"
 import InjectPlugin                 from "webpack-inject-plugin"
@@ -32,7 +29,7 @@ const $: webpack.Plugin[] = [
 	}),
 
 	...pug_Splitter.templates.map(template => (
-			new HtmlWebpackPlugin(template)
+		new HtmlWebpackPlugin(template)
 	)),
 
 	new MiniCssExtractPlugin({
@@ -49,7 +46,7 @@ const $: webpack.Plugin[] = [
 
 	new WebpackBar(),
 
-	// new WebpackBuildNotifierPlugin(),
+	new WebpackBuildNotifierPlugin(),
 
 	new InjectPlugin(
 		get_log_TimeSinceBuild_Callback(),
