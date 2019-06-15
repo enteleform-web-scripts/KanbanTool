@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560634968952)
+		const elapsedTime = _get_ElapsedTime(1560635234164)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:42:48 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:47:14 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13789,7 +13789,7 @@ const Modes = [
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
-    keyBinding_Modifiers: ["shift", "alt"],
+    keyBinding_Modifiers: ["alt"],
     singleContainer: true,
     stretchCells: false,
     cellProperties: [{ functionName: "css", args: ["min-width", "80px"] }],
@@ -13884,13 +13884,13 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], _, "convert_TodayCards_To_TaskCards", null);
 __decorate([
-    __Main__3.KeyBinding.add(["`"], { preventDefault: true }),
+    __Main__3.KeyBinding.add(["-"], { preventDefault: true }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [KeyboardEvent]),
     __metadata("design:returntype", void 0)
 ], _, "hide_EmptyColumns", null);
 __decorate([
-    __Main__3.KeyBinding.add(["ctrl", "`"], { preventDefault: true }),
+    __Main__3.KeyBinding.add(["="], { preventDefault: true }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [KeyboardEvent]),
     __metadata("design:returntype", void 0)
