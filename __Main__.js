@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560618879160)
+		const elapsedTime = _get_ElapsedTime(1560619613912)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:14:39 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:26:53 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11160,12 +11160,13 @@ const Layout_1 = __webpack_require__(43);
 const Module_BaseClasses_1 = __webpack_require__(44);
 const Position_1 = __webpack_require__(10);
 class FunctionBar extends Module_BaseClasses_1.Module {
-    constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, stretchCells, cellProperties }) {
+    constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, singleRow, stretchCells, cellProperties, }) {
         super();
         this.position = position;
         this.entryGroups = entryGroups;
         this.autoMap_KeyBindings = (autoMap_KeyBindings || false);
         this.keyBinding_Modifiers = (keyBinding_Modifiers || []);
+        this.singleRow = (singleRow || false);
         this.stretchCells = (stretchCells || false);
         this.cellProperties = (cellProperties || []);
     }
@@ -13555,10 +13556,14 @@ class Layout {
             subContainer_Class += " stretch";
         }
         this.subContainers = [];
+        let subContainer;
         entryGroups.forEach((group, groupIndex) => {
-            const subContainer = $("<div>", { class: subContainer_Class });
-            this.container.append(subContainer);
-            this.subContainers.push(subContainer);
+            if ((groupIndex == 0)
+                || (!this._functionBar.singleRow)) {
+                subContainer = $("<div>", { class: subContainer_Class });
+                this.container.append(subContainer);
+                this.subContainers.push(subContainer);
+            }
             group.forEach((entry, entryIndex) => {
                 const keyBinding = entry.initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex);
                 this.add_Cell(entry, groupIndex, keyBinding);
@@ -13784,9 +13789,10 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
     keyBinding_Modifiers: ["alt"],
+    singleRow: true,
     stretchCells: false,
     cellProperties: [{ functionName: "css", args: ["min-width", "130px"] }],
-    entryGroups: _get_EntryGroups()
+    entryGroups: _get_EntryGroups(),
 }));
 function _get_EntryGroups() {
     return Modes.map(row => row.map(({ name, rows, cardTypes, is_Default }) => new Entry({
