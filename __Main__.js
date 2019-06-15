@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560620778059)
+		const elapsedTime = _get_ElapsedTime(1560621920353)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:46:18 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     2:05:20 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13513,6 +13513,7 @@ class Layout {
         }
         let subContainer;
         entryGroups.forEach((group, groupIndex) => {
+            const { entries, groupName } = _get_GroupData(group);
             if ((groupIndex == 0)
                 || (!this._functionBar.singleRow)) {
                 subContainer = $("<div>", { class: subContainer_Class });
@@ -13522,7 +13523,12 @@ class Layout {
                 const divider = $("<div>", { class: CSS.divider });
                 subContainer.append(divider);
             }
-            group.forEach((entry, entryIndex) => {
+            if (groupName) {
+                const textDivider = $("<div>", { class: CSS.textDivider });
+                textDivider.text(groupName);
+                subContainer.append(textDivider);
+            }
+            entries.forEach((entry, entryIndex) => {
                 const keyBinding = entry.initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex);
                 this._add_Cell(entry, subContainer, keyBinding);
             });
@@ -13558,6 +13564,14 @@ const _BarComponent_Map = {
     [Position_1.Position.Top]: { containerSelector: `.${CSS.container} > .top`, subContainer_Class: "row", toggleButton_Selector: ".top    > .expand-button > .cell" },
     [Position_1.Position.Bottom]: { containerSelector: `.${CSS.container} > .bottom`, subContainer_Class: "row", toggleButton_Selector: ".bottom > .expand-button > .cell" },
 };
+function _get_GroupData(group) {
+    if (group instanceof Array) {
+        return { entries: group, groupName: undefined };
+    }
+    else {
+        return { entries: Object.values(group)[0], groupName: Object.keys(group)[0] };
+    }
+}
 function _get_ContainerToggle_Callback(position) {
     const { containerSelector } = _BarComponent_Map[position];
     const container = $(containerSelector);
@@ -13679,50 +13693,56 @@ const { CardType, Show, Hide } = __Main__2.KanbanTool;
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     position: Position.Left,
     entryGroups: [
-        [
-            new Entry({
-                name: "Show_Rows",
-                callback: () => {
-                    Show.allRows();
-                },
-            }),
-            new Entry({
-                name: "Show_Columns",
-                callback: () => {
-                    Show.allColumns();
-                },
-            }),
-            new Entry({
-                name: "Hide_Rows",
-                callback: () => {
-                    Hide.emptyRows();
-                },
-            }),
-            new Entry({
-                name: "Hide_Columns",
-                callback: () => {
-                    Hide.emptyColumns();
-                },
-            }),
-            new Entry({
-                name: "Filter_All",
-                callback: () => {
-                    CardType.Filter.enable_CardTypes();
-                },
-            }),
-            new Entry({
-                name: "Filter_None",
-                callback: () => {
-                    CardType.Filter.disable_CardTypes();
-                },
-            }),
-            new Entry({
-                name: "Clear_Today",
-                callback: () => {
-                    TaskToggle_1.TaskToggle.convert_TodayCards_To_TaskCards();
-                },
-            }),
-        ],
+        { "Show": [
+                new Entry({
+                    name: "Rows",
+                    callback: () => {
+                        Show.allRows();
+                    },
+                }),
+                new Entry({
+                    name: "Columns",
+                    callback: () => {
+                        Show.allColumns();
+                    },
+                }),
+            ] },
+        { "Hide": [
+                new Entry({
+                    name: "Rows",
+                    callback: () => {
+                        Hide.emptyRows();
+                    },
+                }),
+                new Entry({
+                    name: "Columns",
+                    callback: () => {
+                        Hide.emptyColumns();
+                    },
+                }),
+            ] },
+        { "Filter": [
+                new Entry({
+                    name: "Clear",
+                    callback: () => {
+                        CardType.Filter.enable_CardTypes();
+                    },
+                }),
+                new Entry({
+                    name: "All",
+                    callback: () => {
+                        CardType.Filter.disable_CardTypes();
+                    },
+                }),
+            ] },
+        { "Today": [
+                new Entry({
+                    name: "Clear",
+                    callback: () => {
+                        TaskToggle_1.TaskToggle.convert_TodayCards_To_TaskCards();
+                    },
+                }),
+            ] },
     ],
 }));
 
