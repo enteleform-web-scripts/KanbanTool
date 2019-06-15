@@ -85,9 +85,9 @@ export class Layout{
 			}
 
 			if(groupName){
-				const textDivider = $("<div>", {class:CSS.textDivider})
-				textDivider.text(groupName)
-				subContainer.append(textDivider)
+				const groupLabel = $("<div>", {class:CSS.groupLabel})
+				groupLabel.text(groupName)
+				subContainer.append(groupLabel)
 			}
 
 			entries.forEach((entry, entryIndex) => {

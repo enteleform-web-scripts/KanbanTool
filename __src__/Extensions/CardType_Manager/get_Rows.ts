@@ -1,8 +1,8 @@
 
 //###  Module  ###//
-import {_CardOptions} from "./__Main__"
-import {KanbanTool  } from "~/Utils/KanbanTool/__Main__"
-import {KeyBinding  } from "~/Utils/KeyBinding/__Main__"
+import {_CardOptions, _CardOptions_Group} from "./__Main__"
+import {KanbanTool                      } from "~/Utils/KanbanTool/__Main__"
+import {KeyBinding                      } from "~/Utils/KeyBinding/__Main__"
 
 //###  Aliases  ###//
 type  CardType = KanbanTool.CardType
@@ -13,15 +13,16 @@ const {CardType, cardTypes} = KanbanTool
 //###  Exports  ###//
 //#################//
 
-export function get_Auto_CardTypes_Rows(){
-	let cardType_Rows: CardType[][] = []
+export function get_Auto_CardTypes_Rows(): CardType_Group[]{
+	const cardType_Rows: CardType_Group[] = []
 	let cardIndex = 0
 
 	for(const keyRow of KeyBinding.alphanumericKey_Rows){
 		if(_cardTypes_Exhausted(cardIndex))
 			{break}
 
-		const cardType_Row = []
+		const cardType_Array = []
+		const cardType_Row   = {"":cardType_Array}
 		cardType_Rows.push(cardType_Row)
 
 		for(const key of keyRow){
@@ -29,7 +30,7 @@ export function get_Auto_CardTypes_Rows(){
 				{break}
 
 			const cardType = cardTypes[cardIndex]
-			cardType_Row.push(cardType)
+			cardType_Array.push(cardType)
 			cardIndex += 1
 		}
 	}
@@ -37,22 +38,28 @@ export function get_Auto_CardTypes_Rows(){
 	return cardType_Rows
 }
 
-export function get_Manual_CardTypes_MultipleRows(cardOptions:_CardOptions[][]){
-	const cardType_Rows: CardType[][] = []
+export function get_Manual_CardTypes_Rows(cardOptions:_CardOptions_Group[]): CardType_Group[]{
+	const cardType_Rows: CardType_Group[] = []
 	let index = 0
 
 	for(const optionsRow of cardOptions){
 		if(_cardTypes_Exhausted(index))
 			{break}
 
-		const cardType_Row = []
+		const [group, groupName] =
+			(optionsRow instanceof Array)
+			? [optionsRow, ""]
+			: [Object.values(optionsRow)[0], Object.keys(optionsRow)[0]]
 
-		for(const options of optionsRow){
+		const cardType_Array = []
+		const cardType_Row   = {[groupName]: cardType_Array}
+
+		for(const options of group){
 			if(_cardTypes_Exhausted(index))
 				{break}
 
 			const cardType = cardTypes[index]
-			cardType_Row.push(cardType)
+			cardType_Array.push(cardType)
 			index += 1
 		}
 
@@ -62,11 +69,7 @@ export function get_Manual_CardTypes_MultipleRows(cardOptions:_CardOptions[][]){
 	return cardType_Rows
 }
 
-export function get_Manual_CardTypes_SingleRow(cardOptions:_CardOptions[][]){
-	const flattened = cardOptions.flatMap(options => options)
-	return get_Manual_CardTypes_MultipleRows([flattened])
-}
-
+export type CardType_Group = {[name:string]: CardType[]}
 
 //###############//
 //###  Utils  ###//

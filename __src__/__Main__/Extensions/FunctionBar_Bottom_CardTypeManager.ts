@@ -35,8 +35,7 @@ const taskSettings = {
 //#####################//
 
 CardType_Manager.initialize_Manual({
-	mode:      CardType_Manager.Mode.MultipleRows,
-	cellWidth: 125,
+	cellWidth: 75,
 
 	functionBar_Options:{
 		singleContainer: true,
@@ -44,19 +43,19 @@ CardType_Manager.initialize_Manual({
 	},
 
 	cardTypes: [
-		[
+		{"Task":[
 			{/*###  "Task_Low"    ###*/ borderAccent_Color:priorityColors.low,    ...taskSettings},
 			{/*###  "Task_Medium" ###*/ borderAccent_Color:priorityColors.medium, ...taskSettings},
 			{/*###  "Task_High"   ###*/ borderAccent_Color:priorityColors.high,   ...taskSettings},
 			{/*###  "Task_Urgent" ###*/ borderAccent_Color:priorityColors.urgent, ...taskSettings},
-		],
-		[
+		]},
+		{"Today":[
 			{/*###  "Today_Low"    ###*/ borderAccent_Color:priorityColors.low,    ...todaySettings},
 			{/*###  "Today_Medium" ###*/ borderAccent_Color:priorityColors.medium, ...todaySettings},
 			{/*###  "Today_High"   ###*/ borderAccent_Color:priorityColors.high,   ...todaySettings},
 			{/*###  "Today_Urgent" ###*/ borderAccent_Color:priorityColors.urgent, ...todaySettings},
-		],
-		[
+		]},
+		{"Misc":[
 			{ //###  Task_Daily  ###//
 				background_Color:    "hsl(215, 80%, 85%)",
 				foreground_Color:    "hsl(215, 20%, 40%)",
@@ -71,8 +70,7 @@ CardType_Manager.initialize_Manual({
 				borderColor_Main:    "hsl(255, 40%, 65%)",
 				borderColor_Outside: "hsl(255, 50%, 55%)",
 			},
-
-		],
+		]},
 	],
 })
 
