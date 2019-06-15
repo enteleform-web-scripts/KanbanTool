@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560618836245)
+		const elapsedTime = _get_ElapsedTime(1560618879160)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:13:56 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:14:39 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13774,9 +13774,9 @@ const Modes = [
         { name: "Routine + Today", rows: ["Daily", "Active"], cardTypes: /(Task_Daily)|(Today_(Low|Medium|High|Urgent))/ },
     ],
     [
+        { name: "Plan_Active", rows: ["Active", "Next"], cardTypes: undefined },
+        { name: "Plan_Next", rows: ["Next", "Queue"], cardTypes: undefined },
         { name: "Plan_Tasks", rows: ["Active", "Next", "Queue"], cardTypes: undefined },
-        { name: "Plan_Next", rows: ["Active", "Next"], cardTypes: undefined },
-        { name: "Plan_Queue", rows: ["Next", "Queue"], cardTypes: undefined },
         { name: "Plan_All", rows: undefined, cardTypes: undefined },
     ],
 ];
