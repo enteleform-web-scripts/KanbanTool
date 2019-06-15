@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560628180471)
+		const elapsedTime = _get_ElapsedTime(1560628384788)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:49:40 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:53:04 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13700,6 +13700,14 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     position: Position.Left,
     singleContainer: true,
     entryGroups: [
+        { "Today": [
+                new Entry({
+                    name: "Clear",
+                    callback: () => {
+                        TaskToggle_1.TaskToggle.convert_TodayCards_To_TaskCards();
+                    },
+                }),
+            ] },
         { "Show": [
                 new Entry({
                     name: "Rows",
@@ -13742,14 +13750,6 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
                     },
                 }),
             ] },
-        { "Today": [
-                new Entry({
-                    name: "Clear",
-                    callback: () => {
-                        TaskToggle_1.TaskToggle.convert_TodayCards_To_TaskCards();
-                    },
-                }),
-            ] },
     ],
 }));
 
@@ -13776,7 +13776,7 @@ const Modes = [
             { name: "Priority", rows: ["Active"], cardTypes: /Today_(Medium|High|Urgent)/ },
         ] },
     { "Daily": [
-            { name: "Tasks", rows: ["Daily"], cardTypes: /Task_Daily/ },
+            { name: "All", rows: ["Daily"], cardTypes: /Task_Daily/ },
             { name: "+Today", rows: ["Daily", "Active"], cardTypes: /(Task_Daily)|(Today_(Low|Medium|High|Urgent))/ },
         ] },
     { "Plan": [
