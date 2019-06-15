@@ -61,8 +61,8 @@
 .FunctionBars .center .right .column .groupLabel {
   padding-left: 5px;
 }
-.FunctionBars .center .left .column .groupLabel:nth-child(1),
-.FunctionBars .center .right .column .groupLabel:nth-child(1) {
+.FunctionBars .center .left .column .groupLabel:first-child,
+.FunctionBars .center .right .column .groupLabel:first-child {
   margin-top: var(--ColumnDivider_Height);
 }
 .FunctionBars .top,

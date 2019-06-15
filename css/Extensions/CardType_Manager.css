@@ -26,11 +26,11 @@ kt-board kt-task .kt-task-body,
 }
 .FunctionBars .cell.filter {
   box-shadow: /* BorderAccent.Outside   */ calc(0px - var(--title_Border_Width)) 0 0 0 var(--title_BorderAccent_Color), /* BorderAccent.Inside    */ inset var(--title_BorderAccent_Width) 0 0 0 var(--title_BorderAccent_Color), /* Border                 */ 0 0 0 var(--title_Border_Width) var(--title_BorderColor_Main), /* BorderAccent.Shadow_2  */ inset calc(var(--title_BorderAccent_Width) + var(--title_BorderAccent_Shadow2_Width)) 0 0 0 rgba(0,0,0,0.267), /* BorderAccent.Shadow_1  */ inset calc(var(--title_BorderAccent_Width) + var(--title_BorderAccent_Shadow1_Width)) 0 0 0 rgba(0,0,0,0.133), /* Border.OutsideBorder   */ 0 0 0 calc(var(--title_Border_Width) + 1px) var(--title_BorderColor_Outside), /* Border.InsideBorder    */ inset 0 0 0 1px var(--title_BorderColor_Inside), /* Shadow                 */ 5px 5px 8px 0px rgba(0,0,0,0), /* Shadow                 */ 5px 11px 8px -7px rgba(0,0,0,0) !important;
-  margin: 12px 0 12px 24px !important;
+  margin: 12px 18px 12px 6px !important;
   padding: 3px 10px 3px calc(10px + var(--title_BorderAccent_Width)) !important;
 }
-.FunctionBars .cell.filter:nth-child(1) {
-  margin-left: 0 !important;
+.FunctionBars .cell.filter:last-child {
+  margin-right: 0 !important;
 }
 .FunctionBars .cell.filter.active {
   opacity: 1 !important;
