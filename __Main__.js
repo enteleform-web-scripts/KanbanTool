@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560627071574)
+		const elapsedTime = _get_ElapsedTime(1560627929889)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     3:31:11 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     3:45:29 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13767,24 +13767,24 @@ const { Entry, Position } = __Main__1.FunctionBar;
 const { CardType, Show, Hide } = __Main__2.KanbanTool;
 const { enable_CardTypes, disable_CardTypes } = CardType.Filter;
 const Modes = [
-    [
-        { name: "Tasks_All", rows: ["Active"], cardTypes: /(Task|Today)_(Low|Medium|High|Urgent)/, is_Default: true },
-        { name: "Tasks_Priority", rows: ["Active"], cardTypes: /(Task|Today)_(Medium|High|Urgent)/ },
-    ],
-    [
-        { name: "Today_All", rows: ["Active"], cardTypes: /Today_(Low|Medium|High|Urgent)/ },
-        { name: "Today_Priority", rows: ["Active"], cardTypes: /Today_(Medium|High|Urgent)/ },
-    ],
-    [
-        { name: "Routine", rows: ["Daily"], cardTypes: /Task_Daily/ },
-        { name: "Routine + Today", rows: ["Daily", "Active"], cardTypes: /(Task_Daily)|(Today_(Low|Medium|High|Urgent))/ },
-    ],
-    [
-        { name: "Plan_Active", rows: ["Active", "Next"], cardTypes: undefined },
-        { name: "Plan_Next", rows: ["Next", "Queue"], cardTypes: undefined },
-        { name: "Plan_Tasks", rows: ["Active", "Next", "Queue"], cardTypes: undefined },
-        { name: "Plan_All", rows: undefined, cardTypes: undefined },
-    ],
+    { "Tasks": [
+            { name: "Tasks_All", rows: ["Active"], cardTypes: /(Task|Today)_(Low|Medium|High|Urgent)/, is_Default: true },
+            { name: "Tasks_Priority", rows: ["Active"], cardTypes: /(Task|Today)_(Medium|High|Urgent)/ },
+        ] },
+    { "Today": [
+            { name: "Today_All", rows: ["Active"], cardTypes: /Today_(Low|Medium|High|Urgent)/ },
+            { name: "Today_Priority", rows: ["Active"], cardTypes: /Today_(Medium|High|Urgent)/ },
+        ] },
+    { "Routine": [
+            { name: "Routine", rows: ["Daily"], cardTypes: /Task_Daily/ },
+            { name: "Routine + Today", rows: ["Daily", "Active"], cardTypes: /(Task_Daily)|(Today_(Low|Medium|High|Urgent))/ },
+        ] },
+    { "Plan": [
+            { name: "Plan_Active", rows: ["Active", "Next"], cardTypes: undefined },
+            { name: "Plan_Next", rows: ["Next", "Queue"], cardTypes: undefined },
+            { name: "Plan_Tasks", rows: ["Active", "Next", "Queue"], cardTypes: undefined },
+            { name: "Plan_All", rows: undefined, cardTypes: undefined },
+        ] },
 ];
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     position: Position.Top,
@@ -13792,15 +13792,19 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     keyBinding_Modifiers: ["shift", "alt"],
     singleContainer: true,
     stretchCells: false,
-    cellProperties: [{ functionName: "css", args: ["min-width", "130px"] }],
+    cellProperties: [{ functionName: "css", args: ["min-width", "80px"] }],
     entryGroups: _get_EntryGroups(),
 }));
 function _get_EntryGroups() {
-    return Modes.map(row => row.map(({ name, rows, cardTypes, is_Default }) => new Entry({
-        name,
-        ..._get_OnLayout(is_Default),
-        ..._get_Callback(rows, cardTypes),
-    })));
+    return Modes.map(row => {
+        const [groupName, group] = Object.entries(row)[0];
+        return { [groupName]: group.map(({ name, rows, cardTypes, is_Default }) => new Entry({
+                name,
+                ..._get_OnLayout(is_Default),
+                ..._get_Callback(rows, cardTypes),
+            }))
+        };
+    });
 }
 function _get_Callback(rows, cardTypes) {
     return { callback: (event) => {

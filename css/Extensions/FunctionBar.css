@@ -89,6 +89,7 @@
 .FunctionBars .top .row .groupLabel,
 .FunctionBars .bottom .row .groupLabel {
   align-self: center;
+  margin-right: 10px;
 }
 .FunctionBars .top .row.stretch,
 .FunctionBars .bottom .row.stretch {
