@@ -21,6 +21,15 @@ FunctionBar.load( new FunctionBar({
 
 	entryGroups:[
 
+		{"Today":[
+			new Entry({
+				name: "Clear",
+				callback: () => {
+					TaskToggle.convert_TodayCards_To_TaskCards()
+				},
+			}),
+		]},
+
 		{"Show":[
 			new Entry({
 				name: "Rows",
@@ -62,15 +71,6 @@ FunctionBar.load( new FunctionBar({
 				name: "All",
 				callback: () => {
 					CardType.Filter.disable_CardTypes()
-				},
-			}),
-		]},
-
-		{"Today":[
-			new Entry({
-				name: "Clear",
-				callback: () => {
-					TaskToggle.convert_TodayCards_To_TaskCards()
 				},
 			}),
 		]},

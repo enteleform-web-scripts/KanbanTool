@@ -22,7 +22,7 @@ const Modes: {[name:string]: Mode[]}[] = [
 		{name:"Priority",  rows:["Active"], cardTypes:/Today_(Medium|High|Urgent)/    },
 	]},
 	{"Daily": [
-		{name:"Tasks",  rows:["Daily"          ], cardTypes:/Task_Daily/                                   },
+		{name:"All",    rows:["Daily"          ], cardTypes:/Task_Daily/                                   },
 		{name:"+Today", rows:["Daily", "Active"], cardTypes:/(Task_Daily)|(Today_(Low|Medium|High|Urgent))/},
 	]},
 	{"Plan": [
