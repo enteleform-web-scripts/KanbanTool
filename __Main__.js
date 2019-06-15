@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560620405031)
+		const elapsedTime = _get_ElapsedTime(1560620778059)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:40:05 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:46:18 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13762,7 +13762,7 @@ const Modes = [
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     position: Position.Top,
     autoMap_KeyBindings: true,
-    keyBinding_Modifiers: ["alt"],
+    keyBinding_Modifiers: ["shift", "alt"],
     singleRow: true,
     stretchCells: false,
     cellProperties: [{ functionName: "css", args: ["min-width", "130px"] }],
