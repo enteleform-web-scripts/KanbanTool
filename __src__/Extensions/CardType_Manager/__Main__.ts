@@ -162,6 +162,8 @@ function _build_FunctionBar(options:_FunctionBar_Options, cardType_Rows:CardType
 		}
 	})
 
+	console.log("entryGroups:", entryGroups)
+
 	return new FunctionBar({
 		...options,
 		entryGroups,
