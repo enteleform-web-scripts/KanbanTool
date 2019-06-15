@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560634767070)
+		const elapsedTime = _get_ElapsedTime(1560634917563)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:39:27 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:41:57 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13850,6 +13850,8 @@ const __Main__2 = __webpack_require__(3);
 const __Main__3 = __webpack_require__(1);
 const { Show, Hide } = __Main__1.KanbanTool;
 class _ {
+    static disable_Space_ScrollDown(event) {
+    }
     static toggle_Between_TaskCards_And_TodayCards(event) {
         TaskToggle_1.TaskToggle.toggle_Hovered_Task();
     }
@@ -13864,7 +13866,13 @@ class _ {
     }
 }
 __decorate([
-    __Main__3.KeyBinding.add(["ctrl", "space"], { preventDefault: true, scope: __Main__2.KeyBinding_Scopes.Card_IsHovered }),
+    __Main__3.KeyBinding.add(["space"], { preventDefault: true }),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [KeyboardEvent]),
+    __metadata("design:returntype", void 0)
+], _, "disable_Space_ScrollDown", null);
+__decorate([
+    __Main__3.KeyBinding.add(["space"], { preventDefault: true, scope: __Main__2.KeyBinding_Scopes.Card_IsHovered }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [KeyboardEvent]),
     __metadata("design:returntype", void 0)
