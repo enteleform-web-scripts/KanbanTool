@@ -3,6 +3,15 @@ import {KanbanTool} from "~/Utils/KanbanTool/__Main__"
 import {KeyBinding} from "~/Utils/KeyBinding/__Main__"
 
 
+//##############//
+//###  Init  ###//
+//##############//
+
+const _searchField = $("#kt-board_search-q")
+
+_unfocus_SearchField_OnEnter()
+
+
 //#################//
 //###  Exports  ###//
 //#################//
@@ -23,18 +32,10 @@ export class focus_SearchField{
 }
 
 
-//##############//
-//###  Init  ###//
-//##############//
-
-_unfocus_SearchField_OnEnter()
-
-
 //###############//
 //###  Utils  ###//
 //###############//
 
-const _searchField   = $("#kt-board_search-q")
 const _enter_KeyCode = 13
 
 function _unfocus_SearchField_OnEnter(){
