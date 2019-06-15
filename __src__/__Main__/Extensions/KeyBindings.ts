@@ -36,7 +36,7 @@ class _{
 	}
 
 	@KeyBinding.add(
-		["ctrl", "`"],
+		["`"],
 		{preventDefault:true}
 	)
 	static hide_EmptyColumns(event:KeyboardEvent){
@@ -44,7 +44,7 @@ class _{
 	}
 
 	@KeyBinding.add(
-		["ctrl", "shift", "`"],
+		["ctrl", "`"],
 		{preventDefault:true}
 	)
 	static show_AllColumns(event:KeyboardEvent){
