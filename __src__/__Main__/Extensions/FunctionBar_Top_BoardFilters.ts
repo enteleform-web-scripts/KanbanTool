@@ -1,6 +1,5 @@
 //###  Module  ###//
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
-import {KeyBinding } from "~/Utils/KeyBinding/__Main__"
 import {KanbanTool } from "~/Utils/KanbanTool/__Main__"
 
 //###  Aliases  ###//

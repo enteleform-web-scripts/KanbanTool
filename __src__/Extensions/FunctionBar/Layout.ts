@@ -77,6 +77,10 @@ export class Layout{
 				subContainer = $("<div>", {class:subContainer_Class})
 				this.container.append(subContainer)
 			}
+			else{
+				const divider = $("<div>", {class:CSS.divider})
+				subContainer.append(divider)
+			}
 
 			group.forEach((entry, entryIndex) => {
 				const keyBinding = entry.initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex)
