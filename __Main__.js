@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1560620082027)
+		const elapsedTime = _get_ElapsedTime(1560620256725)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     1:34:42 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     1:37:36 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13515,6 +13515,10 @@ class Layout {
                 || (!this._functionBar.singleRow)) {
                 subContainer = $("<div>", { class: subContainer_Class });
                 this.container.append(subContainer);
+            }
+            else {
+                const divider = $("<div>", { class: CSS.divider });
+                subContainer.append(divider);
             }
             group.forEach((entry, entryIndex) => {
                 const keyBinding = entry.initialize_KeyBinding(autoMap_KeyBindings, keyBinding_Modifiers, groupIndex, entryIndex);
