@@ -12,25 +12,25 @@ const {enable_CardTypes, disable_CardTypes} = CardType.Filter
 //###  Setup  ###//
 //###############//
 
-const Modes: Mode[][] = [
-	[
+const Modes: {[name:string]: Mode[]}[] = [
+	{"Tasks": [
 		{name:"Tasks_All",      rows:["Active"], cardTypes:/(Task|Today)_(Low|Medium|High|Urgent)/, is_Default:true},
 		{name:"Tasks_Priority", rows:["Active"], cardTypes:/(Task|Today)_(Medium|High|Urgent)/                     },
-	],
-	[
+	]},
+	{"Today": [
 		{name:"Today_All",       rows:["Active"], cardTypes:/Today_(Low|Medium|High|Urgent)/},
 		{name:"Today_Priority",  rows:["Active"], cardTypes:/Today_(Medium|High|Urgent)/    },
-	],
-	[
+	]},
+	{"Routine": [
 		{name:"Routine",         rows:["Daily"          ], cardTypes:/Task_Daily/                                   },
 		{name:"Routine + Today", rows:["Daily", "Active"], cardTypes:/(Task_Daily)|(Today_(Low|Medium|High|Urgent))/},
-	],
-	[
+	]},
+	{"Plan": [
 		{name:"Plan_Active", rows:["Active", "Next"         ], cardTypes:undefined},
 		{name:"Plan_Next",   rows:["Next",   "Queue"        ], cardTypes:undefined},
 		{name:"Plan_Tasks",  rows:["Active", "Next", "Queue"], cardTypes:undefined},
 		{name:"Plan_All",    rows:undefined,                   cardTypes:undefined},
-	],
+	]},
 ]
 
 
@@ -45,7 +45,7 @@ FunctionBar.load( new FunctionBar({
 	keyBinding_Modifiers: ["shift", "alt"],
 	singleContainer:      true,
 	stretchCells:         false,
-	cellProperties:       [{functionName:"css", args:["min-width", "130px"]}],
+	cellProperties:       [{functionName:"css", args:["min-width", "80px"]}],
 	entryGroups:          _get_EntryGroups(),
 
 }))
@@ -63,17 +63,20 @@ interface Mode{
 }
 
 function _get_EntryGroups(){
-	return Modes.map(row =>
-		row.map( ({name, rows, cardTypes, is_Default}) =>
+	return Modes.map(row => {
 
-			new Entry({
-				name,
-				..._get_OnLayout(is_Default),
-				..._get_Callback(rows, cardTypes),
-			})
+		const [groupName, group] = Object.entries(row)[0]
 
-		)
-	)
+		return {[groupName]:
+			group.map( ({name, rows, cardTypes, is_Default}) =>
+				new Entry({
+					name,
+					..._get_OnLayout(is_Default),
+					..._get_Callback(rows, cardTypes),
+				})
+			)
+		}
+	})
 }
 
 function _get_Callback(rows:string[], cardTypes:RegExp){
