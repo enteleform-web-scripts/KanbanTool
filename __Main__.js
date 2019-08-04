@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 23);
+/******/ 	return __webpack_require__(__webpack_require__.s = 24);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -92,7 +92,7 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const Settings_1 = __webpack_require__(11);
-const activeBoard_1 = __webpack_require__(26);
+const activeBoard_1 = __webpack_require__(27);
 class KanbanTool {
     static on_PageLoad(arg_1, arg_2) {
         const [id, callback] = (typeof arg_1 == "symbol")
@@ -125,7 +125,7 @@ KanbanTool.API.onInit(() => {
         });
     }, Settings_1.onPageLoad_Timeout_MS);
 });
-const __Main__1 = __webpack_require__(27);
+const __Main__1 = __webpack_require__(28);
 const __Main__2 = __webpack_require__(6);
 const __Main__3 = __webpack_require__(14);
 const __Main__4 = __webpack_require__(15);
@@ -150,8 +150,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const KeyGroups_1 = __webpack_require__(28);
-const hotkeys_js_1 = __importDefault(__webpack_require__(29));
+const KeyGroups_1 = __webpack_require__(29);
+const hotkeys_js_1 = __importDefault(__webpack_require__(30));
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
     static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
@@ -10856,7 +10856,7 @@ return jQuery;
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(0);
 const __Main__2 = __webpack_require__(1);
-const Card_DetailView_IsActive_1 = __webpack_require__(39);
+const Card_DetailView_IsActive_1 = __webpack_require__(40);
 Card_DetailView_IsActive_1.Card_DetailView_IsActive.initialize();
 exports.KeyBinding_Scopes = {
     Card_IsHovered: "Card_IsHovered",
@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1564879409894)
+		const elapsedTime = _get_ElapsedTime(1564880840646)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     8:43:29 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     9:07:20 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -10983,7 +10983,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const TaskContainer_1 = __webpack_require__(7);
 const get_Rows_1 = __webpack_require__(12);
 const get_Columns_1 = __webpack_require__(13);
-const Glob_1 = __webpack_require__(30);
+const Glob_1 = __webpack_require__(31);
 const $ = __webpack_require__(2);
 class Show {
     static rows({ include, exclude }) {
@@ -11154,9 +11154,9 @@ exports.TaskContainer = TaskContainer;
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(19).inject(__dirname, { CSS: true, HTML: true });
 const Settings_1 = __webpack_require__(9);
-const Entry_1 = __webpack_require__(40);
-const Layout_1 = __webpack_require__(41);
-const Module_BaseClasses_1 = __webpack_require__(43);
+const Entry_1 = __webpack_require__(41);
+const Layout_1 = __webpack_require__(42);
+const Module_BaseClasses_1 = __webpack_require__(44);
 const Position_1 = __webpack_require__(10);
 class FunctionBar extends Module_BaseClasses_1.Module {
     constructor({ position, entryGroups, autoMap_KeyBindings, keyBinding_Modifiers, singleContainer, stretchCells, cellProperties, }) {
@@ -11341,7 +11341,7 @@ function _update_ColumnRelationships(columns) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const get_emptyContainer_Indexes_1 = __webpack_require__(31);
+const get_emptyContainer_Indexes_1 = __webpack_require__(32);
 const get_Rows_1 = __webpack_require__(12);
 const get_Columns_1 = __webpack_require__(13);
 const __Main__1 = __webpack_require__(6);
@@ -11389,7 +11389,7 @@ function _is_Empty(container, emptyContainer_Indexes) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Filter_1 = __webpack_require__(32);
+const Filter_1 = __webpack_require__(33);
 const __Main__1 = __webpack_require__(0);
 const is_JQuery_1 = __webpack_require__(16);
 const $ = __webpack_require__(2);
@@ -11529,13 +11529,13 @@ var CardMover;
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(19).inject(__dirname, { CSS: true, HTML: false });
-const CallbackManager_1 = __webpack_require__(37);
+const CallbackManager_1 = __webpack_require__(38);
 const HoverManager_1 = __webpack_require__(5);
-const StyleManager_1 = __webpack_require__(20);
+const StyleManager_1 = __webpack_require__(21);
 const __Main__1 = __webpack_require__(8);
 const Position_1 = __webpack_require__(10);
 const __Main__2 = __webpack_require__(3);
-const get_Rows_1 = __webpack_require__(44);
+const get_Rows_1 = __webpack_require__(45);
 var CardType_Manager;
 (function (CardType_Manager) {
     CardType_Manager.HoverManager = HoverManager_1.HoverManager;
@@ -11623,7 +11623,7 @@ function _update_FunctionBar_Options_CellWidth(options, cellWidth) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(34);
+const Settings_1 = __webpack_require__(35);
 function inject(modulePath, { CSS, HTML } = { CSS: false, HTML: false }) {
     if (CSS) {
         _inject_CSS(modulePath);
@@ -11703,12 +11703,202 @@ function _strip_HTML_ExcessData(html) {
 
 /***/ }),
 /* 20 */
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+
+/***/ }),
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(21);
+const __Main__1 = __webpack_require__(22);
 const __Main__2 = __webpack_require__(0);
 const $ = __webpack_require__(2);
 const { CardType, cardTypes } = __Main__2.KanbanTool;
@@ -11785,7 +11975,7 @@ function _get_CardOptions(element, cardType) { return StyleManager._CardType_Opt
 
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11844,7 +12034,7 @@ function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documen
 
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11890,31 +12080,31 @@ function _get_Inverted_CardType(cardType) {
 
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(4);
-module.exports = __webpack_require__(24);
+module.exports = __webpack_require__(25);
 
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(25);
-__webpack_require__(33);
-__webpack_require__(45);
+__webpack_require__(26);
+__webpack_require__(34);
 __webpack_require__(46);
 __webpack_require__(47);
 __webpack_require__(48);
-__webpack_require__(53);
+__webpack_require__(49);
+__webpack_require__(54);
 
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11927,7 +12117,7 @@ remove_PageLoad_Callback(CardType.Filter.add_KeyBindings_ID);
 
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11944,7 +12134,7 @@ exports.get_ActiveBoard = get_ActiveBoard;
 
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11968,7 +12158,7 @@ exports.KeyBinding_Decorator = KeyBinding_Decorator;
 
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12016,7 +12206,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -12497,7 +12687,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12538,7 +12728,7 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12628,7 +12818,7 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12747,7 +12937,7 @@ function _get_CardType_Index(id) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12816,16 +13006,19 @@ __Main__1.CardType_Manager.initialize_Manual({
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
+/* WEBPACK VAR INJECTION */(function(process) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const path_1 = __importDefault(__webpack_require__(35));
+const fs_1 = __webpack_require__(36);
+const path_1 = __importDefault(__webpack_require__(37));
+const rootPath = fs_1.realpathSync(process.cwd());
+process.chdir(rootPath);
 class S {
 }
 S.baseURL = "https://enteleform-web-scripts.github.io/KanbanTool";
@@ -12837,7 +13030,7 @@ S.staticFolder = "Static";
 S.mainName = "__Main__";
 S.css_FileBase = "__CSS__.styl";
 S.pug_FileBase = "__HTML__.pug";
-S.rootPath = path_1.default.resolve(".");
+S.rootPath = rootPath;
 S.sourcePath = path_1.default.join(S.rootPath, S.sourceFolder);
 S.distributionPath = path_1.default.join(S.rootPath, S.distributionFolder);
 S.librariesPath = path_1.default.join(S.rootPath, S.librariesFolder);
@@ -12852,9 +13045,16 @@ S.cssExtension = "css";
 S.htmlExtension = "html";
 exports.Settings = S;
 
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(20)))
 
 /***/ }),
-/* 35 */
+/* 36 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
@@ -13082,208 +13282,18 @@ var substr = 'ab'.substr(-1) === 'b'
     }
 ;
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(36)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(20)))
 
 /***/ }),
-/* 36 */
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(38).CardType_Manager;
+const CSS = __webpack_require__(39).CardType_Manager;
 const HoverManager_1 = __webpack_require__(5);
-const StyleManager_1 = __webpack_require__(20);
+const StyleManager_1 = __webpack_require__(21);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(0);
 const { CardType } = __Main__2.KanbanTool;
@@ -13335,13 +13345,13 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module) {
 
 module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterColor","activeFilter":"active","inactiveFilter":"inactive","_":""}};
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13416,7 +13426,7 @@ var Card_DetailView_IsActive;
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13468,16 +13478,16 @@ const emptyCallback = ((...args) => { });
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const CSS = __webpack_require__(42).FunctionBar;
+const CSS = __webpack_require__(43).FunctionBar;
 const Settings_1 = __webpack_require__(9);
 const Position_1 = __webpack_require__(10);
-const __Main__1 = __webpack_require__(21);
+const __Main__1 = __webpack_require__(22);
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
 const $ = __webpack_require__(2);
@@ -13605,13 +13615,13 @@ function _update_OriginalLayout() {
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module) {
 
 module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collapsed","empty":"empty","divider":"divider","groupLabel":"groupLabel","_":""}};
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13624,7 +13634,7 @@ exports.Module = Module;
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13685,13 +13695,13 @@ function _cardTypes_Exhausted(cardIndex) { return (cardIndex == cardTypes.length
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskToggle_1 = __webpack_require__(22);
+const TaskToggle_1 = __webpack_require__(23);
 const __Main__1 = __webpack_require__(8);
 const __Main__2 = __webpack_require__(0);
 const { Entry, Position } = __Main__1.FunctionBar;
@@ -13755,7 +13765,7 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13829,7 +13839,7 @@ function _get_OnLayout(is_Default) {
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13844,7 +13854,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskToggle_1 = __webpack_require__(22);
+const TaskToggle_1 = __webpack_require__(23);
 const __Main__1 = __webpack_require__(0);
 const __Main__2 = __webpack_require__(3);
 const __Main__3 = __webpack_require__(1);
@@ -13898,24 +13908,24 @@ __decorate([
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const clear_SearchField_1 = __webpack_require__(49);
+const clear_SearchField_1 = __webpack_require__(50);
 clear_SearchField_1.clear_SearchField.initialize();
-const focus_SearchField_1 = __webpack_require__(50);
+const focus_SearchField_1 = __webpack_require__(51);
 focus_SearchField_1.focus_SearchField.initialize();
-const archive_Cards_1 = __webpack_require__(51);
+const archive_Cards_1 = __webpack_require__(52);
 archive_Cards_1.archive_Cards.initialize();
-const move_Cards_1 = __webpack_require__(52);
+const move_Cards_1 = __webpack_require__(53);
 move_Cards_1.move_Cards.initialize();
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13951,7 +13961,7 @@ exports.clear_SearchField = clear_SearchField;
 
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13999,7 +14009,7 @@ function _unfocus_SearchField_OnEnter() {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14039,7 +14049,7 @@ exports.archive_Cards = archive_Cards;
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -14070,7 +14080,7 @@ function _add_KeyBinding(direction) {
 
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
