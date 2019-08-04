@@ -1,4 +1,4 @@
 [submodule "__dist__"]
 	path = __dist__
-	url = https://github.com/enteleform-extensions/KanbanTool.git
+	url = https://github.com/enteleform-web-scripts/KanbanTool.git
 	branch = gh-pages
