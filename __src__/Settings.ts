@@ -1,5 +1,11 @@
 //###  Node  ###//
-import path from "path"
+import {realpathSync} from "fs"
+import path           from "path"
+
+
+// Redirect To Symlink Target
+const rootPath = realpathSync(process.cwd())
+process.chdir(rootPath)
 
 
 class S{
@@ -20,7 +26,7 @@ class S{
 	static css_FileBase = "__CSS__.styl"
 	static pug_FileBase = "__HTML__.pug"
 
-	static rootPath         = path.resolve(".")
+	static rootPath         = rootPath
 	static sourcePath       = path.join(S.rootPath,   S.sourceFolder      )
 	static distributionPath = path.join(S.rootPath,   S.distributionFolder)
 	static librariesPath    = path.join(S.rootPath,   S.librariesFolder   )

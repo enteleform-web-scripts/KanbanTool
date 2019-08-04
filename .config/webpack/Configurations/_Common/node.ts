@@ -6,6 +6,7 @@ const $: (webpack.Node | false) = {
 
 	__dirname:  true,
 	__filename: true,
+	fs:         "empty",
 
 }
 
