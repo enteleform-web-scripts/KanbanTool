@@ -1,14 +1,21 @@
+//###  Module  ###//
+import {is_Node} from "./Utils/Environment/__Main__"
+
 //###  Node  ###//
 import {realpathSync} from "fs"
 import path           from "path"
 
 
-// Redirect To Symlink Target
-const rootPath =
-	(realpathSync)
-	? realpathSync(process.cwd())
-	: process.cwd()
-process.chdir(rootPath)
+let rootPath
+
+if(is_Node()){
+	// Redirect To Symlink Target
+	rootPath = realpathSync(process.cwd())
+	process.chdir(rootPath)
+}
+else {
+	rootPath = process.cwd()
+}
 
 
 class S{
