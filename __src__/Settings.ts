@@ -4,7 +4,10 @@ import path           from "path"
 
 
 // Redirect To Symlink Target
-const rootPath = realpathSync(process.cwd())
+const rootPath =
+	(realpathSync)
+	? realpathSync(process.cwd())
+	: process.cwd()
 process.chdir(rootPath)
 
 
