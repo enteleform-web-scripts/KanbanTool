@@ -1,4 +1,30 @@
-__dist__
+
+###################
+###  Framework  ###
+###################
+
+**/__archive__
+**/__build__
+**/__dist__
+
+
+#################
+###  Default  ###
+#################
+
+**/node_modules
+**/*.log
+**/*.DS_Store
+
+##########################
+###  Package Managers  ###
+##########################
+
+###  npm  ###
+package-lock.json
+
+###  yarn  ###
 yarn.lock
-yarn-error.log
-node_modules
+
+###  pnpm  ###
+pnpm-lock.yaml
