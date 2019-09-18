@@ -113,10 +113,10 @@ class KanbanTool {
             && ($(taskView).css("display") != "none"));
     }
 }
+exports.KanbanTool = KanbanTool;
 KanbanTool.API = window.KT;
 KanbanTool.activeBoard = activeBoard_1.get_ActiveBoard();
 KanbanTool._on_PageLoad_Callbacks = [];
-exports.KanbanTool = KanbanTool;
 KanbanTool.API.activeBoard = KanbanTool.activeBoard;
 KanbanTool.API.onInit(() => {
     setTimeout(() => {
@@ -10906,10 +10906,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1564880840646)
+		const elapsedTime = _get_ElapsedTime(1568781762785)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     9:07:20 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     12:42:42 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11197,9 +11197,9 @@ class FunctionBar extends Module_BaseClasses_1.Module {
         }
     }
 }
+exports.FunctionBar = FunctionBar;
 FunctionBar.Entry = Entry_1.Entry;
 FunctionBar.Position = Position_1.Position;
-exports.FunctionBar = FunctionBar;
 (function (FunctionBar) {
     let KeyBinding_Mode;
     (function (KeyBinding_Mode) {
@@ -11432,9 +11432,9 @@ class CardType {
         element.props.task.save("card_type_id", cardType.id);
     }
 }
+exports.CardType = CardType;
 CardType.Filter = Filter_1.Filter;
 CardType._cardTypes = _get_CardTypes();
-exports.CardType = CardType;
 function _get_CardTypes() {
     return __Main__1.KanbanTool.activeBoard.cardTypes().active().map(({ attributes }, index) => new CardType({
         index: index,
@@ -12212,7 +12212,7 @@ exports.characterKey_Rows = [
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /*!
- * hotkeys-js v3.6.10
+ * hotkeys-js v3.7.2
  * A simple micro-library for defining and dispatching keyboard shortcuts. It has no dependencies.
  * 
  * Copyright (c) 2019 kenny wong <wowohoo@qq.com>
@@ -12220,6 +12220,20 @@ __webpack_require__.r(__webpack_exports__);
  * 
  * Licensed under the MIT license.
  */
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
 
 var isff = typeof navigator !== 'undefined' ? navigator.userAgent.toLowerCase().indexOf('firefox') > 0 : false; // 绑定事件
 
@@ -12246,7 +12260,7 @@ function getMods(modifier, key) {
 
 
 function getKeys(key) {
-  if (!key) key = '';
+  if (typeof key !== 'string') key = '';
   key = key.replace(/\s/g, ''); // 匹配任何空白字符,包括空格、制表符、换页符等等
 
   var keys = key.split(','); // 同时设置多个快捷键，以','分割
@@ -12276,7 +12290,6 @@ function compareArray(a1, a2) {
 }
 
 var _keyMap = {
-  // 特殊键
   backspace: 8,
   tab: 9,
   clear: 12,
@@ -12310,40 +12323,46 @@ var _keyMap = {
   '[': 219,
   ']': 221,
   '\\': 220
-};
+}; // Modifier Keys
+
 var _modifier = {
-  // 修饰键
+  // shiftKey
   '⇧': 16,
   shift: 16,
+  // altKey
   '⌥': 18,
   alt: 18,
   option: 18,
+  // ctrlKey
   '⌃': 17,
   ctrl: 17,
   control: 17,
-  '⌘': isff ? 224 : 91,
-  cmd: isff ? 224 : 91,
-  command: isff ? 224 : 91
+  // metaKey
+  '⌘': 91,
+  cmd: 91,
+  command: 91
 };
 var modifierMap = {
   16: 'shiftKey',
   18: 'altKey',
-  17: 'ctrlKey'
+  17: 'ctrlKey',
+  91: 'metaKey',
+  shiftKey: 16,
+  ctrlKey: 17,
+  altKey: 18,
+  metaKey: 91
 };
 var _mods = {
   16: false,
   18: false,
-  17: false
+  17: false,
+  91: false
 };
-var _handlers = {}; // F1~F12 特殊键
+var _handlers = {}; // F1~F12 special key
 
 for (var k = 1; k < 20; k++) {
   _keyMap["f".concat(k)] = 111 + k;
-} // 兼容Firefox处理
-
-
-modifierMap[isff ? 224 : 91] = 'metaKey';
-_mods[isff ? 224 : 91] = false;
+}
 
 var _downKeys = []; // 记录摁下的绑定键
 
@@ -12441,51 +12460,75 @@ function clearModifier(event) {
       if (_modifier[k] === key) hotkeys[k] = false;
     }
   }
+}
+
+function unbind(keysInfo) {
+  // unbind(), unbind all keys
+  if (!keysInfo) {
+    Object.keys(_handlers).forEach(function (key) {
+      return delete _handlers[key];
+    });
+  } else if (Array.isArray(keysInfo)) {
+    // support like : unbind([{key: 'ctrl+a', scope: 's1'}, {key: 'ctrl-a', scope: 's2', splitKey: '-'}])
+    keysInfo.forEach(function (info) {
+      if (info.key) eachUnbind(info);
+    });
+  } else if (_typeof(keysInfo) === 'object') {
+    // support like unbind({key: 'ctrl+a, ctrl+b', scope:'abc'})
+    if (keysInfo.key) eachUnbind(keysInfo);
+  } else if (typeof keysInfo === 'string') {
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    // support old method
+    // eslint-disable-line
+    var scope = args[0],
+        method = args[1];
+
+    if (typeof scope === 'function') {
+      method = scope;
+      scope = '';
+    }
+
+    eachUnbind({
+      key: keysInfo,
+      scope: scope,
+      method: method,
+      splitKey: '+'
+    });
+  }
 } // 解除绑定某个范围的快捷键
 
 
-function unbind(key, scope, method) {
+var eachUnbind = function eachUnbind(_ref) {
+  var key = _ref.key,
+      scope = _ref.scope,
+      method = _ref.method,
+      _ref$splitKey = _ref.splitKey,
+      splitKey = _ref$splitKey === void 0 ? '+' : _ref$splitKey;
   var multipleKeys = getKeys(key);
-  var keys;
-  var mods = [];
-  var obj; // 通过函数判断，是否解除绑定
-  // https://github.com/jaywcjlove/hotkeys/issues/44
+  multipleKeys.forEach(function (originKey) {
+    var unbindKeys = originKey.split(splitKey);
+    var len = unbindKeys.length;
+    var lastKey = unbindKeys[len - 1];
+    var keyCode = lastKey === '*' ? '*' : code(lastKey);
+    if (!_handlers[keyCode]) return; // 判断是否传入范围，没有就获取范围
 
-  if (typeof scope === 'function') {
-    method = scope;
-    scope = 'all';
-  }
+    if (!scope) scope = getScope();
+    var mods = len > 1 ? getMods(_modifier, unbindKeys) : [];
+    _handlers[keyCode] = _handlers[keyCode].map(function (record) {
+      // 通过函数判断，是否解除绑定，函数相等直接返回
+      var isMatchingMethod = method ? record.method === method : true;
 
-  for (var i = 0; i < multipleKeys.length; i++) {
-    // 将组合快捷键拆分为数组
-    keys = multipleKeys[i].split('+'); // 记录每个组合键中的修饰键的键码 返回数组
-
-    if (keys.length > 1) {
-      mods = getMods(_modifier, keys);
-    } else {
-      mods = [];
-    } // 获取除修饰键外的键值key
-
-
-    key = keys[keys.length - 1];
-    key = key === '*' ? '*' : code(key); // 判断是否传入范围，没有就获取范围
-
-    if (!scope) scope = getScope(); // 如何key不在 _handlers 中返回不做处理
-
-    if (!_handlers[key]) return; // 清空 handlers 中数据，
-    // 让触发快捷键键之后没有事件执行到达解除快捷键绑定的目的
-
-    for (var r = 0; r < _handlers[key].length; r++) {
-      obj = _handlers[key][r]; // 通过函数判断，是否解除绑定，函数相等直接返回
-
-      var isMatchingMethod = method ? obj.method === method : true; // 判断是否在范围内并且键值相同
-
-      if (isMatchingMethod && obj.scope === scope && compareArray(obj.mods, mods)) {
-        _handlers[key][r] = {};
+      if (isMatchingMethod && record.scope === scope && compareArray(record.mods, mods)) {
+        return {};
       }
-    }
-  }
-} // 对监听对应快捷键的回调函数进行处理
+
+      return record;
+    });
+  });
+}; // 对监听对应快捷键的回调函数进行处理
 
 
 function eventHandler(event, handler, scope) {
@@ -12497,7 +12540,9 @@ function eventHandler(event, handler, scope) {
 
     for (var y in _mods) {
       if (Object.prototype.hasOwnProperty.call(_mods, y)) {
-        if (!_mods[y] && handler.mods.indexOf(+y) > -1 || _mods[y] && handler.mods.indexOf(+y) === -1) modifiersMatch = false;
+        if (!_mods[y] && handler.mods.indexOf(+y) > -1 || _mods[y] && handler.mods.indexOf(+y) === -1) {
+          modifiersMatch = false;
+        }
       }
     } // 调用处理程序，如果是修饰键不做处理
 
@@ -12517,15 +12562,35 @@ function dispatch(event) {
   var asterisk = _handlers['*'];
   var key = event.keyCode || event.which || event.charCode; // 表单控件过滤 默认表单控件不触发快捷键
 
-  if (!hotkeys.filter.call(this, event)) return; // Collect bound keys
-  // If an Input Method Editor is processing key input and the event is keydown, return 229.
-  // https://stackoverflow.com/questions/25043934/is-it-ok-to-ignore-keydown-events-with-keycode-229
-  // http://lists.w3.org/Archives/Public/www-dom/2010JulSep/att-0182/keyCode-spec.html
-
-  if (_downKeys.indexOf(key) === -1 && key !== 229) _downKeys.push(key); // Gecko(Firefox)的command键值224，在Webkit(Chrome)中保持一致
-  // Webkit左右command键值不一样
+  if (!hotkeys.filter.call(this, event)) return; // Gecko(Firefox)的command键值224，在Webkit(Chrome)中保持一致
+  // Webkit左右 command 键值不一样
 
   if (key === 93 || key === 224) key = 91;
+  /**
+   * Collect bound keys
+   * If an Input Method Editor is processing key input and the event is keydown, return 229.
+   * https://stackoverflow.com/questions/25043934/is-it-ok-to-ignore-keydown-events-with-keycode-229
+   * http://lists.w3.org/Archives/Public/www-dom/2010JulSep/att-0182/keyCode-spec.html
+   */
+
+  if (_downKeys.indexOf(key) === -1 && key !== 229) _downKeys.push(key);
+  /**
+   * Jest test cases are required.
+   * ===============================
+   */
+
+  ['ctrlKey', 'altKey', 'shiftKey', 'metaKey'].forEach(function (keyName) {
+    var keyNum = modifierMap[keyName];
+
+    if (event[keyName] && _downKeys.indexOf(keyNum) === -1) {
+      _downKeys.push(keyNum);
+    } else if (!event[keyName] && _downKeys.indexOf(keyNum) > -1) {
+      _downKeys.splice(_downKeys.indexOf(keyNum), 1);
+    }
+  });
+  /**
+   * -------------------------------
+   */
 
   if (key in _mods) {
     _mods[key] = true; // 将特殊字符的key注册到 hotkeys 上
@@ -12535,14 +12600,14 @@ function dispatch(event) {
     }
 
     if (!asterisk) return;
-  } // 将modifierMap里面的修饰键绑定到event中
+  } // 将 modifierMap 里面的修饰键绑定到 event 中
 
 
   for (var e in _mods) {
     if (Object.prototype.hasOwnProperty.call(_mods, e)) {
       _mods[e] = event[modifierMap[e]];
     }
-  } // 获取范围 默认为all
+  } // 获取范围 默认为 `all`
 
 
   var scope = getScope(); // 对任何快捷键都需要做的处理
@@ -12553,7 +12618,7 @@ function dispatch(event) {
         eventHandler(event, asterisk[i], scope);
       }
     }
-  } // key 不在_handlers中返回
+  } // key 不在 _handlers 中返回
 
 
   if (!(key in _handlers)) return;
@@ -12561,19 +12626,18 @@ function dispatch(event) {
   for (var _i = 0; _i < _handlers[key].length; _i++) {
     if (event.type === 'keydown' && _handlers[key][_i].keydown || event.type === 'keyup' && _handlers[key][_i].keyup) {
       if (_handlers[key][_i].key) {
-        var keyShortcut = _handlers[key][_i].key.split('+');
-
+        var record = _handlers[key][_i];
+        var splitKey = record.splitKey;
+        var keyShortcut = record.key.split(splitKey);
         var _downKeysCurrent = []; // 记录当前按键键值
 
         for (var a = 0; a < keyShortcut.length; a++) {
           _downKeysCurrent.push(code(keyShortcut[a]));
         }
 
-        _downKeysCurrent = _downKeysCurrent.sort();
-
-        if (_downKeysCurrent.join('') === _downKeys.sort().join('')) {
+        if (_downKeysCurrent.sort().join('') === _downKeys.sort().join('')) {
           // 找到处理内容
-          eventHandler(event, _handlers[key][_i], scope);
+          eventHandler(event, record, scope);
         }
       }
     }
@@ -12586,6 +12650,7 @@ function isElementBind(element) {
 }
 
 function hotkeys(key, option, method) {
+  _downKeys = [];
   var keys = getKeys(key); // 需要处理的快捷键列表
 
   var mods = [];
@@ -12595,7 +12660,8 @@ function hotkeys(key, option, method) {
 
   var i = 0;
   var keyup = false;
-  var keydown = true; // 对为设定范围的判断
+  var keydown = true;
+  var splitKey = '+'; // 对为设定范围的判断
 
   if (method === undefined && typeof option === 'function') {
     method = option;
@@ -12608,13 +12674,15 @@ function hotkeys(key, option, method) {
 
     if (option.keyup) keyup = option.keyup; // eslint-disable-line
 
-    if (option.keydown) keydown = option.keydown; // eslint-disable-line
+    if (option.keydown !== undefined) keydown = option.keydown; // eslint-disable-line
+
+    if (typeof option.splitKey === 'string') splitKey = option.splitKey; // eslint-disable-line
   }
 
   if (typeof option === 'string') scope = option; // 对于每个快捷键进行处理
 
   for (; i < keys.length; i++) {
-    key = keys[i].split('+'); // 按键列表
+    key = keys[i].split(splitKey); // 按键列表
 
     mods = []; // 如果是组合快捷键取得组合快捷键
 
@@ -12633,7 +12701,8 @@ function hotkeys(key, option, method) {
       mods: mods,
       shortcut: keys[i],
       method: method,
-      key: keys[i]
+      key: keys[i],
+      splitKey: splitKey
     });
   } // 在全局document上设置快捷键
 
@@ -12868,10 +12937,10 @@ class Filter {
         Filter._onUpdate_Callbacks.forEach(callback => callback());
     }
 }
+exports.Filter = Filter;
 Filter.show_AllCards_ID = Symbol();
 Filter.add_KeyBindings_ID = Symbol();
 Filter._onUpdate_Callbacks = [];
-exports.Filter = Filter;
 __Main__2.KanbanTool.on_PageLoad(() => {
     Filter.enable();
 });
@@ -13017,7 +13086,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = __webpack_require__(36);
 const path_1 = __importDefault(__webpack_require__(37));
-const rootPath = fs_1.realpathSync(process.cwd());
+const rootPath = (fs_1.realpathSync)
+    ? fs_1.realpathSync(process.cwd())
+    : process.cwd();
 process.chdir(rootPath);
 class S {
 }
@@ -13057,7 +13128,10 @@ exports.Settings = S;
 /* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
+/* WEBPACK VAR INJECTION */(function(process) {// .dirname, .basename, and .extname methods are extracted from Node.js v8.11.1,
+// backported and transplited with Babel, with backwards-compat fixes
+
+// Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the
@@ -13107,14 +13181,6 @@ function normalizeArray(parts, allowAboveRoot) {
 
   return parts;
 }
-
-// Split a filename into [root, dir, basename, ext], unix version
-// 'root' is just a slash, or nothing.
-var splitPathRe =
-    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
-var splitPath = function(filename) {
-  return splitPathRe.exec(filename).slice(1);
-};
 
 // path.resolve([from ...], to)
 // posix version
@@ -13231,37 +13297,120 @@ exports.relative = function(from, to) {
 exports.sep = '/';
 exports.delimiter = ':';
 
-exports.dirname = function(path) {
-  var result = splitPath(path),
-      root = result[0],
-      dir = result[1];
-
-  if (!root && !dir) {
-    // No dirname whatsoever
-    return '.';
+exports.dirname = function (path) {
+  if (typeof path !== 'string') path = path + '';
+  if (path.length === 0) return '.';
+  var code = path.charCodeAt(0);
+  var hasRoot = code === 47 /*/*/;
+  var end = -1;
+  var matchedSlash = true;
+  for (var i = path.length - 1; i >= 1; --i) {
+    code = path.charCodeAt(i);
+    if (code === 47 /*/*/) {
+        if (!matchedSlash) {
+          end = i;
+          break;
+        }
+      } else {
+      // We saw the first non-path separator
+      matchedSlash = false;
+    }
   }
 
-  if (dir) {
-    // It has a dirname, strip trailing slash
-    dir = dir.substr(0, dir.length - 1);
+  if (end === -1) return hasRoot ? '/' : '.';
+  if (hasRoot && end === 1) {
+    // return '//';
+    // Backwards-compat fix:
+    return '/';
   }
-
-  return root + dir;
+  return path.slice(0, end);
 };
 
+function basename(path) {
+  if (typeof path !== 'string') path = path + '';
 
-exports.basename = function(path, ext) {
-  var f = splitPath(path)[2];
-  // TODO: make this comparison case-insensitive on windows?
+  var start = 0;
+  var end = -1;
+  var matchedSlash = true;
+  var i;
+
+  for (i = path.length - 1; i >= 0; --i) {
+    if (path.charCodeAt(i) === 47 /*/*/) {
+        // If we reached a path separator that was not part of a set of path
+        // separators at the end of the string, stop now
+        if (!matchedSlash) {
+          start = i + 1;
+          break;
+        }
+      } else if (end === -1) {
+      // We saw the first non-path separator, mark this as the end of our
+      // path component
+      matchedSlash = false;
+      end = i + 1;
+    }
+  }
+
+  if (end === -1) return '';
+  return path.slice(start, end);
+}
+
+// Uses a mixed approach for backwards-compatibility, as ext behavior changed
+// in new Node.js versions, so only basename() above is backported here
+exports.basename = function (path, ext) {
+  var f = basename(path);
   if (ext && f.substr(-1 * ext.length) === ext) {
     f = f.substr(0, f.length - ext.length);
   }
   return f;
 };
 
+exports.extname = function (path) {
+  if (typeof path !== 'string') path = path + '';
+  var startDot = -1;
+  var startPart = 0;
+  var end = -1;
+  var matchedSlash = true;
+  // Track the state of characters (if any) we see before our first dot and
+  // after any path separator we find
+  var preDotState = 0;
+  for (var i = path.length - 1; i >= 0; --i) {
+    var code = path.charCodeAt(i);
+    if (code === 47 /*/*/) {
+        // If we reached a path separator that was not part of a set of path
+        // separators at the end of the string, stop now
+        if (!matchedSlash) {
+          startPart = i + 1;
+          break;
+        }
+        continue;
+      }
+    if (end === -1) {
+      // We saw the first non-path separator, mark this as the end of our
+      // extension
+      matchedSlash = false;
+      end = i + 1;
+    }
+    if (code === 46 /*.*/) {
+        // If this is our first dot, mark it as the start of our extension
+        if (startDot === -1)
+          startDot = i;
+        else if (preDotState !== 1)
+          preDotState = 1;
+    } else if (startDot !== -1) {
+      // We saw a non-dot and non-path separator before our dot, so we should
+      // have a good chance at having a non-empty extension
+      preDotState = -1;
+    }
+  }
 
-exports.extname = function(path) {
-  return splitPath(path)[3];
+  if (startDot === -1 || end === -1 ||
+      // We saw a non-dot character immediately before the dot
+      preDotState === 0 ||
+      // The (right-most) trimmed path component is exactly '..'
+      preDotState === 1 && startDot === end - 1 && startDot === startPart + 1) {
+    return '';
+  }
+  return path.slice(startDot, end);
 };
 
 function filter (xs, f) {
@@ -13348,7 +13497,7 @@ function _get_UpdateCSS_Callback(cell, cardType) {
 /* 39 */
 /***/ (function(module) {
 
-module.exports = {"CardType_Manager":{"filter":"filter","filterColor":"filterColor","activeFilter":"active","inactiveFilter":"inactive","_":""}};
+module.exports = JSON.parse("{\"CardType_Manager\":{\"filter\":\"filter\",\"filterColor\":\"filterColor\",\"activeFilter\":\"active\",\"inactiveFilter\":\"inactive\",\"_\":\"\"}}");
 
 /***/ }),
 /* 40 */
@@ -13618,7 +13767,7 @@ function _update_OriginalLayout() {
 /* 43 */
 /***/ (function(module) {
 
-module.exports = {"FunctionBar":{"container":"FunctionBars","collapsed":"collapsed","empty":"empty","divider":"divider","groupLabel":"groupLabel","_":""}};
+module.exports = JSON.parse("{\"FunctionBar\":{\"container\":\"FunctionBars\",\"collapsed\":\"collapsed\",\"empty\":\"empty\",\"divider\":\"divider\",\"groupLabel\":\"groupLabel\",\"_\":\"\"}}");
 
 /***/ }),
 /* 44 */
