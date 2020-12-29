@@ -139,6 +139,8 @@ const __Main__5 = __webpack_require__(18);
     KanbanTool.cardTypes = __Main__4.CardType.cardTypes;
     KanbanTool.CardMover = __Main__5.CardMover;
 })(KanbanTool = exports.KanbanTool || (exports.KanbanTool = {}));
+;
+window._KT = KanbanTool;
 
 
 /***/ }),
@@ -11183,10 +11185,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609283999208)
+		const elapsedTime = _get_ElapsedTime(1609284219434)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:19:59 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:23:39 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
