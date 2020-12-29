@@ -11183,10 +11183,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609283372655)
+		const elapsedTime = _get_ElapsedTime(1609283429857)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:09:32 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:10:29 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13384,11 +13384,44 @@ const taskSettings = {
     borderColor_Main: "hsl(0, 0%, 70%)",
     borderColor_Outside: "hsl(0, 0%, 60%)",
 };
-__Main__1.CardType_Manager.initialize_Auto({
+__Main__1.CardType_Manager.initialize_Manual({
     cellWidth: 75,
     functionBar_Options: {
+        singleContainer: true,
         stretchCells: false,
     },
+    cardTypes: [
+        { "Task": [
+                { name: "Low", borderAccent_Color: priorityColors.low, ...taskSettings },
+                { name: "Medium", borderAccent_Color: priorityColors.medium, ...taskSettings },
+                { name: "High", borderAccent_Color: priorityColors.high, ...taskSettings },
+                { name: "Urgent", borderAccent_Color: priorityColors.urgent, ...taskSettings },
+            ] },
+        { "Today": [
+                { name: "Low", borderAccent_Color: priorityColors.low, ...todaySettings },
+                { name: "Medium", borderAccent_Color: priorityColors.medium, ...todaySettings },
+                { name: "High", borderAccent_Color: priorityColors.high, ...todaySettings },
+                { name: "Urgent", borderAccent_Color: priorityColors.urgent, ...todaySettings },
+            ] },
+        { "Misc": [
+                {
+                    name: "Daily",
+                    background_Color: "hsl(215, 80%, 85%)",
+                    foreground_Color: "hsl(215, 20%, 40%)",
+                    borderColor_Inside: "hsl(215, 40%, 50%)",
+                    borderColor_Main: "hsl(215, 40%, 65%)",
+                    borderColor_Outside: "hsl(215, 50%, 50%)",
+                },
+                {
+                    name: "Book",
+                    background_Color: "hsl(255, 70%, 85%)",
+                    foreground_Color: "hsl(255, 20%, 40%)",
+                    borderColor_Inside: "hsl(255, 40%, 50%)",
+                    borderColor_Main: "hsl(255, 40%, 65%)",
+                    borderColor_Outside: "hsl(255, 50%, 55%)",
+                },
+            ] },
+    ],
 });
 
 
