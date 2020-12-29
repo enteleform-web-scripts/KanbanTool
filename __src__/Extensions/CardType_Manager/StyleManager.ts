@@ -56,15 +56,55 @@ export namespace StyleManager{
 //###  Utils  ###//
 //###############//
 
-function get_Default_CardOptions(cardType:CardType){
+function _get_Default_CardOptions(cardType:CardType){
+	const h = _get_Hue_From_Hex(cardType.bgColor)
 	return {
-		borderAccent_Color:  cardType.bgColor,
-		background_Color:    "hsl(0, 0%, 80%)",
-		foreground_Color:    "hsl(0, 0%, 30%)",
-		borderColor_Inside:  "hsl(0, 0%, 60%)",
-		borderColor_Main:    "hsl(0, 0%, 70%)",
-		borderColor_Outside: "hsl(0, 0%, 60%)",
+		borderAccent_Color:  undefined,
+		background_Color:    `hsl(${h}, 80%, 85%)`,
+		foreground_Color:    `hsl(${h}, 20%, 40%)`,
+		borderColor_Inside:  `hsl(${h}, 40%, 50%)`,
+		borderColor_Main:    `hsl(${h}, 40%, 65%)`,
+		borderColor_Outside: `hsl(${h}, 50%, 50%)`,
 	}
+}
+
+//###  Reference: https://css-tricks.com/converting-color-spaces-in-javascript/#hex-to-hsl  ###//
+function _get_Hue_From_Hex(H){
+	let r = parseInt("0x" + H[1] + H[2])
+	let g = parseInt("0x" + H[3] + H[4])
+	let b = parseInt("0x" + H[5] + H[6])
+
+	// Then to HSL
+	r /= 255
+	g /= 255
+	b /= 255
+	let cmin = Math.min(r,g,b),
+			cmax = Math.max(r,g,b),
+			delta = cmax - cmin,
+			h = 0,
+			s = 0,
+			l = 0
+
+	if (delta == 0)
+		h = 0
+	else if (cmax == r)
+		h = ((g - b) / delta) % 6
+	else if (cmax == g)
+		h = (b - r) / delta + 2
+	else
+		h = (r - g) / delta + 4
+
+	h = Math.round(h * 60)
+
+	if (h < 0)
+		h += 360
+
+	l = (cmax + cmin) / 2
+	s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
+	s = +(s * 100).toFixed(1)
+	l = +(l * 100).toFixed(1)
+
+	return h
 }
 
 function _build_CardType_ID_Map(){
@@ -80,7 +120,7 @@ function _update_CardStyle_From_CardTypes(element:JQuery, cardType:CardType){
 }
 
 function _update_CardStyle_From_CardOptions(element:JQuery, cardType:CardType){
-	const cardOptions = (_get_CardOptions(element, cardType) || get_Default_CardOptions(cardType))
+	const cardOptions = (_get_CardOptions(element, cardType) || _get_Default_CardOptions(cardType))
 
 	console.log({element, cardType, cardOptions})
 
