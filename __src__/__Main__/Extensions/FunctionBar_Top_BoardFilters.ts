@@ -15,7 +15,7 @@ const {enable_CardTypes, disable_CardTypes} = CardType.Filter
 const Modes: {[name:string]: Mode[]}[] = [
 	{"Today": [
 		{name:"Plan",   rows:["Daily", "Active"], cardTypes:undefined,                                      is_Default:true},
-		{name:"Active", rows:["Daily", "Active"], cardTypes:/(Task_Daily)|(Today_(Low|Medium|High|Urgent))/                },
+		{name:"Active", rows:["Daily", "Active"], cardTypes:/(Daily_Active)|(Today_(Low|Medium|High|Urgent))/              },
 	]},
 	{"Overview": [
 		{name:"Plan", rows:undefined, cardTypes:undefined},
