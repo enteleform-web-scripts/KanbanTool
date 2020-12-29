@@ -11185,10 +11185,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609285785764)
+		const elapsedTime = _get_ElapsedTime(1609286221427)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:49:45 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:57:01 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12344,6 +12344,7 @@ const { CardType } = __Main__2.KanbanTool;
 class TaskToggle {
     static get today_CardTypes() { return CardType.get_FromRegEx(/^(Today_.*)|(Daily_Active)$/); }
     static get task_CardTypes() { return CardType.get_FromRegEx(/^(Task_.*)|(Daily_Complete)$/); }
+    static get daily_CardTypes() { return CardType.get_FromRegEx(/^Daily_(Active|Complete)$/); }
     static get today_Cards() { return CardType.get_Cards(...TaskToggle.today_CardTypes); }
     static toggle_Hovered_Task() {
         const cardType = __Main__1.CardType_Manager.HoverManager.get_CardType();
@@ -12363,8 +12364,13 @@ exports.TaskToggle = TaskToggle;
 function _get_Inverted_CardType(cardType) {
     const task_CardTypes = TaskToggle.task_CardTypes;
     const today_CardTypes = TaskToggle.today_CardTypes;
-    let new_CardType, new_CardType_Index;
-    if (task_CardTypes.includes(cardType)) {
+    const daily_CardTypes = TaskToggle.daily_CardTypes;
+    let new_CardType, new_CardType_Index, old_CardType_Index;
+    if (daily_CardTypes.includes(cardType)) {
+        old_CardType_Index = task_CardTypes.indexOf(cardType);
+        new_CardType = [...today_CardTypes].splice(old_CardType_Index, 1)[0];
+    }
+    else if (task_CardTypes.includes(cardType)) {
         new_CardType_Index = task_CardTypes.indexOf(cardType);
         new_CardType = today_CardTypes[new_CardType_Index];
     }
