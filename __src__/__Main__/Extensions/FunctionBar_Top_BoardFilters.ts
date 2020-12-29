@@ -13,24 +13,31 @@ const {enable_CardTypes, disable_CardTypes} = CardType.Filter
 //###############//
 
 const Modes: {[name:string]: Mode[]}[] = [
-	{"Tasks": [
-		{name:"All",      rows:["Active"], cardTypes:/(Task|Today)_(Low|Medium|High|Urgent)/, is_Default:true},
-		{name:"Priority", rows:["Active"], cardTypes:/(Task|Today)_(Medium|High|Urgent)/                     },
-	]},
 	{"Today": [
-		{name:"All",       rows:["Active"], cardTypes:/Today_(Low|Medium|High|Urgent)/},
-		{name:"Priority",  rows:["Active"], cardTypes:/Today_(Medium|High|Urgent)/    },
+		{name:"Plan",   rows:["Daily", "Active"], cardTypes:/(Task_Daily)|((Task|Today)_(Low|Medium|High|Urgent))/, is_Default:true},
+		{name:"Active", rows:["Daily", "Active"], cardTypes:/(Task_Daily)|(Today_(Low|Medium|High|Urgent))/                        },
 	]},
-	{"Daily": [
-		{name:"All",    rows:["Daily"          ], cardTypes:/Task_Daily/                                   },
-		{name:"+Today", rows:["Daily", "Active"], cardTypes:/(Task_Daily)|(Today_(Low|Medium|High|Urgent))/},
+	{"Overview": [
+		{name:"Plan", rows:undefined, cardTypes:undefined},
 	]},
-	{"Plan": [
-		{name:"Active", rows:["Active", "Next"         ], cardTypes:undefined},
-		{name:"Next",   rows:["Next",   "Queue"        ], cardTypes:undefined},
-		{name:"Tasks",  rows:["Active", "Next", "Queue"], cardTypes:undefined},
-		{name:"All",    rows:undefined,                   cardTypes:undefined},
-	]},
+	//{"Tasks": [
+	//	{name:"All",      rows:["Active"], cardTypes:/(Task|Today)_(Low|Medium|High|Urgent)/, is_Default:true},
+	//	{name:"Priority", rows:["Active"], cardTypes:/(Task|Today)_(Medium|High|Urgent)/                     },
+	//]},
+	//{"Today": [
+	//	{name:"All",       rows:["Active"], cardTypes:/Today_(Low|Medium|High|Urgent)/},
+	//	{name:"Priority",  rows:["Active"], cardTypes:/Today_(Medium|High|Urgent)/    },
+	//]},
+	//{"Daily": [
+	//	{name:"All",    rows:["Daily"          ], cardTypes:/Task_Daily/                                   },
+	//	{name:"+Today", rows:["Daily", "Active"], cardTypes:/(Task_Daily)|(Today_(Low|Medium|High|Urgent))/},
+	//]},
+	//{"Plan": [
+	//	{name:"Active", rows:["Active", "Next"         ], cardTypes:undefined},
+	//	{name:"Next",   rows:["Next",   "Queue"        ], cardTypes:undefined},
+	//	{name:"Tasks",  rows:["Active", "Next", "Queue"], cardTypes:undefined},
+	//	{name:"All",    rows:undefined,                   cardTypes:undefined},
+	//]},
 ]
 
 
