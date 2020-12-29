@@ -11183,10 +11183,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609280847366)
+		const elapsedTime = _get_ElapsedTime(1609281047671)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:27:27 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:30:47 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -14278,7 +14278,7 @@ const { CardType, Show, Hide } = __Main__2.KanbanTool;
 const { enable_CardTypes, disable_CardTypes } = CardType.Filter;
 const Modes = [
     { "Today": [
-            { name: "Plan", rows: ["Daily", "Active"], cardTypes: /(Task_Daily)|((Task|Today)_(Low|Medium|High|Urgent))/, is_Default: true },
+            { name: "Plan", rows: ["Daily", "Active"], cardTypes: undefined, is_Default: true },
             { name: "Active", rows: ["Daily", "Active"], cardTypes: /(Task_Daily)|(Today_(Low|Medium|High|Urgent))/ },
         ] },
     { "Overview": [
