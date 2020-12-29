@@ -87,3 +87,5 @@ export namespace KanbanTool{
 	export const CardMover = _CardMover
 
 }
+
+;(window as any)._KT = KanbanTool
