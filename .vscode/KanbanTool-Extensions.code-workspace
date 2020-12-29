@@ -1,25 +1,25 @@
 {
 	"folders": [
 		{
-			"path": "C:/_/Projects/Active/Web--Script--KanbanTool-Extensions",
+			"path": "..",
 			"name": "___  CONFIG  _________________",
 		},
 		{
-			"path": "C:/_/Projects/Active/Web--Script--KanbanTool-Extensions/__src__",
+			"path": "../__src__",
 			"name": "___  SRC  ____________________",
 		},
 		{
-			"path": "C:/_/Projects/Active/Web--Script--KanbanTool-Extensions/__dist__",
+			"path": "../__dist__",
 			"name": "___  DIST  __________________",
 		},
 		{
-			"path": "C:/_/Projects/Active/Web--Script--KanbanTool-Extensions/.vscode",
+			"path": "../.vscode",
 			"name": "___  VS  _____________________",
 		},
 	],
 	"settings": {
 		"files.exclude": {
-			"C:/_/Projects/Active/Web--Script--KanbanTool-Extensions/__src__": true,
+			"./__src__":            true,
 			"**/.vscode":           true,
 			"**/__Archive__":       true,
 			"**/__archive__":       true,
@@ -31,7 +31,7 @@
 			"**/package-lock.json": true,
 		},
 		"search.exclude": {
-			"C:/_/Projects/Active/Web--Script--KanbanTool-Extensions/__src__": true,
+			"./__src__":            true,
 			"**/.vscode":           true,
 			"**/__archive__":       true,
 			"**/__Archive__":       true,

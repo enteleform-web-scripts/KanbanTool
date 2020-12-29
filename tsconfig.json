@@ -91,7 +91,7 @@
 	"exclude": [
 		"./**/*.test.ts",
 		"./**/tests/*",
-		// "./**/node_modules",
+		"./**/node_modules",
 	],
 
 }
