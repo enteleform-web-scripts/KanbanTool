@@ -11185,10 +11185,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609284558479)
+		const elapsedTime = _get_ElapsedTime(1609285332111)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:29:18 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:42:12 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12342,8 +12342,8 @@ const HoverManager_1 = __webpack_require__(5);
 const __Main__2 = __webpack_require__(0);
 const { CardType } = __Main__2.KanbanTool;
 class TaskToggle {
-    static get today_CardTypes() { return CardType.get_FromRegEx(/^Today_.*$/); }
-    static get task_CardTypes() { return CardType.get_FromRegEx(/^Task_.*$/); }
+    static get today_CardTypes() { return CardType.get_FromRegEx(/^(Today_.*)|(Daily_Active)$/); }
+    static get task_CardTypes() { return CardType.get_FromRegEx(/^(Task_.*)|(Daily_Complete)$/); }
     static get today_Cards() { return CardType.get_Cards(...TaskToggle.today_CardTypes); }
     static toggle_Hovered_Task() {
         const cardType = __Main__1.CardType_Manager.HoverManager.get_CardType();
@@ -13337,6 +13337,10 @@ const priorityColors = {
     high: "hsl(25,  100%, 65%)",
     urgent: "hsl(350, 75%,  65%)",
 };
+const dailyColors = {
+    active: "hsl(143, 0%,  70%)",
+    complete: "hsl(143, 40%, 50%)",
+};
 const todaySettings = {
     background_Color: "hsl(143, 40%, 85%)",
     foreground_Color: "hsl(143, 5%,  40%)",
@@ -13351,9 +13355,13 @@ const taskSettings = {
     borderColor_Main: "hsl(0, 0%, 70%)",
     borderColor_Outside: "hsl(0, 0%, 60%)",
 };
-console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-console.log({ cardTypes: __Main__2.KanbanTool.cardTypes });
-console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+const dailySettings = {
+    background_Color: "hsl(215, 80%, 85%)",
+    foreground_Color: "hsl(215, 20%, 40%)",
+    borderColor_Inside: "hsl(215, 40%, 50%)",
+    borderColor_Main: "hsl(215, 40%, 65%)",
+    borderColor_Outside: "hsl(215, 50%, 50%)",
+};
 __Main__1.CardType_Manager.initialize_Manual({
     cellWidth: 75,
     functionBar_Options: {
@@ -13372,6 +13380,10 @@ __Main__1.CardType_Manager.initialize_Manual({
                 { name: "Medium", borderAccent_Color: priorityColors.medium, ...todaySettings },
                 { name: "High", borderAccent_Color: priorityColors.high, ...todaySettings },
                 { name: "Urgent", borderAccent_Color: priorityColors.urgent, ...todaySettings },
+            ] },
+        { "Daily": [
+                { name: "Complete", borderAccent_Color: dailyColors.complete, ...dailySettings },
+                { name: "Active", borderAccent_Color: dailyColors.active, ...dailySettings },
             ] },
         { "Misc": [
                 ...__Main__2.KanbanTool.cardTypes.slice(8).map(cardType => _get_Default_CardOptions(cardType)),
