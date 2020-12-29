@@ -78,15 +78,15 @@
 
 		"github:push:source":   "npm-run-all github:push:source:*",
 		"github:push:source:1": "git add --all",
-		"github:push:source:2": "git commit --all --message \"..\"",
-		"github:push:source:3": "git push",
+		"github:push:source:2": "git commit --all --allow-empty --message \"..\"",
+		"github:push:source:3": "git push --force",
 
 		"github:pull:source":   "git pull",
 
 		"github:push:gh-pages":   "npm-run-all github:push:gh-pages:*",
 		"github:push:gh-pages:1": "git -C ./__dist__ add --all",
-		"github:push:gh-pages:2": "git -C ./__dist__ commit --all --message \"..\"",
-		"github:push:gh-pages:3": "git -C ./__dist__ push",
+		"github:push:gh-pages:2": "git -C ./__dist__ commit --allow-empty --all --message \"..\"",
+		"github:push:gh-pages:3": "git -C ./__dist__ push --force",
 
 		"github:pull:gh-pages":   "git -C ./__dist__ pull",
 
