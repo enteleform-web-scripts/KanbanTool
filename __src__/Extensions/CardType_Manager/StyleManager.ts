@@ -56,13 +56,15 @@ export namespace StyleManager{
 //###  Utils  ###//
 //###############//
 
-const default_CardOptions = {
-	borderAccent_Color:  undefined,
-	background_Color:    "hsl(0, 0%, 80%)",
-	foreground_Color:    "hsl(0, 0%, 30%)",
-	borderColor_Inside:  "hsl(0, 0%, 60%)",
-	borderColor_Main:    "hsl(0, 0%, 70%)",
-	borderColor_Outside: "hsl(0, 0%, 60%)",
+function get_Default_CardOptions(cardType:CardType){
+	return {
+		borderAccent_Color:  cardType.bgColor,
+		background_Color:    "hsl(0, 0%, 80%)",
+		foreground_Color:    "hsl(0, 0%, 30%)",
+		borderColor_Inside:  "hsl(0, 0%, 60%)",
+		borderColor_Main:    "hsl(0, 0%, 70%)",
+		borderColor_Outside: "hsl(0, 0%, 60%)",
+	}
 }
 
 function _build_CardType_ID_Map(){
@@ -78,7 +80,7 @@ function _update_CardStyle_From_CardTypes(element:JQuery, cardType:CardType){
 }
 
 function _update_CardStyle_From_CardOptions(element:JQuery, cardType:CardType){
-	const cardOptions = (_get_CardOptions(element, cardType) || default_CardOptions)
+	const cardOptions = (_get_CardOptions(element, cardType) || get_Default_CardOptions(cardType))
 
 	console.log({element, cardType, cardOptions})
 
