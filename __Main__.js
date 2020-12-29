@@ -11183,10 +11183,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609282442622)
+		const elapsedTime = _get_ElapsedTime(1609282778581)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:54:02 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:59:38 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12232,9 +12232,9 @@ function _get_Default_CardOptions(cardType) {
         borderAccent_Color: undefined,
         background_Color: `hsl(${h}, 80%, 85%)`,
         foreground_Color: `hsl(${h}, 20%, 40%)`,
-        borderColor_Inside: `hsl(${h}, 40%, 50%)`,
-        borderColor_Main: `hsl(${h}, 40%, 65%)`,
-        borderColor_Outside: `hsl(${h}, 50%, 50%)`,
+        borderColor_Inside: `hsl(${h}, 50%, 50%)`,
+        borderColor_Main: `hsl(${h}, 50%, 65%)`,
+        borderColor_Outside: `hsl(${h}, 60%, 50%)`,
     };
 }
 function _get_Hue_From_Hex(H) {
