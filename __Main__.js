@@ -11183,10 +11183,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609283429857)
+		const elapsedTime = _get_ElapsedTime(1609283999208)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:10:29 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:19:59 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13364,6 +13364,7 @@ function _get_CardType_Index(id) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(19);
+const __Main__2 = __webpack_require__(0);
 const priorityColors = {
     low: "hsl(220, 40%,  60%)",
     medium: "hsl(50,  100%, 70%)",
@@ -13384,6 +13385,9 @@ const taskSettings = {
     borderColor_Main: "hsl(0, 0%, 70%)",
     borderColor_Outside: "hsl(0, 0%, 60%)",
 };
+console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+console.log({ cardTypes: __Main__2.KanbanTool.cardTypes });
+console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 __Main__1.CardType_Manager.initialize_Manual({
     cellWidth: 75,
     functionBar_Options: {
@@ -13403,24 +13407,7 @@ __Main__1.CardType_Manager.initialize_Manual({
                 { name: "High", borderAccent_Color: priorityColors.high, ...todaySettings },
                 { name: "Urgent", borderAccent_Color: priorityColors.urgent, ...todaySettings },
             ] },
-        { "Misc": [
-                {
-                    name: "Daily",
-                    background_Color: "hsl(215, 80%, 85%)",
-                    foreground_Color: "hsl(215, 20%, 40%)",
-                    borderColor_Inside: "hsl(215, 40%, 50%)",
-                    borderColor_Main: "hsl(215, 40%, 65%)",
-                    borderColor_Outside: "hsl(215, 50%, 50%)",
-                },
-                {
-                    name: "Book",
-                    background_Color: "hsl(255, 70%, 85%)",
-                    foreground_Color: "hsl(255, 20%, 40%)",
-                    borderColor_Inside: "hsl(255, 40%, 50%)",
-                    borderColor_Main: "hsl(255, 40%, 65%)",
-                    borderColor_Outside: "hsl(255, 50%, 55%)",
-                },
-            ] },
+        { "Misc": [] },
     ],
 });
 
