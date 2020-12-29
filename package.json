@@ -77,9 +77,9 @@
 		"github:push": "npm-run-all github:push:*",
 
 		"github:push:source":   "npm-run-all github:push:source:*",
-		"github:push:source:1": "git add --all",
-		"github:push:source:2": "git commit --all --allow-empty --message \"..\"",
-		"github:push:source:3": "git push --force",
+		"github:push:source:1": "git -C ./ add --all",
+		"github:push:source:2": "git -C ./ commit --all --allow-empty --message \"..\"",
+		"github:push:source:3": "git -C ./ push --force",
 
 		"github:pull:source":   "git pull",
 
