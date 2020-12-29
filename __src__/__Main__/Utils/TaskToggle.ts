@@ -20,6 +20,9 @@ export class TaskToggle{
 	static get task_CardTypes()
 		{return CardType.get_FromRegEx(/^(Task_.*)|(Daily_Complete)$/)}
 
+	static get daily_CardTypes()
+		{return CardType.get_FromRegEx(/^Daily_(Active|Complete)$/)}
+
 	static get today_Cards()
 		{return CardType.get_Cards(...TaskToggle.today_CardTypes)}
 
@@ -48,10 +51,15 @@ export class TaskToggle{
 function _get_Inverted_CardType(cardType:CardType){
 	const task_CardTypes  = TaskToggle.task_CardTypes
 	const today_CardTypes = TaskToggle.today_CardTypes
+	const daily_CardTypes = TaskToggle.daily_CardTypes
 
-	let new_CardType, new_CardType_Index
+	let new_CardType, new_CardType_Index, old_CardType_Index
 
-	if(task_CardTypes.includes(cardType)){
+	if(daily_CardTypes.includes(cardType)){
+		old_CardType_Index = task_CardTypes.indexOf(cardType)
+		new_CardType       = [...today_CardTypes].splice(old_CardType_Index, 1)[0]
+	}
+	else if(task_CardTypes.includes(cardType)){
 		new_CardType_Index = task_CardTypes.indexOf(cardType)
 		new_CardType       = today_CardTypes[new_CardType_Index]
 	}
