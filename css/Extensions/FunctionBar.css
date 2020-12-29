@@ -52,6 +52,7 @@
 .FunctionBars .center .left .column .cell,
 .FunctionBars .center .right .column .cell {
   text-align: left;
+  min-height: 1.4em;
 }
 .FunctionBars .center .left .column .divider,
 .FunctionBars .center .right .column .divider {

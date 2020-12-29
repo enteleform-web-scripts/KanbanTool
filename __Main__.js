@@ -11183,10 +11183,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609280394605)
+		const elapsedTime = _get_ElapsedTime(1609280847366)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:19:54 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:27:27 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12246,6 +12246,7 @@ function _update_CardStyle_From_CardTypes(element, cardType) {
 }
 function _update_CardStyle_From_CardOptions(element, cardType) {
     const cardOptions = (_get_CardOptions(element, cardType) || default_CardOptions);
+    console.log({ element, cardType, cardOptions });
     Array.from([
         ["title_Background_Color", cardOptions.background_Color],
         ["title_Foreground_Color", cardOptions.foreground_Color],
@@ -14276,23 +14277,12 @@ const { Entry, Position } = __Main__1.FunctionBar;
 const { CardType, Show, Hide } = __Main__2.KanbanTool;
 const { enable_CardTypes, disable_CardTypes } = CardType.Filter;
 const Modes = [
-    { "Tasks": [
-            { name: "All", rows: ["Active"], cardTypes: /(Task|Today)_(Low|Medium|High|Urgent)/, is_Default: true },
-            { name: "Priority", rows: ["Active"], cardTypes: /(Task|Today)_(Medium|High|Urgent)/ },
-        ] },
     { "Today": [
-            { name: "All", rows: ["Active"], cardTypes: /Today_(Low|Medium|High|Urgent)/ },
-            { name: "Priority", rows: ["Active"], cardTypes: /Today_(Medium|High|Urgent)/ },
+            { name: "Plan", rows: ["Daily", "Active"], cardTypes: /(Task_Daily)|((Task|Today)_(Low|Medium|High|Urgent))/, is_Default: true },
+            { name: "Active", rows: ["Daily", "Active"], cardTypes: /(Task_Daily)|(Today_(Low|Medium|High|Urgent))/ },
         ] },
-    { "Daily": [
-            { name: "All", rows: ["Daily"], cardTypes: /Task_Daily/ },
-            { name: "+Today", rows: ["Daily", "Active"], cardTypes: /(Task_Daily)|(Today_(Low|Medium|High|Urgent))/ },
-        ] },
-    { "Plan": [
-            { name: "Active", rows: ["Active", "Next"], cardTypes: undefined },
-            { name: "Next", rows: ["Next", "Queue"], cardTypes: undefined },
-            { name: "Tasks", rows: ["Active", "Next", "Queue"], cardTypes: undefined },
-            { name: "All", rows: undefined, cardTypes: undefined },
+    { "Overview": [
+            { name: "Plan", rows: undefined, cardTypes: undefined },
         ] },
 ];
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
