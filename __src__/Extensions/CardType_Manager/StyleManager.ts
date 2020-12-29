@@ -60,13 +60,59 @@ function _get_Default_CardOptions(cardType:CardType){
 	const h = _get_Hue_From_Hex(cardType.bgColor)
 	return {
 		borderAccent_Color:  undefined,
-		background_Color:    `hsl(${h}, 80%, 85%)`,
+		background_Color:    `hsl(${h}, 50%, 85%)`,
 		foreground_Color:    `hsl(${h}, 20%, 40%)`,
 		borderColor_Inside:  `hsl(${h}, 50%, 50%)`,
 		borderColor_Main:    `hsl(${h}, 50%, 65%)`,
 		borderColor_Outside: `hsl(${h}, 60%, 50%)`,
 	}
 }
+
+function _build_CardType_ID_Map(){
+	const idMap: {[id:number]: CardType} = {}
+	cardTypes.forEach(cardType => {
+		idMap[cardType.id] = cardType
+	})
+	return idMap
+}
+
+function _update_CardStyle_From_CardTypes(element:JQuery, cardType:CardType){
+	$set_CSS_Variable(element, "title_BorderColor_Main", cardType.bgColor)
+}
+
+function _update_CardStyle_From_CardOptions(element:JQuery, cardType:CardType){
+	const cardOptions = (_get_CardOptions(element, cardType) || _get_Default_CardOptions(cardType))
+
+	Array.from([
+		["title_Background_Color",    cardOptions.background_Color   ],
+		["title_Foreground_Color",    cardOptions.foreground_Color   ],
+		["title_BorderColor_Main",    cardOptions.borderColor_Main   ],
+		["title_BorderColor_Inside",  cardOptions.borderColor_Inside ],
+		["title_BorderColor_Outside", cardOptions.borderColor_Outside],
+	]).forEach( ([key, value]) => {
+		if(value)
+			{$set_CSS_Variable(element, key, value)}
+	})
+
+	if(cardOptions.borderAccent_Color){
+		$set_CSS_Variable(element, "title_BorderAccent_Color", cardOptions.borderAccent_Color)
+		element.addClass("borderAccent_Enabled")
+	}
+	else{
+		$set_CSS_Variable(element, "title_BorderAccent_Color", "#0000")
+		element.removeClass("borderAccent_Enabled")
+	}
+}
+
+function _get_CardType(element:JQuery){
+	const taskID      = element.data("task-id")
+	const model       = KanbanTool.API.tasks.stub(taskID)
+	const cardType_ID = model.cardType().id
+	return StyleManager._CardType_ID_Map[cardType_ID]
+}
+
+function _get_CardOptions(element:JQuery, cardType:CardType)
+	{return StyleManager._CardType_Options[cardType.index]}
 
 //###  Reference: https://css-tricks.com/converting-color-spaces-in-javascript/#hex-to-hsl  ###//
 function _get_Hue_From_Hex(H){
@@ -106,51 +152,3 @@ function _get_Hue_From_Hex(H){
 
 	return h
 }
-
-function _build_CardType_ID_Map(){
-	const idMap: {[id:number]: CardType} = {}
-	cardTypes.forEach(cardType => {
-		idMap[cardType.id] = cardType
-	})
-	return idMap
-}
-
-function _update_CardStyle_From_CardTypes(element:JQuery, cardType:CardType){
-	$set_CSS_Variable(element, "title_BorderColor_Main", cardType.bgColor)
-}
-
-function _update_CardStyle_From_CardOptions(element:JQuery, cardType:CardType){
-	const cardOptions = (_get_CardOptions(element, cardType) || _get_Default_CardOptions(cardType))
-
-	console.log({element, cardType, cardOptions})
-
-	Array.from([
-		["title_Background_Color",    cardOptions.background_Color   ],
-		["title_Foreground_Color",    cardOptions.foreground_Color   ],
-		["title_BorderColor_Main",    cardOptions.borderColor_Main   ],
-		["title_BorderColor_Inside",  cardOptions.borderColor_Inside ],
-		["title_BorderColor_Outside", cardOptions.borderColor_Outside],
-	]).forEach( ([key, value]) => {
-		if(value)
-			{$set_CSS_Variable(element, key, value)}
-	})
-
-	if(cardOptions.borderAccent_Color){
-		$set_CSS_Variable(element, "title_BorderAccent_Color", cardOptions.borderAccent_Color)
-		element.addClass("borderAccent_Enabled")
-	}
-	else{
-		$set_CSS_Variable(element, "title_BorderAccent_Color", "#0000")
-		element.removeClass("borderAccent_Enabled")
-	}
-}
-
-function _get_CardType(element:JQuery){
-	const taskID      = element.data("task-id")
-	const model       = KanbanTool.API.tasks.stub(taskID)
-	const cardType_ID = model.cardType().id
-	return StyleManager._CardType_ID_Map[cardType_ID]
-}
-
-function _get_CardOptions(element:JQuery, cardType:CardType)
-	{return StyleManager._CardType_Options[cardType.index]}
