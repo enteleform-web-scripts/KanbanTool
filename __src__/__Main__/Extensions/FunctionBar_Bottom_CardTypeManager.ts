@@ -60,6 +60,9 @@ CardType_Manager.initialize_Manual({
 			{/*###  Today_Urgent ###*/ name:"Urgent", borderAccent_Color:priorityColors.urgent, ...todaySettings},
 		]},
 		{"Misc":[
+			...KanbanTool.cardTypes.slice(8).map(cardType =>
+				_get_Default_CardOptions(cardType)
+			),
 			//{ //###  Task_Daily  ###//
 			//	name:                "Daily",
 			//	background_Color:    "hsl(215, 80%, 85%)",
@@ -80,3 +83,59 @@ CardType_Manager.initialize_Manual({
 	],
 })
 
+
+//####################################################################################################################//
+//##>  Utilities                                                                                                    ##//
+//####################################################################################################################//
+
+function _get_Default_CardOptions(cardType:KanbanTool.CardType){
+	const h = _get_Hue_From_Hex(cardType.bgColor)
+	return {
+		name:                cardType.name,
+		borderAccent_Color:  undefined,
+		background_Color:    `hsl(${h}, 50%, 85%)`,
+		foreground_Color:    `hsl(${h}, 20%, 40%)`,
+		borderColor_Inside:  `hsl(${h}, 50%, 50%)`,
+		borderColor_Main:    `hsl(${h}, 50%, 65%)`,
+		borderColor_Outside: `hsl(${h}, 60%, 50%)`,
+	}
+}
+
+//###  Reference: https://css-tricks.com/converting-color-spaces-in-javascript/#hex-to-hsl  ###//
+function _get_Hue_From_Hex(H){
+	let r = parseInt("0x" + H[1] + H[2])
+	let g = parseInt("0x" + H[3] + H[4])
+	let b = parseInt("0x" + H[5] + H[6])
+
+	// Then to HSL
+	r /= 255
+	g /= 255
+	b /= 255
+	let cmin = Math.min(r,g,b),
+			cmax = Math.max(r,g,b),
+			delta = cmax - cmin,
+			h = 0,
+			s = 0,
+			l = 0
+
+	if (delta == 0)
+		h = 0
+	else if (cmax == r)
+		h = ((g - b) / delta) % 6
+	else if (cmax == g)
+		h = (b - r) / delta + 2
+	else
+		h = (r - g) / delta + 4
+
+	h = Math.round(h * 60)
+
+	if (h < 0)
+		h += 360
+
+	l = (cmax + cmin) / 2
+	s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1))
+	s = +(s * 100).toFixed(1)
+	l = +(l * 100).toFixed(1)
+
+	return h
+}
