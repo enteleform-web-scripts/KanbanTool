@@ -1,5 +1,5 @@
 //###  Module  ###//
-import {KanbanTool } from "~/Utils/KanbanTool/__Main__"
+import {KanbanTool} from "~/Utils/KanbanTool/__Main__"
 
 //###  Aliases  ###//
 const {CardType, remove_PageLoad_Callback} = KanbanTool

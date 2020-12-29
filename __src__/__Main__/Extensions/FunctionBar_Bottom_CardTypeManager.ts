@@ -1,5 +1,6 @@
 //###  Module  ###//
 import {CardType_Manager} from "~/Extensions/CardType_Manager/__Main__"
+import {KanbanTool      } from "~/Utils/KanbanTool/__Main__"
 
 
 //###############//
@@ -34,6 +35,9 @@ const taskSettings = {
 //###  FunctionBar  ###//
 //#####################//
 
+console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+console.log({cardTypes:KanbanTool.cardTypes})
+console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 CardType_Manager.initialize_Manual({
 	cellWidth: 75,
 
@@ -56,22 +60,22 @@ CardType_Manager.initialize_Manual({
 			{/*###  Today_Urgent ###*/ name:"Urgent", borderAccent_Color:priorityColors.urgent, ...todaySettings},
 		]},
 		{"Misc":[
-			{ //###  Task_Daily  ###//
-				name:                "Daily",
-				background_Color:    "hsl(215, 80%, 85%)",
-				foreground_Color:    "hsl(215, 20%, 40%)",
-				borderColor_Inside:  "hsl(215, 40%, 50%)",
-				borderColor_Main:    "hsl(215, 40%, 65%)",
-				borderColor_Outside: "hsl(215, 50%, 50%)",
-			},
-			{ //###  Book  ###//
-				name:                "Book",
-				background_Color:    "hsl(255, 70%, 85%)",
-				foreground_Color:    "hsl(255, 20%, 40%)",
-				borderColor_Inside:  "hsl(255, 40%, 50%)",
-				borderColor_Main:    "hsl(255, 40%, 65%)",
-				borderColor_Outside: "hsl(255, 50%, 55%)",
-			},
+			//{ //###  Task_Daily  ###//
+			//	name:                "Daily",
+			//	background_Color:    "hsl(215, 80%, 85%)",
+			//	foreground_Color:    "hsl(215, 20%, 40%)",
+			//	borderColor_Inside:  "hsl(215, 40%, 50%)",
+			//	borderColor_Main:    "hsl(215, 40%, 65%)",
+			//	borderColor_Outside: "hsl(215, 50%, 50%)",
+			//},
+			//{ //###  Book  ###//
+			//	name:                "Book",
+			//	background_Color:    "hsl(255, 70%, 85%)",
+			//	foreground_Color:    "hsl(255, 20%, 40%)",
+			//	borderColor_Inside:  "hsl(255, 40%, 50%)",
+			//	borderColor_Main:    "hsl(255, 40%, 65%)",
+			//	borderColor_Outside: "hsl(255, 50%, 55%)",
+			//},
 		]},
 	],
 })
