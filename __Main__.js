@@ -11183,10 +11183,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609281047671)
+		const elapsedTime = _get_ElapsedTime(1609281257203)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:30:47 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:34:17 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12226,14 +12226,16 @@ var StyleManager;
     }
     StyleManager.update_CardStyle = update_CardStyle;
 })(StyleManager = exports.StyleManager || (exports.StyleManager = {}));
-const default_CardOptions = {
-    borderAccent_Color: undefined,
-    background_Color: "hsl(0, 0%, 80%)",
-    foreground_Color: "hsl(0, 0%, 30%)",
-    borderColor_Inside: "hsl(0, 0%, 60%)",
-    borderColor_Main: "hsl(0, 0%, 70%)",
-    borderColor_Outside: "hsl(0, 0%, 60%)",
-};
+function get_Default_CardOptions(cardType) {
+    return {
+        borderAccent_Color: cardType.bgColor,
+        background_Color: "hsl(0, 0%, 80%)",
+        foreground_Color: "hsl(0, 0%, 30%)",
+        borderColor_Inside: "hsl(0, 0%, 60%)",
+        borderColor_Main: "hsl(0, 0%, 70%)",
+        borderColor_Outside: "hsl(0, 0%, 60%)",
+    };
+}
 function _build_CardType_ID_Map() {
     const idMap = {};
     cardTypes.forEach(cardType => {
@@ -12245,7 +12247,7 @@ function _update_CardStyle_From_CardTypes(element, cardType) {
     __Main__1.$set_CSS_Variable(element, "title_BorderColor_Main", cardType.bgColor);
 }
 function _update_CardStyle_From_CardOptions(element, cardType) {
-    const cardOptions = (_get_CardOptions(element, cardType) || default_CardOptions);
+    const cardOptions = (_get_CardOptions(element, cardType) || get_Default_CardOptions(cardType));
     console.log({ element, cardType, cardOptions });
     Array.from([
         ["title_Background_Color", cardOptions.background_Color],
