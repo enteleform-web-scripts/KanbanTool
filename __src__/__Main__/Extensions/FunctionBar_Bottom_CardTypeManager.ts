@@ -15,8 +15,8 @@ const priorityColors = {
 }
 
 const dailyColors = {
-	active:   "hsl(143, 0%,  70%)",
-	complete: "hsl(143, 40%, 50%)",
+	active:   "hsl(143, 0%,  40%)",
+	complete: "hsl(143, 60%, 50%)",
 }
 
 const todaySettings = {
@@ -74,7 +74,7 @@ CardType_Manager.initialize_Manual({
 			{/*###  Daily_Active   ###*/ name:"Active",   borderAccent_Color:dailyColors.active,   ...dailySettings},
 		]},
 		{"Misc":[
-			...KanbanTool.cardTypes.slice(8).map(cardType =>
+			...KanbanTool.cardTypes.slice(10).map(cardType =>
 				_get_Default_CardOptions(cardType)
 			),
 		]},
