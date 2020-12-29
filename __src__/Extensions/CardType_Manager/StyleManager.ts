@@ -71,7 +71,7 @@ function _update_CardStyle_From_CardTypes(element:JQuery, cardType:CardType){
 function _update_CardStyle_From_CardOptions(element:JQuery, cardType:CardType){
 	const cardOptions = _get_CardOptions(element, cardType)
 
-	console.log({element, cardType})
+	console.log({element, cardType, cardOptions})
 
 	Array.from([
 		["title_Background_Color",    cardOptions.background_Color   ],
