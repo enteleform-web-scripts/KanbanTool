@@ -62,9 +62,9 @@ function _get_Default_CardOptions(cardType:CardType){
 		borderAccent_Color:  undefined,
 		background_Color:    `hsl(${h}, 80%, 85%)`,
 		foreground_Color:    `hsl(${h}, 20%, 40%)`,
-		borderColor_Inside:  `hsl(${h}, 40%, 50%)`,
-		borderColor_Main:    `hsl(${h}, 40%, 65%)`,
-		borderColor_Outside: `hsl(${h}, 50%, 50%)`,
+		borderColor_Inside:  `hsl(${h}, 50%, 50%)`,
+		borderColor_Main:    `hsl(${h}, 50%, 65%)`,
+		borderColor_Outside: `hsl(${h}, 60%, 50%)`,
 	}
 }
 
