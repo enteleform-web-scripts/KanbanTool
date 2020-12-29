@@ -11185,10 +11185,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609285332111)
+		const elapsedTime = _get_ElapsedTime(1609285637151)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:42:12 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:47:17 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13338,8 +13338,8 @@ const priorityColors = {
     urgent: "hsl(350, 75%,  65%)",
 };
 const dailyColors = {
-    active: "hsl(143, 0%,  70%)",
-    complete: "hsl(143, 40%, 50%)",
+    active: "hsl(143, 0%,  40%)",
+    complete: "hsl(143, 60%, 50%)",
 };
 const todaySettings = {
     background_Color: "hsl(143, 40%, 85%)",
@@ -13386,7 +13386,7 @@ __Main__1.CardType_Manager.initialize_Manual({
                 { name: "Active", borderAccent_Color: dailyColors.active, ...dailySettings },
             ] },
         { "Misc": [
-                ...__Main__2.KanbanTool.cardTypes.slice(8).map(cardType => _get_Default_CardOptions(cardType)),
+                ...__Main__2.KanbanTool.cardTypes.slice(10).map(cardType => _get_Default_CardOptions(cardType)),
             ] },
     ],
 });
