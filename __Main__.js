@@ -11183,10 +11183,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609279737346)
+		const elapsedTime = _get_ElapsedTime(1609279882101)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:08:57 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:11:22 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12238,7 +12238,7 @@ function _update_CardStyle_From_CardTypes(element, cardType) {
 }
 function _update_CardStyle_From_CardOptions(element, cardType) {
     const cardOptions = _get_CardOptions(element, cardType);
-    console.log({ element, cardType });
+    console.log({ element, cardType, cardOptions });
     Array.from([
         ["title_Background_Color", cardOptions.background_Color],
         ["title_Foreground_Color", cardOptions.foreground_Color],
