@@ -1,5 +1,5 @@
 {
-	"name": "__PACKAGE_NAME__",
+	"name": "@enteleform/scripts--kanban-tool",
 	"version": "0.0.1",
 
 	"config": {
