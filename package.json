@@ -68,10 +68,8 @@
 	},
 
 	"scripts": {
-		"build:local": "webpack --config %npm_package_config_WebpackConfigs%/Production/__Main__.ts",
-
 		"build:push":   "npm-run-all build:push:*",
-		"build:push:1": "npm run build:local",
+		"build:push:1": "npm run zzz_build:local",
 		"build:push:2": "npm run github:push",
 
 		"github:push": "npm-run-all github:push:*",
@@ -93,6 +91,8 @@
 		"install-dependencies": "yarn install",
 
 		"test":          "cls && jest",
-		"test:coverage": "cls && jest --coverage"
+		"test:coverage": "cls && jest --coverage",
+
+		"zzz_build:local": "webpack --config %npm_package_config_WebpackConfigs%/Production/__Main__.ts"
 	}
 }
