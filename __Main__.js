@@ -11185,10 +11185,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609284219434)
+		const elapsedTime = _get_ElapsedTime(1609284558479)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:23:39 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:29:18 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12228,17 +12228,6 @@ var StyleManager;
     }
     StyleManager.update_CardStyle = update_CardStyle;
 })(StyleManager = exports.StyleManager || (exports.StyleManager = {}));
-function _get_Default_CardOptions(cardType) {
-    const h = _get_Hue_From_Hex(cardType.bgColor);
-    return {
-        borderAccent_Color: undefined,
-        background_Color: `hsl(${h}, 50%, 85%)`,
-        foreground_Color: `hsl(${h}, 20%, 40%)`,
-        borderColor_Inside: `hsl(${h}, 50%, 50%)`,
-        borderColor_Main: `hsl(${h}, 50%, 65%)`,
-        borderColor_Outside: `hsl(${h}, 60%, 50%)`,
-    };
-}
 function _build_CardType_ID_Map() {
     const idMap = {};
     cardTypes.forEach(cardType => {
@@ -12250,7 +12239,7 @@ function _update_CardStyle_From_CardTypes(element, cardType) {
     __Main__1.$set_CSS_Variable(element, "title_BorderColor_Main", cardType.bgColor);
 }
 function _update_CardStyle_From_CardOptions(element, cardType) {
-    const cardOptions = (_get_CardOptions(element, cardType) || _get_Default_CardOptions(cardType));
+    const cardOptions = _get_CardOptions(element, cardType);
     Array.from([
         ["title_Background_Color", cardOptions.background_Color],
         ["title_Foreground_Color", cardOptions.foreground_Color],
@@ -12278,31 +12267,6 @@ function _get_CardType(element) {
     return StyleManager._CardType_ID_Map[cardType_ID];
 }
 function _get_CardOptions(element, cardType) { return StyleManager._CardType_Options[cardType.index]; }
-function _get_Hue_From_Hex(H) {
-    let r = parseInt("0x" + H[1] + H[2]);
-    let g = parseInt("0x" + H[3] + H[4]);
-    let b = parseInt("0x" + H[5] + H[6]);
-    r /= 255;
-    g /= 255;
-    b /= 255;
-    let cmin = Math.min(r, g, b), cmax = Math.max(r, g, b), delta = cmax - cmin, h = 0, s = 0, l = 0;
-    if (delta == 0)
-        h = 0;
-    else if (cmax == r)
-        h = ((g - b) / delta) % 6;
-    else if (cmax == g)
-        h = (b - r) / delta + 2;
-    else
-        h = (r - g) / delta + 4;
-    h = Math.round(h * 60);
-    if (h < 0)
-        h += 360;
-    l = (cmax + cmin) / 2;
-    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
-    s = +(s * 100).toFixed(1);
-    l = +(l * 100).toFixed(1);
-    return h;
-}
 
 
 /***/ }),
@@ -13409,9 +13373,48 @@ __Main__1.CardType_Manager.initialize_Manual({
                 { name: "High", borderAccent_Color: priorityColors.high, ...todaySettings },
                 { name: "Urgent", borderAccent_Color: priorityColors.urgent, ...todaySettings },
             ] },
-        { "Misc": [] },
+        { "Misc": [
+                ...__Main__2.KanbanTool.cardTypes.slice(8).map(cardType => _get_Default_CardOptions(cardType)),
+            ] },
     ],
 });
+function _get_Default_CardOptions(cardType) {
+    const h = _get_Hue_From_Hex(cardType.bgColor);
+    return {
+        name: cardType.name,
+        borderAccent_Color: undefined,
+        background_Color: `hsl(${h}, 50%, 85%)`,
+        foreground_Color: `hsl(${h}, 20%, 40%)`,
+        borderColor_Inside: `hsl(${h}, 50%, 50%)`,
+        borderColor_Main: `hsl(${h}, 50%, 65%)`,
+        borderColor_Outside: `hsl(${h}, 60%, 50%)`,
+    };
+}
+function _get_Hue_From_Hex(H) {
+    let r = parseInt("0x" + H[1] + H[2]);
+    let g = parseInt("0x" + H[3] + H[4]);
+    let b = parseInt("0x" + H[5] + H[6]);
+    r /= 255;
+    g /= 255;
+    b /= 255;
+    let cmin = Math.min(r, g, b), cmax = Math.max(r, g, b), delta = cmax - cmin, h = 0, s = 0, l = 0;
+    if (delta == 0)
+        h = 0;
+    else if (cmax == r)
+        h = ((g - b) / delta) % 6;
+    else if (cmax == g)
+        h = (b - r) / delta + 2;
+    else
+        h = (r - g) / delta + 4;
+    h = Math.round(h * 60);
+    if (h < 0)
+        h += 360;
+    l = (cmax + cmin) / 2;
+    s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+    s = +(s * 100).toFixed(1);
+    l = +(l * 100).toFixed(1);
+    return h;
+}
 
 
 /***/ }),
