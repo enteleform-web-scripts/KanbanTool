@@ -15,10 +15,10 @@ const {CardType} = KanbanTool
 export class TaskToggle{
 
 	static get today_CardTypes()
-		{return CardType.get_FromRegEx(/^Today_.*$/)}
+		{return CardType.get_FromRegEx(/^(Today_.*)|(Daily_Active)$/)}
 
 	static get task_CardTypes()
-		{return CardType.get_FromRegEx(/^Task_.*$/)}
+		{return CardType.get_FromRegEx(/^(Task_.*)|(Daily_Complete)$/)}
 
 	static get today_Cards()
 		{return CardType.get_Cards(...TaskToggle.today_CardTypes)}
