@@ -11185,10 +11185,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609286221427)
+		const elapsedTime = _get_ElapsedTime(1609286663465)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:57:01 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:04:23 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -12345,7 +12345,9 @@ class TaskToggle {
     static get today_CardTypes() { return CardType.get_FromRegEx(/^(Today_.*)|(Daily_Active)$/); }
     static get task_CardTypes() { return CardType.get_FromRegEx(/^(Task_.*)|(Daily_Complete)$/); }
     static get daily_CardTypes() { return CardType.get_FromRegEx(/^Daily_(Active|Complete)$/); }
-    static get today_Cards() { return CardType.get_Cards(...TaskToggle.today_CardTypes); }
+    static get cards_ToInvert() {
+        return CardType.get_Cards(...CardType.get_FromRegEx(/^(Today_.*)|(Daily_Complete)$/));
+    }
     static toggle_Hovered_Task() {
         const cardType = __Main__1.CardType_Manager.HoverManager.get_CardType();
         const new_CardType = _get_Inverted_CardType(cardType);
@@ -12353,8 +12355,8 @@ class TaskToggle {
             HoverManager_1.HoverManager.set_CardType(new_CardType);
         }
     }
-    static convert_TodayCards_To_TaskCards() {
-        TaskToggle.today_Cards.forEach(({ element, cardType }) => {
+    static invert_ActiveCards() {
+        TaskToggle.cards_ToInvert.forEach(({ element, cardType }) => {
             const inverted_CardType = _get_Inverted_CardType(cardType);
             CardType.set(element, inverted_CardType);
         });
@@ -12364,13 +12366,8 @@ exports.TaskToggle = TaskToggle;
 function _get_Inverted_CardType(cardType) {
     const task_CardTypes = TaskToggle.task_CardTypes;
     const today_CardTypes = TaskToggle.today_CardTypes;
-    const daily_CardTypes = TaskToggle.daily_CardTypes;
-    let new_CardType, new_CardType_Index, old_CardType_Index;
-    if (daily_CardTypes.includes(cardType)) {
-        old_CardType_Index = task_CardTypes.indexOf(cardType);
-        new_CardType = [...today_CardTypes].splice(old_CardType_Index, 1)[0];
-    }
-    else if (task_CardTypes.includes(cardType)) {
+    let new_CardType, new_CardType_Index;
+    if (task_CardTypes.includes(cardType)) {
         new_CardType_Index = task_CardTypes.indexOf(cardType);
         new_CardType = today_CardTypes[new_CardType_Index];
     }
@@ -14251,7 +14248,7 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
                 new Entry({
                     name: "Clear",
                     callback: () => {
-                        TaskToggle_1.TaskToggle.convert_TodayCards_To_TaskCards();
+                        TaskToggle_1.TaskToggle.invert_ActiveCards();
                     },
                 }),
             ] },
@@ -14392,7 +14389,7 @@ class _ {
         TaskToggle_1.TaskToggle.toggle_Hovered_Task();
     }
     static convert_TodayCards_To_TaskCards(event) {
-        TaskToggle_1.TaskToggle.convert_TodayCards_To_TaskCards();
+        TaskToggle_1.TaskToggle.invert_ActiveCards();
     }
     static hide_EmptyColumns(event) {
         Hide.emptyColumns();
