@@ -23,7 +23,7 @@ FunctionBar.load( new FunctionBar({
 
 		{"Today":[
 			new Entry({
-				name: "Clear",
+				name: "Reset",
 				callback: () => {
 					TaskToggle.invert_ActiveCards()
 				},
