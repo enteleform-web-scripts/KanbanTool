@@ -11185,10 +11185,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609287182152)
+		const elapsedTime = _get_ElapsedTime(1609288400942)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     7:13:02 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:33:20 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -14313,7 +14313,7 @@ const { enable_CardTypes, disable_CardTypes } = CardType.Filter;
 const Modes = [
     { "Today": [
             { name: "Plan", rows: ["Daily", "Active"], cardTypes: undefined, is_Default: true },
-            { name: "Active", rows: ["Daily", "Active"], cardTypes: /(Daily_Active)|(Today_(Low|Medium|High|Urgent))/ },
+            { name: "Active", rows: ["Daily", "Active"], cardTypes: /(Daily_Active)|(Today_(Low|Medium|High|Urgent))/, hide_EmptyColumns: true },
         ] },
     { "Overview": [
             { name: "Plan", rows: undefined, cardTypes: undefined },
@@ -14331,15 +14331,15 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
 function _get_EntryGroups() {
     return Modes.map(row => {
         const [groupName, group] = Object.entries(row)[0];
-        return { [groupName]: group.map(({ name, rows, cardTypes, is_Default }) => new Entry({
+        return { [groupName]: group.map(({ name, rows, cardTypes, hide_EmptyColumns, is_Default }) => new Entry({
                 name,
                 ..._get_OnLayout(is_Default),
-                ..._get_Callback(rows, cardTypes),
+                ..._get_Callback(rows, cardTypes, hide_EmptyColumns),
             }))
         };
     });
 }
-function _get_Callback(rows, cardTypes) {
+function _get_Callback(rows, cardTypes, hide_EmptyColumns) {
     return { callback: (event) => {
             const _cardTypes = (cardTypes) ? [cardTypes] : [];
             Show.allColumns();
@@ -14351,7 +14351,9 @@ function _get_Callback(rows, cardTypes) {
             }
             disable_CardTypes();
             enable_CardTypes(..._cardTypes);
-            Hide.emptyColumns();
+            if (hide_EmptyColumns) {
+                Hide.emptyColumns();
+            }
         } };
 }
 function _get_OnLayout(is_Default) {
