@@ -32,7 +32,7 @@ class _{
 		{preventDefault:true}
 	)
 	static convert_TodayCards_To_TaskCards(event:KeyboardEvent){
-		TaskToggle.convert_TodayCards_To_TaskCards()
+		TaskToggle.invert_ActiveCards()
 	}
 
 	@KeyBinding.add(

@@ -25,7 +25,7 @@ FunctionBar.load( new FunctionBar({
 			new Entry({
 				name: "Clear",
 				callback: () => {
-					TaskToggle.convert_TodayCards_To_TaskCards()
+					TaskToggle.invert_ActiveCards()
 				},
 			}),
 		]},
