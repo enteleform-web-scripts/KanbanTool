@@ -14,8 +14,8 @@ const {enable_CardTypes, disable_CardTypes} = CardType.Filter
 
 const Modes: {[name:string]: Mode[]}[] = [
 	{"Today": [
-		{name:"Plan",   rows:["Daily", "Active"], cardTypes:undefined,                                        is_Default:true},
-		{name:"Active", rows:["Daily", "Active"], cardTypes:/(Daily_Active)|(Today_(Low|Medium|High|Urgent))/                },
+		{name:"Plan",   rows:["Daily", "Active"], cardTypes:undefined,                                         is_Default:       true},
+		{name:"Active", rows:["Daily", "Active"], cardTypes:/(Daily_Active)|(Today_(Low|Medium|High|Urgent))/, hide_EmptyColumns:true},
 	]},
 	{"Overview": [
 		{name:"Plan", rows:undefined, cardTypes:undefined},
@@ -63,10 +63,11 @@ FunctionBar.load( new FunctionBar({
 //###############//
 
 interface Mode{
-	name:        string,
-	rows:        string[],
-	cardTypes:   RegExp,
-	is_Default?: boolean
+	name:               string
+	rows:               string[]
+	cardTypes:          RegExp
+	is_Default?:        boolean
+	hide_EmptyColumns?: boolean
 }
 
 function _get_EntryGroups(){
@@ -75,18 +76,18 @@ function _get_EntryGroups(){
 		const [groupName, group] = Object.entries(row)[0]
 
 		return {[groupName]:
-			group.map( ({name, rows, cardTypes, is_Default}) =>
+			group.map( ({name, rows, cardTypes, hide_EmptyColumns, is_Default}) =>
 				new Entry({
 					name,
 					..._get_OnLayout(is_Default),
-					..._get_Callback(rows, cardTypes),
+					..._get_Callback(rows, cardTypes, hide_EmptyColumns),
 				})
 			)
 		}
 	})
 }
 
-function _get_Callback(rows:string[], cardTypes:RegExp){
+function _get_Callback(rows:string[], cardTypes:RegExp, hide_EmptyColumns:boolean){
 	return {callback: (event:any) => {
 		const _cardTypes = (cardTypes) ? [cardTypes] : []
 
@@ -99,7 +100,9 @@ function _get_Callback(rows:string[], cardTypes:RegExp){
 
 		disable_CardTypes()
 		enable_CardTypes(..._cardTypes)
-		Hide.emptyColumns()
+
+		if(hide_EmptyColumns)
+			{Hide.emptyColumns()}
 	}}
 }
 
