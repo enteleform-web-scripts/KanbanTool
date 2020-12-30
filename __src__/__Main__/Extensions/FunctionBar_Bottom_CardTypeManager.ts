@@ -16,7 +16,7 @@ const priorityColors = {
 
 const dailyColors = {
 	active:   "hsl(143, 60%, 50%)",
-	complete: "hsl(143, 0%,  40%)",
+	complete: "hsl(143, 0%,  43%)",
 }
 
 const todaySettings = {
