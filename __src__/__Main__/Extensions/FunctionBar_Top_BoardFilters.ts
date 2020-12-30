@@ -14,8 +14,8 @@ const {enable_CardTypes, disable_CardTypes} = CardType.Filter
 
 const Modes: {[name:string]: Mode[]}[] = [
 	{"Today": [
-		{name:"Plan",   rows:["Daily", "Active"], cardTypes:undefined,                                         is_Default:       true},
-		{name:"Active", rows:["Daily", "Active"], cardTypes:/(Daily_Active)|(Today_(Low|Medium|High|Urgent))/, hide_EmptyColumns:true},
+		{name:"Plan",   rows:["Daily", "Active"], cardTypes:undefined,                                         is_Default:true                            },
+		{name:"Active", rows:["Daily", "Active"], cardTypes:/(Daily_Active)|(Today_(Low|Medium|High|Urgent))/, hide_EmptyRows:true, hide_EmptyColumns:true},
 	]},
 	{"Overview": [
 		{name:"Plan", rows:undefined, cardTypes:undefined},
@@ -67,6 +67,7 @@ interface Mode{
 	rows:               string[]
 	cardTypes:          RegExp
 	is_Default?:        boolean
+	hide_EmptyRows?:    boolean
 	hide_EmptyColumns?: boolean
 }
 
@@ -76,18 +77,18 @@ function _get_EntryGroups(){
 		const [groupName, group] = Object.entries(row)[0]
 
 		return {[groupName]:
-			group.map( ({name, rows, cardTypes, hide_EmptyColumns, is_Default}) =>
+			group.map( ({name, rows, cardTypes, hide_EmptyRows, hide_EmptyColumns, is_Default}) =>
 				new Entry({
 					name,
 					..._get_OnLayout(is_Default),
-					..._get_Callback(rows, cardTypes, hide_EmptyColumns),
+					..._get_Callback(rows, cardTypes, hide_EmptyRows, hide_EmptyColumns),
 				})
 			)
 		}
 	})
 }
 
-function _get_Callback(rows:string[], cardTypes:RegExp, hide_EmptyColumns:boolean){
+function _get_Callback(rows:string[], cardTypes:RegExp, hide_EmptyRows:boolean, hide_EmptyColumns:boolean){
 	return {callback: (event:any) => {
 		const _cardTypes = (cardTypes) ? [cardTypes] : []
 
@@ -103,6 +104,8 @@ function _get_Callback(rows:string[], cardTypes:RegExp, hide_EmptyColumns:boolea
 
 		if(hide_EmptyColumns)
 			{Hide.emptyColumns()}
+		if(hide_EmptyRows)
+			{Hide.emptyRows()}
 	}}
 }
 
