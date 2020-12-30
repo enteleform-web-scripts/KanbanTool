@@ -11185,10 +11185,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609287007852)
+		const elapsedTime = _get_ElapsedTime(1609287182152)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     7:10:07 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:13:02 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13342,7 +13342,7 @@ const priorityColors = {
 };
 const dailyColors = {
     active: "hsl(143, 60%, 50%)",
-    complete: "hsl(143, 0%,  40%)",
+    complete: "hsl(143, 0%,  43%)",
 };
 const todaySettings = {
     background_Color: "hsl(143, 40%, 85%)",
