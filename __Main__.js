@@ -11185,10 +11185,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1609286663465)
+		const elapsedTime = _get_ElapsedTime(1609286756897)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     7:04:23 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:05:56 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -14246,7 +14246,7 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
     entryGroups: [
         { "Today": [
                 new Entry({
-                    name: "Clear",
+                    name: "Reset",
                     callback: () => {
                         TaskToggle_1.TaskToggle.invert_ActiveCards();
                     },
