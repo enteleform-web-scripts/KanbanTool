@@ -1,6 +1,7 @@
 //###  Module  ###//
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
 import {KanbanTool } from "~/Utils/KanbanTool/__Main__"
+import {Filter     } from "~/Utils/KanbanTool/CardType/Filter"
 
 //###  Aliases  ###//
 const {Entry, Position                    } = FunctionBar
@@ -14,11 +15,11 @@ const {enable_CardTypes, disable_CardTypes} = CardType.Filter
 
 const Modes: {[name:string]: Mode[]}[] = [
 	{"Today": [
-		{name:"Plan",   rows:["Daily", "Active"], cardTypes:undefined,                                         is_Default:true                            },
-		{name:"Active", rows:["Daily", "Active"], cardTypes:/(Daily_Active)|(Today_(Low|Medium|High|Urgent))/, hide_EmptyRows:true, hide_EmptyColumns:true},
+		{name:"Plan",   rows:["Daily", "Active"], enabled_CardTypes:undefined,                                         disabled_CardTypes:/Archived/, is_Default:true                            },
+		{name:"Active", rows:["Daily", "Active"], enabled_CardTypes:/(Daily_Active)|(Today_(Low|Medium|High|Urgent))/, disabled_CardTypes:/Archived/, hide_EmptyRows:true, hide_EmptyColumns:true},
 	]},
 	{"Overview": [
-		{name:"Plan", rows:undefined, cardTypes:undefined},
+		{name:"Plan", rows:undefined, enabled_CardTypes:undefined, disabled_CardTypes:/Archived/},
 	]},
 	//{"Tasks": [
 	//	{name:"All",      rows:["Active"], cardTypes:/(Task|Today)_(Low|Medium|High|Urgent)/, is_Default:true},
@@ -65,7 +66,8 @@ FunctionBar.load( new FunctionBar({
 interface Mode{
 	name:               string
 	rows:               string[]
-	cardTypes:          RegExp
+	enabled_CardTypes:  RegExp
+	disabled_CardTypes: RegExp
 	is_Default?:        boolean
 	hide_EmptyRows?:    boolean
 	hide_EmptyColumns?: boolean
@@ -77,20 +79,21 @@ function _get_EntryGroups(){
 		const [groupName, group] = Object.entries(row)[0]
 
 		return {[groupName]:
-			group.map( ({name, rows, cardTypes, hide_EmptyRows, hide_EmptyColumns, is_Default}) =>
+			group.map( ({name, rows, enabled_CardTypes, disabled_CardTypes, hide_EmptyRows, hide_EmptyColumns, is_Default}) =>
 				new Entry({
 					name,
 					..._get_OnLayout(is_Default),
-					..._get_Callback(rows, cardTypes, hide_EmptyRows, hide_EmptyColumns),
+					..._get_Callback(rows, enabled_CardTypes, disabled_CardTypes, hide_EmptyRows, hide_EmptyColumns),
 				})
 			)
 		}
 	})
 }
 
-function _get_Callback(rows:string[], cardTypes:RegExp, hide_EmptyRows:boolean, hide_EmptyColumns:boolean){
+function _get_Callback(rows:string[], enabled_CardTypes:RegExp, disabled_CardTypes:RegExp, hide_EmptyRows:boolean, hide_EmptyColumns:boolean){
 	return {callback: (event:any) => {
-		const _cardTypes = (cardTypes) ? [cardTypes] : []
+		const _enabled_CardTypes  = (enabled_CardTypes ) ? [enabled_CardTypes ] : []
+		const _disabled_CardTypes = (disabled_CardTypes) ? [disabled_CardTypes] : []
 
 		Show.allColumns()
 
@@ -100,7 +103,13 @@ function _get_Callback(rows:string[], cardTypes:RegExp, hide_EmptyRows:boolean, 
 			{Show.allRows()}
 
 		disable_CardTypes()
-		enable_CardTypes(..._cardTypes)
+		enable_CardTypes(..._enabled_CardTypes)
+
+		if(_disabled_CardTypes.length > 0){
+			setTimeout(()=>{
+				Filter.disable_CardTypes(..._disabled_CardTypes)
+			}, 100)
+		}
 
 		if(hide_EmptyColumns)
 			{Hide.emptyColumns()}
