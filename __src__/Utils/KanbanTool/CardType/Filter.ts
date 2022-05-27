@@ -89,7 +89,11 @@ KanbanTool.on_PageLoad(() => {
 KanbanTool.on_PageLoad(Filter.show_AllCards_ID, ()=>{
 	Filter.enable()
 	Filter.enable_CardTypes()
-	Filter.disable_CardTypes("Archived")
+
+	setTimeout(()=>{
+		console.log({"@@@":"on_PageLoad"})
+		Filter.disable_CardTypes("Archived")
+	})
 })
 
 KanbanTool.on_PageLoad(Filter.add_KeyBindings_ID, ()=>{
