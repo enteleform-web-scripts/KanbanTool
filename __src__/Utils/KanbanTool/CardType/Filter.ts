@@ -84,9 +84,7 @@ export class Filter{
 
 KanbanTool.on_PageLoad(() => {
 	Filter.enable()
-	setTimeout(()=>{
-		Filter.disable_CardTypes("Archived")
-	}, 100)
+	Filter.disable_CardTypes("Archived")
 })
 
 KanbanTool.on_PageLoad(Filter.show_AllCards_ID, ()=>{
