@@ -11185,10 +11185,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1653651429150)
+		const elapsedTime = _get_ElapsedTime(1653652383781)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     7:37:09 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:53:03 AM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13267,7 +13267,10 @@ __Main__2.KanbanTool.on_PageLoad(() => {
 __Main__2.KanbanTool.on_PageLoad(Filter.show_AllCards_ID, () => {
     Filter.enable();
     Filter.enable_CardTypes();
-    Filter.disable_CardTypes("Archived");
+    setTimeout(() => {
+        console.log({ "@@@": "on_PageLoad" });
+        Filter.disable_CardTypes("Archived");
+    });
 });
 __Main__2.KanbanTool.on_PageLoad(Filter.add_KeyBindings_ID, () => {
     __Main__5.KeyBinding.add(["ctrl", "`"], () => {
