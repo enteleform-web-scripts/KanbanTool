@@ -11181,10 +11181,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1653861436887)
+		const elapsedTime = _get_ElapsedTime(1653862689981)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:57:16 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:18:09 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -14310,12 +14310,13 @@ const { Entry, Position } = __Main__1.FunctionBar;
 const { CardType, Show, Hide } = __Main__2.KanbanTool;
 const { enable_CardTypes, disable_CardTypes } = CardType.Filter;
 const Modes = [
+    { "Overview": [
+            { name: "Plan", rows: undefined, enabled_CardTypes: undefined, disabled_CardTypes: /Archived/, hide_EmptyRows: false, hide_EmptyColumns: false, },
+            { name: "All", rows: undefined, enabled_CardTypes: undefined, disabled_CardTypes: /Archived/, hide_EmptyRows: true, hide_EmptyColumns: true, },
+        ] },
     { "Today": [
             { name: "Plan", rows: ["Daily", "Active"], enabled_CardTypes: undefined, disabled_CardTypes: /Archived/, hide_EmptyRows: true, hide_EmptyColumns: true, is_Default: true },
             { name: "Active", rows: ["Daily", "Active"], enabled_CardTypes: /(Daily_Active)|(Today_(Low|Medium|High|Urgent))/, disabled_CardTypes: /Archived/, hide_EmptyRows: true, hide_EmptyColumns: true, },
-        ] },
-    { "Overview": [
-            { name: "Plan", rows: undefined, enabled_CardTypes: undefined, disabled_CardTypes: /Archived/ },
         ] },
 ];
 __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
