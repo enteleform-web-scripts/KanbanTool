@@ -13,12 +13,13 @@ const {enable_CardTypes, disable_CardTypes} = CardType.Filter
 //###############//
 
 const Modes: {[name:string]: Mode[]}[] = [
-	{"Today": [
-		{name:"Plan",   rows:["Daily", "Active"], enabled_CardTypes:undefined,                                         disabled_CardTypes:/Archived/, hide_EmptyRows:true, hide_EmptyColumns:true, is_Default:true},
-		{name:"Active", rows:["Daily", "Active"], enabled_CardTypes:/(Daily_Active)|(Today_(Low|Medium|High|Urgent))/, disabled_CardTypes:/Archived/, hide_EmptyRows:true, hide_EmptyColumns:true,                },
-	]},
 	{"Overview": [
-		{name:"Plan", rows:undefined, enabled_CardTypes:undefined, disabled_CardTypes:/Archived/},
+		{name:"Plan",   rows:undefined,           enabled_CardTypes:undefined,                                         disabled_CardTypes:/Archived/, hide_EmptyRows:false, hide_EmptyColumns:false,                },
+		{name:"All",    rows:undefined,           enabled_CardTypes:undefined,                                         disabled_CardTypes:/Archived/, hide_EmptyRows:true,  hide_EmptyColumns:true,                 },
+	]},
+	{"Today": [
+		{name:"Plan",   rows:["Daily", "Active"], enabled_CardTypes:undefined,                                         disabled_CardTypes:/Archived/, hide_EmptyRows:true,  hide_EmptyColumns:true,  is_Default:true},
+		{name:"Active", rows:["Daily", "Active"], enabled_CardTypes:/(Daily_Active)|(Today_(Low|Medium|High|Urgent))/, disabled_CardTypes:/Archived/, hide_EmptyRows:true,  hide_EmptyColumns:true,                 },
 	]},
 	//{"Tasks": [
 	//	{name:"All",      rows:["Active"], cardTypes:/(Task|Today)_(Low|Medium|High|Urgent)/, is_Default:true},
