@@ -1,7 +1,6 @@
 //###  Module  ###//
 import {FunctionBar} from "~/Extensions/FunctionBar/__Main__"
 import {KanbanTool } from "~/Utils/KanbanTool/__Main__"
-import {Filter     } from "~/Utils/KanbanTool/CardType/Filter"
 
 //###  Aliases  ###//
 const {Entry, Position                    } = FunctionBar
@@ -105,21 +104,11 @@ function _get_Callback(rows:string[], enabled_CardTypes:RegExp, disabled_CardTyp
 		disable_CardTypes()
 		enable_CardTypes(..._enabled_CardTypes)
 
-		if(_disabled_CardTypes.length > 0){
-			setTimeout(()=>{
-				Filter.disable_CardTypes(..._disabled_CardTypes)
-			}, 50)
-		}
-		if(hide_EmptyRows){
-			setTimeout(()=>{
-				Hide.emptyRows()
-			}, 100)
-		}
-		if(hide_EmptyColumns){
-			setTimeout(()=>{
-				Hide.emptyColumns()
-			}, 150)
-		}
+		if(_disabled_CardTypes.length > 0)
+			{disable_CardTypes(..._disabled_CardTypes)}
+
+		if(hide_EmptyRows   ){Hide.emptyRows   ()}
+		if(hide_EmptyColumns){Hide.emptyColumns()}
 	}}
 }
 
