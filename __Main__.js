@@ -11185,10 +11185,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1653655918970)
+		const elapsedTime = _get_ElapsedTime(1653860905276)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     8:51:58 AM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:48:25 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -14361,11 +14361,11 @@ function _get_Callback(rows, enabled_CardTypes, disabled_CardTypes, hide_EmptyRo
                     Filter_1.Filter.disable_CardTypes(..._disabled_CardTypes);
                 }, 100);
             }
-            if (hide_EmptyColumns) {
-                Hide.emptyColumns();
-            }
             if (hide_EmptyRows) {
                 Hide.emptyRows();
+            }
+            if (hide_EmptyColumns) {
+                Hide.emptyColumns();
             }
         } };
 }
