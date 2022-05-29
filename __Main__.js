@@ -11181,10 +11181,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1653862689981)
+		const elapsedTime = _get_ElapsedTime(1653862761560)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:18:09 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     6:19:21 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -14311,8 +14311,8 @@ const { CardType, Show, Hide } = __Main__2.KanbanTool;
 const { enable_CardTypes, disable_CardTypes } = CardType.Filter;
 const Modes = [
     { "Overview": [
-            { name: "Plan", rows: undefined, enabled_CardTypes: undefined, disabled_CardTypes: /Archived/, hide_EmptyRows: false, hide_EmptyColumns: false, },
-            { name: "All", rows: undefined, enabled_CardTypes: undefined, disabled_CardTypes: /Archived/, hide_EmptyRows: true, hide_EmptyColumns: true, },
+            { name: "Plan", rows: undefined, enabled_CardTypes: undefined, disabled_CardTypes: /Archived/, hide_EmptyRows: true, hide_EmptyColumns: true, },
+            { name: "All", rows: undefined, enabled_CardTypes: undefined, disabled_CardTypes: /Archived/, hide_EmptyRows: false, hide_EmptyColumns: false, },
         ] },
     { "Today": [
             { name: "Plan", rows: ["Daily", "Active"], enabled_CardTypes: undefined, disabled_CardTypes: /Archived/, hide_EmptyRows: true, hide_EmptyColumns: true, is_Default: true },
