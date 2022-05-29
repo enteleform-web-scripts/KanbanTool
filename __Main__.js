@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 25);
+/******/ 	return __webpack_require__(__webpack_require__.s = 24);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -93,7 +93,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.KanbanTool = void 0;
 const Settings_1 = __webpack_require__(12);
-const activeBoard_1 = __webpack_require__(28);
+const activeBoard_1 = __webpack_require__(27);
 class KanbanTool {
     static on_PageLoad(arg_1, arg_2) {
         const [id, callback] = (typeof arg_1 == "symbol")
@@ -126,11 +126,11 @@ KanbanTool.API.onInit(() => {
         });
     }, Settings_1.onPageLoad_Timeout_MS);
 });
-const __Main__1 = __webpack_require__(29);
+const __Main__1 = __webpack_require__(28);
 const __Main__2 = __webpack_require__(6);
 const __Main__3 = __webpack_require__(15);
 const __Main__4 = __webpack_require__(16);
-const __Main__5 = __webpack_require__(19);
+const __Main__5 = __webpack_require__(18);
 (function (KanbanTool) {
     KanbanTool.KeyBinding = __Main__1.KeyBinding_Decorator;
     KanbanTool.Show = __Main__2.Show;
@@ -154,8 +154,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.KeyBinding = void 0;
-const KeyGroups_1 = __webpack_require__(30);
-const hotkeys_js_1 = __importDefault(__webpack_require__(31));
+const KeyGroups_1 = __webpack_require__(29);
+const hotkeys_js_1 = __importDefault(__webpack_require__(30));
 class KeyBinding {
     static get alphanumericKey_Rows() { return [...KeyGroups_1.alphanumericKey_Rows]; }
     static get characterKey_Rows() { return [...KeyGroups_1.characterKey_Rows]; }
@@ -11185,10 +11185,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1653861092999)
+		const elapsedTime = _get_ElapsedTime(1653861278009)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:51:32 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:54:38 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -11264,7 +11264,7 @@ exports.Show = void 0;
 const TaskContainer_1 = __webpack_require__(7);
 const get_Rows_1 = __webpack_require__(13);
 const get_Columns_1 = __webpack_require__(14);
-const Glob_1 = __webpack_require__(32);
+const Glob_1 = __webpack_require__(31);
 const $ = __webpack_require__(2);
 class Show {
     static rows({ include, exclude }) {
@@ -11625,7 +11625,7 @@ process.umask = function() { return 0; };
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FunctionBar = void 0;
-__webpack_require__(21).inject(__dirname, { CSS: true, HTML: true });
+__webpack_require__(20).inject(__dirname, { CSS: true, HTML: true });
 const Settings_1 = __webpack_require__(10);
 const Entry_1 = __webpack_require__(42);
 const Layout_1 = __webpack_require__(43);
@@ -11820,7 +11820,7 @@ function _update_ColumnRelationships(columns) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Hide = void 0;
-const get_emptyContainer_Indexes_1 = __webpack_require__(33);
+const get_emptyContainer_Indexes_1 = __webpack_require__(32);
 const get_Rows_1 = __webpack_require__(13);
 const get_Columns_1 = __webpack_require__(14);
 const __Main__1 = __webpack_require__(6);
@@ -11869,9 +11869,9 @@ function _is_Empty(container, emptyContainer_Indexes) {
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CardType = void 0;
-const Filter_1 = __webpack_require__(17);
+const Filter_1 = __webpack_require__(33);
 const __Main__1 = __webpack_require__(0);
-const is_JQuery_1 = __webpack_require__(18);
+const is_JQuery_1 = __webpack_require__(17);
 const $ = __webpack_require__(2);
 class CardType {
     constructor({ index, id, name, bgColor, fgColor }) {
@@ -11944,129 +11944,6 @@ function _get_CardType_FromProperty(key, value) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Filter = void 0;
-const __Main__1 = __webpack_require__(16);
-const Settings_1 = __webpack_require__(12);
-const __Main__2 = __webpack_require__(0);
-const __Main__3 = __webpack_require__(6);
-const __Main__4 = __webpack_require__(15);
-const __Main__5 = __webpack_require__(1);
-const $ = __webpack_require__(2);
-class Filter {
-    static get enabled() { return Filter._filterButton.hasClass("kt-board_search-filter--active"); }
-    static get disabled() { return !(this.enabled); }
-    static get _filterButton() { return $(`.kt-board_search-filter:nth-child(${Settings_1.cardType_Filter_Index})`); }
-    static get _cardType_Buttons() { return Array.from($(".kt-board_search-processors-card_types").children()); }
-    static get _enabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > .kt-board_search-processors-card_types--active")); }
-    static get _disabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)")); }
-    static cardType_IsEnabled(cardType) {
-        const cardType_Buttons = Filter._cardType_Buttons;
-        const enabled_CardType_Buttons = Filter._enabled_CardType_Buttons;
-        const enabledIndexes = cardType_Buttons
-            .map((button, index) => ({ button, index }))
-            .filter(({ button }) => enabled_CardType_Buttons.includes(button))
-            .map(({ index }) => index);
-        return enabledIndexes.includes(cardType.index);
-    }
-    static cardType_IsDisabled(cardType) { return !(Filter.cardType_IsEnabled(cardType)); }
-    static enable() {
-        if (Filter.disabled) {
-            Filter._filterButton.click();
-        }
-        Filter._on_Update();
-    }
-    static disable() {
-        if (Filter.enabled) {
-            Filter._filterButton.click();
-        }
-        Filter._on_Update();
-    }
-    static enable_CardTypes(...ids) { _set_CardType_States(ids, Filter._disabled_CardType_Buttons); }
-    static disable_CardTypes(...ids) { _set_CardType_States(ids, Filter._enabled_CardType_Buttons); }
-    static toggle_CardTypes(...ids) { _set_CardType_States(ids, Filter._cardType_Buttons); }
-    static on_Update(callback) { Filter._onUpdate_Callbacks.push(callback); }
-    static _on_Update() {
-        Filter._onUpdate_Callbacks.forEach(callback => callback());
-    }
-}
-exports.Filter = Filter;
-Filter.show_AllCards_ID = Symbol();
-Filter.add_KeyBindings_ID = Symbol();
-Filter._onUpdate_Callbacks = [];
-__Main__2.KanbanTool.on_PageLoad(() => {
-    Filter.enable();
-    setTimeout(() => {
-        Filter.disable_CardTypes("Archived");
-    }, 100);
-});
-__Main__2.KanbanTool.on_PageLoad(Filter.show_AllCards_ID, () => {
-    Filter.enable();
-    Filter.enable_CardTypes();
-});
-__Main__2.KanbanTool.on_PageLoad(Filter.add_KeyBindings_ID, () => {
-    __Main__5.KeyBinding.add(["ctrl", "`"], () => {
-        __Main__4.Hide.emptyColumns();
-        __Main__4.Hide.emptyRows();
-    });
-    __Main__5.KeyBinding.add(["ctrl", "shift", "`"], () => {
-        __Main__3.Show.allColumns();
-        __Main__3.Show.allRows();
-        Filter.enable_CardTypes();
-    });
-});
-function _set_CardType_States(ids, targetButtons) {
-    const allButtons = Filter._cardType_Buttons;
-    const apply_State_To_AllCardTypes = (ids.length == 0);
-    if (apply_State_To_AllCardTypes) {
-        ids = allButtons.map((value, index) => index);
-    }
-    ids = _process_RegExp_IDs(allButtons, targetButtons, ids);
-    for (const id of ids) {
-        const index = _get_CardType_Index(id);
-        if (index == undefined) {
-            return;
-        }
-        const button = allButtons[index];
-        if (targetButtons.includes(button)) {
-            button.click();
-        }
-    }
-    Filter._on_Update();
-}
-function _process_RegExp_IDs(allButtons, targetButtons, ids) {
-    const patterns = ids.filter(id => (id instanceof RegExp));
-    ids = ids.filter(id => !(id instanceof RegExp));
-    const matchingButton_Indexes = __Main__1.CardType.cardTypes
-        .filter(cardType => patterns.some(pattern => pattern.exec(cardType.name) ? true : false))
-        .map(cardType => ({ button: allButtons[cardType.index], index: cardType.index }))
-        .filter(({ button }) => targetButtons.includes(button))
-        .map(({ index }) => index);
-    ids.push(...matchingButton_Indexes);
-    ids = [...new Set(ids)];
-    return ids;
-}
-function _get_CardType_Index(id) {
-    let index;
-    if (typeof id == "string") {
-        const cardType = __Main__1.CardType.get_FromName(id);
-        index = (cardType)
-            ? cardType.index
-            : undefined;
-    }
-    else {
-        index = id;
-    }
-    return index;
-}
-
-
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.is_JQuery = void 0;
 function is_JQuery(obj) {
     return (obj && (obj instanceof jQuery || obj.constructor.prototype.jquery));
@@ -12075,7 +11952,7 @@ exports.is_JQuery = is_JQuery;
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12127,17 +12004,17 @@ var CardMover;
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(__dirname) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CardType_Manager = void 0;
-__webpack_require__(21).inject(__dirname, { CSS: true, HTML: false });
+__webpack_require__(20).inject(__dirname, { CSS: true, HTML: false });
 const CallbackManager_1 = __webpack_require__(39);
 const HoverManager_1 = __webpack_require__(5);
-const StyleManager_1 = __webpack_require__(22);
+const StyleManager_1 = __webpack_require__(21);
 const __Main__1 = __webpack_require__(9);
 const Position_1 = __webpack_require__(11);
 const __Main__2 = __webpack_require__(3);
@@ -12223,7 +12100,7 @@ function _update_FunctionBar_Options_CellWidth(options, cellWidth) {
 /* WEBPACK VAR INJECTION */}.call(this, "__src__\\Extensions\\CardType_Manager"))
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12309,14 +12186,14 @@ function _strip_HTML_ExcessData(html) {
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StyleManager = void 0;
-const __Main__1 = __webpack_require__(23);
+const __Main__1 = __webpack_require__(22);
 const __Main__2 = __webpack_require__(0);
 const $ = __webpack_require__(2);
 const { CardType, cardTypes } = __Main__2.KanbanTool;
@@ -12393,14 +12270,14 @@ function _get_CardOptions(element, cardType) { return StyleManager._CardType_Opt
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.get_CSS_Variables = exports.get_CSS_Variable = exports.$set_CSS_Variable = exports.set_CSS_Variable = void 0;
-const is_JQuery_1 = __webpack_require__(18);
+const is_JQuery_1 = __webpack_require__(17);
 function set_CSS_Variable(arg_1, arg_2, arg_3) {
     const { element, key, value } = _get_Arguments(arg_1, arg_2, arg_3);
     if (element) {
@@ -12453,14 +12330,14 @@ function _get_CSS_Variable_Value(key) { return getComputedStyle(document.documen
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskToggle = void 0;
-const __Main__1 = __webpack_require__(20);
+const __Main__1 = __webpack_require__(19);
 const HoverManager_1 = __webpack_require__(5);
 const __Main__2 = __webpack_require__(0);
 const { CardType } = __Main__2.KanbanTool;
@@ -12503,21 +12380,21 @@ function _get_Inverted_CardType(cardType) {
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(4);
-module.exports = __webpack_require__(26);
+module.exports = __webpack_require__(25);
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-__webpack_require__(27);
+__webpack_require__(26);
 __webpack_require__(34);
 __webpack_require__(47);
 __webpack_require__(48);
@@ -12527,7 +12404,7 @@ __webpack_require__(55);
 
 
 /***/ }),
-/* 27 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12540,7 +12417,7 @@ remove_PageLoad_Callback(CardType.Filter.add_KeyBindings_ID);
 
 
 /***/ }),
-/* 28 */
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12558,7 +12435,7 @@ exports.get_ActiveBoard = get_ActiveBoard;
 
 
 /***/ }),
-/* 29 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12583,7 +12460,7 @@ exports.KeyBinding_Decorator = KeyBinding_Decorator;
 
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -12632,7 +12509,7 @@ exports.characterKey_Rows = [
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13196,7 +13073,7 @@ if (typeof window !== 'undefined') {
 
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13238,7 +13115,7 @@ const _GLOB_TO_REGEX_MAP = [
 
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -13329,13 +13206,136 @@ function _get_EmptyColumn_Indexes(hiddenRow_Indexes) {
 
 
 /***/ }),
+/* 33 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Filter = void 0;
+const __Main__1 = __webpack_require__(16);
+const Settings_1 = __webpack_require__(12);
+const __Main__2 = __webpack_require__(0);
+const __Main__3 = __webpack_require__(6);
+const __Main__4 = __webpack_require__(15);
+const __Main__5 = __webpack_require__(1);
+const $ = __webpack_require__(2);
+class Filter {
+    static get enabled() { return Filter._filterButton.hasClass("kt-board_search-filter--active"); }
+    static get disabled() { return !(this.enabled); }
+    static get _filterButton() { return $(`.kt-board_search-filter:nth-child(${Settings_1.cardType_Filter_Index})`); }
+    static get _cardType_Buttons() { return Array.from($(".kt-board_search-processors-card_types").children()); }
+    static get _enabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > .kt-board_search-processors-card_types--active")); }
+    static get _disabled_CardType_Buttons() { return Array.from($.find(".kt-board_search-processors-card_types > :not(.kt-board_search-processors-card_types--active)")); }
+    static cardType_IsEnabled(cardType) {
+        const cardType_Buttons = Filter._cardType_Buttons;
+        const enabled_CardType_Buttons = Filter._enabled_CardType_Buttons;
+        const enabledIndexes = cardType_Buttons
+            .map((button, index) => ({ button, index }))
+            .filter(({ button }) => enabled_CardType_Buttons.includes(button))
+            .map(({ index }) => index);
+        return enabledIndexes.includes(cardType.index);
+    }
+    static cardType_IsDisabled(cardType) { return !(Filter.cardType_IsEnabled(cardType)); }
+    static enable() {
+        if (Filter.disabled) {
+            Filter._filterButton.click();
+        }
+        Filter._on_Update();
+    }
+    static disable() {
+        if (Filter.enabled) {
+            Filter._filterButton.click();
+        }
+        Filter._on_Update();
+    }
+    static enable_CardTypes(...ids) { _set_CardType_States(ids, Filter._disabled_CardType_Buttons); }
+    static disable_CardTypes(...ids) { _set_CardType_States(ids, Filter._enabled_CardType_Buttons); }
+    static toggle_CardTypes(...ids) { _set_CardType_States(ids, Filter._cardType_Buttons); }
+    static on_Update(callback) { Filter._onUpdate_Callbacks.push(callback); }
+    static _on_Update() {
+        Filter._onUpdate_Callbacks.forEach(callback => callback());
+    }
+}
+exports.Filter = Filter;
+Filter.show_AllCards_ID = Symbol();
+Filter.add_KeyBindings_ID = Symbol();
+Filter._onUpdate_Callbacks = [];
+__Main__2.KanbanTool.on_PageLoad(() => {
+    Filter.enable();
+    setTimeout(() => {
+        Filter.disable_CardTypes("Archived");
+    }, 100);
+});
+__Main__2.KanbanTool.on_PageLoad(Filter.show_AllCards_ID, () => {
+    Filter.enable();
+    Filter.enable_CardTypes();
+});
+__Main__2.KanbanTool.on_PageLoad(Filter.add_KeyBindings_ID, () => {
+    __Main__5.KeyBinding.add(["ctrl", "`"], () => {
+        __Main__4.Hide.emptyColumns();
+        __Main__4.Hide.emptyRows();
+    });
+    __Main__5.KeyBinding.add(["ctrl", "shift", "`"], () => {
+        __Main__3.Show.allColumns();
+        __Main__3.Show.allRows();
+        Filter.enable_CardTypes();
+    });
+});
+function _set_CardType_States(ids, targetButtons) {
+    const allButtons = Filter._cardType_Buttons;
+    const apply_State_To_AllCardTypes = (ids.length == 0);
+    if (apply_State_To_AllCardTypes) {
+        ids = allButtons.map((value, index) => index);
+    }
+    ids = _process_RegExp_IDs(allButtons, targetButtons, ids);
+    for (const id of ids) {
+        const index = _get_CardType_Index(id);
+        if (index == undefined) {
+            return;
+        }
+        const button = allButtons[index];
+        if (targetButtons.includes(button)) {
+            button.click();
+        }
+    }
+    Filter._on_Update();
+}
+function _process_RegExp_IDs(allButtons, targetButtons, ids) {
+    const patterns = ids.filter(id => (id instanceof RegExp));
+    ids = ids.filter(id => !(id instanceof RegExp));
+    const matchingButton_Indexes = __Main__1.CardType.cardTypes
+        .filter(cardType => patterns.some(pattern => pattern.exec(cardType.name) ? true : false))
+        .map(cardType => ({ button: allButtons[cardType.index], index: cardType.index }))
+        .filter(({ button }) => targetButtons.includes(button))
+        .map(({ index }) => index);
+    ids.push(...matchingButton_Indexes);
+    ids = [...new Set(ids)];
+    return ids;
+}
+function _get_CardType_Index(id) {
+    let index;
+    if (typeof id == "string") {
+        const cardType = __Main__1.CardType.get_FromName(id);
+        index = (cardType)
+            ? cardType.index
+            : undefined;
+    }
+    else {
+        index = id;
+    }
+    return index;
+}
+
+
+/***/ }),
 /* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const __Main__1 = __webpack_require__(20);
+const __Main__1 = __webpack_require__(19);
 const __Main__2 = __webpack_require__(0);
 const priorityColors = {
     low: "hsl(220, 40%,  60%)",
@@ -13825,7 +13825,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CallbackManager = void 0;
 const CSS = __webpack_require__(40).CardType_Manager;
 const HoverManager_1 = __webpack_require__(5);
-const StyleManager_1 = __webpack_require__(22);
+const StyleManager_1 = __webpack_require__(21);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(0);
 const { CardType } = __Main__2.KanbanTool;
@@ -14022,7 +14022,7 @@ exports.Layout = void 0;
 const CSS = __webpack_require__(44).FunctionBar;
 const Settings_1 = __webpack_require__(10);
 const Position_1 = __webpack_require__(11);
-const __Main__1 = __webpack_require__(23);
+const __Main__1 = __webpack_require__(22);
 const __Main__2 = __webpack_require__(1);
 const __Main__3 = __webpack_require__(0);
 const $ = __webpack_require__(2);
@@ -14238,7 +14238,7 @@ function _cardTypes_Exhausted(cardIndex) { return (cardIndex == cardTypes.length
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskToggle_1 = __webpack_require__(24);
+const TaskToggle_1 = __webpack_require__(23);
 const __Main__1 = __webpack_require__(9);
 const __Main__2 = __webpack_require__(0);
 const { Entry, Position } = __Main__1.FunctionBar;
@@ -14310,7 +14310,6 @@ __Main__1.FunctionBar.load(new __Main__1.FunctionBar({
 Object.defineProperty(exports, "__esModule", { value: true });
 const __Main__1 = __webpack_require__(9);
 const __Main__2 = __webpack_require__(0);
-const Filter_1 = __webpack_require__(17);
 const { Entry, Position } = __Main__1.FunctionBar;
 const { CardType, Show, Hide } = __Main__2.KanbanTool;
 const { enable_CardTypes, disable_CardTypes } = CardType.Filter;
@@ -14357,19 +14356,13 @@ function _get_Callback(rows, enabled_CardTypes, disabled_CardTypes, hide_EmptyRo
             disable_CardTypes();
             enable_CardTypes(..._enabled_CardTypes);
             if (_disabled_CardTypes.length > 0) {
-                setTimeout(() => {
-                    Filter_1.Filter.disable_CardTypes(..._disabled_CardTypes);
-                }, 50);
+                disable_CardTypes(..._disabled_CardTypes);
             }
             if (hide_EmptyRows) {
-                setTimeout(() => {
-                    Hide.emptyRows();
-                }, 100);
+                Hide.emptyRows();
             }
             if (hide_EmptyColumns) {
-                setTimeout(() => {
-                    Hide.emptyColumns();
-                }, 150);
+                Hide.emptyColumns();
             }
         } };
 }
@@ -14396,7 +14389,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const TaskToggle_1 = __webpack_require__(24);
+const TaskToggle_1 = __webpack_require__(23);
 const __Main__1 = __webpack_require__(0);
 const __Main__2 = __webpack_require__(3);
 const __Main__3 = __webpack_require__(1);
@@ -14604,7 +14597,7 @@ exports.move_Cards = void 0;
 const HoverManager_1 = __webpack_require__(5);
 const __Main__1 = __webpack_require__(1);
 const __Main__2 = __webpack_require__(3);
-const __Main__3 = __webpack_require__(19);
+const __Main__3 = __webpack_require__(18);
 class move_Cards {
     static initialize() {
         __Main__3.CardMover.Directions.forEach(direction => {
