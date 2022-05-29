@@ -73,7 +73,7 @@ CardType_Manager.initialize_Manual({
 			{/*###  Daily_Complete ###*/ name:"Complete", borderAccent_Color:dailyColors.complete, ...dailySettings},
 			{/*###  Daily_Active   ###*/ name:"Active",   borderAccent_Color:dailyColors.active,   ...dailySettings},
 		]},
-		{"Misc":[
+		{"Tags":[
 			...KanbanTool.cardTypes.slice(10).map(cardType =>
 				_get_Default_CardOptions(cardType)
 			),
