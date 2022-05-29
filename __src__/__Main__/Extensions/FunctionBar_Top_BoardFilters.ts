@@ -108,11 +108,18 @@ function _get_Callback(rows:string[], enabled_CardTypes:RegExp, disabled_CardTyp
 		if(_disabled_CardTypes.length > 0){
 			setTimeout(()=>{
 				Filter.disable_CardTypes(..._disabled_CardTypes)
+			}, 50)
+		}
+		if(hide_EmptyRows){
+			setTimeout(()=>{
+				Hide.emptyRows()
 			}, 100)
 		}
-
-		if(hide_EmptyRows   ){Hide.emptyRows   ()}
-		if(hide_EmptyColumns){Hide.emptyColumns()}
+		if(hide_EmptyColumns){
+			setTimeout(()=>{
+				Hide.emptyColumns()
+			}, 150)
+		}
 	}}
 }
 
