@@ -111,10 +111,8 @@ function _get_Callback(rows:string[], enabled_CardTypes:RegExp, disabled_CardTyp
 			}, 100)
 		}
 
-		if(hide_EmptyColumns)
-			{Hide.emptyColumns()}
-		if(hide_EmptyRows)
-			{Hide.emptyRows()}
+		if(hide_EmptyRows   ){Hide.emptyRows   ()}
+		if(hide_EmptyColumns){Hide.emptyColumns()}
 	}}
 }
 
