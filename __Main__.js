@@ -11181,10 +11181,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1653862761560)
+		const elapsedTime = _get_ElapsedTime(1653867030684)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     6:19:21 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     7:30:30 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
@@ -13387,7 +13387,7 @@ __Main__1.CardType_Manager.initialize_Manual({
                 { name: "Complete", borderAccent_Color: dailyColors.complete, ...dailySettings },
                 { name: "Active", borderAccent_Color: dailyColors.active, ...dailySettings },
             ] },
-        { "Misc": [
+        { "Tags": [
                 ...__Main__2.KanbanTool.cardTypes.slice(10).map(cardType => _get_Default_CardOptions(cardType)),
             ] },
     ],
