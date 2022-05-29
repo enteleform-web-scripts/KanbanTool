@@ -205,14 +205,10 @@ function _get_BindArguments(arg_2, arg_3) {
     return { callback, options };
 }
 function _add_KeyBinding(hotKeys, callback, options) {
-    const scopeString = (options.scope)
-        ? options.scope
-        : "Global";
     const wrappedCallback = (event) => {
         if (options.preventDefault) {
             event.preventDefault();
         }
-        console.log(`[KeyBinding][${scopeString}] '${hotKeys}'`);
         callback(event);
     };
     if (options.scope) {
@@ -11185,10 +11181,10 @@ __Main__1.KanbanTool.on_PageLoad(() => {
     }
 }
 
-		const elapsedTime = _get_ElapsedTime(1653861278009)
+		const elapsedTime = _get_ElapsedTime(1653861436887)
 
 		const line_1  = `│  Built  {  ${elapsedTime}  }  Ago  │`
-		const line_2  = `│  At     5:54:38 PM`.padEnd((line_1.length - 1)) + "│"
+		const line_2  = `│  At     5:57:16 PM`.padEnd((line_1.length - 1)) + "│"
 		const divider = "".padStart((line_1.length - 2), "─")
 
 		console.log(""
