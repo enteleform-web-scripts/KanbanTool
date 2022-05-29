@@ -14,8 +14,8 @@ const {enable_CardTypes, disable_CardTypes} = CardType.Filter
 
 const Modes: {[name:string]: Mode[]}[] = [
 	{"Overview": [
-		{name:"Plan",   rows:undefined,           enabled_CardTypes:undefined,                                         disabled_CardTypes:/Archived/, hide_EmptyRows:false, hide_EmptyColumns:false,                },
-		{name:"All",    rows:undefined,           enabled_CardTypes:undefined,                                         disabled_CardTypes:/Archived/, hide_EmptyRows:true,  hide_EmptyColumns:true,                 },
+		{name:"Plan",   rows:undefined,           enabled_CardTypes:undefined,                                         disabled_CardTypes:/Archived/, hide_EmptyRows:true,  hide_EmptyColumns:true,                 },
+		{name:"All",    rows:undefined,           enabled_CardTypes:undefined,                                         disabled_CardTypes:/Archived/, hide_EmptyRows:false, hide_EmptyColumns:false,                },
 	]},
 	{"Today": [
 		{name:"Plan",   rows:["Daily", "Active"], enabled_CardTypes:undefined,                                         disabled_CardTypes:/Archived/, hide_EmptyRows:true,  hide_EmptyColumns:true,  is_Default:true},
